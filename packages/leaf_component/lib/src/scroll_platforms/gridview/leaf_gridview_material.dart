@@ -1,0 +1,87 @@
+part of leaf_scroll_component;
+
+class LeafGridViewMaterial<T> extends StatelessWidget {
+  final Widget Function(BuildContext context, T item, int index) builder;
+  final Key storageKey;
+  final LeafScrollViewRefresh? onRefresh;
+  final List<T> items;
+  final bool loading;
+  final SliverGridDelegate? gridDelegate;
+  final Widget? header;
+  final EdgeInsets? padding;
+  final ScrollPhysics? physics;
+  final bool shrinkWrap;
+  final bool scrollable;
+
+  const LeafGridViewMaterial({
+    Key? key,
+    required this.builder,
+    required this.storageKey,
+    required this.onRefresh,
+    required this.items,
+    required this.loading,
+    this.gridDelegate,
+    this.header,
+    this.padding = const EdgeInsets.all(0),
+    this.physics,
+    this.shrinkWrap = false,
+    this.scrollable = true,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return _buildMaterialListView(context);
+  }
+
+  Widget _buildMaterialListView(BuildContext context) {
+    var totalCount = items.length;
+
+    final gridViewWidget = Expanded(
+      child: GridView.builder(
+        key: storageKey,
+        gridDelegate: gridDelegate ??
+            const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 3,
+              mainAxisSpacing: 1.5,
+              crossAxisSpacing: 1.5,
+            ),
+        itemCount: totalCount,
+        controller: scrollable ? PrimaryScrollController.of(context) : null,
+        physics: scrollable
+            ? AlwaysScrollableScrollPhysics(
+                parent: physics ?? const ClampingScrollPhysics(),
+              )
+            : const NeverScrollableScrollPhysics(),
+        padding: padding,
+        shrinkWrap: shrinkWrap,
+        itemBuilder: (context, index) {
+          final itemIndex = index;
+          final item = items[itemIndex];
+          final itemWidget = builder(context, item, itemIndex);
+          return itemWidget;
+        },
+      ),
+    );
+
+    if (onRefresh == null) {
+      return Column(
+        children: [
+          (header != null) ? header! : Container(),
+          gridViewWidget,
+        ],
+      );
+    }
+
+    return RefreshIndicator(
+      onRefresh: () async {
+        await onRefresh?.call();
+      },
+      child: Column(
+        children: [
+          (header != null) ? header! : Container(),
+          gridViewWidget,
+        ],
+      ),
+    );
+  }
+}

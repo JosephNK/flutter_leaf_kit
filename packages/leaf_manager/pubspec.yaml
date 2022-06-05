@@ -1,0 +1,35 @@
+name: leaf_manager
+description: A new Flutter package project.
+version: 0.0.1
+publish_to: 'none'
+homepage: https://github.com/JosephNK/flutter_leaf_kit
+
+environment:
+  sdk: ">=2.17.1 <3.0.0"
+  flutter: ">=1.17.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  leaf_common:
+    path: ../leaf_common
+
+  app_tracking_transparency: ^2.0.2+4
+  device_info_plus: ^3.2.3
+  package_info_plus: ^1.4.2
+  path_provider: ^2.0.10
+  permission_handler: ^9.2.0
+  flutter_app_badger: ^1.4.0
+  geolocator: ^8.2.1
+  http: ^0.13.4
+  shared_preferences: ^2.0.15
+  share_plus: ^4.0.6
+  url_launcher: ^6.1.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+
+flutter:

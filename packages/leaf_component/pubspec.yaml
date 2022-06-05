@@ -1,0 +1,42 @@
+name: leaf_component
+description: A new Flutter package project.
+version: 0.0.1
+publish_to: 'none'
+homepage: https://github.com/JosephNK/flutter_leaf_kit
+
+environment:
+  sdk: ">=2.17.1 <3.0.0"
+  flutter: ">=1.17.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  leaf_common:
+    path: ../leaf_common
+  leaf_manager:
+    path: ../leaf_manager
+
+  animated_text_kit: ^4.2.1
+  another_flushbar: ^1.10.29
+  cached_network_image: ^3.2.1
+  dotted_border: ^2.0.0+2
+  flutter_cupertino_datetime_picker: ^3.0.0
+  fluttertoast: ^8.0.9
+  flutter_image_compress: ^1.1.0
+  image: ^3.2.0
+  image_picker: ^0.8.5+3
+  image_gallery_saver: ^1.7.1
+  photo_view: ^0.14.0
+  scroll_to_index: ^3.0.1
+  shimmer: ^2.0.0
+  simple_animations: ^4.0.2
+  supercharged: ^2.1.1
+  wechat_assets_picker: ^7.3.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+
+flutter:
