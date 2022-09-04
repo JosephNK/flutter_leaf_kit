@@ -1,11 +1,11 @@
 part of leaf_toast_component;
 
-class LeafToastConfig {
+class LeafToastConfigure {
   final Color? toastBackgroundColor;
   final Color? containerBackgroundColor;
   final TextStyle? containerTextStyle;
 
-  LeafToastConfig({
+  LeafToastConfigure({
     required this.toastBackgroundColor,
     required this.containerBackgroundColor,
     required this.containerTextStyle,
@@ -21,18 +21,18 @@ class LeafToast {
 
   static LeafToast get shared => _instance;
 
-  LeafToastConfig? _toastConfig;
+  LeafToastConfigure? _toastConfig;
 
   LeafToast._internal() {
     Logging.d('LeafToast init');
   }
 
-  void setup(BuildContext context, {LeafToastConfig? config}) {
+  void setup(BuildContext context, {LeafToastConfigure? configure}) {
     Logging.d('LeafToast Setup');
     this.context = context;
     fToast = FToast();
     fToast?.init(this.context);
-    _toastConfig = config;
+    _toastConfig = configure;
   }
 
   Future<void> showNotification(

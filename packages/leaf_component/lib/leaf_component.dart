@@ -1,5 +1,7 @@
 library leaf_component;
 
+export 'package:visibility_detector/visibility_detector.dart';
+
 export 'src/alert/alert.dart';
 export 'src/appbar/appbar.dart';
 export 'src/bottomsheet/bottomsheet.dart';

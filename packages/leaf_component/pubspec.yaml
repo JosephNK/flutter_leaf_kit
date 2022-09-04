@@ -16,6 +16,8 @@ dependencies:
     path: ../leaf_common
   leaf_manager:
     path: ../leaf_manager
+  leaf_network:
+    path: ../leaf_network
 
   animated_text_kit: ^4.2.1
   another_flushbar: ^1.10.29
@@ -32,6 +34,7 @@ dependencies:
   shimmer: ^2.0.0
   simple_animations: ^4.0.2
   supercharged: ^2.1.1
+  visibility_detector: ^0.3.3
   wechat_assets_picker: ^7.3.1
 
 dev_dependencies:

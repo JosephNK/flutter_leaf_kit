@@ -12,6 +12,7 @@ export 'package:page_transition/page_transition.dart'
 export 'package:provider/provider.dart';
 export 'package:quiver/strings.dart';
 
+export 'src/blocs/leaf_bloc_observer.dart';
 export 'src/datetime/datetime.dart';
 export 'src/extension/extension.dart';
 export 'src/localization/localization.dart';

@@ -1,6 +1,11 @@
 part of leaf_controller;
 
+mixin ControllerMixin {
+  void bottomAppBarTapedWhenVisible();
+}
+
 class ControllerVariable {
+  LeafBottomIndex? get bottomIndex => null;
   bool get useSafeArea => false;
   bool get resizeToAvoidBottomInset => false;
   FloatingActionButtonLocation? get floatingActionButtonLocation => null;
@@ -8,6 +13,7 @@ class ControllerVariable {
 }
 
 abstract class ControllerBuild {
+  Widget? build(BuildContext context);
   Widget? buildScreen(BuildContext context);
   PreferredSizeWidget? buildAppbar(BuildContext context, Object? state);
   Widget buildBody(BuildContext context, Object? state);
@@ -20,10 +26,15 @@ abstract class ControllerStatefulWidget extends StatefulWidget {
 }
 
 abstract class ControllerState<T extends StatefulWidget> extends State<T>
-    with ControllerVariable
+    with ControllerVariable, ControllerMixin
     implements ControllerBuild {
   String? className;
   // Object? objectState;
+
+  bool isActivation = true;
+
+  @override
+  LeafBottomIndex? get bottomIndex => null;
 
   @override
   bool get useSafeArea => false;
@@ -42,6 +53,11 @@ abstract class ControllerState<T extends StatefulWidget> extends State<T>
     super.initState();
     className = context.widget.toString();
     Logging.d('Controller initState: $className');
+
+    final bottomIndex = this.bottomIndex;
+    if (bottomIndex != null) {
+      isActivation = (bottomIndex.activeTabIndex == bottomIndex.tabIndex);
+    }
   }
 
   @override
@@ -51,11 +67,35 @@ abstract class ControllerState<T extends StatefulWidget> extends State<T>
   }
 
   @override
+  void didUpdateWidget(covariant T oldWidget) {
+    final bottomIndex = this.bottomIndex;
+
+    // Once Activation
+    if (!isActivation) {
+      if (bottomIndex != null) {
+        isActivation = (bottomIndex.activeTabIndex == bottomIndex.tabIndex);
+      }
+    }
+
+    // Taped when visible
+    if (bottomIndex != null && bottomIndex.scrollTop) {
+      bottomAppBarTapedWhenVisible();
+    }
+
+    super.didUpdateWidget(oldWidget);
+  }
+
+  @override
   Widget build(BuildContext context) {
+    if (!isActivation) {
+      return const LeafTransparentContainer();
+    }
+
     final screenWidget = buildScreen(context);
     if (screenWidget != null) {
       return screenWidget;
     }
+
     return buildScaffold(context, null);
   }
 

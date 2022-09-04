@@ -56,7 +56,7 @@ class LeafBottomAppBarItem extends Equatable {
 ////////////////////////////////////////////////////////////////////////////////
 
 typedef LeafBottomAppBarOnPress = void Function(
-  List<LeafBottomAppBarItem> items,
+  List<LeafBottomIndex> bottomIndexItems,
   int index,
 );
 
@@ -77,56 +77,64 @@ class LeafBottomAppBar extends StatelessWidget {
     this.backgroundColor,
     this.shape,
     this.clipBehavior = Clip.none,
-    this.padding = const EdgeInsets.all(0.0),
+    this.padding = const EdgeInsets.symmetric(vertical: 8.0),
     this.notchMargin = 4.0,
     this.onPress,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return BottomAppBar(
-      elevation: 1.0,
-      shape: shape,
-      clipBehavior: clipBehavior,
-      color: backgroundColor,
-      notchMargin: notchMargin,
-      child: Padding(
-        padding: padding,
-        child: Row(
-          children: [
-            ...items.asMap().entries.map((e) {
-              final index = e.key;
-              final item = e.value;
+    return ClipRRect(
+      borderRadius: const BorderRadius.only(
+        topRight: Radius.circular(0),
+        topLeft: Radius.circular(0),
+      ),
+      child: BottomAppBar(
+        elevation: 1.0,
+        shape: shape,
+        clipBehavior: clipBehavior,
+        color: backgroundColor,
+        notchMargin: notchMargin,
+        child: Padding(
+          padding: padding,
+          child: Row(
+            children: [
+              ...items.asMap().entries.map((e) {
+                final index = e.key;
+                final item = e.value;
 
-              final Widget? defaultWidget = item.defaultWidget;
-              final Widget? activeWidget = item.activeWidget;
+                final Widget? defaultWidget = item.defaultWidget;
+                final Widget? activeWidget = item.activeWidget;
 
-              void onTap() {
-                final scrollTop = selectedIndex == index;
-                final newItems = items.map((item) {
-                  return item.copyWith(
-                    bottomIndex: item.bottomIndex.copyWith(
-                      activeTabIndex: index,
-                      scrollTop: (index == item.bottomIndex.tabIndex)
-                          ? scrollTop
-                          : false,
-                    ),
-                  );
-                }).toList();
-                onPress?.call(newItems, index);
-              }
+                void onTap() {
+                  final scrollTop = selectedIndex == index;
+                  final newItems = items.map((item) {
+                    return item.copyWith(
+                      bottomIndex: item.bottomIndex.copyWith(
+                        activeTabIndex: index,
+                        scrollTop: (index == item.bottomIndex.tabIndex)
+                            ? scrollTop
+                            : false,
+                      ),
+                    );
+                  }).toList();
+                  final bottomIndexs =
+                      newItems.map((item) => item.bottomIndex).toList();
+                  onPress?.call(bottomIndexs, index);
+                }
 
-              return Expanded(
-                child: GestureDetector(
-                  onTap: () {
-                    onTap();
-                  },
-                  child:
-                      (selectedIndex == index) ? activeWidget : defaultWidget,
-                ),
-              );
-            }).toList(),
-          ],
+                Widget? child =
+                    (selectedIndex == index) ? activeWidget : defaultWidget;
+
+                return Expanded(
+                  child: GestureDetector(
+                    onTap: onTap,
+                    child: child,
+                  ),
+                );
+              }).toList(),
+            ],
+          ),
         ),
       ),
     );

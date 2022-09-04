@@ -66,8 +66,8 @@ class TimeoutRequestException extends HTTPException {
 }
 
 // 500
-class ServerIntrnalException extends HTTPException {
-  ServerIntrnalException(String message)
+class ServerInternalException extends HTTPException {
+  ServerInternalException(String message)
       : super(
             message,
             'Internal Server Error',
@@ -83,7 +83,7 @@ class InternetNotConnectRequestException extends HTTPException {
 }
 
 // 이미지 용량 초과
-class ImageVolumMaxException extends HTTPException {
-  ImageVolumMaxException(String message)
+class ImageVolumeMaxException extends HTTPException {
+  ImageVolumeMaxException(String message)
       : super(message, 'Image Volume Max', HTTPExceptionMessage.message);
 }

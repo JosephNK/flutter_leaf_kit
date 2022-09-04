@@ -1,44 +1,42 @@
 part of leaf_alert_component;
 
+class LeafAlertConfigure {
+  final String messageOK;
+  final String messageClose;
+
+  LeafAlertConfigure({
+    required this.messageOK,
+    required this.messageClose,
+  });
+}
+
 class LeafAlert {
+  static final LeafAlert _instance = LeafAlert._internal();
+
+  static LeafAlert get shared => _instance;
+
+  LeafAlert._internal();
+
+  static LeafAlertConfigure? get configure => LeafAlert.shared._configure;
+
+  late LeafAlertConfigure _configure;
+
+  void setup({required LeafAlertConfigure configure}) {
+    _configure = configure;
+  }
+
   static Future<void> show(
     BuildContext context, {
     String? title,
     String? message,
-    bool autoPop = true,
-    required String cancelText,
     VoidCallback? onCancel,
   }) async {
-    await showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: isEmpty(title)
-              ? null
-              : LeafText(
-                  title ?? '',
-                  style: const TextStyle(fontSize: 18),
-                  maxLines: 2,
-                ),
-          content: LeafText(
-            message ?? '',
-            style: const TextStyle(fontSize: 16),
-            maxLines: 5,
-          ),
-          actions: [
-            TextButton(
-              onPressed: () async {
-                if (autoPop) {
-                  Navigator.maybePop(context);
-                  await Future.delayed(const Duration(milliseconds: 100));
-                }
-                onCancel?.call();
-              },
-              child: LeafText(cancelText),
-            ),
-          ],
-        );
-      },
+    await LeafBaseAlert.show(
+      context,
+      title: title,
+      message: message,
+      onCancel: onCancel,
+      cancelText: configure?.messageClose ?? 'Close',
     );
   }
 
@@ -46,52 +44,43 @@ class LeafAlert {
     BuildContext context, {
     String? title,
     String? message,
-    bool autoPop = true,
-    required String okText,
-    required String cancelText,
     Function? onCancel,
     Function? onOK,
   }) async {
-    await showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: isEmpty(title)
-              ? null
-              : LeafText(
-                  title ?? '',
-                  style: const TextStyle(fontSize: 18),
-                  maxLines: 2,
-                ),
-          content: LeafText(
-            message ?? '',
-            style: const TextStyle(fontSize: 16),
-            maxLines: 5,
-          ),
-          actions: [
-            TextButton(
-              onPressed: () async {
-                if (autoPop) {
-                  Navigator.maybePop(context);
-                  await Future.delayed(const Duration(milliseconds: 100));
-                }
-                onCancel?.call();
-              },
-              child: LeafText(cancelText),
-            ),
-            TextButton(
-              onPressed: () async {
-                if (autoPop) {
-                  Navigator.maybePop(context);
-                  await Future.delayed(const Duration(milliseconds: 100));
-                }
-                onOK?.call();
-              },
-              child: LeafText(okText),
-            ),
-          ],
-        );
-      },
+    await LeafBaseAlert.confirm(
+      context,
+      title: title,
+      message: message,
+      onCancel: onCancel,
+      onOK: onOK,
+      cancelText: configure?.messageClose ?? 'Close',
+      okText: configure?.messageOK ?? 'OK',
     );
+  }
+
+  static Future<void> showError(
+    BuildContext context, {
+    bool success = false,
+    String? title,
+    String? message,
+    dynamic exception,
+    VoidCallback? onTap,
+  }) async {
+    if (success) return;
+    String? errorTitle = isNotEmpty(title)
+        ? title
+        : (exception is HTTPException)
+            ? exception.prefix
+            : 'Oops!';
+    String? errorMessage = isNotEmpty(message) ? message : null;
+    errorMessage = errorMessage ?? exception?.toString();
+    if (isNotEmpty(errorMessage)) {
+      LeafAlert.show(
+        context,
+        title: errorTitle,
+        message: errorMessage,
+        onCancel: onTap,
+      );
+    }
   }
 }

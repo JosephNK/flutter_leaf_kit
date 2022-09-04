@@ -442,7 +442,7 @@ class HTTPManager extends http.BaseClient {
     } else if (statusCode == 408) {
       throw TimeoutRequestException(body);
     } else {
-      throw ServerIntrnalException(body);
+      throw ServerInternalException(body);
     }
   }
 
@@ -492,7 +492,7 @@ extension HTTPManagerHeaders on HTTPManager {
   /// UserAgent Headers
   Future<Map<String, String>> _userAgentHeaders() async {
     final appName = _appName;
-    if (_appName == null) {
+    if (appName == null) {
       throw 'HTTPManager AppName should not be null';
     }
     final env = await Environment.packageInfo();
