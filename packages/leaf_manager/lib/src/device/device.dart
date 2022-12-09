@@ -1,10 +1,8 @@
 import 'dart:io';
 
-import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
+import 'package:leaf_common/leaf_common.dart';
 import 'package:permission_handler/permission_handler.dart' as ph;
-
-import '../env/env.dart';
 
 class DeviceManager {
   static final DeviceManager _instance = DeviceManager._internal();
@@ -32,9 +30,6 @@ class DeviceManager {
     _textScaleFactor = MediaQuery.of(context).textScaleFactor;
     _devicePixelRatio = MediaQuery.of(context).devicePixelRatio;
     _deviceSize = MediaQuery.of(context).size;
-    // Logging.d('[DEVICE TSF]: $textScaleFactor');
-    // Logging.d('[DEVICE DPI]: $devicePixelRatio');
-    // Logging.d('[DEVICE SIZE]: $_deviceSize');
   }
 
   Future<String> appVersion() async {

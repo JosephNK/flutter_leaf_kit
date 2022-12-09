@@ -1,5 +1,6 @@
 import 'package:http/http.dart' as http;
-import 'package:shared_preferences/shared_preferences.dart';
+
+import '../preferences/preferences.dart';
 
 class CookieStoreManager {
   static final CookieStoreManager _instance = CookieStoreManager._internal();
@@ -21,19 +22,15 @@ class CookieStoreManager {
   }
 
   Future<void> setCookie(String cookie) async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setString('cookie', cookie);
+    await LeafSharedPreferences.setString('cookie', cookie);
   }
 
   Future<String?> getCookie() async {
-    final prefs = await SharedPreferences.getInstance();
-    final cookie = prefs.getString('cookie');
-    return cookie;
+    return LeafSharedPreferences.getString('cookie');
   }
 
   Future<void> removeCookie() async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.remove('cookie');
+    await LeafSharedPreferences.remove('cookie');
   }
 
   Future<Map<String, String>> getHeader(dynamic uri) async {

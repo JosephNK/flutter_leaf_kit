@@ -1,6 +1,8 @@
 import 'package:leaf_common/leaf_common.dart';
 
 class LeafAppManager {
+  LeafAppManager();
+
   String? get expiredDate => null; // '2021-06-04'
 
   int get imageQuality => 100;

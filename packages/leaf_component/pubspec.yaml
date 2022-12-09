@@ -19,6 +19,8 @@ dependencies:
   leaf_network:
     path: ../leaf_network
 
+  expandable_page_view: ^1.0.17
+
   animated_text_kit: ^4.2.1
   another_flushbar: ^1.10.29
   cached_network_image: ^3.2.1
@@ -36,6 +38,8 @@ dependencies:
   supercharged: ^2.1.1
   visibility_detector: ^0.3.3
   wechat_assets_picker: ^7.3.1
+  flutter_rating_bar: ^4.0.1
+  webview_flutter: ^3.0.4
 
 dev_dependencies:
   flutter_test:

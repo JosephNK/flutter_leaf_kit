@@ -7,7 +7,6 @@ export 'src/app/app.dart';
 export 'src/badger/badger.dart';
 export 'src/cookie/cookie.dart';
 export 'src/device/device.dart';
-export 'src/env/env.dart';
 export 'src/file/file.dart';
 export 'src/launcher/launcher.dart';
 export 'src/location/location.dart';

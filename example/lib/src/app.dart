@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'ui/screens/main_screen.dart';
+import 'ui/main_screen.dart';
 
 class App extends StatefulWidget {
   const App({Key? key}) : super(key: key);
