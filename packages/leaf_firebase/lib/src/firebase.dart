@@ -69,7 +69,7 @@ class FirebaseManager {
 
   Future<void> listenBackgroundMessaging(
       ValueChanged<RemoteMessage>? callBack) async {
-    Future<void> _firebaseMessagingBackgroundHandler(
+    Future<void> firebaseMessagingBackgroundHandler(
         RemoteMessage message) async {
       // If you're going to use other Firebase services in the background, such as Firestore,
       // make sure you call `initializeApp` before using other Firebase services.
@@ -80,7 +80,7 @@ class FirebaseManager {
       callBack?.call(message);
     }
 
-    FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+    FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
   }
 
   Future<AuthorizationStatus> _requestPermission() async {

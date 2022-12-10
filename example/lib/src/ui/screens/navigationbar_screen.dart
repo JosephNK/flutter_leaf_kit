@@ -25,19 +25,19 @@ class _BottomNavigationBarScreenState extends State<BottomNavigationBarScreen> {
   final List<LFBottomTabItem> _tabItems = [
     LFBottomTabItem(
       bottomTabIndex: LFBottomTabIndex(tabIndex: 0),
-      icon: const Icon(Icons.home),
+      defaultIcon: const Icon(Icons.home),
       text: 'Home',
       isNew: false,
     ),
     LFBottomTabItem(
       bottomTabIndex: LFBottomTabIndex(tabIndex: 1),
-      icon: const Icon(Icons.feed),
+      defaultIcon: const Icon(Icons.feed),
       text: 'Feed',
       isNew: false,
     ),
     LFBottomTabItem(
       bottomTabIndex: LFBottomTabIndex(tabIndex: 2),
-      icon: const Icon(Icons.settings),
+      defaultIcon: const Icon(Icons.settings),
       text: 'Setup',
       isNew: true,
     ),
@@ -58,7 +58,7 @@ class _BottomNavigationBarScreenState extends State<BottomNavigationBarScreen> {
         title: LFAppBarTitle(text: widget.title),
         actions: [
           LFAppBarAction(
-            icon: Icons.home,
+            icon: const Icon(Icons.home),
             onPressed: () {},
           )
         ],

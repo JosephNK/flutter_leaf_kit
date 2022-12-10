@@ -1,5 +1,4 @@
 export 'package:device_info_plus/device_info_plus.dart';
-// export 'package:easy_localization/easy_localization.dart' hide TextDirection;
 export 'package:equatable/equatable.dart';
 export 'package:flutter_bloc/flutter_bloc.dart';
 export 'package:google_fonts/google_fonts.dart' show GoogleFonts;

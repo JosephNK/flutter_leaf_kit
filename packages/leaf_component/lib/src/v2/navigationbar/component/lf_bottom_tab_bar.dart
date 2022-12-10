@@ -119,7 +119,8 @@ class _LFBottomTabBarState extends State<LFBottomTabBar> {
               final index = e.key;
               final item = e.value;
 
-              final icon = item.icon;
+              final defaultIcon = item.defaultIcon;
+              final activeIcon = item.activeIcon;
               final text = item.text;
               final isNew = item.isNew;
 
@@ -143,7 +144,8 @@ class _LFBottomTabBarState extends State<LFBottomTabBar> {
                     index: index,
                     activeColor: activeColor,
                     inactiveColor: inactiveColor,
-                    icon: icon,
+                    defaultIcon: defaultIcon,
+                    activeIcon: activeIcon,
                     text: text,
                     isNew: isNew,
                   ),
@@ -162,7 +164,8 @@ class LSBottomTextIcon extends StatelessWidget {
   final int index;
   final Color activeColor;
   final Color inactiveColor;
-  final Widget? icon;
+  final Widget? defaultIcon;
+  final Widget? activeIcon;
   final String? text;
   final bool isNew;
 
@@ -172,7 +175,8 @@ class LSBottomTextIcon extends StatelessWidget {
     required this.index,
     required this.activeColor,
     required this.inactiveColor,
-    this.icon,
+    required this.defaultIcon,
+    this.activeIcon,
     this.text,
     this.isNew = false,
   }) : super(key: key);
@@ -182,7 +186,11 @@ class LSBottomTextIcon extends StatelessWidget {
     final isActive = (selectedIndex == index);
     final activeColor = this.activeColor;
     final inactiveColor = this.inactiveColor;
+    final defaultIcon = this.defaultIcon;
+    final activeIcon = this.activeIcon;
     final color = isActive ? activeColor : inactiveColor;
+
+    final icon = (activeIcon != null && isActive) ? activeIcon : defaultIcon;
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -196,7 +204,7 @@ class LSBottomTextIcon extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   LFBottomIcon(
-                    icon: icon,
+                    widget: icon,
                     color: color,
                   ),
                   LFBottomText(
@@ -223,25 +231,25 @@ class LSBottomTextIcon extends StatelessWidget {
 }
 
 class LFBottomIcon extends StatelessWidget {
-  final Widget? icon;
+  final Widget? widget;
   final Color? color;
 
   const LFBottomIcon({
     Key? key,
-    required this.icon,
+    required this.widget,
     required this.color,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final icon = this.icon;
-    if (icon == null) {
+    final widget = this.widget;
+    if (widget == null) {
       return Container();
     }
-    if (icon is Icon) {
-      return Icon(icon.icon, color: color);
+    if (widget is Icon) {
+      return Icon(widget.icon, color: color);
     }
-    return icon;
+    return widget;
   }
 }
 

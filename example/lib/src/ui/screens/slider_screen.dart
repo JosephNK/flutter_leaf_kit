@@ -15,7 +15,7 @@ class SliderScreen extends ScreenStatefulWidget {
 
 class _SliderScreenState extends ScreenState<SliderScreen> {
   double _sliderValue = 0.0;
-  RangeValues _rangeSliderValues = RangeValues(0.3, 0.7);
+  RangeValues _rangeSliderValues = const RangeValues(0.3, 0.7);
 
   @override
   Color? get backgroundColor => Colors.white;

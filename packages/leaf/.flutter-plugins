@@ -1,5 +1,6 @@
 # This is a generated file; do not edit or check into version control.
 app_tracking_transparency=/Users/josephnk/Library/flutter/.pub-cache/hosted/pub.dartlang.org/app_tracking_transparency-2.0.2+4/
+cloud_firestore_web=/Users/josephnk/Library/flutter/.pub-cache/hosted/pub.dartlang.org/cloud_firestore_web-3.1.1/
 connectivity_plus=/Users/josephnk/Library/flutter/.pub-cache/hosted/pub.dartlang.org/connectivity_plus-2.3.2/
 connectivity_plus_linux=/Users/josephnk/Library/flutter/.pub-cache/hosted/pub.dartlang.org/connectivity_plus_linux-1.3.1/
 connectivity_plus_macos=/Users/josephnk/Library/flutter/.pub-cache/hosted/pub.dartlang.org/connectivity_plus_macos-1.2.2/
@@ -10,13 +11,13 @@ device_info_plus_linux=/Users/josephnk/Library/flutter/.pub-cache/hosted/pub.dar
 device_info_plus_macos=/Users/josephnk/Library/flutter/.pub-cache/hosted/pub.dartlang.org/device_info_plus_macos-5.0.0/
 device_info_plus_web=/Users/josephnk/Library/flutter/.pub-cache/hosted/pub.dartlang.org/device_info_plus_web-5.0.0/
 device_info_plus_windows=/Users/josephnk/Library/flutter/.pub-cache/hosted/pub.dartlang.org/device_info_plus_windows-6.0.0/
-firebase_core=/Users/josephnk/Library/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_core-1.17.1/
-firebase_core_web=/Users/josephnk/Library/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_core_web-1.6.4/
-firebase_messaging=/Users/josephnk/Library/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_messaging-11.4.1/
-firebase_messaging_web=/Users/josephnk/Library/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_messaging_web-2.4.1/
+firebase_core=/Users/josephnk/Library/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_core-2.4.0/
+firebase_core_web=/Users/josephnk/Library/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_core_web-2.0.2/
+firebase_messaging=/Users/josephnk/Library/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_messaging-14.1.4/
+firebase_messaging_web=/Users/josephnk/Library/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_messaging_web-3.2.9/
 flutter_app_badger=/Users/josephnk/Library/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_app_badger-1.4.0/
 flutter_image_compress=/Users/josephnk/Library/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_image_compress-1.1.0/
-flutter_local_notifications=/Users/josephnk/Library/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_local_notifications-9.6.0/
+flutter_local_notifications=/Users/josephnk/Library/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_local_notifications-12.0.4/
 flutter_plugin_android_lifecycle=/Users/josephnk/Library/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_plugin_android_lifecycle-2.0.6/
 fluttertoast=/Users/josephnk/Library/flutter/.pub-cache/hosted/pub.dartlang.org/fluttertoast-8.0.9/
 geolocator=/Users/josephnk/Library/flutter/.pub-cache/hosted/pub.dartlang.org/geolocator-8.2.1/

@@ -1,5 +1,5 @@
 import 'package:built_value/built_value.dart';
-import 'package:quiver/strings.dart';
+import 'package:flutter_leaf_kit/flutter_leaf_kit_common.dart';
 
 part 'api_error_response.g.dart';
 

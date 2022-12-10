@@ -15,9 +15,9 @@ dependencies:
   leaf_common:
     path: ../leaf_common
 
-  firebase_core: ^1.17.1
-  firebase_messaging: ^11.4.1
-  flutter_local_notifications: ^9.6.0
+  firebase_core: ^2.4.0
+  firebase_messaging: ^14.1.4
+  flutter_local_notifications: ^12.0.4
 
 dev_dependencies:
   flutter_test:

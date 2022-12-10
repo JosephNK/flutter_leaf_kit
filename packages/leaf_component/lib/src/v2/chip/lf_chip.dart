@@ -1,7 +1,6 @@
 library lf_chip;
 
 import 'package:flutter/material.dart';
-import 'package:leaf_common/leaf_common.dart';
 
 import '../_model/lf_data_item.dart';
 import '../inkwell/lf_inkwell.dart';

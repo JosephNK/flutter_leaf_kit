@@ -2,13 +2,15 @@ part of lf_navigationbar;
 
 class LFBottomTabItem extends Equatable {
   final LFBottomTabIndex bottomTabIndex;
-  final Widget? icon;
+  final Widget? defaultIcon;
+  final Widget? activeIcon;
   final String? text;
   final bool isNew;
 
   const LFBottomTabItem({
     required this.bottomTabIndex,
-    required this.icon,
+    required this.defaultIcon,
+    this.activeIcon,
     this.text,
     this.isNew = false,
   });
@@ -16,20 +18,23 @@ class LFBottomTabItem extends Equatable {
   @override
   List<Object?> get props => [
         bottomTabIndex,
-        icon,
+        defaultIcon,
+        activeIcon,
         text,
         isNew,
       ];
 
   LFBottomTabItem copyWith({
     LFBottomTabIndex? bottomTabIndex,
-    Widget? icon,
+    Widget? defaultIcon,
+    Widget? activeIcon,
     String? text,
     bool? isNew,
   }) {
     return LFBottomTabItem(
       bottomTabIndex: bottomTabIndex ?? this.bottomTabIndex,
-      icon: icon ?? this.icon,
+      defaultIcon: defaultIcon ?? this.defaultIcon,
+      activeIcon: activeIcon ?? this.activeIcon,
       text: text ?? this.text,
       isNew: isNew ?? this.isNew,
     );

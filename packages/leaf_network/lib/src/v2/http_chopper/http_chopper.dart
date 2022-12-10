@@ -1,7 +1,6 @@
 library http_chopper;
 
 import 'dart:async';
-import 'dart:convert';
 import 'dart:io';
 
 import 'package:built_collection/built_collection.dart';

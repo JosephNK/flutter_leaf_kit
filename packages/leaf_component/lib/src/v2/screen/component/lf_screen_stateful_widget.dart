@@ -33,7 +33,8 @@ abstract class StatefulExtWidget extends StatefulWidget {
 }
 
 abstract class ScreenStatefulWidget extends StatefulExtWidget {
-  const ScreenStatefulWidget({Key? key}) : super(key: key);
+  const ScreenStatefulWidget({Key? key, LFBottomTabIndex? index})
+      : super(key: key, index: index);
 }
 
 abstract class ScreenState<T extends StatefulExtWidget> extends State<T>
@@ -67,14 +68,14 @@ abstract class ScreenState<T extends StatefulExtWidget> extends State<T>
     super.initState();
 
     className = context.widget.toString();
-    Logging.d('Controller initState: $className');
+    Logging.d('$className is initState');
 
     _updateActivation();
   }
 
   @override
   void dispose() {
-    Logging.d('Controller dispose: $className');
+    Logging.d('$className is dispose');
 
     super.dispose();
   }
@@ -98,6 +99,7 @@ abstract class ScreenState<T extends StatefulExtWidget> extends State<T>
   @override
   Widget build(BuildContext context) {
     if (!_isActivation) {
+      Logging.i('$className is not Activation!');
       return Container();
     }
     final screenWidget = buildScreen(context);

@@ -47,7 +47,7 @@ class LeafCacheImage extends StatelessWidget {
     required String? url,
     required Map<String, String>? httpHeaders,
   }) {
-    Widget _getClipperWrapperWidget({required Widget child}) {
+    Widget getClipperWrapperWidget({required Widget child}) {
       return Stack(
         children: [
           ClipPath(
@@ -66,7 +66,7 @@ class LeafCacheImage extends StatelessWidget {
     }
 
     if (httpHeaders == null || isEmpty(url)) {
-      return _getClipperWrapperWidget(
+      return getClipperWrapperWidget(
         child: _buildErrorImage(context),
       );
     }
@@ -80,7 +80,7 @@ class LeafCacheImage extends StatelessWidget {
       httpHeaders: httpHeaders,
     );
 
-    return _getClipperWrapperWidget(
+    return getClipperWrapperWidget(
       child: networkWidget,
     );
   }
