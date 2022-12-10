@@ -14,10 +14,14 @@ dependencies:
 
   leaf_common:
     path: ../leaf_common
+  leaf_data:
+    path: ../leaf_data
   leaf_manager:
     path: ../leaf_manager
   leaf_network:
     path: ../leaf_network
+  leaf_navigation:
+    path: ../leaf_navigation
 
   expandable_page_view: ^1.0.17
 

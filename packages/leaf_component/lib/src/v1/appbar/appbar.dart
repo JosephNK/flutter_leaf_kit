@@ -1,7 +1,7 @@
 library leaf_appbar_component;
 
 import 'package:flutter/material.dart';
-import 'package:leaf_common/leaf_common.dart';
+import 'package:leaf_data/leaf_data.dart';
 
 import '../controller/controller.dart';
 

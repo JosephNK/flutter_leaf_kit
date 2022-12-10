@@ -5,6 +5,7 @@ class LFSkeleton extends StatelessWidget {
   final double? height;
   final Widget? child;
   final Color? color;
+  final double radius;
   final bool random;
 
   const LFSkeleton({
@@ -13,6 +14,7 @@ class LFSkeleton extends StatelessWidget {
     this.height,
     this.child,
     this.color,
+    this.radius = 0.0,
     this.random = false,
   }) : super(key: key);
 
@@ -34,7 +36,10 @@ class LFSkeleton extends StatelessWidget {
           Container(
             width: width,
             height: height,
-            color: Colors.white,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(radius),
+              color: Colors.white,
+            ),
           ),
     );
   }

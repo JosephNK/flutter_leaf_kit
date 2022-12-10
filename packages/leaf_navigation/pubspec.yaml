@@ -1,4 +1,4 @@
-name: flutter_leaf_kit
+name: leaf_navigation
 description: A new Flutter package project.
 version: 0.0.1
 publish_to: 'none'
@@ -12,20 +12,11 @@ dependencies:
   flutter:
     sdk: flutter
 
-  leaf_common:
-    path: ../leaf_common
-  leaf_component:
-    path: ../leaf_component
   leaf_data:
     path: ../leaf_data
-  leaf_firebase:
-    path: ../leaf_firebase
-  leaf_manager:
-    path: ../leaf_manager
-  leaf_network:
-    path: ../leaf_network
-  leaf_navigation:
-    path: ../leaf_navigation
+
+  page_transition: ^2.0.5
+  navigation_history_observer: ^1.1.0
 
 dev_dependencies:
   flutter_test:

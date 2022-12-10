@@ -1,4 +1,4 @@
-part of lf_common;
+part of leaf_navigation;
 
 enum LFNavigatorViewState { none, refresh, update, leave }
 

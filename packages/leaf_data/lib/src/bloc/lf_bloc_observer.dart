@@ -1,4 +1,4 @@
-part of lf_common;
+part of leaf_data;
 
 typedef BlocObserverOnChangeCallback = void Function(
   BlocBase,
