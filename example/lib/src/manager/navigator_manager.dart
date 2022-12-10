@@ -2,6 +2,7 @@ import 'package:example/src/model/classes/list_item.dart';
 import 'package:flutter/material.dart';
 
 import '../ui/screens/accordion_screen.dart';
+import '../ui/screens/avatar_screen.dart';
 import '../ui/screens/badge_screen.dart';
 import '../ui/screens/bottomsheet_screen.dart';
 import '../ui/screens/button_screen.dart';
@@ -18,6 +19,7 @@ import '../ui/screens/textfield_sceen.dart';
 
 dynamic kListObjects = {
   "items": [
+    {"id": "Avatar", "title": "Avatar"},
     {"id": "Network", "title": "Network"},
     {"id": "NavigationBar", "title": "NavigationBar"},
     {"id": "Badge", "title": "Badge"},
@@ -48,6 +50,9 @@ class NavigatorManager {
     late Widget widget;
 
     switch (title) {
+      case 'Avatar':
+        widget = AvatarScreen(title: title);
+        break;
       case 'Network':
         widget = NetworkScreen(title: title);
         break;

@@ -27,7 +27,7 @@ dependencies:
 
   animated_text_kit: ^4.2.1
   another_flushbar: ^1.10.29
-  cached_network_image: ^3.2.1
+  cached_network_image: ^3.2.3
   dotted_border: ^2.0.0+2
   flutter_cupertino_datetime_picker: ^3.0.0
   fluttertoast: ^8.0.9

@@ -6,6 +6,7 @@ export '_model/lf_data_item.dart';
 ///
 export 'accordion/lf_accordion.dart';
 export 'appbar/lf_appbar.dart';
+export 'avatar/lf_avatar.dart';
 export 'badge/lf_badge.dart';
 export 'bottomsheet/lf_bottom_sheet.dart';
 export 'button/lf_button.dart';

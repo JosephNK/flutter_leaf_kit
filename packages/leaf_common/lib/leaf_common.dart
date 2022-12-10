@@ -3,6 +3,7 @@ export 'package:google_fonts/google_fonts.dart' show GoogleFonts;
 export 'package:intl/intl.dart' hide TextDirection;
 export 'package:quiver/core.dart';
 export 'package:quiver/strings.dart';
+export 'package:string_validator/string_validator.dart';
 
 /// V1
 export 'src/v1/leaf_common.dart';
