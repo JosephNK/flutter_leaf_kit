@@ -2,6 +2,7 @@ library leaf_navigation;
 
 import 'package:flutter/material.dart';
 import 'package:leaf_data/leaf_data.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:page_transition/page_transition.dart';
 
 export 'package:navigation_history_observer/navigation_history_observer.dart'

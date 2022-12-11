@@ -144,40 +144,53 @@ class LFNavigationBlocProvider {
     BuildContext context,
     String routeName, {
     required MultiBlocProvider provider,
-    PageTransitionType? transitionType,
+    bool isUsingIosModalType = false,
   }) async {
-    if (transitionType != null) {
-      return await Navigator.push(
-        context,
-        PageRouteBuilder(
-          settings: RouteSettings(name: routeName),
-          pageBuilder: (_, __, ___) {
-            return provider;
-          },
-          transitionsBuilder: (context, animation, secondaryAnimation, child) {
-            if (transitionType == PageTransitionType.bottomToTop) {
-              final tween =
-                  Tween(begin: const Offset(0, 1), end: const Offset(0, 0));
-              final position = tween.animate(animation);
-              return SlideTransition(
-                position: position,
-                child: child,
-              );
-            }
-            return child;
-          },
-          transitionDuration: const Duration(milliseconds: 300),
-        ),
-      );
-    }
-
-    return await Navigator.push(
-      context,
-      MaterialPageRoute(
+    late PageRoute route;
+    if (!isUsingIosModalType) {
+      route = MaterialPageRoute(
         settings: RouteSettings(name: routeName),
         builder: (context) {
           return provider;
         },
+      );
+    } else {
+      route = MaterialWithModalsPageRoute(
+        settings: RouteSettings(name: routeName),
+        builder: (context) {
+          return provider;
+        },
+      );
+    }
+    return await Navigator.push(context, route);
+  }
+
+  static Future<T> pushNamedAtTransition<T>(
+    BuildContext context,
+    String routeName, {
+    required MultiBlocProvider provider,
+    required PageTransitionType transitionType,
+  }) async {
+    return await Navigator.push(
+      context,
+      PageRouteBuilder(
+        settings: RouteSettings(name: routeName),
+        pageBuilder: (_, __, ___) {
+          return provider;
+        },
+        transitionsBuilder: (context, animation, secondaryAnimation, child) {
+          if (transitionType == PageTransitionType.bottomToTop) {
+            final tween =
+                Tween(begin: const Offset(0, 1), end: const Offset(0, 0));
+            final position = tween.animate(animation);
+            return SlideTransition(
+              position: position,
+              child: child,
+            );
+          }
+          return child;
+        },
+        transitionDuration: const Duration(milliseconds: 300),
       ),
     );
   }

@@ -15,6 +15,7 @@ dependencies:
   leaf_data:
     path: ../leaf_data
 
+  modal_bottom_sheet: ^2.1.2
   page_transition: ^2.0.5
   navigation_history_observer: ^1.1.0
 
