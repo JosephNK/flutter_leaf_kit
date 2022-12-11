@@ -61,15 +61,15 @@ class BaseState extends Equatable {
         exception,
       ];
 
-  BaseState copyWith({
-    bool? Function()? success,
-    String? Function()? errorMessage,
-    dynamic Function()? exception,
-  }) {
-    return BaseState(
-      success: success != null ? success() : this.success,
-      errorMessage: errorMessage != null ? errorMessage() : this.errorMessage,
-      exception: exception != null ? exception() : this.exception,
-    );
-  }
+  // BaseState copyWith({
+  //   bool? Function()? success,
+  //   String? Function()? errorMessage,
+  //   dynamic Function()? exception,
+  // }) {
+  //   return BaseState(
+  //     success: success != null ? success() : this.success,
+  //     errorMessage: errorMessage != null ? errorMessage() : this.errorMessage,
+  //     exception: exception != null ? exception() : this.exception,
+  //   );
+  // }
 }

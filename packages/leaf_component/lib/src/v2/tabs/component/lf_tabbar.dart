@@ -4,7 +4,10 @@ class LFTabBar extends StatelessWidget {
   final TabController? controller;
   final Color? labelColor;
   final Color? unselectedLabelColor;
+  final TextStyle? labelStyle;
+  final TextStyle? unselectedLabelStyle;
   final Color? indicatorColor;
+  final EdgeInsets? indicatorPadding;
   final List<Tab> tabs;
 
   const LFTabBar({
@@ -12,7 +15,10 @@ class LFTabBar extends StatelessWidget {
     required this.controller,
     this.labelColor,
     this.unselectedLabelColor,
+    this.labelStyle,
+    this.unselectedLabelStyle,
     this.indicatorColor,
+    this.indicatorPadding,
     this.tabs = const [],
   }) : super(key: key);
 
@@ -24,19 +30,21 @@ class LFTabBar extends StatelessWidget {
 
     return TabBar(
       controller: controller,
-      indicatorPadding:
+      indicatorPadding: indicatorPadding ??
           const EdgeInsets.symmetric(vertical: 0.0, horizontal: 16.0),
       labelColor: labelColor,
       unselectedLabelColor: unselectedLabelColor,
       indicatorColor: indicatorColor,
-      labelStyle: const TextStyle(
-        fontWeight: FontWeight.bold,
-        fontSize: 16.0,
-      ),
-      unselectedLabelStyle: const TextStyle(
-        fontWeight: FontWeight.normal,
-        fontSize: 16.0,
-      ),
+      labelStyle: labelStyle ??
+          const TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 16.0,
+          ),
+      unselectedLabelStyle: unselectedLabelStyle ??
+          const TextStyle(
+            fontWeight: FontWeight.normal,
+            fontSize: 16.0,
+          ),
       tabs: tabs,
     );
   }

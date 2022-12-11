@@ -1,8 +1,8 @@
 part of lf_scroll_component;
 
 class LFListView<T> extends StatefulWidget {
+  final Key? storageKey;
   final Widget Function(BuildContext context, T item, int index) builder;
-  final Key storageKey;
   final LFScrollViewRefresh? onRefresh;
   final List<T> items;
   final LFListViewController? controller;
@@ -16,8 +16,8 @@ class LFListView<T> extends StatefulWidget {
 
   const LFListView({
     Key? key,
+    this.storageKey,
     required this.builder,
-    required this.storageKey,
     required this.onRefresh,
     required this.items,
     required this.controller,

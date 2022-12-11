@@ -2,7 +2,7 @@ part of lf_scroll_component;
 
 class LFScrollViewCupertino<T> extends StatelessWidget {
   final Widget child;
-  final Key storageKey;
+  final Key? storageKey;
   final LFScrollViewRefresh? onRefresh;
   final bool autoKeyboardHide;
   final EdgeInsets? padding;

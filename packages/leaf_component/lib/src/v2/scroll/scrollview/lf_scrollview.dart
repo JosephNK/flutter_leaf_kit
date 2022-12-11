@@ -1,7 +1,7 @@
 part of lf_scroll_component;
 
 class LFScrollView extends StatefulWidget {
-  final Key storageKey;
+  final Key? storageKey;
   final Widget child;
   final bool autoKeyboardHide;
   final ScrollPhysics? physics;
@@ -13,7 +13,7 @@ class LFScrollView extends StatefulWidget {
 
   const LFScrollView({
     Key? key,
-    required this.storageKey,
+    this.storageKey,
     required this.child,
     required this.controller,
     this.autoKeyboardHide = false,

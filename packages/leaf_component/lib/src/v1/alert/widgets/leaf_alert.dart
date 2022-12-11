@@ -12,13 +12,10 @@ class LeafAlertConfigure {
 
 class LeafAlert {
   static final LeafAlert _instance = LeafAlert._internal();
-
   static LeafAlert get shared => _instance;
-
   LeafAlert._internal();
 
   static LeafAlertConfigure? get configure => LeafAlert.shared._configure;
-
   late LeafAlertConfigure _configure;
 
   void setup({required LeafAlertConfigure configure}) {

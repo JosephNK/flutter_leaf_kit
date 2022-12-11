@@ -5,6 +5,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:leaf_common/leaf_common.dart';
 
+import '../_configure/lf_component_configure.dart';
 import '../inkwell/lf_inkwell.dart';
 import '../text/lf_text.dart';
 

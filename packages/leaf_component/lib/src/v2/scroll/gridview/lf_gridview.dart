@@ -1,8 +1,8 @@
 part of lf_scroll_component;
 
 class LFGridView<T> extends StatefulWidget {
+  final Key? storageKey;
   final Widget Function(BuildContext context, T item, int index) builder;
-  final Key storageKey;
   final List<T> items;
   final LFGridViewController? controller;
   final LFScrollViewRefresh? onRefresh;
@@ -18,8 +18,8 @@ class LFGridView<T> extends StatefulWidget {
 
   const LFGridView({
     Key? key,
+    this.storageKey,
     required this.builder,
-    required this.storageKey,
     required this.items,
     required this.controller,
     this.onRefresh,

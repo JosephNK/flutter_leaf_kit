@@ -2,7 +2,7 @@ part of lf_scroll_component;
 
 class LFListViewMaterial<T> extends StatelessWidget {
   final Widget Function(BuildContext context, T item, int index) builder;
-  final Key storageKey;
+  final Key? storageKey;
   final LFScrollViewRefresh? onRefresh;
   final List<T> items;
   final bool loading;

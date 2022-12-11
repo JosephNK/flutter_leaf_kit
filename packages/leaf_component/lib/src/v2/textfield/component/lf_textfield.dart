@@ -30,6 +30,7 @@ class LFTextField extends StatefulWidget {
   final LFTextFieldController controller;
   final String initialValue;
   final String text;
+  final TextStyle? textStyle;
   final bool autofocus;
   final bool disabled;
   final bool readOnly;
@@ -41,6 +42,7 @@ class LFTextField extends StatefulWidget {
   final int? maxLength;
   final int minLines;
   final int maxLines;
+  final double borderRadius;
   final EdgeInsets contentPadding;
   final Color? backgroundColor;
   final Color? disabledBackgroundColor;
@@ -51,6 +53,8 @@ class LFTextField extends StatefulWidget {
   final Color? placeHolderColor;
   final Color? clearIconColor;
   final Color? disabledClearIconColor;
+  final Widget? prefixIcon;
+  final BoxConstraints? prefixIconConstraints;
   final ValueChanged<bool>? onFocusChanged;
   final ValueChanged<String>? onChanged;
   final ValueChanged<String>? onSubmitted;
@@ -61,6 +65,7 @@ class LFTextField extends StatefulWidget {
     required this.controller,
     this.initialValue = '',
     this.text = '',
+    this.textStyle,
     this.autofocus = false,
     this.disabled = false,
     this.readOnly = false,
@@ -72,6 +77,7 @@ class LFTextField extends StatefulWidget {
     this.maxLength,
     this.minLines = 1,
     this.maxLines = 1,
+    this.borderRadius = 0.0,
     this.contentPadding = const EdgeInsets.all(16.0),
     this.backgroundColor,
     this.disabledBackgroundColor,
@@ -82,6 +88,8 @@ class LFTextField extends StatefulWidget {
     this.placeHolderColor,
     this.clearIconColor,
     this.disabledClearIconColor,
+    this.prefixIcon,
+    this.prefixIconConstraints,
     this.onFocusChanged,
     this.onChanged,
     this.onSubmitted,
@@ -164,6 +172,7 @@ class _LFTextFieldState extends State<LFTextField> {
     final autofocus = widget.autofocus;
     final disabled = widget.disabled;
     final readOnly = widget.readOnly;
+    final textStyle = widget.textStyle;
     final errorText = widget.errorText;
     final placeHolder = widget.placeHolder;
     final keyboardType = widget.keyboardType;
@@ -171,6 +180,7 @@ class _LFTextFieldState extends State<LFTextField> {
     final maxLength = widget.maxLength;
     final minLines = widget.minLines;
     final maxLines = widget.maxLines;
+    final borderRadius = widget.borderRadius;
     final contentPadding = widget.contentPadding;
     final backgroundColor = widget.backgroundColor;
     final disabledBackgroundColor = widget.disabledBackgroundColor;
@@ -181,6 +191,8 @@ class _LFTextFieldState extends State<LFTextField> {
     final placeHolderColor = widget.placeHolderColor;
     final clearIconColor = widget.clearIconColor;
     final disabledClearIconColor = widget.disabledClearIconColor;
+    final prefixIcon = widget.prefixIcon;
+    final prefixIconConstraints = widget.prefixIconConstraints;
     final onChanged = widget.onChanged;
     final onSubmitted = widget.onSubmitted;
     final onEditingComplete = widget.onEditingComplete;
@@ -204,10 +216,11 @@ class _LFTextFieldState extends State<LFTextField> {
         : clearIconColor ?? Colors.black.withOpacity(0.6);
 
     /// TextStyle
-    const textStyle = TextStyle(
-      fontWeight: FontWeight.normal,
-      fontSize: 16.0,
-    );
+    final textFieldTextStyle = textStyle ??
+        const TextStyle(
+          fontWeight: FontWeight.normal,
+          fontSize: 16.0,
+        );
 
     /// Handler
     Widget clearButtonWithHandler() {
@@ -261,10 +274,11 @@ class _LFTextFieldState extends State<LFTextField> {
       enabled: !disabled,
       readOnly: readOnly,
       scrollPadding: const EdgeInsets.all(0.0),
-      style: textStyle.copyWith(
+      style: textFieldTextStyle.copyWith(
         decoration: TextDecoration.none,
         color: inputTextColor,
       ),
+      textAlignVertical: TextAlignVertical.center,
       keyboardType: keyboardType,
       textInputAction: textInputAction,
       maxLength: maxLength,
@@ -274,10 +288,15 @@ class _LFTextFieldState extends State<LFTextField> {
       autocorrect: false,
       inputFormatters: const <TextInputFormatter>[],
       decoration: InputDecoration(
+        prefixIcon: prefixIcon,
         suffixIcon: !_showClearButton ? null : clearButtonWithHandler(),
+        prefixIconConstraints: prefixIconConstraints,
         isDense: true,
         isCollapsed: true,
         fillColor: inputBackgroundColor,
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(borderRadius),
+        ),
         filled: true,
         contentPadding: contentPadding,
         floatingLabelBehavior: FloatingLabelBehavior.auto,
@@ -286,19 +305,22 @@ class _LFTextFieldState extends State<LFTextField> {
         errorStyle: (errorText == null) ? null : const TextStyle(height: 0.0),
         hintText: isNotEmpty(placeHolder) ? placeHolder : null,
         hintStyle: isNotEmpty(placeHolder)
-            ? textStyle.copyWith(
+            ? textFieldTextStyle.copyWith(
                 decoration: TextDecoration.none,
                 color: inputPlaceHolderColor,
               )
             : null,
         errorBorder: UnderlineInputBorder(
           borderSide: BorderSide(color: inputErrorBorderColor),
+          borderRadius: BorderRadius.circular(borderRadius),
         ),
         enabledBorder: UnderlineInputBorder(
           borderSide: BorderSide(color: inputBorderColor),
+          borderRadius: BorderRadius.circular(borderRadius),
         ),
         focusedBorder: UnderlineInputBorder(
           borderSide: BorderSide(color: inputBorderColor),
+          borderRadius: BorderRadius.circular(borderRadius),
         ),
       ),
       onChanged: textFieldOnChanged,

@@ -1,6 +1,6 @@
 library lf_component;
 
-///
+export '_configure/lf_component_configure.dart';
 export '_model/lf_data_item.dart';
 
 ///
@@ -14,6 +14,7 @@ export 'button/lf_button.dart';
 export 'button/lf_button.dart';
 export 'checkbox/lf_checkbox.dart';
 export 'chip/lf_chip.dart';
+export 'container/lf_container.dart';
 export 'dialog/lf_dialog.dart';
 export 'image/lf_image.dart';
 export 'indicator/lf_indicator.dart';

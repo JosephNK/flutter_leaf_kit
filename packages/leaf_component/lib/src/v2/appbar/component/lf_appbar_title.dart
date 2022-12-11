@@ -49,6 +49,8 @@ class LFAppBarTitle extends StatelessWidget {
   Widget? _buildTextIcon(BuildContext context) {
     final text = this.text;
     final leading = this.leading;
+    final textStyle =
+        this.textStyle ?? LFComponentConfigure.shared.appBar?.titleStyle;
 
     if (text != null) {
       return Row(
