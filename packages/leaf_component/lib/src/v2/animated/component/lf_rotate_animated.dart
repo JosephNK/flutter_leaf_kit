@@ -1,20 +1,20 @@
-part of lf_container;
+part of lf_animated;
 
-class LFRotateContainer extends StatefulWidget {
+class LFRotateAnimated extends StatefulWidget {
   final Widget child;
   final bool rotate;
 
-  const LFRotateContainer({
+  const LFRotateAnimated({
     Key? key,
     required this.child,
     required this.rotate,
   }) : super(key: key);
 
   @override
-  State<LFRotateContainer> createState() => _LFRotateContainerState();
+  State<LFRotateAnimated> createState() => _LFRotateAnimatedState();
 }
 
-class _LFRotateContainerState extends State<LFRotateContainer>
+class _LFRotateAnimatedState extends State<LFRotateAnimated>
     with SingleTickerProviderStateMixin {
   late AnimationController _animationController;
   late Animation _animation;
@@ -42,7 +42,7 @@ class _LFRotateContainerState extends State<LFRotateContainer>
   }
 
   @override
-  void didUpdateWidget(covariant LFRotateContainer oldWidget) {
+  void didUpdateWidget(covariant LFRotateAnimated oldWidget) {
     if (oldWidget.rotate != widget.rotate) {
       if (widget.rotate) {
         _animationController.forward();

@@ -5,6 +5,7 @@ export '_model/lf_data_item.dart';
 
 ///
 export 'accordion/lf_accordion.dart';
+export 'animated/lf_animated.dart';
 export 'appbar/lf_appbar.dart';
 export 'avatar/lf_avatar.dart';
 export 'badge/lf_badge.dart';
@@ -26,6 +27,7 @@ export 'radio/lf_radio.dart';
 export 'rate/lf_rate.dart';
 export 'screen/lf_screen.dart';
 export 'scroll/lf_scroll.dart';
+export 'size/lf_widget_size.dart';
 export 'skeleton/lf_skeleton.dart';
 export 'slider/ds_slider.dart';
 export 'switch/lf_switch.dart';
@@ -33,4 +35,3 @@ export 'tabs/lf_tabs.dart';
 export 'text/lf_text.dart';
 export 'textfield/lf_textfield.dart';
 export 'webview/lf_webview.dart';
-export 'widgetsize/lf_widget_size.dart';

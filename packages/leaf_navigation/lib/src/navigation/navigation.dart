@@ -145,6 +145,7 @@ class LFNavigationBlocProvider {
     String routeName, {
     required MultiBlocProvider provider,
     bool isUsingIosModalType = false,
+    bool fullscreenDialog = false,
   }) async {
     late PageRoute route;
     if (!isUsingIosModalType) {
@@ -157,6 +158,7 @@ class LFNavigationBlocProvider {
     } else {
       route = MaterialWithModalsPageRoute(
         settings: RouteSettings(name: routeName),
+        fullscreenDialog: fullscreenDialog,
         builder: (context) {
           return provider;
         },

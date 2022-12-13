@@ -1,20 +1,20 @@
-part of lf_container;
+part of lf_animated;
 
-class LFExpandContainer extends StatefulWidget {
+class LFExpandAnimated extends StatefulWidget {
   final Widget child;
   final bool expand;
 
-  const LFExpandContainer({
+  const LFExpandAnimated({
     Key? key,
     required this.child,
     required this.expand,
   }) : super(key: key);
 
   @override
-  State<LFExpandContainer> createState() => _LFExpandContainerState();
+  State<LFExpandAnimated> createState() => _LFExpandAnimatedState();
 }
 
-class _LFExpandContainerState extends State<LFExpandContainer>
+class _LFExpandAnimatedState extends State<LFExpandAnimated>
     with SingleTickerProviderStateMixin {
   late AnimationController _animationController;
   late Animation<double> _animation;
@@ -47,7 +47,7 @@ class _LFExpandContainerState extends State<LFExpandContainer>
   }
 
   @override
-  void didUpdateWidget(covariant LFExpandContainer oldWidget) {
+  void didUpdateWidget(covariant LFExpandAnimated oldWidget) {
     if (oldWidget.expand != widget.expand) {
       if (widget.expand) {
         _animationController.forward();
