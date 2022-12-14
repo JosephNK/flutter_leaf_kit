@@ -12,6 +12,7 @@ class LFCheckBox extends StatelessWidget {
   final bool value;
   final String? text;
   final TextStyle? textStyle;
+  final double runSpacing;
   final LFCheckBoxAlign align;
   final MainAxisAlignment mainAxisAlignment;
   final ValueChanged<bool>? onChanged;
@@ -24,6 +25,7 @@ class LFCheckBox extends StatelessWidget {
     this.value = false,
     this.text,
     this.textStyle,
+    this.runSpacing = 4.0,
     this.align = LFCheckBoxAlign.left,
     this.mainAxisAlignment = MainAxisAlignment.start,
     this.onChanged,
@@ -38,7 +40,7 @@ class LFCheckBox extends StatelessWidget {
           Icons.check_box,
           color: Colors.blueAccent,
         );
-    final inactiveIcon = this.activeIcon ??
+    final inactiveIcon = this.inactiveIcon ??
         const Icon(
           Icons.check_box_outline_blank,
           color: Colors.grey,
@@ -49,13 +51,16 @@ class LFCheckBox extends StatelessWidget {
       Visibility(
         visible: isNotEmpty(text),
         child: Padding(
-          padding: const EdgeInsets.only(left: 4.0),
+          padding: EdgeInsets.only(left: runSpacing),
           child: Row(
             children: [
               leading ?? Container(),
-              LFText(
-                text ?? '',
-                style: textStyle,
+              Align(
+                alignment: Alignment.topCenter,
+                child: LFText(
+                  text ?? '',
+                  style: textStyle,
+                ),
               ),
             ],
           ),
