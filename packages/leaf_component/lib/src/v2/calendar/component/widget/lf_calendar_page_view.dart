@@ -3,12 +3,24 @@ part of lf_calendar_view;
 typedef LFCalendarPageViewOnSizeChanged = void Function(Size size);
 
 class LFCalendarPageView extends StatefulWidget {
-  final DateTime firstDateTime;
+  final LFCalendarCellBuilder cellBuilder;
+  final DateTime pageDateTime;
+  final TextStyle? dayTextStyle;
+  final Color todayColor;
+  final Color holidayColor;
+  final double childAspectRatio;
+  final ValueChanged<DateTime>? onSelected;
   final LFCalendarPageViewOnSizeChanged? onChangeSized;
 
   const LFCalendarPageView({
     Key? key,
-    required this.firstDateTime,
+    required this.cellBuilder,
+    required this.pageDateTime,
+    this.dayTextStyle,
+    this.todayColor = Colors.purple,
+    this.holidayColor = Colors.red,
+    this.childAspectRatio = 1.0,
+    this.onSelected,
     this.onChangeSized,
   }) : super(key: key);
 
@@ -32,26 +44,47 @@ class _LFCalendarPageViewState extends State<LFCalendarPageView> {
     });
 
     setState(() {
-      _dateTimes = widget.firstDateTime.daysInMonth();
+      _dateTimes = widget.pageDateTime.daysInMonth();
     });
   }
 
   @override
   Widget build(BuildContext context) {
+    final cellBuilder = widget.cellBuilder;
+    final dayTextStyle = widget.dayTextStyle;
+    final todayColor = widget.todayColor;
+    final holidayColor = widget.holidayColor;
+    final childAspectRatio = widget.childAspectRatio;
+    final onSelected = widget.onSelected;
+
     return GridView.builder(
       key: _gridKey,
       itemCount: _dateTimes.length,
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 7,
-        childAspectRatio: 1,
+        childAspectRatio: childAspectRatio,
       ),
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
       itemBuilder: (context, index) {
         final dateTime = _dateTimes[index];
+        final weekday = dateTime.weekday;
+        // final isDisabled =
+        //     ((widget.firstDateTime.month ?? -1) != dateTime.month) ||
+        //         (weekday == 6) ||
+        //         (weekday == 7) ||
+        //         (dateTime.isBefore(DateTime.now()));
+        final isDisabled = (widget.pageDateTime.month != dateTime.month);
 
         return LFCalendarPageCell(
+          cellBuilder: cellBuilder,
           dateTime: dateTime,
+          weekday: weekday,
+          isDisabled: isDisabled,
+          dayTextStyle: dayTextStyle,
+          todayColor: todayColor,
+          holidayColor: holidayColor,
+          onSelected: onSelected,
         );
         // final date = _dateTimes[index];
         // final weekday = date.weekday;

@@ -6,6 +6,7 @@ import '../ui/screens/avatar_screen.dart';
 import '../ui/screens/badge_screen.dart';
 import '../ui/screens/bottomsheet_screen.dart';
 import '../ui/screens/button_screen.dart';
+import '../ui/screens/calendar_screen.dart';
 import '../ui/screens/checkbox_screen.dart';
 import '../ui/screens/chip_screen.dart';
 import '../ui/screens/dialog_screen.dart';
@@ -34,6 +35,7 @@ dynamic kListObjects = {
     {"id": "TextField", "title": "TextField"},
     {"id": "BottomSheet", "title": "BottomSheet"},
     {"id": "Slider", "title": "Slider"},
+    {"id": "Calendar", "title": "Calendar"},
   ]
 };
 
@@ -94,6 +96,9 @@ class NavigatorManager {
         break;
       case 'Slider':
         widget = SliderScreen(title: title);
+        break;
+      case 'Calendar':
+        widget = CalendarScreen(title: title);
         break;
     }
 

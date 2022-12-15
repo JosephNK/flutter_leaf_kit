@@ -25,15 +25,7 @@ extension DateTimeExtension on DateTime {
   String formatDate({String format = 'yyyy.MM.dd HH:mm'}) {
     return DateFormat(format).format(this);
   }
-}
 
-extension DateOnlyCompare on DateTime {
-  bool isSameDate(DateTime other) {
-    return year == other.year && month == other.month && day == other.day;
-  }
-}
-
-extension DateTimeBoolExtenstion on DateTime {
   bool isToday() {
     final today = DateTime.now();
     final isToday =
@@ -52,5 +44,48 @@ extension DateTimeBoolExtenstion on DateTime {
       result.add(firstDay.add(Duration(days: i + 1)));
     }
     return result;
+  }
+
+  bool isSameDate(DateTime other) {
+    return year == other.year && month == other.month && day == other.day;
+  }
+
+  DateTime previousMonth() {
+    return DateTime(year, month - 1, day);
+  }
+
+  DateTime nextMonth() {
+    return DateTime(year, month + 1, day);
+  }
+
+  String getMonthString() {
+    switch (month) {
+      case 1:
+        return 'Jan.';
+      case 2:
+        return 'Feb.';
+      case 3:
+        return 'Mar.';
+      case 4:
+        return 'Apr.';
+      case 5:
+        return 'May';
+      case 6:
+        return 'Jun.';
+      case 7:
+        return 'Jul.';
+      case 8:
+        return 'Aug.';
+      case 9:
+        return 'Sept.';
+      case 10:
+        return 'Oct.';
+      case 11:
+        return 'Nov.';
+      case 12:
+        return 'Dec.';
+      default:
+        return 'Err';
+    }
   }
 }

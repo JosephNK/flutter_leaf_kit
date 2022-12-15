@@ -33,8 +33,8 @@ class LFCalendarProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void toggle(DateTime dateTime, bool isMultiple) {
-    if (isMultiple) {
+  void toggle(DateTime dateTime, {bool multiple = false}) {
+    if (multiple) {
       if (_selectedDateTimes.contains(dateTime)) {
         _selectedDateTimes.remove(dateTime);
       } else {

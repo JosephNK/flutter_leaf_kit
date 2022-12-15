@@ -1,7 +1,6 @@
 library lf_calendar_view;
 
 import 'dart:collection';
-import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:leaf_common/leaf_common.dart';
@@ -16,20 +15,30 @@ typedef LFCalendarViewOnMonthChanged = void Function(
   DateTime startDateInMonth,
   DateTime endDateInMonth,
 );
+
 typedef LFCalendarViewOnDateSelected = void Function(
   List<DateTime> dates,
 );
 
-typedef LFCalendarHeaderBuilder = Widget Function(
+typedef LFCalendarCellBuilder = Widget Function(
   BuildContext context,
+  DateTime dateTime,
+  Size size,
 );
 
-class LFCalendarView<T> extends StatefulWidget {
+class LFCalendarView extends StatefulWidget {
   final DateTime defaultDate;
   final DateTime minDate;
   final DateTime maxDate;
-  final List<T> items;
-  final LFCalendarHeaderBuilder? headerBuilder;
+  final LFCalendarCellBuilder cellBuilder;
+  final TextStyle? dayTextStyle;
+  final Color todayColor;
+  final Color holidayColor;
+  final double childAspectRatio;
+  final List<String> weekDays;
+  final String yearUnit;
+  final String monthUnit;
+  final ScrollPhysics? physics;
   final LFCalendarViewOnMonthChanged? onMonthChanged;
   final LFCalendarViewOnDateSelected? onDateSelected;
 
@@ -38,8 +47,15 @@ class LFCalendarView<T> extends StatefulWidget {
     required this.defaultDate,
     required this.minDate,
     required this.maxDate,
-    required this.items,
-    this.headerBuilder,
+    required this.cellBuilder,
+    this.dayTextStyle,
+    this.todayColor = Colors.purple,
+    this.holidayColor = Colors.red,
+    this.childAspectRatio = 1.0,
+    this.weekDays = const ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+    this.yearUnit = '.',
+    this.monthUnit = '',
+    this.physics,
     this.onMonthChanged,
     this.onDateSelected,
   }) : super(key: key);
@@ -51,7 +67,7 @@ class LFCalendarView<T> extends StatefulWidget {
 class _LFCalendarViewState extends State<LFCalendarView> {
   late PageController _pageController;
 
-  List<DateTime> _dateTimes = [];
+  final List<DateTime> _pageDateTimes = [];
 
   int _pageNum = 0;
   double _pageHeight = 0.0;
@@ -71,7 +87,7 @@ class _LFCalendarViewState extends State<LFCalendarView> {
     }
 
     for (var cnt = 0; 0 >= maxDays(cnt); cnt++) {
-      _dateTimes.add(DateTime(minDate.year, minDate.month + cnt, 1));
+      _pageDateTimes.add(DateTime(minDate.year, minDate.month + cnt, 1));
     }
 
     _currentDateTime = widget.defaultDate;
@@ -95,14 +111,45 @@ class _LFCalendarViewState extends State<LFCalendarView> {
 
   @override
   Widget build(BuildContext context) {
-    if (_pageHeight == 0.0) {
+    final dayTextStyle = widget.dayTextStyle;
+    final todayColor = widget.todayColor;
+    final holidayColor = widget.holidayColor;
+    final childAspectRatio = widget.childAspectRatio;
+    final weekDays = widget.weekDays;
+    final yearUnit = widget.yearUnit;
+    final monthUnit = widget.monthUnit;
+    final physics = widget.physics;
+    final cellBuilder = widget.cellBuilder;
+    final onMonthChanged = widget.onMonthChanged;
+
+    Widget buildPageView(
+      BuildContext context, {
+      required DateTime pageDateTime,
+    }) {
       return LFCalendarPageView(
-        firstDateTime: DateTime.now(),
+        cellBuilder: cellBuilder,
+        pageDateTime: pageDateTime,
+        dayTextStyle: dayTextStyle,
+        todayColor: todayColor,
+        holidayColor: holidayColor,
+        childAspectRatio: childAspectRatio,
+        onSelected: (dateTime) {
+          context
+              .read<LFCalendarProvider>()
+              .toggle(dateTime, multiple: false);
+        },
         onChangeSized: (size) {
           setState(() {
             _pageHeight = size.height;
           });
         },
+      );
+    }
+
+    if (_pageHeight == 0.0) {
+      return buildPageView(
+        context,
+        pageDateTime: DateTime.now(),
       );
     }
 
@@ -125,9 +172,73 @@ class _LFCalendarViewState extends State<LFCalendarView> {
               Consumer<LFCalendarProvider>(
                 builder: (context, provider, child) {
                   final currentDateTime = provider.currentDateTime;
-                  final selectedDateTimes = provider.selectedDateTimes.toList();
+                  final year = currentDateTime.toYear();
+                  final month = currentDateTime.toMonth();
 
-                  return widget.headerBuilder?.call(context) ?? Container();
+                  return Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          GestureDetector(
+                            onTap: () {
+                              onTapAtPrevious(
+                                  context, currentDateTime, onMonthChanged);
+                            },
+                            child: const Icon(
+                              Icons.arrow_back_ios,
+                              size: 16.0,
+                              color: Color.fromRGBO(186, 186, 186, 1),
+                            ),
+                          ),
+                          const SizedBox(width: 10.0),
+                          Text(
+                            '$year$yearUnit $month$monthUnit',
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16.0,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                          const SizedBox(width: 10.0),
+                          GestureDetector(
+                            onTap: () {
+                              onTapAtNext(
+                                  context, currentDateTime, onMonthChanged);
+                            },
+                            child: const Icon(
+                              Icons.arrow_forward_ios,
+                              size: 16.0,
+                              color: Color.fromRGBO(186, 186, 186, 1),
+                            ),
+                          )
+                        ],
+                      ),
+                      const SizedBox(height: 10.0),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          for (var i = 0; i < weekDays.length; i++)
+                            Expanded(
+                              child: Container(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 8.0),
+                                child: Text(
+                                  weekDays[i],
+                                  style: TextStyle(
+                                    fontSize: 13.0,
+                                    color: (i == 0)
+                                        ? holidayColor
+                                        : const Color.fromRGBO(0, 0, 0, 0.6),
+                                  ),
+                                  textAlign: TextAlign.center,
+                                ),
+                              ),
+                            ),
+                        ],
+                      ),
+                    ],
+                  );
                 },
               ),
               SizedBox(
@@ -139,23 +250,23 @@ class _LFCalendarViewState extends State<LFCalendarView> {
                         provider.selectedDateTimes.toList();
 
                     return PageView.builder(
+                      physics: physics,
                       controller: _pageController,
-                      itemCount: _dateTimes.length,
+                      itemCount: _pageDateTimes.length,
                       pageSnapping: true,
                       itemBuilder: (context, index) {
-                        final dateTime = _dateTimes[index];
+                        final pageDateTime = _pageDateTimes[index];
 
-                        return LFCalendarPageView(
-                          firstDateTime: dateTime,
-                          onChangeSized: (size) {
-                            setState(() {
-                              _pageHeight = size.height;
-                            });
-                          },
+                        return buildPageView(
+                          context,
+                          pageDateTime: pageDateTime,
                         );
                       },
                       onPageChanged: (index) {
-                        final dateTime = _dateTimes[index];
+                        final pageDateTime = _pageDateTimes[index];
+
+                        onPageChangedAtDateTime(
+                            context, pageDateTime, onMonthChanged);
                       },
                     );
                   },
@@ -166,5 +277,75 @@ class _LFCalendarViewState extends State<LFCalendarView> {
         },
       ),
     );
+  }
+
+  ///
+  /// Provider with onMonthChanged
+  ///
+
+  void onTapAtPrevious(
+    BuildContext context,
+    DateTime currentDateTime,
+    LFCalendarViewOnMonthChanged? onMonthChanged,
+  ) {
+    final dateTime = currentDateTime.previousMonth();
+
+    context.read<LFCalendarProvider>().setDateTime(dateTime);
+
+    previousPage();
+
+    onMonthChanged?.call(
+      dateTime.firstDayOfWeek(),
+      dateTime.lastDayOfWeek(),
+    );
+  }
+
+  void onTapAtNext(
+    BuildContext context,
+    DateTime currentDateTime,
+    LFCalendarViewOnMonthChanged? onMonthChanged,
+  ) {
+    final dateTime = currentDateTime.nextMonth();
+
+    context.read<LFCalendarProvider>().setDateTime(dateTime);
+
+    nextPage();
+
+    onMonthChanged?.call(
+      dateTime.firstDayOfWeek(),
+      dateTime.lastDayOfWeek(),
+    );
+  }
+
+  void onPageChangedAtDateTime(
+    BuildContext context,
+    DateTime pageDateTime,
+    LFCalendarViewOnMonthChanged? onMonthChanged,
+  ) {
+    context.read<LFCalendarProvider>().setDateTime(pageDateTime);
+
+    onMonthChanged?.call(
+      pageDateTime.firstDayOfWeek(),
+      pageDateTime.lastDayOfWeek(),
+    );
+  }
+
+  ///
+  /// PageController To page
+  ///
+
+  void animatedToPage(int page) {
+    _pageController.animateToPage(page,
+        duration: const Duration(milliseconds: 150), curve: Curves.easeIn);
+  }
+
+  void previousPage() {
+    _pageController.animateToPage(_pageController.page!.toInt() - 1,
+        duration: const Duration(milliseconds: 150), curve: Curves.easeIn);
+  }
+
+  void nextPage() {
+    _pageController.animateToPage(_pageController.page!.toInt() + 1,
+        duration: const Duration(milliseconds: 150), curve: Curves.easeIn);
   }
 }
