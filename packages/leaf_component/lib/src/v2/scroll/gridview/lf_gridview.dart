@@ -31,7 +31,7 @@ class LFGridView<T> extends StatefulWidget {
     this.physics,
     this.shrinkWrap = false,
     this.scrollable = true,
-    this.hasReachedMax = false,
+    this.hasReachedMax = true,
   }) : super(key: key);
 
   @override

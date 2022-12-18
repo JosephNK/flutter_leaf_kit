@@ -10,6 +10,7 @@ class LFListViewMaterial<T> extends StatelessWidget {
   final EdgeInsets? padding;
   final ScrollPhysics? physics;
   final bool shrinkWrap;
+  final bool scrollable;
 
   const LFListViewMaterial({
     Key? key,
@@ -22,6 +23,7 @@ class LFListViewMaterial<T> extends StatelessWidget {
     this.padding = const EdgeInsets.all(0),
     this.physics,
     this.shrinkWrap = false,
+    this.scrollable = true,
   }) : super(key: key);
 
   @override
@@ -41,9 +43,11 @@ class LFListViewMaterial<T> extends StatelessWidget {
         key: storageKey,
         itemCount: totalCount,
         controller: PrimaryScrollController.of(context),
-        physics: AlwaysScrollableScrollPhysics(
-          parent: physics ?? const ClampingScrollPhysics(),
-        ),
+        physics: scrollable
+            ? AlwaysScrollableScrollPhysics(
+                parent: physics ?? const BouncingScrollPhysics(),
+              )
+            : const NeverScrollableScrollPhysics(),
         padding: padding,
         shrinkWrap: shrinkWrap,
         itemBuilder: (context, index) {

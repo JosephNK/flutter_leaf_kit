@@ -10,6 +10,7 @@ class LFListViewCupertino<T> extends StatelessWidget {
   final EdgeInsets? padding;
   final ScrollPhysics? physics;
   final bool shrinkWrap;
+  final bool scrollable;
 
   const LFListViewCupertino({
     Key? key,
@@ -22,6 +23,7 @@ class LFListViewCupertino<T> extends StatelessWidget {
     this.padding = const EdgeInsets.all(0),
     this.physics,
     this.shrinkWrap = false,
+    this.scrollable = true,
   }) : super(key: key);
 
   @override
@@ -36,18 +38,24 @@ class LFListViewCupertino<T> extends StatelessWidget {
     return CustomScrollView(
       key: storageKey,
       controller: PrimaryScrollController.of(context),
-      physics: AlwaysScrollableScrollPhysics(
-        parent: physics ?? const BouncingScrollPhysics(),
-      ),
+      physics: scrollable
+          ? AlwaysScrollableScrollPhysics(
+              parent: physics ?? const BouncingScrollPhysics(),
+            )
+          : const NeverScrollableScrollPhysics(),
       shrinkWrap: shrinkWrap,
       slivers: [
-        CupertinoSliverRefreshControl(
-          refreshTriggerPullDistance: 100.0,
-          refreshIndicatorExtent: 30.0,
-          onRefresh: () async {
-            await onRefresh?.call();
-          },
-        ),
+        if (onRefresh != null) ...[
+          CupertinoSliverRefreshControl(
+            refreshTriggerPullDistance: 100.0,
+            refreshIndicatorExtent: 30.0,
+            onRefresh: () async {
+              await onRefresh?.call();
+            },
+          ),
+        ] else ...[
+          const SliverToBoxAdapter(),
+        ],
         SliverPadding(
           padding: padding ?? const EdgeInsets.all(0.0),
           sliver: SliverList(

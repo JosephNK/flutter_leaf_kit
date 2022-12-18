@@ -3,31 +3,33 @@ part of lf_scroll_component;
 class LFListView<T> extends StatefulWidget {
   final Key? storageKey;
   final Widget Function(BuildContext context, T item, int index) builder;
-  final LFScrollViewRefresh? onRefresh;
   final List<T> items;
   final LFListViewController? controller;
+  final LFScrollViewRefresh? onRefresh;
   final LFScrollViewLoadMore? onLoadMore;
   final LFScrollViewDidScroll? onDidScroll;
   final Widget? header;
   final EdgeInsets? padding;
   final ScrollPhysics? physics;
   final bool shrinkWrap;
+  final bool scrollable;
   final bool hasReachedMax;
 
   const LFListView({
     Key? key,
     this.storageKey,
     required this.builder,
-    required this.onRefresh,
     required this.items,
     required this.controller,
+    this.onRefresh,
     this.onLoadMore,
     this.onDidScroll,
     this.header,
     this.padding = const EdgeInsets.all(0),
     this.physics,
+    this.scrollable = true,
     this.shrinkWrap = false,
-    this.hasReachedMax = false,
+    this.hasReachedMax = true,
   }) : super(key: key);
 
   @override
@@ -121,14 +123,17 @@ class _LFListViewState<T> extends State<LFListView<T>>
       return LFListViewMaterial(
         builder: widget.builder,
         storageKey: widget.storageKey,
-        onRefresh: () async {
-          await onPullToRefresh(context, widget.onRefresh);
-        },
+        onRefresh: (widget.onRefresh != null)
+            ? () async {
+                await onPullToRefresh(context, widget.onRefresh);
+              }
+            : null,
         items: widget.items,
         loading: loading,
         header: widget.header,
         padding: widget.padding,
         physics: widget.physics,
+        scrollable: widget.scrollable,
         shrinkWrap: widget.shrinkWrap,
       );
     }
@@ -136,14 +141,17 @@ class _LFListViewState<T> extends State<LFListView<T>>
     return LFListViewCupertino(
       builder: widget.builder,
       storageKey: widget.storageKey,
-      onRefresh: () async {
-        await onPullToRefresh(context, widget.onRefresh);
-      },
+      onRefresh: (widget.onRefresh != null)
+          ? () async {
+              await onPullToRefresh(context, widget.onRefresh);
+            }
+          : null,
       items: widget.items,
       loading: loading,
       header: widget.header,
       padding: widget.padding,
       physics: widget.physics,
+      scrollable: widget.scrollable,
       shrinkWrap: widget.shrinkWrap,
     );
   }

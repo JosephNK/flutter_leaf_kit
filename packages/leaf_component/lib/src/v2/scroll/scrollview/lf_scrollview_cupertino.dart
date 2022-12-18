@@ -8,6 +8,7 @@ class LFScrollViewCupertino<T> extends StatelessWidget {
   final EdgeInsets? padding;
   final ScrollPhysics? physics;
   final bool shrinkWrap;
+  final bool scrollable;
 
   const LFScrollViewCupertino({
     Key? key,
@@ -18,6 +19,7 @@ class LFScrollViewCupertino<T> extends StatelessWidget {
     this.padding = const EdgeInsets.all(0),
     this.physics,
     this.shrinkWrap = false,
+    this.scrollable = true,
   }) : super(key: key);
 
   @override
@@ -29,9 +31,11 @@ class LFScrollViewCupertino<T> extends StatelessWidget {
     return CustomScrollView(
       key: storageKey,
       controller: PrimaryScrollController.of(context),
-      physics: AlwaysScrollableScrollPhysics(
-        parent: physics ?? const BouncingScrollPhysics(),
-      ),
+      physics: scrollable
+          ? AlwaysScrollableScrollPhysics(
+              parent: physics ?? const BouncingScrollPhysics(),
+            )
+          : const NeverScrollableScrollPhysics(),
       shrinkWrap: shrinkWrap,
       slivers: [
         onRefresh == null

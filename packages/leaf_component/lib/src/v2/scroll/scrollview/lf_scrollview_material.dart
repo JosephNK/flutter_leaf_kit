@@ -7,6 +7,7 @@ class LFScrollViewMaterial<T> extends StatelessWidget {
   final bool autoKeyboardHide;
   final EdgeInsets? padding;
   final ScrollPhysics? physics;
+  final bool scrollable;
 
   const LFScrollViewMaterial({
     Key? key,
@@ -16,6 +17,7 @@ class LFScrollViewMaterial<T> extends StatelessWidget {
     this.autoKeyboardHide = false,
     this.padding = const EdgeInsets.all(0),
     this.physics,
+    this.scrollable = true,
   }) : super(key: key);
 
   @override
@@ -33,9 +35,11 @@ class LFScrollViewMaterial<T> extends StatelessWidget {
       },
       child: SingleChildScrollView(
         key: storageKey,
-        physics: AlwaysScrollableScrollPhysics(
-          parent: physics ?? const ClampingScrollPhysics(),
-        ),
+        physics: scrollable
+            ? AlwaysScrollableScrollPhysics(
+                parent: physics ?? const BouncingScrollPhysics(),
+              )
+            : const NeverScrollableScrollPhysics(),
         padding: padding,
         child: child,
       ),

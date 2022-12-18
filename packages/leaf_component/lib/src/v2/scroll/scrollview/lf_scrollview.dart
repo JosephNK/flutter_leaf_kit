@@ -7,6 +7,7 @@ class LFScrollView extends StatefulWidget {
   final ScrollPhysics? physics;
   final EdgeInsets? padding;
   final bool shrinkWrap; // Only Use LFScrollViewCupertino
+  final bool scrollable;
   final LFScrollViewController? controller;
   final LFScrollViewRefresh? onRefresh;
   final LFScrollViewDidScroll? onDidScroll;
@@ -20,6 +21,7 @@ class LFScrollView extends StatefulWidget {
     this.physics,
     this.padding,
     this.shrinkWrap = false,
+    this.scrollable = true,
     this.onRefresh,
     this.onDidScroll,
   }) : super(key: key);
@@ -101,27 +103,29 @@ class _LFScrollViewState extends State<LFScrollView> with LFScrollControlMixin {
     if (Platform.isAndroid) {
       return LFScrollViewMaterial(
         storageKey: widget.storageKey,
-        onRefresh: widget.onRefresh == null
-            ? null
-            : () async {
+        onRefresh: (widget.onRefresh != null)
+            ? () async {
                 await onPullToRefresh(context, widget.onRefresh);
-              },
+              }
+            : null,
         physics: widget.physics,
         padding: widget.padding,
+        scrollable: widget.scrollable,
         child: widget.child,
       );
     }
 
     return LFScrollViewCupertino(
       storageKey: widget.storageKey,
-      onRefresh: widget.onRefresh == null
-          ? null
-          : () async {
+      onRefresh: (widget.onRefresh != null)
+          ? () async {
               await onPullToRefresh(context, widget.onRefresh);
-            },
+            }
+          : null,
       physics: widget.physics,
       padding: widget.padding,
       shrinkWrap: widget.shrinkWrap,
+      scrollable: widget.scrollable,
       child: widget.child,
     );
   }
