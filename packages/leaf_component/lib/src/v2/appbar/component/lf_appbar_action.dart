@@ -3,7 +3,7 @@ part of lf_appbar;
 class LFAppBarAction extends StatelessWidget {
   final String? text;
   final Widget? icon;
-  final Color? textColor;
+  final TextStyle? textStyle;
   final EdgeInsets padding;
   final EdgeInsets? margin;
   final VoidCallback? onPressed;
@@ -12,7 +12,7 @@ class LFAppBarAction extends StatelessWidget {
     Key? key,
     this.text,
     this.icon,
-    this.textColor,
+    this.textStyle,
     this.padding = const EdgeInsets.all(8.0),
     this.margin,
     this.onPressed,
@@ -22,12 +22,12 @@ class LFAppBarAction extends StatelessWidget {
   Widget build(BuildContext context) {
     final text = this.text;
     final icon = this.icon;
-    final textColor = this.textColor;
+    final textStyle = this.textStyle;
     final padding = this.padding;
     final onPressed = this.onPressed;
 
     final child = isNotEmpty(text)
-        ? LFText(text ?? '', color: textColor)
+        ? LFText(text ?? '', style: textStyle)
         : (icon != null)
             ? icon
             : Container();

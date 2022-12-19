@@ -6,6 +6,7 @@ class LFCircleImageAvatar extends StatelessWidget {
   final Color borderColor;
   final double borderWidth;
   final Map<String, String>? header;
+  final BoxFit fit;
 
   const LFCircleImageAvatar({
     Key? key,
@@ -14,6 +15,7 @@ class LFCircleImageAvatar extends StatelessWidget {
     this.borderColor = Colors.transparent,
     this.borderWidth = 0.0,
     this.header,
+    this.fit = BoxFit.cover,
   }) : super(key: key);
 
   @override
@@ -34,7 +36,8 @@ class LFCircleImageAvatar extends StatelessWidget {
                   url: image,
                   width: size,
                   height: size,
-                  fit: BoxFit.cover)
+                  fit: fit,
+                )
               : Image(image: AssetImage(image), fit: BoxFit.cover),
         ),
       ),
