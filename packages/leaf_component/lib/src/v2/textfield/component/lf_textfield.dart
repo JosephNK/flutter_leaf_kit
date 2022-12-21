@@ -43,10 +43,12 @@ class LFTextField extends StatefulWidget {
   final int minLines;
   final int maxLines;
   final double borderRadius;
+  final double borderWidth;
   final EdgeInsets contentPadding;
   final Color? backgroundColor;
   final Color? disabledBackgroundColor;
   final Color? borderColor;
+  final Color? focusBorderColor;
   final Color? errorBorderColor;
   final Color? textColor;
   final Color? disabledTextColor;
@@ -55,6 +57,7 @@ class LFTextField extends StatefulWidget {
   final Color? disabledClearIconColor;
   final Widget? prefixIcon;
   final BoxConstraints? prefixIconConstraints;
+  final BoxConstraints? suffixIconConstraints;
   final ValueChanged<bool>? onFocusChanged;
   final ValueChanged<String>? onChanged;
   final ValueChanged<String>? onSubmitted;
@@ -82,6 +85,8 @@ class LFTextField extends StatefulWidget {
     this.backgroundColor,
     this.disabledBackgroundColor,
     this.borderColor,
+    this.borderWidth = 1.0,
+    this.focusBorderColor,
     this.errorBorderColor,
     this.textColor,
     this.disabledTextColor,
@@ -90,6 +95,7 @@ class LFTextField extends StatefulWidget {
     this.disabledClearIconColor,
     this.prefixIcon,
     this.prefixIconConstraints,
+    this.suffixIconConstraints,
     this.onFocusChanged,
     this.onChanged,
     this.onSubmitted,
@@ -181,10 +187,12 @@ class _LFTextFieldState extends State<LFTextField> {
     final minLines = widget.minLines;
     final maxLines = widget.maxLines;
     final borderRadius = widget.borderRadius;
+    final borderWidth = widget.borderWidth;
     final contentPadding = widget.contentPadding;
     final backgroundColor = widget.backgroundColor;
     final disabledBackgroundColor = widget.disabledBackgroundColor;
     final borderColor = widget.borderColor;
+    final focusBorderColor = widget.focusBorderColor;
     final errorBorderColor = widget.errorBorderColor;
     final textColor = widget.textColor;
     final disabledTextColor = widget.disabledTextColor;
@@ -193,6 +201,7 @@ class _LFTextFieldState extends State<LFTextField> {
     final disabledClearIconColor = widget.disabledClearIconColor;
     final prefixIcon = widget.prefixIcon;
     final prefixIconConstraints = widget.prefixIconConstraints;
+    final suffixIconConstraints = widget.suffixIconConstraints;
     final onChanged = widget.onChanged;
     final onSubmitted = widget.onSubmitted;
     final onEditingComplete = widget.onEditingComplete;
@@ -209,8 +218,9 @@ class _LFTextFieldState extends State<LFTextField> {
     var inputPlaceHolderColor = placeHolderColor ?? Colors.grey;
     var inputTextColor =
         disabled ? disabledTextColor ?? Colors.grey : textColor ?? Colors.black;
-    var inputErrorBorderColor = errorBorderColor ?? Colors.red;
     var inputBorderColor = borderColor ?? Colors.grey.withOpacity(0.2);
+    var inputFocusBorderColor = focusBorderColor ?? inputBorderColor;
+    var inputErrorBorderColor = errorBorderColor ?? Colors.red;
     var buttonClearIconColor = disabled
         ? disabledClearIconColor ?? Colors.grey
         : clearIconColor ?? Colors.black.withOpacity(0.6);
@@ -291,6 +301,7 @@ class _LFTextFieldState extends State<LFTextField> {
         prefixIcon: prefixIcon,
         suffixIcon: !_showClearButton ? null : clearButtonWithHandler(),
         prefixIconConstraints: prefixIconConstraints,
+        suffixIconConstraints: suffixIconConstraints,
         isDense: true,
         isCollapsed: true,
         fillColor: inputBackgroundColor,
@@ -311,15 +322,17 @@ class _LFTextFieldState extends State<LFTextField> {
               )
             : null,
         errorBorder: UnderlineInputBorder(
-          borderSide: BorderSide(color: inputErrorBorderColor),
+          borderSide:
+              BorderSide(color: inputErrorBorderColor, width: borderWidth),
           borderRadius: BorderRadius.circular(borderRadius),
         ),
         enabledBorder: UnderlineInputBorder(
-          borderSide: BorderSide(color: inputBorderColor),
+          borderSide: BorderSide(color: inputBorderColor, width: borderWidth),
           borderRadius: BorderRadius.circular(borderRadius),
         ),
         focusedBorder: UnderlineInputBorder(
-          borderSide: BorderSide(color: inputBorderColor),
+          borderSide:
+              BorderSide(color: inputFocusBorderColor, width: borderWidth),
           borderRadius: BorderRadius.circular(borderRadius),
         ),
       ),
