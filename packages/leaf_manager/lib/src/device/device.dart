@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:leaf_common/leaf_common.dart';
@@ -10,6 +11,12 @@ class DeviceManager {
   static DeviceManager get shared => _instance;
 
   DeviceManager._internal();
+
+  // ignore: prefer_const_constructors
+  EdgeInsets _widowPadding = EdgeInsets.all(0.0);
+  EdgeInsets get widowPadding {
+    return _widowPadding;
+  }
 
   double _devicePixelRatio = 0.0;
   double get devicePixelRatio {
@@ -27,6 +34,7 @@ class DeviceManager {
   }
 
   void setup(BuildContext context) {
+    _widowPadding = MediaQueryData.fromWindow(window).padding;
     _textScaleFactor = MediaQuery.of(context).textScaleFactor;
     _devicePixelRatio = MediaQuery.of(context).devicePixelRatio;
     _deviceSize = MediaQuery.of(context).size;
