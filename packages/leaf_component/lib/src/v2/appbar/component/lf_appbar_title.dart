@@ -2,10 +2,10 @@ part of lf_appbar;
 
 class LFAppBarTitle extends StatelessWidget {
   final String? text;
-  final IconData? leading;
+  final Widget? leading;
   final Image? image;
   final Color? textColor;
-  final Color? iconColor;
+  final double? textHeight;
   final TextStyle? textStyle;
 
   const LFAppBarTitle({
@@ -14,7 +14,7 @@ class LFAppBarTitle extends StatelessWidget {
     this.leading,
     this.image,
     this.textColor,
-    this.iconColor,
+    this.textHeight,
     this.textStyle,
   }) : super(key: key);
 
@@ -58,16 +58,12 @@ class LFAppBarTitle extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisSize: MainAxisSize.min,
         children: [
-          (leading != null)
-              ? Icon(
-                  leading,
-                  color: iconColor ?? Colors.black,
-                )
-              : Container(),
+          (leading != null) ? leading : Container(),
           LFText(
             text,
             style: textStyle,
             color: textColor ?? Colors.black,
+            height: textHeight,
           ),
         ],
       );

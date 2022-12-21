@@ -1,13 +1,15 @@
 part of lf_bottom_sheet;
 
 class LFBottomSheetItem {
-  final dynamic key;
-  final String title;
-  final bool enabled;
+  Object? key;
+  String title;
+  bool enabled;
 
   LFBottomSheetItem({
-    required this.key,
+    this.key,
     required this.title,
     this.enabled = true,
-  });
+  }) {
+    key = key ?? UniqueKey();
+  }
 }

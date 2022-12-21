@@ -1,28 +1,9 @@
 part of lf_bottom_sheet;
 
-class LFBottomSheetConfigure {
-  final Color? activeColor;
-  final Color? inactiveColor;
-
-  LFBottomSheetConfigure({
-    this.activeColor = Colors.blueAccent,
-    this.inactiveColor = Colors.black54,
-  });
-}
-
 class LFBottomSheet {
   static final LFBottomSheet _instance = LFBottomSheet._internal();
   static LFBottomSheet get shared => _instance;
   LFBottomSheet._internal();
-
-  static LFBottomSheetConfigure get configure =>
-      LFBottomSheet.shared._configure ?? LFBottomSheetConfigure();
-
-  LFBottomSheetConfigure? _configure;
-
-  void setup({required LFBottomSheetConfigure configure}) {
-    _configure = configure;
-  }
 
   static void show(
     BuildContext context, {
@@ -31,8 +12,10 @@ class LFBottomSheet {
     ValueChanged<LFBottomSheetItem>? onTap,
     VoidCallback? onClose,
   }) {
-    final activeColor = LFBottomSheet.configure.activeColor;
-    final inactiveColor = LFBottomSheet.configure.inactiveColor;
+    final configure = LFComponentConfigure.shared.bottomSheet;
+    final activeColor = configure?.activeColor;
+    final inactiveColor = configure?.inactiveColor;
+    final cancelText = configure?.cancelText ?? 'Cancel';
 
     if (Platform.isIOS) {
       /// Cupertino
@@ -63,19 +46,19 @@ class LFBottomSheet {
                 );
               }).toList(),
             ],
-            // cancelButton: CupertinoActionSheetAction(
-            //   isDefaultAction: true,
-            //   onPressed: () {
-            //     Navigator.pop(context);
-            //   },
-            //   child: const LFText(
-            //     'Cancel',
-            //     style: TextStyle(
-            //       fontWeight: FontWeight.normal,
-            //       fontSize: 18.0,
-            //     ),
-            //   ),
-            // ),
+            cancelButton: CupertinoActionSheetAction(
+              isDefaultAction: true,
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: LFText(
+                cancelText,
+                style: const TextStyle(
+                  fontWeight: FontWeight.normal,
+                  fontSize: 18.0,
+                ),
+              ),
+            ),
           );
         },
       );
