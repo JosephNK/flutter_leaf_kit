@@ -1,9 +1,10 @@
 part of lf_widget_size;
 
-typedef OnWidgetSizeChange = void Function(Size size);
+typedef OnWidgetSizeChange = void Function(Offset position, Size size);
 
 class LFWidgetRenderObject extends RenderProxyBox {
   Size? oldSize;
+  Offset? oldPos;
   OnWidgetSizeChange onChange;
 
   LFWidgetRenderObject(this.onChange);
@@ -12,12 +13,13 @@ class LFWidgetRenderObject extends RenderProxyBox {
   void performLayout() {
     super.performLayout();
 
-    Size newSize = child!.size;
-    if (oldSize == newSize) return;
-
-    oldSize = newSize;
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      onChange(newSize);
+      Size newSize = child!.size;
+      Offset newPos = child!.localToGlobal(Offset.zero);
+      if (oldSize == newSize && oldPos == newPos) return;
+      oldSize = newSize;
+      oldPos = newPos;
+      onChange(newPos, newSize);
     });
   }
 }
@@ -38,7 +40,9 @@ class LFWidgetSize extends SingleChildRenderObjectWidget {
 
   @override
   void updateRenderObject(
-      BuildContext context, covariant LFWidgetRenderObject renderObject) {
+    BuildContext context,
+    covariant LFWidgetRenderObject renderObject,
+  ) {
     renderObject.onChange = onChange;
   }
 }

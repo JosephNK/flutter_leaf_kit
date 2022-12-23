@@ -51,7 +51,9 @@ class LFCheckBox extends StatelessWidget {
       Visibility(
         visible: isNotEmpty(text),
         child: Padding(
-          padding: EdgeInsets.only(left: runSpacing),
+          padding: (align == LFCheckBoxAlign.left)
+              ? EdgeInsets.only(left: runSpacing)
+              : EdgeInsets.only(right: runSpacing),
           child: Row(
             children: [
               leading ?? Container(),

@@ -3,11 +3,15 @@ part of lf_animated;
 class LFExpandAnimated extends StatefulWidget {
   final Widget child;
   final bool expand;
+  final Duration duration;
+  final Curve curve;
 
   const LFExpandAnimated({
     Key? key,
     required this.child,
-    required this.expand,
+    this.expand = true,
+    this.duration = const Duration(milliseconds: 250),
+    this.curve = Curves.easeInToLinear,
   }) : super(key: key);
 
   @override
@@ -19,19 +23,17 @@ class _LFExpandAnimatedState extends State<LFExpandAnimated>
   late AnimationController _animationController;
   late Animation<double> _animation;
 
-  final _duration = const Duration(milliseconds: 250);
-
   @override
   void initState() {
     super.initState();
 
     _animationController = AnimationController(
       vsync: this,
-      duration: _duration,
+      duration: widget.duration,
     );
     _animation = CurvedAnimation(
       parent: _animationController,
-      curve: Curves.easeInToLinear,
+      curve: widget.curve,
     );
 
     if (widget.expand) {
