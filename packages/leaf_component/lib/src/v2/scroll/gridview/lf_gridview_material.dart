@@ -36,31 +36,29 @@ class LFGridViewMaterial<T> extends StatelessWidget {
   Widget _buildMaterialListView(BuildContext context) {
     var totalCount = items.length;
 
-    final gridViewWidget = Expanded(
-      child: GridView.builder(
-        key: storageKey,
-        gridDelegate: gridDelegate ??
-            const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 3,
-              mainAxisSpacing: 1.5,
-              crossAxisSpacing: 1.5,
-            ),
-        itemCount: totalCount,
-        controller: scrollable ? PrimaryScrollController.of(context) : null,
-        physics: scrollable
-            ? AlwaysScrollableScrollPhysics(
-                parent: physics ?? const ClampingScrollPhysics(),
-              )
-            : const NeverScrollableScrollPhysics(),
-        padding: padding,
-        shrinkWrap: shrinkWrap,
-        itemBuilder: (context, index) {
-          final itemIndex = index;
-          final item = items[itemIndex];
-          final itemWidget = builder(context, item, itemIndex);
-          return itemWidget;
-        },
-      ),
+    final gridViewWidget = GridView.builder(
+      key: storageKey,
+      gridDelegate: gridDelegate ??
+          const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 3,
+            mainAxisSpacing: 1.5,
+            crossAxisSpacing: 1.5,
+          ),
+      itemCount: totalCount,
+      controller: scrollable ? PrimaryScrollController.of(context) : null,
+      physics: scrollable
+          ? AlwaysScrollableScrollPhysics(
+              parent: physics ?? const ClampingScrollPhysics(),
+            )
+          : const NeverScrollableScrollPhysics(),
+      padding: padding,
+      shrinkWrap: shrinkWrap,
+      itemBuilder: (context, index) {
+        final itemIndex = index;
+        final item = items[itemIndex];
+        final itemWidget = builder(context, item, itemIndex);
+        return itemWidget;
+      },
     );
 
     if (onRefresh == null) {
