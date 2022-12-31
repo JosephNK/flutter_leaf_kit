@@ -2,14 +2,16 @@ part of lf_scroll_common;
 
 enum LFScrollControllerEventType {
   scrollToTop,
+  scrollToBottom,
   loading,
 }
 
 class LFScrollControllerEvent {
   final LFScrollControllerEventType type;
   final bool value;
+  final Duration? duration;
 
-  LFScrollControllerEvent(this.type, {this.value = false});
+  LFScrollControllerEvent(this.type, {this.value = false, this.duration});
 }
 
 mixin LFScrollControllerMixin {
@@ -25,10 +27,23 @@ mixin LFScrollControllerMixin {
     isLoading = false;
   }
 
-  void scrollToTop({bool animated = false}) {
+  void scrollToTop({
+    bool animated = false,
+    Duration animationDuration = const Duration(milliseconds: 300),
+  }) {
     addEvent(
       LFScrollControllerEvent(LFScrollControllerEventType.scrollToTop,
-          value: animated),
+          value: animated, duration: animationDuration),
+    );
+  }
+
+  void scrollToBottom({
+    bool animated = false,
+    Duration animationDuration = const Duration(milliseconds: 300),
+  }) {
+    addEvent(
+      LFScrollControllerEvent(LFScrollControllerEventType.scrollToBottom,
+          value: animated, duration: animationDuration),
     );
   }
 

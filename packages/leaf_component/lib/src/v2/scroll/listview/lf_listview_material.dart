@@ -37,42 +37,48 @@ class LFListViewMaterial<T> extends StatelessWidget {
     var totalCount = items.length + 1;
     if (header != null) totalCount += 1;
 
+    final listView = ListView.builder(
+      key: storageKey,
+      itemCount: totalCount,
+      controller: PrimaryScrollController.of(context),
+      physics: scrollable
+          ? AlwaysScrollableScrollPhysics(
+              parent: physics ?? const BouncingScrollPhysics(),
+            )
+          : const NeverScrollableScrollPhysics(),
+      padding: padding,
+      shrinkWrap: shrinkWrap,
+      itemBuilder: (context, index) {
+        if (header != null && index == 0) {
+          return header!;
+        }
+
+        final isLast = (totalCount - 1 == index);
+        if (isLast) {
+          if (!hasReachedMax) {
+            return LFListViewIndicator(
+              loading: loading,
+            );
+          }
+          return Container();
+        }
+
+        final itemIndex = (header == null) ? index : index - 1;
+        final item = items[itemIndex];
+        final itemWidget = builder(context, item, itemIndex);
+        return itemWidget;
+      },
+    );
+
+    if (onRefresh == null) {
+      return listView;
+    }
+
     return RefreshIndicator(
       onRefresh: () async {
         await onRefresh?.call();
       },
-      child: ListView.builder(
-        key: storageKey,
-        itemCount: totalCount,
-        controller: PrimaryScrollController.of(context),
-        physics: scrollable
-            ? AlwaysScrollableScrollPhysics(
-                parent: physics ?? const BouncingScrollPhysics(),
-              )
-            : const NeverScrollableScrollPhysics(),
-        padding: padding,
-        shrinkWrap: shrinkWrap,
-        itemBuilder: (context, index) {
-          if (header != null && index == 0) {
-            return header!;
-          }
-
-          final isLast = (totalCount - 1 == index);
-          if (isLast) {
-            if (!hasReachedMax) {
-              return LFListViewIndicator(
-                loading: loading,
-              );
-            }
-            return Container();
-          }
-
-          final itemIndex = (header == null) ? index : index - 1;
-          final item = items[itemIndex];
-          final itemWidget = builder(context, item, itemIndex);
-          return itemWidget;
-        },
-      ),
+      child: listView,
     );
   }
 }

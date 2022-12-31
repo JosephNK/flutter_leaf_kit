@@ -3,6 +3,7 @@ part of lf_scroll_common;
 class LFScrollInfoData extends Equatable {
   final ScrollNotification scrollNotification;
   final double position;
+  final double maxScrollExtent;
   final ScrollDirection direction;
   final bool isEdgeTop;
   final bool isAppearTop;
@@ -10,6 +11,7 @@ class LFScrollInfoData extends Equatable {
   const LFScrollInfoData({
     required this.scrollNotification,
     required this.position,
+    required this.maxScrollExtent,
     required this.direction,
     required this.isEdgeTop,
     required this.isAppearTop,
@@ -19,6 +21,7 @@ class LFScrollInfoData extends Equatable {
   List<Object?> get props => [
         scrollNotification,
         position,
+        maxScrollExtent,
         direction,
         isEdgeTop,
         isAppearTop,

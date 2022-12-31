@@ -42,7 +42,11 @@ mixin LFScrollControlMixin<T extends StatefulWidget> on State<T>
     }
   }
 
-  void scrollToTop(BuildContext context, {bool animated = false}) {
+  void scrollToTop(
+    BuildContext context, {
+    bool animated = false,
+    Duration animationDuration = const Duration(milliseconds: 300),
+  }) {
     if (mounted) {
       var scrollController = PrimaryScrollController.of(context)!;
 
@@ -55,8 +59,34 @@ mixin LFScrollControlMixin<T extends StatefulWidget> on State<T>
       if (animated == true) {
         scrollController.animateTo(
           value,
-          duration: const Duration(milliseconds: 300),
-          curve: Curves.easeInOut,
+          duration: animationDuration,
+          curve: Curves.fastOutSlowIn,
+        );
+      } else {
+        scrollController.jumpTo(value);
+      }
+    }
+  }
+
+  void scrollToBottom(
+    BuildContext context, {
+    bool animated = false,
+    Duration animationDuration = const Duration(milliseconds: 300),
+  }) {
+    if (mounted) {
+      var scrollController = PrimaryScrollController.of(context)!;
+
+      if (!scrollController.hasClients) {
+        return;
+      }
+
+      double value = scrollController.position.maxScrollExtent;
+
+      if (animated == true) {
+        scrollController.animateTo(
+          value,
+          duration: animationDuration,
+          curve: Curves.fastOutSlowIn,
         );
       } else {
         scrollController.jumpTo(value);
@@ -108,6 +138,7 @@ mixin LFScrollControlMixin<T extends StatefulWidget> on State<T>
       final data = LFScrollInfoData(
         scrollNotification: scrollNotification,
         position: pixels,
+        maxScrollExtent: maxScrollExtent,
         direction: scrollDirection,
         isEdgeTop: isEdgeTop,
         isAppearTop: isNearTop,

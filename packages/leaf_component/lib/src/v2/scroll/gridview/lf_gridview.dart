@@ -12,6 +12,7 @@ class LFGridView<T> extends StatefulWidget {
   final Widget? header;
   final EdgeInsets? padding;
   final ScrollPhysics? physics;
+  final bool disallowGlow;
   final bool shrinkWrap;
   final bool scrollable;
   final bool hasReachedMax;
@@ -29,6 +30,7 @@ class LFGridView<T> extends StatefulWidget {
     this.header,
     this.padding = const EdgeInsets.all(0),
     this.physics,
+    this.disallowGlow = false,
     this.shrinkWrap = false,
     this.scrollable = true,
     this.hasReachedMax = true,
@@ -51,9 +53,13 @@ class _LFGridViewState<T> extends State<LFGridView<T>>
         .listen((event) {
       final type = event.type;
       final value = event.value;
+      final duration = event.duration ?? const Duration(milliseconds: 300);
       switch (type) {
         case LFScrollControllerEventType.scrollToTop:
-          scrollToTop(context, animated: value);
+          scrollToTop(context, animated: value, animationDuration: duration);
+          break;
+        case LFScrollControllerEventType.scrollToBottom:
+          scrollToBottom(context, animated: value, animationDuration: duration);
           break;
         case LFScrollControllerEventType.loading:
           setLoading(value);
@@ -90,8 +96,13 @@ class _LFGridViewState<T> extends State<LFGridView<T>>
   }
 
   @override
-  void scrollToTop(BuildContext context, {bool animated = false}) {
-    super.scrollToTop(context, animated: animated);
+  void scrollToTop(
+    BuildContext context, {
+    bool animated = false,
+    Duration animationDuration = const Duration(milliseconds: 300),
+  }) {
+    super.scrollToTop(context,
+        animated: animated, animationDuration: animationDuration);
   }
 
   @override
@@ -122,7 +133,7 @@ class _LFGridViewState<T> extends State<LFGridView<T>>
 
   Widget _buildPlatform(BuildContext context) {
     if (Platform.isAndroid) {
-      return LFGridViewMaterial(
+      final gridView = LFGridViewMaterial(
         builder: widget.builder,
         storageKey: widget.storageKey,
         onRefresh: (widget.onRefresh != null)
@@ -139,6 +150,15 @@ class _LFGridViewState<T> extends State<LFGridView<T>>
         shrinkWrap: widget.shrinkWrap,
         scrollable: widget.scrollable,
       );
+
+      if (widget.disallowGlow) {
+        return ScrollConfiguration(
+          behavior: LFDisallowGlowBehavior(),
+          child: gridView,
+        );
+      }
+
+      return gridView;
     }
 
     return LFGridViewCupertino(

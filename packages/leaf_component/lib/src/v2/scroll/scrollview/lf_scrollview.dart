@@ -6,6 +6,7 @@ class LFScrollView extends StatefulWidget {
   final bool autoKeyboardHide;
   final ScrollPhysics? physics;
   final EdgeInsets? padding;
+  final bool disallowGlow;
   final bool shrinkWrap; // Only Use LFScrollViewCupertino
   final bool scrollable;
   final LFScrollViewController? controller;
@@ -20,6 +21,7 @@ class LFScrollView extends StatefulWidget {
     this.autoKeyboardHide = false,
     this.physics,
     this.padding,
+    this.disallowGlow = false,
     this.shrinkWrap = false,
     this.scrollable = true,
     this.onRefresh,
@@ -42,9 +44,13 @@ class _LFScrollViewState extends State<LFScrollView> with LFScrollControlMixin {
         .listen((event) {
       final type = event.type;
       final value = event.value;
+      final duration = event.duration ?? const Duration(milliseconds: 300);
       switch (type) {
         case LFScrollControllerEventType.scrollToTop:
-          scrollToTop(context, animated: value);
+          scrollToTop(context, animated: value, animationDuration: duration);
+          break;
+        case LFScrollControllerEventType.scrollToBottom:
+          scrollToBottom(context, animated: value, animationDuration: duration);
           break;
         case LFScrollControllerEventType.loading:
           setLoading(value);
@@ -69,8 +75,13 @@ class _LFScrollViewState extends State<LFScrollView> with LFScrollControlMixin {
   void loadMore() {}
 
   @override
-  void scrollToTop(BuildContext context, {bool animated = false}) {
-    super.scrollToTop(context, animated: animated);
+  void scrollToTop(
+    BuildContext context, {
+    bool animated = false,
+    Duration animationDuration = const Duration(milliseconds: 300),
+  }) {
+    super.scrollToTop(context,
+        animated: animated, animationDuration: animationDuration);
   }
 
   @override
@@ -101,7 +112,7 @@ class _LFScrollViewState extends State<LFScrollView> with LFScrollControlMixin {
 
   Widget _buildPlatform(BuildContext context) {
     if (Platform.isAndroid) {
-      return LFScrollViewMaterial(
+      final scrollView = LFScrollViewMaterial(
         storageKey: widget.storageKey,
         onRefresh: (widget.onRefresh != null)
             ? () async {
@@ -113,6 +124,15 @@ class _LFScrollViewState extends State<LFScrollView> with LFScrollControlMixin {
         scrollable: widget.scrollable,
         child: widget.child,
       );
+
+      if (widget.disallowGlow) {
+        return ScrollConfiguration(
+          behavior: LFDisallowGlowBehavior(),
+          child: scrollView,
+        );
+      }
+
+      return scrollView;
     }
 
     return LFScrollViewCupertino(
