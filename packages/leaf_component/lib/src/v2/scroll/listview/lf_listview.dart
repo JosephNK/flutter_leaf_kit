@@ -135,6 +135,7 @@ class _LFListViewState<T> extends State<LFListView<T>>
         physics: widget.physics,
         scrollable: widget.scrollable,
         shrinkWrap: widget.shrinkWrap,
+        hasReachedMax: widget.hasReachedMax,
       );
     }
 
@@ -153,6 +154,7 @@ class _LFListViewState<T> extends State<LFListView<T>>
       physics: widget.physics,
       scrollable: widget.scrollable,
       shrinkWrap: widget.shrinkWrap,
+      hasReachedMax: widget.hasReachedMax,
     );
   }
 }

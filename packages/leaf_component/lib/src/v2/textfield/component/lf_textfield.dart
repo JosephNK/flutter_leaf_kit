@@ -3,7 +3,7 @@ part of lf_textfield;
 enum LFTextFieldStatus { none, clear, reset }
 
 class LFTextFieldController extends ChangeNotifier {
-  final textController = TextEditingController();
+  final controller = TextEditingController();
 
   LFTextFieldStatus status = LFTextFieldStatus.none;
 
@@ -21,7 +21,7 @@ class LFTextFieldController extends ChangeNotifier {
 
   @override
   void dispose() {
-    textController.dispose();
+    controller.dispose();
     super.dispose();
   }
 }
@@ -34,6 +34,7 @@ class LFTextField extends StatefulWidget {
   final bool autofocus;
   final bool disabled;
   final bool readOnly;
+  final bool? showCursor;
   final String? errorText;
   final FocusNode? focusNode;
   final String? placeHolder;
@@ -56,8 +57,10 @@ class LFTextField extends StatefulWidget {
   final Color? clearIconColor;
   final Color? disabledClearIconColor;
   final Widget? prefixIcon;
+  final Widget? suffixIcon;
   final BoxConstraints? prefixIconConstraints;
   final BoxConstraints? suffixIconConstraints;
+  final VoidCallback? onTap;
   final ValueChanged<bool>? onFocusChanged;
   final ValueChanged<String>? onChanged;
   final ValueChanged<String>? onSubmitted;
@@ -72,6 +75,7 @@ class LFTextField extends StatefulWidget {
     this.autofocus = false,
     this.disabled = false,
     this.readOnly = false,
+    this.showCursor,
     this.errorText,
     this.placeHolder = 'PlaceHolder',
     this.keyboardType = TextInputType.text,
@@ -94,8 +98,10 @@ class LFTextField extends StatefulWidget {
     this.clearIconColor,
     this.disabledClearIconColor,
     this.prefixIcon,
+    this.suffixIcon,
     this.prefixIconConstraints,
     this.suffixIconConstraints,
+    this.onTap,
     this.onFocusChanged,
     this.onChanged,
     this.onSubmitted,
@@ -141,7 +147,7 @@ class _LFTextFieldState extends State<LFTextField> {
       }
     });
 
-    _textController = controller.textController;
+    _textController = controller.controller;
     _textController.addListener(onControllerInputListener);
 
     _textFieldFocusNode = (focusNode == null) ? FocusNode() : focusNode;
@@ -178,6 +184,7 @@ class _LFTextFieldState extends State<LFTextField> {
     final autofocus = widget.autofocus;
     final disabled = widget.disabled;
     final readOnly = widget.readOnly;
+    final showCursor = widget.showCursor;
     final textStyle = widget.textStyle;
     final errorText = widget.errorText;
     final placeHolder = widget.placeHolder;
@@ -200,8 +207,10 @@ class _LFTextFieldState extends State<LFTextField> {
     final clearIconColor = widget.clearIconColor;
     final disabledClearIconColor = widget.disabledClearIconColor;
     final prefixIcon = widget.prefixIcon;
+    final suffixIcon = widget.suffixIcon;
     final prefixIconConstraints = widget.prefixIconConstraints;
     final suffixIconConstraints = widget.suffixIconConstraints;
+    final onTap = widget.onTap;
     final onChanged = widget.onChanged;
     final onSubmitted = widget.onSubmitted;
     final onEditingComplete = widget.onEditingComplete;
@@ -283,6 +292,7 @@ class _LFTextFieldState extends State<LFTextField> {
       autofocus: autofocus,
       enabled: !disabled,
       readOnly: readOnly,
+      showCursor: showCursor,
       scrollPadding: const EdgeInsets.all(0.0),
       style: textFieldTextStyle.copyWith(
         decoration: TextDecoration.none,
@@ -299,15 +309,13 @@ class _LFTextFieldState extends State<LFTextField> {
       inputFormatters: const <TextInputFormatter>[],
       decoration: InputDecoration(
         prefixIcon: prefixIcon,
-        suffixIcon: !_showClearButton ? null : clearButtonWithHandler(),
+        suffixIcon:
+            suffixIcon ?? (!_showClearButton ? null : clearButtonWithHandler()),
         prefixIconConstraints: prefixIconConstraints,
         suffixIconConstraints: suffixIconConstraints,
         isDense: true,
         isCollapsed: true,
         fillColor: inputBackgroundColor,
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(borderRadius),
-        ),
         filled: true,
         contentPadding: contentPadding,
         floatingLabelBehavior: FloatingLabelBehavior.auto,
@@ -321,9 +329,7 @@ class _LFTextFieldState extends State<LFTextField> {
                 color: inputPlaceHolderColor,
               )
             : null,
-        errorBorder: UnderlineInputBorder(
-          borderSide:
-              BorderSide(color: inputErrorBorderColor, width: borderWidth),
+        border: UnderlineInputBorder(
           borderRadius: BorderRadius.circular(borderRadius),
         ),
         enabledBorder: UnderlineInputBorder(
@@ -335,7 +341,18 @@ class _LFTextFieldState extends State<LFTextField> {
               BorderSide(color: inputFocusBorderColor, width: borderWidth),
           borderRadius: BorderRadius.circular(borderRadius),
         ),
+        errorBorder: UnderlineInputBorder(
+          borderSide:
+              BorderSide(color: inputErrorBorderColor, width: borderWidth),
+          borderRadius: BorderRadius.circular(borderRadius),
+        ),
+        focusedErrorBorder: UnderlineInputBorder(
+          borderSide:
+              BorderSide(color: inputErrorBorderColor, width: borderWidth),
+          borderRadius: BorderRadius.circular(borderRadius),
+        ),
       ),
+      onTap: onTap,
       onChanged: textFieldOnChanged,
       onSubmitted: textFieldOnSubmitted,
       onEditingComplete: (onEditingComplete != null)

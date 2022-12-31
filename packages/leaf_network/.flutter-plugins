@@ -1,10 +1,6 @@
 # This is a generated file; do not edit or check into version control.
 app_tracking_transparency=/Users/josephnk/Library/flutter/.pub-cache/hosted/pub.dartlang.org/app_tracking_transparency-2.0.2+4/
-connectivity_plus=/Users/josephnk/Library/flutter/.pub-cache/hosted/pub.dartlang.org/connectivity_plus-2.3.2/
-connectivity_plus_linux=/Users/josephnk/Library/flutter/.pub-cache/hosted/pub.dartlang.org/connectivity_plus_linux-1.3.1/
-connectivity_plus_macos=/Users/josephnk/Library/flutter/.pub-cache/hosted/pub.dartlang.org/connectivity_plus_macos-1.2.2/
-connectivity_plus_web=/Users/josephnk/Library/flutter/.pub-cache/hosted/pub.dartlang.org/connectivity_plus_web-1.2.1/
-connectivity_plus_windows=/Users/josephnk/Library/flutter/.pub-cache/hosted/pub.dartlang.org/connectivity_plus_windows-1.2.2/
+connectivity_plus=/Users/josephnk/Library/flutter/.pub-cache/hosted/pub.dartlang.org/connectivity_plus-3.0.2/
 device_info_plus=/Users/josephnk/Library/flutter/.pub-cache/hosted/pub.dartlang.org/device_info_plus-6.0.0/
 device_info_plus_linux=/Users/josephnk/Library/flutter/.pub-cache/hosted/pub.dartlang.org/device_info_plus_linux-5.0.0/
 device_info_plus_macos=/Users/josephnk/Library/flutter/.pub-cache/hosted/pub.dartlang.org/device_info_plus_macos-5.0.0/

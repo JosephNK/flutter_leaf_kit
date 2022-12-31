@@ -2,10 +2,12 @@ part of lf_animated;
 
 class LFFadeAnimated extends StatefulWidget {
   final Widget child;
+  final ValueChanged<AnimationStatus>? onAnimationStatus;
 
   const LFFadeAnimated({
     Key? key,
     required this.child,
+    this.onAnimationStatus,
   }) : super(key: key);
 
   @override
@@ -28,7 +30,11 @@ class _LFFadeAnimatedState extends State<LFFadeAnimated>
       duration: _duration,
     );
     _animation =
-        CurvedAnimation(parent: _animationController, curve: Curves.easeIn);
+        CurvedAnimation(parent: _animationController, curve: Curves.easeIn)
+          ..addStatusListener((AnimationStatus status) {
+            // if (status == AnimationStatus.completed) print('completed');
+            widget.onAnimationStatus?.call(status);
+          });
 
     _animationController.forward();
   }

@@ -11,6 +11,7 @@ class LFListViewCupertino<T> extends StatelessWidget {
   final ScrollPhysics? physics;
   final bool shrinkWrap;
   final bool scrollable;
+  final bool hasReachedMax;
 
   const LFListViewCupertino({
     Key? key,
@@ -24,6 +25,7 @@ class LFListViewCupertino<T> extends StatelessWidget {
     this.physics,
     this.shrinkWrap = false,
     this.scrollable = true,
+    this.hasReachedMax = true,
   }) : super(key: key);
 
   @override
@@ -65,10 +67,14 @@ class LFListViewCupertino<T> extends StatelessWidget {
                   return header!;
                 }
 
-                if (totalCount - 1 == index) {
-                  return LFListViewIndicator(
-                    loading: loading,
-                  );
+                final isLast = (totalCount - 1 == index);
+                if (isLast) {
+                  if (!hasReachedMax) {
+                    return LFListViewIndicator(
+                      loading: loading,
+                    );
+                  }
+                  return Container();
                 }
 
                 final itemIndex = (header == null) ? index : index - 1;

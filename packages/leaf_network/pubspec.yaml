@@ -17,7 +17,7 @@ dependencies:
   leaf_manager:
     path: ../leaf_manager
 
-  connectivity_plus: ^2.3.2
+  connectivity_plus: ^3.0.2
   http: ^0.13.4
   http_parser: ^4.0.1
 

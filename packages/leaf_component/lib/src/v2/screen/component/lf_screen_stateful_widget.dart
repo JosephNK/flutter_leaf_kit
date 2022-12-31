@@ -8,7 +8,7 @@ class ScreenVariable {
   bool get useSafeArea => true;
   SafeAreaInsets get safeAreaInsets =>
       SafeAreaInsets.fromLTRB(true, true, true, true);
-  bool get resizeToAvoidBottomInset => false;
+  bool? get resizeToAvoidBottomInset => null;
   bool get enablePopScope => false;
   bool get extendBodyBehindAppBar => false;
   FloatingActionButtonLocation? get floatingActionButtonLocation => null;
@@ -52,7 +52,7 @@ abstract class ScreenState<T extends StatefulExtWidget> extends State<T>
       SafeAreaInsets.fromLTRB(true, true, true, true);
 
   @override
-  bool get resizeToAvoidBottomInset => false;
+  bool? get resizeToAvoidBottomInset => null;
 
   @override
   bool get extendBodyBehindAppBar => false;

@@ -30,15 +30,17 @@ class LFCircleImageAvatar extends StatelessWidget {
       child: ClipOval(
         child: SizedBox.fromSize(
           size: Size.fromRadius(size), // Image radius
-          child: isURL(image)
-              ? LFCacheImage(
-                  header: header,
-                  url: image,
-                  width: size,
-                  height: size,
-                  fit: fit,
-                )
-              : Image(image: AssetImage(image), fit: BoxFit.cover),
+          child: (isEmpty(image))
+              ? Container()
+              : isURL(image)
+                  ? LFCacheImage(
+                      header: header,
+                      url: image,
+                      width: size,
+                      height: size,
+                      fit: fit,
+                    )
+                  : Image(image: AssetImage(image), fit: BoxFit.cover),
         ),
       ),
     );
