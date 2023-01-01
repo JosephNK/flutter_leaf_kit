@@ -1,9 +1,5 @@
 part of lf_screen;
 
-mixin ScreenMixin {
-  Future<void>? willPopScopeCallback(BuildContext context);
-}
-
 class ScreenVariable {
   bool get useSafeArea => true;
   SafeAreaInsets get safeAreaInsets =>
@@ -21,6 +17,7 @@ abstract class ScreenBuild {
   Widget buildBody(BuildContext context, Object? state);
   Widget? buildFloatingActionButton(BuildContext context, Object? state);
   Widget? buildBottomNavigationBar(BuildContext context, Object? state);
+  Future<bool> willPopScopeCallback(BuildContext context);
 }
 
 abstract class StatefulExtWidget extends StatefulWidget {
@@ -38,7 +35,7 @@ abstract class ScreenStatefulWidget extends StatefulExtWidget {
 }
 
 abstract class ScreenState<T extends StatefulExtWidget> extends State<T>
-    with ScreenVariable, ScreenMixin
+    with ScreenVariable
     implements ScreenBuild {
   String? className;
 
@@ -141,11 +138,10 @@ abstract class ScreenState<T extends StatefulExtWidget> extends State<T>
     );
 
     if (enablePopScope) {
-      return LFPopScopeToAppClose(
-        callback: () async {
-          await willPopScopeCallback(context);
+      return WillPopScope(
+        onWillPop: () {
+          return willPopScopeCallback(context);
         },
-        onWillPop: () {},
         child: scaffold,
       );
     }
@@ -179,8 +175,8 @@ abstract class ScreenState<T extends StatefulExtWidget> extends State<T>
   }
 
   @override
-  Future<void>? willPopScopeCallback(BuildContext context) {
-    return null;
+  Future<bool> willPopScopeCallback(BuildContext context) {
+    return Future<bool>.value(true);
   }
 }
 
