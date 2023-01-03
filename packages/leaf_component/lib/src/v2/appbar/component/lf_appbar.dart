@@ -10,6 +10,7 @@ class LFAppBar extends StatelessWidget implements PreferredSizeWidget {
   final List<Widget>? actions;
   final Color? backgroundColor;
   final Color? backButtonColor;
+  final Color? bottomBorderColor;
   final bool? centerTitle;
   final bool automaticallyImplyLeading;
   final Color? shadowColor;
@@ -28,6 +29,7 @@ class LFAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.actions,
     this.backgroundColor,
     this.backButtonColor,
+    this.bottomBorderColor,
     this.centerTitle,
     this.automaticallyImplyLeading = true,
     this.shadowColor = Colors.transparent,
@@ -51,7 +53,8 @@ class LFAppBar extends StatelessWidget implements PreferredSizeWidget {
     final leadingWidth = this.leadingWidth ?? toolbarHeight;
     final backgroundColor = this.backgroundColor ?? Colors.white;
     final backButtonColor = this.backButtonColor ?? Colors.black;
-    const bottomBorderColor = Colors.grey;
+    final bottomBorderColor = this.bottomBorderColor ??
+        LFComponentConfigure.shared.appBar?.bottomBorderColor;
 
     final ModalRoute<dynamic>? parentRoute = ModalRoute.of(context);
     final bool canPop = parentRoute?.canPop ?? false;
@@ -97,11 +100,10 @@ class LFAppBar extends StatelessWidget implements PreferredSizeWidget {
     return PreferredSize(
       preferredSize: const Size.fromHeight(1.0),
       child: Container(
-        color: color ?? const Color(0x0d000000),
+        color: color,
         child: const SizedBox(
+          width: double.infinity,
           height: 1.0,
-          width: 1.0,
-          // width: double.infinity,
         ),
       ),
     );

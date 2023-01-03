@@ -4,10 +4,12 @@ import 'package:flutter/material.dart';
 class LFAppBarComponentConfigure {
   final TextStyle? titleStyle;
   final double? backIconSize;
+  final Color? bottomBorderColor;
 
   LFAppBarComponentConfigure({
     this.titleStyle,
     this.backIconSize,
+    this.bottomBorderColor,
   });
 }
 
