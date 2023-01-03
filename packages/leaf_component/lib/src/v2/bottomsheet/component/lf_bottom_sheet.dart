@@ -5,11 +5,11 @@ class LFBottomSheet {
   static LFBottomSheet get shared => _instance;
   LFBottomSheet._internal();
 
-  static void show(
+  static void show<T>(
     BuildContext context, {
-    required List<LFBottomSheetItem> items,
+    required List<LFBottomSheetItem<T>> items,
     LFBottomSheetItem? selectItem,
-    ValueChanged<LFBottomSheetItem>? onTap,
+    ValueChanged<LFBottomSheetItem<T>>? onTap,
     VoidCallback? onClose,
   }) {
     final configure = LFComponentConfigure.shared.bottomSheet;

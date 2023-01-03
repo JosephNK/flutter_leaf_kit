@@ -1,7 +1,7 @@
 part of lf_bottom_sheet;
 
-class LFBottomSheetItem {
-  Object? key;
+class LFBottomSheetItem<T> {
+  T? key;
   String title;
   bool enabled;
 
@@ -10,6 +10,6 @@ class LFBottomSheetItem {
     required this.title,
     this.enabled = true,
   }) {
-    key = key ?? UniqueKey();
+    // key = key ?? UniqueKey();
   }
 }

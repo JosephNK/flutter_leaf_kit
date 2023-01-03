@@ -14,6 +14,7 @@ import '../ui/screens/indicator_screen.dart';
 import '../ui/screens/navigationbar_screen.dart';
 import '../ui/screens/network_screen.dart';
 import '../ui/screens/pageview_screen.dart';
+import '../ui/screens/photo_screen.dart';
 import '../ui/screens/radio_screen.dart';
 import '../ui/screens/slider_screen.dart';
 import '../ui/screens/textfield_sceen.dart';
@@ -36,6 +37,7 @@ dynamic kListObjects = {
     {"id": "BottomSheet", "title": "BottomSheet"},
     {"id": "Slider", "title": "Slider"},
     {"id": "Calendar", "title": "Calendar"},
+    {"id": "Photo", "title": "Photo"},
   ]
 };
 
@@ -99,6 +101,9 @@ class NavigatorManager {
         break;
       case 'Calendar':
         widget = CalendarScreen(title: title);
+        break;
+      case 'Photo':
+        widget = PhotoScreen(title: title);
         break;
     }
 

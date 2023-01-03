@@ -1,9 +1,128 @@
 part of lf_photo;
 
-typedef LFPhotosOnSelected = void Function(List<AssetEntity> selectedEntities);
-typedef LFPhotosOnLimitError = void Function(int count);
+typedef LFPhotosOnSelected = void Function(
+  List<AssetEntity> selectedEntities,
+);
+typedef LFPhotosOnLimitError = void Function(
+  Exception error,
+  int limit,
+);
 
-class LFPhotoView extends StatefulWidget {
+///
+/// LFPhotoAlbumView
+///
+class LFPhotoAlbumView extends StatefulWidget {
+  final AssetPathEntity? selectedAssetPath;
+  final TextStyle? textStyle;
+  final ValueChanged<AssetPathEntity>? onSelected;
+
+  const LFPhotoAlbumView({
+    Key? key,
+    required this.selectedAssetPath,
+    this.textStyle,
+    this.onSelected,
+  }) : super(key: key);
+
+  @override
+  State<LFPhotoAlbumView> createState() => _LFPhotoAlbumViewState();
+}
+
+class _LFPhotoAlbumViewState extends State<LFPhotoAlbumView> {
+  List<AssetPathEntity> _assetPathList = [];
+  AssetPathEntity? _selectedAssetPath;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _selectedAssetPath = widget.selectedAssetPath;
+
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      final assetPathList = await _requestAssetPaths();
+      final assetPath = (_selectedAssetPath == null)
+          ? assetPathList.first
+          : _selectedAssetPath;
+      setState(() {
+        _assetPathList = assetPathList;
+        _selectedAssetPath = assetPath;
+      });
+      if (assetPath != null && _selectedAssetPath != null) {
+        widget.onSelected?.call(assetPath);
+      }
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      behavior: HitTestBehavior.opaque,
+      onTap: () {
+        LFBottomSheet.show<String>(
+          context,
+          items: _assetPathList
+              .map(
+                (item) => LFBottomSheetItem<String>(
+                  key: item.id,
+                  title: item.name,
+                ),
+              )
+              .toList(),
+          onTap: (item) {
+            final key = item.key;
+            final findList = _assetPathList
+                .where((assetPath) => assetPath.id == key)
+                .toList();
+            final assetPath = findList.isNotEmpty ? findList.first : null;
+            if (assetPath != null) {
+              setState(() {
+                _selectedAssetPath = assetPath;
+              });
+              widget.onSelected?.call(assetPath);
+            }
+          },
+        );
+      },
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          LFText(
+            _selectedAssetPath?.name ?? '',
+            style: widget.textStyle ??
+                const TextStyle(
+                  fontSize: 18.0,
+                ),
+          ),
+          const Icon(Icons.arrow_drop_down_sharp, size: 30.0),
+        ],
+      ),
+    );
+  }
+
+  Future<List<AssetPathEntity>> _requestAssetPaths() async {
+    final result = await PhotoManager.requestPermissionExtend();
+    if (result == PermissionState.authorized) {
+      final paths = await PhotoManager.getAssetPathList(
+        type: RequestType.common,
+        filterOption: FilterOptionGroup(
+          containsPathModified: true,
+          containsLivePhotos: false,
+        ),
+      );
+      return paths;
+    } else {
+      await PhotoManager.openSetting();
+    }
+    return [];
+  }
+}
+
+///
+/// LFPhotoContentView
+///
+class LFPhotoContentView extends StatefulWidget {
+  final AssetPathEntity? selectedAssetPath;
   final int selectedLimit;
   final EdgeInsets padding;
   final List<AssetEntity> selectedEntities;
@@ -13,8 +132,9 @@ class LFPhotoView extends StatefulWidget {
   final LFPhotosOnSelected? onSelected;
   final LFPhotosOnLimitError? onLimitError;
 
-  const LFPhotoView({
+  const LFPhotoContentView({
     Key? key,
+    required this.selectedAssetPath,
     this.selectedLimit = 3,
     this.padding = const EdgeInsets.all(0),
     this.selectedEntities = const [],
@@ -26,15 +146,14 @@ class LFPhotoView extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<LFPhotoView> createState() => _LFPhotoViewState();
+  State<LFPhotoContentView> createState() => _LFPhotoContentViewState();
 }
 
-class _LFPhotoViewState extends State<LFPhotoView> {
+class _LFPhotoContentViewState extends State<LFPhotoContentView> {
+  AssetPathEntity? _selectedAssetPath;
   final List<AssetEntity> _selectedEntities = [];
-
   final int _sizePerPage = 50;
 
-  AssetPathEntity? _path;
   List<AssetEntity> _entities = [];
   int _totalEntitiesCount = 0;
 
@@ -52,14 +171,16 @@ class _LFPhotoViewState extends State<LFPhotoView> {
   void initState() {
     super.initState();
 
-    _checkedIcon = widget.checkedIcon ?? const Icon(Icons.check_box);
-    _uncheckedIcon = widget.uncheckedIcon ?? const Icon(Icons.check_box);
-
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      _selectedEntities.addAll(widget.selectedEntities);
-      ImageLruCache.clearCache();
-      _requestAssets();
-    });
+    _checkedIcon = widget.checkedIcon ??
+        const Icon(
+          Icons.check_box,
+          color: Colors.blueAccent,
+        );
+    _uncheckedIcon = widget.uncheckedIcon ??
+        Icon(
+          Icons.check_box_outline_blank,
+          color: Colors.grey.withOpacity(0.8),
+        );
 
     _scrollController.addListener(() {
       final currentPos = _scrollController.offset;
@@ -68,6 +189,13 @@ class _LFPhotoViewState extends State<LFPhotoView> {
         _loadMoreAsset();
       }
     });
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      ImageLruCache.clearCache();
+      _selectedEntities.addAll(widget.selectedEntities);
+      _selectedAssetPath = widget.selectedAssetPath;
+      _requestAssets();
+    });
   }
 
   @override
@@ -75,6 +203,15 @@ class _LFPhotoViewState extends State<LFPhotoView> {
     _scrollController.dispose();
 
     super.dispose();
+  }
+
+  @override
+  void didUpdateWidget(covariant LFPhotoContentView oldWidget) {
+    if (oldWidget.selectedAssetPath != widget.selectedAssetPath) {
+      _selectedAssetPath = widget.selectedAssetPath;
+      _requestAssets();
+    }
+    super.didUpdateWidget(oldWidget);
   }
 
   @override
@@ -95,92 +232,75 @@ class _LFPhotoViewState extends State<LFPhotoView> {
               final entity = _entities[index];
               final checked = _selectedEntities.contains(entity);
 
-              return RepaintBoundary(
-                child: GestureDetector(
-                  behavior: HitTestBehavior.opaque,
-                  onTap: () => _onItemTap(entity, index),
-                  child: Stack(
-                    children: <Widget>[
-                      LFPhotoTile(entity: entity),
-                      LFPhotoMask(
-                        showMask: checked,
-                        borderColor: widget.selectedBorderColor,
+              return GestureDetector(
+                behavior: HitTestBehavior.opaque,
+                onTap: () => _onItemTap(entity, index),
+                child: Stack(
+                  children: <Widget>[
+                    LFPhotoTile(
+                      entity: entity,
+                    ),
+                    LFPhotoMask(
+                      showMask: checked,
+                      borderColor: widget.selectedBorderColor,
+                    ),
+                    Positioned(
+                      top: 0,
+                      right: 4,
+                      child: LFPhotoCheckBox(
+                        checkedIcon: _checkedIcon,
+                        uncheckedIcon: _uncheckedIcon,
+                        checked: checked,
                       ),
-                      Positioned(
-                        top: 0,
-                        right: 4,
-                        child: LFPhotoCheckBox(
-                          checkedIcon: _checkedIcon,
-                          uncheckedIcon: _uncheckedIcon,
-                          checked: checked,
-                        ),
-                      ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               );
             },
           ),
         ),
-        // Visibility(
-        //   visible: _isLoading,
-        //   child: LFCenterIndicator(),
-        // ),
       ],
     );
   }
 
   // Request Assets
   Future<void> _requestAssets() async {
-    final result = await PhotoManager.requestPermissionExtend();
-    if (result == PermissionState.authorized) {
-      setState(() {
-        _isLoading = true;
-      });
+    if (!mounted) return;
+    if (_isLoading) return;
+    if (_selectedAssetPath == null) return;
 
-      final paths = await PhotoManager.getAssetPathList(
-        type: RequestType.image,
-        onlyAll: true,
-      );
-      if (!mounted) {
-        return;
-      }
-      if (paths.isEmpty) {
-        setState(() {
-          _isLoading = false;
-        });
-        return;
-      }
-      setState(() {
-        _path = paths.first;
-      });
-      _totalEntitiesCount = await _path!.assetCountAsync;
-      final entities = await _path!.getAssetListPaged(
-        page: 0,
-        size: _sizePerPage,
-      );
-      if (!mounted) {
-        return;
-      }
-      setState(() {
-        _entities = entities;
-        _isLoading = false;
-        _hasMoreToLoad = _entities.length < _totalEntitiesCount;
-      });
-    } else {
-      await PhotoManager.openSetting();
-    }
+    setState(() {
+      _isLoading = true;
+    });
+
+    _totalEntitiesCount = await _selectedAssetPath!.assetCountAsync;
+    final entities = await _selectedAssetPath!.getAssetListPaged(
+      page: 0,
+      size: _sizePerPage,
+    );
+
+    setState(() {
+      _entities = entities;
+      _isLoading = false;
+      _hasMoreToLoad = _entities.length < _totalEntitiesCount;
+    });
   }
 
   // Load More
   Future<void> _loadMoreAsset() async {
-    final entities = await _path!.getAssetListPaged(
+    if (!mounted) return;
+    if (_isLoadingMore) return;
+    if (_selectedAssetPath == null) return;
+
+    setState(() {
+      _isLoadingMore = true;
+    });
+
+    final entities = await _selectedAssetPath!.getAssetListPaged(
       page: _page + 1,
       size: _sizePerPage,
     );
-    if (!mounted) {
-      return;
-    }
+
     setState(() {
       _entities.addAll(entities);
       _page++;
@@ -198,7 +318,8 @@ class _LFPhotoViewState extends State<LFPhotoView> {
         _selectedEntities.remove(data);
       }
       final int limit = widget.selectedLimit;
-      widget.onLimitError?.call(limit);
+      widget.onLimitError
+          ?.call(Exception('Selection $limit limit is restricted.'), limit);
       return;
     }
     setState(() {});
@@ -206,6 +327,9 @@ class _LFPhotoViewState extends State<LFPhotoView> {
   }
 }
 
+///
+/// LFPhotoTile
+///
 class LFPhotoTile extends StatelessWidget {
   final AssetEntity entity;
   final int size;
@@ -237,6 +361,8 @@ class LFPhotoTile extends StatelessWidget {
   }
 
   Widget _buildImageItem(BuildContext context, Uint8List data) {
+    Duration videoDuration = entity.videoDuration;
+
     return Stack(
       children: [
         Image.memory(
@@ -245,11 +371,28 @@ class LFPhotoTile extends StatelessWidget {
           height: double.infinity,
           fit: BoxFit.cover,
         ),
+        Positioned(
+          bottom: 5.0,
+          right: 5.0,
+          child: Visibility(
+            visible: entity.type == AssetType.video,
+            child: LFText(
+              videoDuration.toString().split('.').first.padLeft(8, '0'),
+              style: const TextStyle(
+                fontSize: 12.0,
+                color: Colors.white,
+              ),
+            ),
+          ),
+        )
       ],
     );
   }
 }
 
+///
+/// LFPhotoMask
+///
 class LFPhotoMask extends StatelessWidget {
   final bool showMask;
   final Color? borderColor;
@@ -264,7 +407,6 @@ class LFPhotoMask extends StatelessWidget {
   Widget build(BuildContext context) {
     return IgnorePointer(
       child: AnimatedContainer(
-        //color: showMask ? Colors.black.withOpacity(0.5) : Colors.transparent,
         duration: const Duration(milliseconds: 300),
         decoration: showMask
             ? BoxDecoration(
@@ -279,6 +421,9 @@ class LFPhotoMask extends StatelessWidget {
   }
 }
 
+///
+/// LFPhotoCheckBox
+///
 class LFPhotoCheckBox extends StatelessWidget {
   final Widget? checkedIcon;
   final Widget? uncheckedIcon;

@@ -69,8 +69,8 @@ class LeafImageHelper {
   static Future<void> imageStorageSave(List<Uint8List> bytes) async {
     final r = (Platform.isIOS)
         ? true
-        : await LeafPermission.isGrantedPermission(
-            permissionType: PermissionType.storage,
+        : await LFPermission.isGrantedPermission(
+            permissionType: LFPermissionType.storage,
           );
     if (r) {
       for (var byte in bytes) {
