@@ -43,7 +43,7 @@ class HTTPChopper {
   }
 
   void init({
-    required String baseUrl,
+    required Uri baseUrl,
     required Iterable<ChopperService> services,
     required Converter? converter,
     ErrorConverter? errorConverter,

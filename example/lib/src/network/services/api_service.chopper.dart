@@ -18,7 +18,7 @@ class _$APIService extends APIService {
 
   @override
   Future<Response<ProductResponse>> getProducts(Map<String, dynamic> query) {
-    final String $url = '/products';
+    final Uri $url = Uri.parse('/products');
     final Map<String, dynamic> $params = query;
     final Request $request = Request(
       'GET',
@@ -31,7 +31,7 @@ class _$APIService extends APIService {
 
   @override
   Future<Response<ProductResponse>> getNotFound(Map<String, dynamic> query) {
-    final String $url = '/productss';
+    final Uri $url = Uri.parse('/productss');
     final Map<String, dynamic> $params = query;
     final Request $request = Request(
       'GET',

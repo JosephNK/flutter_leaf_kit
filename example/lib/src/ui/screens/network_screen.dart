@@ -27,7 +27,7 @@ class _NetworkScreenState extends ScreenState<NetworkScreen> {
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       // Init
       HTTPChopper.shared.init(
-        baseUrl: 'https://dummyjson.com/',
+        baseUrl: Uri.parse('https://dummyjson.com/'),
         services: [
           APIService.create(),
         ],
