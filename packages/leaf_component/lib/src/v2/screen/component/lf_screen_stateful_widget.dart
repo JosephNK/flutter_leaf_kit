@@ -15,6 +15,8 @@ abstract class ScreenBuild {
   Widget? buildScreen(BuildContext context);
   PreferredSizeWidget? buildAppbar(BuildContext context, Object? state);
   Widget buildBody(BuildContext context, Object? state);
+  Widget? buildDrawer(BuildContext context, Object? state);
+  Widget? buildEndDrawer(BuildContext context, Object? state);
   Widget? buildFloatingActionButton(BuildContext context, Object? state);
   Widget? buildBottomNavigationBar(BuildContext context, Object? state);
   Future<bool> willPopScopeCallback(BuildContext context);
@@ -133,6 +135,8 @@ abstract class ScreenState<T extends StatefulExtWidget> extends State<T>
       bottomNavigationBar: buildBottomNavigationBar(context, state),
       floatingActionButton: buildFloatingActionButton(context, state),
       floatingActionButtonLocation: floatingActionButtonLocation,
+      drawer: buildDrawer(context, state),
+      endDrawer: buildEndDrawer(context, state),
       resizeToAvoidBottomInset: resizeToAvoidBottomInset,
       extendBodyBehindAppBar: extendBodyBehindAppBar,
     );
@@ -164,6 +168,16 @@ abstract class ScreenState<T extends StatefulExtWidget> extends State<T>
   //   return Container();
   // }
 
+  @override
+  Widget? buildDrawer(BuildContext context, Object? state) {
+    return null;
+  }
+
+  @override
+  Widget? buildEndDrawer(BuildContext context, Object? state) {
+    return null;
+  }
+  
   @override
   Widget? buildBottomNavigationBar(BuildContext context, Object? state) {
     return null;
