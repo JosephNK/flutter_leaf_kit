@@ -2,11 +2,15 @@ part of lf_animated;
 
 class LFFadeAnimated extends StatefulWidget {
   final Widget child;
+  final bool fade;
+  final Duration duration;
   final ValueChanged<AnimationStatus>? onAnimationStatus;
 
   const LFFadeAnimated({
     Key? key,
     required this.child,
+    this.fade = true,
+    this.duration = const Duration(milliseconds: 1000),
     this.onAnimationStatus,
   }) : super(key: key);
 
@@ -19,22 +23,27 @@ class _LFFadeAnimatedState extends State<LFFadeAnimated>
   late AnimationController _animationController;
   late Animation<double> _animation;
 
-  final _duration = const Duration(milliseconds: 1000);
-
   @override
   void initState() {
     super.initState();
 
     _animationController = AnimationController(
       vsync: this,
-      duration: _duration,
+      duration: widget.duration,
     );
-    _animation =
-        CurvedAnimation(parent: _animationController, curve: Curves.easeIn)
-          ..addStatusListener((AnimationStatus status) {
-            // if (status == AnimationStatus.completed) print('completed');
-            widget.onAnimationStatus?.call(status);
-          });
+
+    if (widget.fade) {
+      _animation =
+          CurvedAnimation(parent: _animationController, curve: Curves.easeIn);
+    } else {
+      _animation = Tween<double>(begin: 1.0, end: 0.0).animate(
+          CurvedAnimation(parent: _animationController, curve: Curves.easeOut));
+    }
+
+    _animation.addStatusListener((AnimationStatus status) {
+      // if (status == AnimationStatus.completed) print('completed');
+      widget.onAnimationStatus?.call(status);
+    });
 
     _animationController.forward();
   }
@@ -48,6 +57,14 @@ class _LFFadeAnimatedState extends State<LFFadeAnimated>
 
   @override
   void didUpdateWidget(covariant LFFadeAnimated oldWidget) {
+    // if (oldWidget.fade != widget.fade) {
+    //   if (widget.fade) {
+    //     _animationController.forward();
+    //   } else {
+    //     _animationController.reverse();
+    //     // _animationController.animateBack(0, duration: _duration);
+    //   }
+    // }
     super.didUpdateWidget(oldWidget);
   }
 

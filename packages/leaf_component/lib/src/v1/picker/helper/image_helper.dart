@@ -70,7 +70,7 @@ class LeafImageHelper {
     final r = (Platform.isIOS)
         ? true
         : await LFPermission.isGrantedPermission(
-            permissionType: LFPermissionType.storage,
+            permission: Permission.storage,
           );
     if (r) {
       for (var byte in bytes) {

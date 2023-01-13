@@ -1,6 +1,7 @@
 library leaf_manager;
 
 export 'package:geolocator/geolocator.dart' show Position, LocationAccuracy;
+export 'package:permission_handler/permission_handler.dart';
 export 'package:share_plus/share_plus.dart' hide Share;
 
 export 'src/app/app.dart';
