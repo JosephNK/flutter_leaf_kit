@@ -5,7 +5,6 @@ class ScreenVariable {
   SafeAreaInsets get safeAreaInsets =>
       SafeAreaInsets.fromLTRB(true, true, true, true);
   bool? get resizeToAvoidBottomInset => null;
-  bool get enablePopScope => false;
   bool get extendBodyBehindAppBar => false;
   FloatingActionButtonLocation? get floatingActionButtonLocation => null;
   Color? get backgroundColor => null;
@@ -141,16 +140,12 @@ abstract class ScreenState<T extends StatefulExtWidget> extends State<T>
       extendBodyBehindAppBar: extendBodyBehindAppBar,
     );
 
-    if (enablePopScope) {
-      return WillPopScope(
-        onWillPop: () {
-          return willPopScopeCallback(context);
-        },
-        child: scaffold,
-      );
-    }
-
-    return scaffold;
+    return WillPopScope(
+      onWillPop: () {
+        return willPopScopeCallback(context);
+      },
+      child: scaffold,
+    );
   }
 
   // @override
@@ -177,7 +172,7 @@ abstract class ScreenState<T extends StatefulExtWidget> extends State<T>
   Widget? buildEndDrawer(BuildContext context, Object? state) {
     return null;
   }
-  
+
   @override
   Widget? buildBottomNavigationBar(BuildContext context, Object? state) {
     return null;

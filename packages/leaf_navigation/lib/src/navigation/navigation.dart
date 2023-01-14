@@ -101,8 +101,8 @@ class LFNavigation {
     Navigator.pop(context, param);
   }
 
-  static void maybePop(BuildContext context, {dynamic param}) {
-    Navigator.maybePop(context, param);
+  static Future<bool> maybePop(BuildContext context, {dynamic param}) {
+    return Navigator.maybePop(context, param);
   }
 
   static void popRoot(BuildContext context) {

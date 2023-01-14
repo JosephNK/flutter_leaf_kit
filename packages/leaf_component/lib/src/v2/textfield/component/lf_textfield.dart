@@ -7,6 +7,11 @@ class LFTextFieldController extends ChangeNotifier {
 
   LFTextFieldStatus status = LFTextFieldStatus.none;
 
+  String get text => controller.text;
+  set text(String value) {
+    controller.text = value;
+  }
+
   void reset() {
     status = LFTextFieldStatus.reset;
     notifyListeners();
@@ -35,7 +40,9 @@ class LFTextField extends StatefulWidget {
   final bool disabled;
   final bool readOnly;
   final bool? showCursor;
+  final bool showAuthClearButton;
   final bool onlyUnderline;
+  final bool obscureText;
   final String? errorText;
   final FocusNode? focusNode;
   final String? placeHolder;
@@ -59,6 +66,7 @@ class LFTextField extends StatefulWidget {
   final Color? disabledClearIconColor;
   final Widget? prefixIcon;
   final Widget? suffixIcon;
+  final Widget? clearIcon;
   final BoxConstraints? prefixIconConstraints;
   final BoxConstraints? suffixIconConstraints;
   final VoidCallback? onTap;
@@ -77,7 +85,9 @@ class LFTextField extends StatefulWidget {
     this.disabled = false,
     this.readOnly = false,
     this.showCursor,
+    this.showAuthClearButton = true,
     this.onlyUnderline = true,
+    this.obscureText = false,
     this.errorText,
     this.placeHolder = 'PlaceHolder',
     this.keyboardType = TextInputType.text,
@@ -101,6 +111,7 @@ class LFTextField extends StatefulWidget {
     this.disabledClearIconColor,
     this.prefixIcon,
     this.suffixIcon,
+    this.clearIcon,
     this.prefixIconConstraints,
     this.suffixIconConstraints,
     this.onTap,
@@ -187,6 +198,8 @@ class _LFTextFieldState extends State<LFTextField> {
     final disabled = widget.disabled;
     final readOnly = widget.readOnly;
     final showCursor = widget.showCursor;
+    final showAuthClearButton = widget.showAuthClearButton;
+    final obscureText = widget.obscureText;
     final textStyle = widget.textStyle;
     final errorText = widget.errorText;
     final placeHolder = widget.placeHolder;
@@ -211,6 +224,7 @@ class _LFTextFieldState extends State<LFTextField> {
     final disabledClearIconColor = widget.disabledClearIconColor;
     final prefixIcon = widget.prefixIcon;
     final suffixIcon = widget.suffixIcon;
+    final clearIcon = widget.clearIcon;
     final prefixIconConstraints = widget.prefixIconConstraints;
     final suffixIconConstraints = widget.suffixIconConstraints;
     final onTap = widget.onTap;
@@ -250,10 +264,11 @@ class _LFTextFieldState extends State<LFTextField> {
         onTap: () {
           clear();
         },
-        child: Icon(
-          Icons.clear_rounded,
-          color: buttonClearIconColor,
-        ),
+        child: clearIcon ??
+            Icon(
+              Icons.clear_rounded,
+              color: buttonClearIconColor,
+            ),
       );
     }
 
@@ -289,6 +304,15 @@ class _LFTextFieldState extends State<LFTextField> {
       onSubmitted?.call(text);
     }
 
+    final prefixIconWidget = prefixIcon;
+
+    final suffixIconWidget = suffixIcon ??
+        (!showAuthClearButton
+            ? null
+            : !_showClearButton
+                ? null
+                : clearButtonWithHandler());
+
     return TextField(
       controller: _textController,
       focusNode: _textFieldFocusNode,
@@ -307,13 +331,13 @@ class _LFTextFieldState extends State<LFTextField> {
       maxLength: maxLength,
       minLines: minLines,
       maxLines: maxLines,
+      obscureText: obscureText,
       enableSuggestions: false,
       autocorrect: false,
       inputFormatters: const <TextInputFormatter>[],
       decoration: InputDecoration(
-        prefixIcon: prefixIcon,
-        suffixIcon:
-            suffixIcon ?? (!_showClearButton ? null : clearButtonWithHandler()),
+        prefixIcon: prefixIconWidget,
+        suffixIcon: suffixIconWidget,
         prefixIconConstraints: prefixIconConstraints,
         suffixIconConstraints: suffixIconConstraints,
         isDense: true,
@@ -403,6 +427,7 @@ class _LFTextFieldState extends State<LFTextField> {
     final text = _textController.text.trim();
     onChanged?.call(text);
     onSubmitted?.call(text);
+    if (!mounted) return;
     setState(() => _showClearButton = false);
   }
 

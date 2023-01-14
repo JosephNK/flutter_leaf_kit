@@ -70,8 +70,11 @@ class LFAppBar extends StatelessWidget implements PreferredSizeWidget {
                 ? LFAppBarBack(
                     color: backButtonColor,
                     onPressed: () {
-                      Navigator.maybePop(context);
-                      onBackPressed?.call();
+                      if (onBackPressed == null) {
+                        Navigator.maybePop(context);
+                      } else {
+                        onBackPressed?.call();
+                      }
                     },
                   )
                 : null,
