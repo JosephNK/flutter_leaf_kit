@@ -4,12 +4,18 @@ import 'package:flutter/material.dart';
 class LFAppBarComponentConfigure {
   final TextStyle? titleStyle;
   final double? backIconSize;
+  final Color? backgroundColor;
   final Color? bottomBorderColor;
+  final double? elevation;
+  final double? actionsRightMargin;
 
   LFAppBarComponentConfigure({
     this.titleStyle,
     this.backIconSize,
+    this.backgroundColor,
     this.bottomBorderColor,
+    this.elevation,
+    this.actionsRightMargin,
   });
 }
 
@@ -26,33 +32,37 @@ class LFBottomSheetConfigure {
   });
 }
 
-abstract class LFAppComponentConfigure {
-  void run();
+class LFAppComponentConfigure {
+  LFAppBarComponentConfigure? appBar;
+  LFBottomSheetConfigure? bottomSheet;
+
+  LFAppComponentConfigure();
+
+  LFAppBarComponentConfigure? setupAppbar() {
+    return null;
+  }
+
+  LFBottomSheetConfigure? setupBottomSheet() {
+    return null;
+  }
 }
 
-class LFComponentConfigure extends LFAppComponentConfigure {
+class LFComponentConfigure {
   static final LFComponentConfigure _instance =
       LFComponentConfigure._internal();
   static LFComponentConfigure get shared => _instance;
   LFComponentConfigure._internal();
 
-  LFComponentConfigure setup({
-    LFAppBarComponentConfigure? appBarConfigure,
-    LFBottomSheetConfigure? bottomSheetConfigure,
-  }) {
-    _appBar = appBarConfigure;
-    _bottomSheet = bottomSheetConfigure;
-
+  LFComponentConfigure setup(LFAppComponentConfigure? configure) {
+    _appComponentConfigure = configure;
     return this;
   }
 
-  LFAppBarComponentConfigure? get appBar => LFComponentConfigure.shared._appBar;
-  LFAppBarComponentConfigure? _appBar;
+  LFAppComponentConfigure? _appComponentConfigure;
 
+  /// Getter
+  LFAppBarComponentConfigure? get appBar =>
+      LFComponentConfigure.shared._appComponentConfigure?.appBar;
   LFBottomSheetConfigure? get bottomSheet =>
-      LFComponentConfigure.shared._bottomSheet;
-  LFBottomSheetConfigure? _bottomSheet;
-
-  @override
-  void run() {}
+      LFComponentConfigure.shared._appComponentConfigure?.bottomSheet;
 }

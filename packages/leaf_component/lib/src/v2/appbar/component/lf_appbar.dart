@@ -15,6 +15,7 @@ class LFAppBar extends StatelessWidget implements PreferredSizeWidget {
   final bool automaticallyImplyLeading;
   final Color? shadowColor;
   final PreferredSizeWidget? bottom;
+  final double? actionsRightMargin;
   final double? toolbarHeight;
   final Widget? flexibleSpace;
   final double? elevation;
@@ -33,6 +34,7 @@ class LFAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.centerTitle,
     this.automaticallyImplyLeading = true,
     this.shadowColor = Colors.transparent,
+    this.actionsRightMargin = 0.0,
     this.bottom,
     this.toolbarHeight,
     this.flexibleSpace,
@@ -51,10 +53,18 @@ class LFAppBar extends StatelessWidget implements PreferredSizeWidget {
     final centerTitle = this.centerTitle ?? Platform.isIOS ? true : false;
     final toolbarHeight = this.toolbarHeight ?? kLFToolbarHeight;
     final leadingWidth = this.leadingWidth ?? toolbarHeight;
-    final backgroundColor = this.backgroundColor ?? Colors.white;
+    final backgroundColor = this.backgroundColor ??
+        LFComponentConfigure.shared.appBar?.backgroundColor ??
+        Colors.white;
     final backButtonColor = this.backButtonColor ?? Colors.black;
     final bottomBorderColor = this.bottomBorderColor ??
         LFComponentConfigure.shared.appBar?.bottomBorderColor;
+
+    final elevation =
+        this.elevation ?? LFComponentConfigure.shared.appBar?.elevation;
+
+    final actionsRightMargin = this.actionsRightMargin ??
+        LFComponentConfigure.shared.appBar?.actionsRightMargin;
 
     final ModalRoute<dynamic>? parentRoute = ModalRoute.of(context);
     final bool canPop = parentRoute?.canPop ?? false;
@@ -79,7 +89,10 @@ class LFAppBar extends StatelessWidget implements PreferredSizeWidget {
                   )
                 : null,
         leadingWidth: leadingWidth,
-        actions: actions,
+        actions: [
+          ...actions ?? [],
+          SizedBox(width: actionsRightMargin),
+        ],
         backgroundColor: backgroundColor,
         centerTitle: centerTitle,
         automaticallyImplyLeading: automaticallyImplyLeading,

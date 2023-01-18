@@ -19,7 +19,8 @@ class _LFLayoutAppState extends State<LFLayoutApp> {
   void initState() {
     super.initState();
 
-    widget.configure?.run();
+    final configure = widget.configure;
+    LFComponentConfigure.shared.setup(configure);
   }
 
   @override
