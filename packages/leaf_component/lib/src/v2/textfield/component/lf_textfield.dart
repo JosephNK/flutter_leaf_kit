@@ -134,6 +134,8 @@ class _LFTextFieldState extends State<LFTextField> {
 
   String _prevText = '';
 
+  String get text => _textController.text;
+
   set text(String newText) {
     _textController.value = TextEditingValue(
       text: newText,
@@ -306,12 +308,32 @@ class _LFTextFieldState extends State<LFTextField> {
 
     final prefixIconWidget = prefixIcon;
 
-    final suffixIconWidget = suffixIcon ??
+    var suffixIconWidget = suffixIcon ??
         (!showAuthClearButton
             ? null
             : !_showClearButton
                 ? null
                 : clearButtonWithHandler());
+
+    if (maxLength != null && suffixIconWidget != null) {
+      suffixIconWidget = Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          suffixIconWidget,
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10.0),
+            child: Text(
+              '${text.length}/$maxLength',
+              style: const TextStyle(
+                fontSize: 14.0,
+                color: Colors.grey,
+              ),
+            ),
+          ),
+        ],
+      );
+    }
 
     return TextField(
       controller: _textController,

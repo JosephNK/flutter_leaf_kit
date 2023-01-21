@@ -1,13 +1,6 @@
 part of leaf_navigation;
 
-enum LFNavigatorViewState { none, refresh, update, leave }
-
-class LFNavigatorData {
-  final LFNavigatorViewState state;
-  final dynamic param;
-
-  LFNavigatorData(this.state, {this.param});
-}
+enum LFNavigatorViewParamState { none, refresh, update, leave }
 
 class LFNavigation {
   static void presentModal(

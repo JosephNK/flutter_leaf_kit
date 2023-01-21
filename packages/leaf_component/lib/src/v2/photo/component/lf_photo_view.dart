@@ -313,6 +313,10 @@ class _LFPhotoContentViewState extends State<LFPhotoContentView> {
   void _onItemTap(AssetEntity data, int index) {
     final isExist = _selectedEntities.contains(data);
     !isExist ? _selectedEntities.add(data) : _selectedEntities.remove(data);
+    if (!isExist && widget.selectedLimit == 1) {
+      _selectedEntities.clear();
+      _selectedEntities.add(data);
+    }
     if (_selectedEntities.length > widget.selectedLimit) {
       if (_selectedEntities.contains(data)) {
         _selectedEntities.remove(data);

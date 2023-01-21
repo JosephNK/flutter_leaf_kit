@@ -2,11 +2,13 @@ part of lf_app;
 
 class LFLayoutApp extends StatefulWidget {
   final LFAppComponentConfigure? configure;
+  final Color? backgroundColor;
   final Widget child;
 
   const LFLayoutApp({
     Key? key,
     required this.child,
+    this.backgroundColor,
     this.configure,
   }) : super(key: key);
 
@@ -30,7 +32,10 @@ class _LFLayoutAppState extends State<LFLayoutApp> {
         return OrientationBuilder(builder: (_, orientation) {
           if (constraints.maxWidth != 0) {
             DeviceManager.shared.setup(context);
-            return widget.child;
+            return Container(
+              color: widget.backgroundColor,
+              child: widget.child,
+            );
           }
           return const Center(child: LFIndicator());
         });

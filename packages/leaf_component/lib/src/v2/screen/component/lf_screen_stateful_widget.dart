@@ -113,24 +113,31 @@ abstract class ScreenState<T extends StatefulExtWidget> extends State<T>
     Key? key,
     LFPopScopeCallback? willPopCallback,
   }) {
-    final body = useSafeArea
-        ? SafeArea(
-            left: safeAreaInsets.left,
-            top: safeAreaInsets.top,
-            right: safeAreaInsets.right,
-            bottom: safeAreaInsets.bottom,
-            child: buildBody(context, state),
-          )
-        : buildBody(context, state);
+    const defaultBackgroundColor = Colors.transparent;
+
+    final useSafeArea = this.useSafeArea;
+    final safeAreaInsets = this.safeAreaInsets;
+    final backgroundColor = this.backgroundColor;
+    final floatingActionButtonLocation = this.floatingActionButtonLocation;
+    final resizeToAvoidBottomInset = this.resizeToAvoidBottomInset;
+    final extendBodyBehindAppBar = this.extendBodyBehindAppBar;
 
     final scaffold = Scaffold(
       key: key,
       appBar: buildAppbar(context, state),
       body: Container(
-        color: Colors.transparent,
-        child: body,
+        color: defaultBackgroundColor,
+        child: useSafeArea
+            ? SafeArea(
+                left: safeAreaInsets.left,
+                top: safeAreaInsets.top,
+                right: safeAreaInsets.right,
+                bottom: safeAreaInsets.bottom,
+                child: buildBody(context, state),
+              )
+            : buildBody(context, state),
       ),
-      backgroundColor: backgroundColor ?? Colors.transparent,
+      backgroundColor: backgroundColor ?? defaultBackgroundColor,
       bottomNavigationBar: buildBottomNavigationBar(context, state),
       floatingActionButton: buildFloatingActionButton(context, state),
       floatingActionButtonLocation: floatingActionButtonLocation,
@@ -147,21 +154,6 @@ abstract class ScreenState<T extends StatefulExtWidget> extends State<T>
       child: scaffold,
     );
   }
-
-  // @override
-  // Widget? buildScreen(BuildContext context) {
-  //   return null;
-  // }
-  //
-  // @override
-  // PreferredSizeWidget? buildAppbar(BuildContext context, Object? state) {
-  //   return null;
-  // }
-  //
-  // @override
-  // Widget buildBody(BuildContext context, Object? state) {
-  //   return Container();
-  // }
 
   @override
   Widget? buildDrawer(BuildContext context, Object? state) {

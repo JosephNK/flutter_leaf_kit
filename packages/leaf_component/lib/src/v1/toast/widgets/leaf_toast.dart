@@ -59,7 +59,7 @@ class LeafToast {
       if (!mounted) return;
       LFNavigation.maybePop(
         context,
-        param: LFNavigatorData(LFNavigatorViewState.refresh),
+        param: LFNavigatorViewParamState.refresh,
       );
     }
   }

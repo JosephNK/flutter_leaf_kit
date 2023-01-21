@@ -1,7 +1,7 @@
 part of lf_avatar;
 
 class LFCircleImageAvatar extends StatelessWidget {
-  final String image;
+  final Object? image; // String, Uint8List
   final double size;
   final Color borderColor;
   final double borderWidth;
@@ -30,19 +30,35 @@ class LFCircleImageAvatar extends StatelessWidget {
       child: ClipOval(
         child: SizedBox.fromSize(
           size: Size.fromRadius(size), // Image radius
-          child: (isEmpty(image))
-              ? Container()
-              : isURL(image)
-                  ? LFCacheImage(
-                      header: header,
-                      url: image,
-                      width: size,
-                      height: size,
-                      fit: fit,
-                    )
-                  : Image(image: AssetImage(image), fit: BoxFit.cover),
+          child: _buildImageWidget(),
         ),
       ),
     );
+  }
+
+  Widget? _buildImageWidget() {
+    final image = this.image;
+
+    if (image is String) {
+      if (isEmpty(image)) {
+        return Container();
+      } else {
+        if (isURL(image)) {
+          return LFCacheImage(
+            header: header,
+            url: image,
+            width: size,
+            height: size,
+            fit: fit,
+          );
+        } else {
+          return Image(image: AssetImage(image), fit: fit);
+        }
+      }
+    } else if (image is Uint8List) {
+      return Image.memory(image, fit: fit);
+    }
+
+    return null;
   }
 }
