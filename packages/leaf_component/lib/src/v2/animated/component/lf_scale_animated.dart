@@ -2,10 +2,12 @@ part of lf_animated;
 
 class LFScaleAnimated extends StatefulWidget {
   final Widget child;
+  final ValueChanged<AnimationStatus>? onAnimationStatus;
 
   const LFScaleAnimated({
     Key? key,
     required this.child,
+    this.onAnimationStatus,
   }) : super(key: key);
 
   @override
@@ -30,11 +32,14 @@ class _LFScaleAnimatedState extends State<LFScaleAnimated>
     _animation = CurvedAnimation(
         parent: _animationController, curve: Curves.bounceInOut);
 
+    _animation.addStatusListener(animationCallback);
+
     _animationController.forward();
   }
 
   @override
   void dispose() {
+    _animation.removeStatusListener(animationCallback);
     _animationController.dispose();
 
     super.dispose();
@@ -51,5 +56,10 @@ class _LFScaleAnimatedState extends State<LFScaleAnimated>
       scale: _animation,
       child: widget.child,
     );
+  }
+
+  void animationCallback(AnimationStatus status) {
+    // if (status == AnimationStatus.completed) print('completed');
+    widget.onAnimationStatus?.call(status);
   }
 }

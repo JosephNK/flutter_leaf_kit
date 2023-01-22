@@ -5,6 +5,7 @@ class LFExpandAnimated extends StatefulWidget {
   final bool expand;
   final Duration duration;
   final Curve curve;
+  final ValueChanged<AnimationStatus>? onAnimationStatus;
 
   const LFExpandAnimated({
     Key? key,
@@ -12,6 +13,7 @@ class LFExpandAnimated extends StatefulWidget {
     this.expand = true,
     this.duration = const Duration(milliseconds: 250),
     this.curve = Curves.easeInToLinear,
+    this.onAnimationStatus,
   }) : super(key: key);
 
   @override
@@ -36,6 +38,8 @@ class _LFExpandAnimatedState extends State<LFExpandAnimated>
       curve: widget.curve,
     );
 
+    _animation.addStatusListener(animationCallback);
+
     if (widget.expand) {
       _animationController.forward();
     }
@@ -43,6 +47,7 @@ class _LFExpandAnimatedState extends State<LFExpandAnimated>
 
   @override
   void dispose() {
+    _animation.removeStatusListener(animationCallback);
     _animationController.dispose();
 
     super.dispose();
@@ -72,5 +77,10 @@ class _LFExpandAnimatedState extends State<LFExpandAnimated>
         child: widget.child,
       ),
     );
+  }
+
+  void animationCallback(AnimationStatus status) {
+    // if (status == AnimationStatus.completed) print('completed');
+    widget.onAnimationStatus?.call(status);
   }
 }

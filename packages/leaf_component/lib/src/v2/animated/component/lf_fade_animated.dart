@@ -40,16 +40,14 @@ class _LFFadeAnimatedState extends State<LFFadeAnimated>
           CurvedAnimation(parent: _animationController, curve: Curves.easeOut));
     }
 
-    _animation.addStatusListener((AnimationStatus status) {
-      // if (status == AnimationStatus.completed) print('completed');
-      widget.onAnimationStatus?.call(status);
-    });
+    _animation.addStatusListener(animationCallback);
 
     _animationController.forward();
   }
 
   @override
   void dispose() {
+    _animation.removeStatusListener(animationCallback);
     _animationController.dispose();
 
     super.dispose();
@@ -74,5 +72,10 @@ class _LFFadeAnimatedState extends State<LFFadeAnimated>
       opacity: _animation,
       child: widget.child,
     );
+  }
+
+  void animationCallback(AnimationStatus status) {
+    // if (status == AnimationStatus.completed) print('completed');
+    widget.onAnimationStatus?.call(status);
   }
 }

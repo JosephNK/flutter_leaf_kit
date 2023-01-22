@@ -9,119 +9,9 @@ typedef LFPhotosOnLimitError = void Function(
 );
 
 ///
-/// LFPhotoAlbumView
+/// LFPhotoListView
 ///
-class LFPhotoAlbumView extends StatefulWidget {
-  final AssetPathEntity? selectedAssetPath;
-  final TextStyle? textStyle;
-  final ValueChanged<AssetPathEntity>? onSelected;
-
-  const LFPhotoAlbumView({
-    Key? key,
-    required this.selectedAssetPath,
-    this.textStyle,
-    this.onSelected,
-  }) : super(key: key);
-
-  @override
-  State<LFPhotoAlbumView> createState() => _LFPhotoAlbumViewState();
-}
-
-class _LFPhotoAlbumViewState extends State<LFPhotoAlbumView> {
-  List<AssetPathEntity> _assetPathList = [];
-  AssetPathEntity? _selectedAssetPath;
-
-  @override
-  void initState() {
-    super.initState();
-
-    _selectedAssetPath = widget.selectedAssetPath;
-
-    WidgetsBinding.instance.addPostFrameCallback((_) async {
-      final assetPathList = await _requestAssetPaths();
-      final assetPath = (_selectedAssetPath == null)
-          ? assetPathList.first
-          : _selectedAssetPath;
-      setState(() {
-        _assetPathList = assetPathList;
-        _selectedAssetPath = assetPath;
-      });
-      if (assetPath != null && _selectedAssetPath != null) {
-        widget.onSelected?.call(assetPath);
-      }
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      behavior: HitTestBehavior.opaque,
-      onTap: () {
-        LFBottomSheet.show<String>(
-          context,
-          items: _assetPathList
-              .map(
-                (item) => LFBottomSheetItem<String>(
-                  key: item.id,
-                  title: item.name,
-                ),
-              )
-              .toList(),
-          onTap: (item) {
-            final key = item.key;
-            final findList = _assetPathList
-                .where((assetPath) => assetPath.id == key)
-                .toList();
-            final assetPath = findList.isNotEmpty ? findList.first : null;
-            if (assetPath != null) {
-              setState(() {
-                _selectedAssetPath = assetPath;
-              });
-              widget.onSelected?.call(assetPath);
-            }
-          },
-        );
-      },
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          LFText(
-            _selectedAssetPath?.name ?? '',
-            style: widget.textStyle ??
-                const TextStyle(
-                  fontSize: 18.0,
-                ),
-          ),
-          const Icon(Icons.arrow_drop_down_sharp, size: 30.0),
-        ],
-      ),
-    );
-  }
-
-  Future<List<AssetPathEntity>> _requestAssetPaths() async {
-    final result = await PhotoManager.requestPermissionExtend();
-    if (result == PermissionState.authorized) {
-      final paths = await PhotoManager.getAssetPathList(
-        type: RequestType.common,
-        filterOption: FilterOptionGroup(
-          containsPathModified: true,
-          containsLivePhotos: false,
-        ),
-      );
-      return paths;
-    } else {
-      await PhotoManager.openSetting();
-    }
-    return [];
-  }
-}
-
-///
-/// LFPhotoContentView
-///
-class LFPhotoContentView extends StatefulWidget {
+class LFPhotoListView extends StatefulWidget {
   final AssetPathEntity? selectedAssetPath;
   final int selectedLimit;
   final EdgeInsets padding;
@@ -132,7 +22,7 @@ class LFPhotoContentView extends StatefulWidget {
   final LFPhotosOnSelected? onSelected;
   final LFPhotosOnLimitError? onLimitError;
 
-  const LFPhotoContentView({
+  const LFPhotoListView({
     Key? key,
     required this.selectedAssetPath,
     this.selectedLimit = 3,
@@ -146,10 +36,10 @@ class LFPhotoContentView extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<LFPhotoContentView> createState() => _LFPhotoContentViewState();
+  State<LFPhotoListView> createState() => _LFPhotoListViewState();
 }
 
-class _LFPhotoContentViewState extends State<LFPhotoContentView> {
+class _LFPhotoListViewState extends State<LFPhotoListView> {
   AssetPathEntity? _selectedAssetPath;
   final List<AssetEntity> _selectedEntities = [];
   final int _sizePerPage = 50;
@@ -171,6 +61,8 @@ class _LFPhotoContentViewState extends State<LFPhotoContentView> {
   void initState() {
     super.initState();
 
+    ImageLruCache.clearCache();
+
     _checkedIcon = widget.checkedIcon ??
         const Icon(
           Icons.check_box,
@@ -191,7 +83,6 @@ class _LFPhotoContentViewState extends State<LFPhotoContentView> {
     });
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      ImageLruCache.clearCache();
       _selectedEntities.addAll(widget.selectedEntities);
       _selectedAssetPath = widget.selectedAssetPath;
       _requestAssets();
@@ -206,7 +97,7 @@ class _LFPhotoContentViewState extends State<LFPhotoContentView> {
   }
 
   @override
-  void didUpdateWidget(covariant LFPhotoContentView oldWidget) {
+  void didUpdateWidget(covariant LFPhotoListView oldWidget) {
     if (oldWidget.selectedAssetPath != widget.selectedAssetPath) {
       _selectedAssetPath = widget.selectedAssetPath;
       _requestAssets();
@@ -351,7 +242,8 @@ class LFPhotoTile extends StatelessWidget {
       return _buildImageItem(context, thumb);
     }
     return FutureBuilder<Uint8List?>(
-      future: entity.thumbnailData,
+      future: entity.thumbnailDataWithOption(
+          const ThumbnailOption(size: ThumbnailSize.square(150), quality: 100)),
       builder: (BuildContext context, AsyncSnapshot<Uint8List?> snapshot) {
         final futureData = snapshot.data;
         if (snapshot.connectionState == ConnectionState.done &&
