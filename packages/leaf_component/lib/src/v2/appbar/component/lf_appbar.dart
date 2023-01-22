@@ -34,7 +34,7 @@ class LFAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.centerTitle,
     this.automaticallyImplyLeading = true,
     this.shadowColor = Colors.transparent,
-    this.actionsRightMargin = 0.0,
+    this.actionsRightMargin,
     this.bottom,
     this.toolbarHeight,
     this.flexibleSpace,

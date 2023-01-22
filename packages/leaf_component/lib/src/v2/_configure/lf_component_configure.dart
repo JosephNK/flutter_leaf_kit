@@ -54,15 +54,15 @@ class LFComponentConfigure {
   LFComponentConfigure._internal();
 
   LFComponentConfigure setup(LFAppComponentConfigure? configure) {
-    _appComponentConfigure = configure;
+    _appBarComponentConfigure = configure?.setupAppbar();
+    _bottomSheetComponentConfigure = configure?.setupBottomSheet();
     return this;
   }
 
-  LFAppComponentConfigure? _appComponentConfigure;
+  LFAppBarComponentConfigure? _appBarComponentConfigure;
+  LFBottomSheetConfigure? _bottomSheetComponentConfigure;
 
   /// Getter
-  LFAppBarComponentConfigure? get appBar =>
-      LFComponentConfigure.shared._appComponentConfigure?.appBar;
-  LFBottomSheetConfigure? get bottomSheet =>
-      LFComponentConfigure.shared._appComponentConfigure?.bottomSheet;
+  LFAppBarComponentConfigure? get appBar => _appBarComponentConfigure;
+  LFBottomSheetConfigure? get bottomSheet => _bottomSheetComponentConfigure;
 }

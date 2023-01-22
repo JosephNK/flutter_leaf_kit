@@ -29,7 +29,7 @@ class _PhotoScreenState extends ScreenState<PhotoScreen> {
   PreferredSizeWidget? buildAppbar(BuildContext context, Object? state) {
     return LFAppBar(
       // centerTitle: true,
-      title: LFPhotoAlbumView(
+      title: LFPhotoAlbumSheetTitleView(
         selectedAssetPath: _selectedAssetPath,
         onSelected: (assetPath) {
           setState(() {
@@ -47,7 +47,7 @@ class _PhotoScreenState extends ScreenState<PhotoScreen> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Expanded(
-          child: LFPhotoContentView(
+          child: LFPhotoListView(
             selectedLimit: 5,
             selectedAssetPath: _selectedAssetPath,
             selectedEntities: _selectedEntities,
