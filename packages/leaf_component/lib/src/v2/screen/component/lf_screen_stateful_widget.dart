@@ -18,6 +18,7 @@ abstract class ScreenBuild {
   Widget? buildEndDrawer(BuildContext context, Object? state);
   Widget? buildFloatingActionButton(BuildContext context, Object? state);
   Widget? buildBottomNavigationBar(BuildContext context, Object? state);
+  // only Android
   Future<bool> willPopScopeCallback(BuildContext context);
 }
 
@@ -146,6 +147,10 @@ abstract class ScreenState<T extends StatefulExtWidget> extends State<T>
       resizeToAvoidBottomInset: resizeToAvoidBottomInset,
       extendBodyBehindAppBar: extendBodyBehindAppBar,
     );
+
+    if (Platform.isIOS) {
+      return scaffold;
+    }
 
     return WillPopScope(
       onWillPop: () {
