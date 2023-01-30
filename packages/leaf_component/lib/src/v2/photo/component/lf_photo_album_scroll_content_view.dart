@@ -22,12 +22,21 @@ class LFPhotoAlbumScrollContentView extends StatefulWidget {
 
 class _LFPhotoAlbumScrollContentViewState
     extends State<LFPhotoAlbumScrollContentView> with LFPhotoAlbumRequest {
+  late LFExpandAnimationController _expandController;
+
   List<AssetPathEntity> _assetPathEntityList = [];
   AssetPathEntity? _selectedAssetPathEntity;
 
   @override
   void initState() {
     super.initState();
+
+    _expandController = LFExpandAnimationController(
+      autoAnimation: false,
+      repeatCount: -1,
+      duration: const Duration(milliseconds: 1000),
+      expand: false,
+    );
 
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       update();
@@ -39,6 +48,13 @@ class _LFPhotoAlbumScrollContentViewState
     if (oldWidget.selectedAssetPath != widget.selectedAssetPath) {
       if (_assetPathEntityList.isEmpty) {
         update();
+      }
+    }
+    if (oldWidget.visible != widget.visible) {
+      if (widget.visible) {
+        _expandController.forward();
+      } else {
+        _expandController.reverse();
       }
     }
     super.didUpdateWidget(oldWidget);
@@ -62,7 +78,7 @@ class _LFPhotoAlbumScrollContentViewState
           left: 0,
           right: 0,
           child: LFExpandAnimated(
-            expand: visible,
+            controller: _expandController,
             child: Container(
               color: Colors.white,
               padding:
