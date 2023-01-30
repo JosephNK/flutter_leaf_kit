@@ -1,13 +1,15 @@
 part of lf_animated;
 
 class LFRotateAnimated extends StatefulWidget {
+  final LFRotateAnimationController controller;
   final Widget child;
-  final bool rotate;
+  final ValueChanged<AnimationStatus>? onAnimationStatus;
 
   const LFRotateAnimated({
     Key? key,
+    required this.controller,
     required this.child,
-    required this.rotate,
+    this.onAnimationStatus,
   }) : super(key: key);
 
   @override
@@ -16,47 +18,65 @@ class LFRotateAnimated extends StatefulWidget {
 
 class _LFRotateAnimatedState extends State<LFRotateAnimated>
     with SingleTickerProviderStateMixin {
-  late AnimationController _animationController;
   late Animation _animation;
 
   @override
   void initState() {
     super.initState();
 
-    _animationController = AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 250),
-    );
-    _animation = Tween(begin: 0.0, end: -pi).animate(_animationController);
+    final controller = widget.controller;
+    final repeatCount = controller.repeatCount;
+    final autoAnimation = controller.autoAnimation;
+    final degree = controller.degree;
+    final animationController = controller.initAnimationController(vsync: this);
 
-    if (widget.rotate) {
-      _animationController.forward();
-    }
+    controller.addListener(() {
+      final status = controller.status;
+      switch (status) {
+        case LFAnimationStatus.forward:
+          break;
+        case LFAnimationStatus.stop:
+          break;
+        case LFAnimationStatus.reverse:
+          break;
+        case LFAnimationStatus.repeat:
+          break;
+      }
+    });
+
+    _animation = Tween(begin: 0.0, end: degree).animate(animationController);
+    _animation.addStatusListener(animationCallback);
+
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      if (autoAnimation) {
+        if (repeatCount != -1) {
+          controller.repeat();
+        } else {
+          controller.forward();
+        }
+      }
+    });
   }
 
   @override
   void dispose() {
-    _animationController.dispose();
+    _animation.removeStatusListener(animationCallback);
 
     super.dispose();
   }
 
   @override
   void didUpdateWidget(covariant LFRotateAnimated oldWidget) {
-    if (oldWidget.rotate != widget.rotate) {
-      if (widget.rotate) {
-        _animationController.forward();
-      } else {
-        _animationController.reverse();
-      }
-    }
     super.didUpdateWidget(oldWidget);
   }
 
   @override
   Widget build(BuildContext context) {
+    final controller = widget.controller;
+    final animationController = controller.animationController;
+
     return AnimatedBuilder(
-      animation: _animationController,
+      animation: animationController,
       builder: (context, child) {
         return Transform.rotate(
           angle: _animation.value,
@@ -64,5 +84,9 @@ class _LFRotateAnimatedState extends State<LFRotateAnimated>
         );
       },
     );
+  }
+
+  void animationCallback(AnimationStatus status) {
+    widget.onAnimationStatus?.call(status);
   }
 }

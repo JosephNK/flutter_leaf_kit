@@ -1,18 +1,14 @@
 part of lf_animated;
 
 class LFExpandAnimated extends StatefulWidget {
+  final LFExpandAnimationController controller;
   final Widget child;
-  final bool expand;
-  final Duration duration;
-  final Curve curve;
   final ValueChanged<AnimationStatus>? onAnimationStatus;
 
   const LFExpandAnimated({
     Key? key,
+    required this.controller,
     required this.child,
-    this.expand = true,
-    this.duration = const Duration(milliseconds: 250),
-    this.curve = Curves.easeInToLinear,
     this.onAnimationStatus,
   }) : super(key: key);
 
@@ -22,55 +18,74 @@ class LFExpandAnimated extends StatefulWidget {
 
 class _LFExpandAnimatedState extends State<LFExpandAnimated>
     with SingleTickerProviderStateMixin {
-  late AnimationController _animationController;
   late Animation<double> _animation;
 
   @override
   void initState() {
     super.initState();
 
-    _animationController = AnimationController(
-      vsync: this,
-      duration: widget.duration,
-    );
-    _animation = CurvedAnimation(
-      parent: _animationController,
-      curve: widget.curve,
-    );
+    final controller = widget.controller;
+    final duration = controller.duration;
+    final repeatCount = controller.repeatCount;
+    final autoAnimation = controller.autoAnimation;
+    final animationController = controller.initAnimationController(vsync: this);
 
+    controller.addListener(() async {
+      final status = controller.status;
+      switch (status) {
+        case LFAnimationStatus.forward:
+          break;
+        case LFAnimationStatus.stop:
+          break;
+        case LFAnimationStatus.reverse:
+          break;
+        case LFAnimationStatus.repeat:
+          break;
+      }
+    });
+    _animation =
+        CurvedAnimation(parent: animationController, curve: Curves.easeIn);
     _animation.addStatusListener(animationCallback);
 
-    if (widget.expand) {
-      _animationController.forward();
-    }
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      if (autoAnimation) {
+        if (repeatCount != -1) {
+          controller.repeat();
+        } else {
+          controller.forward();
+        }
+      }
+    });
   }
 
   @override
   void dispose() {
     _animation.removeStatusListener(animationCallback);
-    _animationController.dispose();
 
     super.dispose();
   }
 
   @override
   void didUpdateWidget(covariant LFExpandAnimated oldWidget) {
-    if (oldWidget.expand != widget.expand) {
-      if (widget.expand) {
-        _animationController.forward();
-      } else {
-        _animationController.reverse();
-        // _animationController.animateBack(0, duration: _duration);
-      }
-    }
+    // if (oldWidget.expand != widget.expand) {
+    //   if (widget.expand) {
+    //     _animationController.forward();
+    //   } else {
+    //     _animationController.reverse();
+    //     // _animationController.animateBack(0, duration: _duration);
+    //   }
+    // }
     super.didUpdateWidget(oldWidget);
   }
 
   @override
   Widget build(BuildContext context) {
+    final controller = widget.controller;
+    final expand = controller.expand;
+
     /// https://stackoverflow.com/a/72734746
     return SizeTransition(
-      axisAlignment: (widget.expand) ? 1.0 : -1.0,
+      axisAlignment: (expand) ? 1.0 : -1.0,
       sizeFactor: _animation,
       child: Container(
         color: Colors.transparent,
@@ -80,7 +95,6 @@ class _LFExpandAnimatedState extends State<LFExpandAnimated>
   }
 
   void animationCallback(AnimationStatus status) {
-    // if (status == AnimationStatus.completed) print('completed');
     widget.onAnimationStatus?.call(status);
   }
 }

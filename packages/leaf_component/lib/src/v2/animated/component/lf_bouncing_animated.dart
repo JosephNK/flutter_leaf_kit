@@ -1,11 +1,15 @@
 part of lf_animated;
 
 class LFBouncingAnimated extends StatefulWidget {
+  final LFBouncingAnimationController controller;
   final Widget child;
+  final ValueChanged<AnimationStatus>? onAnimationStatus;
 
   const LFBouncingAnimated({
     Key? key,
+    required this.controller,
     required this.child,
+    this.onAnimationStatus,
   }) : super(key: key);
 
   @override
@@ -14,34 +18,52 @@ class LFBouncingAnimated extends StatefulWidget {
 
 class _LFBouncingAnimatedState extends State<LFBouncingAnimated>
     with SingleTickerProviderStateMixin {
-  late AnimationController _animationController;
   late Animation<double> _animation;
-
-  final _duration = const Duration(milliseconds: 1000);
 
   @override
   void initState() {
     super.initState();
 
-    _animationController = AnimationController(
-      vsync: this,
-      duration: _duration,
-    );
+    final controller = widget.controller;
+    final repeatCount = controller.repeatCount;
+    final autoAnimation = controller.autoAnimation;
+    final animationController = controller.initAnimationController(vsync: this);
+
+    controller.addListener(() async {
+      final status = controller.status;
+      switch (status) {
+        case LFAnimationStatus.forward:
+          break;
+        case LFAnimationStatus.stop:
+          break;
+        case LFAnimationStatus.reverse:
+          break;
+        case LFAnimationStatus.repeat:
+          break;
+      }
+    });
+
     _animation = Tween(begin: 1.0, end: 1.2).animate(
-      CurvedAnimation(parent: _animationController, curve: Curves.elasticIn),
-    )..addStatusListener((AnimationStatus status) {
-        if (status == AnimationStatus.completed) {}
-      });
+      CurvedAnimation(parent: animationController, curve: Curves.elasticIn),
+    );
+    _animation.addStatusListener(animationCallback);
 
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      await _animationController.forward();
-      await _animationController.reverse();
+      if (autoAnimation) {
+        if (repeatCount != -1) {
+          controller.repeat();
+        } else {
+          await controller.forward();
+          await controller.reverse();
+        }
+      }
     });
   }
 
   @override
   void dispose() {
-    _animationController.dispose();
+    _animation.removeStatusListener(animationCallback);
+    // _animationController.dispose();
 
     super.dispose();
   }
@@ -57,5 +79,9 @@ class _LFBouncingAnimatedState extends State<LFBouncingAnimated>
       scale: _animation,
       child: widget.child,
     );
+  }
+
+  void animationCallback(AnimationStatus status) {
+    widget.onAnimationStatus?.call(status);
   }
 }
