@@ -25,7 +25,6 @@ class _LFExpandAnimatedState extends State<LFExpandAnimated>
     super.initState();
 
     final controller = widget.controller;
-    final duration = controller.duration;
     final repeatCount = controller.repeatCount;
     final autoAnimation = controller.autoAnimation;
     final animationController = controller.initAnimationController(vsync: this);
@@ -43,8 +42,8 @@ class _LFExpandAnimatedState extends State<LFExpandAnimated>
           break;
       }
     });
-    _animation =
-        CurvedAnimation(parent: animationController, curve: Curves.easeIn);
+    _animation = CurvedAnimation(
+        parent: animationController, curve: Curves.fastLinearToSlowEaseIn);
     _animation.addStatusListener(animationCallback);
 
     WidgetsBinding.instance.addPostFrameCallback((_) async {
@@ -81,16 +80,14 @@ class _LFExpandAnimatedState extends State<LFExpandAnimated>
   @override
   Widget build(BuildContext context) {
     final controller = widget.controller;
-    final expand = controller.expand;
+    final expand = controller.status == LFAnimationStatus.forward;
 
     /// https://stackoverflow.com/a/72734746
     return SizeTransition(
+      axis: Axis.vertical,
       axisAlignment: (expand) ? 1.0 : -1.0,
       sizeFactor: _animation,
-      child: Container(
-        color: Colors.transparent,
-        child: widget.child,
-      ),
+      child: widget.child,
     );
   }
 

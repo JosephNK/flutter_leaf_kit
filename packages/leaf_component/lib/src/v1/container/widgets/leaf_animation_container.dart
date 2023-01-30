@@ -71,10 +71,10 @@ class AnimatedWave extends StatelessWidget {
       return SizedBox(
         height: height,
         width: constraints.biggest.width,
-        child: LoopAnimation<double>(
+        child: LoopAnimationBuilder<double>(
             duration: (5000 / speed).round().milliseconds,
             tween: 0.0.tweenTo(2 * pi),
-            builder: (context, child, value) {
+            builder: (context, value, child) {
               return CustomPaint(
                 foregroundPainter: CurvePainter(value + offset),
               );
@@ -124,16 +124,16 @@ class AnimatedBackground extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final tween = MultiTween<_BgProps>()
-      ..add(_BgProps.color1,
+    final tween = MovieTween()
+      ..tween(_BgProps.color1,
           const Color(0xffD38312).tweenTo(Colors.lightBlue.shade900))
-      ..add(_BgProps.color2,
+      ..tween(_BgProps.color2,
           const Color(0xffA83279).tweenTo(Colors.blue.shade600));
 
-    return MirrorAnimation<MultiTweenValues<_BgProps>>(
+    return MirrorAnimationBuilder<Movie>(
       tween: tween,
       duration: 3.seconds,
-      builder: (context, child, value) {
+      builder: (context, value, child) {
         return Container(
           decoration: BoxDecoration(
             gradient: LinearGradient(

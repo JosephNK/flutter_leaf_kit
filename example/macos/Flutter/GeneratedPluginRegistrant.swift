@@ -6,17 +6,17 @@ import FlutterMacOS
 import Foundation
 
 import connectivity_plus
-import device_info_plus_macos
+import device_info_plus
 import firebase_core
 import firebase_messaging
 import flutter_app_badger
 import flutter_local_notifications
 import geolocator_apple
-import package_info_plus_macos
-import path_provider_macos
+import package_info_plus
+import path_provider_foundation
 import photo_manager
-import share_plus_macos
-import shared_preferences_macos
+import share_plus
+import shared_preferences_foundation
 import sqflite
 import url_launcher_macos
 

@@ -34,8 +34,7 @@ class _LFPhotoAlbumScrollContentViewState
     _expandController = LFExpandAnimationController(
       autoAnimation: false,
       repeatCount: -1,
-      duration: const Duration(milliseconds: 1000),
-      expand: false,
+      duration: const Duration(milliseconds: 250),
     );
 
     WidgetsBinding.instance.addPostFrameCallback((_) async {
@@ -74,35 +73,40 @@ class _LFPhotoAlbumScrollContentViewState
           ),
         ),
         Positioned(
-          top: 0,
-          left: 0,
-          right: 0,
+          top: 0.0,
+          left: 0.0,
+          right: 0.0,
           child: LFExpandAnimated(
             controller: _expandController,
             child: Container(
               color: Colors.white,
-              padding:
-                  const EdgeInsets.symmetric(vertical: 12.0, horizontal: 0.0),
+              padding: const EdgeInsets.symmetric(vertical: 12.0),
               child: SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
-                child: Row(
-                  children: [
-                    ..._assetPathEntityList.map((assetPathEntity) {
-                      final checked =
-                          assetPathEntity.id == _selectedAssetPathEntity?.id;
-                      return LFPhotoAlbumScrollContentTile(
-                        assetPathEntity: assetPathEntity,
-                        selectedAssetPathEntity: _selectedAssetPathEntity,
-                        checked: checked,
-                        onSelected: (assetPathEntity) {
-                          setState(() {
-                            _selectedAssetPathEntity = assetPathEntity;
-                          });
-                          widget.onSelected?.call(assetPathEntity);
-                        },
-                      );
-                    }).toList(),
-                  ],
+                child: ConstrainedBox(
+                  constraints: BoxConstraints(
+                    maxWidth: MediaQuery.of(context).size.width,
+                  ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      ..._assetPathEntityList.map((assetPathEntity) {
+                        final checked =
+                            assetPathEntity.id == _selectedAssetPathEntity?.id;
+                        return LFPhotoAlbumScrollContentTile(
+                          assetPathEntity: assetPathEntity,
+                          selectedAssetPathEntity: _selectedAssetPathEntity,
+                          checked: checked,
+                          onSelected: (assetPathEntity) {
+                            setState(() {
+                              _selectedAssetPathEntity = assetPathEntity;
+                            });
+                            widget.onSelected?.call(assetPathEntity);
+                          },
+                        );
+                      }).toList(),
+                    ],
+                  ),
                 ),
               ),
             ),

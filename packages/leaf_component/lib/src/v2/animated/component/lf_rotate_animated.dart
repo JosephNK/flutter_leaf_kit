@@ -76,7 +76,7 @@ class _LFRotateAnimatedState extends State<LFRotateAnimated>
     final animationController = controller.animationController;
 
     return AnimatedBuilder(
-      animation: animationController,
+      animation: animationController!,
       builder: (context, child) {
         return Transform.rotate(
           angle: _animation.value,

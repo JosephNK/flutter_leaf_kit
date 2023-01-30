@@ -3,7 +3,7 @@ part of lf_animated;
 enum LFAnimationStatus { forward, stop, reverse, repeat }
 
 class LFAnimationController extends ChangeNotifier {
-  late AnimationController animationController;
+  AnimationController? animationController;
 
   final bool autoAnimation;
   final int repeatCount;
@@ -26,24 +26,30 @@ class LFAnimationController extends ChangeNotifier {
       vsync: vsync,
       duration: duration,
     );
-    return animationController;
+    return animationController!;
   }
 
-  TickerFuture forward() {
+  TickerFuture? forward() {
+    final animationController = this.animationController;
+    if (animationController == null) return null;
     status = LFAnimationStatus.forward;
     notifyListeners();
     _tickerFuture = animationController.forward();
     return _tickerFuture;
   }
 
-  TickerFuture reverse() {
+  TickerFuture? reverse() {
+    final animationController = this.animationController;
+    if (animationController == null) return null;
     status = LFAnimationStatus.reverse;
     notifyListeners();
     _tickerFuture = animationController.reverse();
     return _tickerFuture;
   }
 
-  TickerFuture repeat() {
+  TickerFuture? repeat() {
+    final animationController = this.animationController;
+    if (animationController == null) return null;
     status = LFAnimationStatus.repeat;
     notifyListeners();
     _tickerFuture = animationController.repeat();
@@ -59,12 +65,16 @@ class LFAnimationController extends ChangeNotifier {
   }
 
   void stop() {
+    final animationController = this.animationController;
+    if (animationController == null) return;
     status = LFAnimationStatus.stop;
     notifyListeners();
     animationController.stop();
   }
 
-  TickerFuture forwardWithStop() {
+  TickerFuture? forwardWithStop() {
+    final animationController = this.animationController;
+    if (animationController == null) return null;
     status = LFAnimationStatus.stop;
     notifyListeners();
     final value = animationController.value;
@@ -74,8 +84,7 @@ class LFAnimationController extends ChangeNotifier {
 
   @override
   void dispose() {
-    Logging.d('LFAnimationController dispose');
-    animationController.dispose();
+    animationController?.dispose();
     super.dispose();
   }
 }
@@ -111,13 +120,10 @@ class LFFadeAnimationController extends LFAnimationController {
 }
 
 class LFExpandAnimationController extends LFAnimationController {
-  final bool expand;
-
   LFExpandAnimationController({
     bool autoAnimation = false,
     int repeatCount = -1,
     Duration duration = const Duration(milliseconds: 250),
-    this.expand = false,
   }) : super(
           autoAnimation: autoAnimation,
           repeatCount: repeatCount,
