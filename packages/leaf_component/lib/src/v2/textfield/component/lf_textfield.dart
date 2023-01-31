@@ -448,7 +448,9 @@ class _LFTextFieldState extends State<LFTextField> {
     _textController.clear();
     final text = _textController.text.trim();
     onChanged?.call(text);
-    onSubmitted?.call(text);
+    if (text.isNotEmpty) {
+      onSubmitted?.call(text);
+    }
     if (!mounted) return;
     setState(() => _showClearButton = false);
   }
