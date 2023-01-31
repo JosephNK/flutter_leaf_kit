@@ -1,66 +1,90 @@
 #!/bin/bash
+
+# Expand aliases defined in the shell ~/.bashrc
+shopt -s expand_aliases
+source ~/.bash_profile
+
 (
   leaf() {
      cd leaf
-     flutter pub get
+     exec_flutter_pub_get
      cd ..
      echo "leaf pub get done!"
   }
 
   leaf_common() {
      cd leaf_common
-     flutter pub get
+     exec_flutter_pub_get
      cd ..
      echo "leaf_common pub get done!"
   }
 
   leaf_component() {
      cd leaf_component
-     flutter pub get
+     exec_flutter_pub_get
      cd ..
      echo "leaf_component pub get done!"
   }
 
   leaf_firebase() {
      cd leaf_firebase
-     flutter pub get
+     exec_flutter_pub_get
      cd ..
      echo "leaf_firebase pub get done!"
   }
 
   leaf_manager() {
      cd leaf_manager
-     flutter pub get
+     exec_flutter_pub_get
      cd ..
      echo "leaf_manager pub get done!"
   }
 
   leaf_network() {
      cd leaf_network
-     flutter pub get
+     exec_flutter_pub_get
      cd ..
      echo "leaf_network pub get done!"
   }
 
   leaf_data() {
      cd leaf_data
-     flutter pub get
+     exec_flutter_pub_get
      cd ..
      echo "leaf_data pub get done!"
   }
 
   leaf_navigation() {
      cd leaf_navigation
-     flutter pub get
+     exec_flutter_pub_get
      cd ..
      echo "leaf_navigation pub get done!"
   }
 
-  while getopts p:t: flag
+  exec_flutter_pub_get() {
+    if [ -z "$flutterCmd" ]; then
+      flutter pub get
+    else
+      eval "$flutterCmd pub get"
+    fi
+  }
+
+  test_func() {
+     cd leaf_navigation
+     if [ -z "$flutterCmd" ]; then
+       flutter pub get
+     else
+       eval "$flutterCmd pub get"
+     fi
+     echo "test fuction call! ($flutterCmd)"
+  }
+
+  while getopts p:t:f: flag
   do
       case "${flag}" in
           p) package=${OPTARG};;
           t) type=${OPTARG};;
+          f) flutterCmd=${OPTARG};;
       esac
   done
 
