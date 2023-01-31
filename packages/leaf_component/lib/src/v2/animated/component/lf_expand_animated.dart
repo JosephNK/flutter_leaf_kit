@@ -1,14 +1,18 @@
 part of lf_animated;
 
 class LFExpandAnimated extends StatefulWidget {
-  final LFExpandAnimationController controller;
   final Widget child;
+  final LFExpandAnimationController? controller;
+  final bool? value;
+  final Duration? duration;
   final ValueChanged<AnimationStatus>? onAnimationStatus;
 
   const LFExpandAnimated({
     Key? key,
-    required this.controller,
     required this.child,
+    this.controller,
+    this.value,
+    this.duration,
     this.onAnimationStatus,
   }) : super(key: key);
 
@@ -18,16 +22,26 @@ class LFExpandAnimated extends StatefulWidget {
 
 class _LFExpandAnimatedState extends State<LFExpandAnimated>
     with SingleTickerProviderStateMixin {
+  late AnimationController? _animationController;
   late Animation<double> _animation;
+  late LFExpandAnimationController _innerController;
 
   @override
   void initState() {
     super.initState();
 
-    final controller = widget.controller;
-    final repeatCount = controller.repeatCount;
+    _innerController = widget.controller ??
+        LFExpandAnimationController(
+          autoAnimation: false,
+          duration: widget.duration ?? const Duration(milliseconds: 250),
+        );
+    final controller = _innerController;
     final autoAnimation = controller.autoAnimation;
-    final animationController = controller.initAnimationController(vsync: this);
+    final duration = controller.duration;
+    final animationController = controller.initAnimationController(
+      AnimationController(vsync: this, duration: duration),
+    );
+    _animationController = animationController;
 
     controller.addListener(() async {
       final status = controller.status;
@@ -42,17 +56,16 @@ class _LFExpandAnimatedState extends State<LFExpandAnimated>
           break;
       }
     });
-    _animation = CurvedAnimation(
-        parent: animationController, curve: Curves.fastLinearToSlowEaseIn);
+
+    _animation =
+        CurvedAnimation(parent: animationController!, curve: Curves.ease);
     _animation.addStatusListener(animationCallback);
 
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       if (autoAnimation) {
-        if (repeatCount != -1) {
-          controller.repeat();
-        } else {
-          controller.forward();
-        }
+        runAutoAnimating();
+      } else {
+        runManualAnimating();
       }
     });
   }
@@ -60,27 +73,25 @@ class _LFExpandAnimatedState extends State<LFExpandAnimated>
   @override
   void dispose() {
     _animation.removeStatusListener(animationCallback);
+    _animationController?.stop();
+    _animationController?.dispose();
+    if (widget.controller == null) _innerController.dispose();
 
     super.dispose();
   }
 
   @override
   void didUpdateWidget(covariant LFExpandAnimated oldWidget) {
-    // if (oldWidget.expand != widget.expand) {
-    //   if (widget.expand) {
-    //     _animationController.forward();
-    //   } else {
-    //     _animationController.reverse();
-    //     // _animationController.animateBack(0, duration: _duration);
-    //   }
-    // }
+    if (oldWidget.value != widget.value) {
+      runManualAnimating();
+    }
     super.didUpdateWidget(oldWidget);
   }
 
   @override
   Widget build(BuildContext context) {
     final controller = widget.controller;
-    final expand = controller.status == LFAnimationStatus.forward;
+    final expand = controller?.status == LFAnimationStatus.forward;
 
     /// https://stackoverflow.com/a/72734746
     return SizeTransition(
@@ -93,5 +104,27 @@ class _LFExpandAnimatedState extends State<LFExpandAnimated>
 
   void animationCallback(AnimationStatus status) {
     widget.onAnimationStatus?.call(status);
+  }
+
+  void runAutoAnimating() {
+    final controller = widget.controller ?? _innerController;
+    final repeatCount = controller.repeatCount;
+    if (repeatCount != -1) {
+      controller.repeat();
+    } else {
+      controller.forward();
+    }
+  }
+
+  void runManualAnimating() {
+    final controller = widget.controller ?? _innerController;
+    final value = widget.value;
+    if (value != null) {
+      if (value) {
+        controller.forward();
+      } else {
+        controller.reverse();
+      }
+    }
   }
 }

@@ -1,14 +1,18 @@
 part of lf_animated;
 
 class LFBouncingAnimated extends StatefulWidget {
-  final LFBouncingAnimationController controller;
   final Widget child;
+  final LFBouncingAnimationController? controller;
+  final bool? value;
+  final Duration? duration;
   final ValueChanged<AnimationStatus>? onAnimationStatus;
 
   const LFBouncingAnimated({
     Key? key,
-    required this.controller,
     required this.child,
+    this.controller,
+    this.value,
+    this.duration,
     this.onAnimationStatus,
   }) : super(key: key);
 
@@ -18,16 +22,27 @@ class LFBouncingAnimated extends StatefulWidget {
 
 class _LFBouncingAnimatedState extends State<LFBouncingAnimated>
     with SingleTickerProviderStateMixin {
+  late AnimationController? _animationController;
   late Animation<double> _animation;
+  late LFBouncingAnimationController _innerController;
 
   @override
   void initState() {
     super.initState();
 
-    final controller = widget.controller;
+    _innerController = widget.controller ??
+        LFBouncingAnimationController(
+          autoAnimation: false,
+          duration: widget.duration ?? const Duration(milliseconds: 250),
+        );
+    final controller = _innerController;
     final repeatCount = controller.repeatCount;
     final autoAnimation = controller.autoAnimation;
-    final animationController = controller.initAnimationController(vsync: this);
+    final duration = controller.duration;
+    final animationController = controller.initAnimationController(
+      AnimationController(vsync: this, duration: duration),
+    );
+    _animationController = animationController;
 
     controller.addListener(() async {
       final status = controller.status;
@@ -44,18 +59,15 @@ class _LFBouncingAnimatedState extends State<LFBouncingAnimated>
     });
 
     _animation = Tween(begin: 1.0, end: 1.2).animate(
-      CurvedAnimation(parent: animationController, curve: Curves.elasticIn),
+      CurvedAnimation(parent: animationController!, curve: Curves.elasticIn),
     );
     _animation.addStatusListener(animationCallback);
 
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       if (autoAnimation) {
-        if (repeatCount != -1) {
-          controller.repeat();
-        } else {
-          await controller.forward();
-          await controller.reverse();
-        }
+        runAutoAnimating();
+      } else {
+        runManualAnimating();
       }
     });
   }
@@ -63,13 +75,18 @@ class _LFBouncingAnimatedState extends State<LFBouncingAnimated>
   @override
   void dispose() {
     _animation.removeStatusListener(animationCallback);
-    // _animationController.dispose();
+    _animationController?.stop();
+    _animationController?.dispose();
+    if (widget.controller == null) _innerController.dispose();
 
     super.dispose();
   }
 
   @override
   void didUpdateWidget(covariant LFBouncingAnimated oldWidget) {
+    if (oldWidget.value != widget.value) {
+      runManualAnimating();
+    }
     super.didUpdateWidget(oldWidget);
   }
 
@@ -83,5 +100,30 @@ class _LFBouncingAnimatedState extends State<LFBouncingAnimated>
 
   void animationCallback(AnimationStatus status) {
     widget.onAnimationStatus?.call(status);
+  }
+
+  void runAutoAnimating() async {
+    final controller = widget.controller ?? _innerController;
+    final repeatCount = controller.repeatCount;
+    if (repeatCount != -1) {
+      controller.repeat();
+    } else {
+      await controller.forward();
+      await controller.reverse();
+    }
+  }
+
+  void runManualAnimating() async {
+    final controller = widget.controller ?? _innerController;
+    final value = widget.value;
+    if (value != null) {
+      if (value) {
+        await controller.forward();
+        await controller.reverse();
+      } else {
+        await controller.reverse();
+        await controller.forward();
+      }
+    }
   }
 }

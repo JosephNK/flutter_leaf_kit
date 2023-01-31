@@ -1,14 +1,18 @@
 part of lf_animated;
 
 class LFFadeAnimated extends StatefulWidget {
-  final LFFadeAnimationController controller;
   final Widget child;
+  final LFFadeAnimationController? controller;
+  final bool? value;
+  final Duration? duration;
   final ValueChanged<AnimationStatus>? onAnimationStatus;
 
   const LFFadeAnimated({
     Key? key,
-    required this.controller,
     required this.child,
+    this.controller,
+    this.value,
+    this.duration,
     this.onAnimationStatus,
   }) : super(key: key);
 
@@ -18,17 +22,27 @@ class LFFadeAnimated extends StatefulWidget {
 
 class _LFFadeAnimatedState extends State<LFFadeAnimated>
     with SingleTickerProviderStateMixin {
+  late AnimationController? _animationController;
   late Animation<double> _animation;
+  late LFFadeAnimationController _innerController;
 
   @override
   void initState() {
     super.initState();
 
-    final controller = widget.controller;
-    final repeatCount = controller.repeatCount;
+    _innerController = widget.controller ??
+        LFFadeAnimationController(
+          autoAnimation: false,
+          duration: widget.duration ?? const Duration(milliseconds: 250),
+        );
+    final controller = _innerController;
     final autoAnimation = controller.autoAnimation;
     final isDisappear = controller.isDisappear;
-    final animationController = controller.initAnimationController(vsync: this);
+    final duration = controller.duration;
+    final animationController = controller.initAnimationController(
+      AnimationController(vsync: this, duration: duration),
+    );
+    _animationController = animationController;
 
     controller.addListener(() {
       final status = controller.status;
@@ -46,20 +60,18 @@ class _LFFadeAnimatedState extends State<LFFadeAnimated>
 
     if (!isDisappear) {
       _animation = Tween<double>(begin: 0.0, end: 1.0).animate(
-          CurvedAnimation(parent: animationController, curve: Curves.easeIn));
+          CurvedAnimation(parent: animationController!, curve: Curves.easeIn));
     } else {
       _animation = Tween<double>(begin: 1.0, end: 0.0).animate(
-          CurvedAnimation(parent: animationController, curve: Curves.easeOut));
+          CurvedAnimation(parent: animationController!, curve: Curves.easeOut));
     }
     _animation.addStatusListener(animationCallback);
 
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       if (autoAnimation) {
-        if (repeatCount != -1) {
-          controller.repeat();
-        } else {
-          controller.forward();
-        }
+        runAutoAnimating();
+      } else {
+        runManualAnimating();
       }
     });
   }
@@ -67,12 +79,18 @@ class _LFFadeAnimatedState extends State<LFFadeAnimated>
   @override
   void dispose() {
     _animation.removeStatusListener(animationCallback);
+    _animationController?.stop();
+    _animationController?.dispose();
+    if (widget.controller == null) _innerController.dispose();
 
     super.dispose();
   }
 
   @override
   void didUpdateWidget(covariant LFFadeAnimated oldWidget) {
+    if (oldWidget.value != widget.value) {
+      runManualAnimating();
+    }
     super.didUpdateWidget(oldWidget);
   }
 
@@ -85,7 +103,28 @@ class _LFFadeAnimatedState extends State<LFFadeAnimated>
   }
 
   void animationCallback(AnimationStatus status) {
-    // if (status == AnimationStatus.completed) print('completed');
     widget.onAnimationStatus?.call(status);
+  }
+
+  void runAutoAnimating() {
+    final controller = widget.controller ?? _innerController;
+    final repeatCount = controller.repeatCount;
+    if (repeatCount != -1) {
+      controller.repeat();
+    } else {
+      controller.forward();
+    }
+  }
+
+  void runManualAnimating() {
+    final controller = widget.controller ?? _innerController;
+    final value = widget.value;
+    if (value != null) {
+      if (value) {
+        controller.forward();
+      } else {
+        controller.reverse();
+      }
+    }
   }
 }

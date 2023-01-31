@@ -22,6 +22,8 @@ class _AnimationScreenState extends ScreenState<AnimationScreen> {
   late LFBouncingAnimationController _bouncingController;
   late LFScaleAnimationController _scaleController;
 
+  bool _expand = false;
+
   @override
   Color? get backgroundColor => Colors.white;
 
@@ -92,7 +94,25 @@ class _AnimationScreenState extends ScreenState<AnimationScreen> {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
+          ///
           const SizedBox(height: 10.0),
+          LFExpandAnimated(
+            value: _expand,
+            duration: const Duration(milliseconds: 550),
+            child: const Center(
+              child: Icon(Icons.access_alarm, size: 45.0),
+            ),
+          ),
+          const SizedBox(height: 10.0),
+          LFRoundedButton(
+            text: 'Expand (Value)',
+            onPressed: () async {
+              setState(() => _expand = !_expand);
+            },
+          ),
+
+          ///
+          const SizedBox(height: 30.0),
           LFScaleAnimated(
             controller: _scaleController,
             child: const Center(

@@ -3,6 +3,7 @@ part of lf_animated;
 enum LFAnimationStatus { forward, stop, reverse, repeat }
 
 class LFAnimationController extends ChangeNotifier {
+  // Note: dispose at the place of use
   AnimationController? animationController;
 
   final bool autoAnimation;
@@ -19,14 +20,9 @@ class LFAnimationController extends ChangeNotifier {
 
   TickerFuture _tickerFuture = TickerFuture.complete();
 
-  AnimationController initAnimationController({
-    required TickerProvider vsync,
-  }) {
-    animationController = AnimationController(
-      vsync: vsync,
-      duration: duration,
-    );
-    return animationController!;
+  AnimationController? initAnimationController(AnimationController controller) {
+    animationController = controller;
+    return animationController;
   }
 
   TickerFuture? forward() {
@@ -80,12 +76,6 @@ class LFAnimationController extends ChangeNotifier {
     final value = animationController.value;
     _tickerFuture = animationController.forward(from: value);
     return _tickerFuture;
-  }
-
-  @override
-  void dispose() {
-    animationController?.dispose();
-    super.dispose();
   }
 }
 
