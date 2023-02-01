@@ -1,7 +1,7 @@
 import 'package:leaf_common/leaf_common.dart';
 
-class LeafAppManager {
-  LeafAppManager();
+class LFAppManager {
+  LFAppManager();
 
   String? get expiredDate => null; // '2021-06-04'
 

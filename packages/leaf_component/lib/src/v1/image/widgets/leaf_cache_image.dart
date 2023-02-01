@@ -33,7 +33,7 @@ class LeafCacheImage extends StatelessWidget {
 
   // ImageBuilder with Direct Get Header
   Widget _buildImageContainer(BuildContext context) {
-    final header = CookieStoreManager.shared.header;
+    final header = LFCookieStoreManager.shared.header;
     return _buildWrapNetworkImage(
       context,
       url: url,
@@ -94,7 +94,7 @@ class LeafCacheImage extends StatelessWidget {
     required BoxFit fit,
     required Map<String, String>? httpHeaders,
   }) {
-    DeviceManager.shared.checkMemory();
+    LFDeviceManager.shared.checkMemory();
 
     return CachedNetworkImage(
       key: ValueKey(urlString),

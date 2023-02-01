@@ -1,13 +1,20 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
-class LFSharedPreferences {
-  static Future<SharedPreferences> getInstance() async {
+class LFSharedPreferencesManager {
+  static final LFSharedPreferencesManager _instance =
+      LFSharedPreferencesManager._internal();
+
+  static LFSharedPreferencesManager get shared => _instance;
+
+  LFSharedPreferencesManager._internal();
+
+  Future<SharedPreferences> getInstance() async {
     return await SharedPreferences.getInstance();
   }
 
   /// Set
   ///
-  static Future<bool> setString(
+  Future<bool> setString(
     String key,
     String value,
   ) async {
@@ -15,7 +22,7 @@ class LFSharedPreferences {
     return await prefs.setString(key, value);
   }
 
-  static Future<bool> setBool(
+  Future<bool> setBool(
     String key,
     bool value,
   ) async {
@@ -23,7 +30,7 @@ class LFSharedPreferences {
     return await prefs.setBool(key, value);
   }
 
-  static Future<bool> setInt(
+  Future<bool> setInt(
     String key,
     int value,
   ) async {
@@ -31,7 +38,7 @@ class LFSharedPreferences {
     return await prefs.setInt(key, value);
   }
 
-  static Future<bool> setDouble(
+  Future<bool> setDouble(
     String key,
     double value,
   ) async {
@@ -41,27 +48,27 @@ class LFSharedPreferences {
 
   /// Get
   ///
-  static Future<String?> getString(String key) async {
+  Future<String?> getString(String key) async {
     final prefs = await getInstance();
     return prefs.getString(key);
   }
 
-  static Future<bool?> getBool(String key) async {
+  Future<bool?> getBool(String key) async {
     final prefs = await getInstance();
     return prefs.getBool(key);
   }
 
-  static Future<int?> getInt(String key) async {
+  Future<int?> getInt(String key) async {
     final prefs = await getInstance();
     return prefs.getInt(key);
   }
 
-  static Future<double?> getDouble(String key) async {
+  Future<double?> getDouble(String key) async {
     final prefs = await getInstance();
     return prefs.getDouble(key);
   }
 
-  static Future<bool> remove(String key) async {
+  Future<bool> remove(String key) async {
     final prefs = await getInstance();
     return prefs.remove(key);
   }

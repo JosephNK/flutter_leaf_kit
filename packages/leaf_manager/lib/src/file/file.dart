@@ -5,12 +5,12 @@ import 'dart:typed_data';
 import 'package:leaf_common/leaf_common.dart';
 import 'package:path_provider/path_provider.dart';
 
-class FileManager {
-  static final FileManager _instance = FileManager._internal();
+class LFFileManager {
+  static final LFFileManager _instance = LFFileManager._internal();
 
-  static FileManager get shared => _instance;
+  static LFFileManager get shared => _instance;
 
-  FileManager._internal();
+  LFFileManager._internal();
 
   /// File
   ///

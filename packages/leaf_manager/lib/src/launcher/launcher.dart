@@ -2,12 +2,12 @@ import 'dart:io';
 
 import 'package:url_launcher/url_launcher_string.dart';
 
-class LauncherManager {
-  static final LauncherManager _instance = LauncherManager._internal();
+class LFLauncherManager {
+  static final LFLauncherManager _instance = LFLauncherManager._internal();
 
-  static LauncherManager get shared => _instance;
+  static LFLauncherManager get shared => _instance;
 
-  LauncherManager._internal();
+  LFLauncherManager._internal();
 
   Future<void> openLink(String link) async {
     if (await canLaunchUrlString(link)) {

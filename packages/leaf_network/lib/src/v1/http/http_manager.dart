@@ -81,7 +81,7 @@ class HTTPManager extends http.BaseClient {
         }
       }
 
-      await CookieStoreManager.shared.setCookieByResponse(response);
+      await LFCookieStoreManager.shared.setCookieByResponse(response);
 
       return response;
     } catch (e) {
@@ -119,7 +119,7 @@ class HTTPManager extends http.BaseClient {
         }
       }
 
-      await CookieStoreManager.shared.setCookieByResponse(response);
+      await LFCookieStoreManager.shared.setCookieByResponse(response);
 
       return response;
     } catch (e) {
@@ -161,7 +161,7 @@ class HTTPManager extends http.BaseClient {
         }
       }
 
-      await CookieStoreManager.shared.setCookieByResponse(response);
+      await LFCookieStoreManager.shared.setCookieByResponse(response);
 
       return response;
     } catch (e) {
@@ -203,7 +203,7 @@ class HTTPManager extends http.BaseClient {
         }
       }
 
-      await CookieStoreManager.shared.setCookieByResponse(response);
+      await LFCookieStoreManager.shared.setCookieByResponse(response);
 
       return response;
     } catch (e) {
@@ -244,7 +244,7 @@ class HTTPManager extends http.BaseClient {
         }
       }
 
-      await CookieStoreManager.shared.setCookieByResponse(response);
+      await LFCookieStoreManager.shared.setCookieByResponse(response);
 
       return response;
     } catch (e) {
@@ -286,7 +286,7 @@ class HTTPManager extends http.BaseClient {
         }
       }
 
-      await CookieStoreManager.shared.setCookieByResponse(response);
+      await LFCookieStoreManager.shared.setCookieByResponse(response);
 
       return response;
     } catch (e) {
@@ -356,7 +356,7 @@ class HTTPManager extends http.BaseClient {
         }
       }
 
-      await CookieStoreManager.shared.setCookieByResponse(response);
+      await LFCookieStoreManager.shared.setCookieByResponse(response);
 
       return response;
     } catch (e) {
@@ -395,8 +395,9 @@ class HTTPManager extends http.BaseClient {
       }
 
       var bytes = response.bodyBytes;
-      var dir = await FileManager.shared.getApplicationDocumentsDirectoryPath();
-      var file = await FileManager.shared
+      var dir =
+          await LFFileManager.shared.getApplicationDocumentsDirectoryPath();
+      var file = await LFFileManager.shared
           .writeLocalByteFile(dir, fileName: fileName, bytes: bytes);
       return file;
     } catch (e) {
@@ -514,7 +515,7 @@ extension HTTPManagerHeaders on HTTPManager {
     required Uri uri,
     Map<String, String>? headers,
   }) async {
-    final cookieHeaders = await CookieStoreManager.shared.getHeader(uri);
+    final cookieHeaders = await LFCookieStoreManager.shared.getHeader(uri);
     final defaultHeaders = await _defaultHeaders();
     final userAgentHeaders = await _userAgentHeaders();
 

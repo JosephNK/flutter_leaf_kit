@@ -1,11 +1,17 @@
 import 'package:flutter_app_badger/flutter_app_badger.dart';
 
-class LeafAppBadger {
-  static Future<bool> isAppBadgeSupported() async {
+class LFAppBadgerManager {
+  static final LFAppBadgerManager _instance = LFAppBadgerManager._internal();
+
+  static LFAppBadgerManager get shared => _instance;
+
+  LFAppBadgerManager._internal();
+
+  Future<bool> isAppBadgeSupported() async {
     return await FlutterAppBadger.isAppBadgeSupported();
   }
 
-  static Future<void> removeBadge() async {
+  Future<void> removeBadge() async {
     final isAppBadgeSupported = await FlutterAppBadger.isAppBadgeSupported();
     if (isAppBadgeSupported) {
       FlutterAppBadger.removeBadge();

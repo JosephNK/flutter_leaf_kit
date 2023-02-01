@@ -5,12 +5,12 @@ import 'package:flutter/material.dart';
 import 'package:leaf_common/leaf_common.dart';
 import 'package:permission_handler/permission_handler.dart' as ph;
 
-class DeviceManager {
-  static final DeviceManager _instance = DeviceManager._internal();
+class LFDeviceManager {
+  static final LFDeviceManager _instance = LFDeviceManager._internal();
 
-  static DeviceManager get shared => _instance;
+  static LFDeviceManager get shared => _instance;
 
-  DeviceManager._internal();
+  LFDeviceManager._internal();
 
   // ignore: prefer_const_constructors
   EdgeInsets _widowPadding = EdgeInsets.all(0.0);

@@ -9,6 +9,7 @@ class LeafModal {
     if (delay != null) {
       await Future.delayed(delay);
     }
+    // ignore: use_build_context_synchronously
     showGeneralDialog(
       context: context,
       barrierDismissible: false,

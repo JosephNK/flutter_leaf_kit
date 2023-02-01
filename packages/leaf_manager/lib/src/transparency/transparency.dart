@@ -5,8 +5,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:leaf_common/leaf_common.dart';
 
-class LeafTransparency {
-  static Future<void> requestAppTracking(BuildContext context) async {
+class LFTransparencyManager {
+  static final LFTransparencyManager _instance =
+      LFTransparencyManager._internal();
+
+  static LFTransparencyManager get shared => _instance;
+
+  LFTransparencyManager._internal();
+
+  Future<void> requestAppTracking(BuildContext context) async {
     if (Platform.isIOS) {
       try {
         final TrackingStatus status =

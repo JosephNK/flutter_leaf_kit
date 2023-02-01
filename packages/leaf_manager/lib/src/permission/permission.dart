@@ -2,10 +2,16 @@ import 'package:flutter/foundation.dart';
 import 'package:leaf_common/leaf_common.dart';
 import 'package:permission_handler/permission_handler.dart';
 
-class LFPermission {
+class LFPermissionManager {
+  static final LFPermissionManager _instance = LFPermissionManager._internal();
+
+  static LFPermissionManager get shared => _instance;
+
+  LFPermissionManager._internal();
+
   // isGranted 안전하게 퍼미션 체크 후
   // 퍼미션이 없을 경우, request 요청!
-  static Future<bool> requestSafePermissionStatus({
+  Future<bool> requestSafePermissionStatus({
     required Permission permission,
     required ValueChanged<PermissionStatus> onNotPermission,
   }) async {
@@ -23,7 +29,7 @@ class LFPermission {
 
   // Permission request 할 때
   // didChangeAppLifecycleState 함수 called!!
-  static Future<bool> requestPermissionStatus({
+  Future<bool> requestPermissionStatus({
     required Permission permission,
     required ValueChanged<PermissionStatus> onNotPermission,
   }) async {
@@ -42,7 +48,7 @@ class LFPermission {
 
   // 상태만 체크하는 함수이기에
   // didChangeAppLifecycleState 함수 호출 하지 않음.
-  static Future<bool> isGrantedPermission({
+  Future<bool> isGrantedPermission({
     required Permission permission,
   }) async {
     var isGranted = await permission.isGranted;

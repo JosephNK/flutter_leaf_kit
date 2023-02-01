@@ -99,7 +99,7 @@ class LFCacheImage extends StatelessWidget {
     required BoxFit fit,
     required Map<String, String>? httpHeaders,
   }) {
-    DeviceManager.shared.checkMemory();
+    LFDeviceManager.shared.checkMemory();
 
     return CachedNetworkImage(
       key: ValueKey(urlString),
