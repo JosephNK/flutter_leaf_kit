@@ -134,9 +134,7 @@ class _LFCalendarViewState extends State<LFCalendarView> {
         holidayColor: holidayColor,
         childAspectRatio: childAspectRatio,
         onSelected: (dateTime) {
-          context
-              .read<LFCalendarProvider>()
-              .toggle(dateTime, multiple: false);
+          context.read<LFCalendarProvider>().toggle(dateTime, multiple: false);
         },
         onChangeSized: (size) {
           setState(() {
@@ -245,9 +243,9 @@ class _LFCalendarViewState extends State<LFCalendarView> {
                 height: _pageHeight,
                 child: Consumer<LFCalendarProvider>(
                   builder: (context, provider, child) {
-                    final currentDateTime = provider.currentDateTime;
-                    final selectedDateTimes =
-                        provider.selectedDateTimes.toList();
+                    // final currentDateTime = provider.currentDateTime;
+                    // final selectedDateTimes =
+                    //     provider.selectedDateTimes.toList();
 
                     return PageView.builder(
                       physics: physics,

@@ -53,7 +53,7 @@ class DeviceManager {
     var deviceName = '';
     if (Platform.isAndroid) {
       final androidInfo = await deviceInfo.androidInfo;
-      deviceName = androidInfo.model ?? '';
+      deviceName = androidInfo.model;
     }
     if (Platform.isIOS) {
       final iosInfo = await deviceInfo.iosInfo;
@@ -70,7 +70,7 @@ class DeviceManager {
       isPhysicalDevice = iosInfo.isPhysicalDevice;
     } else {
       final androidInfo = await deviceInfo.androidInfo;
-      isPhysicalDevice = androidInfo.isPhysicalDevice ?? false;
+      isPhysicalDevice = androidInfo.isPhysicalDevice;
     }
     return isPhysicalDevice;
   }

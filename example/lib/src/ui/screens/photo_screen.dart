@@ -57,7 +57,7 @@ class _PhotoScreenState extends ScreenState<PhotoScreen> {
               });
             },
             onLimitError: (e, limit) {
-              print('Limit error: $e, $limit');
+              Logging.d('Limit error: $e, $limit');
               LFAlertDialog.show(context, message: e.toString());
             },
           ),

@@ -94,6 +94,7 @@ class _LFListViewState<T> extends State<LFListView<T>>
   }
 
   @override
+  // ignore: unnecessary_overrides
   void scrollToTop(
     BuildContext context, {
     bool animated = false,
@@ -113,7 +114,7 @@ class _LFListViewState<T> extends State<LFListView<T>>
   Widget build(BuildContext context) {
     return NotificationListener<ScrollNotification>(
       onNotification: (scrollNotification) {
-        var scrollController = PrimaryScrollController.of(context)!;
+        var scrollController = PrimaryScrollController.of(context);
 
         widget.controller?.scrollController = scrollController;
 

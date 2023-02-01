@@ -96,6 +96,7 @@ class _LFGridViewState<T> extends State<LFGridView<T>>
   }
 
   @override
+  // ignore: unnecessary_overrides
   void scrollToTop(
     BuildContext context, {
     bool animated = false,
@@ -115,7 +116,7 @@ class _LFGridViewState<T> extends State<LFGridView<T>>
   Widget build(BuildContext context) {
     return NotificationListener<ScrollNotification>(
       onNotification: (scrollNotification) {
-        var scrollController = PrimaryScrollController.of(context)!;
+        var scrollController = PrimaryScrollController.of(context);
 
         final depth = scrollNotification.depth;
 

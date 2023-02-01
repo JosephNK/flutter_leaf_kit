@@ -30,11 +30,6 @@ abstract class LeafBottomAppBarScreenState<
   }
 
   @override
-  void dispose() {
-    super.dispose();
-  }
-
-  @override
   void didUpdateWidget(covariant T oldWidget) {
     // Once Activation
     if (!isActivation) {

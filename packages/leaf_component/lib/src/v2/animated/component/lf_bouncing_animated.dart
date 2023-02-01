@@ -36,7 +36,6 @@ class _LFBouncingAnimatedState extends State<LFBouncingAnimated>
           duration: widget.duration ?? const Duration(milliseconds: 250),
         );
     final controller = _innerController;
-    final repeatCount = controller.repeatCount;
     final autoAnimation = controller.autoAnimation;
     final duration = controller.duration;
     final animationController = controller.initAnimationController(

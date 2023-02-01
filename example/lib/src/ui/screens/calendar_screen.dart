@@ -59,7 +59,7 @@ class _CalendarScreenState extends ScreenState<CalendarScreen> {
                             borderRadius: BorderRadius.circular(3.0),
                             color: const Color.fromRGBO(234, 225, 255, 1),
                           ),
-                          child: LFText(
+                          child: const LFText(
                             'Hello',
                             style: TextStyle(fontSize: 10),
                             textAlign: TextAlign.center,
@@ -74,7 +74,7 @@ class _CalendarScreenState extends ScreenState<CalendarScreen> {
                             borderRadius: BorderRadius.circular(3.0),
                             color: const Color.fromRGBO(241, 241, 241, 1),
                           ),
-                          child: LFText(
+                          child: const LFText(
                             'World',
                             style: TextStyle(fontSize: 10),
                             textAlign: TextAlign.center,
@@ -87,10 +87,10 @@ class _CalendarScreenState extends ScreenState<CalendarScreen> {
               );
             },
             onMonthChanged: (startDateTime, endDateTime) {
-              print('onMonthChanged: $startDateTime, $endDateTime');
+              Logging.d('onMonthChanged: $startDateTime, $endDateTime');
             },
             onDateSelected: (dateTimes) {
-              print('onDateSelected: $dateTimes');
+              Logging.d('onDateSelected: $dateTimes');
             },
           ),
         ),

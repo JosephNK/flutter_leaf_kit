@@ -43,7 +43,7 @@ mixin LeafScrollViewMixin<T extends StatefulWidget> on State<T>
   }
 
   void scrollToTop(BuildContext context, {bool animated = false}) async {
-    var scrollController = PrimaryScrollController.of(context)!;
+    var scrollController = PrimaryScrollController.of(context);
 
     if (!scrollController.hasClients) {
       return;

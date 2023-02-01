@@ -75,6 +75,7 @@ class _LFScrollViewState extends State<LFScrollView> with LFScrollControlMixin {
   void loadMore() {}
 
   @override
+  // ignore: unnecessary_overrides
   void scrollToTop(
     BuildContext context, {
     bool animated = false,
@@ -94,7 +95,7 @@ class _LFScrollViewState extends State<LFScrollView> with LFScrollControlMixin {
   Widget build(BuildContext context) {
     return NotificationListener<ScrollNotification>(
       onNotification: (scrollNotification) {
-        var scrollController = PrimaryScrollController.of(context)!;
+        var scrollController = PrimaryScrollController.of(context);
 
         final depth = scrollNotification.depth;
 

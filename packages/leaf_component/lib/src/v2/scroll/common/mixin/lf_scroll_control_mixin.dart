@@ -48,7 +48,7 @@ mixin LFScrollControlMixin<T extends StatefulWidget> on State<T>
     Duration animationDuration = const Duration(milliseconds: 300),
   }) {
     if (mounted) {
-      var scrollController = PrimaryScrollController.of(context)!;
+      var scrollController = PrimaryScrollController.of(context);
 
       if (!scrollController.hasClients) {
         return;
@@ -74,7 +74,7 @@ mixin LFScrollControlMixin<T extends StatefulWidget> on State<T>
     Duration animationDuration = const Duration(milliseconds: 300),
   }) {
     if (mounted) {
-      var scrollController = PrimaryScrollController.of(context)!;
+      var scrollController = PrimaryScrollController.of(context);
 
       if (!scrollController.hasClients) {
         return;

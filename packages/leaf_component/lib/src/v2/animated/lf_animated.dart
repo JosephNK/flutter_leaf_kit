@@ -3,8 +3,6 @@ library lf_animated;
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/physics.dart';
-import 'package:leaf_common/leaf_common.dart';
 
 part 'component/lf_bouncing_animated.dart';
 part 'component/lf_expand_animated.dart';

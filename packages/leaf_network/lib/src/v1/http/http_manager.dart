@@ -395,9 +395,9 @@ class HTTPManager extends http.BaseClient {
       }
 
       var bytes = response.bodyBytes;
-      var dir = await LeafFile.getApplicationDocumentsDirectoryPath();
-      var file = await LeafFile.writeLocalByteFile(dir,
-          fileName: fileName, bytes: bytes);
+      var dir = await FileManager.shared.getApplicationDocumentsDirectoryPath();
+      var file = await FileManager.shared
+          .writeLocalByteFile(dir, fileName: fileName, bytes: bytes);
       return file;
     } catch (e) {
       rethrow;

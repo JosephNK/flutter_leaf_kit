@@ -12,8 +12,6 @@ export 'avatar/lf_avatar.dart';
 export 'badge/lf_badge.dart';
 export 'bottomsheet/lf_bottom_sheet.dart';
 export 'button/lf_button.dart';
-export 'button/lf_button.dart';
-export 'button/lf_button.dart';
 export 'calendar/lf_calendar.dart';
 export 'checkbox/lf_checkbox.dart';
 export 'chip/lf_chip.dart';

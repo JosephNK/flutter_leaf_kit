@@ -55,6 +55,7 @@ class _LeafScrollViewState extends State<LeafScrollView>
   void loadMore() {}
 
   @override
+  // ignore: unnecessary_overrides
   void scrollToTop(BuildContext context, {bool animated = false}) {
     super.scrollToTop(context, animated: animated);
   }
@@ -69,7 +70,7 @@ class _LeafScrollViewState extends State<LeafScrollView>
   Widget build(BuildContext context) {
     return NotificationListener<ScrollNotification>(
       onNotification: (scrollNotification) {
-        var scrollController = PrimaryScrollController.of(context)!;
+        var scrollController = PrimaryScrollController.of(context);
 
         final depth = scrollNotification.depth;
 

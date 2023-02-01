@@ -5,11 +5,17 @@ import 'dart:typed_data';
 import 'package:leaf_common/leaf_common.dart';
 import 'package:path_provider/path_provider.dart';
 
-class LeafFile {
+class FileManager {
+  static final FileManager _instance = FileManager._internal();
+
+  static FileManager get shared => _instance;
+
+  FileManager._internal();
+
   /// File
   ///
 
-  static Future<bool> createLocalFile(
+  Future<bool> createLocalFile(
     String path, {
     required String fileName,
     dynamic content,
@@ -28,7 +34,7 @@ class LeafFile {
     }
   }
 
-  static Future<File> readLocalFileWithName(
+  Future<File> readLocalFileWithName(
     String path, {
     required String fileName,
   }) async {
@@ -36,18 +42,18 @@ class LeafFile {
     return File('$path/$fileName');
   }
 
-  static Future<File> readLocalFilePath(String path) async {
+  Future<File> readLocalFilePath(String path) async {
     Logging.d('readLocalFilePath: $path');
     return File(path);
   }
 
-  static Future<Uint8List> readLocalByteFilePath(String path) async {
+  Future<Uint8List> readLocalByteFilePath(String path) async {
     final file = await readLocalFilePath(path);
     final bytes = await file.readAsBytes();
     return bytes;
   }
 
-  static Future<void> writeLocalFile(
+  Future<void> writeLocalFile(
     String path, {
     required String fileName,
     dynamic content,
@@ -56,7 +62,7 @@ class LeafFile {
     file.writeAsStringSync(jsonEncode(content), flush: true);
   }
 
-  static Future<File> writeLocalByteFile(
+  Future<File> writeLocalByteFile(
     String path, {
     required String fileName,
     required Uint8List bytes,
@@ -66,7 +72,7 @@ class LeafFile {
     return file;
   }
 
-  static Future<void> writeLocalAssetFileCopy(
+  Future<void> writeLocalAssetFileCopy(
     String path, {
     required String fileName,
     required ByteBuffer buffer,
@@ -78,7 +84,7 @@ class LeafFile {
         flush: true);
   }
 
-  static Future<bool> deleteLocalFilePathWithName(
+  Future<bool> deleteLocalFilePathWithName(
     String path, {
     required String fileName,
   }) async {
@@ -93,7 +99,7 @@ class LeafFile {
     }
   }
 
-  static Future<bool> deleteLocalFilePath(String path) async {
+  Future<bool> deleteLocalFilePath(String path) async {
     try {
       final file = File(path);
       file.deleteSync(recursive: true);
@@ -105,7 +111,7 @@ class LeafFile {
     }
   }
 
-  static Future<dynamic> readAsJson(File file) async {
+  Future<dynamic> readAsJson(File file) async {
     try {
       return jsonDecode(file.readAsStringSync());
     } catch (e) {
@@ -117,7 +123,7 @@ class LeafFile {
   /// Directory
   ///
 
-  static Future<void> deleteTemporaryDir() async {
+  Future<void> deleteTemporaryDir() async {
     final cacheDir = await getTemporaryDirectory();
     if (cacheDir.existsSync()) {
       cacheDir.deleteSync(recursive: true);
@@ -129,21 +135,21 @@ class LeafFile {
     // }
   }
 
-  static Future<void> deleteDocumentDir() async {
+  Future<void> deleteDocumentDir() async {
     final appDir = await getApplicationDocumentsDirectory();
     if (appDir.existsSync()) {
       appDir.deleteSync(recursive: true);
     }
   }
 
-  static Future<void> deleteSupportDir() async {
+  Future<void> deleteSupportDir() async {
     final appDir = await getApplicationSupportDirectory();
     if (appDir.existsSync()) {
       appDir.deleteSync(recursive: true);
     }
   }
 
-  static Future<void> deleteExternalStoragDir() async {
+  Future<void> deleteExternalStoragDir() async {
     final appDir = await getExternalStorageDirectories();
     if (appDir != null) {
       for (var dir in appDir) {
@@ -154,12 +160,12 @@ class LeafFile {
     }
   }
 
-  static Future<String> getTemporaryDirectoryPath() async {
+  Future<String> getTemporaryDirectoryPath() async {
     final directory = await getTemporaryDirectory();
     return directory.path;
   }
 
-  static Future<String> getApplicationDocumentsDirectoryPath() async {
+  Future<String> getApplicationDocumentsDirectoryPath() async {
     final directory = await getApplicationDocumentsDirectory();
     return directory.path;
   }
