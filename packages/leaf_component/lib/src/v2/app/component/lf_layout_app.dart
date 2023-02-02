@@ -2,12 +2,14 @@ part of lf_app;
 
 class LFLayoutApp extends StatefulWidget {
   final LFAppComponentConfigure? configure;
+  final String buildName;
   final Color? backgroundColor;
   final Widget child;
 
   const LFLayoutApp({
     Key? key,
     required this.child,
+    this.buildName = '',
     this.backgroundColor,
     this.configure,
   }) : super(key: key);
@@ -23,11 +25,17 @@ class _LFLayoutAppState extends State<LFLayoutApp> {
 
     final configure = widget.configure;
     LFComponentConfigure.shared.setup(configure);
+
+    // WidgetsBinding.instance.addPostFrameCallback((_) async {
+    //
+    // });
   }
 
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(
+    final buildName = widget.buildName;
+
+    final child = LayoutBuilder(
       builder: (_, constraints) {
         return OrientationBuilder(builder: (_, orientation) {
           if (constraints.maxWidth != 0) {
@@ -41,5 +49,15 @@ class _LFLayoutAppState extends State<LFLayoutApp> {
         });
       },
     );
+
+    if (isNotEmpty(buildName)) {
+      return Banner(
+        message: buildName,
+        location: BannerLocation.topStart,
+        child: child,
+      );
+    }
+
+    return child;
   }
 }
