@@ -3,8 +3,6 @@ part of leaf_navigation;
 enum LFNavigatorViewParamState { none, refresh, update, leave }
 
 class LFNavigation {
-  static GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
-
   static void presentModal(
     BuildContext context, {
     required GlobalKey<NavigatorState> navigatorKey,
