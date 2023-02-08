@@ -1,6 +1,6 @@
 part of leaf_navigation;
 
-enum LFNavigatorViewParamState { none, refresh, update, leave }
+enum LFNavigatorParamState { flow }
 
 class LFNavigation {
   static void presentModal(
@@ -90,8 +90,15 @@ class LFNavigation {
     });
   }
 
-  static void pop(BuildContext context, {dynamic param}) {
-    Navigator.pop(context, param);
+  static void popUntilDepth(BuildContext context, {required int depth}) {
+    int count = 0;
+    Navigator.of(context).popUntil((_) => count++ >= depth);
+  }
+
+  static NavigatorState pop(BuildContext context, {dynamic param}) {
+    NavigatorState navigator = Navigator.of(context);
+    navigator.pop(param);
+    return navigator;
   }
 
   static Future<bool> maybePop(BuildContext context, {dynamic param}) {
