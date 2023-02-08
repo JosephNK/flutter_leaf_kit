@@ -5,8 +5,4 @@ export 'package:quiver/core.dart';
 export 'package:quiver/strings.dart';
 export 'package:string_validator/string_validator.dart';
 
-/// V1
-export 'src/v1/leaf_common.dart';
-
-/// V2
-export 'src/v2/leaf_common.dart';
+export 'src/lf_common.dart';

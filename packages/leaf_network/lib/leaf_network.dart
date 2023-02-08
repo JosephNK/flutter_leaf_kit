@@ -1,4 +1,3 @@
-library flutter_leaf_kit_network;
+library leaf_network;
 
-export 'src/v1/leaf_network.dart';
-export 'src/v2/lf_network.dart';
+export 'src/lf_network.dart';
