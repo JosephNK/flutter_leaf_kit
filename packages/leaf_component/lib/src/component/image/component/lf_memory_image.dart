@@ -1,7 +1,7 @@
 part of lf_image;
 
-class LFAssetImage extends StatelessWidget {
-  final String path;
+class LFMemoryImage extends StatelessWidget {
+  final Uint8List? bytes;
   final Color? color;
   final double width;
   final double height;
@@ -9,9 +9,9 @@ class LFAssetImage extends StatelessWidget {
   final Widget? placeholderWidget;
   final Widget? errorWidget;
 
-  const LFAssetImage({
+  const LFMemoryImage({
     Key? key,
-    required this.path,
+    required this.bytes,
     this.color,
     this.width = 45.0,
     this.height = 45.0,
@@ -22,12 +22,9 @@ class LFAssetImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final path = this.path;
-    final width = this.width;
-    final height = this.height;
-    final fit = this.fit;
+    final bytes = this.bytes;
 
-    if (isEmpty(path)) {
+    if (bytes == null) {
       return SizedBox(
         width: width,
         height: height,
@@ -35,8 +32,8 @@ class LFAssetImage extends StatelessWidget {
       );
     }
 
-    return Image(
-      image: AssetImage(path),
+    return Image.memory(
+      bytes,
       fit: fit,
       width: width,
       height: height,

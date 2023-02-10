@@ -13,6 +13,7 @@ class LFCacheImage extends StatelessWidget {
   final Color? shimmerBaseColor;
   final Color? shimmerHighlightColor;
   final Map<String, String>? header;
+  final Widget? placeholderWidget;
   final Widget? errorWidget;
 
   const LFCacheImage({
@@ -26,6 +27,7 @@ class LFCacheImage extends StatelessWidget {
     this.shimmerBaseColor,
     this.shimmerHighlightColor,
     this.header,
+    this.placeholderWidget,
     this.errorWidget,
   }) : super(key: key);
 
@@ -67,10 +69,10 @@ class LFCacheImage extends StatelessWidget {
     if (isEmpty(url)) {
       if (isClipper) {
         return getClipperWrapperWidget(
-          child: _buildErrorImage(context),
+          child: _buildPlaceholderImage(context),
         );
       }
-      return _buildErrorImage(context);
+      return _buildPlaceholderImage(context);
     }
 
     final networkWidget = _buildNetworkImage(
@@ -126,6 +128,11 @@ class LFCacheImage extends StatelessWidget {
   // Placeholder Loader Image
   Widget _buildPlaceholderLoaderImage(BuildContext context) {
     return LFSkeleton(width: width, height: height);
+  }
+
+  // Placeholder Image
+  Widget _buildPlaceholderImage(BuildContext context) {
+    return placeholderWidget ?? Container(color: Colors.grey);
   }
 
   // Error Image

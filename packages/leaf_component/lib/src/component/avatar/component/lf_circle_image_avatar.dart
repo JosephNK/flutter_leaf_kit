@@ -7,6 +7,8 @@ class LFCircleImageAvatar extends StatelessWidget {
   final double borderWidth;
   final Map<String, String>? header;
   final BoxFit fit;
+  final Widget? placeholderWidget;
+  final Widget? errorWidget;
 
   const LFCircleImageAvatar({
     Key? key,
@@ -16,6 +18,8 @@ class LFCircleImageAvatar extends StatelessWidget {
     this.borderWidth = 0.0,
     this.header,
     this.fit = BoxFit.cover,
+    this.placeholderWidget,
+    this.errorWidget,
   }) : super(key: key);
 
   @override
@@ -40,23 +44,36 @@ class LFCircleImageAvatar extends StatelessWidget {
     final image = this.image;
 
     if (image is String) {
-      if (isEmpty(image)) {
-        return Container();
-      } else {
-        if (isURL(image)) {
-          return LFCacheImage(
-            header: header,
-            url: image,
-            width: size,
-            height: size,
-            fit: fit,
-          );
-        } else {
-          return Image(image: AssetImage(image), fit: fit);
-        }
+      if (!isURL(image)) {
+        return LFAssetImage(
+          path: image,
+          width: size,
+          height: size,
+          fit: fit,
+          placeholderWidget: placeholderWidget,
+          errorWidget: errorWidget,
+        );
       }
-    } else if (image is Uint8List) {
-      return Image.memory(image, fit: fit);
+      return LFCacheImage(
+        header: header,
+        url: image,
+        width: size,
+        height: size,
+        fit: fit,
+        placeholderWidget: placeholderWidget,
+        errorWidget: errorWidget,
+      );
+    }
+
+    if (image is Uint8List) {
+      return LFMemoryImage(
+        bytes: image,
+        width: size,
+        height: size,
+        fit: fit,
+        placeholderWidget: placeholderWidget,
+        errorWidget: errorWidget,
+      );
     }
 
     return null;
