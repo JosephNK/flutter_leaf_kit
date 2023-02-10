@@ -43,6 +43,14 @@ class LFCircleAvatarImage extends StatelessWidget {
   Widget? _buildImageWidget() {
     final image = this.image;
 
+    if (image == null) {
+      return SizedBox(
+        width: size,
+        height: size,
+        child: placeholderWidget,
+      );
+    }
+
     if (image is String) {
       if (!isURL(image)) {
         return LFAssetImage(
@@ -76,6 +84,6 @@ class LFCircleAvatarImage extends StatelessWidget {
       );
     }
 
-    return null;
+    return Container();
   }
 }
