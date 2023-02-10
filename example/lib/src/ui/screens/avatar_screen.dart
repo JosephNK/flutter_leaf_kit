@@ -36,7 +36,7 @@ class _AvatarScreenState extends ScreenState<AvatarScreen> {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: const [
-          LFCircleImageAvatar(
+          LFCircleAvatarImage(
             image: 'https://picsum.photos/200/300',
             size: 25,
           ),

@@ -11,4 +11,6 @@ import '../skeleton/lf_skeleton.dart';
 
 part 'component/lf_asset_image.dart';
 part 'component/lf_cache_image.dart';
+part 'component/lf_circle_avatar_image.dart';
+part 'component/lf_combine_image.dart';
 part 'component/lf_memory_image.dart';

@@ -1,6 +1,6 @@
-part of lf_avatar;
+part of lf_image;
 
-class LFCircleImageAvatar extends StatelessWidget {
+class LFCircleAvatarImage extends StatelessWidget {
   final Object? image; // String, Uint8List
   final double size;
   final Color borderColor;
@@ -10,7 +10,7 @@ class LFCircleImageAvatar extends StatelessWidget {
   final Widget? placeholderWidget;
   final Widget? errorWidget;
 
-  const LFCircleImageAvatar({
+  const LFCircleAvatarImage({
     Key? key,
     required this.image,
     this.size = 50,

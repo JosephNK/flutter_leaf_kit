@@ -5,7 +5,6 @@ export 'component/accordion/lf_accordion.dart';
 export 'component/animated/lf_animated.dart';
 export 'component/app/lf_app.dart';
 export 'component/appbar/lf_appbar.dart';
-export 'component/avatar/lf_avatar.dart';
 export 'component/badge/lf_badge.dart';
 export 'component/bottomsheet/lf_bottom_sheet.dart';
 export 'component/button/lf_button.dart';
