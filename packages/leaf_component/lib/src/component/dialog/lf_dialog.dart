@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:leaf_common/leaf_common.dart';
 import 'package:leaf_network/leaf_network.dart';
 
+import '../../configure/lf_component_configure.dart';
 import '../../model/lf_data_item.dart';
 import '../button/lf_button.dart';
 import '../checkbox/lf_checkbox.dart';

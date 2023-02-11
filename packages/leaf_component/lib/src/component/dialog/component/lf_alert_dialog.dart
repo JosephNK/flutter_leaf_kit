@@ -1,28 +1,9 @@
 part of lf_dialog;
 
-class LFAlertDialogConfigure {
-  final String messageOK;
-  final String messageClose;
-
-  LFAlertDialogConfigure({
-    required this.messageOK,
-    required this.messageClose,
-  });
-}
-
 class LFAlertDialog {
   static final LFAlertDialog _instance = LFAlertDialog._internal();
   static LFAlertDialog get shared => _instance;
   LFAlertDialog._internal();
-
-  static LFAlertDialogConfigure? get configure =>
-      LFAlertDialog.shared._configure;
-
-  LFAlertDialogConfigure? _configure;
-
-  void setup({required LFAlertDialogConfigure configure}) {
-    _configure = configure;
-  }
 
   static Future<void> show(
     BuildContext context, {
@@ -30,12 +11,14 @@ class LFAlertDialog {
     required String message,
     VoidCallback? onCancel,
   }) async {
+    final cancelText = LFComponentConfigure.shared.alert?.cancelText ?? 'Close';
+
     await _LFAlertDialog.show(
       context,
       title: title,
       message: message,
       onCancel: onCancel,
-      cancelText: configure?.messageClose ?? 'Close',
+      cancelText: cancelText,
     );
   }
 
@@ -46,14 +29,17 @@ class LFAlertDialog {
     Function? onCancel,
     Function? onOK,
   }) async {
+    final cancelText = LFComponentConfigure.shared.alert?.cancelText ?? 'Close';
+    final okText = LFComponentConfigure.shared.alert?.okText ?? 'OK';
+
     await _LFAlertDialog.confirm(
       context,
       title: title,
       message: message,
       onCancel: onCancel,
       onOK: onOK,
-      cancelText: configure?.messageClose ?? 'Close',
-      okText: configure?.messageOK ?? 'OK',
+      cancelText: cancelText,
+      okText: okText,
     );
   }
 
@@ -66,6 +52,7 @@ class LFAlertDialog {
     VoidCallback? onTap,
   }) async {
     if (success) return;
+    final cancelText = LFComponentConfigure.shared.alert?.cancelText ?? 'Close';
     String? errorTitle = isNotEmpty(title)
         ? title
         : (exception is HTTPException)
@@ -79,7 +66,7 @@ class LFAlertDialog {
         title: errorTitle,
         message: errorMessage,
         onCancel: onTap,
-        cancelText: configure?.messageClose ?? 'Close',
+        cancelText: cancelText,
       );
     }
   }

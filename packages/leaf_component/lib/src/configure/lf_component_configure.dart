@@ -19,26 +19,42 @@ class LFAppBarComponentConfigure {
   });
 }
 
+/// Alert Configure
+class LFAlertDialogConfigure {
+  final String? cancelText;
+  final String? okText;
+
+  LFAlertDialogConfigure({
+    this.cancelText,
+    this.okText,
+  });
+}
+
 /// BottomSheet Configure
 class LFBottomSheetConfigure {
   final Color? activeColor;
   final Color? inactiveColor;
-  final String cancelText;
+  final String? cancelText;
 
   LFBottomSheetConfigure({
     this.activeColor = Colors.blueAccent,
     this.inactiveColor = Colors.black,
-    this.cancelText = 'Cancel',
+    this.cancelText,
   });
 }
 
 class LFAppComponentConfigure {
   LFAppBarComponentConfigure? appBar;
+  LFAlertDialogConfigure? alert;
   LFBottomSheetConfigure? bottomSheet;
 
   LFAppComponentConfigure();
 
   LFAppBarComponentConfigure? setupAppbar() {
+    return null;
+  }
+
+  LFAlertDialogConfigure? setupAlert() {
     return null;
   }
 
@@ -55,14 +71,17 @@ class LFComponentConfigure {
 
   LFComponentConfigure setup(LFAppComponentConfigure? configure) {
     _appBarComponentConfigure = configure?.setupAppbar();
+    _alertComponentConfigure = configure?.setupAlert();
     _bottomSheetComponentConfigure = configure?.setupBottomSheet();
     return this;
   }
 
   LFAppBarComponentConfigure? _appBarComponentConfigure;
+  LFAlertDialogConfigure? _alertComponentConfigure;
   LFBottomSheetConfigure? _bottomSheetComponentConfigure;
 
   /// Getter
   LFAppBarComponentConfigure? get appBar => _appBarComponentConfigure;
+  LFAlertDialogConfigure? get alert => _alertComponentConfigure;
   LFBottomSheetConfigure? get bottomSheet => _bottomSheetComponentConfigure;
 }
