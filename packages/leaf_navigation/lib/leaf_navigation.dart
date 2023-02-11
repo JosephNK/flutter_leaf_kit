@@ -11,3 +11,6 @@ export 'package:page_transition/page_transition.dart'
     show PageTransition, PageTransitionType;
 
 part 'src/navigation/navigation.dart';
+part 'src/navigation/navigation_basic.dart';
+part 'src/navigation/navigation_bloc.dart';
+part 'src/navigation/navigation_helper.dart';
