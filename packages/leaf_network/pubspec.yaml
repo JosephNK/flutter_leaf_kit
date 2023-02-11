@@ -17,11 +17,11 @@ dependencies:
   leaf_manager:
     path: ../leaf_manager
 
-  connectivity_plus: ^3.0.2
+  connectivity_plus: ^3.0.3
   http: ^0.13.4
   http_parser: ^4.0.1
 
-  chopper: ^6.0.0
+  chopper: ^6.1.0
   built_value: ^8.4.1
   built_collection: ^5.1.1
 
