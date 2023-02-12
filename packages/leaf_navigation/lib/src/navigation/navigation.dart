@@ -41,11 +41,34 @@ class LFNavigation {
     String routeName, {
     required Widget child, // Widget, MultiBlocProvider
     bool isUsingIosModalType = false,
-    bool fullscreenDialog = false,
+    bool isFullScreenModalDialog = false,
     bool isShowModal = false,
+    bool isFullScreenTransition = false,
   }) async {
     RouteSettings routeSettings = RouteSettings(name: routeName);
     if (isShowModal) {
+      if (isFullScreenTransition) {
+        return await Navigator.push(
+          context,
+          PageRouteBuilder(
+            settings: routeSettings,
+            pageBuilder: (_, __, ___) {
+              return child;
+            },
+            transitionsBuilder:
+                (context, animation, secondaryAnimation, child) {
+              final tween =
+                  Tween(begin: const Offset(0, 1), end: const Offset(0, 0));
+              final position = tween.animate(animation);
+              return SlideTransition(
+                position: position,
+                child: child,
+              );
+            },
+            transitionDuration: const Duration(milliseconds: 300),
+          ),
+        );
+      }
       return await showCupertinoModalBottomSheet(
         context: context,
         settings: routeSettings,
@@ -55,17 +78,17 @@ class LFNavigation {
       );
     }
     late PageRoute<T> route;
-    if (!isUsingIosModalType) {
-      route = MaterialPageRoute(
+    if (isUsingIosModalType) {
+      route = MaterialWithModalsPageRoute(
         settings: routeSettings,
+        fullscreenDialog: isFullScreenModalDialog,
         builder: (context) {
           return child;
         },
       );
     } else {
-      route = MaterialWithModalsPageRoute(
+      route = MaterialPageRoute(
         settings: routeSettings,
-        fullscreenDialog: fullscreenDialog,
         builder: (context) {
           return child;
         },

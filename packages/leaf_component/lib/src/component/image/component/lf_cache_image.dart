@@ -5,8 +5,8 @@ part of lf_image;
 ///
 class LFCacheImage extends StatelessWidget {
   final String? url;
-  final double width;
-  final double height;
+  final double? width;
+  final double? height;
   final BoxFit fit;
   final bool isClipper;
   final int? cacheWidth;
@@ -19,8 +19,8 @@ class LFCacheImage extends StatelessWidget {
   const LFCacheImage({
     Key? key,
     this.url,
-    this.width = 45,
-    this.height = 45,
+    this.width,
+    this.height,
     this.fit = BoxFit.cover,
     this.isClipper = false,
     this.cacheWidth,
@@ -52,11 +52,11 @@ class LFCacheImage extends StatelessWidget {
       return Stack(
         children: [
           ClipPath(
-            clipper: LeafImageClipper(useClip: isClipper),
+            clipper: LFImageClipper(useClip: isClipper),
             child: child,
           ),
           CustomPaint(
-            painter: LeafBorderPainter(),
+            painter: LFBorderPainter(),
             child: SizedBox(
               width: isClipper ? width : 0.0,
               height: isClipper ? height : 0.0,
@@ -75,13 +75,17 @@ class LFCacheImage extends StatelessWidget {
       return _buildPlaceholderImage(context);
     }
 
-    final networkWidget = _buildNetworkImage(
-      context,
-      urlString: url!,
+    final networkWidget = LFCacheNetworkImage(
+      url: url!,
       width: width,
       height: height,
       fit: fit,
-      httpHeaders: httpHeaders,
+      cacheWidth: cacheWidth,
+      shimmerBaseColor: shimmerBaseColor,
+      shimmerHighlightColor: shimmerHighlightColor,
+      header: httpHeaders,
+      placeholderWidget: placeholderWidget,
+      errorWidget: errorWidget,
     );
 
     if (isClipper) {
@@ -92,61 +96,18 @@ class LFCacheImage extends StatelessWidget {
     return networkWidget;
   }
 
-  // Wrapper Network Image
-  Widget _buildNetworkImage(
-    BuildContext context, {
-    required String urlString,
-    required double width,
-    required double height,
-    required BoxFit fit,
-    required Map<String, String>? httpHeaders,
-  }) {
-    LFDeviceManager.shared.checkMemory();
-
-    return CachedNetworkImage(
-      key: ValueKey(urlString),
-      httpHeaders: httpHeaders,
-      width: width,
-      height: height,
-      fit: fit,
-      placeholderFadeInDuration: const Duration(milliseconds: 0),
-      fadeOutDuration: const Duration(milliseconds: 0),
-      fadeInDuration: const Duration(milliseconds: 0),
-      imageUrl: urlString,
-      memCacheWidth: cacheWidth,
-      //memCacheHeight: 500,
-      //filterQuality: FilterQuality.high,
-      placeholder: (context, url) {
-        return _buildPlaceholderLoaderImage(context);
-      },
-      errorWidget: (context, url, error) {
-        return _buildErrorImage(context);
-      },
-    );
-  }
-
-  // Placeholder Loader Image
-  Widget _buildPlaceholderLoaderImage(BuildContext context) {
-    return LFSkeleton(width: width, height: height);
-  }
-
   // Placeholder Image
   Widget _buildPlaceholderImage(BuildContext context) {
     return placeholderWidget ?? Container(color: Colors.grey);
-  }
-
-  // Error Image
-  Widget _buildErrorImage(BuildContext context) {
-    return errorWidget ?? const Icon(Icons.error);
   }
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-class LeafImageClipper extends CustomClipper<Path> {
+class LFImageClipper extends CustomClipper<Path> {
   final bool useClip;
 
-  LeafImageClipper({this.useClip = true});
+  LFImageClipper({this.useClip = true});
 
   @override
   Path getClip(Size size) {
@@ -168,10 +129,10 @@ class LeafImageClipper extends CustomClipper<Path> {
 
 ////////////////////////////////////////////////////////////////////////////////
 
-class LeafBorderPainter extends CustomPainter {
+class LFBorderPainter extends CustomPainter {
   final bool useClip;
 
-  LeafBorderPainter({this.useClip = true});
+  LFBorderPainter({this.useClip = true});
 
   @override
   void paint(Canvas canvas, Size size) {

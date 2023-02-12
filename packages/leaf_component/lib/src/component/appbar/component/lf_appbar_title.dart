@@ -51,6 +51,7 @@ class LFAppBarTitle extends StatelessWidget {
     final leading = this.leading;
     final textStyle =
         this.textStyle ?? LFComponentConfigure.shared.appBar?.titleStyle;
+    final textColor = this.textColor ?? textStyle?.color ?? Colors.black;
 
     if (text != null) {
       return Row(
@@ -62,7 +63,7 @@ class LFAppBarTitle extends StatelessWidget {
           LFText(
             text,
             style: textStyle,
-            color: textColor ?? Colors.black,
+            color: textColor,
             height: textHeight,
           ),
         ],

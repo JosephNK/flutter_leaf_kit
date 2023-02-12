@@ -24,6 +24,7 @@ dependencies:
     path: ../leaf_navigation
 
   cached_network_image: ^3.2.3
+
   flutter_rating_bar: ^4.0.1
   dropdown_button2: ^1.9.2
   expandable_page_view: ^1.0.17

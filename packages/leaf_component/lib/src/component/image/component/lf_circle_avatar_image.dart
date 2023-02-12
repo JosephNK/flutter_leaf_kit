@@ -5,8 +5,8 @@ class LFCircleAvatarImage extends StatelessWidget {
   final double size;
   final Color borderColor;
   final double borderWidth;
-  final Map<String, String>? header;
   final BoxFit fit;
+  final Map<String, String>? header;
   final Widget? placeholderWidget;
   final Widget? errorWidget;
 
@@ -16,8 +16,8 @@ class LFCircleAvatarImage extends StatelessWidget {
     this.size = 50,
     this.borderColor = Colors.transparent,
     this.borderWidth = 0.0,
-    this.header,
     this.fit = BoxFit.cover,
+    this.header,
     this.placeholderWidget,
     this.errorWidget,
   }) : super(key: key);

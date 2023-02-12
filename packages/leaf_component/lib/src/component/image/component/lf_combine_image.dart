@@ -5,6 +5,7 @@ class LFCombineImage extends StatelessWidget {
   final double width;
   final double height;
   final BoxFit fit;
+  final Map<String, String>? header;
   final Widget? placeholderWidget;
   final Widget? errorWidget;
 
@@ -14,6 +15,7 @@ class LFCombineImage extends StatelessWidget {
     this.width = 45.0,
     this.height = 45.0,
     this.fit = BoxFit.cover,
+    this.header,
     this.placeholderWidget,
     this.errorWidget,
   }) : super(key: key);
@@ -32,7 +34,7 @@ class LFCombineImage extends StatelessWidget {
     }
 
     return LFCacheImage(
-      header: null,
+      header: header,
       url: url,
       width: width,
       height: height,
