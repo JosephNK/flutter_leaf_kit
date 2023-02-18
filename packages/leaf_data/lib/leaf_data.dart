@@ -13,6 +13,7 @@ export 'package:provider/provider.dart';
 part 'src/bloc/lf_bloc_base_state.dart';
 part 'src/bloc/lf_bloc_observer.dart';
 part 'src/bloc/lf_bloc_screen_consumer.dart';
+part 'src/model/lf_data_model.dart';
+part 'src/model/lf_ui_model.dart';
 part 'src/value/lf_error_value.dart';
 part 'src/value/lf_result_value.dart';
-part 'src/value/lf_view_value.dart';
