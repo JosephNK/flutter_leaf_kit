@@ -19,16 +19,20 @@ class ResultValue<T> extends Equatable {
       ];
 
   bool get empty {
-    return errorValue == null && data == null;
+    return errorValue == null && data == null && option == null;
   }
 
-  Future<ResultValue<T>> showErrorAlert(BuildContext context) async {
+  /// Chain
+
+  Future<ResultValue<T>> showIfExistErrorMessage(BuildContext context) async {
     final errorValue = this.errorValue;
     if (errorValue == null || errorValue.errorMessage == null) return this;
     await LFAlertDialog.showErrorMessage(context,
         errorMessage: errorValue.errorMessage);
     return this;
   }
+
+  /// Create
 
   static ResultValue<T> fromValue<T>({
     required int statusCode,
@@ -68,11 +72,7 @@ class ResultValue<T> extends Equatable {
   }
 
   static ResultValue objectEmpty() {
-    return const ResultValue(
-      errorValue: null,
-      data: null,
-      option: null,
-    );
+    return const ResultValue();
   }
 }
 

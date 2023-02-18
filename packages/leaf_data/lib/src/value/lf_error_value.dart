@@ -18,20 +18,29 @@ class ErrorValue extends Equatable {
         exception,
       ];
 
-  String get message {
-    // final exception = this.exception;
-    final errorMessage = this.errorMessage;
-    // if (exception != null) return exception.toString();
-    return errorMessage.toString();
-  }
+  /// Create
 
   factory ErrorValue.fromException({
     dynamic exception,
   }) {
     return ErrorValue(
-      statusCode: -999,
+      statusCode: -9999,
       errorMessage: 'Unknown Exception',
       exception: exception,
+    );
+  }
+}
+
+extension ErrorValueCopyWith on ErrorValue {
+  ErrorValue copyWith({
+    int Function()? statusCode,
+    String? Function()? errorMessage,
+    Object? Function()? exception,
+  }) {
+    return ErrorValue(
+      statusCode: statusCode != null ? statusCode() : this.statusCode,
+      errorMessage: errorMessage != null ? errorMessage() : this.errorMessage,
+      exception: exception != null ? exception() : this.exception,
     );
   }
 }
