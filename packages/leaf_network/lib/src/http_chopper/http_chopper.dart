@@ -7,6 +7,7 @@ import 'package:built_collection/built_collection.dart';
 import 'package:built_value/serializer.dart';
 import 'package:built_value/standard_json_plugin.dart';
 import 'package:chopper/chopper.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/foundation.dart';
 import 'package:http/io_client.dart' as http;
 import 'package:leaf_common/leaf_common.dart';
@@ -14,6 +15,7 @@ import 'package:leaf_common/leaf_common.dart';
 part 'src/converter/built_value_converter.dart';
 part 'src/converter/http_exception_error_converter.dart';
 part 'src/exception/http_exception.dart';
+part 'src/interceptors/connect_interceptor.dart';
 part 'src/interceptors/log_response_interceptor.dart';
 part 'src/interceptors/throw_exception_interceptor.dart';
 part 'src/override/http_override.dart';
@@ -48,6 +50,7 @@ class HTTPChopper {
     required Iterable<ChopperService> services,
     required Converter? converter,
     ErrorConverter? errorConverter,
+    Authenticator? authenticator,
   }) {
     chopperClient = ChopperClient(
       client: http.IOClient(
@@ -57,11 +60,13 @@ class HTTPChopper {
       converter: converter,
       errorConverter: errorConverter,
       interceptors: [
+        ConnectInterceptor(),
         CurlInterceptor(),
         LogResponseInterceptor(),
         ThrowExceptionInterceptor(),
       ],
       services: services,
+      authenticator: authenticator,
     );
   }
 

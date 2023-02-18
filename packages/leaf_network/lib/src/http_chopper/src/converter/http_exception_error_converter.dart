@@ -36,9 +36,11 @@ class HttpExceptionErrorConverter extends ErrorConverter {
 
     final base = jsonResponse.base;
     final statusCode = base.statusCode;
-    // final body = jsonResponse.body;
+    final body = jsonResponse.body;
 
-    final body = {'error_message': 'Test ErrorMessage', 'total': 100};
+    print('[convertError] statusCode: $statusCode, body: $body');
+
+    //final body = {'error_message': 'Test ErrorMessage', 'total': 100};
 
     dynamic object;
 
@@ -49,13 +51,6 @@ class HttpExceptionErrorConverter extends ErrorConverter {
     }
 
     String message = (object is String) ? object : '';
-
-    if (object is ResultType) {
-      return response.copyWith<ResultType>(
-        body: object,
-        bodyError: object,
-      );
-    }
 
     HTTPException? exception;
     switch (statusCode) {
@@ -94,7 +89,21 @@ class HttpExceptionErrorConverter extends ErrorConverter {
           body,
         );
         break;
+      case 503:
+        exception = ServiceUnavailableException(
+          statusCode,
+          message,
+          body,
+        );
+        break;
       default:
+        if (object is ResultType) {
+          print('[convertError] object is ResultType :: $object');
+          return response.copyWith<ResultType>(
+            body: object,
+            bodyError: object,
+          );
+        }
         exception = HTTPException(
           statusCode,
           message,

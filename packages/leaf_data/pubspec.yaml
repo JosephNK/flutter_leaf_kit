@@ -11,6 +11,9 @@ dependencies:
   flutter:
     sdk: flutter
 
+  leaf_component:
+    path: ../leaf_component
+
   bloc: ^8.1.1
   flutter_bloc: ^8.1.2
   bloc_concurrency: ^0.2.1

@@ -7,7 +7,6 @@ typedef BlocScreenSuccessListener<S> = void Function(
 
 typedef BlocScreenErrorListener<S> = void Function(
   BuildContext context,
-  String? errorMessage,
   dynamic exception,
 );
 
@@ -28,48 +27,14 @@ class BlocScreenConsumer<B extends BlocBase<S>, S> extends StatelessWidget {
     return BlocConsumer<B, S>(
       builder: builder,
       listener: (context, state) {
-        if (state is BaseState) {
-          final success = state.success ?? false;
-          final errorMessage = state.errorMessage;
+        if (state is BlocBaseState) {
           final exception = state.exception;
-
-          if (!success && (errorMessage != null || exception != null)) {
-            errorListener?.call(context, errorMessage, exception);
+          if (exception != null) {
+            errorListener?.call(context, exception);
           }
         }
         successListener.call(context, state);
       },
     );
   }
-}
-
-class BaseState extends Equatable {
-  final bool? success;
-  final String? errorMessage;
-  final dynamic exception;
-
-  const BaseState({
-    this.success,
-    this.errorMessage,
-    this.exception,
-  });
-
-  @override
-  List<Object?> get props => [
-        success,
-        errorMessage,
-        exception,
-      ];
-
-  // BaseState copyWith({
-  //   bool? Function()? success,
-  //   String? Function()? errorMessage,
-  //   dynamic Function()? exception,
-  // }) {
-  //   return BaseState(
-  //     success: success != null ? success() : this.success,
-  //     errorMessage: errorMessage != null ? errorMessage() : this.errorMessage,
-  //     exception: exception != null ? exception() : this.exception,
-  //   );
-  // }
 }

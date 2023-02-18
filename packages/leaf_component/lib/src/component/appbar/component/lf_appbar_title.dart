@@ -60,11 +60,13 @@ class LFAppBarTitle extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           (leading != null) ? leading : Container(),
-          LFText(
-            text,
-            style: textStyle,
-            color: textColor,
-            height: textHeight,
+          Flexible(
+            child: LFText(
+              text,
+              style: textStyle,
+              color: textColor,
+              height: textHeight,
+            ),
           ),
         ],
       );

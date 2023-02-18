@@ -43,23 +43,32 @@ class LFAlertDialog {
     );
   }
 
-  static Future<void> showException(
+  static Future<void> showErrorMessage(
     BuildContext context, {
-    bool success = false,
-    String? title,
-    String? message,
-    dynamic exception,
+    required String? errorMessage,
     VoidCallback? onTap,
   }) async {
-    if (success) return;
+    if (errorMessage == null) return;
     final cancelText = LFComponentConfigure.shared.alert?.cancelText ?? 'Close';
-    String? errorTitle = isNotEmpty(title)
-        ? title
-        : (exception is HTTPException)
-            ? exception.message
-            : 'Oops!';
-    String? errorMessage = isNotEmpty(message) ? message : null;
-    errorMessage = errorMessage ?? exception?.toString();
+    String? errorTitle = 'Oops! Error :(';
+    _LFAlertDialog.show(
+      context,
+      title: errorTitle,
+      message: errorMessage,
+      onCancel: onTap,
+      cancelText: cancelText,
+    );
+  }
+
+  static Future<void> showException(
+    BuildContext context, {
+    Object? exception,
+    VoidCallback? onTap,
+  }) async {
+    if (exception == null) return;
+    final cancelText = LFComponentConfigure.shared.alert?.cancelText ?? 'Close';
+    String? errorTitle = 'Oops! Exception Error :(';
+    String? errorMessage = exception.toString();
     if (isNotEmpty(errorMessage)) {
       _LFAlertDialog.show(
         context,
@@ -103,7 +112,10 @@ class _LFAlertDialog {
                 await Future.delayed(const Duration(milliseconds: 100));
                 onCancel?.call();
               },
-              child: LFText(cancelText),
+              child: LFText(
+                cancelText,
+                style: const TextStyle(fontSize: 18),
+              ),
             ),
           ],
         );
@@ -146,7 +158,10 @@ class _LFAlertDialog {
                 }
                 onCancel?.call();
               },
-              child: LFText(cancelText),
+              child: LFText(
+                cancelText,
+                style: const TextStyle(fontSize: 18),
+              ),
             ),
             TextButton(
               onPressed: () async {
@@ -156,7 +171,10 @@ class _LFAlertDialog {
                 }
                 onOK?.call();
               },
-              child: LFText(okText),
+              child: LFText(
+                okText,
+                style: const TextStyle(fontSize: 18),
+              ),
             ),
           ],
         );
