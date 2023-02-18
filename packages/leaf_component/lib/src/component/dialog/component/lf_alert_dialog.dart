@@ -67,7 +67,7 @@ class LFAlertDialog {
   }) async {
     if (exception == null) return;
     final cancelText = LFComponentConfigure.shared.alert?.cancelText ?? 'Close';
-    String? errorTitle = 'Oops! Exception Error :(';
+    String? errorTitle = 'Oops! Exception :(';
     String? errorMessage = exception.toString();
     if (isNotEmpty(errorMessage)) {
       _LFAlertDialog.show(

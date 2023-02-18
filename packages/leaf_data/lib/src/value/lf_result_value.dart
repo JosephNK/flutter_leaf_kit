@@ -32,6 +32,14 @@ class ResultValue<T> extends Equatable {
     return this;
   }
 
+  Future<ResultValue<T>> showIfExistExceptionMessage(
+      BuildContext context) async {
+    final errorValue = this.errorValue;
+    if (errorValue == null || errorValue.exception == null) return this;
+    await LFAlertDialog.showException(context, exception: errorValue.exception);
+    return this;
+  }
+
   /// Create
 
   static ResultValue<T> fromValue<T>({
