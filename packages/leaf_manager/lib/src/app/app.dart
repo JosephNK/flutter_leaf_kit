@@ -9,7 +9,6 @@ class LFAppManager {
   int get imageSaveAlbumQuality => 100;
 
   Duration get delayedDuration => const Duration(milliseconds: 100);
-  Duration get delayedLittleDuration => const Duration(milliseconds: 25);
 
   // ExpireDate 체크 함수
   bool isExpire() {
