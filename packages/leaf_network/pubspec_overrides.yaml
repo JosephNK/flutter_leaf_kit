@@ -1,0 +1,6 @@
+# melos_managed_dependency_overrides: leaf_common,leaf_manager
+dependency_overrides:
+  leaf_common:
+    path: ../leaf_common
+  leaf_manager:
+    path: ../leaf_manager

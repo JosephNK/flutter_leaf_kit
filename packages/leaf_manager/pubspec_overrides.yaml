@@ -1,0 +1,4 @@
+# melos_managed_dependency_overrides: leaf_common
+dependency_overrides:
+  leaf_common:
+    path: ../leaf_common

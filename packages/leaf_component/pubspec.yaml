@@ -13,18 +13,32 @@ dependencies:
     sdk: flutter
 
   leaf_common:
-    path: ../leaf_common
+    git:
+      url: https://github.com/JosephNK/flutter_leaf_kit.git
+      ref: develop
+      path: ./packages/leaf_common
   leaf_data:
-    path: ../leaf_data
+    git:
+      url: https://github.com/JosephNK/flutter_leaf_kit.git
+      ref: develop
+      path: ./packages/leaf_data
   leaf_manager:
-    path: ../leaf_manager
+    git:
+      url: https://github.com/JosephNK/flutter_leaf_kit.git
+      ref: develop
+      path: ./packages/leaf_manager
   leaf_network:
-    path: ../leaf_network
+    git:
+      url: https://github.com/JosephNK/flutter_leaf_kit.git
+      ref: develop
+      path: ./packages/leaf_network
   leaf_navigation:
-    path: ../leaf_navigation
+    git:
+      url: https://github.com/JosephNK/flutter_leaf_kit.git
+      ref: develop
+      path: ./packages/leaf_navigation
 
   cached_network_image: ^3.2.3
-
   flutter_rating_bar: ^4.0.1
   dropdown_button2: ^1.9.2
   expandable_page_view: ^1.0.17
@@ -32,7 +46,6 @@ dependencies:
   webview_flutter_android: ^3.2.4
   webview_flutter_wkwebview: ^3.0.5
   shimmer: ^2.0.0
-
   photo_manager: ^2.5.1+1
   visibility_detector: ^0.3.3
 
