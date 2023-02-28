@@ -2,7 +2,6 @@ library lf_dialog;
 
 import 'package:flutter/material.dart';
 import 'package:leaf_common/leaf_common.dart';
-import 'package:leaf_data/leaf_data.dart';
 
 import '../../configure/lf_component_configure.dart';
 import '../../model/lf_data_item.dart';

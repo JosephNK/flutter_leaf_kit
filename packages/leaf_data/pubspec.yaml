@@ -1,6 +1,7 @@
 name: leaf_data
 description: A new Flutter package project.
 version: 0.0.1
+publish_to: 'none'
 homepage: https://github.com/JosephNK/flutter_leaf_kit
 
 environment:
