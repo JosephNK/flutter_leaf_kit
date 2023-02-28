@@ -14,6 +14,7 @@ class LFBottomTabBar extends StatefulWidget {
   final Clip clipBehavior;
   final EdgeInsetsGeometry padding;
   final double notchMargin;
+  final bool show;
   final LFBottomTabBarOnPressed? onPressed;
 
   const LFBottomTabBar({
@@ -26,6 +27,7 @@ class LFBottomTabBar extends StatefulWidget {
     this.clipBehavior = Clip.none,
     this.padding = const EdgeInsets.all(0.0),
     this.notchMargin = 4.0,
+    this.show = true,
     this.onPressed,
   }) : super(key: key);
 
@@ -100,59 +102,63 @@ class _LFBottomTabBarState extends State<LFBottomTabBar> {
     final activeColor = widget.activeColor;
     final inactiveColor = widget.inactiveColor;
     final notchMargin = widget.notchMargin;
+    final show = widget.show;
     final padding = widget.padding;
 
     final items = _tabItems;
     final selectedIndex = _selectedIndex;
 
-    return BottomAppBar(
-      elevation: 1.0,
-      shape: shape,
-      clipBehavior: clipBehavior,
-      color: backgroundColor ?? Colors.white,
-      notchMargin: notchMargin,
-      child: Padding(
-        padding: padding,
-        child: Row(
-          children: [
-            ...items.asMap().entries.map((e) {
-              final index = e.key;
-              final item = e.value;
+    return Visibility(
+      visible: show,
+      child: BottomAppBar(
+        elevation: 1.0,
+        shape: shape,
+        clipBehavior: clipBehavior,
+        color: backgroundColor ?? Colors.white,
+        notchMargin: notchMargin,
+        child: Padding(
+          padding: padding,
+          child: Row(
+            children: [
+              ...items.asMap().entries.map((e) {
+                final index = e.key;
+                final item = e.value;
 
-              final defaultIcon = item.defaultIcon;
-              final activeIcon = item.activeIcon;
-              final text = item.text;
-              final isNew = item.isNew;
+                final defaultIcon = item.defaultIcon;
+                final activeIcon = item.activeIcon;
+                final text = item.text;
+                final isNew = item.isNew;
 
-              return Expanded(
-                child: GestureDetector(
-                  onTap: () {
-                    final didSelected = (selectedIndex == index);
-                    final newItems = items.map((item) {
-                      return item.copyWith(
-                          bottomTabIndex: item.bottomTabIndex.copyWith(
-                        activeTabIndex: index,
-                        didSelected: (index == item.bottomTabIndex.tabIndex)
-                            ? didSelected
-                            : false,
-                      ));
-                    }).toList();
-                    widget.onPressed?.call(newItems, index);
-                  },
-                  child: LSBottomTextIcon(
-                    selectedIndex: selectedIndex,
-                    index: index,
-                    activeColor: activeColor,
-                    inactiveColor: inactiveColor,
-                    defaultIcon: defaultIcon,
-                    activeIcon: activeIcon,
-                    text: text,
-                    isNew: isNew,
+                return Expanded(
+                  child: GestureDetector(
+                    onTap: () {
+                      final didSelected = (selectedIndex == index);
+                      final newItems = items.map((item) {
+                        return item.copyWith(
+                            bottomTabIndex: item.bottomTabIndex.copyWith(
+                          activeTabIndex: index,
+                          didSelected: (index == item.bottomTabIndex.tabIndex)
+                              ? didSelected
+                              : false,
+                        ));
+                      }).toList();
+                      widget.onPressed?.call(newItems, index);
+                    },
+                    child: LSBottomTextIcon(
+                      selectedIndex: selectedIndex,
+                      index: index,
+                      activeColor: activeColor,
+                      inactiveColor: inactiveColor,
+                      defaultIcon: defaultIcon,
+                      activeIcon: activeIcon,
+                      text: text,
+                      isNew: isNew,
+                    ),
                   ),
-                ),
-              );
-            })
-          ],
+                );
+              })
+            ],
+          ),
         ),
       ),
     );

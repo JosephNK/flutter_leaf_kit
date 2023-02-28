@@ -10,6 +10,7 @@ class LFBottomTabBarScaffold extends StatefulWidget {
   final EdgeInsetsGeometry padding;
   final Color activeColor;
   final Color inactiveColor;
+  final bool isShowTabBar;
   final LFBottomTabBarOnPressed? onPressed;
 
   const LFBottomTabBarScaffold({
@@ -23,6 +24,7 @@ class LFBottomTabBarScaffold extends StatefulWidget {
     this.padding = const EdgeInsets.all(0.0),
     this.activeColor = Colors.blueAccent,
     this.inactiveColor = Colors.grey,
+    this.isShowTabBar = true,
     this.onPressed,
   }) : super(key: key);
 
@@ -64,6 +66,7 @@ class _LFBottomTabBarScaffoldState extends State<LFBottomTabBarScaffold> {
     final padding = widget.padding;
     final activeColor = widget.activeColor;
     final inactiveColor = widget.inactiveColor;
+    final isShowTabBar = widget.isShowTabBar;
     final onPressed = widget.onPressed;
 
     return Scaffold(
@@ -77,6 +80,7 @@ class _LFBottomTabBarScaffoldState extends State<LFBottomTabBarScaffold> {
         padding: padding,
         activeColor: activeColor,
         inactiveColor: inactiveColor,
+        show: isShowTabBar,
         onPressed: onPressed,
       ),
     );
