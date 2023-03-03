@@ -19,7 +19,7 @@ class LFAppBarBack extends StatelessWidget {
     return LFInkWell(
       onTap: onPressed,
       child: Icon(
-        Icons.arrow_back_ios,
+        Icons.arrow_back_ios_new,
         color: color,
         size: size,
       ),

@@ -3,10 +3,12 @@ part of lf_calendar_view;
 class LFCalendarPageCell extends StatelessWidget {
   final LFCalendarCellBuilder cellBuilder;
   final DateTime dateTime;
+  final List<DateTime> selectedDateTimes;
   final int weekday;
   final bool isDisabled;
   final TextStyle? dayTextStyle;
   final Color todayColor;
+  final Color selectedColor;
   final Color holidayColor;
   final ValueChanged<DateTime>? onSelected;
 
@@ -14,22 +16,30 @@ class LFCalendarPageCell extends StatelessWidget {
     Key? key,
     required this.cellBuilder,
     required this.dateTime,
+    required this.selectedDateTimes,
     this.weekday = -1,
     this.isDisabled = false,
     this.dayTextStyle,
     this.todayColor = Colors.purple,
+    this.selectedColor = Colors.purpleAccent,
     this.holidayColor = Colors.red,
     this.onSelected,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final selectedDateTimes = this.selectedDateTimes;
     final dayTextStyle = this.dayTextStyle;
     final isDisabled = this.isDisabled;
     final todayColor = this.todayColor;
+    final selectedColor = this.selectedColor;
     final holidayColor = this.holidayColor;
     final onSelected = this.onSelected;
 
+    final isSelected = selectedDateTimes
+        .where((selectedDateTime) => dateTime.isSameDate(selectedDateTime))
+        .toList()
+        .isNotEmpty;
     final isToday = dateTime.isToday();
     final day = dateTime.day.toString();
 
@@ -53,12 +63,15 @@ class LFCalendarPageCell extends StatelessWidget {
               Align(
                 alignment: Alignment.topCenter,
                 child: Container(
-                  width: 24.0,
-                  height: 24.0,
+                  width: 26.0,
+                  height: 26.0,
                   // padding: const EdgeInsets.all(4.0),
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(12.0),
+                    borderRadius: BorderRadius.circular(26.0),
                     color: isToday ? todayColor : Colors.transparent,
+                    border: Border.all(
+                      color: isSelected ? selectedColor : Colors.transparent,
+                    ),
                   ),
                   child: Opacity(
                     opacity: isDisabled ? 0.3 : 1.0,

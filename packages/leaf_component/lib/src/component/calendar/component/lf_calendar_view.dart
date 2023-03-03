@@ -33,6 +33,7 @@ class LFCalendarView extends StatefulWidget {
   final LFCalendarCellBuilder cellBuilder;
   final TextStyle? dayTextStyle;
   final Color todayColor;
+  final Color selectedColor;
   final Color holidayColor;
   final double childAspectRatio;
   final List<String> weekDays;
@@ -50,6 +51,7 @@ class LFCalendarView extends StatefulWidget {
     required this.cellBuilder,
     this.dayTextStyle,
     this.todayColor = Colors.purple,
+    this.selectedColor = Colors.purpleAccent,
     this.holidayColor = Colors.red,
     this.childAspectRatio = 1.0,
     this.weekDays = const ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
@@ -113,6 +115,7 @@ class _LFCalendarViewState extends State<LFCalendarView> {
   Widget build(BuildContext context) {
     final dayTextStyle = widget.dayTextStyle;
     final todayColor = widget.todayColor;
+    final selectedColor = widget.selectedColor;
     final holidayColor = widget.holidayColor;
     final childAspectRatio = widget.childAspectRatio;
     final weekDays = widget.weekDays;
@@ -125,12 +128,15 @@ class _LFCalendarViewState extends State<LFCalendarView> {
     Widget buildPageView(
       BuildContext context, {
       required DateTime pageDateTime,
+      required List<DateTime> selectedDateTimes,
     }) {
       return LFCalendarPageView(
         cellBuilder: cellBuilder,
         pageDateTime: pageDateTime,
+        selectedDateTimes: selectedDateTimes,
         dayTextStyle: dayTextStyle,
         todayColor: todayColor,
+        selectedColor: selectedColor,
         holidayColor: holidayColor,
         childAspectRatio: childAspectRatio,
         onSelected: (dateTime) {
@@ -148,6 +154,7 @@ class _LFCalendarViewState extends State<LFCalendarView> {
       return buildPageView(
         context,
         pageDateTime: DateTime.now(),
+        selectedDateTimes: const [],
       );
     }
 
@@ -183,31 +190,53 @@ class _LFCalendarViewState extends State<LFCalendarView> {
                               onTapAtPrevious(
                                   context, currentDateTime, onMonthChanged);
                             },
-                            child: const Icon(
-                              Icons.arrow_back_ios,
-                              size: 16.0,
-                              color: Color.fromRGBO(186, 186, 186, 1),
+                            child: Container(
+                              width: 25.0,
+                              height: 25.0,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(25.0),
+                                color: const Color.fromRGBO(186, 186, 186, 0.3),
+                              ),
+                              child: const Center(
+                                child: Icon(
+                                  Icons.arrow_back_ios_new,
+                                  size: 14.0,
+                                  color: Color.fromRGBO(0, 0, 0, 1),
+                                ),
+                              ),
                             ),
                           ),
-                          const SizedBox(width: 10.0),
-                          Text(
-                            '$year$yearUnit $month$monthUnit',
-                            style: const TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 16.0,
+                          Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 15.0),
+                            child: Text(
+                              '$year$yearUnit$month$monthUnit',
+                              style: const TextStyle(
+                                fontWeight: FontWeight.w600,
+                                fontSize: 22.0,
+                              ),
+                              textAlign: TextAlign.center,
                             ),
-                            textAlign: TextAlign.center,
                           ),
-                          const SizedBox(width: 10.0),
                           GestureDetector(
                             onTap: () {
                               onTapAtNext(
                                   context, currentDateTime, onMonthChanged);
                             },
-                            child: const Icon(
-                              Icons.arrow_forward_ios,
-                              size: 16.0,
-                              color: Color.fromRGBO(186, 186, 186, 1),
+                            child: Container(
+                              width: 25.0,
+                              height: 25.0,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(25.0),
+                                color: const Color.fromRGBO(186, 186, 186, 0.3),
+                              ),
+                              child: const Center(
+                                child: Icon(
+                                  Icons.arrow_forward_ios,
+                                  size: 14.0,
+                                  color: Color.fromRGBO(0, 0, 0, 1),
+                                ),
+                              ),
                             ),
                           )
                         ],
@@ -243,9 +272,8 @@ class _LFCalendarViewState extends State<LFCalendarView> {
                 height: _pageHeight,
                 child: Consumer<LFCalendarProvider>(
                   builder: (context, provider, child) {
-                    // final currentDateTime = provider.currentDateTime;
-                    // final selectedDateTimes =
-                    //     provider.selectedDateTimes.toList();
+                    final selectedDateTimes =
+                        provider.selectedDateTimes.toList();
 
                     return PageView.builder(
                       physics: physics,
@@ -258,6 +286,7 @@ class _LFCalendarViewState extends State<LFCalendarView> {
                         return buildPageView(
                           context,
                           pageDateTime: pageDateTime,
+                          selectedDateTimes: selectedDateTimes,
                         );
                       },
                       onPageChanged: (index) {

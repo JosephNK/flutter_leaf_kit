@@ -5,8 +5,10 @@ typedef LFCalendarPageViewOnSizeChanged = void Function(Size size);
 class LFCalendarPageView extends StatefulWidget {
   final LFCalendarCellBuilder cellBuilder;
   final DateTime pageDateTime;
+  final List<DateTime> selectedDateTimes;
   final TextStyle? dayTextStyle;
   final Color todayColor;
+  final Color selectedColor;
   final Color holidayColor;
   final double childAspectRatio;
   final ValueChanged<DateTime>? onSelected;
@@ -16,8 +18,10 @@ class LFCalendarPageView extends StatefulWidget {
     Key? key,
     required this.cellBuilder,
     required this.pageDateTime,
+    required this.selectedDateTimes,
     this.dayTextStyle,
     this.todayColor = Colors.purple,
+    this.selectedColor = Colors.purpleAccent,
     this.holidayColor = Colors.red,
     this.childAspectRatio = 1.0,
     this.onSelected,
@@ -50,9 +54,12 @@ class _LFCalendarPageViewState extends State<LFCalendarPageView> {
 
   @override
   Widget build(BuildContext context) {
+    final pageDateTime = widget.pageDateTime;
+    final selectedDateTimes = widget.selectedDateTimes;
     final cellBuilder = widget.cellBuilder;
     final dayTextStyle = widget.dayTextStyle;
     final todayColor = widget.todayColor;
+    final selectedColor = widget.selectedColor;
     final holidayColor = widget.holidayColor;
     final childAspectRatio = widget.childAspectRatio;
     final onSelected = widget.onSelected;
@@ -74,15 +81,17 @@ class _LFCalendarPageViewState extends State<LFCalendarPageView> {
         //         (weekday == 6) ||
         //         (weekday == 7) ||
         //         (dateTime.isBefore(DateTime.now()));
-        final isDisabled = (widget.pageDateTime.month != dateTime.month);
+        final isDisabled = (pageDateTime.month != dateTime.month);
 
         return LFCalendarPageCell(
           cellBuilder: cellBuilder,
           dateTime: dateTime,
+          selectedDateTimes: selectedDateTimes,
           weekday: weekday,
           isDisabled: isDisabled,
           dayTextStyle: dayTextStyle,
           todayColor: todayColor,
+          selectedColor: selectedColor,
           holidayColor: holidayColor,
           onSelected: onSelected,
         );
