@@ -338,7 +338,7 @@ class _LFCalendarViewState extends State<LFCalendarView> {
   /// Provider with onMonthChanged
   ///
 
-  final _duration = const Duration(milliseconds: 150);
+  final _pageDuration = const Duration(milliseconds: 150);
 
   void onActionAtSelected(
     BuildContext context,
@@ -357,9 +357,9 @@ class _LFCalendarViewState extends State<LFCalendarView> {
     context.read<LFCalendarProvider>().setDateTime(dateTime);
     context.read<LFCalendarProvider>().removeAll();
 
-    todayPage();
+    todayPage(animate: false);
 
-    await Future.delayed(_duration);
+    await Future.delayed(_pageDuration);
 
     onMonthChanged?.call(
       dateTime.inMonth(),
@@ -380,7 +380,7 @@ class _LFCalendarViewState extends State<LFCalendarView> {
 
     previousPage();
 
-    await Future.delayed(_duration);
+    await Future.delayed(_pageDuration);
 
     onMonthChanged?.call(
       dateTime.inMonth(),
@@ -401,7 +401,7 @@ class _LFCalendarViewState extends State<LFCalendarView> {
 
     nextPage();
 
-    await Future.delayed(_duration);
+    await Future.delayed(_pageDuration);
 
     onMonthChanged?.call(
       dateTime.inMonth(),
@@ -418,7 +418,7 @@ class _LFCalendarViewState extends State<LFCalendarView> {
     context.read<LFCalendarProvider>().setDateTime(pageDateTime);
     context.read<LFCalendarProvider>().removeAll();
 
-    // await Future.delayed(_duration);
+    // await Future.delayed(_pageDuration);
 
     onMonthChanged?.call(
       pageDateTime.inMonth(),
@@ -431,23 +431,27 @@ class _LFCalendarViewState extends State<LFCalendarView> {
   /// PageController To page
   ///
 
-  void animatedToPage(int page) {
-    _pageController.animateToPage(page,
-        duration: _duration, curve: Curves.easeIn);
+  void animateToPage(int page, {bool animate = true}) {
+    if (animate) {
+      _pageController.animateToPage(page,
+          duration: _pageDuration, curve: Curves.easeIn);
+    } else {
+      _pageController.jumpToPage(page);
+    }
   }
 
-  void todayPage() {
-    _pageController.animateToPage(_initialPage,
-        duration: _duration, curve: Curves.easeIn);
+  void todayPage({bool animate = true}) {
+    final page = _initialPage;
+    animateToPage(page, animate: animate);
   }
 
-  void previousPage() {
-    _pageController.animateToPage(_pageController.page!.toInt() - 1,
-        duration: _duration, curve: Curves.easeIn);
+  void previousPage({bool animate = true}) {
+    final page = _pageController.page!.toInt() - 1;
+    animateToPage(page, animate: animate);
   }
 
-  void nextPage() {
-    _pageController.animateToPage(_pageController.page!.toInt() + 1,
-        duration: _duration, curve: Curves.easeIn);
+  void nextPage({bool animate = true}) {
+    final page = _pageController.page!.toInt() + 1;
+    animateToPage(page, animate: animate);
   }
 }
