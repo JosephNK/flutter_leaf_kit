@@ -1,40 +1,32 @@
 part of lf_common;
 
 extension DateString on String {
-  String toLongDateTime() {
-    return LFDateTime.shared.formatString(this, format: 'yyyy.MM.dd HH:mm');
+  String toLongDateTime({String format = 'yyyy.MM.dd HH:mm'}) {
+    return LFDateTime.shared.formatString(this, format: format);
   }
 
-  String toShortDateTime() {
-    return LFDateTime.shared.formatString(this, format: 'yyyy.MM.dd');
+  String toShortDateTime({String format = 'yyyy.MM.dd'}) {
+    return LFDateTime.shared.formatString(this, format: format);
   }
 
-  String toCalendarLongDateTime() {
-    return LFDateTime.shared.formatString(this, format: 'yyyy-MM-dd HH:mm');
+  String toDate({String format = 'MM.dd'}) {
+    return LFDateTime.shared.formatString(this, format: format);
   }
 
-  String toCalendarShortDateTime() {
-    return LFDateTime.shared.formatString(this, format: 'yyyy-MM-dd');
+  String toYear({String format = 'yyyy'}) {
+    return LFDateTime.shared.formatString(this, format: format);
   }
 
-  String toDate() {
-    return LFDateTime.shared.formatString(this, format: 'MM.dd');
+  String toMonth({String format = 'MM'}) {
+    return LFDateTime.shared.formatString(this, format: format);
   }
 
-  String toYear() {
-    return LFDateTime.shared.formatString(this, format: 'yyyy');
+  String toDay({String format = 'dd'}) {
+    return LFDateTime.shared.formatString(this, format: format);
   }
 
-  String toMonth() {
-    return LFDateTime.shared.formatString(this, format: 'MM');
-  }
-
-  String toDay() {
-    return LFDateTime.shared.formatString(this, format: 'dd');
-  }
-
-  String toTime() {
-    return LFDateTime.shared.formatString(this, format: 'HH:mm');
+  String toTime({String format = 'HH:mm'}) {
+    return LFDateTime.shared.formatString(this, format: format);
   }
 
   String toCurrency() {

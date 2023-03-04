@@ -205,8 +205,8 @@ class _LFCalendarViewState extends State<LFCalendarView> {
               Consumer<LFCalendarProvider>(
                 builder: (context, provider, child) {
                   final currentDateTime = provider.currentDateTime;
-                  final year = currentDateTime.toYear();
-                  final month = currentDateTime.toMonth();
+                  final year = currentDateTime.toYearString();
+                  final month = currentDateTime.toMonthString();
 
                   return Column(
                     children: [

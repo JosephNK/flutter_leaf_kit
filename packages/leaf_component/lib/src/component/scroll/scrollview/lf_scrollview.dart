@@ -17,7 +17,7 @@ class LFScrollView extends StatefulWidget {
     Key? key,
     this.storageKey,
     required this.child,
-    required this.controller,
+    this.controller,
     this.autoKeyboardHide = false,
     this.physics,
     this.padding,

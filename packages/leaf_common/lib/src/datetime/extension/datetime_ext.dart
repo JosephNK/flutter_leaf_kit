@@ -1,58 +1,104 @@
 part of lf_common;
 
+/// https://www.flutterbeads.com/format-datetime-in-flutter/
+
 extension DateTimeString on DateTime {
-  String toLongDateTime() {
-    return LFDateTime.shared.formatDate(this, format: 'yyyy.MM.dd HH:mm');
+  String toDateTimeString({String format = 'yyyy-MM-dd HH:mm'}) {
+    return LFDateTime.shared.formatDate(this, format: format);
   }
 
-  String toShortDateTime() {
-    return LFDateTime.shared.formatDate(this, format: 'yyyy.MM.dd');
+  String toLongDateTimeString({String format = 'yyyy.MM.dd HH:mm'}) {
+    return LFDateTime.shared.formatDate(this, format: format);
   }
 
-  String toCalendarLongDateTime() {
-    return LFDateTime.shared.formatDate(this, format: 'yyyy-MM-dd HH:mm');
+  String toShortDateTimeString({String format = 'yyyy.MM.dd'}) {
+    return LFDateTime.shared.formatDate(this, format: format);
   }
 
-  String toCalendarShortDateTime() {
-    return LFDateTime.shared.formatDate(this, format: 'yyyy-MM-dd');
+  String toDateString({String format = 'MM.dd', bool showWeekDay = false}) {
+    final value = LFDateTime.shared.formatDate(this, format: format);
+    if (showWeekDay) {
+      final weekDay = toWeekDay(short: true);
+      return '$value($weekDay)';
+    }
+    return value;
   }
 
-  String toDate() {
-    return LFDateTime.shared.formatDate(this, format: 'MM.dd');
+  String toYearString({String format = 'yyyy'}) {
+    return LFDateTime.shared.formatDate(this, format: format);
   }
 
-  String toYear() {
-    return LFDateTime.shared.formatDate(this, format: 'yyyy');
+  String toMonthString({String format = 'MM'}) {
+    return LFDateTime.shared.formatDate(this, format: format);
   }
 
-  String toMonth() {
-    return LFDateTime.shared.formatDate(this, format: 'MM');
+  String toDayString({String format = 'dd'}) {
+    return LFDateTime.shared.formatDate(this, format: format);
   }
 
-  String toDay() {
-    return LFDateTime.shared.formatDate(this, format: 'dd');
+  String toTimeString({String format = 'HH:mm'}) {
+    return LFDateTime.shared.formatDate(this, format: format);
   }
 
-  String toTime() {
-    return LFDateTime.shared.formatDate(this, format: 'HH:mm');
+  String toWeekDay({bool short = true}) {
+    String weekDay = '';
+    try {
+      if (short) {
+        weekDay = DateFormat.E('ko_KR').format(this);
+      } else {
+        weekDay = DateFormat.EEEE('ko_KR').format(this);
+      }
+    } catch (_) {}
+    return weekDay;
   }
 
-  String toLocaleHHmmTime() {
-    return millisecondsSinceEpoch.toLocaleHHmmTime();
+  String toAAHHmmTimeString() {
+    return millisecondsSinceEpoch.toAAHHmmTime();
   }
 
-  String toLocaleYearMonthDayWeekDate() {
-    return millisecondsSinceEpoch.toLocaleYearMonthDayWeekDate();
+  String toYMMDWDateString({bool showUnit = true}) {
+    return millisecondsSinceEpoch.toYMMDWDate(showUnit: showUnit);
   }
 
   DateTime to000000Time() {
-    return DateTime.parse(
-        '${year.toString().padLeft(4, '0')}-${month.toString().padLeft(2, '0')}-${day.toString().padLeft(2, '0')} 00:00:00');
+    final year = this.year.toString().padLeft(4, '0');
+    final month = this.month.toString().padLeft(2, '0');
+    final day = this.day.toString().padLeft(2, '0');
+    return DateTime.parse('$year-$month-$day 00:00:00');
   }
 
   DateTime to235959Time() {
-    return DateTime.parse(
-        '${year.toString().padLeft(4, '0')}-${month.toString().padLeft(2, '0')}-${day.toString().padLeft(2, '0')} 23:59:59');
+    final year = this.year.toString().padLeft(4, '0');
+    final month = this.month.toString().padLeft(2, '0');
+    final day = this.day.toString().padLeft(2, '0');
+    return DateTime.parse('$year-$month-$day 23:59:59');
+  }
+}
+
+extension DateTimeCompare on DateTime {
+  bool isAfterOrEqualTo(DateTime dateTime) {
+    final date = this;
+    final isAtSameMomentAs = dateTime.isAtSameMomentAs(date);
+    return isAtSameMomentAs | date.isAfter(dateTime);
+  }
+
+  bool isBeforeOrEqualTo(DateTime dateTime) {
+    final date = this;
+    final isAtSameMomentAs = dateTime.isAtSameMomentAs(date);
+    return isAtSameMomentAs | date.isBefore(dateTime);
+  }
+
+  bool isBetween(DateTime fromDateTime, DateTime toDateTime,
+      {bool equal = true}) {
+    final date = this;
+    if (equal) {
+      final isAfter = date.isAfterOrEqualTo(fromDateTime);
+      final isBefore = date.isBeforeOrEqualTo(toDateTime);
+      return isAfter && isBefore;
+    }
+    final isAfter = date.isAfter(fromDateTime);
+    final isBefore = date.isBefore(toDateTime);
+    return isAfter && isBefore;
   }
 }
 
@@ -85,10 +131,6 @@ extension DateTimeCalendar on DateTime {
   DateTime createUTCMiddayDateTime() {
     // Magic const: 12 is to maintain compatibility with date_utils
     return DateTime.utc(year, month, day, 12, 0, 0);
-  }
-
-  String formatDate({String format = 'yyyy.MM.dd HH:mm'}) {
-    return DateFormat(format).format(this);
   }
 
   bool isToday() {
@@ -161,31 +203,42 @@ extension DateExtension on int {
   }
 
   DateTime get timeToDate {
-    final dateTime = DateTime.fromMillisecondsSinceEpoch(this);
+    final dateTime = toTimestamp();
     return DateTime(dateTime.year, dateTime.month, dateTime.day);
   }
 
   DateTime get timeToDateTime {
-    final dateTime = DateTime.fromMillisecondsSinceEpoch(this);
+    final dateTime = toTimestamp();
     return DateTime(dateTime.year, dateTime.month, dateTime.day, dateTime.hour,
         dateTime.minute);
   }
 
-  String toLocaleHHmmTime() {
+  DateTime toTimestamp() {
+    return DateTime.fromMillisecondsSinceEpoch(this);
+  }
+
+  String toAAHHmmTime() {
     // TODO: Set Locale
-    final dateTime = DateTime.fromMillisecondsSinceEpoch(this);
+    final dateTime = toTimestamp();
     final DateFormat formatter = DateFormat('aa hh:mm', 'ko');
     return formatter.format(dateTime);
   }
 
-  String toLocaleYearMonthDayWeekDate() {
+  String toYMMDWDate({bool showUnit = true}) {
     // TODO: Set Locale
-    final dateTime = DateTime.fromMillisecondsSinceEpoch(this);
-    final weekDay = DateFormat.EEEE('ko_KR').format(dateTime);
+    final dateTime = toTimestamp();
+    //final weekDay = DateFormat.EEEE('ko_KR').format(dateTime);
+    final weekDay = DateFormat.E('ko_KR').format(dateTime);
     final yearUnit = LFDateTime.shared.localization.year;
     final monthUnit = LFDateTime.shared.localization.month;
     final dayUnit = LFDateTime.shared.localization.day;
-    return '${dateTime.year}$yearUnit ${dateTime.month}$monthUnit ${dateTime.day}$dayUnit $weekDay';
+    final year = dateTime.year.toString().padLeft(4, '0');
+    final month = dateTime.month.toString().padLeft(2, '0');
+    final day = dateTime.day.toString().padLeft(2, '0');
+    if (showUnit) {
+      return '$year$yearUnit $month$monthUnit $day$dayUnit ($weekDay)';
+    }
+    return '$year.$month.$day ($weekDay)';
   }
 
   bool isSameDate(int p2) {
