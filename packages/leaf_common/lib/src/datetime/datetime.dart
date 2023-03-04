@@ -1,62 +1,61 @@
 part of lf_common;
 
 abstract class LFDateTimeLocalization {
+  String get year;
+  String get month;
+  String get day;
   String get min;
   String get hour;
-  String get day;
   String get ago;
 }
 
 class ENDateTimeLocalization extends LFDateTimeLocalization {
   @override
-  String get min => 'min';
+  String get year => 'year';
+  @override
+  String get month => 'month';
+  @override
+  String get day => 'day';
   @override
   String get hour => 'hour';
   @override
-  String get day => 'day';
+  String get min => 'min';
   @override
   String get ago => 'ago';
 }
 
 class LFDateTime {
-  // LeafDateTime._();
   static final LFDateTime _instance = LFDateTime._internal();
+
   static LFDateTime get shared => _instance;
+
   LFDateTime._internal() {
     _localization = ENDateTimeLocalization();
   }
 
-  static LFDateTimeLocalization get localization =>
-      LFDateTime.shared._localization;
-
   late LFDateTimeLocalization _localization;
 
-  static String today({String format = 'yyyy-MM-dd HH:mm:ss'}) {
-    final dateStr = DateFormat(format).format(DateTime.now());
-    return dateStr;
+  LFDateTimeLocalization get localization => LFDateTime.shared._localization;
+
+  void config(LFDateTimeLocalization localization) {
+    _localization = localization;
   }
 
-  static String formatString(String value,
-      {String format = 'yyyy.MM.dd HH:mm'}) {
-    if (isEmpty(value)) return '0000.00.00 00:00';
-    final dateTimeToLocal = dateToLocal(value);
-    return DateFormat(format).format(dateTimeToLocal);
+  static DateTime parse(String formattedString) {
+    return DateTime.parse(formattedString);
   }
 
-  static String formatDate(DateTime value,
-      {String format = 'yyyy.MM.dd HH:mm'}) {
-    return DateFormat(format).format(value);
+  static DateTime today() {
+    return DateTime.now();
   }
 
-  static String formatTimestamp(int timestamp,
-      {String format = 'yyyy.MM.dd HH:mm'}) {
-    if (timestamp == 0) return '0000.00.00 00:00';
-    final dateTimeToLocal =
-        DateTime.fromMillisecondsSinceEpoch(timestamp * 1000);
-    return DateFormat(format).format(dateTimeToLocal);
+  static String todayString({
+    String format = 'yyyy-MM-dd HH:mm:ss',
+  }) {
+    return DateFormat(format).format(today());
   }
 
-  static DateTime dateToLocal(String value) {
+  DateTime dateToLocalTimeStampTZ(String value) {
     DateTime dateTime;
 
     final timeStamp = int.tryParse(value) ?? 0;
@@ -75,22 +74,48 @@ class LFDateTime {
     return dateTime.toLocal();
   }
 
-  static bool betweenNow({required String startDate, required String endDate}) {
-    if (isEmpty(startDate) || isEmpty(endDate)) return false;
-    final n = DateTime.now().toLocal();
-    final s = dateToLocal(startDate);
-    final e = dateToLocal(endDate);
-    final r1 = n.isAfter(s);
-    final r2 = n.isBefore(e);
-    return r1 && r2;
+  String formatString(
+    String value, {
+    String format = 'yyyy.MM.dd HH:mm',
+  }) {
+    if (isEmpty(value)) return '0000.00.00 00:00';
+    final dateTimeToLocal = dateToLocalTimeStampTZ(value);
+    return DateFormat(format).format(dateTimeToLocal);
   }
 
-  static int betweenDifferenceMinutes(
-      {required int timestamp1, required int timestamp2}) {
-    if (timestamp1 == 0 || timestamp2 == 0) return -1;
-    final s = DateTime.fromMillisecondsSinceEpoch(timestamp1);
-    final e = DateTime.fromMillisecondsSinceEpoch(timestamp2);
-    final difference = e.difference(s).inMinutes;
-    return difference;
+  String formatDate(
+    DateTime value, {
+    String format = 'yyyy.MM.dd HH:mm',
+  }) {
+    return DateFormat(format).format(value);
   }
+
+  // String formatTimestamp(
+  //   int timestamp, {
+  //   String format = 'yyyy.MM.dd HH:mm',
+  // }) {
+  //   if (timestamp == 0) return '0000.00.00 00:00';
+  //   final dateTimeToLocal =
+  //       DateTime.fromMillisecondsSinceEpoch(timestamp * 1000);
+  //   return DateFormat(format).format(dateTimeToLocal);
+  // }
+  //
+  // bool betweenNow({required String startDate, required String endDate}) {
+  //   if (isEmpty(startDate) || isEmpty(endDate)) return false;
+  //   final n = DateTime.now().toLocal();
+  //   final s = dateToTimeStampTZ(startDate);
+  //   final e = dateToTimeStampTZ(endDate);
+  //   final r1 = n.isAfter(s);
+  //   final r2 = n.isBefore(e);
+  //   return r1 && r2;
+  // }
+  //
+  // int betweenDifferenceMinutes(
+  //     {required int timestamp1, required int timestamp2}) {
+  //   if (timestamp1 == 0 || timestamp2 == 0) return -1;
+  //   final s = DateTime.fromMillisecondsSinceEpoch(timestamp1);
+  //   final e = DateTime.fromMillisecondsSinceEpoch(timestamp2);
+  //   final difference = e.difference(s).inMinutes;
+  //   return difference;
+  // }
 }

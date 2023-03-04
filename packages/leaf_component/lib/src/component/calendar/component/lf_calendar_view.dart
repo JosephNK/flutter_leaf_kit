@@ -1,17 +1,19 @@
 library lf_calendar_view;
 
+import 'dart:async';
 import 'dart:collection';
 
 import 'package:flutter/material.dart';
 import 'package:leaf_common/leaf_common.dart';
 import 'package:leaf_data/leaf_data.dart';
 
-part 'helper/date_extension.dart';
+part 'controller/lf_calendar_controller.dart';
 part 'provider/lf_calendar_provider.dart';
 part 'widget/lf_calendar_page_cell.dart';
 part 'widget/lf_calendar_page_view.dart';
 
 typedef LFCalendarViewOnMonthChanged = void Function(
+  DateTime month,
   DateTime startDateInMonth,
   DateTime endDateInMonth,
 );
@@ -31,6 +33,7 @@ class LFCalendarView extends StatefulWidget {
   final DateTime minDate;
   final DateTime maxDate;
   final LFCalendarCellBuilder cellBuilder;
+  final LFCalendarController? controller;
   final TextStyle? dayTextStyle;
   final Color todayColor;
   final Color selectedColor;
@@ -49,6 +52,7 @@ class LFCalendarView extends StatefulWidget {
     required this.minDate,
     required this.maxDate,
     required this.cellBuilder,
+    this.controller,
     this.dayTextStyle,
     this.todayColor = Colors.purple,
     this.selectedColor = Colors.purpleAccent,
@@ -71,9 +75,13 @@ class _LFCalendarViewState extends State<LFCalendarView> {
 
   final List<DateTime> _pageDateTimes = [];
 
+  late int _initialPage;
   int _pageNum = 0;
   double _pageHeight = 0.0;
-  DateTime _currentDateTime = DateTime.now();
+  DateTime _defaultDateTime = LFDateTime.today();
+
+  BuildContext? _providerContext;
+  StreamSubscription<LFCalendarControllerEvent>? _streamSubscription;
 
   @override
   void initState() {
@@ -92,22 +100,41 @@ class _LFCalendarViewState extends State<LFCalendarView> {
       _pageDateTimes.add(DateTime(minDate.year, minDate.month + cnt, 1));
     }
 
-    _currentDateTime = widget.defaultDate;
+    _defaultDateTime = widget.defaultDate;
 
-    _pageNum = (_currentDateTime.year - minDate.year) * 12 +
-        _currentDateTime.month -
+    _pageNum = (_defaultDateTime.year - minDate.year) * 12 +
+        _defaultDateTime.month -
         minDate.month;
 
+    _initialPage = _pageNum;
+
     _pageController = PageController(
-      initialPage: _pageNum,
+      initialPage: _initialPage,
       keepPage: true,
       viewportFraction: 1.0,
     );
+
+    _streamSubscription = widget.controller?.streamController?.stream
+        .asBroadcastStream()
+        .listen((event) {
+      final context = _providerContext;
+      if (context != null) {
+        if (event is LFCalendarControllerTodayEvent) {
+          onActionAtToday(context, widget.onMonthChanged);
+        }
+        if (event is LFCalendarControllerSelectedEvent) {
+          onActionAtSelected(context, event.dateTime);
+        }
+      }
+    });
   }
 
   @override
   void dispose() {
     _pageController.dispose();
+    _streamSubscription?.cancel();
+    _providerContext = null;
+
     super.dispose();
   }
 
@@ -140,7 +167,7 @@ class _LFCalendarViewState extends State<LFCalendarView> {
         holidayColor: holidayColor,
         childAspectRatio: childAspectRatio,
         onSelected: (dateTime) {
-          context.read<LFCalendarProvider>().toggle(dateTime, multiple: false);
+          onActionAtSelected(context, dateTime);
         },
         onChangeSized: (size) {
           setState(() {
@@ -153,7 +180,7 @@ class _LFCalendarViewState extends State<LFCalendarView> {
     if (_pageHeight == 0.0) {
       return buildPageView(
         context,
-        pageDateTime: DateTime.now(),
+        pageDateTime: LFDateTime.today(),
         selectedDateTimes: const [],
       );
     }
@@ -162,7 +189,7 @@ class _LFCalendarViewState extends State<LFCalendarView> {
       providers: [
         ChangeNotifierProvider(
           create: (_) => LFCalendarProvider(
-            dateTime: _currentDateTime,
+            dateTime: _defaultDateTime,
             onCellTapped: (dates) {
               widget.onDateSelected?.call(dates);
             },
@@ -171,6 +198,7 @@ class _LFCalendarViewState extends State<LFCalendarView> {
       ],
       child: Builder(
         builder: (context) {
+          _providerContext = context;
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -187,7 +215,7 @@ class _LFCalendarViewState extends State<LFCalendarView> {
                         children: [
                           GestureDetector(
                             onTap: () {
-                              onTapAtPrevious(
+                              onActionAtPrevious(
                                   context, currentDateTime, onMonthChanged);
                             },
                             child: Container(
@@ -220,7 +248,7 @@ class _LFCalendarViewState extends State<LFCalendarView> {
                           ),
                           GestureDetector(
                             onTap: () {
-                              onTapAtNext(
+                              onActionAtNext(
                                   context, currentDateTime, onMonthChanged);
                             },
                             child: Container(
@@ -310,35 +338,73 @@ class _LFCalendarViewState extends State<LFCalendarView> {
   /// Provider with onMonthChanged
   ///
 
-  void onTapAtPrevious(
+  final _duration = const Duration(milliseconds: 150);
+
+  void onActionAtSelected(
     BuildContext context,
-    DateTime currentDateTime,
+    DateTime dateTime, {
+    bool multiple = false,
+  }) {
+    context.read<LFCalendarProvider>().toggle(dateTime, multiple: multiple);
+  }
+
+  void onActionAtToday(
+    BuildContext context,
     LFCalendarViewOnMonthChanged? onMonthChanged,
-  ) {
-    final dateTime = currentDateTime.previousMonth();
+  ) async {
+    final dateTime = LFDateTime.today();
 
     context.read<LFCalendarProvider>().setDateTime(dateTime);
+    context.read<LFCalendarProvider>().removeAll();
 
-    previousPage();
+    todayPage();
+
+    await Future.delayed(_duration);
 
     onMonthChanged?.call(
+      dateTime.inMonth(),
       dateTime.firstDayOfWeek(),
       dateTime.lastDayOfWeek(),
     );
   }
 
-  void onTapAtNext(
+  void onActionAtPrevious(
     BuildContext context,
     DateTime currentDateTime,
     LFCalendarViewOnMonthChanged? onMonthChanged,
-  ) {
+  ) async {
+    final dateTime = currentDateTime.previousMonth();
+
+    context.read<LFCalendarProvider>().setDateTime(dateTime);
+    context.read<LFCalendarProvider>().removeAll();
+
+    previousPage();
+
+    await Future.delayed(_duration);
+
+    onMonthChanged?.call(
+      dateTime.inMonth(),
+      dateTime.firstDayOfWeek(),
+      dateTime.lastDayOfWeek(),
+    );
+  }
+
+  void onActionAtNext(
+    BuildContext context,
+    DateTime currentDateTime,
+    LFCalendarViewOnMonthChanged? onMonthChanged,
+  ) async {
     final dateTime = currentDateTime.nextMonth();
 
     context.read<LFCalendarProvider>().setDateTime(dateTime);
+    context.read<LFCalendarProvider>().removeAll();
 
     nextPage();
 
+    await Future.delayed(_duration);
+
     onMonthChanged?.call(
+      dateTime.inMonth(),
       dateTime.firstDayOfWeek(),
       dateTime.lastDayOfWeek(),
     );
@@ -348,10 +414,14 @@ class _LFCalendarViewState extends State<LFCalendarView> {
     BuildContext context,
     DateTime pageDateTime,
     LFCalendarViewOnMonthChanged? onMonthChanged,
-  ) {
+  ) async {
     context.read<LFCalendarProvider>().setDateTime(pageDateTime);
+    context.read<LFCalendarProvider>().removeAll();
+
+    // await Future.delayed(_duration);
 
     onMonthChanged?.call(
+      pageDateTime.inMonth(),
       pageDateTime.firstDayOfWeek(),
       pageDateTime.lastDayOfWeek(),
     );
@@ -363,16 +433,21 @@ class _LFCalendarViewState extends State<LFCalendarView> {
 
   void animatedToPage(int page) {
     _pageController.animateToPage(page,
-        duration: const Duration(milliseconds: 150), curve: Curves.easeIn);
+        duration: _duration, curve: Curves.easeIn);
+  }
+
+  void todayPage() {
+    _pageController.animateToPage(_initialPage,
+        duration: _duration, curve: Curves.easeIn);
   }
 
   void previousPage() {
     _pageController.animateToPage(_pageController.page!.toInt() - 1,
-        duration: const Duration(milliseconds: 150), curve: Curves.easeIn);
+        duration: _duration, curve: Curves.easeIn);
   }
 
   void nextPage() {
     _pageController.animateToPage(_pageController.page!.toInt() + 1,
-        duration: const Duration(milliseconds: 150), curve: Curves.easeIn);
+        duration: _duration, curve: Curves.easeIn);
   }
 }

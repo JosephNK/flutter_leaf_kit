@@ -112,7 +112,7 @@ class _LFWebViewState extends State<LFWebView> {
           height = (maxHeight.isInfinite) ? 0.0 : maxHeight;
         }
         return SizedBox(
-          height: max(height, _contentHeight),
+          height: math.max(height, _contentHeight),
           child: Stack(
             children: [
               WebViewWidget(

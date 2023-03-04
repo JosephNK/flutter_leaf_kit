@@ -2,7 +2,7 @@ library lf_webview;
 
 import 'dart:async';
 import 'dart:convert';
-import 'dart:math';
+import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 import 'package:leaf_common/leaf_common.dart';
