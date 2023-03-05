@@ -40,6 +40,20 @@ extension DateTimeString on DateTime {
     return LFDateTime.shared.formatDate(this, format: format);
   }
 
+  String toLunarDateString({String format = 'yyyy-MM-dd'}) {
+    // param : year(년), month(월), day(일)
+    setSolarDate(year, month, day);
+    final lunar = getLunarIsoFormat();
+    return LFDateTime.shared.formatString(lunar, format: format);
+  }
+
+  String toSolarDateString({String format = 'yyyy-MM-dd'}) {
+    // param : year(년), month(월), day(일), intercalation(윤달여부)
+    setLunarDate(year, month, day, false);
+    final solar = getSolarIsoFormat();
+    return LFDateTime.shared.formatString(solar, format: format);
+  }
+
   String toWeekDay({bool short = true}) {
     String weekDay = '';
     try {

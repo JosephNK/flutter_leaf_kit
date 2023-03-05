@@ -19,6 +19,7 @@ dependencies:
   string_validator: ^0.3.0
   device_info_plus: ^8.1.0
   package_info_plus: ^3.0.3
+  klc: ^0.1.0
 
 dev_dependencies:
   flutter_test:
