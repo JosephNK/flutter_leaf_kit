@@ -161,10 +161,8 @@ class _CalendarPickerContentState extends State<_CalendarPickerContent> {
               cellBuilder: (context, dateTime, size) {
                 return Column();
               },
-              onMonthChanged: (month, startDateTime, endDateTime) {
-                // _controller.addEvent(
-                //     LFCalendarControllerSelectedEvent(dateTime: month));
-              },
+              onMonthChanged:
+                  (month, startDateTime, endDateTime, selectedDate) {},
               onMonthOnTap: (month) {
                 print('onMonthOnTap: $month');
               },
