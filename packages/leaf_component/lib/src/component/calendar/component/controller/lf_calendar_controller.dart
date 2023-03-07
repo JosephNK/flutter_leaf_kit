@@ -12,6 +12,12 @@ class LFCalendarControllerSelectedEvent extends LFCalendarControllerEvent {
   LFCalendarControllerSelectedEvent({required this.dateTime});
 }
 
+class LFCalendarControllerMonthSelectedEvent extends LFCalendarControllerEvent {
+  final DateTime dateTime;
+
+  LFCalendarControllerMonthSelectedEvent({required this.dateTime});
+}
+
 mixin LFCalendarControllerMixIn {
   late StreamController<LFCalendarControllerEvent>? streamController;
 

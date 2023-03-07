@@ -128,6 +128,18 @@ class _DialogScreenState extends ScreenState<DialogScreen> {
             },
           ),
         ),
+        const SizedBox(height: 10.0),
+        Center(
+          child: LFFlatButton(
+            text: 'Show Calendar Picker Dialog',
+            onPressed: () {
+              LFCalendarPickerDialog.show(
+                context,
+                pickerSelect: LFCalendarPickerSelect.start,
+              );
+            },
+          ),
+        ),
       ],
     );
   }

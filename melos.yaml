@@ -5,6 +5,7 @@ command:
     usePubspecOverrides: true
 
 packages:
+  - example/**
   - packages/**
 
 scripts:

@@ -1,28 +1,30 @@
 part of lf_calendar_view;
 
 class LFCalendarPageCell extends StatelessWidget {
-  final LFCalendarCellBuilder cellBuilder;
   final DateTime dateTime;
   final List<DateTime> selectedDateTimes;
+  final LFCalendarCellBuilder? cellBuilder;
   final int weekday;
   final bool isDisabled;
   final TextStyle? dayTextStyle;
   final Color todayColor;
   final Color selectedColor;
   final Color holidayColor;
+  final bool showToday;
   final ValueChanged<DateTime>? onSelected;
 
   const LFCalendarPageCell({
     Key? key,
-    required this.cellBuilder,
     required this.dateTime,
     required this.selectedDateTimes,
+    this.cellBuilder,
     this.weekday = -1,
     this.isDisabled = false,
     this.dayTextStyle,
     this.todayColor = Colors.purple,
     this.selectedColor = Colors.purpleAccent,
     this.holidayColor = Colors.red,
+    this.showToday = true,
     this.onSelected,
   }) : super(key: key);
 
@@ -34,6 +36,7 @@ class LFCalendarPageCell extends StatelessWidget {
     final todayColor = this.todayColor;
     final selectedColor = this.selectedColor;
     final holidayColor = this.holidayColor;
+    final showToday = this.showToday;
     final onSelected = this.onSelected;
 
     final isSelected = selectedDateTimes
@@ -43,10 +46,18 @@ class LFCalendarPageCell extends StatelessWidget {
     final isToday = dateTime.isToday();
     final day = dateTime.day.toString();
 
+    final dayBackgroundColor = isToday
+        ? showToday
+            ? todayColor
+            : Colors.transparent
+        : Colors.transparent;
+
     final dayTextColor = weekday == 7
         ? holidayColor
         : isToday
-            ? Colors.white
+            ? showToday
+                ? Colors.white
+                : Colors.black
             : Colors.black;
 
     return Material(
@@ -68,7 +79,7 @@ class LFCalendarPageCell extends StatelessWidget {
                   // padding: const EdgeInsets.all(4.0),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(26.0),
-                    color: isToday ? todayColor : Colors.transparent,
+                    color: dayBackgroundColor,
                     border: Border.all(
                       color: isSelected ? selectedColor : Colors.transparent,
                     ),
@@ -90,11 +101,12 @@ class LFCalendarPageCell extends StatelessWidget {
                   ),
                 ),
               ),
-              cellBuilder.call(
-                context,
-                dateTime,
-                Size(constraints.maxWidth, constraints.maxHeight - 24.0),
-              ),
+              cellBuilder?.call(
+                    context,
+                    dateTime,
+                    Size(constraints.maxWidth, constraints.maxHeight - 24.0),
+                  ) ??
+                  Container(),
             ],
           );
         }),

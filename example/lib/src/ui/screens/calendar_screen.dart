@@ -86,7 +86,7 @@ class _CalendarScreenState extends ScreenState<CalendarScreen> {
                 ),
               );
             },
-            onMonthChanged: (startDateTime, endDateTime) {
+            onMonthChanged: (month, startDateTime, endDateTime) {
               Logging.d('onMonthChanged: $startDateTime, $endDateTime');
             },
             onDateSelected: (dateTimes) {

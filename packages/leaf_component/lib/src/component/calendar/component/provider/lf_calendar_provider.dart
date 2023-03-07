@@ -25,6 +25,7 @@ class LFCalendarProvider extends ChangeNotifier {
 
   void _initialize(DateTime dateTime) {
     _currentDateTime = dateTime;
+    _selectedDateTimes = [dateTime];
     notifyListeners();
   }
 

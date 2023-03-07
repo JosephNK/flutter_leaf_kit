@@ -3,27 +3,29 @@ part of lf_calendar_view;
 typedef LFCalendarPageViewOnSizeChanged = void Function(Size size);
 
 class LFCalendarPageView extends StatefulWidget {
-  final LFCalendarCellBuilder cellBuilder;
   final DateTime pageDateTime;
   final List<DateTime> selectedDateTimes;
+  final LFCalendarCellBuilder? cellBuilder;
   final TextStyle? dayTextStyle;
   final Color todayColor;
   final Color selectedColor;
   final Color holidayColor;
   final double childAspectRatio;
+  final bool showToday;
   final ValueChanged<DateTime>? onSelected;
   final LFCalendarPageViewOnSizeChanged? onChangeSized;
 
   const LFCalendarPageView({
     Key? key,
-    required this.cellBuilder,
     required this.pageDateTime,
     required this.selectedDateTimes,
+    this.cellBuilder,
     this.dayTextStyle,
     this.todayColor = Colors.purple,
     this.selectedColor = Colors.purpleAccent,
     this.holidayColor = Colors.red,
     this.childAspectRatio = 1.0,
+    this.showToday = true,
     this.onSelected,
     this.onChangeSized,
   }) : super(key: key);
@@ -62,6 +64,7 @@ class _LFCalendarPageViewState extends State<LFCalendarPageView> {
     final selectedColor = widget.selectedColor;
     final holidayColor = widget.holidayColor;
     final childAspectRatio = widget.childAspectRatio;
+    final showToday = widget.showToday;
     final onSelected = widget.onSelected;
 
     return GridView.builder(
@@ -84,15 +87,16 @@ class _LFCalendarPageViewState extends State<LFCalendarPageView> {
         final isDisabled = (pageDateTime.month != dateTime.month);
 
         return LFCalendarPageCell(
-          cellBuilder: cellBuilder,
           dateTime: dateTime,
           selectedDateTimes: selectedDateTimes,
+          cellBuilder: cellBuilder,
           weekday: weekday,
           isDisabled: isDisabled,
           dayTextStyle: dayTextStyle,
           todayColor: todayColor,
           selectedColor: selectedColor,
           holidayColor: holidayColor,
+          showToday: showToday,
           onSelected: onSelected,
         );
         // final date = _dateTimes[index];
