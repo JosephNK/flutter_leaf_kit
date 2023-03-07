@@ -1,11 +1,13 @@
 part of lf_calendar_view;
 
 class LFCalendarMonthDatePicker {
-  static Future show(
+  static Future<DateTime?> show(
     BuildContext context, {
     required DateTime date,
     DateTime? minDate,
     DateTime? maxDate,
+    Color activeColor = Colors.purple,
+    String okText = 'OK',
     ValueChanged<DateTime>? onOK,
   }) async {
     return await showDialog(
@@ -15,6 +17,9 @@ class LFCalendarMonthDatePicker {
           date: date,
           minDate: minDate,
           maxDate: maxDate,
+          activeColor: activeColor,
+          okText: okText,
+          dialog: true,
           onOK: onOK,
         );
       },
@@ -26,6 +31,9 @@ class _LFCalendarMonthContent extends StatefulWidget {
   final DateTime date;
   final DateTime? minDate;
   final DateTime? maxDate;
+  final Color activeColor;
+  final String okText;
+  final bool dialog;
   final ValueChanged<DateTime>? onOK;
 
   const _LFCalendarMonthContent({
@@ -33,6 +41,9 @@ class _LFCalendarMonthContent extends StatefulWidget {
     required this.date,
     this.minDate,
     this.maxDate,
+    this.activeColor = Colors.purple,
+    this.okText = 'OK',
+    this.dialog = true,
     this.onOK,
   }) : super(key: key);
 
@@ -72,6 +83,109 @@ class _LFCalendarMonthContentState extends State<_LFCalendarMonthContent> {
 
   @override
   Widget build(BuildContext context) {
+    final child = Padding(
+      padding: const EdgeInsets.all(25.0),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          SizedBox(
+            height: 150.0,
+            child: Row(
+              children: [
+                Expanded(
+                  child: CupertinoPicker.builder(
+                    scrollController:
+                        FixedExtentScrollController(initialItem: _yearIndex),
+                    childCount: _yearDif,
+                    itemExtent: kItemExtent,
+                    onSelectedItemChanged: (index) {
+                      final selectedYear = _years[index].toString();
+                      _selectedYear = selectedYear;
+                    },
+                    itemBuilder: (context, index) {
+                      final dateText =
+                          (_minDate.year + index).toString().padLeft(4, '0');
+
+                      return Center(
+                        child: Text(
+                          dateText,
+                          textAlign: TextAlign.center,
+                          style: CupertinoTheme.of(context)
+                              .textTheme
+                              .dateTimePickerTextStyle,
+                        ),
+                      );
+                    },
+                  ),
+                ),
+                Expanded(
+                  child: CupertinoPicker.builder(
+                    scrollController: FixedExtentScrollController(
+                        initialItem: _date.month - 1),
+                    childCount: 12,
+                    itemExtent: kItemExtent,
+                    onSelectedItemChanged: (index) {
+                      final selectedMonth =
+                          (index + 1).toString().padLeft(2, '0');
+                      _selectedMonth = selectedMonth;
+                    },
+                    itemBuilder: (context, index) {
+                      final dateText = (index + 1).toString().padLeft(2, '0');
+
+                      return Center(
+                        child: Text(
+                          dateText,
+                          textAlign: TextAlign.center,
+                          style: CupertinoTheme.of(context)
+                              .textTheme
+                              .dateTimePickerTextStyle,
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: 10.0),
+          Row(
+            children: [
+              Expanded(
+                child: GestureDetector(
+                  onTap: () {
+                    final dateTime =
+                        LFDateTime.parse('$_selectedYear-$_selectedMonth-01');
+                    widget.onOK?.call(dateTime);
+                    Navigator.pop(context, dateTime);
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(14.0),
+                      color: widget.activeColor,
+                    ),
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 15.0, horizontal: 20.0),
+                    child: LFText(
+                      widget.okText,
+                      style: const TextStyle(
+                        fontSize: 18.0,
+                        color: Colors.white,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          )
+        ],
+      ),
+    );
+
+    if (!widget.dialog) {
+      return child;
+    }
+
     return Dialog(
       insetPadding:
           const EdgeInsets.symmetric(horizontal: 40.0, vertical: 80.0),
@@ -80,102 +194,7 @@ class _LFCalendarMonthContentState extends State<_LFCalendarMonthContent> {
       ),
       elevation: 4.0,
       backgroundColor: Colors.white,
-      child: Padding(
-        padding: const EdgeInsets.all(25.0),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            SizedBox(
-              height: 200.0,
-              child: Row(
-                children: [
-                  Expanded(
-                    child: CupertinoPicker.builder(
-                      scrollController:
-                          FixedExtentScrollController(initialItem: _yearIndex),
-                      childCount: _yearDif,
-                      itemExtent: kItemExtent,
-                      onSelectedItemChanged: (index) {
-                        final selectedYear = _years[index].toString();
-                        _selectedYear = selectedYear;
-                      },
-                      itemBuilder: (context, index) {
-                        final dateText =
-                            (_minDate.year + index).toString().padLeft(4, '0');
-
-                        return Center(
-                          child: Text(
-                            dateText,
-                            textAlign: TextAlign.center,
-                            style: CupertinoTheme.of(context)
-                                .textTheme
-                                .dateTimePickerTextStyle,
-                          ),
-                        );
-                      },
-                    ),
-                  ),
-                  Expanded(
-                    child: CupertinoPicker.builder(
-                      scrollController: FixedExtentScrollController(
-                          initialItem: _date.month - 1),
-                      childCount: 12,
-                      itemExtent: kItemExtent,
-                      onSelectedItemChanged: (index) {
-                        final selectedMonth =
-                            (index + 1).toString().padLeft(2, '0');
-                        _selectedMonth = selectedMonth;
-                      },
-                      itemBuilder: (context, index) {
-                        final dateText = (index + 1).toString().padLeft(2, '0');
-
-                        return Center(
-                          child: Text(
-                            dateText,
-                            textAlign: TextAlign.center,
-                            style: CupertinoTheme.of(context)
-                                .textTheme
-                                .dateTimePickerTextStyle,
-                          ),
-                        );
-                      },
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Row(
-              children: [
-                Expanded(
-                  child: GestureDetector(
-                    onTap: () {
-                      widget.onOK?.call(LFDateTime.parse(
-                          '$_selectedYear-$_selectedMonth-01'));
-                      Navigator.of(context).pop();
-                    },
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(14.0),
-                        color: Colors.blue,
-                      ),
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 15.0, horizontal: 20.0),
-                      child: LFText(
-                        'OK',
-                        style: const TextStyle(
-                          fontSize: 18.0,
-                          color: Colors.white,
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            )
-          ],
-        ),
-      ),
+      child: child,
     );
   }
 }

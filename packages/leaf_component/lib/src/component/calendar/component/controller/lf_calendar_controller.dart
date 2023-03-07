@@ -32,6 +32,18 @@ mixin LFCalendarControllerMixIn {
   void addEvent(LFCalendarControllerEvent value) {
     streamController?.sink.add(value);
   }
+
+  void addTodayEvent() {
+    addEvent(LFCalendarControllerTodayEvent());
+  }
+
+  void addSelectedEvent(DateTime dateTime) {
+    addEvent(LFCalendarControllerSelectedEvent(dateTime: dateTime));
+  }
+
+  void addMonthSelectedEvent(DateTime dateTime) {
+    addEvent(LFCalendarControllerMonthSelectedEvent(dateTime: dateTime));
+  }
 }
 
 class LFCalendarController with LFCalendarControllerMixIn {

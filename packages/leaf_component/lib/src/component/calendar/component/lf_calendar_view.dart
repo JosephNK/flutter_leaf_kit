@@ -13,8 +13,10 @@ import '../../text/lf_text.dart';
 part 'controller/lf_calendar_controller.dart';
 part 'provider/lf_calendar_provider.dart';
 part 'widget/lf_calendar_month_date_picker.dart';
+part 'widget/lf_calendar_month_view.dart';
 part 'widget/lf_calendar_page_cell.dart';
 part 'widget/lf_calendar_page_view.dart';
+part 'widget/lf_calendar_weekday_view.dart';
 
 enum LFCalendarFormat { month }
 
@@ -53,6 +55,7 @@ class LFCalendarView extends StatefulWidget {
   final List<String> weekDays;
   final String yearUnit;
   final String monthUnit;
+  final String okText;
   final ScrollPhysics? physics;
   final bool showToday;
   final LFCalendarViewOnMonthOnTap? onMonthOnTap;
@@ -74,6 +77,7 @@ class LFCalendarView extends StatefulWidget {
     this.weekDays = const ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
     this.yearUnit = '.',
     this.monthUnit = '',
+    this.okText = 'OK',
     this.physics,
     this.showToday = true,
     this.onMonthOnTap,
@@ -212,113 +216,34 @@ class _LFCalendarViewState extends State<LFCalendarView> {
               Consumer<LFCalendarProvider>(
                 builder: (context, provider, child) {
                   final currentDateTime = provider.currentDateTime;
-                  final year = currentDateTime.toYearString();
-                  final month = currentDateTime.toMonthString();
 
-                  return Column(
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          GestureDetector(
-                            onTap: () {
-                              onActionAtPrevious(
-                                  context, currentDateTime, onMonthChanged);
-                            },
-                            child: Container(
-                              width: 25.0,
-                              height: 25.0,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(25.0),
-                                color: const Color.fromRGBO(186, 186, 186, 0.3),
-                              ),
-                              child: const Center(
-                                child: Icon(
-                                  Icons.arrow_back_ios_new,
-                                  size: 14.0,
-                                  color: Color.fromRGBO(0, 0, 0, 1),
-                                ),
-                              ),
-                            ),
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                              final onMonthOnTap = widget.onMonthOnTap;
-                              if (onMonthOnTap != null) {
-                                final date = LFDateTime.parse(currentDateTime
-                                    .toDateTimeString(format: 'yyyy-MM-dd'));
-                                LFCalendarMonthDatePicker.show(
-                                  context,
-                                  date: date,
-                                  onOK: (dateTime) {
-                                    onActionAtMonthSelected(context, dateTime);
-                                  },
-                                );
-                                onMonthOnTap.call(date);
-                              }
-                            },
-                            child: Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 15.0),
-                              child: Text(
-                                '$year$yearUnit$month$monthUnit',
-                                style: const TextStyle(
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 22.0,
-                                ),
-                                textAlign: TextAlign.center,
-                              ),
-                            ),
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                              onActionAtNext(
-                                  context, currentDateTime, onMonthChanged);
-                            },
-                            child: Container(
-                              width: 25.0,
-                              height: 25.0,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(25.0),
-                                color: const Color.fromRGBO(186, 186, 186, 0.3),
-                              ),
-                              child: const Center(
-                                child: Icon(
-                                  Icons.arrow_forward_ios,
-                                  size: 14.0,
-                                  color: Color.fromRGBO(0, 0, 0, 1),
-                                ),
-                              ),
-                            ),
-                          )
-                        ],
-                      ),
-                      const SizedBox(height: 10.0),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          for (var i = 0; i < weekDays.length; i++)
-                            Expanded(
-                              child: Container(
-                                padding:
-                                    const EdgeInsets.symmetric(vertical: 8.0),
-                                child: Text(
-                                  weekDays[i],
-                                  style: TextStyle(
-                                    fontSize: 13.0,
-                                    color: (i == 0)
-                                        ? holidayColor
-                                        : const Color.fromRGBO(0, 0, 0, 0.6),
-                                  ),
-                                  textAlign: TextAlign.center,
-                                ),
-                              ),
-                            ),
-                        ],
-                      ),
-                    ],
+                  return LFCalendarMonthView(
+                    dateTime: currentDateTime,
+                    minDate: _minDate,
+                    maxDate: _maxDate,
+                    yearUnit: yearUnit,
+                    monthUnit: monthUnit,
+                    pickerActiveColor: widget.selectedColor,
+                    pickerOKText: widget.okText,
+                    onPrev: () {
+                      onActionAtPrevious(
+                          context, currentDateTime, onMonthChanged);
+                    },
+                    onNext: () {
+                      onActionAtNext(context, currentDateTime, onMonthChanged);
+                    },
+                    onPickerSelectTap: (widget.onMonthOnTap == null)
+                        ? null
+                        : (dateTime) {
+                            onActionAtMonthSelected(context, dateTime);
+                            widget.onMonthOnTap?.call(dateTime);
+                          },
                   );
                 },
+              ),
+              LFCalendarWeekDayView(
+                holidayColor: holidayColor,
+                weekDays: weekDays,
               ),
               SizedBox(
                 height: _pageHeight,
