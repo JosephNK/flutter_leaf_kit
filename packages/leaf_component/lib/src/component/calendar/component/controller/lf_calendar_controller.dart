@@ -29,20 +29,20 @@ mixin LFCalendarControllerMixIn {
     streamController?.close();
   }
 
-  void addEvent(LFCalendarControllerEvent value) {
+  void fireTodayEvent() {
+    _addEvent(LFCalendarControllerTodayEvent());
+  }
+
+  void fireSelectedEvent(DateTime dateTime) {
+    _addEvent(LFCalendarControllerSelectedEvent(dateTime: dateTime));
+  }
+
+  void fireMonthSelectedEvent(DateTime dateTime) {
+    _addEvent(LFCalendarControllerMonthSelectedEvent(dateTime: dateTime));
+  }
+
+  void _addEvent(LFCalendarControllerEvent value) {
     streamController?.sink.add(value);
-  }
-
-  void addTodayEvent() {
-    addEvent(LFCalendarControllerTodayEvent());
-  }
-
-  void addSelectedEvent(DateTime dateTime) {
-    addEvent(LFCalendarControllerSelectedEvent(dateTime: dateTime));
-  }
-
-  void addMonthSelectedEvent(DateTime dateTime) {
-    addEvent(LFCalendarControllerMonthSelectedEvent(dateTime: dateTime));
   }
 }
 
