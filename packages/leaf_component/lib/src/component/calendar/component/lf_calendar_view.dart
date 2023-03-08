@@ -32,7 +32,7 @@ typedef LFCalendarViewOnMonthChanged = void Function(
 );
 
 typedef LFCalendarViewOnDateSelected = void Function(
-  List<DateTime> dates,
+  DateTime? selectedDate,
 );
 
 typedef LFCalendarCellBuilder = Widget Function(
@@ -197,7 +197,8 @@ class _LFCalendarViewState extends State<LFCalendarView> {
             dateTime: _defaultDateTime,
             onCellTapped: (dates) {
               // Send Event CallBack
-              onDateSelected?.call(dates);
+              final selectDate = dates.isNotEmpty ? dates.first : null;
+              onDateSelected?.call(selectDate);
             },
           ),
         ),

@@ -174,17 +174,18 @@ class _CalendarDatePickerContentState
               onMonthChanged:
                   (startDateTime, endDateTime, monthDate, selectedDate) {},
               onMonthOnTap: (month) {},
-              onDateSelected: (dateTimes) {
+              onDateSelected: (selectedDate) {
+                if (selectedDate == null) return;
                 final pickerSelect = widget.pickerSelect;
                 switch (pickerSelect) {
                   case LFCalendarDatePickerSelect.start:
                     setState(() {
-                      _startDate = dateTimes.first;
+                      _startDate = selectedDate;
                     });
                     break;
                   case LFCalendarDatePickerSelect.end:
                     setState(() {
-                      _endDate = dateTimes.first;
+                      _endDate = selectedDate;
                     });
                     break;
                 }
