@@ -25,9 +25,9 @@ typedef LFCalendarViewOnMonthOnTap = void Function(
 );
 
 typedef LFCalendarViewOnMonthChanged = void Function(
-  DateTime month,
   DateTime startDateInMonth,
   DateTime endDateInMonth,
+  DateTime monthDate,
   DateTime? selectedDate,
 );
 
@@ -155,6 +155,7 @@ class _LFCalendarViewState extends State<LFCalendarView> {
     final physics = widget.physics;
     final showToday = widget.showToday;
     final cellBuilder = widget.cellBuilder;
+    final onDateSelected = widget.onDateSelected;
     final onMonthChanged = widget.onMonthChanged;
 
     Widget buildPageView(
@@ -172,9 +173,11 @@ class _LFCalendarViewState extends State<LFCalendarView> {
         holidayColor: holidayColor,
         childAspectRatio: childAspectRatio,
         showToday: showToday,
-        onSelected: (dateTime) {
-          onActionAtSelected(context, dateTime, null);
-        },
+        onSelected: (onDateSelected == null)
+            ? null
+            : (dateTime) {
+                onActionAtSelected(context, dateTime, null);
+              },
         onChangeSized: (size) {
           setState(() {
             _pageHeight = size.height;
@@ -193,7 +196,7 @@ class _LFCalendarViewState extends State<LFCalendarView> {
           create: (_) => LFCalendarProvider(
             dateTime: _defaultDateTime,
             onCellTapped: (dates) {
-              widget.onDateSelected?.call(dates);
+              onDateSelected?.call(dates);
             },
           ),
         ),
@@ -214,13 +217,18 @@ class _LFCalendarViewState extends State<LFCalendarView> {
                     maxDate: _maxDate,
                     pickerActiveColor: widget.selectedColor,
                     pickerOKText: widget.okText,
-                    onPrev: () {
-                      onActionAtPrevious(
-                          context, currentDateTime, onMonthChanged);
-                    },
-                    onNext: () {
-                      onActionAtNext(context, currentDateTime, onMonthChanged);
-                    },
+                    onPrev: (onMonthChanged == null)
+                        ? null
+                        : () {
+                            onActionAtPrevious(
+                                context, currentDateTime, onMonthChanged);
+                          },
+                    onNext: (onMonthChanged == null)
+                        ? null
+                        : () {
+                            onActionAtNext(
+                                context, currentDateTime, onMonthChanged);
+                          },
                     onPickerSelectTap: (widget.onMonthOnTap == null)
                         ? null
                         : (dateTime) {
@@ -241,7 +249,9 @@ class _LFCalendarViewState extends State<LFCalendarView> {
                         provider.selectedDateTimes.toList();
 
                     return PageView.builder(
-                      physics: physics,
+                      physics: (onMonthChanged == null)
+                          ? const NeverScrollableScrollPhysics()
+                          : physics,
                       controller: _pageController,
                       itemCount: _getPageCount(
                           LFCalendarFormat.month, _minDate, _maxDate),
@@ -380,9 +390,9 @@ class _LFCalendarViewState extends State<LFCalendarView> {
         onActionAtSelected(context, dateTime, selectedDateTimes);
 
     onMonthChanged?.call(
-      dateTime.inMonth(),
       dateTime.firstDayOfWeek(),
       dateTime.lastDayOfWeek(),
+      dateTime.inMonth(),
       selectedDate,
     );
   }
@@ -408,9 +418,9 @@ class _LFCalendarViewState extends State<LFCalendarView> {
         onActionAtSelected(context, dateTime, selectedDateTimes);
 
     onMonthChanged?.call(
-      dateTime.inMonth(),
       dateTime.firstDayOfWeek(),
       dateTime.lastDayOfWeek(),
+      dateTime.inMonth(),
       selectedDate,
     );
   }
@@ -436,9 +446,9 @@ class _LFCalendarViewState extends State<LFCalendarView> {
         onActionAtSelected(context, dateTime, selectedDateTimes);
 
     onMonthChanged?.call(
-      dateTime.inMonth(),
       dateTime.firstDayOfWeek(),
       dateTime.lastDayOfWeek(),
+      dateTime.inMonth(),
       selectedDate,
     );
   }
@@ -460,9 +470,9 @@ class _LFCalendarViewState extends State<LFCalendarView> {
         onActionAtSelected(context, pageDateTime, selectedDateTimes);
 
     onMonthChanged?.call(
-      pageDateTime.inMonth(),
       pageDateTime.firstDayOfWeek(),
       pageDateTime.lastDayOfWeek(),
+      pageDateTime.inMonth(),
       selectedDate,
     );
   }

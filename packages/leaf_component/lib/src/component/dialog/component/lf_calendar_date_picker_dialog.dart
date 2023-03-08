@@ -172,7 +172,7 @@ class _CalendarDatePickerContentState
                 return Column();
               },
               onMonthChanged:
-                  (month, startDateTime, endDateTime, selectedDate) {},
+                  (startDateTime, endDateTime, monthDate, selectedDate) {},
               onMonthOnTap: (month) {},
               onDateSelected: (dateTimes) {
                 final pickerSelect = widget.pickerSelect;

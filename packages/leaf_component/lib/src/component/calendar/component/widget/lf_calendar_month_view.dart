@@ -32,22 +32,25 @@ class LFCalendarMonthView extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            GestureDetector(
-              onTap: () {
-                onPrev?.call();
-              },
-              child: Container(
-                width: 25.0,
-                height: 25.0,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(25.0),
-                  color: const Color.fromRGBO(186, 186, 186, 0.3),
-                ),
-                child: const Center(
-                  child: Icon(
-                    Icons.arrow_back_ios_new,
-                    size: 14.0,
-                    color: Color.fromRGBO(0, 0, 0, 1),
+            Visibility(
+              visible: (onPrev != null),
+              child: GestureDetector(
+                onTap: () {
+                  onPrev?.call();
+                },
+                child: Container(
+                  width: 25.0,
+                  height: 25.0,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(25.0),
+                    color: const Color.fromRGBO(186, 186, 186, 0.3),
+                  ),
+                  child: const Center(
+                    child: Icon(
+                      Icons.arrow_back_ios_new,
+                      size: 14.0,
+                      color: Color.fromRGBO(0, 0, 0, 1),
+                    ),
                   ),
                 ),
               ),
@@ -81,22 +84,25 @@ class LFCalendarMonthView extends StatelessWidget {
                 ),
               ),
             ),
-            GestureDetector(
-              onTap: () {
-                onNext?.call();
-              },
-              child: Container(
-                width: 25.0,
-                height: 25.0,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(25.0),
-                  color: const Color.fromRGBO(186, 186, 186, 0.3),
-                ),
-                child: const Center(
-                  child: Icon(
-                    Icons.arrow_forward_ios,
-                    size: 14.0,
-                    color: Color.fromRGBO(0, 0, 0, 1),
+            Visibility(
+              visible: (onNext != null),
+              child: GestureDetector(
+                onTap: () {
+                  onNext?.call();
+                },
+                child: Container(
+                  width: 25.0,
+                  height: 25.0,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(25.0),
+                    color: const Color.fromRGBO(186, 186, 186, 0.3),
+                  ),
+                  child: const Center(
+                    child: Icon(
+                      Icons.arrow_forward_ios,
+                      size: 14.0,
+                      color: Color.fromRGBO(0, 0, 0, 1),
+                    ),
                   ),
                 ),
               ),

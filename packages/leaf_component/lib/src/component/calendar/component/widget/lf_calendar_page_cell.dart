@@ -39,10 +39,12 @@ class LFCalendarPageCell extends StatelessWidget {
     final showToday = this.showToday;
     final onSelected = this.onSelected;
 
-    final isSelected = selectedDateTimes
-        .where((selectedDateTime) => dateTime.isSameDate(selectedDateTime))
-        .toList()
-        .isNotEmpty;
+    final isSelected = (onSelected == null)
+        ? false
+        : selectedDateTimes
+            .where((selectedDateTime) => dateTime.isSameDate(selectedDateTime))
+            .toList()
+            .isNotEmpty;
     final isToday = dateTime.isToday();
     final day = dateTime.day.toString();
 

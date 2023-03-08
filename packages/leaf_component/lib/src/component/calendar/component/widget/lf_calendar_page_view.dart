@@ -79,11 +79,6 @@ class _LFCalendarPageViewState extends State<LFCalendarPageView> {
       itemBuilder: (context, index) {
         final dateTime = _dateTimes[index];
         final weekday = dateTime.weekday;
-        // final isDisabled =
-        //     ((widget.firstDateTime.month ?? -1) != dateTime.month) ||
-        //         (weekday == 6) ||
-        //         (weekday == 7) ||
-        //         (dateTime.isBefore(DateTime.now()));
         final isDisabled = (pageDateTime.month != dateTime.month);
 
         return LFCalendarPageCell(
@@ -99,45 +94,6 @@ class _LFCalendarPageViewState extends State<LFCalendarPageView> {
           showToday: showToday,
           onSelected: onSelected,
         );
-        // final date = _dateTimes[index];
-        // final weekday = date.weekday;
-        //
-        // final isDisabled =
-        //     ((widget.firstDateTime?.month ?? -1) != date.month) ||
-        //         (weekday == 6) ||
-        //         (weekday == 7) ||
-        //         (date.isBefore(DateTime.now()));
-        //
-        // final isSelected = (widget.selectedDateTimes ?? []).contains(date);
-        //
-        // var cellType = NanoCalendarCellType.none;
-        // if (isDisabled) {
-        //   cellType = NanoCalendarCellType.disabled;
-        // }
-        //
-        // final filtered = widget.items
-        //     .where((element) {
-        //   return element.date.isSameDate(date);
-        // })
-        //     .where((element) => element != null)
-        //     .toList();
-        //
-        // NanoCalendarItem item;
-        // if (filtered.isNotEmpty) {
-        //   item = filtered.first;
-        //   cellType = item.type;
-        // }
-        //
-        // return NanoCalendarCell(
-        //   builder: widget.builder,
-        //   cellType: cellType,
-        //   date: date,
-        //   item: item,
-        //   isSelected: isSelected,
-        //   onTap: (date, item, cellType) {
-        //     widget.onCellSeleted?.call(date, item, cellType);
-        //   },
-        // );
       },
     );
   }
