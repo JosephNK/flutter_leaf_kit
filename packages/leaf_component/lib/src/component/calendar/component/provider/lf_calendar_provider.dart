@@ -34,7 +34,11 @@ class LFCalendarProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void toggle(DateTime dateTime, {bool multiple = false}) {
+  void select(
+    DateTime dateTime, {
+    bool useSendEvent = false,
+    bool multiple = false,
+  }) {
     if (multiple) {
       if (_selectedDateTimes.contains(dateTime)) {
         _selectedDateTimes.remove(dateTime);
@@ -45,7 +49,9 @@ class LFCalendarProvider extends ChangeNotifier {
       _selectedDateTimes = [];
       _selectedDateTimes.add(dateTime);
     }
-    onCellTapped.call(_selectedDateTimes);
+    if (useSendEvent) {
+      onCellTapped.call(_selectedDateTimes);
+    }
     notifyListeners();
   }
 
