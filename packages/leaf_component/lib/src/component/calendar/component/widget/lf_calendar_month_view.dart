@@ -4,8 +4,6 @@ class LFCalendarMonthView extends StatelessWidget {
   final DateTime dateTime;
   final DateTime? minDate;
   final DateTime? maxDate;
-  final String yearUnit;
-  final String monthUnit;
   final Color pickerActiveColor;
   final String pickerOKText;
   final VoidCallback? onPrev;
@@ -17,8 +15,6 @@ class LFCalendarMonthView extends StatelessWidget {
     required this.dateTime,
     this.minDate,
     this.maxDate,
-    this.yearUnit = '',
-    this.monthUnit = '',
     this.pickerActiveColor = Colors.purple,
     this.pickerOKText = 'OK',
     this.onPrev,
@@ -76,7 +72,7 @@ class LFCalendarMonthView extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 15.0),
                 child: Text(
-                  '$year$yearUnit$month$monthUnit',
+                  '$year.$month',
                   style: const TextStyle(
                     fontWeight: FontWeight.w600,
                     fontSize: 22.0,

@@ -1,44 +1,28 @@
 part of lf_common;
 
-abstract class LFDateTimeLocalization {
-  String get year;
-  String get month;
-  String get day;
-  String get min;
-  String get hour;
-  String get ago;
-}
-
-class ENDateTimeLocalization extends LFDateTimeLocalization {
-  @override
-  String get year => 'year';
-  @override
-  String get month => 'month';
-  @override
-  String get day => 'day';
-  @override
-  String get hour => 'hour';
-  @override
-  String get min => 'min';
-  @override
-  String get ago => 'ago';
-}
-
 class LFDateTime {
   static final LFDateTime _instance = LFDateTime._internal();
 
   static LFDateTime get shared => _instance;
 
-  LFDateTime._internal() {
-    _localization = ENDateTimeLocalization();
-  }
+  LFDateTime._internal();
 
-  late LFDateTimeLocalization _localization;
+  late LFLocalizations _localization;
 
-  LFDateTimeLocalization get localization => LFDateTime.shared._localization;
+  LFLocalizations get localization => LFDateTime.shared._localization;
 
-  void config(LFDateTimeLocalization localization) {
-    _localization = localization;
+  void config(BuildContext context) {
+    try {
+      final languageCode = context.locale.languageCode;
+      if (languageCode == 'ko') {
+        _localization = LFLocalizationsKo();
+      } else {
+        _localization = LFLocalizationsEn();
+      }
+    } catch (e) {
+      debugPrint('DateFormat Locale error: $e');
+      _localization = LFLocalizationsEn();
+    }
   }
 
   static DateTime parse(String formattedString) {
@@ -88,6 +72,29 @@ class LFDateTime {
     String format = 'yyyy.MM.dd HH:mm',
   }) {
     return DateFormat(format).format(value);
+  }
+
+  DateFormat formatLocaleMeridiemTime(BuildContext context) {
+    try {
+      final languageCode = context.locale.languageCode;
+      if (languageCode == 'ko') {
+        return DateFormat('aa hh:mm', 'ko');
+      }
+      return DateFormat('hh:mm aa', 'en');
+    } catch (e) {
+      debugPrint('DateFormat Locale error: $e');
+      return DateFormat('hh:mm aa', 'en');
+    }
+  }
+
+  DateFormat formatLocaleWeekDay(BuildContext context) {
+    try {
+      final locale = context.locale.toString();
+      return DateFormat.E(locale);
+    } catch (e) {
+      debugPrint('DateFormat Locale error: $e');
+      return DateFormat.E('en_US');
+    }
   }
 
   // String formatTimestamp(

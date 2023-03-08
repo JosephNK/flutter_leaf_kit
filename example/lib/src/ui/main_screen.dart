@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:example/src/manager/navigator_manager.dart';
 import 'package:example/src/model/classes/list_item.dart';
 import 'package:flutter/material.dart';
@@ -28,8 +29,8 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const LFAppBar(
-        title: LFAppBarTitle(text: 'Example'),
+      appBar: LFAppBar(
+        title: LFAppBarTitle(text: 'Example ${'L10N_HELLO'.tr()}'),
       ),
       body: ListView.builder(
         itemCount: _items.length,

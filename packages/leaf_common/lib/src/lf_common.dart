@@ -2,10 +2,11 @@ library lf_common;
 
 import 'dart:io';
 import 'dart:math';
-import 'dart:ui';
 
-import 'package:flutter/foundation.dart' show kIsWeb, kDebugMode;
-import 'package:intl/intl.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart'
+    show SynchronousFuture, kDebugMode, kIsWeb;
 import 'package:klc/klc.dart';
 import 'package:logger/logger.dart';
 import 'package:package_info_plus/package_info_plus.dart';
@@ -22,6 +23,8 @@ part 'datetime/extension/string_date_ext.dart';
 part 'env/env.dart';
 part 'extension/lists.dart';
 part 'extension/numbers.dart';
+part 'localizations/cupertino_localizations_ko.dart';
+part 'localizations/localizations.dart';
 part 'logger/logging.dart';
 part 'notification_center/notification_center.dart';
 part 'number/number.dart';

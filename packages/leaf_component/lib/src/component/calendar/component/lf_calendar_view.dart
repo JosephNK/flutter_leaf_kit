@@ -52,9 +52,6 @@ class LFCalendarView extends StatefulWidget {
   final Color selectedColor;
   final Color holidayColor;
   final double childAspectRatio;
-  final List<String> weekDays;
-  final String yearUnit;
-  final String monthUnit;
   final String okText;
   final ScrollPhysics? physics;
   final bool showToday;
@@ -74,9 +71,6 @@ class LFCalendarView extends StatefulWidget {
     this.selectedColor = Colors.purpleAccent,
     this.holidayColor = Colors.red,
     this.childAspectRatio = 1.0,
-    this.weekDays = const ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
-    this.yearUnit = '.',
-    this.monthUnit = '',
     this.okText = 'OK',
     this.physics,
     this.showToday = true,
@@ -158,9 +152,6 @@ class _LFCalendarViewState extends State<LFCalendarView> {
     final selectedColor = widget.selectedColor;
     final holidayColor = widget.holidayColor;
     final childAspectRatio = widget.childAspectRatio;
-    final weekDays = widget.weekDays;
-    final yearUnit = widget.yearUnit;
-    final monthUnit = widget.monthUnit;
     final physics = widget.physics;
     final showToday = widget.showToday;
     final cellBuilder = widget.cellBuilder;
@@ -221,8 +212,6 @@ class _LFCalendarViewState extends State<LFCalendarView> {
                     dateTime: currentDateTime,
                     minDate: _minDate,
                     maxDate: _maxDate,
-                    yearUnit: yearUnit,
-                    monthUnit: monthUnit,
                     pickerActiveColor: widget.selectedColor,
                     pickerOKText: widget.okText,
                     onPrev: () {
@@ -243,7 +232,6 @@ class _LFCalendarViewState extends State<LFCalendarView> {
               ),
               LFCalendarWeekDayView(
                 holidayColor: holidayColor,
-                weekDays: weekDays,
               ),
               SizedBox(
                 height: _pageHeight,

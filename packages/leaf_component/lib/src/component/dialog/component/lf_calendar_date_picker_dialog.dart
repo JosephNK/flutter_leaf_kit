@@ -1,14 +1,14 @@
 part of lf_dialog;
 
-enum LFCalendarPickerSelect { start, end }
+enum LFCalendarDatePickerSelect { start, end }
 
-typedef LFCalendarPickerOnOK = Function(
-    LFCalendarPickerSelect select, DateTime dateTime);
+typedef LFCalendarDatePickerOnOK = Function(
+    LFCalendarDatePickerSelect select, DateTime dateTime);
 
-class LFCalendarPickerDialog {
+class LFCalendarDatePickerDialog {
   static Future show(
     BuildContext context, {
-    required LFCalendarPickerSelect pickerSelect,
+    required LFCalendarDatePickerSelect pickerSelect,
     DateTime? startDate,
     DateTime? endDate,
     Color activeColor = Colors.purple,
@@ -16,12 +16,12 @@ class LFCalendarPickerDialog {
     String startText = 'Start',
     String endText = 'End',
     String okText = 'OK',
-    LFCalendarPickerOnOK? onOK,
+    LFCalendarDatePickerOnOK? onOK,
   }) async {
     return await showDialog(
       context: context,
       builder: (context) {
-        return _CalendarPickerContent(
+        return _CalendarDatePickerContent(
           pickerSelect: pickerSelect,
           startDate: startDate,
           endDate: endDate,
@@ -37,8 +37,8 @@ class LFCalendarPickerDialog {
   }
 }
 
-class _CalendarPickerContent extends StatefulWidget {
-  final LFCalendarPickerSelect pickerSelect;
+class _CalendarDatePickerContent extends StatefulWidget {
+  final LFCalendarDatePickerSelect pickerSelect;
   final DateTime? startDate;
   final DateTime? endDate;
   final Color activeColor;
@@ -46,9 +46,9 @@ class _CalendarPickerContent extends StatefulWidget {
   final String startText;
   final String endText;
   final String okText;
-  final LFCalendarPickerOnOK? onOK;
+  final LFCalendarDatePickerOnOK? onOK;
 
-  const _CalendarPickerContent({
+  const _CalendarDatePickerContent({
     Key? key,
     required this.pickerSelect,
     this.startDate,
@@ -62,11 +62,14 @@ class _CalendarPickerContent extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<_CalendarPickerContent> createState() => _CalendarPickerContentState();
+  State<_CalendarDatePickerContent> createState() =>
+      _CalendarDatePickerContentState();
 }
 
-class _CalendarPickerContentState extends State<_CalendarPickerContent> {
+class _CalendarDatePickerContentState
+    extends State<_CalendarDatePickerContent> {
   late LFCalendarController _controller;
+  late DateTime _defaultDate;
   late DateTime _startDate;
   late DateTime _endDate;
 
@@ -77,6 +80,15 @@ class _CalendarPickerContentState extends State<_CalendarPickerContent> {
     _controller = LFCalendarController();
     _startDate = widget.startDate ?? LFDateTime.today();
     _endDate = widget.endDate ?? LFDateTime.today();
+    final pickerSelect = widget.pickerSelect;
+    switch (pickerSelect) {
+      case LFCalendarDatePickerSelect.start:
+        _defaultDate = _startDate;
+        break;
+      case LFCalendarDatePickerSelect.end:
+        _defaultDate = _endDate;
+        break;
+    }
   }
 
   @override
@@ -125,9 +137,9 @@ class _CalendarPickerContentState extends State<_CalendarPickerContent> {
                   children: [
                     Expanded(
                       child: LFText(
-                        _startDate.toShortDateTimeString(),
+                        _startDate.toWeekDayDateString(context, short: true),
                         style: TextStyle(
-                            fontSize: 20.0, color: _getStartDateColor()),
+                            fontSize: 18.0, color: _getStartDateColor()),
                         textAlign: TextAlign.left,
                       ),
                     ),
@@ -138,9 +150,9 @@ class _CalendarPickerContentState extends State<_CalendarPickerContent> {
                     ),
                     Expanded(
                       child: LFText(
-                        _endDate.toShortDateTimeString(),
+                        _endDate.toWeekDayDateString(context, short: true),
                         style: TextStyle(
-                            fontSize: 20.0, color: _getEndDateColor()),
+                            fontSize: 18.0, color: _getEndDateColor()),
                         textAlign: TextAlign.right,
                       ),
                     ),
@@ -150,31 +162,27 @@ class _CalendarPickerContentState extends State<_CalendarPickerContent> {
             ),
             const SizedBox(height: 25.0),
             LFCalendarView(
+              defaultDate: _defaultDate,
               controller: _controller,
               childAspectRatio: 1.0,
               todayColor: widget.activeColor,
               selectedColor: widget.activeColor,
-              weekDays: const ['일', '월', '화', '수', '목', '금', '토'],
-              yearUnit: '년',
-              monthUnit: '월',
               showToday: false,
               cellBuilder: (context, dateTime, size) {
                 return Column();
               },
               onMonthChanged:
                   (month, startDateTime, endDateTime, selectedDate) {},
-              onMonthOnTap: (month) {
-                print('onMonthOnTap: $month');
-              },
+              onMonthOnTap: (month) {},
               onDateSelected: (dateTimes) {
                 final pickerSelect = widget.pickerSelect;
                 switch (pickerSelect) {
-                  case LFCalendarPickerSelect.start:
+                  case LFCalendarDatePickerSelect.start:
                     setState(() {
                       _startDate = dateTimes.first;
                     });
                     break;
-                  case LFCalendarPickerSelect.end:
+                  case LFCalendarDatePickerSelect.end:
                     setState(() {
                       _endDate = dateTimes.first;
                     });
@@ -189,10 +197,10 @@ class _CalendarPickerContentState extends State<_CalendarPickerContent> {
                     onTap: () {
                       final pickerSelect = widget.pickerSelect;
                       switch (pickerSelect) {
-                        case LFCalendarPickerSelect.start:
+                        case LFCalendarDatePickerSelect.start:
                           widget.onOK?.call(pickerSelect, _startDate);
                           break;
-                        case LFCalendarPickerSelect.end:
+                        case LFCalendarDatePickerSelect.end:
                           widget.onOK?.call(pickerSelect, _endDate);
                           break;
                       }
@@ -227,9 +235,9 @@ class _CalendarPickerContentState extends State<_CalendarPickerContent> {
   Color _getStartDateColor() {
     final pickerSelect = widget.pickerSelect;
     switch (pickerSelect) {
-      case LFCalendarPickerSelect.start:
+      case LFCalendarDatePickerSelect.start:
         return widget.activeColor;
-      case LFCalendarPickerSelect.end:
+      case LFCalendarDatePickerSelect.end:
         return widget.inactiveColor;
     }
   }
@@ -237,9 +245,9 @@ class _CalendarPickerContentState extends State<_CalendarPickerContent> {
   Color _getEndDateColor() {
     final pickerSelect = widget.pickerSelect;
     switch (pickerSelect) {
-      case LFCalendarPickerSelect.start:
+      case LFCalendarDatePickerSelect.start:
         return widget.inactiveColor;
-      case LFCalendarPickerSelect.end:
+      case LFCalendarDatePickerSelect.end:
         return widget.activeColor;
     }
   }

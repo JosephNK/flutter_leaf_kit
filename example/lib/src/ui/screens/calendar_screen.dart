@@ -42,10 +42,6 @@ class _CalendarScreenState extends ScreenState<CalendarScreen> {
             minDate: DateTime(1900),
             maxDate: DateTime(2200),
             childAspectRatio: 0.9,
-            // physics: const NeverScrollableScrollPhysics(),
-            weekDays: const ['일', '월', '화', '수', '목', '금', '토'],
-            yearUnit: '년',
-            monthUnit: '월',
             cellBuilder: (context, dateTime, size) {
               return Expanded(
                 child: Padding(

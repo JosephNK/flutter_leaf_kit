@@ -66,12 +66,23 @@ extension DateTimeString on DateTime {
     return weekDay;
   }
 
-  String toAAHHmmTimeString() {
-    return millisecondsSinceEpoch.toAAHHmmTime();
+  String toMeridiemTimeString(BuildContext context) {
+    final formatter = LFDateTime.shared.formatLocaleMeridiemTime(context);
+    return formatter.format(this);
   }
 
-  String toYMMDWDateString({bool showUnit = true}) {
-    return millisecondsSinceEpoch.toYMMDWDate(showUnit: showUnit);
+  String toWeekDayDateString(BuildContext context, {bool short = false}) {
+    final weekDay = LFDateTime.shared.formatLocaleWeekDay(context).format(this);
+    final year = this.year.toString().padLeft(4, '0');
+    final month = this.month.toString().padLeft(2, '0');
+    final day = this.day.toString().padLeft(2, '0');
+    if (short) {
+      return '$year.$month.$day($weekDay)';
+    }
+    final yearUnit = LFDateTime.shared.localization.year;
+    final monthUnit = LFDateTime.shared.localization.month;
+    final dayUnit = LFDateTime.shared.localization.day;
+    return '$year$yearUnit$month$monthUnit$day$dayUnit($weekDay)';
   }
 
   DateTime to000000Time() {
@@ -178,37 +189,6 @@ extension DateTimeCalendar on DateTime {
   DateTime nextMonth() {
     return DateTime(year, month + 1, day);
   }
-
-  String getMonthString() {
-    switch (month) {
-      case 1:
-        return 'Jan.';
-      case 2:
-        return 'Feb.';
-      case 3:
-        return 'Mar.';
-      case 4:
-        return 'Apr.';
-      case 5:
-        return 'May';
-      case 6:
-        return 'Jun.';
-      case 7:
-        return 'Jul.';
-      case 8:
-        return 'Aug.';
-      case 9:
-        return 'Sept.';
-      case 10:
-        return 'Oct.';
-      case 11:
-        return 'Nov.';
-      case 12:
-        return 'Dec.';
-      default:
-        return 'Err';
-    }
-  }
 }
 
 extension DateExtension on int {
@@ -229,30 +209,6 @@ extension DateExtension on int {
 
   DateTime toTimestamp() {
     return DateTime.fromMillisecondsSinceEpoch(this);
-  }
-
-  String toAAHHmmTime() {
-    // TODO: Set Locale
-    final dateTime = toTimestamp();
-    final DateFormat formatter = DateFormat('aa hh:mm', 'ko');
-    return formatter.format(dateTime);
-  }
-
-  String toYMMDWDate({bool showUnit = true}) {
-    // TODO: Set Locale
-    final dateTime = toTimestamp();
-    //final weekDay = DateFormat.EEEE('ko_KR').format(dateTime);
-    final weekDay = DateFormat.E('ko_KR').format(dateTime);
-    final yearUnit = LFDateTime.shared.localization.year;
-    final monthUnit = LFDateTime.shared.localization.month;
-    final dayUnit = LFDateTime.shared.localization.day;
-    final year = dateTime.year.toString().padLeft(4, '0');
-    final month = dateTime.month.toString().padLeft(2, '0');
-    final day = dateTime.day.toString().padLeft(2, '0');
-    if (showUnit) {
-      return '$year$yearUnit $month$monthUnit $day$dayUnit ($weekDay)';
-    }
-    return '$year.$month.$day ($weekDay)';
   }
 
   bool isSameDate(int p2) {

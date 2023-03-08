@@ -131,11 +131,23 @@ class _DialogScreenState extends ScreenState<DialogScreen> {
         const SizedBox(height: 10.0),
         Center(
           child: LFFlatButton(
-            text: 'Show Calendar Picker Dialog',
+            text: 'Show Calendar Date Picker Dialog',
             onPressed: () {
-              LFCalendarPickerDialog.show(
+              LFCalendarDatePickerDialog.show(
                 context,
-                pickerSelect: LFCalendarPickerSelect.start,
+                pickerSelect: LFCalendarDatePickerSelect.start,
+              );
+            },
+          ),
+        ),
+        const SizedBox(height: 10.0),
+        Center(
+          child: LFFlatButton(
+            text: 'Show Calendar Time Picker Dialog',
+            onPressed: () {
+              LFCalendarTimePickerDialog.show(
+                context,
+                pickerSelect: LFCalendarTimePickerSelect.start,
               );
             },
           ),

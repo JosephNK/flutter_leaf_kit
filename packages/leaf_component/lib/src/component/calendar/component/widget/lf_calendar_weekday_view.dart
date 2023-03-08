@@ -2,16 +2,16 @@ part of lf_calendar_view;
 
 class LFCalendarWeekDayView extends StatelessWidget {
   final Color holidayColor;
-  final List<String> weekDays;
 
   const LFCalendarWeekDayView({
     Key? key,
     required this.holidayColor,
-    required this.weekDays,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final weekDays = LFDateTime.shared.localization.shortWeekdays;
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
