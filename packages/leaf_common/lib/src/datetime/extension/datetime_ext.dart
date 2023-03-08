@@ -66,12 +66,12 @@ extension DateTimeString on DateTime {
     return weekDay;
   }
 
-  String toMeridiemTimeString(BuildContext context) {
+  String toMeridiemTimeString(BuildContext? context) {
     final formatter = LFDateTime.shared.formatLocaleMeridiemTime(context);
     return formatter.format(this);
   }
 
-  String toWeekDayDateString(BuildContext context, {bool short = false}) {
+  String toWeekDayDateString(BuildContext? context, {bool short = false}) {
     final weekDay = LFDateTime.shared.formatLocaleWeekDay(context).format(this);
     final year = this.year.toString().padLeft(4, '0');
     final month = this.month.toString().padLeft(2, '0');

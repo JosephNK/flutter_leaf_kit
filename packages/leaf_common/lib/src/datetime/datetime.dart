@@ -74,9 +74,9 @@ class LFDateTime {
     return DateFormat(format).format(value);
   }
 
-  DateFormat formatLocaleMeridiemTime(BuildContext context) {
+  DateFormat formatLocaleMeridiemTime(BuildContext? context) {
     try {
-      final languageCode = context.locale.languageCode;
+      final languageCode = context?.locale.languageCode;
       if (languageCode == 'ko') {
         return DateFormat('aa hh:mm', 'ko');
       }
@@ -87,9 +87,9 @@ class LFDateTime {
     }
   }
 
-  DateFormat formatLocaleWeekDay(BuildContext context) {
+  DateFormat formatLocaleWeekDay(BuildContext? context) {
     try {
-      final locale = context.locale.toString();
+      final locale = context?.locale.toString();
       return DateFormat.E(locale);
     } catch (e) {
       debugPrint('DateFormat Locale error: $e');
