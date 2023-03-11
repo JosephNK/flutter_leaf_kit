@@ -298,6 +298,7 @@ class _CalendarDatePickerContentState
 
   void _updateSelectDate(DateTime? selectedDate) {
     if (selectedDate == null) return;
+    final isAllDay = widget.isAllDay;
     final isLunar = widget.isLunar;
     final pickerSelect = widget.pickerSelect;
     final dateTime = !isLunar
@@ -305,14 +306,28 @@ class _CalendarDatePickerContentState
         : LFDateTime.parse(selectedDate.toSolarDateString());
     switch (pickerSelect) {
       case LFCalendarPickerSelect.start:
-        setState(() {
-          _startDate = dateTime;
-        });
+        if (!isAllDay) {
+          setState(() {
+            _startDate = dateTime;
+          });
+        } else {
+          setState(() {
+            _startDate = dateTime;
+            _endDate = dateTime;
+          });
+        }
         break;
       case LFCalendarPickerSelect.end:
-        setState(() {
-          _endDate = dateTime;
-        });
+        if (!isAllDay) {
+          setState(() {
+            _endDate = dateTime;
+          });
+        } else {
+          setState(() {
+            _startDate = dateTime;
+            _endDate = dateTime;
+          });
+        }
         break;
     }
   }
@@ -376,7 +391,11 @@ class _CalendarDatePickerContentState
   }
 
   Color _getStartDateColor() {
+    final isAllDay = widget.isAllDay;
     final pickerSelect = widget.pickerSelect;
+
+    if (isAllDay) return widget.activeColor;
+
     switch (pickerSelect) {
       case LFCalendarPickerSelect.start:
         return widget.activeColor;
@@ -386,7 +405,11 @@ class _CalendarDatePickerContentState
   }
 
   Color _getEndDateColor() {
+    final isAllDay = widget.isAllDay;
     final pickerSelect = widget.pickerSelect;
+
+    if (isAllDay) return widget.activeColor;
+
     switch (pickerSelect) {
       case LFCalendarPickerSelect.start:
         return widget.inactiveColor;
