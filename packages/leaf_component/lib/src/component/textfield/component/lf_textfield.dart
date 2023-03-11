@@ -48,6 +48,7 @@ class LFTextField extends StatefulWidget {
   final String? placeHolder;
   final TextInputType keyboardType;
   final TextInputAction textInputAction;
+  final TextAlign textAlign;
   final int? maxLength;
   final int minLines;
   final int maxLines;
@@ -92,6 +93,7 @@ class LFTextField extends StatefulWidget {
     this.placeHolder = 'PlaceHolder',
     this.keyboardType = TextInputType.text,
     this.textInputAction = TextInputAction.done,
+    this.textAlign = TextAlign.left,
     this.focusNode,
     this.maxLength,
     this.minLines = 1,
@@ -207,6 +209,7 @@ class _LFTextFieldState extends State<LFTextField> {
     final placeHolder = widget.placeHolder;
     final keyboardType = widget.keyboardType;
     final textInputAction = widget.textInputAction;
+    final textAlign = widget.textAlign;
     final maxLength = widget.maxLength;
     final minLines = widget.minLines;
     final maxLines = widget.maxLines;
@@ -347,6 +350,7 @@ class _LFTextFieldState extends State<LFTextField> {
         decoration: TextDecoration.none,
         color: inputTextColor,
       ),
+      textAlign: textAlign,
       textAlignVertical: TextAlignVertical.center,
       keyboardType: keyboardType,
       textInputAction: textInputAction,

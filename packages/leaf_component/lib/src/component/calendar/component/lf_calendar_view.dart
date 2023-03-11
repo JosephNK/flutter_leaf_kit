@@ -124,7 +124,7 @@ class _LFCalendarViewState extends State<LFCalendarView> {
       final context = _providerContext;
       if (context != null) {
         if (event is LFCalendarControllerTodayEvent) {
-          onActionAtToday(context, widget.onMonthChanged);
+          onActionAtToday(context);
         }
         if (event is LFCalendarControllerSelectedEvent) {
           onActionAtSelected(context, event.dateTime, null);
@@ -222,14 +222,12 @@ class _LFCalendarViewState extends State<LFCalendarView> {
                     onPrev: (onMonthChanged == null)
                         ? null
                         : () {
-                            onActionAtPrevious(
-                                context, currentDateTime, onMonthChanged);
+                            onActionAtPrevious(context, currentDateTime);
                           },
                     onNext: (onMonthChanged == null)
                         ? null
                         : () {
-                            onActionAtNext(
-                                context, currentDateTime, onMonthChanged);
+                            onActionAtNext(context, currentDateTime);
                           },
                     onPickerSelectTap: (widget.onMonthOnTap == null)
                         ? null
@@ -361,119 +359,32 @@ class _LFCalendarViewState extends State<LFCalendarView> {
     BuildContext context,
     DateTime dateTime,
   ) async {
-    final selectedDateTimes = List<DateTime>.from(
-        context.read<LFCalendarProvider>().selectedDateTimes);
-    context.read<LFCalendarProvider>().setDateTime(dateTime);
-    context.read<LFCalendarProvider>().removeAll();
-
     final page =
         _calculateFocusedPage(LFCalendarFormat.month, _minDate, dateTime);
 
     animateToPage(page, animate: false);
-
-    await Future.delayed(_pageDuration);
-
-    if (!mounted) return;
-    final _ = onActionAtSelected(context, dateTime, selectedDateTimes,
-        useSendEvent: false);
   }
 
   void onActionAtToday(
     BuildContext context,
-    LFCalendarViewOnMonthChanged? onMonthChanged,
   ) async {
-    final dateTime = LFDateTime.today();
-
-    final selectedDateTimes = List<DateTime>.from(
-        context.read<LFCalendarProvider>().selectedDateTimes);
-    context.read<LFCalendarProvider>().setDateTime(dateTime);
-    context.read<LFCalendarProvider>().removeAll();
-
-    todayPage(animate: false);
-
-    await Future.delayed(_pageDuration);
-
-    if (!mounted) return;
-    final selectedDate = onActionAtSelected(
-        context, dateTime, selectedDateTimes,
-        useSendEvent: false);
-
-    onMonthChanged?.call(
-      dateTime.firstDayOfWeek(),
-      dateTime.lastDayOfWeek(),
-      dateTime.inMonth(),
-      selectedDate,
-    );
+    todayPage(animate: false); // 이후 onPageChangedAtDateTime 자동으로 Called
   }
 
   void onActionAtPrevious(
     BuildContext context,
-    DateTime currentDateTime,
-    LFCalendarViewOnMonthChanged? onMonthChanged, {
+    DateTime currentDateTime, {
     bool animate = true,
   }) async {
-    if (animate) {
-      previousPage(); // 이후 onPageChangedAtDateTime 자동으로 Called
-      return;
-    }
-
-    final dateTime = currentDateTime.previousMonth();
-
-    final selectedDateTimes = List<DateTime>.from(
-        context.read<LFCalendarProvider>().selectedDateTimes);
-    context.read<LFCalendarProvider>().setDateTime(dateTime);
-    context.read<LFCalendarProvider>().removeAll();
-
-    previousPage(animate: animate);
-
-    await Future.delayed(_pageDuration);
-
-    if (!mounted) return;
-    final selectedDate = onActionAtSelected(
-        context, dateTime, selectedDateTimes,
-        useSendEvent: false);
-
-    onMonthChanged?.call(
-      dateTime.firstDayOfWeek(),
-      dateTime.lastDayOfWeek(),
-      dateTime.inMonth(),
-      selectedDate,
-    );
+    previousPage(animate: animate); // 이후 onPageChangedAtDateTime 자동으로 Called
   }
 
   void onActionAtNext(
     BuildContext context,
-    DateTime currentDateTime,
-    LFCalendarViewOnMonthChanged? onMonthChanged, {
+    DateTime currentDateTime, {
     bool animate = true,
   }) async {
-    if (animate) {
-      nextPage(); // 이후 onPageChangedAtDateTime 자동으로 Called
-      return;
-    }
-
-    final dateTime = currentDateTime.nextMonth();
-
-    final selectedDateTimes = List<DateTime>.from(
-        context.read<LFCalendarProvider>().selectedDateTimes);
-    context.read<LFCalendarProvider>().setDateTime(dateTime);
-    context.read<LFCalendarProvider>().removeAll();
-
-    nextPage(animate: animate);
-
-    await Future.delayed(_pageDuration);
-
-    if (!mounted) return;
-    final selectedDate = onActionAtSelected(
-        context, dateTime, selectedDateTimes,
-        useSendEvent: false);
-
-    onMonthChanged?.call(
-      dateTime.firstDayOfWeek(),
-      dateTime.lastDayOfWeek(),
-      dateTime.inMonth(),
-      selectedDate,
-    );
+    nextPage(animate: animate); // 이후 onPageChangedAtDateTime 자동으로 Called
   }
 
   void onPageChangedAtDateTime(

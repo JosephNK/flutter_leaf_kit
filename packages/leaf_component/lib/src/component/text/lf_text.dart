@@ -1,7 +1,9 @@
 library lf_text;
 
+import 'package:easy_rich_text/easy_rich_text.dart';
 import 'package:flutter/material.dart';
 
+part 'component/lf_easy_rich_text.dart';
 part 'component/lf_rich_text.dart';
 part 'component/lf_text.dart';
 part 'interface/lf_build_text.dart';

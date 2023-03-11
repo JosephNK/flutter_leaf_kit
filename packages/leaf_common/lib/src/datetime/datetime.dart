@@ -7,24 +7,6 @@ class LFDateTime {
 
   LFDateTime._internal();
 
-  late LFLocalizations _localization;
-
-  LFLocalizations get localization => LFDateTime.shared._localization;
-
-  void config(BuildContext context) {
-    try {
-      final languageCode = context.locale.languageCode;
-      if (languageCode == 'ko') {
-        _localization = LFLocalizationsKo();
-      } else {
-        _localization = LFLocalizationsEn();
-      }
-    } catch (e) {
-      debugPrint('DateFormat Locale error: $e');
-      _localization = LFLocalizationsEn();
-    }
-  }
-
   static DateTime parse(String formattedString) {
     return DateTime.parse(formattedString);
   }

@@ -4,6 +4,7 @@ class LFSwitch extends StatelessWidget {
   final bool value;
   final Color? activeColor;
   final Color? activeTrackColor;
+  final bool isIOSStyle;
   final ValueChanged<bool>? onChanged;
 
   const LFSwitch({
@@ -11,12 +12,13 @@ class LFSwitch extends StatelessWidget {
     required this.value,
     this.activeColor,
     this.activeTrackColor,
+    this.isIOSStyle = false,
     this.onChanged,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    if (Platform.isIOS) {
+    if (Platform.isIOS || isIOSStyle) {
       return CupertinoSwitch(
         value: value,
         activeColor: activeColor,

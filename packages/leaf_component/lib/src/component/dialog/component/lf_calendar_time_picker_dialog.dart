@@ -1,14 +1,12 @@
 part of lf_dialog;
 
-enum LFCalendarTimePickerSelect { start, end }
-
 typedef LFCalendarTimePickerOnOK = Function(
-    LFCalendarTimePickerSelect select, DateTime dateTime);
+    LFCalendarPickerSelect select, DateTime dateTime);
 
 class LFCalendarTimePickerDialog {
   static Future show(
     BuildContext context, {
-    required LFCalendarTimePickerSelect pickerSelect,
+    required LFCalendarPickerSelect pickerSelect,
     DateTime? startTime,
     DateTime? endTime,
     Color activeColor = Colors.purple,
@@ -16,6 +14,8 @@ class LFCalendarTimePickerDialog {
     String startText = 'Start',
     String endText = 'End',
     String okText = 'OK',
+    String validStartMessage = 'Please set the start time before the end time',
+    String validEndMessage = 'Please set the end time after the start time',
     LFCalendarTimePickerOnOK? onOK,
   }) async {
     return await showDialog(
@@ -30,6 +30,8 @@ class LFCalendarTimePickerDialog {
           startText: startText,
           endText: endText,
           okText: okText,
+          validStartMessage: validStartMessage,
+          validEndMessage: validEndMessage,
           onOK: onOK,
         );
       },
@@ -38,7 +40,7 @@ class LFCalendarTimePickerDialog {
 }
 
 class _CalendarTimePickerContent extends StatefulWidget {
-  final LFCalendarTimePickerSelect pickerSelect;
+  final LFCalendarPickerSelect pickerSelect;
   final DateTime? startTime;
   final DateTime? endTime;
   final Color activeColor;
@@ -46,6 +48,8 @@ class _CalendarTimePickerContent extends StatefulWidget {
   final String startText;
   final String endText;
   final String okText;
+  final String validStartMessage;
+  final String validEndMessage;
   final LFCalendarTimePickerOnOK? onOK;
 
   const _CalendarTimePickerContent({
@@ -58,6 +62,8 @@ class _CalendarTimePickerContent extends StatefulWidget {
     this.startText = 'Start',
     this.endText = 'End',
     this.okText = 'OK',
+    this.validStartMessage = 'Please set the start time before the end time',
+    this.validEndMessage = 'Please set the start time before the end time',
     this.onOK,
   }) : super(key: key);
 
@@ -80,10 +86,10 @@ class _CalendarTimePickerContentState
     _endTime = widget.endTime ?? LFDateTime.today();
     final pickerSelect = widget.pickerSelect;
     switch (pickerSelect) {
-      case LFCalendarTimePickerSelect.start:
+      case LFCalendarPickerSelect.start:
         _defaultTime = _startTime;
         break;
-      case LFCalendarTimePickerSelect.end:
+      case LFCalendarPickerSelect.end:
         _defaultTime = _endTime;
         break;
     }
@@ -91,6 +97,12 @@ class _CalendarTimePickerContentState
 
   @override
   Widget build(BuildContext context) {
+    final activeColor = widget.activeColor;
+    final inactiveColor = widget.inactiveColor;
+    final startText = widget.startText;
+    final endText = widget.endText;
+    final okText = widget.okText;
+
     return Dialog(
       insetPadding:
           const EdgeInsets.symmetric(horizontal: 40.0, vertical: 80.0),
@@ -110,15 +122,13 @@ class _CalendarTimePickerContentState
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     LFText(
-                      widget.startText,
-                      style: TextStyle(
-                          fontSize: 14.0, color: widget.inactiveColor),
+                      startText,
+                      style: TextStyle(fontSize: 14.0, color: inactiveColor),
                       textAlign: TextAlign.left,
                     ),
                     LFText(
-                      widget.endText,
-                      style: TextStyle(
-                          fontSize: 14.0, color: widget.inactiveColor),
+                      endText,
+                      style: TextStyle(fontSize: 14.0, color: inactiveColor),
                       textAlign: TextAlign.right,
                     ),
                   ],
@@ -158,19 +168,7 @@ class _CalendarTimePickerContentState
                 initialDateTime: _defaultTime,
                 mode: CupertinoDatePickerMode.time,
                 onDateTimeChanged: (value) {
-                  final pickerSelect = widget.pickerSelect;
-                  switch (pickerSelect) {
-                    case LFCalendarTimePickerSelect.start:
-                      setState(() {
-                        _startTime = value;
-                      });
-                      break;
-                    case LFCalendarTimePickerSelect.end:
-                      setState(() {
-                        _endTime = value;
-                      });
-                      break;
-                  }
+                  _updateSelectTime(value);
                 },
               ),
             ),
@@ -179,26 +177,17 @@ class _CalendarTimePickerContentState
                 Expanded(
                   child: GestureDetector(
                     onTap: () {
-                      final pickerSelect = widget.pickerSelect;
-                      switch (pickerSelect) {
-                        case LFCalendarTimePickerSelect.start:
-                          widget.onOK?.call(pickerSelect, _startTime);
-                          break;
-                        case LFCalendarTimePickerSelect.end:
-                          widget.onOK?.call(pickerSelect, _endTime);
-                          break;
-                      }
-                      Navigator.of(context).pop();
+                      _onCallBackOK(context);
                     },
                     child: Container(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(14.0),
-                        color: widget.activeColor,
+                        color: activeColor,
                       ),
                       padding: const EdgeInsets.symmetric(
                           vertical: 15.0, horizontal: 20.0),
                       child: LFText(
-                        widget.okText,
+                        okText,
                         style: const TextStyle(
                           fontSize: 18.0,
                           color: Colors.white,
@@ -216,12 +205,92 @@ class _CalendarTimePickerContentState
     );
   }
 
+  void _updateSelectTime(DateTime? selectedTime) {
+    if (selectedTime == null) return;
+    final pickerSelect = widget.pickerSelect;
+    final time = selectedTime;
+    switch (pickerSelect) {
+      case LFCalendarPickerSelect.start:
+        setState(() {
+          _startTime = time;
+        });
+        break;
+      case LFCalendarPickerSelect.end:
+        setState(() {
+          _endTime = time;
+        });
+        break;
+    }
+  }
+
+  void _onCallBackOK(BuildContext context) {
+    final pickerSelect = widget.pickerSelect;
+
+    late DateTime fromTime;
+    late DateTime toTime;
+    late DateTime resultTime;
+
+    switch (pickerSelect) {
+      case LFCalendarPickerSelect.start:
+        fromTime = _startTime;
+        toTime = _endTime;
+        resultTime = _startTime;
+        break;
+      case LFCalendarPickerSelect.end:
+        fromTime = _endTime;
+        toTime = _startTime;
+        resultTime = _endTime;
+        break;
+    }
+
+    final fDay =
+        LFDateTime.parse(fromTime.toDateTimeString(format: 'yyyy-MM-dd'));
+    final tDay =
+        LFDateTime.parse(toTime.toDateTimeString(format: 'yyyy-MM-dd'));
+
+    if (fDay.isSameDate(tDay)) {
+      final f = LFDateTime.parse(fromTime.toDateTimeString());
+      final t = LFDateTime.parse(toTime.toDateTimeString());
+
+      String? validMessage;
+
+      switch (pickerSelect) {
+        case LFCalendarPickerSelect.start:
+          if (f.isAfter(t)) {
+            validMessage = widget.validStartMessage;
+          }
+          break;
+        case LFCalendarPickerSelect.end:
+          if (f.isBefore(t)) {
+            validMessage = widget.validEndMessage;
+          }
+          break;
+      }
+
+      if (validMessage != null) {
+        Fluttertoast.showToast(
+          msg: validMessage,
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          backgroundColor: Colors.black87,
+          textColor: Colors.white,
+          fontSize: 16.0,
+        );
+        return;
+      }
+    }
+
+    widget.onOK?.call(pickerSelect, resultTime);
+
+    Navigator.of(context).pop();
+  }
+
   Color _getStartTimeColor() {
     final pickerSelect = widget.pickerSelect;
     switch (pickerSelect) {
-      case LFCalendarTimePickerSelect.start:
+      case LFCalendarPickerSelect.start:
         return widget.activeColor;
-      case LFCalendarTimePickerSelect.end:
+      case LFCalendarPickerSelect.end:
         return widget.inactiveColor;
     }
   }
@@ -229,9 +298,9 @@ class _CalendarTimePickerContentState
   Color _getEndTimeColor() {
     final pickerSelect = widget.pickerSelect;
     switch (pickerSelect) {
-      case LFCalendarTimePickerSelect.start:
+      case LFCalendarPickerSelect.start:
         return widget.inactiveColor;
-      case LFCalendarTimePickerSelect.end:
+      case LFCalendarPickerSelect.end:
         return widget.activeColor;
     }
   }

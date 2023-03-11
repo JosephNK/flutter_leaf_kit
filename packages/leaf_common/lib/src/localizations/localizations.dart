@@ -1,19 +1,21 @@
 part of lf_common;
 
-abstract class LFLocalizations {
+abstract class LFLocalization {
   String get year;
   String get month;
   String get day;
   String get min;
   String get hour;
   String get ago;
+  String get shortLunar;
+  String get shortSolar;
 
   List<String> get shortWeekdays;
   List<String> get shortMonths;
   List<String> get months;
 }
 
-class LFLocalizationsEn extends LFLocalizations {
+class LFLocalizationEn extends LFLocalization {
   @override
   String get year => '';
 
@@ -31,6 +33,12 @@ class LFLocalizationsEn extends LFLocalizations {
 
   @override
   String get ago => 'ago';
+
+  @override
+  String get shortLunar => 'lunar';
+
+  @override
+  String get shortSolar => 'solar';
 
   @override
   List<String> get shortWeekdays => [
@@ -76,7 +84,7 @@ class LFLocalizationsEn extends LFLocalizations {
       ];
 }
 
-class LFLocalizationsKo extends LFLocalizations {
+class LFLocalizationKo extends LFLocalization {
   @override
   String get year => '년';
 
@@ -94,6 +102,12 @@ class LFLocalizationsKo extends LFLocalizations {
 
   @override
   String get ago => '전';
+
+  @override
+  String get shortLunar => '음';
+
+  @override
+  String get shortSolar => '양';
 
   @override
   List<String> get shortWeekdays => [
@@ -137,4 +151,30 @@ class LFLocalizationsKo extends LFLocalizations {
         '11월',
         '12월',
       ];
+}
+
+class LFLocalizations {
+  static final LFLocalizations _instance = LFLocalizations._internal();
+
+  static LFLocalizations get shared => _instance;
+
+  LFLocalizations._internal();
+
+  late LFLocalization _localization;
+
+  LFLocalization get localization => LFLocalizations.shared._localization;
+
+  void config(BuildContext context) {
+    try {
+      final languageCode = context.locale.languageCode;
+      if (languageCode == 'ko') {
+        _localization = LFLocalizationKo();
+      } else {
+        _localization = LFLocalizationEn();
+      }
+    } catch (e) {
+      debugPrint('DateFormat Locale error: $e');
+      _localization = LFLocalizationEn();
+    }
+  }
 }

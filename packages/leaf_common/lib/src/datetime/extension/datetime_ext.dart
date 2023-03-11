@@ -71,18 +71,40 @@ extension DateTimeString on DateTime {
     return formatter.format(this);
   }
 
-  String toWeekDayDateString(BuildContext? context, {bool short = false}) {
-    final weekDay = LFDateTime.shared.formatLocaleWeekDay(context).format(this);
-    final year = this.year.toString().padLeft(4, '0');
-    final month = this.month.toString().padLeft(2, '0');
-    final day = this.day.toString().padLeft(2, '0');
+  String toWeekDayDateString(
+    BuildContext? context, {
+    bool short = false,
+    bool isLunar = false,
+    bool visiblePrefix = false,
+  }) {
+    final prefix = !isLunar
+        ? LFLocalizations.shared.localization.shortSolar
+        : LFLocalizations.shared.localization.shortLunar;
+    final yearUnit = LFLocalizations.shared.localization.year;
+    final monthUnit = LFLocalizations.shared.localization.month;
+    final dayUnit = LFLocalizations.shared.localization.day;
+    final dateTime = !isLunar ? this : LFDateTime.parse(toLunarDateString());
+    final weekDay =
+        LFDateTime.shared.formatLocaleWeekDay(context).format(dateTime);
+    final year = dateTime.year.toString().padLeft(4, '0');
+    final month = dateTime.month.toString().padLeft(2, '0');
+    final day = dateTime.day.toString().padLeft(2, '0');
     if (short) {
-      return '$year.$month.$day($weekDay)';
+      final result = '$year.$month.$day($weekDay)';
+      return visiblePrefix ? '$prefix $result' : result;
     }
-    final yearUnit = LFDateTime.shared.localization.year;
-    final monthUnit = LFDateTime.shared.localization.month;
-    final dayUnit = LFDateTime.shared.localization.day;
-    return '$year$yearUnit$month$monthUnit$day$dayUnit($weekDay)';
+    final result = '$year$yearUnit$month$monthUnit$day$dayUnit($weekDay)';
+    return visiblePrefix ? '$prefix $result' : result;
+  }
+
+  DateTime toDayStartDateTime() {
+    final dateString = LFDateTime.shared.formatDate(this, format: 'yyyy-MM-dd');
+    return LFDateTime.parse('$dateString 00:00:00');
+  }
+
+  DateTime toDayEndDateTime() {
+    final dateString = LFDateTime.shared.formatDate(this, format: 'yyyy-MM-dd');
+    return LFDateTime.parse('$dateString 23:59:59');
   }
 
   DateTime to000000Time() {

@@ -24,9 +24,9 @@ class CupertinoLocalizationsKoFixed implements CupertinoLocalizations {
   /// [LocalizationsDelegate] implementations typically call the static [load]
   /// function, rather than constructing this class directly.
   CupertinoLocalizationsKoFixed() {
-    _shortWeekdays = LFLocalizationsKo().shortWeekdays;
-    _shortMonths = LFLocalizationsKo().shortMonths;
-    _months = LFLocalizationsKo().months;
+    _shortWeekdays = LFLocalizationKo().shortWeekdays;
+    _shortMonths = LFLocalizationKo().shortMonths;
+    _months = LFLocalizationKo().months;
   }
 
   late List<String> _shortWeekdays;
