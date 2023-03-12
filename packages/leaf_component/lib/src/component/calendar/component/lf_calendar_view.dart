@@ -91,6 +91,7 @@ class _LFCalendarViewState extends State<LFCalendarView> {
   late DateTime _minDate;
   late DateTime _maxDate;
   late int _initialPage;
+  late int _todayPage;
   double _pageHeight = 0.0;
 
   BuildContext? _providerContext;
@@ -110,8 +111,11 @@ class _LFCalendarViewState extends State<LFCalendarView> {
 
     final initialPage = _calculateFocusedPage(
         LFCalendarFormat.month, minDate, _defaultDateTime);
+    final todayPage = _calculateFocusedPage(
+        LFCalendarFormat.month, minDate, LFDateTime.today());
 
     _initialPage = initialPage;
+    _todayPage = todayPage;
 
     _pageController = PageController(
       initialPage: _initialPage,
@@ -350,6 +354,8 @@ class _LFCalendarViewState extends State<LFCalendarView> {
     final selectedDate =
         _makeSelectingDateTime(monthDateTime: dateTime, dayDateTime: null);
 
+    // [selectedDate] 날짜로 선택 효과
+    // useSendEvent 값에 의한 onDateSelected 함수 호출 여부 (default: 호출 안함)
     context
         .read<LFCalendarProvider>()
         .select(selectedDate, useSendEvent: useSendEvent);
@@ -362,13 +368,18 @@ class _LFCalendarViewState extends State<LFCalendarView> {
     final page =
         _calculateFocusedPage(LFCalendarFormat.month, _minDate, dateTime);
 
-    animateToPage(page, animate: false);
+    animateToPage(page, animate: false); // 이후 onPageChangedAtDateTime 함수 호출
   }
 
   void onActionAtToday(
     BuildContext context,
   ) async {
-    todayPage(animate: false); // 이후 onPageChangedAtDateTime 자동으로 Called
+    todayPage(animate: false); // 이후 onPageChangedAtDateTime 함수 호출
+
+    // 페이지 전환 후 [오늘] 날짜로 선택 효과 & onDateSelected 함수 호출
+    context
+        .read<LFCalendarProvider>()
+        .select(LFDateTime.today(), useSendEvent: true);
   }
 
   void onActionAtPrevious(
@@ -376,7 +387,7 @@ class _LFCalendarViewState extends State<LFCalendarView> {
     DateTime currentDateTime, {
     bool animate = true,
   }) async {
-    previousPage(animate: animate); // 이후 onPageChangedAtDateTime 자동으로 Called
+    previousPage(animate: animate); // 이후 onPageChangedAtDateTime 함수 호출
   }
 
   void onActionAtNext(
@@ -384,7 +395,7 @@ class _LFCalendarViewState extends State<LFCalendarView> {
     DateTime currentDateTime, {
     bool animate = true,
   }) async {
-    nextPage(animate: animate); // 이후 onPageChangedAtDateTime 자동으로 Called
+    nextPage(animate: animate); // 이후 onPageChangedAtDateTime 함수 호출
   }
 
   void onPageChangedAtDateTime(
@@ -392,10 +403,6 @@ class _LFCalendarViewState extends State<LFCalendarView> {
     DateTime pageDateTime,
     LFCalendarViewOnMonthChanged? onMonthChanged,
   ) async {
-    if (kDebugMode) {
-      print('[LFCalendarView onPageChangedAtDateTime] $pageDateTime');
-    }
-
     final selectedDateTimes = List<DateTime>.from(
         context.read<LFCalendarProvider>().selectedDateTimes);
     context.read<LFCalendarProvider>().setDateTime(pageDateTime);
@@ -404,6 +411,13 @@ class _LFCalendarViewState extends State<LFCalendarView> {
     final selectedDate = _makeSelectingDateTime(
         monthDateTime: pageDateTime, dayDateTime: selectedDateTimes.first);
 
+    if (kDebugMode) {
+      print(
+        '[LFCalendarView onPageChangedAtDateTime] p: $pageDateTime | s: $selectedDate',
+      );
+    }
+
+    // 페이지 전환 후 [selectedDate] 날짜로 선택 효과 & onDateSelected 함수 호출 하지 않음
     context
         .read<LFCalendarProvider>()
         .select(selectedDate, useSendEvent: false);
@@ -430,7 +444,7 @@ class _LFCalendarViewState extends State<LFCalendarView> {
   }
 
   void todayPage({bool animate = true}) {
-    final page = _initialPage;
+    final page = _todayPage;
     animateToPage(page, animate: animate);
   }
 
@@ -443,6 +457,10 @@ class _LFCalendarViewState extends State<LFCalendarView> {
     final page = _pageController.page!.toInt() + 1;
     animateToPage(page, animate: animate);
   }
+
+  ///
+  /// PageController Helper
+  ///
 
   DateTime _makeSelectingDateTime(
       {required DateTime monthDateTime, required DateTime? dayDateTime}) {
