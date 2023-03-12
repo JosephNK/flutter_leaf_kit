@@ -2,7 +2,6 @@ library lf_dialog;
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:leaf_common/leaf_common.dart';
 
 import '../../configure/lf_component_configure.dart';
@@ -13,6 +12,7 @@ import '../checkbox/lf_checkbox.dart';
 import '../chip/lf_chip.dart';
 import '../radio/lf_radio.dart';
 import '../text/lf_text.dart';
+import '../toast/lf_toast.dart';
 
 part 'common/lf_common.dart';
 part 'component/lf_alert_dialog.dart';

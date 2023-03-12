@@ -2,6 +2,13 @@ part of leaf_navigation;
 
 enum LFNavigatorParamState { flow }
 
+enum LFNavigatorPushType {
+  basicMaterial,
+  basicCupertino,
+  materialModal,
+  cupertinoModal
+}
+
 class LFNavigation {
   /// Pop
   static void popUntilUntilNamed(BuildContext context, String routeName) {
@@ -40,14 +47,30 @@ class LFNavigation {
     BuildContext context,
     String routeName, {
     required Widget child, // Widget, MultiBlocProvider
-    bool isUsingIosModalType = false,
-    bool isFullScreenModalDialog = false,
-    bool isShowModal = false,
-    bool isFullScreenTransition = false,
+    LFNavigatorPushType pushType = LFNavigatorPushType.basicCupertino,
   }) async {
+    Logging.i('[LFNavigation PushNamed] PushType :: $routeName => $pushType');
+
     RouteSettings routeSettings = RouteSettings(name: routeName);
-    if (isShowModal) {
-      if (isFullScreenTransition) {
+
+    switch (pushType) {
+      case LFNavigatorPushType.basicMaterial:
+        PageRoute<T> route = MaterialPageRoute(
+          settings: routeSettings,
+          builder: (context) {
+            return child;
+          },
+        );
+        return await Navigator.push(context, route);
+      case LFNavigatorPushType.basicCupertino:
+        PageRoute<T> route = MaterialWithModalsPageRoute(
+          settings: routeSettings,
+          builder: (context) {
+            return child;
+          },
+        );
+        return await Navigator.push(context, route);
+      case LFNavigatorPushType.materialModal:
         return await Navigator.push(
           context,
           PageRouteBuilder(
@@ -68,32 +91,14 @@ class LFNavigation {
             transitionDuration: const Duration(milliseconds: 300),
           ),
         );
-      }
-      return await showCupertinoModalBottomSheet(
-        context: context,
-        settings: routeSettings,
-        builder: (context) {
-          return child;
-        },
-      );
+      case LFNavigatorPushType.cupertinoModal:
+        return await showCupertinoModalBottomSheet(
+          context: context,
+          settings: routeSettings,
+          builder: (context) {
+            return child;
+          },
+        );
     }
-    late PageRoute<T> route;
-    if (isUsingIosModalType) {
-      route = MaterialWithModalsPageRoute(
-        settings: routeSettings,
-        fullscreenDialog: isFullScreenModalDialog,
-        builder: (context) {
-          return child;
-        },
-      );
-    } else {
-      route = MaterialPageRoute(
-        settings: routeSettings,
-        builder: (context) {
-          return child;
-        },
-      );
-    }
-    return await Navigator.push(context, route);
   }
 }

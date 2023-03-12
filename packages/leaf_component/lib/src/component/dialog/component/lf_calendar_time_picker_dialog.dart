@@ -86,6 +86,7 @@ class _CalendarTimePickerContentState
     _endTime = widget.endTime ?? LFDateTime.today();
     final pickerSelect = widget.pickerSelect;
     switch (pickerSelect) {
+      case LFCalendarPickerSelect.none:
       case LFCalendarPickerSelect.start:
         _defaultTime = _startTime;
         break;
@@ -97,6 +98,7 @@ class _CalendarTimePickerContentState
 
   @override
   Widget build(BuildContext context) {
+    final pickerSelect = widget.pickerSelect;
     final activeColor = widget.activeColor;
     final inactiveColor = widget.inactiveColor;
     final startText = widget.startText;
@@ -116,52 +118,61 @@ class _CalendarTimePickerContentState
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Column(
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    LFText(
-                      startText,
-                      style: TextStyle(fontSize: 14.0, color: inactiveColor),
-                      textAlign: TextAlign.left,
-                    ),
-                    LFText(
-                      endText,
-                      style: TextStyle(fontSize: 14.0, color: inactiveColor),
-                      textAlign: TextAlign.right,
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 4.0),
-                Row(
-                  children: [
-                    Expanded(
-                      child: LFText(
-                        _startTime.toMeridiemTimeString(context),
-                        style: TextStyle(
-                            fontSize: 18.0, color: _getStartTimeColor()),
+            /// Header
+            Visibility(
+              visible: (pickerSelect != LFCalendarPickerSelect.none),
+              child: Column(
+                children: [
+                  /// Header Start & End String
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      LFText(
+                        startText,
+                        style: TextStyle(fontSize: 14.0, color: inactiveColor),
                         textAlign: TextAlign.left,
                       ),
-                    ),
-                    const Icon(
-                      Icons.arrow_forward_ios,
-                      size: 19.0,
-                      color: Colors.black54,
-                    ),
-                    Expanded(
-                      child: LFText(
-                        _endTime.toMeridiemTimeString(context),
-                        style: TextStyle(
-                            fontSize: 18.0, color: _getEndTimeColor()),
+                      LFText(
+                        endText,
+                        style: TextStyle(fontSize: 14.0, color: inactiveColor),
                         textAlign: TextAlign.right,
                       ),
-                    ),
-                  ],
-                ),
-              ],
+                    ],
+                  ),
+
+                  /// Header Start & End Date
+                  const SizedBox(height: 4.0),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: LFText(
+                          _startTime.toMeridiemTimeString(context),
+                          style: TextStyle(
+                              fontSize: 18.0, color: _getStartTimeColor()),
+                          textAlign: TextAlign.left,
+                        ),
+                      ),
+                      const Icon(
+                        Icons.arrow_forward_ios,
+                        size: 19.0,
+                        color: Colors.black54,
+                      ),
+                      Expanded(
+                        child: LFText(
+                          _endTime.toMeridiemTimeString(context),
+                          style: TextStyle(
+                              fontSize: 18.0, color: _getEndTimeColor()),
+                          textAlign: TextAlign.right,
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 25.0),
+                ],
+              ),
             ),
-            const SizedBox(height: 25.0),
+
+            /// DatePicker
             SizedBox(
               height: 180,
               child: CupertinoDatePicker(
@@ -172,6 +183,8 @@ class _CalendarTimePickerContentState
                 },
               ),
             ),
+
+            /// OK Button
             Row(
               children: [
                 Expanded(
@@ -210,6 +223,7 @@ class _CalendarTimePickerContentState
     final pickerSelect = widget.pickerSelect;
     final time = selectedTime;
     switch (pickerSelect) {
+      case LFCalendarPickerSelect.none:
       case LFCalendarPickerSelect.start:
         setState(() {
           _startTime = time;
@@ -231,6 +245,7 @@ class _CalendarTimePickerContentState
     late DateTime resultTime;
 
     switch (pickerSelect) {
+      case LFCalendarPickerSelect.none:
       case LFCalendarPickerSelect.start:
         fromTime = _startTime;
         toTime = _endTime;
@@ -255,6 +270,8 @@ class _CalendarTimePickerContentState
       String? validMessage;
 
       switch (pickerSelect) {
+        case LFCalendarPickerSelect.none:
+          break;
         case LFCalendarPickerSelect.start:
           if (f.isAfter(t)) {
             validMessage = widget.validStartMessage;
@@ -268,14 +285,7 @@ class _CalendarTimePickerContentState
       }
 
       if (validMessage != null) {
-        Fluttertoast.showToast(
-          msg: validMessage,
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.BOTTOM,
-          backgroundColor: Colors.black87,
-          textColor: Colors.white,
-          fontSize: 16.0,
-        );
+        LFToast.show(context, message: validMessage);
         return;
       }
     }
@@ -288,6 +298,8 @@ class _CalendarTimePickerContentState
   Color _getStartTimeColor() {
     final pickerSelect = widget.pickerSelect;
     switch (pickerSelect) {
+      case LFCalendarPickerSelect.none:
+        return widget.activeColor;
       case LFCalendarPickerSelect.start:
         return widget.activeColor;
       case LFCalendarPickerSelect.end:
@@ -298,6 +310,8 @@ class _CalendarTimePickerContentState
   Color _getEndTimeColor() {
     final pickerSelect = widget.pickerSelect;
     switch (pickerSelect) {
+      case LFCalendarPickerSelect.none:
+        return widget.activeColor;
       case LFCalendarPickerSelect.start:
         return widget.inactiveColor;
       case LFCalendarPickerSelect.end:

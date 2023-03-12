@@ -99,6 +99,7 @@ class _CalendarDatePickerContentState
     _endDate = widget.endDate ?? LFDateTime.today();
 
     switch (pickerSelect) {
+      case LFCalendarPickerSelect.none:
       case LFCalendarPickerSelect.start:
         _defaultDate = !isLunar
             ? _startDate
@@ -121,6 +122,7 @@ class _CalendarDatePickerContentState
 
   @override
   Widget build(BuildContext context) {
+    final pickerSelect = widget.pickerSelect;
     final isLunar = widget.isLunar;
     final activeColor = widget.activeColor;
     final inactiveColor = widget.inactiveColor;
@@ -141,109 +143,113 @@ class _CalendarDatePickerContentState
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Column(
-              children: [
-                /// Header Start & End String
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    LFText(
-                      startText,
-                      style: TextStyle(fontSize: 14.0, color: inactiveColor),
-                      textAlign: TextAlign.left,
-                    ),
-                    LFText(
-                      endText,
-                      style: TextStyle(fontSize: 14.0, color: inactiveColor),
-                      textAlign: TextAlign.right,
-                    ),
-                  ],
-                ),
+            /// Header
+            Visibility(
+              visible: (pickerSelect != LFCalendarPickerSelect.none),
+              child: Column(
+                children: [
+                  /// Header Start & End String
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      LFText(
+                        startText,
+                        style: TextStyle(fontSize: 14.0, color: inactiveColor),
+                        textAlign: TextAlign.left,
+                      ),
+                      LFText(
+                        endText,
+                        style: TextStyle(fontSize: 14.0, color: inactiveColor),
+                        textAlign: TextAlign.right,
+                      ),
+                    ],
+                  ),
 
-                /// Header Start & End Date
-                const SizedBox(height: 4.0),
-                Row(
-                  children: [
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          LFText(
-                            _startDate.toWeekDayDateString(context,
-                                short: true,
-                                isLunar: isLunar,
-                                visiblePrefix: isLunar),
-                            style: TextStyle(
-                                fontSize: !isLunar ? 18.0 : 16.0,
-                                color: _getStartDateColor()),
-                            textAlign: TextAlign.left,
-                            maxLines: 2,
-                          ),
-                          Visibility(
-                            visible: isLunar,
-                            child: Padding(
-                              padding: const EdgeInsets.only(top: 2.0),
-                              child: LFText(
-                                _startDate.toWeekDayDateString(context,
-                                    short: true,
-                                    isLunar: false,
-                                    visiblePrefix: isLunar),
-                                style: TextStyle(
-                                    fontSize: 14.0, color: inactiveColor),
-                                textAlign: TextAlign.left,
-                                maxLines: 2,
+                  /// Header Start & End Date
+                  const SizedBox(height: 4.0),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            LFText(
+                              _startDate.toWeekDayDateString(context,
+                                  short: true,
+                                  isLunar: isLunar,
+                                  visiblePrefix: isLunar),
+                              style: TextStyle(
+                                  fontSize: !isLunar ? 18.0 : 16.0,
+                                  color: _getStartDateColor()),
+                              textAlign: TextAlign.left,
+                              maxLines: 2,
+                            ),
+                            Visibility(
+                              visible: isLunar,
+                              child: Padding(
+                                padding: const EdgeInsets.only(top: 2.0),
+                                child: LFText(
+                                  _startDate.toWeekDayDateString(context,
+                                      short: true,
+                                      isLunar: false,
+                                      visiblePrefix: isLunar),
+                                  style: TextStyle(
+                                      fontSize: 14.0, color: inactiveColor),
+                                  textAlign: TextAlign.left,
+                                  maxLines: 2,
+                                ),
                               ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
-                    ),
-                    const Icon(
-                      Icons.arrow_forward_ios,
-                      size: 19.0,
-                      color: Colors.black54,
-                    ),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: [
-                          LFText(
-                            _endDate.toWeekDayDateString(context,
-                                short: true,
-                                isLunar: isLunar,
-                                visiblePrefix: isLunar),
-                            style: TextStyle(
-                                fontSize: !isLunar ? 18.0 : 16.0,
-                                color: _getEndDateColor()),
-                            textAlign: TextAlign.right,
-                            maxLines: 2,
-                          ),
-                          Visibility(
-                            visible: isLunar,
-                            child: Padding(
-                              padding: const EdgeInsets.only(top: 2.0),
-                              child: LFText(
-                                _endDate.toWeekDayDateString(context,
-                                    short: true,
-                                    isLunar: isLunar,
-                                    visiblePrefix: isLunar),
-                                style: TextStyle(
-                                    fontSize: 14.0, color: inactiveColor),
-                                textAlign: TextAlign.right,
-                                maxLines: 2,
+                      const Icon(
+                        Icons.arrow_forward_ios,
+                        size: 19.0,
+                        color: Colors.black54,
+                      ),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            LFText(
+                              _endDate.toWeekDayDateString(context,
+                                  short: true,
+                                  isLunar: isLunar,
+                                  visiblePrefix: isLunar),
+                              style: TextStyle(
+                                  fontSize: !isLunar ? 18.0 : 16.0,
+                                  color: _getEndDateColor()),
+                              textAlign: TextAlign.right,
+                              maxLines: 2,
+                            ),
+                            Visibility(
+                              visible: isLunar,
+                              child: Padding(
+                                padding: const EdgeInsets.only(top: 2.0),
+                                child: LFText(
+                                  _endDate.toWeekDayDateString(context,
+                                      short: true,
+                                      isLunar: isLunar,
+                                      visiblePrefix: isLunar),
+                                  style: TextStyle(
+                                      fontSize: 14.0, color: inactiveColor),
+                                  textAlign: TextAlign.right,
+                                  maxLines: 2,
+                                ),
                               ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-              ],
+                    ],
+                  ),
+                  const SizedBox(height: 25.0),
+                ],
+              ),
             ),
 
             /// Calendar
-            const SizedBox(height: 25.0),
             LFCalendarView(
               defaultDate: _defaultDate,
               controller: _controller,
@@ -263,6 +269,8 @@ class _CalendarDatePickerContentState
                 return Column();
               },
             ),
+
+            /// OK Button
             Row(
               children: [
                 Expanded(
@@ -305,6 +313,7 @@ class _CalendarDatePickerContentState
         ? selectedDate
         : LFDateTime.parse(selectedDate.toSolarDateString());
     switch (pickerSelect) {
+      case LFCalendarPickerSelect.none:
       case LFCalendarPickerSelect.start:
         if (!isAllDay) {
           setState(() {
@@ -341,6 +350,7 @@ class _CalendarDatePickerContentState
     late DateTime resultDateTime;
 
     switch (pickerSelect) {
+      case LFCalendarPickerSelect.none:
       case LFCalendarPickerSelect.start:
         fromDateTime = _startDate;
         toDateTime = _endDate;
@@ -361,6 +371,8 @@ class _CalendarDatePickerContentState
     String? validMessage;
 
     switch (pickerSelect) {
+      case LFCalendarPickerSelect.none:
+        break;
       case LFCalendarPickerSelect.start:
         if (f.isAfter(t) && !isAllDay) {
           validMessage = widget.validStartMessage;
@@ -374,14 +386,7 @@ class _CalendarDatePickerContentState
     }
 
     if (validMessage != null) {
-      Fluttertoast.showToast(
-        msg: validMessage,
-        toastLength: Toast.LENGTH_SHORT,
-        gravity: ToastGravity.BOTTOM,
-        backgroundColor: Colors.black87,
-        textColor: Colors.white,
-        fontSize: 16.0,
-      );
+      LFToast.show(context, message: validMessage);
       return;
     }
 
@@ -397,6 +402,8 @@ class _CalendarDatePickerContentState
     if (isAllDay) return widget.activeColor;
 
     switch (pickerSelect) {
+      case LFCalendarPickerSelect.none:
+        return widget.activeColor;
       case LFCalendarPickerSelect.start:
         return widget.activeColor;
       case LFCalendarPickerSelect.end:
@@ -411,6 +418,8 @@ class _CalendarDatePickerContentState
     if (isAllDay) return widget.activeColor;
 
     switch (pickerSelect) {
+      case LFCalendarPickerSelect.none:
+        return widget.activeColor;
       case LFCalendarPickerSelect.start:
         return widget.inactiveColor;
       case LFCalendarPickerSelect.end:

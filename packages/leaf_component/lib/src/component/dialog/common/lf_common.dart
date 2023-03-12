@@ -1,3 +1,3 @@
 part of lf_dialog;
 
-enum LFCalendarPickerSelect { start, end }
+enum LFCalendarPickerSelect { none, start, end }

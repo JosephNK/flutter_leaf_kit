@@ -422,7 +422,7 @@ packages:
     source: hosted
     version: "0.1.0"
   leaf_common:
-    dependency: "direct overridden"
+    dependency: "direct main"
     description:
       path: "../leaf_common"
       relative: true
