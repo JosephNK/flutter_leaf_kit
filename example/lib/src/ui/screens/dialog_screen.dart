@@ -135,7 +135,7 @@ class _DialogScreenState extends ScreenState<DialogScreen> {
             onPressed: () {
               LFCalendarDatePickerDialog.show(
                 context,
-                pickerSelect: LFCalendarDatePickerSelect.start,
+                pickerSelect: LFCalendarPickerSelect.start,
               );
             },
           ),
@@ -147,7 +147,7 @@ class _DialogScreenState extends ScreenState<DialogScreen> {
             onPressed: () {
               LFCalendarTimePickerDialog.show(
                 context,
-                pickerSelect: LFCalendarTimePickerSelect.start,
+                pickerSelect: LFCalendarPickerSelect.start,
               );
             },
           ),

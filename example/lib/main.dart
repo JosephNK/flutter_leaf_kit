@@ -27,7 +27,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    LFDateTime.shared.config(context);
+    // LFLocalizations Config
+    LFLocalizations.shared.config(context);
 
     return MaterialApp(
       title: 'Flutter Example',
