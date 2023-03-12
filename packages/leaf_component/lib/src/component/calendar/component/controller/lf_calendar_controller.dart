@@ -8,8 +8,10 @@ class LFCalendarControllerTodayEvent extends LFCalendarControllerEvent {
 
 class LFCalendarControllerSelectedEvent extends LFCalendarControllerEvent {
   final DateTime dateTime;
+  final bool useSendEvent;
 
-  LFCalendarControllerSelectedEvent({required this.dateTime});
+  LFCalendarControllerSelectedEvent(
+      {required this.dateTime, this.useSendEvent = false});
 }
 
 class LFCalendarControllerMonthSelectedEvent extends LFCalendarControllerEvent {
@@ -33,8 +35,9 @@ mixin LFCalendarControllerMixIn {
     _addEvent(LFCalendarControllerTodayEvent());
   }
 
-  void fireSelectedEvent(DateTime dateTime) {
-    _addEvent(LFCalendarControllerSelectedEvent(dateTime: dateTime));
+  void fireSelectedEvent(DateTime dateTime, {bool useSendEvent = false}) {
+    _addEvent(LFCalendarControllerSelectedEvent(
+        dateTime: dateTime, useSendEvent: useSendEvent));
   }
 
   void fireMonthSelectedEvent(DateTime dateTime) {
