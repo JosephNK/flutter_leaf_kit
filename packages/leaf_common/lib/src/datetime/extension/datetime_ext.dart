@@ -16,7 +16,8 @@ extension DateTimeString on DateTime {
   }
 
   String toDateString({String format = 'MM.dd', bool showWeekDay = false}) {
-    final value = LFDateTime.shared.formatDate(this, format: format);
+    late String value;
+    value = LFDateTime.shared.formatDate(this, format: format);
     if (showWeekDay) {
       final weekDay = toWeekDay(short: true);
       return '$value($weekDay)';
@@ -40,18 +41,34 @@ extension DateTimeString on DateTime {
     return LFDateTime.shared.formatDate(this, format: format);
   }
 
-  String toLunarDateString({String format = 'yyyy-MM-dd'}) {
+  String toLunarDateString({
+    String format = 'yyyy-MM-dd',
+    bool showShortLunar = false,
+  }) {
     // param : year(년), month(월), day(일)
     setSolarDate(year, month, day);
     final lunar = getLunarIsoFormat();
-    return LFDateTime.shared.formatString(lunar, format: format);
+    final value = LFDateTime.shared.formatString(lunar, format: format);
+    final prefix = LFLocalizations.shared.localization.shortLunar;
+    if (showShortLunar) {
+      return '$prefix $value';
+    }
+    return value;
   }
 
-  String toSolarDateString({String format = 'yyyy-MM-dd'}) {
+  String toSolarDateString({
+    String format = 'yyyy-MM-dd',
+    bool showShortSolar = false,
+  }) {
     // param : year(년), month(월), day(일), intercalation(윤달여부)
     setLunarDate(year, month, day, false);
     final solar = getSolarIsoFormat();
-    return LFDateTime.shared.formatString(solar, format: format);
+    final value = LFDateTime.shared.formatString(solar, format: format);
+    final prefix = LFLocalizations.shared.localization.shortSolar;
+    if (showShortSolar) {
+      return '$prefix $value';
+    }
+    return value;
   }
 
   String toWeekDay({bool short = true}) {
@@ -76,6 +93,7 @@ extension DateTimeString on DateTime {
     bool short = false,
     bool isLunar = false,
     bool visiblePrefix = false,
+    String format = 'yyyy-MM-dd',
   }) {
     final prefix = !isLunar
         ? LFLocalizations.shared.localization.shortSolar
@@ -83,7 +101,8 @@ extension DateTimeString on DateTime {
     final yearUnit = LFLocalizations.shared.localization.year;
     final monthUnit = LFLocalizations.shared.localization.month;
     final dayUnit = LFLocalizations.shared.localization.day;
-    final dateTime = !isLunar ? this : LFDateTime.parse(toLunarDateString());
+    final dateTime =
+        !isLunar ? this : LFDateTime.parse(toLunarDateString(format: format));
     final weekDay =
         LFDateTime.shared.formatLocaleWeekDay(context).format(dateTime);
     final year = dateTime.year.toString().padLeft(4, '0');
