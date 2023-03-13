@@ -1,7 +1,7 @@
 part of lf_image;
 
 class LFCircleAvatarImage extends StatelessWidget {
-  final Object? image; // String, Uint8List
+  final LFImageValue image;
   final double size;
   final Color borderColor;
   final double borderWidth;
@@ -42,19 +42,13 @@ class LFCircleAvatarImage extends StatelessWidget {
 
   Widget? _buildImageWidget() {
     final image = this.image;
+    final file = image.file;
+    final bytes = image.bytes;
 
-    if (image == null) {
-      return SizedBox(
-        width: size,
-        height: size,
-        child: placeholderWidget,
-      );
-    }
-
-    if (image is String) {
-      if (!isURL(image)) {
+    if (file != null) {
+      if (!isURL(file)) {
         return LFAssetImage(
-          path: image,
+          path: file,
           width: size,
           height: size,
           fit: fit,
@@ -64,7 +58,7 @@ class LFCircleAvatarImage extends StatelessWidget {
       }
       return LFCacheImage(
         header: header,
-        url: image,
+        url: file,
         width: size,
         height: size,
         fit: fit,
@@ -73,9 +67,9 @@ class LFCircleAvatarImage extends StatelessWidget {
       );
     }
 
-    if (image is Uint8List) {
+    if (bytes != null) {
       return LFMemoryImage(
-        bytes: image,
+        bytes: bytes,
         width: size,
         height: size,
         fit: fit,
@@ -84,6 +78,10 @@ class LFCircleAvatarImage extends StatelessWidget {
       );
     }
 
-    return Container();
+    return SizedBox(
+      width: size,
+      height: size,
+      child: placeholderWidget ?? Container(),
+    );
   }
 }

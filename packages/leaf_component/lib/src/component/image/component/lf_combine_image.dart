@@ -1,7 +1,7 @@
 part of lf_image;
 
 class LFCombineImage extends StatelessWidget {
-  final String url;
+  final LFImageValue image;
   final double width;
   final double height;
   final BoxFit fit;
@@ -11,7 +11,7 @@ class LFCombineImage extends StatelessWidget {
 
   const LFCombineImage({
     Key? key,
-    required this.url,
+    required this.image,
     this.width = 45.0,
     this.height = 45.0,
     this.fit = BoxFit.cover,
@@ -22,9 +22,25 @@ class LFCombineImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (!isURL(url)) {
-      return LFAssetImage(
-        path: url,
+    final image = this.image;
+    final file = image.file;
+    final bytes = image.bytes;
+
+    if (file != null) {
+      if (!isURL(file)) {
+        return LFAssetImage(
+          path: file,
+          width: width,
+          height: height,
+          fit: fit,
+          placeholderWidget: placeholderWidget,
+          errorWidget: errorWidget,
+        );
+      }
+
+      return LFCacheImage(
+        header: header,
+        url: file,
         width: width,
         height: height,
         fit: fit,
@@ -33,14 +49,10 @@ class LFCombineImage extends StatelessWidget {
       );
     }
 
-    return LFCacheImage(
-      header: header,
-      url: url,
-      width: width,
-      height: height,
-      fit: fit,
-      placeholderWidget: placeholderWidget,
-      errorWidget: errorWidget,
-    );
+    if (bytes != null) {
+      Logging.e('Bytes Unimplemented');
+    }
+
+    return Container();
   }
 }
