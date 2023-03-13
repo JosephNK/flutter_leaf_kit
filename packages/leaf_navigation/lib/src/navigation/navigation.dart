@@ -5,6 +5,7 @@ enum LFNavigatorParamState { flow }
 enum LFNavigatorPushType {
   basicMaterial,
   basicCupertino,
+  basicCupertinoFullScreen,
   materialModal,
   cupertinoModal
 }
@@ -63,8 +64,11 @@ class LFNavigation {
         );
         return await Navigator.push(context, route);
       case LFNavigatorPushType.basicCupertino:
+      case LFNavigatorPushType.basicCupertinoFullScreen:
         PageRoute<T> route = MaterialWithModalsPageRoute(
           settings: routeSettings,
+          fullscreenDialog:
+              (pushType == LFNavigatorPushType.basicCupertinoFullScreen),
           builder: (context) {
             return child;
           },
