@@ -123,6 +123,7 @@ class _LFScrollViewState extends State<LFScrollView> with LFScrollControlMixin {
         physics: widget.physics,
         padding: widget.padding,
         scrollable: widget.scrollable,
+        autoKeyboardHide: widget.autoKeyboardHide,
         child: widget.child,
       );
 
@@ -147,6 +148,7 @@ class _LFScrollViewState extends State<LFScrollView> with LFScrollControlMixin {
       padding: widget.padding,
       shrinkWrap: widget.shrinkWrap,
       scrollable: widget.scrollable,
+      autoKeyboardHide: widget.autoKeyboardHide,
       child: widget.child,
     );
   }

@@ -27,7 +27,7 @@ class LFNavigation {
     Navigator.of(context).popUntil((_) => count++ >= depth);
   }
 
-  static NavigatorState pop(BuildContext context, {dynamic param}) {
+  static NavigatorState pop<T>(BuildContext context, {T? param}) {
     NavigatorState navigator = Navigator.of(context);
     navigator.pop(param);
     return navigator;

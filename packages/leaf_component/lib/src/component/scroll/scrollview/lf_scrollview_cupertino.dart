@@ -30,6 +30,9 @@ class LFScrollViewCupertino<T> extends StatelessWidget {
   Widget _buildCupertinoListView(BuildContext context) {
     return CustomScrollView(
       key: storageKey,
+      keyboardDismissBehavior: autoKeyboardHide
+          ? ScrollViewKeyboardDismissBehavior.onDrag
+          : ScrollViewKeyboardDismissBehavior.manual,
       controller: PrimaryScrollController.of(context),
       physics: scrollable
           ? AlwaysScrollableScrollPhysics(

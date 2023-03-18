@@ -35,6 +35,9 @@ class LFScrollViewMaterial<T> extends StatelessWidget {
       },
       child: SingleChildScrollView(
         key: storageKey,
+        keyboardDismissBehavior: autoKeyboardHide
+            ? ScrollViewKeyboardDismissBehavior.onDrag
+            : ScrollViewKeyboardDismissBehavior.manual,
         physics: scrollable
             ? AlwaysScrollableScrollPhysics(
                 parent: physics ?? const BouncingScrollPhysics(),
