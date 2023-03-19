@@ -9,16 +9,15 @@ class LFAlertDialog {
     BuildContext context, {
     String? title,
     required String message,
-    VoidCallback? onCancel,
+    VoidCallback? onOk,
   }) async {
-    final cancelText = LFComponentConfigure.shared.alert?.cancelText ?? 'Close';
-
+    final okText = LFComponentConfigure.shared.alert?.okText ?? 'OK';
     await _LFAlertDialog.show(
       context,
       title: title,
       message: message,
-      onCancel: onCancel,
-      cancelText: cancelText,
+      onOK: onOk,
+      okText: okText,
     );
   }
 
@@ -49,14 +48,14 @@ class LFAlertDialog {
     VoidCallback? onTap,
   }) async {
     if (errorMessage == null) return;
-    final cancelText = LFComponentConfigure.shared.alert?.cancelText ?? 'Close';
+    final okText = LFComponentConfigure.shared.alert?.okText ?? 'OK';
     String? errorTitle = 'Oops! Error :(';
     _LFAlertDialog.show(
       context,
       title: errorTitle,
       message: errorMessage,
-      onCancel: onTap,
-      cancelText: cancelText,
+      onOK: onTap,
+      okText: okText,
     );
   }
 
@@ -66,7 +65,7 @@ class LFAlertDialog {
     VoidCallback? onTap,
   }) async {
     if (exception == null) return;
-    final cancelText = LFComponentConfigure.shared.alert?.cancelText ?? 'Close';
+    final okText = LFComponentConfigure.shared.alert?.okText ?? 'Close';
     String? errorTitle = 'Oops! Exception :(';
     String? errorMessage = exception.toString();
     if (isNotEmpty(errorMessage)) {
@@ -74,8 +73,8 @@ class LFAlertDialog {
         context,
         title: errorTitle,
         message: errorMessage,
-        onCancel: onTap,
-        cancelText: cancelText,
+        onOK: onTap,
+        okText: okText,
       );
     }
   }
@@ -86,8 +85,8 @@ class _LFAlertDialog {
     BuildContext context, {
     String? title,
     String? message,
-    required String cancelText,
-    VoidCallback? onCancel,
+    required String okText,
+    VoidCallback? onOK,
   }) async {
     await showDialog(
       context: context,
@@ -110,10 +109,10 @@ class _LFAlertDialog {
               onPressed: () async {
                 Navigator.maybePop(context);
                 await Future.delayed(const Duration(milliseconds: 100));
-                onCancel?.call();
+                onOK?.call();
               },
               child: LFText(
-                cancelText,
+                okText,
                 style: const TextStyle(fontSize: 18),
               ),
             ),
