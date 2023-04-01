@@ -40,7 +40,7 @@ class LFTextField extends StatefulWidget {
   final bool disabled;
   final bool readOnly;
   final bool? showCursor;
-  final bool showAuthClearButton;
+  final bool enableClearButton;
   final bool onlyUnderline;
   final bool obscureText;
   final String? errorText;
@@ -86,7 +86,7 @@ class LFTextField extends StatefulWidget {
     this.disabled = false,
     this.readOnly = false,
     this.showCursor,
-    this.showAuthClearButton = true,
+    this.enableClearButton = true,
     this.onlyUnderline = true,
     this.obscureText = false,
     this.errorText,
@@ -139,6 +139,14 @@ class _LFTextFieldState extends State<LFTextField> {
   String get text => _textController.text;
 
   set text(String newText) {
+    final suffixIcon = widget.suffixIcon;
+    final enableClearButton = widget.enableClearButton;
+    final maxLines = widget.maxLines;
+    if (suffixIcon == null && enableClearButton) {
+      if (maxLines == 1) {
+        _showClearButton = isNotEmpty(newText);
+      }
+    }
     _textController.value = TextEditingValue(
       text: newText,
       selection: TextSelection.collapsed(
@@ -202,7 +210,7 @@ class _LFTextFieldState extends State<LFTextField> {
     final disabled = widget.disabled;
     final readOnly = widget.readOnly;
     final showCursor = widget.showCursor;
-    final showAuthClearButton = widget.showAuthClearButton;
+    final enableClearButton = widget.enableClearButton;
     final obscureText = widget.obscureText;
     final textStyle = widget.textStyle;
     final errorText = widget.errorText;
@@ -312,11 +320,11 @@ class _LFTextFieldState extends State<LFTextField> {
     final prefixIconWidget = prefixIcon;
 
     var suffixIconWidget = suffixIcon ??
-        (!showAuthClearButton
-            ? null
-            : !_showClearButton
+        (enableClearButton
+            ? !_showClearButton
                 ? null
-                : clearButtonWithHandler());
+                : clearButtonWithHandler()
+            : null);
 
     if (maxLength != null && suffixIconWidget != null) {
       suffixIconWidget = Row(
