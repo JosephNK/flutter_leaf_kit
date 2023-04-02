@@ -83,30 +83,24 @@ class _LFPhotoAlbumScrollContentViewState
               padding: const EdgeInsets.symmetric(vertical: 12.0),
               child: SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
-                child: ConstrainedBox(
-                  constraints: BoxConstraints(
-                    maxWidth: MediaQuery.of(context).size.width,
-                  ),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      ..._assetPathEntityList.map((assetPathEntity) {
-                        final checked =
-                            assetPathEntity.id == _selectedAssetPathEntity?.id;
-                        return LFPhotoAlbumScrollContentTile(
-                          assetPathEntity: assetPathEntity,
-                          selectedAssetPathEntity: _selectedAssetPathEntity,
-                          checked: checked,
-                          onSelected: (assetPathEntity) {
-                            setState(() {
-                              _selectedAssetPathEntity = assetPathEntity;
-                            });
-                            widget.onSelected?.call(assetPathEntity);
-                          },
-                        );
-                      }).toList(),
-                    ],
-                  ),
+                child: Row(
+                  children: [
+                    ..._assetPathEntityList.map((assetPathEntity) {
+                      final checked =
+                          assetPathEntity.id == _selectedAssetPathEntity?.id;
+                      return LFPhotoAlbumScrollContentTile(
+                        assetPathEntity: assetPathEntity,
+                        selectedAssetPathEntity: _selectedAssetPathEntity,
+                        checked: checked,
+                        onSelected: (assetPathEntity) {
+                          setState(() {
+                            _selectedAssetPathEntity = assetPathEntity;
+                          });
+                          widget.onSelected?.call(assetPathEntity);
+                        },
+                      );
+                    }).toList(),
+                  ],
                 ),
               ),
             ),
