@@ -112,7 +112,7 @@ extension DateTimeString on DateTime {
     String weekDayStr =
         LFDateTime.shared.formatLocaleWeekDay(context).format(dateTime);
     if (short) {
-      dateStr = dateTime.toNormalDateDisplay();
+      dateStr = dateTime.toNormalDateDisplay(); // ex., 2023.01.01
     }
     final result = '$dateStr($weekDayStr)';
     return visiblePrefix ? '$prefix $result' : result;
