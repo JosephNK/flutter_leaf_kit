@@ -98,21 +98,20 @@ extension DateTimeString on DateTime {
     final prefix = !isLunar
         ? LFLocalizations.shared.localization.shortSolar
         : LFLocalizations.shared.localization.shortLunar;
-    final yearUnit = LFLocalizations.shared.localization.year;
-    final monthUnit = LFLocalizations.shared.localization.month;
-    final dayUnit = LFLocalizations.shared.localization.day;
     final dateTime =
         !isLunar ? this : LFDateTime.parse(toLunarDateString(format: format));
+    final date =
+        LFDateTime.shared.formatLocaleYearMonthDay(context).format(dateTime);
     final weekDay =
         LFDateTime.shared.formatLocaleWeekDay(context).format(dateTime);
-    final year = dateTime.year.toString().padLeft(4, '0');
-    final month = dateTime.month.toString().padLeft(2, '0');
-    final day = dateTime.day.toString().padLeft(2, '0');
     if (short) {
+      final year = dateTime.year.toString().padLeft(4, '0');
+      final month = dateTime.month.toString().padLeft(2, '0');
+      final day = dateTime.day.toString().padLeft(2, '0');
       final result = '$year.$month.$day($weekDay)';
       return visiblePrefix ? '$prefix $result' : result;
     }
-    final result = '$year$yearUnit$month$monthUnit$day$dayUnit($weekDay)';
+    final result = '$date($weekDay)';
     return visiblePrefix ? '$prefix $result' : result;
   }
 

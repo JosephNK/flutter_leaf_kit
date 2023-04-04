@@ -56,6 +56,22 @@ class LFDateTime {
     return DateFormat(format).format(value);
   }
 
+  DateFormat formatLocaleYearMonthDay(BuildContext? context) {
+    try {
+      final languageCode = context?.locale.languageCode;
+      if (languageCode == 'ko') {
+        final yearUnit = LFLocalizations.shared.localization.year;
+        final monthUnit = LFLocalizations.shared.localization.month;
+        final dayUnit = LFLocalizations.shared.localization.day;
+        return DateFormat('yyyy$yearUnit MM$monthUnit dd$dayUnit', 'ko');
+      }
+      return DateFormat('yyyy.MM.dd', 'en');
+    } catch (e) {
+      debugPrint('DateFormat Locale error: $e');
+      return DateFormat('yyyy.MM.dd', 'en');
+    }
+  }
+
   DateFormat formatLocaleMeridiemTime(BuildContext? context) {
     try {
       final languageCode = context?.locale.languageCode;
