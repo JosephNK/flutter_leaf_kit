@@ -38,7 +38,8 @@ class HttpExceptionErrorConverter extends ErrorConverter {
     final statusCode = base.statusCode;
     final body = jsonResponse.body;
 
-    print('[convertError] statusCode: $statusCode, body: $body');
+    debugPrint(
+        '[http_chopper][convertError] statusCode: $statusCode, body: $body');
 
     //final body = {'error_message': 'Test ErrorMessage', 'total': 100};
 
@@ -98,7 +99,8 @@ class HttpExceptionErrorConverter extends ErrorConverter {
         break;
       default:
         if (object is ResultType) {
-          print('[convertError] object is ResultType :: $object');
+          debugPrint(
+              '[http_chopper][convertError] object is ResultType :: $object');
           return response.copyWith<ResultType>(
             body: object,
             bodyError: object,
