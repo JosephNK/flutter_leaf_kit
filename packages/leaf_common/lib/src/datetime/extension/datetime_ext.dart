@@ -71,6 +71,13 @@ extension DateTimeString on DateTime {
     return value;
   }
 
+  String toNormalDateDisplay() {
+    final year = this.year.toString().padLeft(4, '0');
+    final month = this.month.toString().padLeft(2, '0');
+    final day = this.day.toString().padLeft(2, '0');
+    return '$year.$month.$day';
+  }
+
   String toWeekDay({bool short = true}) {
     String weekDay = '';
     try {
@@ -95,23 +102,19 @@ extension DateTimeString on DateTime {
     bool visiblePrefix = false,
     String format = 'yyyy-MM-dd',
   }) {
-    final prefix = !isLunar
+    String prefix = !isLunar
         ? LFLocalizations.shared.localization.shortSolar
         : LFLocalizations.shared.localization.shortLunar;
-    final dateTime =
+    DateTime? dateTime =
         !isLunar ? this : LFDateTime.parse(toLunarDateString(format: format));
-    final date =
+    String dateStr =
         LFDateTime.shared.formatLocaleYearMonthDay(context).format(dateTime);
-    final weekDay =
+    String weekDayStr =
         LFDateTime.shared.formatLocaleWeekDay(context).format(dateTime);
     if (short) {
-      final year = dateTime.year.toString().padLeft(4, '0');
-      final month = dateTime.month.toString().padLeft(2, '0');
-      final day = dateTime.day.toString().padLeft(2, '0');
-      final result = '$year.$month.$day($weekDay)';
-      return visiblePrefix ? '$prefix $result' : result;
+      dateStr = dateTime.toNormalDateDisplay();
     }
-    final result = '$date($weekDay)';
+    final result = '$dateStr($weekDayStr)';
     return visiblePrefix ? '$prefix $result' : result;
   }
 
