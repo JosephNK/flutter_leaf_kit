@@ -499,7 +499,7 @@ extension HTTPManagerHeaders on HTTPManager {
     }
     final env = await Environment.packageInfo();
     final deployment = env.buildType.name;
-    final version = env.version;
+    final version = env.packageVersion;
     final platform = env.platform;
     final agent = '$appName-$platform-$deployment-$version';
     return {

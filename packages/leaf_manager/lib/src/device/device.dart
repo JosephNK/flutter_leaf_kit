@@ -14,65 +14,49 @@ class LFDeviceManager {
 
   // ignore: prefer_const_constructors
   EdgeInsets _widowPadding = EdgeInsets.all(0.0);
-  EdgeInsets get widowPadding {
-    return _widowPadding;
-  }
+  EdgeInsets get widowPadding => _widowPadding;
 
   double _devicePixelRatio = 0.0;
-  double get devicePixelRatio {
-    return _devicePixelRatio;
-  }
+  double get devicePixelRatio => _devicePixelRatio;
 
   double _textScaleFactor = 1.0;
-  double get textScaleFactor {
-    return _textScaleFactor;
-  }
+  double get textScaleFactor => _textScaleFactor;
 
   Size _deviceSize = Size.zero;
-  Size get deviceSize {
-    return _deviceSize;
-  }
+  Size get deviceSize => _deviceSize;
 
-  void setup(BuildContext context) {
+  String _deviceName = '';
+  String get deviceName => _deviceName;
+
+  String _deviceOSVersion = '';
+  String get deviceOSVersion => _deviceOSVersion;
+
+  void setup(BuildContext context) async {
+    /// MediaQuery
     _widowPadding = MediaQueryData.fromWindow(window).padding;
     _textScaleFactor = MediaQuery.of(context).textScaleFactor;
     _devicePixelRatio = MediaQuery.of(context).devicePixelRatio;
     _deviceSize = MediaQuery.of(context).size;
-  }
 
-  Future<String> appVersion() async {
-    final info = await Environment.packageInfo();
-    final version = info.version;
-    final buildNumber = info.buildNumber;
-    final appVersion = '$version ($buildNumber)';
-    return appVersion;
-  }
-
-  Future<String> deviceName() async {
-    final deviceInfo = DeviceInfoPlugin();
-    var deviceName = '';
+    /// Device Info
+    DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
     if (Platform.isAndroid) {
       final androidInfo = await deviceInfo.androidInfo;
-      deviceName = androidInfo.model;
-    }
-    if (Platform.isIOS) {
+      final release = androidInfo.version.release;
+      final sdkInt = androidInfo.version.sdkInt;
+      final manufacturer = androidInfo.manufacturer;
+      final model = androidInfo.model;
+      _deviceName = model;
+      _deviceOSVersion = 'Android $release (SDK $sdkInt), $manufacturer';
+    } else if (Platform.isIOS) {
       final iosInfo = await deviceInfo.iosInfo;
-      deviceName = iosInfo.utsname.machine ?? '';
+      final systemName = iosInfo.systemName;
+      final systemVersion = iosInfo.systemVersion;
+      final name = iosInfo.name;
+      final model = iosInfo.model;
+      _deviceName = '${name ?? 'Unknown'} ${model ?? ''}';
+      _deviceOSVersion = '${systemName ?? 'Unknown'} ${systemVersion ?? '0.0'}';
     }
-    return deviceName;
-  }
-
-  Future<bool> isPhysicalDevice() async {
-    var isPhysicalDevice = false;
-    final deviceInfo = DeviceInfoPlugin();
-    if (Platform.isIOS) {
-      final iosInfo = await deviceInfo.iosInfo;
-      isPhysicalDevice = iosInfo.isPhysicalDevice;
-    } else {
-      final androidInfo = await deviceInfo.androidInfo;
-      isPhysicalDevice = androidInfo.isPhysicalDevice;
-    }
-    return isPhysicalDevice;
   }
 
   Future<bool> openAppSettings() async {

@@ -36,11 +36,11 @@ extension BuildTypeExt on BuildType {
 }
 
 class Environment {
-  final String packageName;
-  final String version;
-  final String buildNumber;
-  final String platform;
   final BuildType buildType;
+  final String packageName;
+  final String packageVersion;
+  final String packageBuildNumber;
+  final String platform;
 
   static Environment? _instance;
   static Environment get instance => _instance!;
@@ -48,15 +48,30 @@ class Environment {
   const Environment._internal(
     this.buildType, {
     required this.packageName,
-    required this.version,
-    required this.buildNumber,
+    required this.packageVersion,
+    required this.packageBuildNumber,
     required this.platform,
   });
 
+  bool get isProduction => (buildType == BuildType.production);
+  bool get isDevelopment => (buildType == BuildType.development);
+  bool get isStaging => (buildType == BuildType.staging);
+  bool get isTest => (buildType == BuildType.test);
+
+  String get displayAppVersion {
+    final deployment = kDebugMode ? buildType.name : '';
+    return '$deployment v.$packageVersion($packageBuildNumber)';
+  }
+
+  String userAgent(String appName) {
+    final deployment = buildType.name;
+    return '$appName-$platform-$deployment-$packageVersion.$packageBuildNumber';
+  }
+
   factory Environment({
     required String packageName,
-    required String version,
-    required String buildNumber,
+    required String packageVersion,
+    required String packageBuildNumber,
   }) {
     String platform;
     if (kIsWeb) {
@@ -77,8 +92,8 @@ class Environment {
     _instance ??= Environment._internal(
       buildType,
       packageName: packageName,
-      version: version,
-      buildNumber: buildNumber,
+      packageVersion: packageVersion,
+      packageBuildNumber: packageBuildNumber,
       platform: platform,
     );
 
@@ -87,31 +102,20 @@ class Environment {
 
   static Future<Environment> packageInfo() async {
     if (kIsWeb) {
-      return Environment(packageName: 'web', version: '', buildNumber: '');
+      return Environment(
+        packageName: 'web',
+        packageVersion: '',
+        packageBuildNumber: '',
+      );
     }
-    final info = await PackageInfo.fromPlatform();
-    final packageName = info.packageName;
-    final version = info.version;
-    final buildNumber = info.buildNumber;
+    final packageInfo = await PackageInfo.fromPlatform();
+    final packageName = packageInfo.packageName;
+    final packageVersion = packageInfo.version;
+    final packageBuildNumber = packageInfo.buildNumber;
     return Environment(
       packageName: packageName,
-      version: version,
-      buildNumber: buildNumber,
+      packageVersion: packageVersion,
+      packageBuildNumber: packageBuildNumber,
     );
-  }
-
-  bool get isProduction => (buildType == BuildType.production);
-  bool get isDevelopment => (buildType == BuildType.development);
-  bool get isStaging => (buildType == BuildType.staging);
-  bool get isTest => (buildType == BuildType.test);
-
-  String get displayVersion {
-    final deployment = kDebugMode ? buildType.name : '';
-    return '$deployment v.$version($buildNumber)';
-  }
-
-  String userAgent(String appName) {
-    final deployment = buildType.name;
-    return '$appName-$platform-$deployment-$version.$buildNumber';
   }
 }
