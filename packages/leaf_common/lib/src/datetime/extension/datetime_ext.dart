@@ -97,11 +97,12 @@ extension DateTimeString on DateTime {
 
   String toWeekDayDateString(
     BuildContext? context, {
+    bool showTime = false,
     bool short = false,
     bool isLunar = false,
     bool visiblePrefix = false,
-    String format = 'yyyy-MM-dd',
   }) {
+    String format = 'yyyy-MM-dd';
     String prefix = !isLunar
         ? LFLocalizations.shared.localization.shortSolar
         : LFLocalizations.shared.localization.shortLunar;
@@ -114,7 +115,14 @@ extension DateTimeString on DateTime {
     if (short) {
       dateStr = dateTime.toNormalDateDisplay(); // ex., 2023.01.01
     }
-    final result = '$dateStr($weekDayStr)';
+
+    String result = '$dateStr ($weekDayStr)';
+
+    if (showTime) {
+      String timeStr = toMeridiemTimeString(context);
+      result = '$dateStr $timeStr ($weekDayStr)';
+    }
+
     return visiblePrefix ? '$prefix $result' : result;
   }
 
