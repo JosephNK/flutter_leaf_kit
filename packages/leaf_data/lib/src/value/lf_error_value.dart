@@ -2,11 +2,13 @@ part of leaf_data;
 
 class ErrorValue extends Equatable {
   final int statusCode;
+  final String? errorCode;
   final String? errorMessage;
   final Object? exception;
 
   const ErrorValue({
     required this.statusCode,
+    this.errorCode,
     this.errorMessage,
     this.exception,
   });
@@ -14,9 +16,14 @@ class ErrorValue extends Equatable {
   @override
   List<Object?> get props => [
         statusCode,
+        errorCode,
         errorMessage,
         exception,
       ];
+
+  String get displayErrorMessage {
+    return '$errorMessage ($errorCode)';
+  }
 
   /// Create
 
@@ -25,6 +32,7 @@ class ErrorValue extends Equatable {
   }) {
     return ErrorValue(
       statusCode: -9999,
+      errorCode: null,
       errorMessage: 'Unknown Exception',
       exception: exception,
     );
@@ -34,11 +42,13 @@ class ErrorValue extends Equatable {
 extension ErrorValueCopyWith on ErrorValue {
   ErrorValue copyWith({
     int Function()? statusCode,
+    String? Function()? errorCode,
     String? Function()? errorMessage,
     Object? Function()? exception,
   }) {
     return ErrorValue(
       statusCode: statusCode != null ? statusCode() : this.statusCode,
+      errorCode: errorCode != null ? errorCode() : this.errorCode,
       errorMessage: errorMessage != null ? errorMessage() : this.errorMessage,
       exception: exception != null ? exception() : this.exception,
     );
