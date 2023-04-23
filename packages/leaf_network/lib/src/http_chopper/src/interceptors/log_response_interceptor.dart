@@ -13,9 +13,7 @@ class LogResponseInterceptor implements ResponseInterceptor {
       Logging.i('[Success] Response\n$message\n\n${response.body}');
     } else {
       final error = response.error;
-      if (error is HTTPException) {
-        Logging.e('[Error] Response:\n${error.toString()}');
-      }
+      Logging.e('[Error] Response:\n$error');
     }
     return response;
   }

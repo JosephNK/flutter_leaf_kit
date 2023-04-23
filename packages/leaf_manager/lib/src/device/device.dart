@@ -1,8 +1,9 @@
 import 'dart:io';
 import 'dart:ui';
 
+import 'package:android_id/android_id.dart';
+import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
-import 'package:leaf_common/leaf_common.dart';
 import 'package:permission_handler/permission_handler.dart' as ph;
 
 class LFDeviceManager {
@@ -12,8 +13,7 @@ class LFDeviceManager {
 
   LFDeviceManager._internal();
 
-  // ignore: prefer_const_constructors
-  EdgeInsets _widowPadding = EdgeInsets.all(0.0);
+  EdgeInsets _widowPadding = const EdgeInsets.all(0.0);
   EdgeInsets get widowPadding => _widowPadding;
 
   double _devicePixelRatio = 0.0;
@@ -31,6 +31,9 @@ class LFDeviceManager {
   String _deviceOSVersion = '';
   String get deviceOSVersion => _deviceOSVersion;
 
+  String _deviceUniqueID = '';
+  String get deviceUniqueID => _deviceUniqueID;
+
   void setup(BuildContext context) async {
     /// MediaQuery
     _widowPadding = MediaQueryData.fromWindow(window).padding;
@@ -46,16 +49,20 @@ class LFDeviceManager {
       final sdkInt = androidInfo.version.sdkInt;
       final manufacturer = androidInfo.manufacturer;
       final model = androidInfo.model;
+      final String uniqueID = await const AndroidId().getId() ?? '';
       _deviceName = model;
       _deviceOSVersion = 'Android $release (SDK $sdkInt), $manufacturer';
+      _deviceUniqueID = uniqueID;
     } else if (Platform.isIOS) {
       final iosInfo = await deviceInfo.iosInfo;
       final systemName = iosInfo.systemName;
       final systemVersion = iosInfo.systemVersion;
       final name = iosInfo.name;
       final model = iosInfo.model;
+      final String uniqueID = iosInfo.identifierForVendor ?? '';
       _deviceName = '${name ?? 'Unknown'} ${model ?? ''}';
       _deviceOSVersion = '${systemName ?? 'Unknown'} ${systemVersion ?? '0.0'}';
+      _deviceUniqueID = uniqueID;
     }
   }
 
@@ -72,12 +79,24 @@ class LFDeviceManager {
     //..maximumSizeBytes = 0;
   }
 
-  // ref., https://github.com/Baseflow/flutter_cached_network_image/issues/429
+  // https://github.com/Baseflow/flutter_cached_network_image/issues/429
   Future<void> checkMemory() async {
     final imageCache = PaintingBinding.instance.imageCache;
     if (imageCache.liveImageCount >= 100) {
       imageCache.clear();
       imageCache.clearLiveImages();
     }
+  }
+
+  // https://github.com/Baseflow/flutter-permission-handler/issues/955#issuecomment-1339099909
+  // No need to ask this permission on Android 13 (API 33)
+  Future<bool> checkPlatformSdk() async {
+    if (Platform.isIOS) return true;
+    if (Platform.isAndroid) {
+      final DeviceInfoPlugin deviceInfoPlugin = DeviceInfoPlugin();
+      final AndroidDeviceInfo info = await deviceInfoPlugin.androidInfo;
+      if (info.version.sdkInt >= 33) return true;
+    }
+    return false;
   }
 }

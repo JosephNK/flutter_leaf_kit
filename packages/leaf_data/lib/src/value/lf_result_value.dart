@@ -81,8 +81,8 @@ class ResultValue<T> extends Equatable {
     );
   }
 
-  static ResultValue fromEmpty() {
-    return const ResultValue();
+  static ResultValue<T> fromEmpty<T>() {
+    return ResultValue<T>();
   }
 }
 
