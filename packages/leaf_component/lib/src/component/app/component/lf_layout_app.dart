@@ -4,6 +4,8 @@ class LFLayoutApp extends StatefulWidget {
   final LFAppComponentConfigure? configure;
   final String buildName;
   final Color? backgroundColor;
+  final bool isDeviceManagerSetup;
+  final VoidCallback? onBuilder;
   final Widget child;
 
   const LFLayoutApp({
@@ -12,6 +14,8 @@ class LFLayoutApp extends StatefulWidget {
     this.buildName = '',
     this.backgroundColor,
     this.configure,
+    this.isDeviceManagerSetup = true,
+    this.onBuilder,
   }) : super(key: key);
 
   @override
@@ -34,12 +38,17 @@ class _LFLayoutAppState extends State<LFLayoutApp> {
   @override
   Widget build(BuildContext context) {
     final buildName = widget.buildName;
+    final isDeviceManagerSetup = widget.isDeviceManagerSetup;
+    final onBuilder = widget.onBuilder;
 
     final child = LayoutBuilder(
       builder: (_, constraints) {
         return OrientationBuilder(builder: (_, orientation) {
           if (constraints.maxWidth != 0) {
-            LFDeviceManager.shared.setup(context);
+            if (isDeviceManagerSetup) {
+              LFDeviceManager.shared.setup(context);
+            }
+            onBuilder?.call();
             return Container(
               color: widget.backgroundColor,
               child: widget.child,
