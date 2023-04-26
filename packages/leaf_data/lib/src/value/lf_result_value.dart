@@ -43,22 +43,12 @@ class ResultValue<T> extends Equatable {
   /// Create
 
   static ResultValue<T> fromValue<T>({
-    required int statusCode,
-    String? errorCode,
-    String? errorMessage,
-    Object? exception,
+    ErrorValue? errorValue,
     T? data,
     Object? option,
   }) {
-    return ResultValue(
-      errorValue: (errorMessage == null && exception == null)
-          ? null
-          : ErrorValue(
-              statusCode: statusCode,
-              errorCode: errorCode,
-              errorMessage: errorMessage,
-              exception: exception,
-            ),
+    return ResultValue<T>(
+      errorValue: errorValue,
       data: data,
       option: option,
     );

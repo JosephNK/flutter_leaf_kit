@@ -10,10 +10,10 @@ class LogResponseInterceptor implements ResponseInterceptor {
     response.base.headers.forEach((k, v) => message += '\n$k: $v');
 
     if (response.isSuccessful) {
-      Logging.i('[Success] Response\n$message\n\n${response.body}');
+      Logging.i('[Interceptor Success] Response\n$message\n\n${response.body}');
     } else {
       final error = response.error;
-      Logging.e('[Error] Response:\n$error');
+      Logging.e('[Interceptor Error] Response:\n$error');
     }
     return response;
   }
