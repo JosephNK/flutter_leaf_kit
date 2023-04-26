@@ -23,10 +23,22 @@ class LFAppBarComponentConfigure {
 class LFAlertDialogConfigure {
   final String? cancelText;
   final String? okText;
+  final TextStyle? titleStyle;
+  final TextStyle? messageStyle;
+  final TextStyle? okTextStyle;
+  final Color? okTextBackgroundColor;
+  final TextStyle? cancelTextStyle;
+  final Color? cancelTextBackgroundColor;
 
   LFAlertDialogConfigure({
     this.cancelText,
     this.okText,
+    this.titleStyle,
+    this.messageStyle,
+    this.okTextStyle,
+    this.okTextBackgroundColor,
+    this.cancelTextStyle,
+    this.cancelTextBackgroundColor,
   });
 }
 

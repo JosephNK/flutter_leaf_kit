@@ -12,23 +12,29 @@ class LFAlertDialog {
     String? okText,
     TextStyle? titleStyle,
     TextStyle? messageStyle,
-    TextStyle? okTextStyle,
-    Color? okTextBackgroundColor,
     VoidCallback? onOK,
   }) async {
     final okTextStr =
         okText ?? LFComponentConfigure.shared.alert?.okText ?? 'OK';
 
+    final titleStyleValue =
+        titleStyle ?? LFComponentConfigure.shared.alert?.titleStyle;
+    final messageStyleValue =
+        messageStyle ?? LFComponentConfigure.shared.alert?.messageStyle;
+    final okTextStyleValue = LFComponentConfigure.shared.alert?.okTextStyle;
+    final okTextBackgroundColorValue =
+        LFComponentConfigure.shared.alert?.okTextBackgroundColor;
+
     await _LFAlertDialog().show(
       context,
       title: title,
       message: message,
-      titleStyle: titleStyle,
-      messageStyle: messageStyle,
+      titleStyle: titleStyleValue,
+      messageStyle: messageStyleValue,
       onOK: onOK,
-      okTextStyle: okTextStyle,
-      okTextBackgroundColor: okTextBackgroundColor,
       okText: okTextStr,
+      okTextStyle: okTextStyleValue,
+      okTextBackgroundColor: okTextBackgroundColorValue,
     );
   }
 
@@ -39,10 +45,6 @@ class LFAlertDialog {
     TextStyle? titleStyle,
     TextStyle? messageStyle,
     String? okText,
-    TextStyle? okTextStyle,
-    Color? okTextBackgroundColor,
-    TextStyle? cancelTextStyle,
-    Color? cancelTextBackgroundColor,
     VoidCallback? onCancel,
     VoidCallback? onOK,
   }) async {
@@ -51,19 +53,31 @@ class LFAlertDialog {
     final okTextStr =
         okText ?? LFComponentConfigure.shared.alert?.okText ?? 'OK';
 
+    final titleStyleValue =
+        titleStyle ?? LFComponentConfigure.shared.alert?.titleStyle;
+    final messageStyleValue =
+        messageStyle ?? LFComponentConfigure.shared.alert?.messageStyle;
+    final okTextStyleValue = LFComponentConfigure.shared.alert?.okTextStyle;
+    final okTextBackgroundColorValue =
+        LFComponentConfigure.shared.alert?.okTextBackgroundColor;
+    final cancelTextStyleValue =
+        LFComponentConfigure.shared.alert?.cancelTextStyle;
+    final cancelTextBackgroundColorValue =
+        LFComponentConfigure.shared.alert?.cancelTextBackgroundColor;
+
     await _LFAlertDialog().confirm(
       context,
       title: title,
       message: message,
-      titleStyle: titleStyle,
-      messageStyle: messageStyle,
+      titleStyle: titleStyleValue,
+      messageStyle: messageStyleValue,
       onCancel: onCancel,
       onOK: onOK,
-      okTextStyle: okTextStyle,
-      okTextBackgroundColor: okTextBackgroundColor,
+      okTextStyle: okTextStyleValue,
+      okTextBackgroundColor: okTextBackgroundColorValue,
       okText: okTextStr,
-      cancelTextStyle: cancelTextStyle,
-      cancelTextBackgroundColor: cancelTextBackgroundColor,
+      cancelTextStyle: cancelTextStyleValue,
+      cancelTextBackgroundColor: cancelTextBackgroundColorValue,
       cancelText: cancelTextStr,
     );
   }
@@ -76,6 +90,9 @@ class LFAlertDialog {
     if (errorMessage == null) return;
 
     final okTextStr = LFComponentConfigure.shared.alert?.okText ?? 'OK';
+    final okTextStyle = LFComponentConfigure.shared.alert?.okTextStyle;
+    final okTextBackgroundColor =
+        LFComponentConfigure.shared.alert?.okTextBackgroundColor;
 
     String? errorTitle = 'Oops! Error :(';
     _LFAlertDialog().show(
@@ -84,6 +101,8 @@ class LFAlertDialog {
       message: errorMessage,
       onOK: onTap,
       okText: okTextStr,
+      okTextStyle: okTextStyle,
+      okTextBackgroundColor: okTextBackgroundColor,
     );
   }
 
@@ -95,6 +114,9 @@ class LFAlertDialog {
     if (exception == null) return;
 
     final okTextStr = LFComponentConfigure.shared.alert?.okText ?? 'Close';
+    final okTextStyle = LFComponentConfigure.shared.alert?.okTextStyle;
+    final okTextBackgroundColor =
+        LFComponentConfigure.shared.alert?.okTextBackgroundColor;
 
     String? errorTitle = 'Oops! Exception :(';
     String? errorMessage = exception.toString();
@@ -106,6 +128,8 @@ class LFAlertDialog {
         message: errorMessage,
         onOK: onTap,
         okText: okTextStr,
+        okTextStyle: okTextStyle,
+        okTextBackgroundColor: okTextBackgroundColor,
       );
     }
   }
