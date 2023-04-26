@@ -49,6 +49,7 @@ class HTTPChopper {
     required Uri baseUrl,
     required Iterable<ChopperService> services,
     required Converter? converter,
+    Iterable interceptors = const [],
     ErrorConverter? errorConverter,
     Authenticator? authenticator,
   }) {
@@ -60,6 +61,7 @@ class HTTPChopper {
       converter: converter,
       errorConverter: errorConverter,
       interceptors: [
+        ...interceptors,
         ConnectInterceptor(),
         CurlInterceptor(),
         LogResponseInterceptor(),
