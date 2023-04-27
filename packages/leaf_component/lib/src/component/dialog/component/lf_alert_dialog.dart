@@ -85,7 +85,7 @@ class LFAlertDialog {
   static Future<void> showErrorMessage(
     BuildContext context, {
     required String? errorMessage,
-    VoidCallback? onTap,
+    VoidCallback? onOk,
   }) async {
     if (errorMessage == null) return;
 
@@ -99,7 +99,7 @@ class LFAlertDialog {
       context,
       title: errorTitle,
       message: errorMessage,
-      onOK: onTap,
+      onOK: onOk,
       okText: okTextStr,
       okTextStyle: okTextStyle,
       okTextBackgroundColor: okTextBackgroundColor,
