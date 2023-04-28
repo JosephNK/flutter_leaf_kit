@@ -9,7 +9,7 @@ import 'package:built_value/standard_json_plugin.dart';
 import 'package:chopper/chopper.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/foundation.dart';
-import 'package:http/io_client.dart' as http;
+// import 'package:http/io_client.dart' as http;
 import 'package:leaf_common/leaf_common.dart';
 
 part 'src/converter/built_value_converter.dart';
@@ -20,6 +20,7 @@ part 'src/interceptors/log_response_interceptor.dart';
 part 'src/interceptors/throw_exception_interceptor.dart';
 part 'src/override/http_override.dart';
 
+/*
 class HTTPChopper {
   static final HTTPChopper _instance = HTTPChopper._internal();
 
@@ -74,3 +75,4 @@ class HTTPChopper {
 
   late ChopperClient chopperClient;
 }
+ */
