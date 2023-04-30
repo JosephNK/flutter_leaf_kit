@@ -26,3 +26,16 @@ class NavigationHelper {
     return count == findIndex + 1;
   }
 }
+
+extension NavigatorStateExtension on NavigatorState {
+  bool checkCurrentWithRouteName(String routeName) {
+    bool isCurrent = false;
+    popUntil((route) {
+      if (route.settings.name == routeName) {
+        isCurrent = true;
+      }
+      return true;
+    });
+    return isCurrent;
+  }
+}

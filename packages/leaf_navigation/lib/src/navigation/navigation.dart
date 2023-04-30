@@ -7,6 +7,7 @@ enum LFNavigatorPushType {
   basicCupertino,
   basicCupertinoFullScreen,
   materialModal,
+  materialModalNoAnimation,
   cupertinoModal
 }
 
@@ -93,6 +94,18 @@ class LFNavigation {
               );
             },
             transitionDuration: const Duration(milliseconds: 300),
+          ),
+        );
+      case LFNavigatorPushType.materialModalNoAnimation:
+        return await Navigator.push(
+          context,
+          PageRouteBuilder(
+            settings: routeSettings,
+            pageBuilder: (_, __, ___) {
+              return child;
+            },
+            transitionDuration: Duration.zero,
+            reverseTransitionDuration: Duration.zero,
           ),
         );
       case LFNavigatorPushType.cupertinoModal:

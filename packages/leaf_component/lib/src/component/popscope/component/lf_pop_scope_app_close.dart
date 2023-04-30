@@ -4,17 +4,15 @@ typedef LFPopScopeCallback = Future<void> Function();
 
 class LFPopScopeToAppClose extends StatefulWidget {
   final Widget child;
-  final LFPopScopeCallback? callback;
+  final LFPopScopeCallback? closeBeforeCallback;
   final Duration duration;
-  final bool enableBack;
   final VoidCallback? onWillPop;
 
   const LFPopScopeToAppClose({
     Key? key,
     required this.child,
-    required this.callback,
+    required this.closeBeforeCallback,
     this.duration = const Duration(milliseconds: 4000),
-    this.enableBack = false,
     this.onWillPop,
   }) : super(key: key);
 
@@ -34,17 +32,18 @@ class _LFPopScopeToAppCloseState extends State<LFPopScopeToAppClose> {
             DateTime.now().difference(lastTimeBackButtonWasTapped));
   }
 
-  bool get _willHandlePopInternally =>
-      ModalRoute.of(context)?.willHandlePopInternally ?? false;
-
   @override
   Widget build(BuildContext context) {
     if (_isAndroid) {
       return WillPopScope(
-        onWillPop: () {
-          if (widget.enableBack) {
-            return Future<bool>.value(true);
+        onWillPop: () async {
+          if (Platform.isAndroid) {
+            // SystemChannels.platform.invokeMethod<void>('SystemNavigator.pop') wrong behavior in Android 12 when using FlutterFragmentActivity
+            // https://github.com/flutter/flutter/issues/98133
+            final sdkInt = await LFDeviceManager.shared.getAndroidSdkInt();
+            if (sdkInt >= 31) return Future<bool>.value(true);
           }
+          // ignore: use_build_context_synchronously
           return _handleWillPop(context);
         },
         child: widget.child,
@@ -54,15 +53,19 @@ class _LFPopScopeToAppCloseState extends State<LFPopScopeToAppClose> {
   }
 
   Future<bool> _handleWillPop(BuildContext context) async {
-    if (_isSnackBarVisible || _willHandlePopInternally) {
-      //return true;
-      // exit(0);
-      // await Future.delayed(Duration(milliseconds: 1000));
-      // await SystemChannels.platform.invokeMethod('SystemNavigator.pop');
+    bool willHandlePopInternally =
+        ModalRoute.of(context)?.willHandlePopInternally ?? false;
+    if (_isSnackBarVisible || willHandlePopInternally) {
+      if (_isAndroid) {
+        Future.delayed(const Duration(milliseconds: 1000), () {
+          SystemChannels.platform.invokeMethod('SystemNavigator.pop');
+        });
+        // exit(0);
+      }
       return true;
     } else {
       _lastTimeBackButtonWasTapped = DateTime.now();
-      await widget.callback?.call();
+      await widget.closeBeforeCallback?.call();
       widget.onWillPop?.call();
       return false;
     }

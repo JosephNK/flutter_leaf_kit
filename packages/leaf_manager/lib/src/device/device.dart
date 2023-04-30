@@ -66,6 +66,15 @@ class LFDeviceManager {
     }
   }
 
+  Future<int> getAndroidSdkInt() async {
+    if (Platform.isAndroid) {
+      final DeviceInfoPlugin deviceInfoPlugin = DeviceInfoPlugin();
+      final AndroidDeviceInfo info = await deviceInfoPlugin.androidInfo;
+      return info.version.sdkInt;
+    }
+    return 0;
+  }
+
   Future<bool> openAppSettings() async {
     return await ph.openAppSettings();
   }
@@ -93,9 +102,8 @@ class LFDeviceManager {
   Future<bool> checkPlatformSdk() async {
     if (Platform.isIOS) return true;
     if (Platform.isAndroid) {
-      final DeviceInfoPlugin deviceInfoPlugin = DeviceInfoPlugin();
-      final AndroidDeviceInfo info = await deviceInfoPlugin.androidInfo;
-      if (info.version.sdkInt >= 33) return true;
+      final sdkInt = await getAndroidSdkInt();
+      if (sdkInt >= 33) return true;
     }
     return false;
   }
