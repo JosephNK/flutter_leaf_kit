@@ -497,7 +497,7 @@ extension HTTPManagerHeaders on HTTPManager {
     if (appName == null) {
       throw 'HTTPManager AppName should not be null';
     }
-    final env = await Environment.packageInfo();
+    final env = await PlatformPackage.fromInfo();
     final deployment = env.buildType.name;
     final version = env.packageVersion;
     final platform = env.platform;

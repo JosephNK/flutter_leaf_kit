@@ -35,17 +35,17 @@ extension BuildTypeExt on BuildType {
   }
 }
 
-class Environment {
+class PlatformPackage {
   final BuildType buildType;
   final String packageName;
   final String packageVersion;
   final String packageBuildNumber;
   final String platform;
 
-  static Environment? _instance;
-  static Environment get instance => _instance!;
+  static PlatformPackage? _instance;
+  static PlatformPackage get instance => _instance!;
 
-  const Environment._internal(
+  const PlatformPackage._internal(
     this.buildType, {
     required this.packageName,
     required this.packageVersion,
@@ -68,7 +68,7 @@ class Environment {
     return '$appName-$platform-$deployment-$packageVersion.$packageBuildNumber';
   }
 
-  factory Environment({
+  factory PlatformPackage({
     required String packageName,
     required String packageVersion,
     required String packageBuildNumber,
@@ -89,7 +89,7 @@ class Environment {
       buildType = BuildType.test;
     }
 
-    _instance ??= Environment._internal(
+    _instance ??= PlatformPackage._internal(
       buildType,
       packageName: packageName,
       packageVersion: packageVersion,
@@ -100,9 +100,9 @@ class Environment {
     return _instance!;
   }
 
-  static Future<Environment> packageInfo() async {
+  static Future<PlatformPackage> fromInfo() async {
     if (kIsWeb) {
-      return Environment(
+      return PlatformPackage(
         packageName: 'web',
         packageVersion: '',
         packageBuildNumber: '',
@@ -112,7 +112,7 @@ class Environment {
     final packageName = packageInfo.packageName;
     final packageVersion = packageInfo.version;
     final packageBuildNumber = packageInfo.buildNumber;
-    return Environment(
+    return PlatformPackage(
       packageName: packageName,
       packageVersion: packageVersion,
       packageBuildNumber: packageBuildNumber,
