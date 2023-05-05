@@ -15,7 +15,7 @@ class LFListViewIndicator extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(12),
         child: const Center(
-          child: LFIndicator(),
+          child: LFIndicator(size: LFIndicatorSize.medium),
         ),
       ),
     );

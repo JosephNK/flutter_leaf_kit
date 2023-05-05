@@ -399,46 +399,70 @@ class _LFTextFieldState extends State<LFTextField> {
               ),
         enabledBorder: onlyUnderline
             ? UnderlineInputBorder(
-                borderSide:
-                    BorderSide(color: inputBorderColor, width: borderWidth),
+                borderSide: BorderSide(
+                    color: (borderWidth == 0.0)
+                        ? Colors.transparent
+                        : inputBorderColor,
+                    width: borderWidth),
                 borderRadius: BorderRadius.circular(borderRadius),
               )
             : OutlineInputBorder(
-                borderSide:
-                    BorderSide(color: inputBorderColor, width: borderWidth),
+                borderSide: BorderSide(
+                    color: (borderWidth == 0.0)
+                        ? Colors.transparent
+                        : inputBorderColor,
+                    width: borderWidth),
                 borderRadius: BorderRadius.circular(borderRadius),
               ),
         focusedBorder: onlyUnderline
             ? UnderlineInputBorder(
                 borderSide: BorderSide(
-                    color: inputFocusBorderColor, width: borderWidth),
+                    color: (borderWidth == 0.0)
+                        ? Colors.transparent
+                        : inputFocusBorderColor,
+                    width: borderWidth),
                 borderRadius: BorderRadius.circular(borderRadius),
               )
             : OutlineInputBorder(
                 borderSide: BorderSide(
-                    color: inputFocusBorderColor, width: borderWidth),
+                    color: (borderWidth == 0.0)
+                        ? Colors.transparent
+                        : inputFocusBorderColor,
+                    width: borderWidth),
                 borderRadius: BorderRadius.circular(borderRadius),
               ),
         errorBorder: onlyUnderline
             ? UnderlineInputBorder(
                 borderSide: BorderSide(
-                    color: inputErrorBorderColor, width: borderWidth),
+                    color: (borderWidth == 0.0)
+                        ? Colors.transparent
+                        : inputErrorBorderColor,
+                    width: borderWidth),
                 borderRadius: BorderRadius.circular(borderRadius),
               )
             : OutlineInputBorder(
                 borderSide: BorderSide(
-                    color: inputErrorBorderColor, width: borderWidth),
+                    color: (borderWidth == 0.0)
+                        ? Colors.transparent
+                        : inputErrorBorderColor,
+                    width: borderWidth),
                 borderRadius: BorderRadius.circular(borderRadius),
               ),
         focusedErrorBorder: onlyUnderline
             ? UnderlineInputBorder(
                 borderSide: BorderSide(
-                    color: inputErrorBorderColor, width: borderWidth),
+                    color: (borderWidth == 0.0)
+                        ? Colors.transparent
+                        : inputErrorBorderColor,
+                    width: borderWidth),
                 borderRadius: BorderRadius.circular(borderRadius),
               )
             : OutlineInputBorder(
                 borderSide: BorderSide(
-                    color: inputErrorBorderColor, width: borderWidth),
+                    color: (borderWidth == 0.0)
+                        ? Colors.transparent
+                        : inputErrorBorderColor,
+                    width: borderWidth),
                 borderRadius: BorderRadius.circular(borderRadius),
               ),
       ),

@@ -19,9 +19,9 @@ extension LFIndicatorSizeExt on LFIndicatorSize {
       case LFIndicatorSize.small:
         return 10.0;
       case LFIndicatorSize.medium:
-        return 20.0;
+        return 15.0;
       case LFIndicatorSize.large:
-        return 30.0;
+        return 25.0;
     }
   }
 }
