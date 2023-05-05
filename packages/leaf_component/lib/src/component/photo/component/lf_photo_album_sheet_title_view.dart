@@ -4,12 +4,14 @@ part of lf_photo;
 /// LFPhotoAlbumSheetTitleView
 ///
 class LFPhotoAlbumSheetTitleView extends StatefulWidget {
+  final RequestType type;
   final AssetPathEntity? selectedAssetPath;
   final TextStyle? textStyle;
   final ValueChanged<AssetPathEntity>? onSelected;
 
   const LFPhotoAlbumSheetTitleView({
     Key? key,
+    required this.type,
     required this.selectedAssetPath,
     this.textStyle,
     this.onSelected,
@@ -32,7 +34,7 @@ class _LFPhotoAlbumSheetTitleViewState extends State<LFPhotoAlbumSheetTitleView>
     _selectedAssetPath = widget.selectedAssetPath;
 
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      final assetPathList = await requestAssetPaths();
+      final assetPathList = await requestAssetPaths(widget.type);
       final assetPath = (_selectedAssetPath == null)
           ? assetPathList.first
           : _selectedAssetPath;

@@ -4,11 +4,11 @@ part of lf_photo;
 /// Mixin
 ///
 mixin LFPhotoAlbumRequest {
-  Future<List<AssetPathEntity>> requestAssetPaths() async {
+  Future<List<AssetPathEntity>> requestAssetPaths(RequestType type) async {
     final result = await PhotoManager.requestPermissionExtend();
     if (result == PermissionState.authorized) {
       final paths = await PhotoManager.getAssetPathList(
-        type: RequestType.common,
+        type: type,
         filterOption: FilterOptionGroup(
           containsPathModified: true,
           containsLivePhotos: false,

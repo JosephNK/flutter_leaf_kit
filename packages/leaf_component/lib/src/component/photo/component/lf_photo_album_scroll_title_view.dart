@@ -4,6 +4,7 @@ part of lf_photo;
 /// LFPhotoAlbumScrollTitleView
 ///
 class LFPhotoAlbumScrollTitleView extends StatefulWidget {
+  final RequestType type;
   final AssetPathEntity? selectedAssetPath;
   final TextStyle? textStyle;
   final VoidCallback? onPressed;
@@ -11,6 +12,7 @@ class LFPhotoAlbumScrollTitleView extends StatefulWidget {
 
   const LFPhotoAlbumScrollTitleView({
     Key? key,
+    required this.type,
     required this.selectedAssetPath,
     this.textStyle,
     this.onPressed,
@@ -33,7 +35,7 @@ class _LFPhotoAlbumScrollTitleViewState
     _selectedAssetPath = widget.selectedAssetPath;
 
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      final assetPathList = await requestAssetPaths();
+      final assetPathList = await requestAssetPaths(widget.type);
       final assetPath = (_selectedAssetPath == null)
           ? assetPathList.first
           : _selectedAssetPath;

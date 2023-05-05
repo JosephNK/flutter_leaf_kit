@@ -45,6 +45,17 @@ class LFCircleAvatarImage extends StatelessWidget {
     final file = image.file;
     final bytes = image.bytes;
 
+    if (bytes != null) {
+      return LFMemoryImage(
+        bytes: bytes,
+        width: size,
+        height: size,
+        fit: fit,
+        placeholderWidget: placeholderWidget,
+        errorWidget: errorWidget,
+      );
+    }
+
     if (file != null) {
       if (!isURL(file)) {
         return LFAssetImage(
@@ -59,17 +70,6 @@ class LFCircleAvatarImage extends StatelessWidget {
       return LFCacheImage(
         header: header,
         url: file,
-        width: size,
-        height: size,
-        fit: fit,
-        placeholderWidget: placeholderWidget,
-        errorWidget: errorWidget,
-      );
-    }
-
-    if (bytes != null) {
-      return LFMemoryImage(
-        bytes: bytes,
         width: size,
         height: size,
         fit: fit,
