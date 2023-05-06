@@ -42,7 +42,7 @@ class LFCircleAvatarImage extends StatelessWidget {
 
   Widget? _buildImageWidget() {
     final image = this.image;
-    final file = image.file;
+    final file = image.file ?? '';
     final bytes = image.bytes;
 
     if (bytes != null) {
@@ -56,17 +56,7 @@ class LFCircleAvatarImage extends StatelessWidget {
       );
     }
 
-    if (file != null) {
-      if (!isURL(file)) {
-        return LFAssetImage(
-          path: file,
-          width: size,
-          height: size,
-          fit: fit,
-          placeholderWidget: placeholderWidget,
-          errorWidget: errorWidget,
-        );
-      }
+    if (isURL(file)) {
       return LFCacheImage(
         header: header,
         url: file,
@@ -78,10 +68,13 @@ class LFCircleAvatarImage extends StatelessWidget {
       );
     }
 
-    return SizedBox(
+    return LFAssetImage(
+      path: file,
       width: size,
       height: size,
-      child: placeholderWidget ?? Container(),
+      fit: fit,
+      placeholderWidget: placeholderWidget,
+      errorWidget: errorWidget,
     );
   }
 }

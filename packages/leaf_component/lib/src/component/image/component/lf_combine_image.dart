@@ -23,7 +23,7 @@ class LFCombineImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final image = this.image;
-    final file = image.file;
+    final file = image.file ?? '';
     final bytes = image.bytes;
 
     if (bytes != null) {
@@ -37,18 +37,7 @@ class LFCombineImage extends StatelessWidget {
       );
     }
 
-    if (file != null) {
-      if (!isURL(file)) {
-        return LFAssetImage(
-          path: file,
-          width: width,
-          height: height,
-          fit: fit,
-          placeholderWidget: placeholderWidget,
-          errorWidget: errorWidget,
-        );
-      }
-
+    if (isURL(file)) {
       return LFCacheImage(
         header: header,
         url: file,
@@ -60,6 +49,13 @@ class LFCombineImage extends StatelessWidget {
       );
     }
 
-    return Container();
+    return LFAssetImage(
+      path: file,
+      width: width,
+      height: height,
+      fit: fit,
+      placeholderWidget: placeholderWidget,
+      errorWidget: errorWidget,
+    );
   }
 }
