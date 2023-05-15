@@ -65,7 +65,9 @@ class LFGridViewMaterial<T> extends StatelessWidget {
       return Column(
         children: [
           (header != null) ? header! : Container(),
-          gridViewWidget,
+          Expanded(
+            child: gridViewWidget,
+          ),
         ],
       );
     }
@@ -77,7 +79,9 @@ class LFGridViewMaterial<T> extends StatelessWidget {
       child: Column(
         children: [
           (header != null) ? header! : Container(),
-          gridViewWidget,
+          Expanded(
+            child: gridViewWidget,
+          ),
         ],
       ),
     );
