@@ -149,7 +149,7 @@ class LFFileManager {
     }
   }
 
-  Future<void> deleteExternalStoragDir() async {
+  Future<void> deleteExternalStorageDir() async {
     final appDir = await getExternalStorageDirectories();
     if (appDir != null) {
       for (var dir in appDir) {
@@ -160,9 +160,17 @@ class LFFileManager {
     }
   }
 
+  Future<Directory> getTemporaryDirectoryDir() async {
+    return await getTemporaryDirectory();
+  }
+
   Future<String> getTemporaryDirectoryPath() async {
     final directory = await getTemporaryDirectory();
     return directory.path;
+  }
+
+  Future<Directory> getApplicationDocumentsDirectoryDir() async {
+    return await getApplicationDocumentsDirectory();
   }
 
   Future<String> getApplicationDocumentsDirectoryPath() async {
