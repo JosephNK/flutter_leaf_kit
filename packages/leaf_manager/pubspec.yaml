@@ -19,7 +19,7 @@ dependencies:
       path: ./packages/leaf_common
 
   app_tracking_transparency: ^2.0.2+4
-  path_provider: ^2.0.10
+  path_provider: ^2.0.15
   permission_handler: ^10.2.0
   flutter_app_badger: ^1.4.0
   geolocator: ^9.0.2
