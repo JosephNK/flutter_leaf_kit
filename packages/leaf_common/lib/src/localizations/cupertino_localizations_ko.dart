@@ -143,6 +143,9 @@ class CupertinoLocalizationsKoFixed implements CupertinoLocalizations {
   @override
   String get modalBarrierDismissLabel => '닫기';
 
+  @override
+  String get noSpellCheckReplacementsLabel => '교체품 없음';
+
   /// Creates an object that provides US English resource values for the
   /// cupertino library widgets.
   ///

@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'dart:ui';
 
 import 'package:android_id/android_id.dart';
 import 'package:device_info_plus/device_info_plus.dart';
@@ -36,7 +35,7 @@ class LFDeviceManager {
 
   void setup(BuildContext context) async {
     /// MediaQuery
-    _widowPadding = MediaQueryData.fromWindow(window).padding;
+    _widowPadding = MediaQueryData.fromView(View.of(context)).padding;
     _textScaleFactor = MediaQuery.of(context).textScaleFactor;
     _devicePixelRatio = MediaQuery.of(context).devicePixelRatio;
     _deviceSize = MediaQuery.of(context).size;
