@@ -30,6 +30,7 @@ class _PhotoScreenState extends ScreenState<PhotoScreen> {
     return LFAppBar(
       // centerTitle: true,
       title: LFPhotoAlbumSheetTitleView(
+        type: RequestType.all,
         selectedAssetPath: _selectedAssetPath,
         onSelected: (assetPath) {
           setState(() {

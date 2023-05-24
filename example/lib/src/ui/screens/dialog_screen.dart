@@ -65,7 +65,6 @@ class _DialogScreenState extends ScreenState<DialogScreen> {
                 context,
                 title: 'Title',
                 message: 'Message',
-                onCancel: () {},
               );
             },
           ),

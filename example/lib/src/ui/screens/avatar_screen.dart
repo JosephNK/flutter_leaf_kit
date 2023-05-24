@@ -31,13 +31,13 @@ class _AvatarScreenState extends ScreenState<AvatarScreen> {
 
   @override
   Widget buildBody(BuildContext context, Object? state) {
-    return Center(
+    return const Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
-        children: const [
+        children: [
           LFCircleAvatarImage(
-            image: 'https://picsum.photos/200/300',
+            image: LFImageValue(file: 'https://picsum.photos/200/300'),
             size: 25,
           ),
           SizedBox(height: 20.0),

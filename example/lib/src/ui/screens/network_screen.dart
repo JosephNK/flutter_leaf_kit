@@ -1,6 +1,3 @@
-import 'package:example/src/network/services/api_service.dart';
-import 'package:example/src/network/services/responses/api_error_response.dart';
-import 'package:example/src/network/services/responses/serializer/serializers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_leaf_kit/flutter_leaf_kit.dart';
 
@@ -26,18 +23,18 @@ class _NetworkScreenState extends ScreenState<NetworkScreen> {
 
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       // Init
-      HTTPChopper.shared.init(
-        baseUrl: Uri.parse('https://dummyjson.com/'),
-        services: [
-          APIService.create(),
-        ],
-        converter: BuiltValueConverter(
-          serializers: serializers,
-        ),
-        errorConverter: HttpExceptionErrorConverter(
-          serializers: serializers,
-        ),
-      );
+      // HTTPChopper.shared.init(
+      //   baseUrl: Uri.parse('https://dummyjson.com/'),
+      //   services: [
+      //     APIService.create(),
+      //   ],
+      //   converter: BuiltValueConverter(
+      //     serializers: serializers,
+      //   ),
+      //   errorConverter: HttpExceptionErrorConverter(
+      //     serializers: serializers,
+      //   ),
+      // );
     });
   }
 
@@ -87,52 +84,52 @@ class _NetworkScreenState extends ScreenState<NetworkScreen> {
   }
 
   void _action1() async {
-    try {
-      final Map<String, dynamic> query = {'limit': 5};
-      final apiService =
-          HTTPChopper.shared.chopperClient.getService<APIService>();
-      final response = await apiService.getProducts(query);
-      if (response.isSuccessful) {
-        final body = response.body;
-        final products = body?.products;
-        Logging.d('Response Success: Products: $products');
-      } else {
-        final code = response.statusCode;
-        final error = response.error as APIErrorResponse;
-        Logging.e(
-            'Response Error: $code, $error, errorMessage: ${error.errorMessage}');
-      }
-    } on Exception catch (e) {
-      if (e is NotFoundException) {
-        Logging.e('NotFoundException: $e');
-      } else {
-        Logging.e('Exception: $e');
-      }
-    }
+    // try {
+    //   final Map<String, dynamic> query = {'limit': 5};
+    //   final apiService =
+    //       HTTPChopper.shared.chopperClient.getService<APIService>();
+    //   final response = await apiService.getProducts(query);
+    //   if (response.isSuccessful) {
+    //     final body = response.body;
+    //     final products = body?.products;
+    //     Logging.d('Response Success: Products: $products');
+    //   } else {
+    //     final code = response.statusCode;
+    //     final error = response.error as APIErrorResponse;
+    //     Logging.e(
+    //         'Response Error: $code, $error, errorMessage: ${error.errorMessage}');
+    //   }
+    // } on Exception catch (e) {
+    //   if (e is NotFoundException) {
+    //     Logging.e('NotFoundException: $e');
+    //   } else {
+    //     Logging.e('Exception: $e');
+    //   }
+    // }
   }
 
   void _action2() async {
-    try {
-      final Map<String, dynamic> query = {'limit': 5};
-      final apiService =
-          HTTPChopper.shared.chopperClient.getService<APIService>();
-      final response = await apiService.getNotFound(query);
-      if (response.isSuccessful) {
-        final body = response.body;
-        final products = body?.products;
-        Logging.d('Response Success: Products: $products');
-      } else {
-        final code = response.statusCode;
-        final error = response.error as APIErrorResponse;
-        Logging.e(
-            'Response Error: $code, $error, errorMessage: ${error.errorMessage}');
-      }
-    } on Exception catch (e) {
-      if (e is NotFoundException) {
-        Logging.e('NotFoundException: $e');
-      } else {
-        Logging.e('Exception: $e');
-      }
-    }
+    // try {
+    //   final Map<String, dynamic> query = {'limit': 5};
+    //   final apiService =
+    //       HTTPChopper.shared.chopperClient.getService<APIService>();
+    //   final response = await apiService.getNotFound(query);
+    //   if (response.isSuccessful) {
+    //     final body = response.body;
+    //     final products = body?.products;
+    //     Logging.d('Response Success: Products: $products');
+    //   } else {
+    //     final code = response.statusCode;
+    //     final error = response.error as APIErrorResponse;
+    //     Logging.e(
+    //         'Response Error: $code, $error, errorMessage: ${error.errorMessage}');
+    //   }
+    // } on Exception catch (e) {
+    //   if (e is NotFoundException) {
+    //     Logging.e('NotFoundException: $e');
+    //   } else {
+    //     Logging.e('Exception: $e');
+    //   }
+    // }
   }
 }
