@@ -1,6 +1,17 @@
 part of leaf_navigation;
 
 class NavigationHelper {
+  static bool isExistRoute(BuildContext context, {required String routeName}) {
+    bool isCurrent = false;
+    Navigator.popUntil(context, (currentRoute) {
+      if (currentRoute.settings.name == routeName) {
+        isCurrent = true;
+      }
+      return true;
+    });
+    return isCurrent;
+  }
+
   static int getFindIndexRouteName(String routeName) {
     var findIndex = 0;
     // final history =
