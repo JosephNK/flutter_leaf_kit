@@ -1,6 +1,6 @@
 part of lf_common;
 
-extension DateString on String {
+extension DateStringString on String {
   String toLongDateTime({String format = 'yyyy.MM.dd HH:mm'}) {
     return LFDateTime.shared.formatString(this, format: format);
   }

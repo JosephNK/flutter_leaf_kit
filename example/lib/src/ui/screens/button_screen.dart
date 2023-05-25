@@ -31,10 +31,10 @@ class _ButtonScreenState extends ScreenState<ButtonScreen> {
 
   @override
   Widget buildBody(BuildContext context, Object? state) {
-    return Column(
+    return const Column(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
-      children: const [
+      children: [
         Center(
           child: LFFlatButton(
             text: 'Button',

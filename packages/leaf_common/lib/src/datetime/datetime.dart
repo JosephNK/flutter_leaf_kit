@@ -56,9 +56,9 @@ class LFDateTime {
     return DateFormat(format).format(value);
   }
 
-  DateFormat formatLocaleYearMonthDay(BuildContext? context) {
+  DateFormat formatLocaleYearMonthDay() {
     try {
-      final languageCode = context?.locale.languageCode;
+      final languageCode = LFLocalizations.shared.languageCode;
       if (languageCode == 'ko') {
         final yearUnit = LFLocalizations.shared.localization.year;
         final monthUnit = LFLocalizations.shared.localization.month;
@@ -72,9 +72,9 @@ class LFDateTime {
     }
   }
 
-  DateFormat formatLocaleMeridiemTime(BuildContext? context) {
+  DateFormat formatLocaleMeridiemTime() {
     try {
-      final languageCode = context?.locale.languageCode;
+      final languageCode = LFLocalizations.shared.languageCode;
       if (languageCode == 'ko') {
         return DateFormat('aa hh:mm', 'ko');
       }
@@ -85,9 +85,9 @@ class LFDateTime {
     }
   }
 
-  DateFormat formatLocaleWeekDay(BuildContext? context) {
+  DateFormat formatLocaleWeekDay() {
     try {
-      final locale = context?.locale.toString();
+      final locale = LFLocalizations.shared.locale.toString();
       return DateFormat.E(locale);
     } catch (e) {
       debugPrint('DateFormat Locale error: $e');

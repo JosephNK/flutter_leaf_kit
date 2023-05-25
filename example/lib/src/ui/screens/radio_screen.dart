@@ -42,10 +42,10 @@ class _RadioScreenState extends ScreenState<RadioScreen> {
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Row(
+        const Row(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
-          children: const [
+          children: [
             LFRadio(
               text: 'Hello',
               value: true,

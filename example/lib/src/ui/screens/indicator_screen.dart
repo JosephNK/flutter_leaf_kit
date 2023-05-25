@@ -78,10 +78,10 @@ class _IndicatorScreenState extends ScreenState<IndicatorScreen> {
         ),
         const SizedBox(height: 30.0),
         const LFText('LFPageIndicator'),
-        Column(
+        const Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
-          children: const [
+          children: [
             LFPageIndicator(
               total: 5,
               current: 2.0,

@@ -19,6 +19,7 @@ export 'notification_center/src/dart_notification_center.dart';
 
 part 'datetime/datetime.dart';
 part 'datetime/extension/datetime_ext.dart';
+part 'datetime/extension/int_date_ext.dart';
 part 'datetime/extension/string_date_ext.dart';
 part 'extension/lists.dart';
 part 'extension/numbers.dart';

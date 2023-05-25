@@ -42,10 +42,10 @@ class _CheckboxScreenState extends ScreenState<CheckboxScreen> {
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Row(
+        const Row(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
-          children: const [
+          children: [
             LFCheckBox(
               text: 'Hello',
               value: true,

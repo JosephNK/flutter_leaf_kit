@@ -7,6 +7,8 @@ abstract class LFLocalization {
   String get min;
   String get hour;
   String get ago;
+  String get nowAgo;
+  String get yesterday;
   String get shortLunar;
   String get shortSolar;
 
@@ -33,6 +35,12 @@ class LFLocalizationEn extends LFLocalization {
 
   @override
   String get ago => 'ago';
+
+  @override
+  String get nowAgo => 'now';
+
+  @override
+  String get yesterday => 'yesterday';
 
   @override
   String get shortLunar => 'lunar';
@@ -104,6 +112,12 @@ class LFLocalizationKo extends LFLocalization {
   String get ago => '전';
 
   @override
+  String get nowAgo => '방금';
+
+  @override
+  String get yesterday => '어제';
+
+  @override
   String get shortLunar => '음';
 
   @override
@@ -161,13 +175,19 @@ class LFLocalizations {
   LFLocalizations._internal();
 
   late LFLocalization _localization;
+  late Locale _locale;
+  late String _languageCode;
 
   LFLocalization get localization => LFLocalizations.shared._localization;
 
+  Locale get locale => LFLocalizations.shared._locale;
+  String get languageCode => LFLocalizations.shared._languageCode;
+
   void config(BuildContext context) {
     try {
-      final languageCode = context.locale.languageCode;
-      if (languageCode == 'ko') {
+      _locale = context.locale;
+      _languageCode = _locale.languageCode;
+      if (_languageCode == 'ko') {
         _localization = LFLocalizationKo();
       } else {
         _localization = LFLocalizationEn();

@@ -90,13 +90,12 @@ extension DateTimeString on DateTime {
     return weekDay;
   }
 
-  String toMeridiemTimeString(BuildContext? context) {
-    final formatter = LFDateTime.shared.formatLocaleMeridiemTime(context);
+  String toMeridiemTimeString() {
+    final formatter = LFDateTime.shared.formatLocaleMeridiemTime();
     return formatter.format(this);
   }
 
-  String toWeekDayDateString(
-    BuildContext? context, {
+  String toWeekDayDateString({
     bool showTime = false,
     bool short = false,
     bool isLunar = false,
@@ -109,9 +108,9 @@ extension DateTimeString on DateTime {
     DateTime? dateTime =
         !isLunar ? this : LFDateTime.parse(toLunarDateString(format: format));
     String dateStr =
-        LFDateTime.shared.formatLocaleYearMonthDay(context).format(dateTime);
+        LFDateTime.shared.formatLocaleYearMonthDay().format(dateTime);
     String weekDayStr =
-        LFDateTime.shared.formatLocaleWeekDay(context).format(dateTime);
+        LFDateTime.shared.formatLocaleWeekDay().format(dateTime);
     if (short) {
       dateStr = dateTime.toNormalDateDisplay(); // ex., 2023.01.01
     }
@@ -119,7 +118,7 @@ extension DateTimeString on DateTime {
     String result = '$dateStr ($weekDayStr)';
 
     if (showTime) {
-      String timeStr = toMeridiemTimeString(context);
+      String timeStr = toMeridiemTimeString();
       result = '$dateStr $timeStr ($weekDayStr)';
     }
 
@@ -258,7 +257,10 @@ extension DateExtension on int {
         dateTime.minute);
   }
 
-  DateTime toTimestamp() {
+  DateTime toTimestamp({int? addition}) {
+    if (addition != null) {
+      return DateTime.fromMillisecondsSinceEpoch(this * addition);
+    }
     return DateTime.fromMillisecondsSinceEpoch(this);
   }
 

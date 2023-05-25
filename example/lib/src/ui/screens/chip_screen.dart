@@ -35,10 +35,10 @@ class _ChipScreenState extends ScreenState<ChipScreen> {
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Row(
+        const Row(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
-          children: const [
+          children: [
             LFChip(
               text: 'Hello',
               selected: false,
