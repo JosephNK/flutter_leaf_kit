@@ -63,9 +63,10 @@ class LFGridViewMaterial<T> extends StatelessWidget {
 
     if (onRefresh == null) {
       return Column(
+        mainAxisSize: MainAxisSize.min,
         children: [
           (header != null) ? header! : Container(),
-          Expanded(
+          Flexible(
             child: gridViewWidget,
           ),
         ],
@@ -77,9 +78,10 @@ class LFGridViewMaterial<T> extends StatelessWidget {
         await onRefresh?.call();
       },
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         children: [
           (header != null) ? header! : Container(),
-          Expanded(
+          Flexible(
             child: gridViewWidget,
           ),
         ],
