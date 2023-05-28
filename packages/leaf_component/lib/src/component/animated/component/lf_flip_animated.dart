@@ -32,7 +32,8 @@ class _LFFlipAnimatedState extends State<LFFlipAnimated> {
 
   @override
   void didUpdateWidget(covariant LFFlipAnimated oldWidget) {
-    if (oldWidget.showFrontSide != widget.showFrontSide) {
+    if ((oldWidget.showFrontSide != widget.showFrontSide) ||
+        (_showFrontSide != widget.showFrontSide)) {
       setState(() {
         _showFrontSide = widget.showFrontSide;
       });
@@ -76,7 +77,7 @@ class _LFFlipAnimatedState extends State<LFFlipAnimated> {
         var tilt = ((animation.value - 0.5).abs() - 0.5) * 0.003;
         tilt *= isUnder ? -1.0 : 1.0;
         final value =
-        isUnder ? min(rotateAnim.value, pi / 2) : rotateAnim.value;
+            isUnder ? min(rotateAnim.value, pi / 2) : rotateAnim.value;
         return Transform(
           transform: _flipXAxis
               ? (Matrix4.rotationY(value)..setEntry(3, 0, tilt))

@@ -4,6 +4,7 @@ class LFBottomTabBarScaffold extends StatefulWidget {
   final LFBottomTabBarScaffoldController scaffoldController;
   final List<LFBottomTabItem> tabItems;
   final int selectedIndex;
+  final int deactivateIndex;
   final LFBottomTabBarViewsChildren children;
   final PreferredSizeWidget? appBar;
   final EdgeInsetsGeometry padding;
@@ -18,6 +19,7 @@ class LFBottomTabBarScaffold extends StatefulWidget {
     required this.tabItems,
     required this.selectedIndex,
     required this.children,
+    this.deactivateIndex = -1,
     this.appBar,
     this.padding = const EdgeInsets.all(0.0),
     this.activeColor = Colors.blueAccent,
@@ -65,6 +67,7 @@ class _LFBottomTabBarScaffoldState extends State<LFBottomTabBarScaffold> {
     final activeColor = widget.activeColor;
     final inactiveColor = widget.inactiveColor;
     final isShowTabBar = widget.isShowTabBar;
+    final deactivateIndex = widget.deactivateIndex;
     final onPressed = widget.onPressed;
 
     return Scaffold(
@@ -80,8 +83,10 @@ class _LFBottomTabBarScaffoldState extends State<LFBottomTabBarScaffold> {
         inactiveColor: inactiveColor,
         show: isShowTabBar,
         onPressed: (index) {
-          tabBarViewsController.selectedIndex = index;
-          tabBarController.selectedIndex = index;
+          if (index != deactivateIndex) {
+            tabBarViewsController.selectedIndex = index;
+            tabBarController.selectedIndex = index;
+          }
           onPressed?.call(index);
         },
       ),

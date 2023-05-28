@@ -21,12 +21,12 @@ class LFDateTime {
     return DateFormat(format).format(today());
   }
 
-  DateTime dateToLocalTimeStampTZ(String value) {
+  DateTime dateToLocalTimeStampTZ(String value, {int multiply = 1}) {
     DateTime dateTime;
 
     final timeStamp = int.tryParse(value) ?? 0;
     if (timeStamp != 0) {
-      dateTime = DateTime.fromMillisecondsSinceEpoch(timeStamp * 1000);
+      dateTime = DateTime.fromMillisecondsSinceEpoch(timeStamp * 1);
     } else {
       try {
         dateTime = (value.contains('Z'))
