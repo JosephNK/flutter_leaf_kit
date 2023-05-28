@@ -1,7 +1,6 @@
 part of lf_navigationbar;
 
 typedef LFBottomTabBarOnPressed = void Function(
-  List<LFBottomTabItem> items,
   int index,
 );
 
@@ -132,17 +131,7 @@ class _LFBottomTabBarState extends State<LFBottomTabBar> {
                 return Expanded(
                   child: GestureDetector(
                     onTap: () {
-                      final didSelected = (selectedIndex == index);
-                      final newItems = items.map((item) {
-                        return item.copyWith(
-                            bottomTabIndex: item.bottomTabIndex.copyWith(
-                          activeTabIndex: index,
-                          didSelected: (index == item.bottomTabIndex.tabIndex)
-                              ? didSelected
-                              : false,
-                        ));
-                      }).toList();
-                      widget.onPressed?.call(newItems, index);
+                      widget.onPressed?.call(index);
                     },
                     child: LSBottomTextIcon(
                       selectedIndex: selectedIndex,

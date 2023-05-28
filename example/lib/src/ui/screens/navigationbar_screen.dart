@@ -17,10 +17,8 @@ class BottomNavigationBarScreen extends StatefulWidget {
 }
 
 class _BottomNavigationBarScreenState extends State<BottomNavigationBarScreen> {
-  final LFBottomTabBarViewsController _bottomTabBarViewsController =
-      LFBottomTabBarViewsController();
-  final LFBottomTabBarController _bottomTabBarController =
-      LFBottomTabBarController();
+  final LFBottomTabBarScaffoldController _bottomTabBarScaffoldController =
+      LFBottomTabBarScaffoldController();
 
   final List<LFBottomTabItem> _tabItems = [
     LFBottomTabItem(
@@ -45,8 +43,7 @@ class _BottomNavigationBarScreenState extends State<BottomNavigationBarScreen> {
 
   @override
   void dispose() {
-    _bottomTabBarViewsController.dispose();
-    _bottomTabBarController.dispose();
+    _bottomTabBarScaffoldController.dispose();
 
     super.dispose();
   }
@@ -63,8 +60,7 @@ class _BottomNavigationBarScreenState extends State<BottomNavigationBarScreen> {
           )
         ],
       ),
-      bottomTabBarViewsController: _bottomTabBarViewsController,
-      bottomTabBarController: _bottomTabBarController,
+      scaffoldController: _bottomTabBarScaffoldController,
       tabItems: _tabItems,
       selectedIndex: 0,
       children: (tabItems) {
@@ -76,7 +72,7 @@ class _BottomNavigationBarScreenState extends State<BottomNavigationBarScreen> {
               child: GestureDetector(
                 onTap: () {
                   const i = 2;
-                  _bottomTabBarController.updateTabBadge(
+                  _bottomTabBarScaffoldController.updateTabBadge(
                     tabIndex: i,
                     isNew: !tabItems[i].isNew,
                   );
@@ -89,15 +85,8 @@ class _BottomNavigationBarScreenState extends State<BottomNavigationBarScreen> {
           }).toList(),
         ];
       },
-      onPressed: (tabItems, index) {
-        _bottomTabBarViewsController.updateTabSelectedWithTabItems(
-          selectedIndex: index,
-          tabItems: tabItems,
-        );
-        _bottomTabBarController.updateTabSelectedWithTabItems(
-          selectedIndex: index,
-          tabItems: tabItems,
-        );
+      onPressed: (index) {
+        _bottomTabBarScaffoldController.selectedIndex = index;
       },
     );
   }

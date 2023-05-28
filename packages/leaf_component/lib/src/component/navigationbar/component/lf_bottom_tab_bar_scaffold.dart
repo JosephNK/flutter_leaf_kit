@@ -1,8 +1,7 @@
 part of lf_navigationbar;
 
 class LFBottomTabBarScaffold extends StatefulWidget {
-  final LFBottomTabBarViewsController bottomTabBarViewsController;
-  final LFBottomTabBarController bottomTabBarController;
+  final LFBottomTabBarScaffoldController scaffoldController;
   final List<LFBottomTabItem> tabItems;
   final int selectedIndex;
   final LFBottomTabBarViewsChildren children;
@@ -11,12 +10,11 @@ class LFBottomTabBarScaffold extends StatefulWidget {
   final Color activeColor;
   final Color inactiveColor;
   final bool isShowTabBar;
-  final LFBottomTabBarOnPressed? onPressed;
+  final ValueChanged<int>? onPressed;
 
   const LFBottomTabBarScaffold({
     Key? key,
-    required this.bottomTabBarViewsController,
-    required this.bottomTabBarController,
+    required this.scaffoldController,
     required this.tabItems,
     required this.selectedIndex,
     required this.children,
@@ -39,8 +37,9 @@ class _LFBottomTabBarScaffoldState extends State<LFBottomTabBarScaffold> {
 
     final tabItems = widget.tabItems;
     final selectedIndex = widget.selectedIndex;
-    final bottomTabBarViewsController = widget.bottomTabBarViewsController;
-    final bottomTabBarController = widget.bottomTabBarController;
+    final scaffoldController = widget.scaffoldController;
+    final tabBarViewsController = scaffoldController.tabBarViewsController;
+    final tabBarController = scaffoldController.tabBarController;
 
     final rebuildTabItems = tabItems.map((tabItem) {
       return tabItem.copyWith(
@@ -50,19 +49,18 @@ class _LFBottomTabBarScaffoldState extends State<LFBottomTabBarScaffold> {
       );
     }).toList();
 
-    bottomTabBarViewsController.selectedIndex = selectedIndex;
-    bottomTabBarViewsController.tabItems = rebuildTabItems;
-
-    bottomTabBarController.selectedIndex = selectedIndex;
-    bottomTabBarController.tabItems = tabItems;
+    scaffoldController.selectedIndex = selectedIndex;
+    tabBarViewsController.tabItems = rebuildTabItems;
+    tabBarController.tabItems = tabItems;
   }
 
   @override
   Widget build(BuildContext context) {
     final appbar = widget.appBar;
     final children = widget.children;
-    final bottomTabBarViewsController = widget.bottomTabBarViewsController;
-    final bottomTabBarController = widget.bottomTabBarController;
+    final scaffoldController = widget.scaffoldController;
+    final tabBarViewsController = scaffoldController.tabBarViewsController;
+    final tabBarController = scaffoldController.tabBarController;
     final padding = widget.padding;
     final activeColor = widget.activeColor;
     final inactiveColor = widget.inactiveColor;
@@ -72,16 +70,20 @@ class _LFBottomTabBarScaffoldState extends State<LFBottomTabBarScaffold> {
     return Scaffold(
       appBar: appbar,
       body: LFBottomTabBarViews(
-        controller: bottomTabBarViewsController,
+        controller: tabBarViewsController,
         children: children,
       ),
       bottomNavigationBar: LFBottomTabBar(
-        controller: bottomTabBarController,
+        controller: tabBarController,
         padding: padding,
         activeColor: activeColor,
         inactiveColor: inactiveColor,
         show: isShowTabBar,
-        onPressed: onPressed,
+        onPressed: (index) {
+          tabBarViewsController.selectedIndex = index;
+          tabBarController.selectedIndex = index;
+          onPressed?.call(index);
+        },
       ),
     );
   }

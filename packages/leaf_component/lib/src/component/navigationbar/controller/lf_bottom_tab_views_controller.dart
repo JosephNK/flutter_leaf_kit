@@ -1,5 +1,7 @@
 part of lf_navigationbar;
 
+///////////////////////////////////////////////////////////////////////////////
+
 abstract class LFBottomTabBarViewsEvent {}
 
 class LFBottomTabBarViewsSelectedEvent extends LFBottomTabBarViewsEvent {
@@ -18,11 +20,18 @@ class LFBottomTabBarViewsItemsEvent extends LFBottomTabBarViewsEvent {
   });
 }
 
+///////////////////////////////////////////////////////////////////////////////
+
 mixin LFBottomTabBarViewsMixIn {
   late StreamController<LFBottomTabBarViewsEvent>? streamController;
 
-  int selectedIndex = 0;
+  int _selectedIndex = 0;
   List<LFBottomTabItem> tabItems = [];
+
+  int get selectedIndex => _selectedIndex;
+  set selectedIndex(int index) {
+    updateSelected(selectedIndex: index);
+  }
 
   void init() {
     streamController = StreamController<LFBottomTabBarViewsEvent>.broadcast();
@@ -37,27 +46,19 @@ mixin LFBottomTabBarViewsMixIn {
   }
 
   void updateSelected({required int selectedIndex}) {
-    this.selectedIndex = selectedIndex;
+    _selectedIndex = selectedIndex;
     addEvent(
       LFBottomTabBarViewsSelectedEvent(selectedIndex: selectedIndex),
     );
-  }
-
-  void updateTabItems({required List<LFBottomTabItem> tabItems}) {
-    this.tabItems = tabItems;
+    tabItems = LFBottomTabBarScaffoldController.makeNewItems(tabItems,
+        selectedIndex: selectedIndex);
     addEvent(
       LFBottomTabBarViewsItemsEvent(tabItems: tabItems),
     );
   }
-
-  void updateTabSelectedWithTabItems({
-    required int selectedIndex,
-    required List<LFBottomTabItem> tabItems,
-  }) {
-    updateSelected(selectedIndex: selectedIndex);
-    updateTabItems(tabItems: tabItems);
-  }
 }
+
+///////////////////////////////////////////////////////////////////////////////
 
 class LFBottomTabBarViewsController with LFBottomTabBarViewsMixIn {
   LFBottomTabBarViewsController() {
