@@ -316,9 +316,17 @@ class _CalendarDatePickerContentState
       case LFCalendarPickerSelect.none:
       case LFCalendarPickerSelect.start:
         if (!isAllDay) {
-          setState(() {
-            _startDate = dateTime;
-          });
+          final isAfter = dateTime.isAfter(_endDate);
+          if (isAfter) {
+            setState(() {
+              _startDate = dateTime;
+              _endDate = dateTime;
+            });
+          } else {
+            setState(() {
+              _startDate = dateTime;
+            });
+          }
         } else {
           setState(() {
             _startDate = dateTime;

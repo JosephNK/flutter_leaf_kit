@@ -24,7 +24,7 @@ class _DialogScreenState extends ScreenState<DialogScreen> {
     const LFDataItem(id: '1', text: 'Hello'),
     const LFDataItem(id: '2', text: 'World'),
   ];
-  LFDataItem? _selectedRadioItem;
+  LFDataItem _selectedRadioItem = const LFDataItem(id: '1', text: 'Hello');
 
   final List<LFDataItem> _chipItems = [
     const LFDataItem(id: '1', text: 'Hello'),
@@ -93,7 +93,7 @@ class _DialogScreenState extends ScreenState<DialogScreen> {
           child: LFFlatButton(
             text: 'Show Radio Picker Dialog',
             onPressed: () {
-              LFRadioPickerDialog.show(
+              LFRadioPickerDialog.confirm(
                 context,
                 items: _radioItems,
                 value: _selectedRadioItem,

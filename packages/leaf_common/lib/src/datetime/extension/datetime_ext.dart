@@ -3,6 +3,12 @@ part of lf_common;
 /// https://www.flutterbeads.com/format-datetime-in-flutter/
 
 extension DateTimeString on DateTime {
+  String toDateTimeIso8601() {
+    DateTime localDateTime = toLocal();
+    String formattedDateTime = localDateTime.toUtc().toIso8601String();
+    return formattedDateTime;
+  }
+
   String toDateTimeString({String format = 'yyyy-MM-dd HH:mm'}) {
     return LFDateTime.shared.formatDate(this, format: format);
   }
@@ -148,6 +154,11 @@ extension DateTimeString on DateTime {
     final day = this.day.toString().padLeft(2, '0');
     return DateTime.parse('$year-$month-$day 23:59:59');
   }
+
+  int weekNumber() {
+    int weekNumber = ((day - 1) ~/ 7) + 1;
+    return weekNumber;
+  }
 }
 
 extension DateTimeCompare on DateTime {
@@ -201,6 +212,14 @@ extension DateTimeCalendar on DateTime {
   DateTime lastDayOfWeek() {
     var day = createUTCMiddayDateTime();
     return day.add(Duration(days: 7 - day.weekday % 7));
+  }
+
+  DateTime firstDayInMonth() {
+    return daysInMonth().first;
+  }
+
+  DateTime lastDayInMonth() {
+    return daysInMonth().last;
   }
 
   DateTime createUTCMiddayDateTime() {
