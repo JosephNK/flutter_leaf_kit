@@ -50,13 +50,13 @@ class LFLocalizationEn extends LFLocalization {
 
   @override
   List<String> get shortWeekdays => [
+        'Sun',
         'Mon',
         'Tue',
         'Wed',
         'Thu',
         'Fri',
         'Sat',
-        'Sun',
       ];
 
   @override
@@ -125,13 +125,13 @@ class LFLocalizationKo extends LFLocalization {
 
   @override
   List<String> get shortWeekdays => [
+        '일',
         '월',
         '화',
         '수',
         '목',
         '금',
         '토',
-        '일',
       ];
 
   @override
