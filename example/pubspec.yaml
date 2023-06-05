@@ -20,7 +20,7 @@ dependencies:
   json_annotation: ^4.7.0
   built_value: ^8.4.2
   built_collection: ^5.1.1
-  chopper: ^6.0.0
+  chopper: ^6.1.4
   http: ^0.13.5
 
   # Leaf Kit Plugin
