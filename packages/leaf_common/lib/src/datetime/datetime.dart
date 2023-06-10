@@ -32,8 +32,12 @@ class LFDateTime {
         dateTime = (value.contains('Z'))
             ? DateTime.parse(value)
             : DateTime.parse('${value}Z');
-      } catch (e) {
-        dateTime = DateTime.parse(value);
+      } catch (_) {
+        try {
+          dateTime = DateTime.parse(value);
+        } catch (_) {
+          dateTime = DateTime.now();
+        }
       }
     }
 
