@@ -21,8 +21,9 @@ class LFDateTime {
     return DateFormat(format).format(today());
   }
 
-  DateTime dateToLocalTimeStampTZ(String value, {int multiply = 1}) {
-    DateTime dateTime;
+  DateTime dateToLocalTimeStampTZ(String value,
+      {int multiply = 1, bool isLocal = true}) {
+    late DateTime dateTime;
 
     final timeStamp = int.tryParse(value) ?? 0;
     if (timeStamp != 0) {
@@ -41,7 +42,10 @@ class LFDateTime {
       }
     }
 
-    return dateTime.toLocal();
+    if (isLocal) {
+      return dateTime.toLocal();
+    }
+    return dateTime;
   }
 
   String formatString(
