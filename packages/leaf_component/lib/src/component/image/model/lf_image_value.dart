@@ -13,4 +13,14 @@ class LFImageValue extends Equatable {
         bytes,
         thumbFile,
       ];
+
+  @override
+  String toString() {
+    return '$runtimeType(${props.map((prop) {
+      if (prop is Uint8List) {
+        return prop.length.toString();
+      }
+      return prop.toString();
+    }).join(', ')})';
+  }
 }
