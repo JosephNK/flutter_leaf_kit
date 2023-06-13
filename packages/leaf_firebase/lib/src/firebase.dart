@@ -4,7 +4,7 @@ part of leaf_firebase;
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   await Firebase.initializeApp();
   await setupFlutterNotifications();
-  showFlutterNotification(message);
+  // showFlutterNotification(message);
   // If you're going to use other Firebase services in the background, such as Firestore,
   // make sure you call `initializeApp` before using other Firebase services.
   Logging.d('FirebaseManager Messaging Background message: $message');
@@ -54,6 +54,32 @@ Future<void> setupFlutterNotifications() async {
 void showFlutterNotification(RemoteMessage message) {
   RemoteNotification? notification = message.notification;
   AndroidNotification? android = message.notification?.android;
+  Map<String, dynamic> data = message.data;
+  dynamic sendbirdData = data['sendbird'];
+  if (sendbirdData != null) {
+    final sendbirdMap = json.decode(sendbirdData);
+    Random random = Random();
+    const int minInt32 = -2147483648;
+    const int maxInt32 = 2147483647;
+    int randomInt32 = random.nextInt(maxInt32 - minInt32 + 1) + minInt32;
+    final channelMap = sendbirdMap['channel'];
+    final channelName = channelMap['name'];
+    final channelUrl = channelMap['channel_url'];
+    final message = sendbirdMap['message'];
+    flutterLocalNotificationsPlugin.show(
+      randomInt32,
+      null,
+      message,
+      NotificationDetails(
+        android: AndroidNotificationDetails(
+          channel.id,
+          channel.name,
+          channelDescription: channel.description,
+          icon: 'launch_background',
+        ),
+      ),
+    );
+  }
   if (notification != null && android != null && !kIsWeb) {
     flutterLocalNotificationsPlugin.show(
       notification.hashCode,
@@ -87,14 +113,17 @@ class FirebaseManager {
     return Firebase.initializeApp();
   }
 
-  Future<String?> registerTokenWithPermission() async {
+  Future<String?> registerTokenWithPermission(
+      {bool usingPlatform = false}) async {
     final status = await _requestPermission();
     if (status != AuthorizationStatus.authorized) {
       return null;
     }
-    // if (Platform.isIOS) {
-    //   return await _messaging.getAPNSToken();
-    // }
+    if (usingPlatform) {
+      if (Platform.isIOS) {
+        return await _messaging.getAPNSToken();
+      }
+    }
     return await _messaging.getToken();
   }
 
