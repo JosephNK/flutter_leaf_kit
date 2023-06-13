@@ -1,5 +1,76 @@
 part of leaf_firebase;
 
+@pragma('vm:entry-point')
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  await Firebase.initializeApp();
+  await setupFlutterNotifications();
+  showFlutterNotification(message);
+  // If you're going to use other Firebase services in the background, such as Firestore,
+  // make sure you call `initializeApp` before using other Firebase services.
+  Logging.d('FirebaseManager Messaging Background message: $message');
+}
+
+/// Initialize the [FlutterLocalNotificationsPlugin] package.
+late FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin;
+
+late AndroidNotificationChannel channel;
+
+bool isFlutterLocalNotificationsInitialized = false;
+
+Future<void> setupFlutterNotifications() async {
+  if (isFlutterLocalNotificationsInitialized) {
+    return;
+  }
+
+  channel = const AndroidNotificationChannel(
+    'high_importance_channel', // id
+    'High Importance Notifications', // title
+    description:
+        'This channel is used for important notifications.', // description
+    importance: Importance.high,
+  );
+
+  flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
+
+  /// Create an Android Notification Channel.
+  ///
+  /// We use this channel in the `AndroidManifest.xml` file to override the
+  /// default FCM channel to enable heads up notifications.
+  await flutterLocalNotificationsPlugin
+      .resolvePlatformSpecificImplementation<
+          AndroidFlutterLocalNotificationsPlugin>()
+      ?.createNotificationChannel(channel);
+
+  /// Update the iOS foreground notification presentation options to allow
+  /// heads up notifications.
+  await FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
+    alert: true,
+    badge: true,
+    sound: true,
+  );
+  isFlutterLocalNotificationsInitialized = true;
+}
+
+void showFlutterNotification(RemoteMessage message) {
+  RemoteNotification? notification = message.notification;
+  AndroidNotification? android = message.notification?.android;
+  if (notification != null && android != null && !kIsWeb) {
+    flutterLocalNotificationsPlugin.show(
+      notification.hashCode,
+      notification.title,
+      notification.body,
+      NotificationDetails(
+        android: AndroidNotificationDetails(
+          channel.id,
+          channel.name,
+          channelDescription: channel.description,
+          icon: 'launch_background',
+        ),
+      ),
+    );
+  }
+}
+
 class FirebaseManager {
   static final FirebaseManager _instance = FirebaseManager._internal();
 
@@ -7,31 +78,13 @@ class FirebaseManager {
 
   FirebaseManager._internal() {
     Logging.d('FirebaseManager Init');
-    _load();
+    setupFlutterNotifications();
   }
 
   final FirebaseMessaging _messaging = FirebaseMessaging.instance;
 
   static Future<FirebaseApp> initialization() async {
     return Firebase.initializeApp();
-  }
-
-  Future<void> _load() async {
-    /// flutter_local_notifications
-    const channel = AndroidNotificationChannel(
-      'high_importance_channel', // id
-      'High Importance Notifications', // title
-      description:
-          'This channel is used for important notifications.', // description
-      importance: Importance.max,
-    );
-
-    final flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
-
-    await flutterLocalNotificationsPlugin
-        .resolvePlatformSpecificImplementation<
-            AndroidFlutterLocalNotificationsPlugin>()
-        ?.createNotificationChannel(channel);
   }
 
   Future<String?> registerTokenWithPermission() async {
@@ -67,20 +120,8 @@ class FirebaseManager {
     });
   }
 
-  Future<void> listenBackgroundMessaging(
-      ValueChanged<RemoteMessage>? callBack) async {
-    Future<void> firebaseMessagingBackgroundHandler(
-        RemoteMessage message) async {
-      // If you're going to use other Firebase services in the background, such as Firestore,
-      // make sure you call `initializeApp` before using other Firebase services.
-      await Firebase.initializeApp();
-
-      Logging.d('Handling a background message: ${message.messageId}');
-
-      callBack?.call(message);
-    }
-
-    FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
+  Future<void> listenBackgroundMessaging() async {
+    FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
   }
 
   Future<AuthorizationStatus> _requestPermission() async {
