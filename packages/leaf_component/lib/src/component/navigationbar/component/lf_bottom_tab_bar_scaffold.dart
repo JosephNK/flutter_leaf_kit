@@ -83,11 +83,14 @@ class _LFBottomTabBarScaffoldState extends State<LFBottomTabBarScaffold> {
         inactiveColor: inactiveColor,
         show: isShowTabBar,
         onPressed: (index) {
+          bool isSameIndex = (tabBarController.selectedIndex == index);
           if (index != deactivateIndex) {
             tabBarViewsController.selectedIndex = index;
             tabBarController.selectedIndex = index;
           }
-          onPressed?.call(index);
+          if (!isSameIndex) {
+            onPressed?.call(index);
+          }
         },
       ),
     );
