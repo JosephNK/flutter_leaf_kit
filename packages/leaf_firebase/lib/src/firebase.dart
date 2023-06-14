@@ -77,9 +77,9 @@ Future<void> setupFlutterNotifications() async {
   /// Update the iOS foreground notification presentation options to allow
   /// heads up notifications.
   await FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
-    alert: true,
-    badge: true,
-    sound: true,
+    alert: false,
+    badge: false,
+    sound: false,
   );
   isFlutterLocalNotificationsInitialized = true;
 }
