@@ -10,6 +10,11 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   Logging.d('FirebaseManager Messaging Background message: $message');
 }
 
+@pragma('vm:entry-point')
+void notificationTapBackground(NotificationResponse notificationResponse) {
+  debugPrint('[notificationTapBackground()]');
+}
+
 /// Initialize the [FlutterLocalNotificationsPlugin] package.
 late FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin;
 
@@ -31,6 +36,34 @@ Future<void> setupFlutterNotifications() async {
   );
 
   flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
+
+  // final initializationSettings = InitializationSettings(
+  //   android: const AndroidInitializationSettings('mipmap/ic_launcher'),
+  //   iOS: DarwinInitializationSettings(
+  //     requestAlertPermission: false,
+  //     requestBadgePermission: false,
+  //     requestSoundPermission: false,
+  //     onDidReceiveLocalNotification: (
+  //       int id,
+  //       String? title,
+  //       String? body,
+  //       String? payload,
+  //     ) {
+  //       debugPrint('[onDidReceiveLocalNotification()]');
+  //     },
+  //   ),
+  // );
+  //
+  // await flutterLocalNotificationsPlugin.initialize(
+  //   initializationSettings,
+  //   onDidReceiveNotificationResponse: (final notificationResponse) async {
+  //     debugPrint('[onDidReceiveNotificationResponse]');
+  //     if (notificationResponse.payload != null) {
+  //       debugPrint('notification payload: ${notificationResponse.payload}');
+  //     }
+  //   },
+  //   onDidReceiveBackgroundNotificationResponse: notificationTapBackground,
+  // );
 
   /// Create an Android Notification Channel.
   ///
