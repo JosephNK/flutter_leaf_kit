@@ -23,8 +23,8 @@ dependencies:
       ref: develop
       path: ./packages/leaf_manager
 
-  connectivity_plus: ^3.0.3
-  http: ^0.13.5
+  connectivity_plus: ^4.0.1
+  http: ^1.0.0
   http_parser: ^4.0.1
 
   chopper: ^6.1.4

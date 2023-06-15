@@ -21,7 +21,7 @@ dependencies:
   built_value: ^8.4.2
   built_collection: ^5.1.1
   chopper: ^6.1.4
-  http: ^0.13.5
+  http: ^1.0.0
 
   # Leaf Kit Plugin
   flutter_leaf_kit:
