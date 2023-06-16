@@ -36,7 +36,7 @@ class LFBottomTabBarScaffoldController {
       final didSelected = (selectedIndex == index);
       return item.copyWith(
           bottomTabIndex: item.bottomTabIndex.copyWith(
-        activeTabIndex: index,
+        activeTabIndex: selectedIndex,
         didSelected:
             (index == item.bottomTabIndex.tabIndex) ? didSelected : false,
       ));
