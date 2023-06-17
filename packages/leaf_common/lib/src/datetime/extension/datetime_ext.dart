@@ -159,6 +159,10 @@ extension DateTimeString on DateTime {
     int weekNumber = ((day - 1) ~/ 7) + 1;
     return weekNumber;
   }
+
+  int timestamp() {
+    return millisecondsSinceEpoch;
+  }
 }
 
 extension DateTimeCompare on DateTime {
