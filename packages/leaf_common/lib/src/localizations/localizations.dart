@@ -6,6 +6,7 @@ abstract class LFLocalization {
   String get day;
   String get min;
   String get hour;
+  String get hourOther;
   String get ago;
   String get nowAgo;
   String get yesterday;
@@ -29,6 +30,9 @@ class LFLocalizationEn extends LFLocalization {
 
   @override
   String get hour => 'hour';
+
+  @override
+  String get hourOther => 'hour';
 
   @override
   String get min => 'min';
@@ -104,6 +108,9 @@ class LFLocalizationKo extends LFLocalization {
 
   @override
   String get hour => '시';
+
+  @override
+  String get hourOther => '시간';
 
   @override
   String get min => '분';
