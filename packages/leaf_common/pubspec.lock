@@ -458,6 +458,23 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.4"
+  wakelock_platform_interface:
+    dependency: transitive
+    description:
+      name: wakelock_platform_interface
+      sha256: "1f4aeb81fb592b863da83d2d0f7b8196067451e4df91046c26b54a403f9de621"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.3.0"
+  wakelock_windows:
+    dependency: "direct overridden"
+    description:
+      path: wakelock_windows
+      ref: win32-v5
+      resolved-ref: "2a9bca63a540771f241d688562351482b2cf234c"
+      url: "https://github.com/timsneath/wakelock"
+    source: git
+    version: "0.2.2"
   win32:
     dependency: transitive
     description:

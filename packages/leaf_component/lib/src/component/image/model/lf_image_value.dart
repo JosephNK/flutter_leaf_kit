@@ -23,4 +23,15 @@ class LFImageValue extends Equatable {
       return prop.toString();
     }).join(', ')})';
   }
+
+  LFImageValue copyWith({
+    String? Function()? file,
+    Uint8List? Function()? bytes,
+    String? Function()? thumbFile,
+  }) =>
+      LFImageValue(
+        file: file != null ? file() : this.file,
+        bytes: bytes != null ? bytes() : this.bytes,
+        thumbFile: thumbFile != null ? thumbFile() : this.thumbFile,
+      );
 }
