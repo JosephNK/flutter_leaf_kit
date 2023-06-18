@@ -458,6 +458,48 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.4"
+  wakelock:
+    dependency: "direct overridden"
+    description:
+      path: wakelock
+      ref: main
+      resolved-ref: "40464c75e908f57f458597ef4912f5273ab89b1a"
+      url: "https://github.com/diegotori/wakelock.git"
+    source: git
+    version: "0.6.2"
+  wakelock_macos:
+    dependency: transitive
+    description:
+      name: wakelock_macos
+      sha256: "047c6be2f88cb6b76d02553bca5a3a3b95323b15d30867eca53a19a0a319d4cd"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.4.0"
+  wakelock_platform_interface:
+    dependency: transitive
+    description:
+      name: wakelock_platform_interface
+      sha256: "1f4aeb81fb592b863da83d2d0f7b8196067451e4df91046c26b54a403f9de621"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.3.0"
+  wakelock_web:
+    dependency: transitive
+    description:
+      name: wakelock_web
+      sha256: "1b256b811ee3f0834888efddfe03da8d18d0819317f20f6193e2922b41a501b5"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.4.0"
+  wakelock_windows:
+    dependency: "direct overridden"
+    description:
+      path: wakelock_windows
+      ref: main
+      resolved-ref: "40464c75e908f57f458597ef4912f5273ab89b1a"
+      url: "https://github.com/diegotori/wakelock.git"
+    source: git
+    version: "0.2.2"
   win32:
     dependency: transitive
     description:
