@@ -27,8 +27,10 @@ class ResultValue<T> extends Equatable {
   Future<ResultValue<T>> showIfExistErrorMessage(BuildContext context) async {
     final errorValue = this.errorValue;
     if (errorValue == null || errorValue.errorMessage == null) return this;
-    await LFAlertDialog.showErrorMessage(context,
-        errorMessage: errorValue.errorMessage);
+    if (context.mounted) {
+      await LFAlertDialog.showErrorMessage(context,
+          errorMessage: errorValue.errorMessage);
+    }
     return this;
   }
 
@@ -36,7 +38,10 @@ class ResultValue<T> extends Equatable {
       BuildContext context) async {
     final errorValue = this.errorValue;
     if (errorValue == null || errorValue.exception == null) return this;
-    await LFAlertDialog.showException(context, exception: errorValue.exception);
+    if (context.mounted) {
+      await LFAlertDialog.showException(
+          context, exception: errorValue.exception);
+    }
     return this;
   }
 
