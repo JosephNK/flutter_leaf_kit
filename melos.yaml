@@ -8,6 +8,9 @@ packages:
   - example/**
   - packages/**
 
+#ignore:
+#  - example/**
+
 scripts:
   analyze: melos exec -- flutter analyze
   format: melos exec -- flutter format .

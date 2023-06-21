@@ -6,4 +6,3 @@ export 'package:leaf_data/leaf_data.dart';
 export 'package:leaf_firebase/leaf_firebase.dart';
 export 'package:leaf_manager/leaf_manager.dart';
 export 'package:leaf_navigation/leaf_navigation.dart';
-export 'package:leaf_network/leaf_network.dart';

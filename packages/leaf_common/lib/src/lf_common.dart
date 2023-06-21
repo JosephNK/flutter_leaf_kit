@@ -23,6 +23,8 @@ part 'datetime/extension/int_date_ext.dart';
 part 'datetime/extension/string_date_ext.dart';
 part 'extension/lists.dart';
 part 'extension/numbers.dart';
+part 'http/http_exception.dart';
+part 'http/http_override.dart';
 part 'localizations/cupertino_localizations_ko.dart';
 part 'localizations/localizations.dart';
 part 'logger/logging.dart';

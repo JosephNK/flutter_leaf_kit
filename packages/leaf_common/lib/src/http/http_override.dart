@@ -1,4 +1,4 @@
-part of http_chopper;
+part of lf_common;
 
 class LFHttpOverrides extends HttpOverrides {
   @override
