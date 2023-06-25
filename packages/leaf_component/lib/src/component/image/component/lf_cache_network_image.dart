@@ -55,6 +55,7 @@ class LFCacheNetworkImage extends StatelessWidget {
       width: width,
       height: height,
       fit: fit,
+      cacheManager: CustomCacheManager.instance,
       placeholderFadeInDuration: const Duration(milliseconds: 0),
       fadeOutDuration: const Duration(milliseconds: 0),
       fadeInDuration: const Duration(milliseconds: 0),
@@ -80,4 +81,18 @@ class LFCacheNetworkImage extends StatelessWidget {
   Widget _buildErrorImage(BuildContext context) {
     return errorWidget ?? const Icon(Icons.error);
   }
+}
+
+class CustomCacheManager {
+  static const key = 'LFCachedImageData';
+  static CacheManager instance = CacheManager(
+    Config(
+      key,
+      // stalePeriod: const Duration(days: 7),
+      // maxNrOfCacheObjects: 20,
+      repo: JsonCacheInfoRepository(databaseName: key),
+      // fileSystem: IOFileSystem(key),
+      // fileService: HttpFileService(),
+    ),
+  );
 }

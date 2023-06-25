@@ -33,13 +33,14 @@ dependencies:
       ref: develop
       path: ./packages/leaf_navigation
 
-#  cached_network_image: ^3.2.3
-  cached_network_image:
-    git:
-      url: https://github.com/lucasmiranda5/flutter_cached_network_image.git
-      ref: dart3
-      path: cached_network_image
+  cached_network_image: ^3.2.3
+#  cached_network_image:
+#    git:
+#      url: https://github.com/lucasmiranda5/flutter_cached_network_image.git
+#      ref: dart3
+#      path: cached_network_image
 
+  flutter_cache_manager: ^3.3.0
   flutter_rating_bar: ^4.0.1
   dropdown_button2: ^1.9.2
   expandable_page_view: ^1.0.17

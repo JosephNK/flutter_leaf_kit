@@ -76,30 +76,27 @@ packages:
   cached_network_image:
     dependency: transitive
     description:
-      path: cached_network_image
-      ref: dart3
-      resolved-ref: ee5f9d2a39f734e2ca8771bc00b03f041943ff30
-      url: "https://github.com/lucasmiranda5/flutter_cached_network_image.git"
-    source: git
-    version: "3.0.0"
+      name: cached_network_image
+      sha256: fd3d0dc1d451f9a252b32d95d3f0c3c487bc41a75eba2e6097cb0b9c71491b15
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.2.3"
   cached_network_image_platform_interface:
     dependency: transitive
     description:
-      path: cached_network_image_platform_interface
-      ref: dart3
-      resolved-ref: ee5f9d2a39f734e2ca8771bc00b03f041943ff30
-      url: "https://github.com/lucasmiranda5/flutter_cached_network_image.git"
-    source: git
-    version: "2.1.0"
+      name: cached_network_image_platform_interface
+      sha256: bb2b8403b4ccdc60ef5f25c70dead1f3d32d24b9d6117cfc087f496b178594a7
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.0"
   cached_network_image_web:
     dependency: transitive
     description:
-      path: cached_network_image_web
-      ref: dart3
-      resolved-ref: ee5f9d2a39f734e2ca8771bc00b03f041943ff30
-      url: "https://github.com/lucasmiranda5/flutter_cached_network_image.git"
-    source: git
-    version: "1.1.0"
+      name: cached_network_image_web
+      sha256: b8eb814ebfcb4dea049680f8c1ffb2df399e4d03bf7a352c775e26fa06e02fa0
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.2"
   characters:
     dependency: transitive
     description:
@@ -308,12 +305,11 @@ packages:
   flutter_cache_manager:
     dependency: transitive
     description:
-      path: flutter_cache_manager
-      ref: HEAD
-      resolved-ref: "24988acc911be1cca3dd4211b9d7ff29c41d6b37"
-      url: "https://github.com/Carapacik/flutter_cache_manager.git"
-    source: git
-    version: "3.3.1"
+      name: flutter_cache_manager
+      sha256: "32cd900555219333326a2d0653aaaf8671264c29befa65bbd9856d204a4c9fb3"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.3.0"
   flutter_lints:
     dependency: "direct dev"
     description:
@@ -667,6 +663,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.7"
+  pedantic:
+    dependency: transitive
+    description:
+      name: pedantic
+      sha256: "67fc27ed9639506c856c840ccce7594d0bdcd91bc8d53d6e52359449a1d50602"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.11.1"
   permission_handler:
     dependency: transitive
     description:
@@ -1106,4 +1110,4 @@ packages:
     version: "6.3.0"
 sdks:
   dart: ">=3.0.0 <4.0.0"
-  flutter: ">=3.10.0"
+  flutter: ">=3.7.0"
