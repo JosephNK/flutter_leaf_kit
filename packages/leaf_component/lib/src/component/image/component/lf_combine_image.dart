@@ -49,7 +49,7 @@ class LFCombineImage extends StatelessWidget {
       );
     }
 
-    return LFAssetImage(
+    return LFAssetFileImage(
       path: file,
       width: width,
       height: height,

@@ -68,7 +68,7 @@ class LFCircleAvatarImage extends StatelessWidget {
       );
     }
 
-    return LFAssetImage(
+    return LFAssetFileImage(
       path: file,
       width: size,
       height: size,

@@ -1,6 +1,6 @@
 part of lf_image;
 
-class LFAssetImage extends StatelessWidget {
+class LFAssetFileImage extends StatelessWidget {
   final String path;
   final Color? color;
   final double width;
@@ -9,7 +9,7 @@ class LFAssetImage extends StatelessWidget {
   final Widget? placeholderWidget;
   final Widget? errorWidget;
 
-  const LFAssetImage({
+  const LFAssetFileImage({
     Key? key,
     required this.path,
     this.color,
@@ -32,6 +32,25 @@ class LFAssetImage extends StatelessWidget {
         width: width,
         height: height,
         child: _buildPlaceholderImage(context),
+      );
+    }
+
+    if (path.startsWith('file://')) {
+      final filePath = path.replaceAll('file://', '');
+      return Image.file(
+        File(filePath),
+        fit: fit,
+        width: width,
+        height: height,
+        frameBuilder: (context, child, frame, wasSynchronouslyLoaded) {
+          if (wasSynchronouslyLoaded || frame != null) {
+            return child;
+          }
+          return LFSkeleton(color: color);
+        },
+        errorBuilder: (context, error, stackTrace) {
+          return _buildErrorImage(context);
+        },
       );
     }
 
