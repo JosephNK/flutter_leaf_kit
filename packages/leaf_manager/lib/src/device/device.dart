@@ -59,8 +59,8 @@ class LFDeviceManager {
       final name = iosInfo.name;
       final model = iosInfo.model;
       final String uniqueID = iosInfo.identifierForVendor ?? '';
-      _deviceName = '${name ?? 'Unknown'} ${model ?? ''}';
-      _deviceOSVersion = '${systemName ?? 'Unknown'} ${systemVersion ?? '0.0'}';
+      _deviceName = '$name $model';
+      _deviceOSVersion = '$systemName $systemVersion';
       _deviceUniqueID = uniqueID;
     }
   }
