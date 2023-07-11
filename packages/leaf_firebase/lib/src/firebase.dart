@@ -84,51 +84,51 @@ Future<void> setupFlutterNotifications() async {
   isFlutterLocalNotificationsInitialized = true;
 }
 
-void showFlutterNotification(RemoteMessage message) {
-  RemoteNotification? notification = message.notification;
-  AndroidNotification? android = message.notification?.android;
-  Map<String, dynamic> data = message.data;
-  dynamic sendbirdData = data['sendbird'];
-  if (sendbirdData != null) {
-    final sendbirdMap = json.decode(sendbirdData);
-    Random random = Random();
-    const int minInt32 = -2147483648;
-    const int maxInt32 = 2147483647;
-    int randomInt32 = random.nextInt(maxInt32 - minInt32 + 1) + minInt32;
-    final channelMap = sendbirdMap['channel'];
-    final channelName = channelMap['name'];
-    final channelUrl = channelMap['channel_url'];
-    final message = sendbirdMap['message'];
-    flutterLocalNotificationsPlugin.show(
-      randomInt32,
-      null,
-      message,
-      NotificationDetails(
-        android: AndroidNotificationDetails(
-          channel.id,
-          channel.name,
-          channelDescription: channel.description,
-          icon: 'launch_background',
-        ),
-      ),
-    );
-  }
-  if (notification != null && android != null && !kIsWeb) {
-    flutterLocalNotificationsPlugin.show(
-      notification.hashCode,
-      notification.title,
-      notification.body,
-      NotificationDetails(
-        android: AndroidNotificationDetails(
-          channel.id,
-          channel.name,
-          channelDescription: channel.description,
-          icon: 'launch_background',
-        ),
-      ),
-    );
-  }
-}
+// void showFlutterNotification(RemoteMessage message) {
+//   RemoteNotification? notification = message.notification;
+//   AndroidNotification? android = message.notification?.android;
+//   Map<String, dynamic> data = message.data;
+//   dynamic sendbirdData = data['sendbird'];
+//   if (sendbirdData != null) {
+//     final sendbirdMap = json.decode(sendbirdData);
+//     Random random = Random();
+//     const int minInt32 = -2147483648;
+//     const int maxInt32 = 2147483647;
+//     int randomInt32 = random.nextInt(maxInt32 - minInt32 + 1) + minInt32;
+//     final channelMap = sendbirdMap['channel'];
+//     final channelName = channelMap['name'];
+//     final channelUrl = channelMap['channel_url'];
+//     final message = sendbirdMap['message'];
+//     flutterLocalNotificationsPlugin.show(
+//       randomInt32,
+//       null,
+//       message,
+//       NotificationDetails(
+//         android: AndroidNotificationDetails(
+//           channel.id,
+//           channel.name,
+//           channelDescription: channel.description,
+//           icon: 'launch_background',
+//         ),
+//       ),
+//     );
+//   }
+//   if (notification != null && android != null && !kIsWeb) {
+//     flutterLocalNotificationsPlugin.show(
+//       notification.hashCode,
+//       notification.title,
+//       notification.body,
+//       NotificationDetails(
+//         android: AndroidNotificationDetails(
+//           channel.id,
+//           channel.name,
+//           channelDescription: channel.description,
+//           icon: 'launch_background',
+//         ),
+//       ),
+//     );
+//   }
+// }
 
 class FirebaseManager {
   static final FirebaseManager _instance = FirebaseManager._internal();

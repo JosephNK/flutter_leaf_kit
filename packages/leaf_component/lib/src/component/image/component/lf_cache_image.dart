@@ -48,6 +48,8 @@ class LFCacheImage extends StatelessWidget {
     required String? url,
     required Map<String, String>? httpHeaders,
   }) {
+    final url = this.url ?? '';
+
     Widget getClipperWrapperWidget({required Widget child}) {
       return Stack(
         children: [
@@ -75,8 +77,17 @@ class LFCacheImage extends StatelessWidget {
       return _buildPlaceholderImage(context);
     }
 
+    if (url.endsWith('webp')) {
+      return LFWebpCacheNetworkImage(
+        url: url,
+        width: width,
+        height: height,
+        header: header,
+      );
+    }
+
     final networkWidget = LFCacheNetworkImage(
-      url: url!,
+      url: url,
       width: width,
       height: height,
       fit: fit,
@@ -99,6 +110,59 @@ class LFCacheImage extends StatelessWidget {
   // Placeholder Image
   Widget _buildPlaceholderImage(BuildContext context) {
     return placeholderWidget ?? Container(color: Colors.grey);
+  }
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+class LFWebpCacheNetworkImage extends StatefulWidget {
+  final String url;
+  final double? width;
+  final double? height;
+  final Map<String, String>? header;
+
+  const LFWebpCacheNetworkImage({
+    super.key,
+    required this.url,
+    required this.width,
+    required this.height,
+    required this.header,
+  });
+
+  @override
+  State<LFWebpCacheNetworkImage> createState() =>
+      _LFWebpCacheNetworkImageState();
+}
+
+class _LFWebpCacheNetworkImageState extends State<LFWebpCacheNetworkImage> {
+  bool _play = false;
+
+  @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      final _ = await LFCachedNetworkImageProvider(widget.url).evict();
+      setState(() => _play = true);
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: widget.width,
+      height: widget.height,
+      decoration: BoxDecoration(
+        image: (!_play)
+            ? null
+            : DecorationImage(
+                image: LFCachedNetworkImageProvider(
+                  widget.url,
+                  headers: widget.header,
+                ),
+              ),
+      ),
+    );
   }
 }
 

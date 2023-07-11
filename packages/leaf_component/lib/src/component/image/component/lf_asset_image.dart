@@ -37,17 +37,22 @@ class LFAssetFileImage extends StatelessWidget {
 
     if (path.startsWith('file://')) {
       final filePath = path.replaceAll('file://', '');
+      if (filePath.endsWith('webp')) {
+        // https://github.com/flutter/flutter/issues/24858#issuecomment-460544959
+        final _ = imageCache.evict(FileImage(File(filePath)));
+        // imageCache.clear();
+      }
       return Image.file(
         File(filePath),
         fit: fit,
         width: width,
         height: height,
-        frameBuilder: (context, child, frame, wasSynchronouslyLoaded) {
-          if (wasSynchronouslyLoaded || frame != null) {
-            return child;
-          }
-          return LFSkeleton(color: color);
-        },
+        // frameBuilder: (context, child, frame, wasSynchronouslyLoaded) {
+        //   if (wasSynchronouslyLoaded || frame != null) {
+        //     return child;
+        //   }
+        //   return LFSkeleton(color: color);
+        // },
         errorBuilder: (context, error, stackTrace) {
           return _buildErrorImage(context);
         },
