@@ -142,7 +142,9 @@ class _LFWebpCacheNetworkImageState extends State<LFWebpCacheNetworkImage> {
     super.initState();
 
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      final _ = await LFCachedNetworkImageProvider(widget.url).evict();
+      final _ = await LFCachedNetworkImageProvider(widget.url,
+              cacheManager: CustomCacheManager.instance)
+          .evict();
       setState(() => _play = true);
     });
   }
@@ -158,6 +160,7 @@ class _LFWebpCacheNetworkImageState extends State<LFWebpCacheNetworkImage> {
             : DecorationImage(
                 image: LFCachedNetworkImageProvider(
                   widget.url,
+                  cacheManager: CustomCacheManager.instance,
                   headers: widget.header,
                 ),
               ),

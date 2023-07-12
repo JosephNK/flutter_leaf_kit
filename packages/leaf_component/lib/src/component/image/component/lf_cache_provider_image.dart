@@ -11,6 +11,7 @@ class LFCachedNetworkImageProvider
     double scale = 1.0,
     cached_network.ErrorListener? errorListener,
     Map<String, String>? headers,
+    BaseCacheManager? cacheManager,
     String? cacheKey,
   }) : super(
           url,
@@ -19,6 +20,7 @@ class LFCachedNetworkImageProvider
           scale: scale,
           errorListener: errorListener,
           headers: headers,
+          cacheManager: cacheManager,
           cacheKey: cacheKey,
         );
 }
