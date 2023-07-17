@@ -357,6 +357,17 @@ class _CalendarDatePickerContentState
     late DateTime toDateTime;
     late DateTime resultDateTime;
 
+    final startDate = _startDate.toDateTimeString(format: 'yyyy-MM-dd');
+    final startTime = _startDate.toDateTimeString(format: 'HH:mm');
+    final endDate = _endDate.toDateTimeString(format: 'yyyy-MM-dd');
+    final updateStartDateTime = LFDateTime.parse('$startDate $startTime');
+    final updateEndDateTime = LFDateTime.parse('$endDate $startTime');
+
+    if (updateStartDateTime.isSameDate(updateEndDateTime)) {
+      _startDate = updateStartDateTime.toDayStartDateTime();
+      _endDate = updateEndDateTime.toDayEndDateTime();
+    }
+
     switch (pickerSelect) {
       case LFCalendarPickerSelect.none:
       case LFCalendarPickerSelect.start:
