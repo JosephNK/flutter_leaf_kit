@@ -177,4 +177,17 @@ class LFFileManager {
     final directory = await getApplicationDocumentsDirectory();
     return directory.path;
   }
+
+  Future<String> getApplicationDocumentsCreateDirectoryPath(
+      String folderName) async {
+    final Directory appDocDir = await getApplicationDocumentsDirectoryDir();
+    final Directory appDocDirFolder =
+        Directory('${appDocDir.path}/$folderName/');
+    if (await appDocDirFolder.exists()) {
+      return appDocDirFolder.path;
+    }
+    final Directory appDocDirNewFolder =
+        await appDocDirFolder.create(recursive: true);
+    return appDocDirNewFolder.path;
+  }
 }
