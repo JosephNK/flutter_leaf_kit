@@ -70,48 +70,63 @@ class LFCalendarPageCell extends StatelessWidget {
           if (isDisabled) return;
           onSelected?.call(dateTime);
         },
-        child: LayoutBuilder(builder: (context, constraints) {
-          return Column(
-            children: [
-              Align(
-                alignment: Alignment.topCenter,
-                child: Container(
-                  width: 26.0,
-                  height: 26.0,
-                  // padding: const EdgeInsets.all(4.0),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(26.0),
-                    color: dayBackgroundColor,
-                    border: Border.all(
-                      color: isSelected ? selectedColor : Colors.transparent,
-                    ),
-                  ),
-                  child: Opacity(
-                    opacity: isDisabled ? 0.3 : 1.0,
-                    child: Align(
-                      alignment: Alignment.center,
-                      child: Text(
-                        day,
-                        style: dayTextStyle?.copyWith(color: dayTextColor) ??
-                            const TextStyle(
-                              fontWeight: FontWeight.normal,
-                              fontSize: 16.0,
-                            ).copyWith(color: dayTextColor),
-                        textAlign: TextAlign.center,
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            return SizedBox(
+              width: constraints.maxWidth,
+              height: constraints.maxHeight,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Align(
+                    alignment: Alignment.topCenter,
+                    child: Container(
+                      width: 26.0,
+                      height: 26.0,
+                      // padding: const EdgeInsets.all(4.0),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(26.0),
+                        color: dayBackgroundColor,
+                        border: Border.all(
+                          color:
+                              isSelected ? selectedColor : Colors.transparent,
+                        ),
+                      ),
+                      child: Opacity(
+                        opacity: isDisabled ? 0.3 : 1.0,
+                        child: Align(
+                          alignment: Alignment.center,
+                          child: Text(
+                            day,
+                            style:
+                                dayTextStyle?.copyWith(color: dayTextColor) ??
+                                    const TextStyle(
+                                      fontWeight: FontWeight.normal,
+                                      fontSize: 16.0,
+                                    ).copyWith(color: dayTextColor),
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
                       ),
                     ),
                   ),
-                ),
+                  Expanded(
+                    child: LayoutBuilder(
+                      builder: (_, constraints) {
+                        return cellBuilder?.call(
+                              context,
+                              dateTime,
+                              Size(constraints.maxWidth, constraints.maxHeight),
+                            ) ??
+                            Container();
+                      },
+                    ),
+                  ),
+                ],
               ),
-              cellBuilder?.call(
-                    context,
-                    dateTime,
-                    Size(constraints.maxWidth, constraints.maxHeight - 24.0),
-                  ) ??
-                  Container(),
-            ],
-          );
-        }),
+            );
+          },
+        ),
       ),
     );
   }

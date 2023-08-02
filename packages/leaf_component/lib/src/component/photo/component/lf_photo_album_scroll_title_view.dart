@@ -7,6 +7,7 @@ class LFPhotoAlbumScrollTitleView extends StatefulWidget {
   final RequestType type;
   final AssetPathEntity? selectedAssetPath;
   final TextStyle? textStyle;
+  final bool visibleAlbumView;
   final VoidCallback? onPressed;
   final ValueChanged<AssetPathEntity>? onFirstLoadSelected;
 
@@ -15,6 +16,7 @@ class LFPhotoAlbumScrollTitleView extends StatefulWidget {
     required this.type,
     required this.selectedAssetPath,
     this.textStyle,
+    this.visibleAlbumView = false,
     this.onPressed,
     this.onFirstLoadSelected,
   }) : super(key: key);
@@ -77,7 +79,9 @@ class _LFPhotoAlbumScrollTitleViewState
                   fontSize: 18.0,
                 ),
           ),
-          const Icon(Icons.arrow_drop_down_sharp, size: 30.0),
+          widget.visibleAlbumView
+              ? const Icon(Icons.arrow_drop_up_sharp, size: 30.0)
+              : const Icon(Icons.arrow_drop_down_sharp, size: 30.0),
         ],
       ),
     );
