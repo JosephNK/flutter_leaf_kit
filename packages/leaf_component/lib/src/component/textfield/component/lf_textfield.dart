@@ -70,6 +70,7 @@ class LFTextField extends StatefulWidget {
   final Widget? clearIcon;
   final BoxConstraints? prefixIconConstraints;
   final BoxConstraints? suffixIconConstraints;
+  final List<TextInputFormatter>? inputFormatters;
   final VoidCallback? onTap;
   final ValueChanged<bool>? onFocusChanged;
   final ValueChanged<String>? onChanged;
@@ -116,6 +117,7 @@ class LFTextField extends StatefulWidget {
     this.clearIcon,
     this.prefixIconConstraints,
     this.suffixIconConstraints,
+    this.inputFormatters,
     this.onTap,
     this.onFocusChanged,
     this.onChanged,
@@ -240,6 +242,7 @@ class _LFTextFieldState extends State<LFTextField> {
     final clearIcon = widget.clearIcon;
     final prefixIconConstraints = widget.prefixIconConstraints;
     final suffixIconConstraints = widget.suffixIconConstraints;
+    final inputFormatters = widget.inputFormatters;
     final onTap = widget.onTap;
     final onChanged = widget.onChanged;
     final onSubmitted = widget.onSubmitted;
@@ -368,7 +371,7 @@ class _LFTextFieldState extends State<LFTextField> {
       obscureText: obscureText,
       enableSuggestions: false,
       autocorrect: false,
-      inputFormatters: const <TextInputFormatter>[],
+      inputFormatters: inputFormatters,
       decoration: InputDecoration(
         prefixIcon: prefixIconWidget,
         suffixIcon: suffixIconWidget,
