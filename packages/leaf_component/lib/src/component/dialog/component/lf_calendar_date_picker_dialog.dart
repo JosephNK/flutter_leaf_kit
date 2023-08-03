@@ -173,7 +173,7 @@ class _CalendarDatePickerContentState
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            LFText(
+                            LFAutoSizeText(
                               _startDate.toWeekDayDateString(
                                   short: true,
                                   isLunar: isLunar,
@@ -182,7 +182,7 @@ class _CalendarDatePickerContentState
                                   fontSize: !isLunar ? 18.0 : 16.0,
                                   color: _getStartDateColor()),
                               textAlign: TextAlign.left,
-                              maxLines: 2,
+                              minFontSize: 9,
                             ),
                             Visibility(
                               visible: isLunar,
@@ -212,7 +212,7 @@ class _CalendarDatePickerContentState
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
-                            LFText(
+                            LFAutoSizeText(
                               _endDate.toWeekDayDateString(
                                   short: true,
                                   isLunar: isLunar,
@@ -221,7 +221,7 @@ class _CalendarDatePickerContentState
                                   fontSize: !isLunar ? 18.0 : 16.0,
                                   color: _getEndDateColor()),
                               textAlign: TextAlign.right,
-                              maxLines: 2,
+                              minFontSize: 9,
                             ),
                             Visibility(
                               visible: isLunar,
@@ -244,7 +244,7 @@ class _CalendarDatePickerContentState
                       ),
                     ],
                   ),
-                  const SizedBox(height: 25.0),
+                  const SizedBox(height: 15.0),
                 ],
               ),
             ),
@@ -271,32 +271,35 @@ class _CalendarDatePickerContentState
             ),
 
             /// OK Button
-            Row(
-              children: [
-                Expanded(
-                  child: GestureDetector(
-                    onTap: () {
-                      _onCallBackOK(context);
-                    },
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(14.0),
-                        color: activeColor,
-                      ),
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 15.0, horizontal: 20.0),
-                      child: LFText(
-                        okText,
-                        style: const TextStyle(
-                          fontSize: 18.0,
-                          color: Colors.white,
+            Padding(
+              padding: const EdgeInsets.only(top: 8.0),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: GestureDetector(
+                      onTap: () {
+                        _onCallBackOK(context);
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(14.0),
+                          color: activeColor,
                         ),
-                        textAlign: TextAlign.center,
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 12.0, horizontal: 20.0),
+                        child: LFText(
+                          okText,
+                          style: const TextStyle(
+                            fontSize: 18.0,
+                            color: Colors.white,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
                       ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             )
           ],
         ),

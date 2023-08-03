@@ -18,8 +18,8 @@ class LFCalendarWeekDayView extends StatelessWidget {
         for (var i = 0; i < weekDays.length; i++)
           Expanded(
             child: Container(
-              padding: const EdgeInsets.symmetric(vertical: 8.0),
-              child: Text(
+              padding: const EdgeInsets.symmetric(vertical: 6.0),
+              child: LFAutoSizeText(
                 weekDays[i],
                 style: TextStyle(
                   fontSize: 13.0,

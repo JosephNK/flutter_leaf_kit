@@ -7,6 +7,7 @@ class LFPhotoAlbumScrollContentView extends StatefulWidget {
   final RequestType type;
   final AssetPathEntity? selectedAssetPath;
   final bool visible;
+  final String? recentName;
   final ValueChanged<AssetPathEntity>? onSelected;
 
   const LFPhotoAlbumScrollContentView({
@@ -14,6 +15,7 @@ class LFPhotoAlbumScrollContentView extends StatefulWidget {
     required this.type,
     required this.selectedAssetPath,
     required this.visible,
+    this.recentName,
     this.onSelected,
   }) : super(key: key);
 
@@ -64,6 +66,7 @@ class _LFPhotoAlbumScrollContentViewState
   @override
   Widget build(BuildContext context) {
     final visible = widget.visible;
+    final recentName = widget.recentName;
 
     return Stack(
       fit: StackFit.expand,
@@ -97,6 +100,7 @@ class _LFPhotoAlbumScrollContentViewState
                             assetPathEntity: assetPathEntity,
                             selectedAssetPathEntity: _selectedAssetPathEntity,
                             checked: checked,
+                            recentName: recentName,
                             onSelected: (assetPathEntity) {
                               setState(() {
                                 _selectedAssetPathEntity = assetPathEntity;
@@ -133,6 +137,7 @@ class LFPhotoAlbumScrollContentTile extends StatefulWidget {
   final AssetPathEntity assetPathEntity;
   final AssetPathEntity? selectedAssetPathEntity;
   final bool checked;
+  final String? recentName;
   final ValueChanged<AssetPathEntity>? onSelected;
 
   const LFPhotoAlbumScrollContentTile({
@@ -140,6 +145,7 @@ class LFPhotoAlbumScrollContentTile extends StatefulWidget {
     required this.assetPathEntity,
     required this.selectedAssetPathEntity,
     required this.checked,
+    this.recentName,
     this.onSelected,
   }) : super(key: key);
 
@@ -168,9 +174,13 @@ class _LFPhotoAlbumScrollContentTileState
     final assetPathEntity = widget.assetPathEntity;
     final selectedAssetPathEntity = widget.selectedAssetPathEntity;
     final checked = widget.checked;
+    final recentName = widget.recentName;
     final onSelected = widget.onSelected;
 
-    final name = assetPathEntity.name;
+    String name = assetPathEntity.name;
+    if (name == 'Recent' && recentName != null) {
+      name = recentName;
+    }
 
     final entities = _entities;
     if (entities.isEmpty) {

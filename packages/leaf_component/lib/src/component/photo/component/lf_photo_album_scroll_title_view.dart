@@ -8,6 +8,7 @@ class LFPhotoAlbumScrollTitleView extends StatefulWidget {
   final AssetPathEntity? selectedAssetPath;
   final TextStyle? textStyle;
   final bool visibleAlbumView;
+  final String? recentName;
   final VoidCallback? onPressed;
   final ValueChanged<AssetPathEntity>? onFirstLoadSelected;
 
@@ -17,6 +18,7 @@ class LFPhotoAlbumScrollTitleView extends StatefulWidget {
     required this.selectedAssetPath,
     this.textStyle,
     this.visibleAlbumView = false,
+    this.recentName,
     this.onPressed,
     this.onFirstLoadSelected,
   }) : super(key: key);
@@ -62,6 +64,12 @@ class _LFPhotoAlbumScrollTitleViewState
 
   @override
   Widget build(BuildContext context) {
+    final recentName = widget.recentName;
+    String albumName = _selectedAssetPath?.name ?? '';
+    if (albumName == 'Recent' && recentName != null) {
+      albumName = recentName;
+    }
+
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
       onTap: () {
@@ -73,7 +81,7 @@ class _LFPhotoAlbumScrollTitleViewState
         mainAxisSize: MainAxisSize.min,
         children: [
           LFText(
-            _selectedAssetPath?.name ?? '',
+            albumName,
             style: widget.textStyle ??
                 const TextStyle(
                   fontSize: 18.0,
