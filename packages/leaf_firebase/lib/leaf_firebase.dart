@@ -12,4 +12,4 @@ import 'package:leaf_data/leaf_data.dart';
 export 'package:firebase_core/firebase_core.dart' show FirebaseApp;
 export 'package:firebase_messaging/firebase_messaging.dart' show RemoteMessage;
 
-part 'src/firebase.dart';
+part 'src/firebase_messaging.dart';

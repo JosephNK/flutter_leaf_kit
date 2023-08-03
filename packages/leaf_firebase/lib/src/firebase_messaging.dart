@@ -130,13 +130,14 @@ Future<void> setupFlutterNotifications() async {
 //   }
 // }
 
-class FirebaseManager {
-  static final FirebaseManager _instance = FirebaseManager._internal();
+class FirebaseMessagingManager {
+  static final FirebaseMessagingManager _instance =
+      FirebaseMessagingManager._internal();
 
-  static FirebaseManager get shared => _instance;
+  static FirebaseMessagingManager get shared => _instance;
 
-  FirebaseManager._internal() {
-    Logging.d('FirebaseManager Init');
+  FirebaseMessagingManager._internal() {
+    Logging.d('FirebaseMessagingManager Init');
     setupFlutterNotifications();
   }
 
