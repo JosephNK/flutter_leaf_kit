@@ -8,6 +8,7 @@ class ScreenVariable {
   bool get extendBodyBehindAppBar => false;
   FloatingActionButtonLocation? get floatingActionButtonLocation => null;
   Color? get backgroundColor => null;
+  double? get drawerEdgeDragWidth => null;
 }
 
 abstract class ScreenBuild {
@@ -18,6 +19,8 @@ abstract class ScreenBuild {
   Widget? buildEndDrawer(BuildContext context, Object? state);
   Widget? buildFloatingActionButton(BuildContext context, Object? state);
   Widget? buildBottomNavigationBar(BuildContext context, Object? state);
+  void onDrawerChanged(BuildContext context, bool isOpened);
+  void onEndDrawerChanged(BuildContext context, bool isOpened);
   // only Android
   Future<bool> willPopScopeCallback(BuildContext context);
 }
@@ -119,6 +122,7 @@ abstract class ScreenState<T extends StatefulExtWidget> extends State<T>
     final useSafeArea = this.useSafeArea;
     final safeAreaInsets = this.safeAreaInsets;
     final backgroundColor = this.backgroundColor;
+    final drawerEdgeDragWidth = this.drawerEdgeDragWidth;
     final floatingActionButtonLocation = this.floatingActionButtonLocation;
     final resizeToAvoidBottomInset = this.resizeToAvoidBottomInset;
     final extendBodyBehindAppBar = this.extendBodyBehindAppBar;
@@ -142,8 +146,15 @@ abstract class ScreenState<T extends StatefulExtWidget> extends State<T>
       bottomNavigationBar: buildBottomNavigationBar(context, state),
       floatingActionButton: buildFloatingActionButton(context, state),
       floatingActionButtonLocation: floatingActionButtonLocation,
+      drawerEdgeDragWidth: drawerEdgeDragWidth,
       drawer: buildDrawer(context, state),
       endDrawer: buildEndDrawer(context, state),
+      onDrawerChanged: (bool isOpened) {
+        onDrawerChanged(context, isOpened);
+      },
+      onEndDrawerChanged: (bool isOpened) {
+        onEndDrawerChanged(context, isOpened);
+      },
       resizeToAvoidBottomInset: resizeToAvoidBottomInset,
       extendBodyBehindAppBar: extendBodyBehindAppBar,
     );
@@ -179,6 +190,12 @@ abstract class ScreenState<T extends StatefulExtWidget> extends State<T>
   Widget? buildFloatingActionButton(BuildContext context, Object? state) {
     return null;
   }
+
+  @override
+  void onDrawerChanged(BuildContext context, bool isOpened) {}
+
+  @override
+  void onEndDrawerChanged(BuildContext context, bool isOpened) {}
 
   @override
   Future<bool> willPopScopeCallback(BuildContext context) {
