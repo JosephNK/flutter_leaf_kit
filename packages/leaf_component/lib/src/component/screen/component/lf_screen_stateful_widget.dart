@@ -207,7 +207,12 @@ extension ScreenStateFunction on ScreenState {
   void _updateActivation() {
     final index = widget.index;
     if (index != null) {
-      _isActivation = (index.activeTabIndex == index.tabIndex);
+      final isForceActive = index.forceActive;
+      if (isForceActive) {
+        _isActivation = true;
+      } else {
+        _isActivation = (index.activeTabIndex == index.tabIndex);
+      }
     }
   }
 

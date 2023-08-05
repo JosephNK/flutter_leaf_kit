@@ -46,7 +46,7 @@ class _LFBottomTabBarScaffoldState extends State<LFBottomTabBarScaffold> {
     final rebuildTabItems = tabItems.map((tabItem) {
       return tabItem.copyWith(
         bottomTabIndex: tabItem.bottomTabIndex.copyWith(
-          activeTabIndex: selectedIndex,
+          activeTabIndex: () => selectedIndex,
         ),
       );
     }).toList();
