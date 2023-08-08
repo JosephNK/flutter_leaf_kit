@@ -28,8 +28,10 @@ class ResultValue<T> extends Equatable {
     final errorValue = this.errorValue;
     if (errorValue == null || errorValue.errorMessage == null) return this;
     if (context.mounted) {
-      await LFAlertDialog.showErrorMessage(context,
-          errorMessage: errorValue.errorMessage);
+      await LFAlertDialog.showErrorMessage(
+        context,
+        errorMessage: errorValue.errorMessage,
+      );
     }
     return this;
   }
@@ -40,7 +42,9 @@ class ResultValue<T> extends Equatable {
     if (errorValue == null || errorValue.exception == null) return this;
     if (context.mounted) {
       await LFAlertDialog.showException(
-          context, exception: errorValue.exception);
+        context,
+        exception: errorValue.exception,
+      );
     }
     return this;
   }

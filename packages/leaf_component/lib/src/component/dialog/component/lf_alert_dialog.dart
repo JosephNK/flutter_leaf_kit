@@ -93,12 +93,16 @@ class LFAlertDialog {
     final okTextStyle = LFComponentConfigure.shared.alert?.okTextStyle;
     final okTextBackgroundColor =
         LFComponentConfigure.shared.alert?.okTextBackgroundColor;
+    final errorTitleStr =
+        LFComponentConfigure.shared.alert?.errorMessageTitle ??
+            'Oops! Error :(';
 
-    String? errorTitle = 'Oops! Error :(';
+    String errorMessageStr = errorMessage;
+
     _LFAlertDialog().show(
       context,
-      title: errorTitle,
-      message: errorMessage,
+      title: errorTitleStr,
+      message: errorMessageStr,
       onOK: onOk,
       okText: okTextStr,
       okTextStyle: okTextStyle,
@@ -118,14 +122,14 @@ class LFAlertDialog {
     final okTextBackgroundColor =
         LFComponentConfigure.shared.alert?.okTextBackgroundColor;
 
-    String? errorTitle = 'Oops! Exception :(';
-    String? errorMessage = exception.toString();
+    String title = 'Oops! Exception :(';
+    String message = exception.toString();
 
-    if (isNotEmpty(errorMessage)) {
+    if (isNotEmpty(message)) {
       _LFAlertDialog().show(
         context,
-        title: errorTitle,
-        message: errorMessage,
+        title: title,
+        message: message,
         onOK: onTap,
         okText: okTextStr,
         okTextStyle: okTextStyle,
