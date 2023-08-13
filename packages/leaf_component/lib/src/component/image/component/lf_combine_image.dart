@@ -24,6 +24,7 @@ class LFCombineImage extends StatelessWidget {
   Widget build(BuildContext context) {
     final image = this.image;
     final file = image.file ?? '';
+    final thumbFile = image.thumbFile ?? '';
     final bytes = image.bytes;
 
     if (bytes != null) {
@@ -37,10 +38,16 @@ class LFCombineImage extends StatelessWidget {
       );
     }
 
-    if (isURL(file)) {
+    String? urlFile;
+    if (isURL(thumbFile)) {
+      urlFile = thumbFile;
+    } else if (isURL(file)) {
+      urlFile = file;
+    }
+    if (urlFile != null) {
       return LFCacheImage(
         header: header,
-        url: file,
+        url: urlFile,
         width: width,
         height: height,
         fit: fit,
