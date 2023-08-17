@@ -161,6 +161,25 @@ class FirebaseMessagingManager {
     return await _messaging.getToken();
   }
 
+  Future<List<ActiveNotification>> getActiveNotifications() async {
+    if (Platform.isAndroid) {
+      final List<ActiveNotification> activeNotifications =
+          await flutterLocalNotificationsPlugin
+              .resolvePlatformSpecificImplementation<
+                  AndroidFlutterLocalNotificationsPlugin>()!
+              .getActiveNotifications();
+      return activeNotifications;
+    }
+    return [];
+  }
+
+  Future<void> cancel(int id, {String? tag}) async {
+    await flutterLocalNotificationsPlugin
+        .resolvePlatformSpecificImplementation<
+            AndroidFlutterLocalNotificationsPlugin>()!
+        .cancel(id, tag: tag);
+  }
+
   Future<void> listenInitialMessageApp(
       ValueChanged<RemoteMessage>? callBack) async {
     final message = await FirebaseMessaging.instance.getInitialMessage();
