@@ -50,9 +50,11 @@ class LFTextSpan extends TextSpan {
     String? text,
     List<InlineSpan>? children,
     TextStyle? style,
+    GestureRecognizer? recognizer,
   }) : super(
           text: text,
           children: children,
           style: style,
+          recognizer: recognizer,
         );
 }
