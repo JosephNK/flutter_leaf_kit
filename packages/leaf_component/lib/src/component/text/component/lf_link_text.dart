@@ -2,7 +2,7 @@ part of lf_text;
 
 // Url RegExp
 final RegExp kLinkUrlRegExp = RegExp(
-  r'(http|https|ftp):\/\/[\w?=&.\/-;#~%-]+(?![\w\s?&.\/;#~%"=-]*>)',
+  r'(http[s]?:\/\/|www.)[\w?=&.\/-;#~%-]+(?![\w\s?&.\/;#~%"=-]*>)',
   caseSensitive: false,
 );
 
@@ -35,7 +35,7 @@ class LFLinkText extends StatefulWidget {
   final TextStyle? styleEmail;
   final TextAlign textAlign;
   final TextOverflow overflow;
-  final int maxLines;
+  final int? maxLines;
   final double textScaleFactor;
   final List<InlineSpan> leadingSpans;
   final LFLinkTextOnTap? onTap;
