@@ -11,6 +11,13 @@ class LFAppBadgerManager {
     return await FlutterAppBadger.isAppBadgeSupported();
   }
 
+  Future<void> updateBadgeCount(int count) async {
+    final isAppBadgeSupported = await FlutterAppBadger.isAppBadgeSupported();
+    if (isAppBadgeSupported) {
+      FlutterAppBadger.updateBadgeCount(count);
+    }
+  }
+
   Future<void> removeBadge() async {
     final isAppBadgeSupported = await FlutterAppBadger.isAppBadgeSupported();
     if (isAppBadgeSupported) {
