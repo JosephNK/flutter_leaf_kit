@@ -9,6 +9,7 @@ class LFListViewCupertino<T> extends StatelessWidget {
   final Widget? header;
   final EdgeInsets? padding;
   final ScrollPhysics? physics;
+  final ScrollViewKeyboardDismissBehavior keyboardDismissBehavior;
   final bool shrinkWrap;
   final bool scrollable;
   final bool hasReachedMax;
@@ -23,6 +24,7 @@ class LFListViewCupertino<T> extends StatelessWidget {
     this.header,
     this.padding = const EdgeInsets.all(0),
     this.physics,
+    this.keyboardDismissBehavior = ScrollViewKeyboardDismissBehavior.manual,
     this.shrinkWrap = false,
     this.scrollable = true,
     this.hasReachedMax = true,
@@ -45,6 +47,7 @@ class LFListViewCupertino<T> extends StatelessWidget {
               parent: physics ?? const BouncingScrollPhysics(),
             )
           : const NeverScrollableScrollPhysics(),
+      keyboardDismissBehavior: keyboardDismissBehavior,
       shrinkWrap: shrinkWrap,
       slivers: [
         if (onRefresh != null) ...[

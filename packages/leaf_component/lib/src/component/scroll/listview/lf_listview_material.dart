@@ -9,6 +9,7 @@ class LFListViewMaterial<T> extends StatelessWidget {
   final Widget? header;
   final EdgeInsets? padding;
   final ScrollPhysics? physics;
+  final ScrollViewKeyboardDismissBehavior keyboardDismissBehavior;
   final bool shrinkWrap;
   final bool scrollable;
   final bool hasReachedMax;
@@ -23,6 +24,7 @@ class LFListViewMaterial<T> extends StatelessWidget {
     this.header,
     this.padding = const EdgeInsets.all(0),
     this.physics,
+    this.keyboardDismissBehavior = ScrollViewKeyboardDismissBehavior.manual,
     this.shrinkWrap = false,
     this.scrollable = true,
     this.hasReachedMax = true,
@@ -46,6 +48,7 @@ class LFListViewMaterial<T> extends StatelessWidget {
               parent: physics ?? const BouncingScrollPhysics(),
             )
           : const NeverScrollableScrollPhysics(),
+      keyboardDismissBehavior: keyboardDismissBehavior,
       padding: padding,
       shrinkWrap: shrinkWrap,
       itemBuilder: (context, index) {

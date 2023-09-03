@@ -11,6 +11,7 @@ class LFListView<T> extends StatefulWidget {
   final Widget? header;
   final EdgeInsets? padding;
   final ScrollPhysics? physics;
+  final ScrollViewKeyboardDismissBehavior keyboardDismissBehavior;
   final bool disallowGlow;
   final bool shrinkWrap;
   final bool scrollable;
@@ -28,6 +29,7 @@ class LFListView<T> extends StatefulWidget {
     this.header,
     this.padding = const EdgeInsets.all(0),
     this.physics,
+    this.keyboardDismissBehavior = ScrollViewKeyboardDismissBehavior.manual,
     this.disallowGlow = false,
     this.scrollable = true,
     this.shrinkWrap = false,
@@ -147,6 +149,7 @@ class _LFListViewState<T> extends State<LFListView<T>>
         header: widget.header,
         padding: widget.padding,
         physics: widget.physics,
+        keyboardDismissBehavior: widget.keyboardDismissBehavior,
         scrollable: widget.scrollable,
         shrinkWrap: widget.shrinkWrap,
         hasReachedMax: widget.hasReachedMax,
@@ -175,6 +178,7 @@ class _LFListViewState<T> extends State<LFListView<T>>
       header: widget.header,
       padding: widget.padding,
       physics: widget.physics,
+      keyboardDismissBehavior: widget.keyboardDismissBehavior,
       scrollable: widget.scrollable,
       shrinkWrap: widget.shrinkWrap,
       hasReachedMax: widget.hasReachedMax,
