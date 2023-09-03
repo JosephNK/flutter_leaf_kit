@@ -1,14 +1,11 @@
 part of lf_scroll_component;
 
-class LFListViewController with LFScrollControllerMixin {
-  ScrollController? scrollController;
-
+class LFListViewController extends Object with LFScrollControllerMixin {
   LFListViewController() {
     init();
   }
 
   void dispose() {
-    scrollController?.dispose();
     tearDown();
   }
 }

@@ -118,8 +118,6 @@ class _LFListViewState<T> extends State<LFListView<T>>
       onNotification: (scrollNotification) {
         var scrollController = PrimaryScrollController.of(context);
 
-        widget.controller?.scrollController = scrollController;
-
         final depth = scrollNotification.depth;
 
         if (depth > 0 || !scrollController.hasClients) {
