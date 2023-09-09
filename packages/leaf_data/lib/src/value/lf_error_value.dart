@@ -1,5 +1,13 @@
 part of leaf_data;
 
+class ErrorValueException implements Exception {
+  ErrorValue value;
+
+  ErrorValueException(this.value);
+}
+
+///////////////////////////////////////////////////////////////////////////////
+
 class ErrorValue extends Equatable {
   final int statusCode;
   final String? errorCode;
@@ -23,6 +31,19 @@ class ErrorValue extends Equatable {
 
   String get displayErrorMessage {
     return '$errorMessage ($errorCode)';
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'statusCode': statusCode,
+      'errorCode': errorCode,
+      'errorMessage': errorMessage,
+      'exception': exception,
+    };
+  }
+
+  ErrorValueException get objectToException {
+    return ErrorValueException(this);
   }
 
   /// Create
