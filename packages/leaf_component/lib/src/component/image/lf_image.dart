@@ -5,6 +5,8 @@ import 'dart:typed_data';
 
 import 'package:cached_network_image/cached_network_image.dart'
     as cached_network;
+import 'package:cached_network_image_platform_interface/cached_network_image_platform_interface.dart'
+    as cached_network_interface;
 import 'package:flutter/material.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:leaf_common/leaf_common.dart';
