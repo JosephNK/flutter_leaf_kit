@@ -1,4 +1,4 @@
-part of resources;
+part of leaf_resources;
 
 // ignore_for_file: unnecessary_const
 class AppIcons {

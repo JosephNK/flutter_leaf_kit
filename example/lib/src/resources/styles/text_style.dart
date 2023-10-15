@@ -1,4 +1,4 @@
-part of resources;
+part of leaf_resources;
 
 /// https://material.io/design/typography/the-type-system.html#type-scale
 
