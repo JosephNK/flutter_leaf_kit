@@ -24,6 +24,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'logger/console_output.dart';
 import 'notification_center/src/dart_notification_center.dart';
 
+export 'package:permission_handler/permission_handler.dart';
+
 export 'notification_center/src/dart_notification_center.dart';
 
 part 'app/app.dart';
