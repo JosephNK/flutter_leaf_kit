@@ -379,70 +379,70 @@ packages:
       path: "../leaf_bloc"
       relative: true
     source: path
-    version: "0.0.1"
+    version: "0.0.2"
   leaf_common:
     dependency: "direct main"
     description:
       path: "../leaf_common"
       relative: true
     source: path
-    version: "0.0.1"
+    version: "0.0.2"
   leaf_component:
     dependency: "direct main"
     description:
       path: "../leaf_component"
       relative: true
     source: path
-    version: "0.0.1"
+    version: "0.0.2"
   leaf_device:
     dependency: "direct main"
     description:
       path: "../leaf_device"
       relative: true
     source: path
-    version: "0.0.1"
+    version: "0.0.2"
   leaf_file:
     dependency: "direct main"
     description:
       path: "../leaf_file"
       relative: true
     source: path
-    version: "0.0.1"
+    version: "0.0.2"
   leaf_location:
     dependency: "direct main"
     description:
       path: "../leaf_location"
       relative: true
     source: path
-    version: "0.0.1"
+    version: "0.0.2"
   leaf_navigation:
     dependency: "direct main"
     description:
       path: "../leaf_navigation"
       relative: true
     source: path
-    version: "0.0.1"
+    version: "0.0.2"
   leaf_network:
     dependency: "direct main"
     description:
       path: "../leaf_network"
       relative: true
     source: path
-    version: "0.0.1"
+    version: "0.0.2"
   leaf_package:
     dependency: "direct main"
     description:
       path: "../leaf_package"
       relative: true
     source: path
-    version: "0.0.1"
+    version: "0.0.2"
   leaf_permission:
     dependency: "direct main"
     description:
       path: "../leaf_permission"
       relative: true
     source: path
-    version: "0.0.1"
+    version: "0.0.2"
   lints:
     dependency: transitive
     description:

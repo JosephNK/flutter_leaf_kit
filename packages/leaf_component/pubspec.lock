@@ -331,35 +331,35 @@ packages:
       path: "../leaf_bloc"
       relative: true
     source: path
-    version: "0.0.1"
+    version: "0.0.2"
   leaf_common:
     dependency: "direct main"
     description:
       path: "../leaf_common"
       relative: true
     source: path
-    version: "0.0.1"
+    version: "0.0.2"
   leaf_device:
     dependency: "direct main"
     description:
       path: "../leaf_device"
       relative: true
     source: path
-    version: "0.0.1"
+    version: "0.0.2"
   leaf_navigation:
     dependency: "direct main"
     description:
       path: "../leaf_navigation"
       relative: true
     source: path
-    version: "0.0.1"
+    version: "0.0.2"
   leaf_permission:
     dependency: "direct main"
     description:
       path: "../leaf_permission"
       relative: true
     source: path
-    version: "0.0.1"
+    version: "0.0.2"
   lints:
     dependency: transitive
     description:
