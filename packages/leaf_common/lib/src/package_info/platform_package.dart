@@ -1,4 +1,4 @@
-part of leaf_package;
+part of lf_common;
 
 enum BuildType {
   production,

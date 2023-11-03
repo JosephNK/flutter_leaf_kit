@@ -33,11 +33,6 @@ dependencies:
       url: https://github.com/JosephNK/flutter_leaf_kit.git
       ref: '0.0.2'
       path: ./packages/leaf_common
-  leaf_device:
-    git:
-      url: https://github.com/JosephNK/flutter_leaf_kit.git
-      ref: '0.0.2'
-      path: ./packages/leaf_device
   leaf_bloc:
     git:
       url: https://github.com/JosephNK/flutter_leaf_kit.git
@@ -48,10 +43,6 @@ dependencies:
       url: https://github.com/JosephNK/flutter_leaf_kit.git
       ref: '0.0.2'
       path: ./packages/leaf_navigation
-  leaf_permission:
-    git:
-      url: https://github.com/JosephNK/flutter_leaf_kit.git
-      ref: '0.0.2'
 
 dev_dependencies:
   flutter_test:

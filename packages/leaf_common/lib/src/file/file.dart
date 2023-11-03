@@ -1,4 +1,4 @@
-part of leaf_file;
+part of lf_common;
 
 class LFFileManager {
   static final LFFileManager _instance = LFFileManager._internal();

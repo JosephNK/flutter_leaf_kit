@@ -11,7 +11,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:leaf_bloc/leaf_bloc.dart';
 import 'package:leaf_common/leaf_common.dart';
-import 'package:leaf_device/leaf_device.dart';
 
 import '../skeleton/lf_skeleton.dart';
 

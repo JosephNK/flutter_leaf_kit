@@ -1,9 +1,4 @@
-import 'dart:io';
-
-import 'package:android_id/android_id.dart';
-import 'package:device_info_plus/device_info_plus.dart';
-import 'package:flutter/material.dart';
-import 'package:leaf_permission/leaf_permission.dart' as ph;
+part of lf_common;
 
 class LFDeviceManager {
   static final LFDeviceManager _instance = LFDeviceManager._internal();
