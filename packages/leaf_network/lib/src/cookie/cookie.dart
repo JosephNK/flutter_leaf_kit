@@ -21,15 +21,15 @@ class LFCookieStoreManager {
   }
 
   Future<void> setCookie(String cookie) async {
-    await LFSharedPreferences.shared.setString('cookie', cookie);
+    await LFSharedPreferencesManager.shared.setString('cookie', cookie);
   }
 
   Future<String?> getCookie() async {
-    return LFSharedPreferences.shared.getString('cookie');
+    return LFSharedPreferencesManager.shared.getString('cookie');
   }
 
   Future<void> removeCookie() async {
-    await LFSharedPreferences.shared.remove('cookie');
+    await LFSharedPreferencesManager.shared.remove('cookie');
   }
 
   Future<Map<String, String>> getHeader(dynamic uri) async {
