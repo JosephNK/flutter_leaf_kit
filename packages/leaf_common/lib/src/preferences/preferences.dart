@@ -1,11 +1,12 @@
 part of lf_common;
 
-class LFSharedPreferences {
-  static final LFSharedPreferences _instance = LFSharedPreferences._internal();
+class LFSharedPreferencesManager {
+  static final LFSharedPreferencesManager _instance =
+      LFSharedPreferencesManager._internal();
 
-  static LFSharedPreferences get shared => _instance;
+  static LFSharedPreferencesManager get shared => _instance;
 
-  LFSharedPreferences._internal();
+  LFSharedPreferencesManager._internal();
 
   Future<SharedPreferences> getInstance() async {
     return await SharedPreferences.getInstance();
