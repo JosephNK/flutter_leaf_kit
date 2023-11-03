@@ -12,6 +12,10 @@ dependencies:
   flutter:
     sdk: flutter
 
+  navigation_history_observer: ^1.1.0
+  modal_bottom_sheet: ^3.0.0-pre
+  page_transition: ^2.1.0
+
   leaf_common:
     git:
       url: https://github.com/JosephNK/flutter_leaf_kit.git
@@ -22,10 +26,6 @@ dependencies:
       url: https://github.com/JosephNK/flutter_leaf_kit.git
       ref: '0.0.2'
       path: ./packages/leaf_bloc
-
-  navigation_history_observer: ^1.1.0
-  modal_bottom_sheet: ^3.0.0-pre
-  page_transition: ^2.1.0
 
 dev_dependencies:
   flutter_test:

@@ -1,4 +1,3 @@
-export 'package:google_fonts/google_fonts.dart' show GoogleFonts;
 export 'package:intl/intl.dart' hide TextDirection;
 export 'package:klc/klc.dart';
 export 'package:quiver/core.dart';

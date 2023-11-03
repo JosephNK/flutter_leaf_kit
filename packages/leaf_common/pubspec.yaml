@@ -12,16 +12,15 @@ dependencies:
   flutter:
     sdk: flutter
 
-  easy_localization: ^3.0.2
-  google_fonts: ^4.0.3
-  intl: ^0.18.0
-  logger: ^1.1.0
-  quiver: ^3.1.0
-  string_validator: ^0.3.0
+  easy_localization: ^3.0.3
+  logger: ^2.0.2+1
+  quiver: ^3.2.1
+  string_validator: ^1.0.2
   shared_preferences: ^2.2.2
   app_tracking_transparency: ^2.0.4
   flutter_app_badger: ^1.5.0
   klc: ^0.1.0
+  intl: ^0.18.1
 
 # package_info_plus (temporarily override for chewie)
 dependency_overrides:

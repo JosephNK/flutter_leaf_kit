@@ -12,13 +12,13 @@ dependencies:
   flutter:
     sdk: flutter
 
+  permission_handler: ^11.0.1
+
   leaf_common:
     git:
       url: https://github.com/JosephNK/flutter_leaf_kit.git
       ref: '0.0.2'
       path: ./packages/leaf_common
-
-  permission_handler: ^11.0.1
 
 dev_dependencies:
   flutter_test:

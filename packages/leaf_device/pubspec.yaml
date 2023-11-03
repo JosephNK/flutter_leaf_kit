@@ -12,6 +12,9 @@ dependencies:
   flutter:
     sdk: flutter
 
+  device_info_plus: ^9.1.0
+  android_id: ^0.3.6
+
   leaf_common:
     git:
       url: https://github.com/JosephNK/flutter_leaf_kit.git
@@ -22,9 +25,6 @@ dependencies:
       url: https://github.com/JosephNK/flutter_leaf_kit.git
       ref: '0.0.2'
       path: ./packages/leaf_permission
-
-  device_info_plus: ^9.1.0
-  android_id: ^0.3.6
 
 dev_dependencies:
   flutter_test:
