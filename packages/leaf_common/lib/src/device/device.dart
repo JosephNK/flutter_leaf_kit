@@ -29,12 +29,19 @@ class LFDeviceManager {
   String get deviceUniqueID => _deviceUniqueID;
 
   Future<void> setup(BuildContext context) async {
+    await setupMedia(context);
+    await setupDevice();
+  }
+
+  Future<void> setupMedia(BuildContext context) async {
     /// MediaQuery
     _widowPadding = MediaQueryData.fromView(View.of(context)).padding;
     _textScaleFactor = MediaQuery.of(context).textScaleFactor;
     _devicePixelRatio = MediaQuery.of(context).devicePixelRatio;
     _deviceSize = MediaQuery.of(context).size;
+  }
 
+  Future<void> setupDevice() async {
     /// Device Info
     DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
     if (Platform.isAndroid) {
