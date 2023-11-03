@@ -1,4 +1,4 @@
-part of resources;
+part of leaf_resources;
 
 // ignore_for_file: constant_identifier_names, unnecessary_const
 class AppAssetImage {

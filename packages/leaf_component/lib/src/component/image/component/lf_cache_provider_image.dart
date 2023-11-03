@@ -9,7 +9,7 @@ class LFCachedNetworkImageProvider
     int? maxHeight,
     int? maxWidth,
     double scale = 1.0,
-    cached_network.ErrorListener? errorListener,
+    cached_network_interface.ErrorListener? errorListener,
     Map<String, String>? headers,
     BaseCacheManager? cacheManager,
     String? cacheKey,

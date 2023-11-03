@@ -46,9 +46,12 @@ class _LFLayoutAppState extends State<LFLayoutApp> {
         return OrientationBuilder(builder: (_, orientation) {
           if (constraints.maxWidth != 0) {
             if (isDeviceManagerSetup) {
-              LFDeviceManager.shared.setup(context);
+              LFDeviceManager.shared.setup(context).then((_) {
+                onBuilder?.call();
+              });
+            } else {
+              onBuilder?.call();
             }
-            onBuilder?.call();
             return Container(
               color: widget.backgroundColor,
               child: widget.child,

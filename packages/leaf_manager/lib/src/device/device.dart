@@ -33,7 +33,7 @@ class LFDeviceManager {
   String _deviceUniqueID = '';
   String get deviceUniqueID => _deviceUniqueID;
 
-  void setup(BuildContext context) async {
+  Future<void> setup(BuildContext context) async {
     /// MediaQuery
     _widowPadding = MediaQueryData.fromView(View.of(context)).padding;
     _textScaleFactor = MediaQuery.of(context).textScaleFactor;
