@@ -17,42 +17,41 @@ dependencies:
       url: https://github.com/JosephNK/flutter_leaf_kit.git
       ref: develop
       path: ./packages/leaf_common
-  leaf_data:
+  leaf_device:
     git:
       url: https://github.com/JosephNK/flutter_leaf_kit.git
       ref: develop
-      path: ./packages/leaf_data
-  leaf_manager:
+      path: ./packages/leaf_device
+  leaf_bloc:
     git:
       url: https://github.com/JosephNK/flutter_leaf_kit.git
       ref: develop
-      path: ./packages/leaf_manager
+      path: ./packages/leaf_bloc
   leaf_navigation:
     git:
       url: https://github.com/JosephNK/flutter_leaf_kit.git
       ref: develop
       path: ./packages/leaf_navigation
+  leaf_permission:
+    git:
+      url: https://github.com/JosephNK/flutter_leaf_kit.git
+      ref: develop
+
 
   cached_network_image: ^3.3.0
   cached_network_image_platform_interface: ^3.0.0
-#  cached_network_image:
-#    git:
-#      url: https://github.com/lucasmiranda5/flutter_cached_network_image.git
-#      ref: dart3
-#      path: cached_network_image
-
-  flutter_cache_manager: ^3.3.0
+  flutter_cache_manager: ^3.3.1
   flutter_rating_bar: ^4.0.1
-  dropdown_button2: ^1.9.2
+  dropdown_button2: ^2.3.9
   expandable_page_view: ^1.0.17
-  webview_flutter: ^4.0.2
-  webview_flutter_android: ^3.2.4
-  webview_flutter_wkwebview: ^3.0.5
-  shimmer: ^2.0.0
-  photo_manager: ^2.6.0
+  webview_flutter: ^4.4.1
+  webview_flutter_android: ^3.12.0
+  webview_flutter_wkwebview: ^3.9.2
+  shimmer: ^3.0.0
+  photo_manager: ^2.7.2
   visibility_detector: ^0.4.0+2
-  fluttertoast: ^8.2.1
-  easy_rich_text: ^1.2.0
+  fluttertoast: ^8.2.2
+  easy_rich_text: ^2.0.0
   auto_size_text: ^3.0.0
 
 dev_dependencies:

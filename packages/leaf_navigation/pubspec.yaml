@@ -17,16 +17,15 @@ dependencies:
       url: https://github.com/JosephNK/flutter_leaf_kit.git
       ref: develop
       path: ./packages/leaf_common
-
-  leaf_data:
+  leaf_bloc:
     git:
       url: https://github.com/JosephNK/flutter_leaf_kit.git
       ref: develop
-      path: ./packages/leaf_data
+      path: ./packages/leaf_bloc
 
-  modal_bottom_sheet: ^3.0.0-pre
-  page_transition: ^2.0.5
   navigation_history_observer: ^1.1.0
+  modal_bottom_sheet: ^3.0.0-pre
+  page_transition: ^2.1.0
 
 dev_dependencies:
   flutter_test:

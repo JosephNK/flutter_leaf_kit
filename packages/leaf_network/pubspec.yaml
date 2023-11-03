@@ -1,0 +1,28 @@
+name: leaf_network
+description: A new Flutter package project.
+version: 0.0.1
+publish_to: 'none'
+homepage: https://github.com/JosephNK/flutter_leaf_kit
+
+environment:
+  sdk: ">=2.17.1 <4.0.0"
+  flutter: ">=1.17.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  leaf_common:
+    git:
+      url: https://github.com/JosephNK/flutter_leaf_kit.git
+      ref: develop
+      path: ./packages/leaf_common
+
+  http: ^0.13.6
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+
+flutter:
