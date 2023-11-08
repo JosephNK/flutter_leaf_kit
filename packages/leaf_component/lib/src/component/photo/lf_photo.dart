@@ -10,8 +10,6 @@ import '../bottomsheet/lf_bottom_sheet.dart';
 import '../text/lf_text.dart';
 import 'component/lf_image_lru_cache.dart';
 
-export 'package:photo_manager/photo_manager.dart';
-
 export 'component/lf_image_lru_cache.dart';
 
 part 'component/lf_photo_album_scroll_content_view.dart';
