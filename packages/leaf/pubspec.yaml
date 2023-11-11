@@ -25,7 +25,7 @@ dependencies:
   leaf_component:
     git:
       url: https://github.com/JosephNK/flutter_leaf_kit.git
-      ref: '0.0.3'
+      ref: '0.0.5'
       path: ./packages/leaf_component
   leaf_location:
     git:
@@ -35,7 +35,7 @@ dependencies:
   leaf_map:
     git:
       url: https://github.com/JosephNK/flutter_leaf_kit.git
-      ref: '0.0.4'
+      ref: '0.0.5'
       path: ./packages/leaf_map
   leaf_navigation:
     git:
