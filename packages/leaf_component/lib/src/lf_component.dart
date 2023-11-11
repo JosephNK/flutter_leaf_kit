@@ -18,6 +18,7 @@ export 'component/indicator/lf_indicator.dart';
 export 'component/inkwell/lf_inkwell.dart';
 export 'component/navigationbar/lf_navigationbar.dart';
 export 'component/page/lf_page.dart';
+export 'component/painter/lf_painter.dart';
 export 'component/photo/lf_photo.dart';
 export 'component/popscope/lf_popscope.dart';
 export 'component/radio/lf_radio.dart';
