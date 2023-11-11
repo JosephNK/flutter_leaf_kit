@@ -323,21 +323,21 @@ packages:
       path: "../leaf_common"
       relative: true
     source: path
-    version: "0.0.2"
+    version: "0.0.3"
   leaf_component:
     dependency: "direct main"
     description:
       path: "../leaf_component"
       relative: true
     source: path
-    version: "0.0.2"
+    version: "0.0.3"
   leaf_navigation:
     dependency: "direct overridden"
     description:
       path: "../leaf_navigation"
       relative: true
     source: path
-    version: "0.0.2"
+    version: "0.0.3"
   lints:
     dependency: transitive
     description:

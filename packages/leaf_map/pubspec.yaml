@@ -1,4 +1,4 @@
-name: flutter_leaf_kit
+name: leaf_map
 description: A new Flutter package project.
 version: 0.0.3
 publish_to: 'none'
@@ -12,36 +12,18 @@ dependencies:
   flutter:
     sdk: flutter
 
-  leaf_bloc:
-    git:
-      url: https://github.com/JosephNK/flutter_leaf_kit.git
-      ref: '0.0.3'
-      path: ./packages/leaf_bloc
+  google_maps_flutter: ^2.5.0
+  
   leaf_common:
     git:
       url: https://github.com/JosephNK/flutter_leaf_kit.git
       ref: '0.0.3'
       path: ./packages/leaf_common
-  leaf_component:
-    git:
-      url: https://github.com/JosephNK/flutter_leaf_kit.git
-      ref: '0.0.3'
-      path: ./packages/leaf_component
   leaf_location:
     git:
       url: https://github.com/JosephNK/flutter_leaf_kit.git
       ref: '0.0.3'
       path: ./packages/leaf_location
-  leaf_map:
-    git:
-      url: https://github.com/JosephNK/flutter_leaf_kit.git
-      ref: '0.0.4'
-      path: ./packages/leaf_map
-  leaf_navigation:
-    git:
-      url: https://github.com/JosephNK/flutter_leaf_kit.git
-      ref: '0.0.3'
-      path: ./packages/leaf_navigation
   leaf_network:
     git:
       url: https://github.com/JosephNK/flutter_leaf_kit.git
