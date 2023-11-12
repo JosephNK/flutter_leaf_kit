@@ -42,11 +42,11 @@ extension DateStringString on String {
     final now = DateTime.now();
     final difference = now.difference(dateTimeToLocal);
     if (difference.inHours < 1) {
-      return '${difference.inMinutes}${LFLocalizations.shared.localization.min} ${LFLocalizations.shared.localization.ago}';
+      return '${difference.inMinutes} ${LFLocalizations.shared.localization.min} ${LFLocalizations.shared.localization.ago}';
     } else if (difference.inHours < 23) {
-      return '${difference.inHours}${LFLocalizations.shared.localization.hour} ${LFLocalizations.shared.localization.ago}';
+      return '${difference.inHours} ${LFLocalizations.shared.localization.hour} ${LFLocalizations.shared.localization.ago}';
     } else if (difference.inDays < 7) {
-      return '${difference.inDays}${LFLocalizations.shared.localization.day} ${LFLocalizations.shared.localization.ago}';
+      return '${difference.inDays} ${LFLocalizations.shared.localization.day} ${LFLocalizations.shared.localization.ago}';
     }
     return toLongDateTime();
   }
