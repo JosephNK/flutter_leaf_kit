@@ -330,7 +330,7 @@ packages:
       path: "../leaf_component"
       relative: true
     source: path
-    version: "0.0.3"
+    version: "0.0.5"
   leaf_navigation:
     dependency: "direct overridden"
     description:
