@@ -1,4 +1,5 @@
-part of '../../leaf_network.dart';
+import 'package:flutter_leaf_manager/leaf_manager.dart';
+import 'package:http/http.dart' as http;
 
 class LFCookieStoreManager {
   static final LFCookieStoreManager _instance =
