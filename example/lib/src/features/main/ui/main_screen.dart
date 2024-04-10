@@ -1,11 +1,11 @@
-import 'package:easy_localization/easy_localization.dart';
-import 'package:example/src/manager/navigator_manager.dart';
-import 'package:example/src/model/classes/list_item.dart';
+import 'package:example/src/common/manager/navigator_manager.dart';
+import 'package:example/src/common/model/classes/list_item.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_leaf_kit/flutter_leaf_kit.dart';
+import 'package:flutter_leaf_common/leaf_common.dart';
+import 'package:flutter_leaf_component/leaf_component.dart';
 
 class MainScreen extends StatefulWidget {
-  const MainScreen({Key? key}) : super(key: key);
+  const MainScreen({super.key});
 
   @override
   State<MainScreen> createState() => _MainScreenState();

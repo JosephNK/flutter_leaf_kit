@@ -1,24 +1,24 @@
-import 'package:example/src/model/classes/list_item.dart';
+import 'package:example/src/common/model/classes/list_item.dart';
 import 'package:flutter/material.dart';
 
-import '../ui/screens/accordion_screen.dart';
-import '../ui/screens/animation_screen.dart';
-import '../ui/screens/avatar_screen.dart';
-import '../ui/screens/badge_screen.dart';
-import '../ui/screens/bottomsheet_screen.dart';
-import '../ui/screens/button_screen.dart';
-import '../ui/screens/calendar_screen.dart';
-import '../ui/screens/checkbox_screen.dart';
-import '../ui/screens/chip_screen.dart';
-import '../ui/screens/dialog_screen.dart';
-import '../ui/screens/indicator_screen.dart';
-import '../ui/screens/navigationbar_screen.dart';
-import '../ui/screens/network_screen.dart';
-import '../ui/screens/pageview_screen.dart';
-import '../ui/screens/photo_screen.dart';
-import '../ui/screens/radio_screen.dart';
-import '../ui/screens/slider_screen.dart';
-import '../ui/screens/textfield_sceen.dart';
+import '../../features/sub/ui/accordion_screen.dart';
+import '../../features/sub/ui/animation_screen.dart';
+import '../../features/sub/ui/avatar_screen.dart';
+import '../../features/sub/ui/badge_screen.dart';
+import '../../features/sub/ui/bottomsheet_screen.dart';
+import '../../features/sub/ui/button_screen.dart';
+import '../../features/sub/ui/calendar_screen.dart';
+import '../../features/sub/ui/checkbox_screen.dart';
+import '../../features/sub/ui/chip_screen.dart';
+import '../../features/sub/ui/dialog_screen.dart';
+import '../../features/sub/ui/indicator_screen.dart';
+import '../../features/sub/ui/navigationbar_screen.dart';
+import '../../features/sub/ui/network_screen.dart';
+import '../../features/sub/ui/pageview_screen.dart';
+import '../../features/sub/ui/photo_screen.dart';
+import '../../features/sub/ui/radio_screen.dart';
+import '../../features/sub/ui/slider_screen.dart';
+import '../../features/sub/ui/textfield_sceen.dart';
 
 dynamic kListObjects = {
   "items": [

@@ -1,15 +1,15 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_leaf_kit/flutter_leaf_kit.dart';
+import 'package:flutter_leaf_component/leaf_component.dart';
 
 class AnimationScreen extends ScreenStatefulWidget {
   final String title;
 
   const AnimationScreen({
-    Key? key,
+    super.key,
     required this.title,
-  }) : super(key: key);
+  });
 
   @override
   State<AnimationScreen> createState() => _AnimationScreenState();

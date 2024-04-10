@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_leaf_kit/flutter_leaf_kit.dart';
+import 'package:flutter_leaf_component/leaf_component.dart';
 
 class IndicatorScreen extends ScreenStatefulWidget {
   final String title;
 
   const IndicatorScreen({
-    Key? key,
+    super.key,
     required this.title,
-  }) : super(key: key);
+  });
 
   @override
   State<IndicatorScreen> createState() => _IndicatorScreenState();
@@ -49,7 +49,7 @@ class _IndicatorScreenState extends ScreenState<IndicatorScreen> {
             ...sizes.map((size) {
               return LFIndicator(
                   padding: const EdgeInsets.all(8.0), size: size);
-            }).toList(),
+            }),
           ],
         ),
         const SizedBox(height: 30.0),
@@ -61,7 +61,7 @@ class _IndicatorScreenState extends ScreenState<IndicatorScreen> {
             ...sizes.map((size) {
               return LFMaterialIndicator(
                   padding: const EdgeInsets.all(8.0), size: size);
-            }).toList(),
+            }),
           ],
         ),
         const SizedBox(height: 30.0),
@@ -73,7 +73,7 @@ class _IndicatorScreenState extends ScreenState<IndicatorScreen> {
             ...sizes.map((size) {
               return LFCupertinoIndicator(
                   padding: const EdgeInsets.all(8.0), size: size);
-            }).toList(),
+            }),
           ],
         ),
         const SizedBox(height: 30.0),

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import 'ui/main_screen.dart';
+import 'features/main/ui/main_screen.dart';
 
 class App extends StatefulWidget {
-  const App({Key? key}) : super(key: key);
+  const App({super.key});
 
   @override
   State<App> createState() => _AppState();

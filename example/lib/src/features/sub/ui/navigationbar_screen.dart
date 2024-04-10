@@ -1,15 +1,15 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_leaf_kit/flutter_leaf_kit.dart';
+import 'package:flutter_leaf_component/leaf_component.dart';
 
 class BottomNavigationBarScreen extends StatefulWidget {
   final String title;
 
   const BottomNavigationBarScreen({
-    Key? key,
+    super.key,
     required this.title,
-  }) : super(key: key);
+  });
 
   @override
   State<BottomNavigationBarScreen> createState() =>
@@ -82,7 +82,7 @@ class _BottomNavigationBarScreenState extends State<BottomNavigationBarScreen> {
                 ),
               ),
             );
-          }).toList(),
+          }),
         ];
       },
       onPressed: (index) {

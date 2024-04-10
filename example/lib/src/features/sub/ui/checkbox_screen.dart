@@ -1,25 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_leaf_kit/flutter_leaf_kit.dart';
+import 'package:flutter_leaf_component/leaf_component.dart';
 
-class RadioScreen extends ScreenStatefulWidget {
+class CheckboxScreen extends ScreenStatefulWidget {
   final String title;
 
-  const RadioScreen({
-    Key? key,
+  const CheckboxScreen({
+    super.key,
     required this.title,
-  }) : super(key: key);
+  });
 
   @override
-  State<RadioScreen> createState() => _RadioScreenState();
+  State<CheckboxScreen> createState() => _CheckboxScreenState();
 }
 
-class _RadioScreenState extends ScreenState<RadioScreen> {
+class _CheckboxScreenState extends ScreenState<CheckboxScreen> {
   final _items = [
-    const LFDataItem(id: '1', text: 'Hello', leading: Icon(Icons.add)),
+    const LFDataItem(id: '1', text: 'Hello', leading: Icon(Icons.ac_unit)),
     const LFDataItem(id: '2', text: 'World'),
   ];
-  var _selectedItem01 = const LFDataItem(id: '1', text: 'Hello');
-  var _selectedItem02 = const LFDataItem(id: '1', text: 'Hello');
+  var _selectedItems01 = [const LFDataItem(id: '1', text: 'Hello')];
+  var _selectedItems02 = [const LFDataItem(id: '1', text: 'Hello')];
 
   @override
   Color? get backgroundColor => Colors.white;
@@ -46,7 +46,7 @@ class _RadioScreenState extends ScreenState<RadioScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            LFRadio(
+            LFCheckBox(
               text: 'Hello',
               value: true,
             ),
@@ -57,13 +57,13 @@ class _RadioScreenState extends ScreenState<RadioScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            LFRadioGroups(
+            LFCheckboxGroups(
               direction: Axis.vertical,
               items: _items,
-              value: _selectedItem01,
-              onChanged: (item, checked) {
+              values: _selectedItems01,
+              onChanged: (items, item) {
                 setState(() {
-                  _selectedItem01 = item;
+                  _selectedItems01 = items;
                 });
               },
             ),
@@ -74,34 +74,31 @@ class _RadioScreenState extends ScreenState<RadioScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            LFRadioGroups(
+            LFCheckboxGroups(
               direction: Axis.horizontal,
               items: _items,
-              value: _selectedItem02,
-              onChanged: (item, checked) {
+              values: _selectedItems02,
+              onChanged: (items, item) {
                 setState(() {
-                  _selectedItem02 = item;
+                  _selectedItems02 = items;
                 });
               },
             ),
           ],
         ),
         const SizedBox(height: 20.0),
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: LFRadioGroups(
-            direction: Axis.horizontal,
-            items: _items,
-            value: _selectedItem02,
-            align: LFRadioAlign.right,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            runSpacing: 3.0,
-            onChanged: (item, checked) {
-              setState(() {
-                _selectedItem02 = item;
-              });
-            },
-          ),
+        LFCheckboxGroups(
+          direction: Axis.horizontal,
+          items: _items,
+          values: _selectedItems02,
+          align: LFCheckBoxAlign.right,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          runSpacing: 4.0,
+          onChanged: (items, item) {
+            setState(() {
+              _selectedItems02 = items;
+            });
+          },
         ),
       ],
     );

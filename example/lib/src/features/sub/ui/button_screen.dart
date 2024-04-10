@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_leaf_kit/flutter_leaf_kit.dart';
+import 'package:flutter_leaf_component/leaf_component.dart';
 
-class BadgeScreen extends ScreenStatefulWidget {
+class ButtonScreen extends ScreenStatefulWidget {
   final String title;
 
-  const BadgeScreen({
-    Key? key,
+  const ButtonScreen({
+    super.key,
     required this.title,
-  }) : super(key: key);
+  });
 
   @override
-  State<BadgeScreen> createState() => _BadgeScreenState();
+  State<ButtonScreen> createState() => _ButtonScreenState();
 }
 
-class _BadgeScreenState extends ScreenState<BadgeScreen> {
+class _ButtonScreenState extends ScreenState<ButtonScreen> {
   @override
   Color? get backgroundColor => Colors.white;
 
@@ -36,15 +36,20 @@ class _BadgeScreenState extends ScreenState<BadgeScreen> {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Center(
-          child: LFBadge(
-            text: 'N',
-            size: 28.0,
-            textStyle: TextStyle(
-              fontSize: 16.0,
-              fontWeight: FontWeight.bold,
-              color: Colors.white,
-            ),
-            backgroundColor: Colors.red,
+          child: LFFlatButton(
+            text: 'Button',
+          ),
+        ),
+        SizedBox(height: 10.0),
+        Center(
+          child: LFRoundedButton(
+            text: 'Button',
+          ),
+        ),
+        SizedBox(height: 10.0),
+        Center(
+          child: LFTopButton(
+            isShow: false,
           ),
         ),
       ],
