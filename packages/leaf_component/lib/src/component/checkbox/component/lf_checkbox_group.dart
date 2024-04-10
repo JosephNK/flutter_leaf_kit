@@ -1,4 +1,4 @@
-part of lf_checkbox;
+part of '../lf_checkbox.dart';
 
 typedef LFCheckboxGroupsOnChanged = Function(
   List<LFDataItem> items,
@@ -15,7 +15,7 @@ class LFCheckboxGroups extends StatefulWidget {
   final LFCheckboxGroupsOnChanged? onChanged;
 
   const LFCheckboxGroups({
-    Key? key,
+    super.key,
     required this.items,
     this.values,
     this.direction = Axis.vertical,
@@ -23,7 +23,7 @@ class LFCheckboxGroups extends StatefulWidget {
     this.mainAxisAlignment = MainAxisAlignment.start,
     this.runSpacing = 0.0,
     this.onChanged,
-  }) : super(key: key);
+  });
 
   @override
   State<LFCheckboxGroups> createState() => _LFCheckboxGroupsState();
@@ -78,7 +78,7 @@ class _LFCheckboxGroupsState extends State<LFCheckboxGroups> {
             },
           ),
         );
-      }).toList(),
+      }),
     ];
 
     return Wrap(

@@ -1,4 +1,4 @@
-part of lf_indicator;
+part of '../lf_indicator.dart';
 
 enum LFIndicatorSize { small, medium, large }
 
@@ -31,10 +31,10 @@ class LFIndicator extends StatelessWidget {
   final LFIndicatorSize size;
 
   const LFIndicator({
-    Key? key,
+    super.key,
     this.padding = const EdgeInsets.all(0),
     this.size = LFIndicatorSize.medium,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -60,10 +60,10 @@ class LFMaterialIndicator extends StatelessWidget {
   final LFIndicatorSize size;
 
   const LFMaterialIndicator({
-    Key? key,
+    super.key,
     this.padding = const EdgeInsets.all(0),
     this.size = LFIndicatorSize.medium,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -87,10 +87,10 @@ class LFCupertinoIndicator extends StatelessWidget {
   final LFIndicatorSize size;
 
   const LFCupertinoIndicator({
-    Key? key,
+    super.key,
     this.padding = const EdgeInsets.all(0),
     this.size = LFIndicatorSize.medium,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

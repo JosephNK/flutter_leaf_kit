@@ -1,4 +1,4 @@
-part of lf_scroll_component;
+part of '../lf_scroll.dart';
 
 class LFGridViewMaterial<T> extends StatelessWidget {
   final Widget Function(BuildContext context, T item, int index) builder;
@@ -14,7 +14,7 @@ class LFGridViewMaterial<T> extends StatelessWidget {
   final bool scrollable;
 
   const LFGridViewMaterial({
-    Key? key,
+    super.key,
     required this.builder,
     required this.storageKey,
     required this.onRefresh,
@@ -26,7 +26,7 @@ class LFGridViewMaterial<T> extends StatelessWidget {
     this.physics,
     this.shrinkWrap = false,
     this.scrollable = true,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

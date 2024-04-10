@@ -4,9 +4,9 @@ import 'dart:math';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_leaf_location/leaf_location.dart';
+import 'package:flutter_leaf_network/leaf_network.dart' as net;
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:leaf_location/leaf_location.dart';
-import 'package:leaf_network/leaf_network.dart' as net;
 
 export 'package:google_maps_flutter/google_maps_flutter.dart';
 

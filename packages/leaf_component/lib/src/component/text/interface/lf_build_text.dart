@@ -1,4 +1,4 @@
-part of lf_text;
+part of '../lf_text.dart';
 
 abstract class LFBuildText {
   double buildTextScaleFactor(BuildContext context);

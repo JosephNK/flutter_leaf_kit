@@ -1,4 +1,4 @@
-part of lf_accordion;
+part of '../lf_accordion.dart';
 
 typedef LFAccordionItemBuilder<T> = Widget Function(
   BuildContext context,
@@ -13,12 +13,12 @@ class LFAccordion<T> extends StatelessWidget {
   final Color? borderColor;
 
   const LFAccordion({
-    Key? key,
+    super.key,
     required this.items,
     required this.itemBuilder,
     this.expandIndex,
     this.borderColor,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

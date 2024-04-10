@@ -1,4 +1,4 @@
-part of lf_inkwell;
+part of '../lf_inkwell.dart';
 
 class LFInkWell extends StatelessWidget {
   final Widget child;
@@ -11,7 +11,7 @@ class LFInkWell extends StatelessWidget {
   final VoidCallback? onTap;
 
   const LFInkWell({
-    Key? key,
+    super.key,
     required this.child,
     this.padding = const EdgeInsets.all(0.0),
     this.decoration,
@@ -20,7 +20,7 @@ class LFInkWell extends StatelessWidget {
     this.disabled = false,
     this.borderRadius,
     this.onTap,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

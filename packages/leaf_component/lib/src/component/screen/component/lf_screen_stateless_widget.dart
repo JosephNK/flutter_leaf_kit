@@ -1,12 +1,12 @@
-part of lf_screen;
+part of '../lf_screen.dart';
 
 class ScreenStatelessWidget extends StatelessWidget {
   final Widget child;
 
   const ScreenStatelessWidget({
-    Key? key,
+    super.key,
     required this.child,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

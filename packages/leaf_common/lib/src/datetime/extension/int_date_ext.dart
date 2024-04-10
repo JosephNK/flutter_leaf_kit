@@ -1,4 +1,4 @@
-part of lf_common;
+part of '../../lf_common.dart';
 
 extension DateIntString on int {
   String toAgo() {

@@ -1,4 +1,4 @@
-part of lf_photo;
+part of '../lf_photo.dart';
 
 ///
 /// LFPhotoAlbumScrollTitleView
@@ -13,7 +13,7 @@ class LFPhotoAlbumScrollTitleView extends StatefulWidget {
   final ValueChanged<AssetPathEntity>? onFirstLoadSelected;
 
   const LFPhotoAlbumScrollTitleView({
-    Key? key,
+    super.key,
     required this.type,
     required this.selectedAssetPath,
     this.textStyle,
@@ -21,7 +21,7 @@ class LFPhotoAlbumScrollTitleView extends StatefulWidget {
     this.recentName,
     this.onPressed,
     this.onFirstLoadSelected,
-  }) : super(key: key);
+  });
 
   @override
   State<LFPhotoAlbumScrollTitleView> createState() =>

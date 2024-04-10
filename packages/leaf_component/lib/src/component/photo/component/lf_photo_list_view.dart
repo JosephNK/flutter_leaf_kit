@@ -1,4 +1,4 @@
-part of lf_photo;
+part of '../lf_photo.dart';
 
 typedef LFPhotosOnSelected = void Function(
   List<AssetEntity> selectedEntities,
@@ -23,7 +23,7 @@ class LFPhotoListView extends StatefulWidget {
   final LFPhotosOnLimitError? onLimitError;
 
   const LFPhotoListView({
-    Key? key,
+    super.key,
     required this.selectedAssetPath,
     this.selectedLimit = 3,
     this.padding = const EdgeInsets.all(0),
@@ -33,7 +33,7 @@ class LFPhotoListView extends StatefulWidget {
     this.selectedBorderColor,
     this.onSelected,
     this.onLimitError,
-  }) : super(key: key);
+  });
 
   @override
   State<LFPhotoListView> createState() => _LFPhotoListViewState();
@@ -230,10 +230,10 @@ class LFPhotoTile extends StatelessWidget {
   final int size;
 
   const LFPhotoTile({
-    Key? key,
+    super.key,
     required this.entity,
     this.size = 64,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -294,10 +294,10 @@ class LFPhotoMask extends StatelessWidget {
   final Color? borderColor;
 
   const LFPhotoMask({
-    Key? key,
+    super.key,
     required this.showMask,
     this.borderColor,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -326,11 +326,11 @@ class LFPhotoCheckBox extends StatelessWidget {
   final bool checked;
 
   const LFPhotoCheckBox({
-    Key? key,
+    super.key,
     this.checkedIcon,
     this.uncheckedIcon,
     this.checked = false,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

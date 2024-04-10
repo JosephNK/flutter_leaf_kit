@@ -1,8 +1,8 @@
 library leaf_navigation;
 
 import 'package:flutter/material.dart';
-import 'package:leaf_bloc/leaf_bloc.dart';
-import 'package:leaf_common/leaf_common.dart';
+import 'package:flutter_leaf_common/leaf_common.dart';
+import 'package:flutter_leaf_store/leaf_store.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:page_transition/page_transition.dart';
 

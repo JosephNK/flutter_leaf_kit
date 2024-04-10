@@ -1,4 +1,4 @@
-part of leaf_map;
+part of '../leaf_map.dart';
 
 class MapUtil {
   static bool isInsideCircle(LatLng point, Circle circle) {

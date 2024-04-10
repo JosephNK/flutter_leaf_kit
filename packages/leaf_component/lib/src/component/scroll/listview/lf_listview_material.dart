@@ -1,4 +1,4 @@
-part of lf_scroll_component;
+part of '../lf_scroll.dart';
 
 class LFListViewMaterial<T> extends StatelessWidget {
   final Widget Function(BuildContext context, T item, int index) builder;
@@ -15,7 +15,7 @@ class LFListViewMaterial<T> extends StatelessWidget {
   final bool hasReachedMax;
 
   const LFListViewMaterial({
-    Key? key,
+    super.key,
     required this.builder,
     required this.storageKey,
     required this.onRefresh,
@@ -28,7 +28,7 @@ class LFListViewMaterial<T> extends StatelessWidget {
     this.shrinkWrap = false,
     this.scrollable = true,
     this.hasReachedMax = true,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

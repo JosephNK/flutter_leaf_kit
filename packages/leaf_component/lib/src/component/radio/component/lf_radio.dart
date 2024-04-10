@@ -1,4 +1,4 @@
-part of lf_radio;
+part of '../lf_radio.dart';
 
 enum LFRadioAlign {
   left,
@@ -17,7 +17,7 @@ class LFRadio extends StatelessWidget {
   final ValueChanged<bool>? onChanged;
 
   const LFRadio({
-    Key? key,
+    super.key,
     this.leading,
     this.activeIcon,
     this.inactiveIcon,
@@ -27,7 +27,7 @@ class LFRadio extends StatelessWidget {
     this.align = LFRadioAlign.left,
     this.mainAxisAlignment = MainAxisAlignment.start,
     this.onChanged,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -70,10 +70,7 @@ class LFRadio extends StatelessWidget {
       child: Row(
         mainAxisAlignment: mainAxisAlignment,
         children: [
-          if (align == LFRadioAlign.left)
-            ...children
-          else
-            ...children.reversed.toList()
+          if (align == LFRadioAlign.left) ...children else ...children.reversed
         ],
       ),
     );

@@ -1,4 +1,4 @@
-part of lf_radio;
+part of '../lf_radio.dart';
 
 typedef LFRadioGroupsOnChanged = Function(
   LFDataItem item,
@@ -15,7 +15,7 @@ class LFRadioGroups extends StatefulWidget {
   final LFRadioGroupsOnChanged? onChanged;
 
   const LFRadioGroups({
-    Key? key,
+    super.key,
     required this.items,
     this.value,
     this.direction = Axis.vertical,
@@ -23,7 +23,7 @@ class LFRadioGroups extends StatefulWidget {
     this.mainAxisAlignment = MainAxisAlignment.start,
     this.runSpacing = 0.0,
     this.onChanged,
-  }) : super(key: key);
+  });
 
   @override
   State<LFRadioGroups> createState() => _LFRadioGroupsState();
@@ -78,7 +78,7 @@ class _LFRadioGroupsState extends State<LFRadioGroups> {
             },
           ),
         );
-      }).toList(),
+      }),
     ];
 
     return Wrap(

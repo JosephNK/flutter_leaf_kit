@@ -1,4 +1,4 @@
-part of lf_bottom_sheet;
+part of '../lf_bottom_sheet.dart';
 
 class LFBottomSheet {
   static final LFBottomSheet _instance = LFBottomSheet._internal();
@@ -44,7 +44,7 @@ class LFBottomSheet {
                   },
                   child: LFText(item.title, style: textStyle),
                 );
-              }).toList(),
+              }),
             ],
             cancelButton: CupertinoActionSheetAction(
               isDefaultAction: true,
@@ -93,7 +93,7 @@ class LFBottomSheet {
                   onTap?.call(item);
                 },
               );
-            }).toList(),
+            }),
           ],
         );
       },

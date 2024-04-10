@@ -1,4 +1,4 @@
-part of lf_text;
+part of '../lf_text.dart';
 
 class LFText extends StatelessWidget implements LFBuildText {
   final String text;
@@ -13,7 +13,7 @@ class LFText extends StatelessWidget implements LFBuildText {
 
   const LFText(
     this.text, {
-    Key? key,
+    super.key,
     this.style,
     this.textAlign = TextAlign.left,
     this.color,
@@ -22,7 +22,7 @@ class LFText extends StatelessWidget implements LFBuildText {
     this.textScaleFactor = 1.0,
     this.textSize,
     this.height,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +32,7 @@ class LFText extends StatelessWidget implements LFBuildText {
       textAlign: textAlign,
       maxLines: maxLines,
       overflow: overflow,
-      textScaleFactor: buildTextScaleFactor(context),
+      textScaler: TextScaler.linear(buildTextScaleFactor(context)),
     );
   }
 

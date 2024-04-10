@@ -1,4 +1,4 @@
-part of lf_navigationbar;
+part of '../lf_navigationbar.dart';
 
 typedef LFBottomTabBarViewsChildren = List<Widget> Function(
   List<LFBottomTabItem> tabItems,
@@ -9,10 +9,10 @@ class LFBottomTabBarViews extends StatefulWidget {
   final LFBottomTabBarViewsChildren children;
 
   const LFBottomTabBarViews({
-    Key? key,
+    super.key,
     required this.controller,
     required this.children,
-  }) : super(key: key);
+  });
 
   @override
   State<LFBottomTabBarViews> createState() => _LFBottomTabBarViewsState();

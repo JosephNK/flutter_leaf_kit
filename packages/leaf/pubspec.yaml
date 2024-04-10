@@ -1,56 +1,66 @@
 name: flutter_leaf_kit
 description: A new Flutter package project.
-version: 0.0.3
+version: 0.0.5
 publish_to: 'none'
 homepage: https://github.com/JosephNK/flutter_leaf_kit
 
 environment:
-  sdk: ">=2.17.1 <4.0.0"
+  sdk: ">=3.0.0 <4.0.0"
   flutter: ">=1.17.0"
 
 dependencies:
   flutter:
     sdk: flutter
 
-  leaf_bloc:
+  flutter_leaf_common:
     git:
       url: https://github.com/JosephNK/flutter_leaf_kit.git
-      ref: '0.0.3'
-      path: ./packages/leaf_bloc
-  leaf_common:
-    git:
-      url: https://github.com/JosephNK/flutter_leaf_kit.git
-      ref: '0.0.3'
+      ref: '0.0.5'
       path: ./packages/leaf_common
-  leaf_component:
+  flutter_leaf_component:
     git:
       url: https://github.com/JosephNK/flutter_leaf_kit.git
       ref: '0.0.5'
       path: ./packages/leaf_component
-  leaf_location:
+  flutter_leaf_location:
     git:
       url: https://github.com/JosephNK/flutter_leaf_kit.git
-      ref: '0.0.3'
+      ref: '0.0.5'
       path: ./packages/leaf_location
-  leaf_map:
+  flutter_leaf_map:
     git:
       url: https://github.com/JosephNK/flutter_leaf_kit.git
       ref: '0.0.5'
       path: ./packages/leaf_map
-  leaf_navigation:
+  flutter_leaf_navigation:
     git:
       url: https://github.com/JosephNK/flutter_leaf_kit.git
-      ref: '0.0.3'
+      ref: '0.0.5'
       path: ./packages/leaf_navigation
-  leaf_network:
+  flutter_leaf_manager:
     git:
       url: https://github.com/JosephNK/flutter_leaf_kit.git
-      ref: '0.0.3'
+      ref: '0.0.5'
+      path: ./packages/leaf_manager
+  flutter_leaf_network:
+    git:
+      url: https://github.com/JosephNK/flutter_leaf_kit.git
+      ref: '0.0.5'
       path: ./packages/leaf_network
+  flutter_leaf_store:
+    git:
+      url: https://github.com/JosephNK/flutter_leaf_kit.git
+      ref: '0.0.5'
+      path: ./packages/leaf_store
+  flutter_leaf_webview:
+    git:
+      url: https://github.com/JosephNK/flutter_leaf_kit.git
+      ref: '0.0.5'
+      path: ./packages/leaf_webview
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^2.0.0
+  flutter_lints: ^3.0.0
 
 flutter:

@@ -1,6 +1,6 @@
-part of lf_screen;
+part of '../lf_screen.dart';
 
-class ScreenVariable {
+mixin class ScreenVariable {
   bool get useSafeArea => true;
   SafeAreaInsets get safeAreaInsets =>
       SafeAreaInsets.fromLTRB(true, true, true, true);
@@ -9,6 +9,7 @@ class ScreenVariable {
   FloatingActionButtonLocation? get floatingActionButtonLocation => null;
   Color? get backgroundColor => null;
   double? get drawerEdgeDragWidth => null;
+  bool get canPop => true;
 }
 
 abstract class ScreenBuild {
@@ -29,14 +30,13 @@ abstract class StatefulExtWidget extends StatefulWidget {
   final LFBottomTabIndex? index;
 
   const StatefulExtWidget({
-    Key? key,
+    super.key,
     this.index,
-  }) : super(key: key);
+  });
 }
 
 abstract class ScreenStatefulWidget extends StatefulExtWidget {
-  const ScreenStatefulWidget({Key? key, LFBottomTabIndex? index})
-      : super(key: key, index: index);
+  const ScreenStatefulWidget({super.key, super.index});
 }
 
 abstract class ScreenState<T extends StatefulExtWidget> extends State<T>
@@ -163,9 +163,12 @@ abstract class ScreenState<T extends StatefulExtWidget> extends State<T>
       return scaffold;
     }
 
-    return WillPopScope(
-      onWillPop: () {
-        return willPopScopeCallback(context);
+    return PopScope(
+      canPop: canPop,
+      onPopInvoked: (bool didPop) {
+        if (didPop) {
+          willPopScopeCallback(context);
+        }
       },
       child: scaffold,
     );

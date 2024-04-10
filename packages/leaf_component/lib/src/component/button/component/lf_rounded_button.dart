@@ -1,4 +1,4 @@
-part of lf_button;
+part of '../lf_button.dart';
 
 class LFRoundedButton extends StatelessWidget {
   final String text;
@@ -8,13 +8,13 @@ class LFRoundedButton extends StatelessWidget {
   final VoidCallback? onPressed;
 
   const LFRoundedButton({
-    Key? key,
+    super.key,
     required this.text,
     this.textColor,
     this.backgroundColor,
     this.textAlign = TextAlign.center,
     this.onPressed,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -1,4 +1,4 @@
-part of lf_scroll_component;
+part of '../lf_scroll.dart';
 
 class LFListViewController extends Object with LFScrollControllerMixin {
   LFListViewController() {

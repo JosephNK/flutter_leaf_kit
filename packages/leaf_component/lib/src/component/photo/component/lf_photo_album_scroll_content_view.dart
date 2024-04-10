@@ -1,4 +1,4 @@
-part of lf_photo;
+part of '../lf_photo.dart';
 
 ///
 /// LFPhotoAlbumScrollContentView
@@ -11,13 +11,13 @@ class LFPhotoAlbumScrollContentView extends StatefulWidget {
   final ValueChanged<AssetPathEntity>? onSelected;
 
   const LFPhotoAlbumScrollContentView({
-    Key? key,
+    super.key,
     required this.type,
     required this.selectedAssetPath,
     required this.visible,
     this.recentName,
     this.onSelected,
-  }) : super(key: key);
+  });
 
   @override
   State<LFPhotoAlbumScrollContentView> createState() =>
@@ -108,7 +108,7 @@ class _LFPhotoAlbumScrollContentViewState
                               widget.onSelected?.call(assetPathEntity);
                             },
                           );
-                        }).toList(),
+                        }),
                       ],
                     ),
                   ),
@@ -141,13 +141,13 @@ class LFPhotoAlbumScrollContentTile extends StatefulWidget {
   final ValueChanged<AssetPathEntity>? onSelected;
 
   const LFPhotoAlbumScrollContentTile({
-    Key? key,
+    super.key,
     required this.assetPathEntity,
     required this.selectedAssetPathEntity,
     required this.checked,
     this.recentName,
     this.onSelected,
-  }) : super(key: key);
+  });
 
   @override
   State<LFPhotoAlbumScrollContentTile> createState() =>
@@ -251,14 +251,14 @@ class LFPhotoAlbumEntityTile extends StatefulWidget {
   final ValueChanged<AssetPathEntity>? onSelected;
 
   const LFPhotoAlbumEntityTile({
-    Key? key,
+    super.key,
     required this.assetPathEntity,
     required this.selectedAssetPathEntity,
     required this.entity,
     required this.size,
     required this.checked,
     this.onSelected,
-  }) : super(key: key);
+  });
 
   @override
   State<LFPhotoAlbumEntityTile> createState() => _LFPhotoAlbumEntityTileState();

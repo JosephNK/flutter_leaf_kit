@@ -1,4 +1,4 @@
-part of lf_page;
+part of '../lf_page.dart';
 
 class LFPageView extends StatefulWidget {
   final List<Widget> children;
@@ -9,14 +9,14 @@ class LFPageView extends StatefulWidget {
   final ValueChanged<double>? onChanged;
 
   const LFPageView({
-    Key? key,
+    super.key,
     required this.children,
     this.initialPage = 0,
     this.autoPage = false,
     this.padding = const EdgeInsets.all(0.0),
     this.margin = const EdgeInsets.all(0.0),
     this.onChanged,
-  }) : super(key: key);
+  });
 
   @override
   State<LFPageView> createState() => _LFPageViewState();

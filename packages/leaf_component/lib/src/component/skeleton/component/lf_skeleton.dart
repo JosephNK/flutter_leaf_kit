@@ -1,4 +1,4 @@
-part of lf_skeleton;
+part of '../lf_skeleton.dart';
 
 class LFSkeleton extends StatelessWidget {
   final double? width;
@@ -11,7 +11,7 @@ class LFSkeleton extends StatelessWidget {
   final bool random;
 
   const LFSkeleton({
-    Key? key,
+    super.key,
     this.width,
     this.height,
     this.child,
@@ -20,7 +20,7 @@ class LFSkeleton extends StatelessWidget {
     this.baseOpacity = 0.3,
     this.highlightOpacity = 0.1,
     this.random = false,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

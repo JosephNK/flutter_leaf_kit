@@ -1,12 +1,12 @@
-part of lf_badge;
+part of '../lf_badge.dart';
 
 class LFNewBadge extends StatelessWidget {
   final double size;
 
   const LFNewBadge({
-    Key? key,
+    super.key,
     this.size = 18.0,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

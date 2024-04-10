@@ -1,4 +1,4 @@
-part of lf_image;
+part of '../lf_image.dart';
 
 class LFAssetFileImage extends StatelessWidget {
   final String path;
@@ -10,7 +10,7 @@ class LFAssetFileImage extends StatelessWidget {
   final Widget? errorWidget;
 
   const LFAssetFileImage({
-    Key? key,
+    super.key,
     required this.path,
     this.color,
     this.width = 45.0,
@@ -18,7 +18,7 @@ class LFAssetFileImage extends StatelessWidget {
     this.fit = BoxFit.cover,
     this.placeholderWidget,
     this.errorWidget,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

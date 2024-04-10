@@ -6,8 +6,7 @@ import 'dart:collection';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:leaf_bloc/leaf_bloc.dart';
-import 'package:leaf_common/leaf_common.dart';
+import 'package:flutter_leaf_common/leaf_common.dart';
 
 import '../../text/lf_text.dart';
 
@@ -61,7 +60,7 @@ class LFCalendarView extends StatefulWidget {
   final LFCalendarViewOnDateSelected? onDateSelected;
 
   const LFCalendarView({
-    Key? key,
+    super.key,
     this.defaultDate,
     this.minDate,
     this.maxDate,
@@ -78,7 +77,7 @@ class LFCalendarView extends StatefulWidget {
     this.onMonthOnTap,
     this.onMonthChanged,
     this.onDateSelected,
-  }) : super(key: key);
+  });
 
   @override
   State<LFCalendarView> createState() => _LFCalendarViewState();

@@ -1,4 +1,4 @@
-part of lf_text;
+part of '../lf_text.dart';
 
 class LFAutoSizeText extends StatelessWidget implements LFBuildText {
   final String text;
@@ -14,7 +14,7 @@ class LFAutoSizeText extends StatelessWidget implements LFBuildText {
 
   const LFAutoSizeText(
     this.text, {
-    Key? key,
+    super.key,
     this.style,
     this.textAlign = TextAlign.left,
     this.color,
@@ -24,7 +24,7 @@ class LFAutoSizeText extends StatelessWidget implements LFBuildText {
     this.textScaleFactor = 1.0,
     this.textSize,
     this.height,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

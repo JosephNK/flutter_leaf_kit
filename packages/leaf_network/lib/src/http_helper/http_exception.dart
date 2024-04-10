@@ -1,5 +1,3 @@
-part of leaf_network;
-
 bool isContainsHTTPException(Object? e) {
   if (e is BadRequestException ||
       e is UnauthorisedException ||
@@ -29,48 +27,46 @@ class HTTPException implements Exception {
 
 /// HttpStatus 400
 class BadRequestException extends HTTPException {
-  BadRequestException(int statusCode, String message, dynamic value)
-      : super(statusCode, message, value);
+  BadRequestException(super.statusCode, super.message, super.value);
 }
 
 /// HttpStatus 401
 class UnauthorisedException extends HTTPException {
-  UnauthorisedException(int statusCode, String message, dynamic value)
-      : super(statusCode, message, value);
+  UnauthorisedException(super.statusCode, super.message, super.value);
 }
 
 /// HttpStatus 404
 class NotFoundException extends HTTPException {
-  NotFoundException(int statusCode, String message, dynamic value)
-      : super(statusCode, message, value);
+  NotFoundException(super.statusCode, super.message, super.value);
 }
 
 /// HttpStatus 408
 class TimeoutRequestException extends HTTPException {
-  TimeoutRequestException(int statusCode, String message, dynamic value)
-      : super(statusCode, message, value);
+  TimeoutRequestException(super.statusCode, super.message, super.value);
 }
 
 /// HttpStatus 500
 class InternalServerException extends HTTPException {
-  InternalServerException(int statusCode, String message, dynamic value)
-      : super(statusCode, message, value);
+  InternalServerException(super.statusCode, super.message, super.value);
 }
 
 /// HttpStatus 503
 class ServiceUnavailableException extends HTTPException {
-  ServiceUnavailableException(int statusCode, String message, dynamic value)
-      : super(statusCode, message, value);
+  ServiceUnavailableException(super.statusCode, super.message, super.value);
 }
 
 /// 인터넷 연결 에러
 class InternetNotConnectException extends HTTPException {
-  InternetNotConnectException(int statusCode, String message, dynamic value)
-      : super(statusCode, message, value);
+  InternetNotConnectException(super.statusCode, super.message, super.value);
 }
 
 /// 이미지 용량 초과
 class ImageVolumeMaxException extends HTTPException {
-  ImageVolumeMaxException(int statusCode, String message, dynamic value)
-      : super(statusCode, message, value);
+  ImageVolumeMaxException(super.statusCode, super.message, super.value);
+}
+
+class LFHttpExceptionObject extends Object {
+  final HTTPException exception;
+
+  LFHttpExceptionObject(this.exception);
 }

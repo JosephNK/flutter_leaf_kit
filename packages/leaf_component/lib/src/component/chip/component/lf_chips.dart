@@ -1,4 +1,4 @@
-part of lf_chip;
+part of '../lf_chip.dart';
 
 typedef LFChipsOnChanged = Function(
   List<LFDataItem> items,
@@ -13,13 +13,13 @@ class LFChips extends StatefulWidget {
   final LFChipsOnChanged? onChanged;
 
   const LFChips({
-    Key? key,
+    super.key,
     required this.items,
     this.values,
     this.direction = Axis.horizontal,
     this.multiple = true,
     this.onChanged,
-  }) : super(key: key);
+  });
 
   @override
   State<LFChips> createState() => _LFChipsState();

@@ -1,4 +1,4 @@
-part of leaf_network;
+part of '../../leaf_network.dart';
 
 class LFCookieStoreManager {
   static final LFCookieStoreManager _instance =

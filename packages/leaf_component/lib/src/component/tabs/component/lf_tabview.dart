@@ -1,14 +1,14 @@
-part of lf_tabs;
+part of '../lf_tabs.dart';
 
 class LFTabView extends StatelessWidget {
   final TabController? controller;
   final List<Widget> children;
 
   const LFTabView({
-    Key? key,
+    super.key,
     required this.controller,
     this.children = const [],
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

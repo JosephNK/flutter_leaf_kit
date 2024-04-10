@@ -1,4 +1,4 @@
-part of leaf_network;
+import 'dart:io';
 
 class LFHttpOverrides extends HttpOverrides {
   @override

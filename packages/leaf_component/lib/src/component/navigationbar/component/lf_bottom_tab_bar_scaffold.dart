@@ -1,4 +1,4 @@
-part of lf_navigationbar;
+part of '../lf_navigationbar.dart';
 
 class LFBottomTabBarScaffold extends StatefulWidget {
   final LFBottomTabBarScaffoldController scaffoldController;
@@ -15,7 +15,7 @@ class LFBottomTabBarScaffold extends StatefulWidget {
   final ValueChanged<int>? onPressed;
 
   const LFBottomTabBarScaffold({
-    Key? key,
+    super.key,
     required this.scaffoldController,
     required this.tabItems,
     required this.selectedIndex,
@@ -28,7 +28,7 @@ class LFBottomTabBarScaffold extends StatefulWidget {
     this.inactiveColor = Colors.grey,
     this.isShowTabBar = true,
     this.onPressed,
-  }) : super(key: key);
+  });
 
   @override
   State<LFBottomTabBarScaffold> createState() => _LFBottomTabBarScaffoldState();

@@ -1,4 +1,4 @@
-part of lf_appbar;
+part of '../lf_appbar.dart';
 
 class LFAppBarBack extends StatelessWidget {
   final Color? color;
@@ -6,11 +6,11 @@ class LFAppBarBack extends StatelessWidget {
   final VoidCallback? onPressed;
 
   const LFAppBarBack({
-    Key? key,
+    super.key,
     this.color,
     this.size,
     this.onPressed,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

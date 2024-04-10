@@ -1,4 +1,4 @@
-part of lf_scroll_component;
+part of '../lf_scroll.dart';
 
 class LFScrollView extends StatefulWidget {
   final Key? storageKey;
@@ -14,7 +14,7 @@ class LFScrollView extends StatefulWidget {
   final LFScrollViewDidScroll? onDidScroll;
 
   const LFScrollView({
-    Key? key,
+    super.key,
     this.storageKey,
     required this.child,
     this.controller,
@@ -26,7 +26,7 @@ class LFScrollView extends StatefulWidget {
     this.scrollable = true,
     this.onRefresh,
     this.onDidScroll,
-  }) : super(key: key);
+  });
 
   @override
   State<LFScrollView> createState() => _LFScrollViewState();

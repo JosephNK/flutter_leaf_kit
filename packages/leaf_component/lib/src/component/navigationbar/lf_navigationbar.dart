@@ -3,8 +3,7 @@ library lf_navigationbar;
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:leaf_bloc/leaf_bloc.dart';
-import 'package:leaf_common/leaf_common.dart';
+import 'package:flutter_leaf_common/leaf_common.dart';
 
 import '../badge/lf_badge.dart';
 

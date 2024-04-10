@@ -1,14 +1,14 @@
-part of lf_accordion;
+part of '../lf_accordion.dart';
 
 class LFAccordionContent extends StatefulWidget {
   final Widget child;
   final bool expand;
 
   const LFAccordionContent({
-    Key? key,
+    super.key,
     required this.child,
     required this.expand,
-  }) : super(key: key);
+  });
 
   @override
   State<LFAccordionContent> createState() => _LFAccordionContentState();

@@ -1,4 +1,4 @@
-part of lf_widget_size;
+part of '../lf_widget_size.dart';
 
 typedef OnWidgetSizeChange = void Function(Offset position, Size size);
 
@@ -28,10 +28,10 @@ class LFWidgetSize extends SingleChildRenderObjectWidget {
   final OnWidgetSizeChange onChange;
 
   const LFWidgetSize({
-    Key? key,
+    super.key,
     required this.onChange,
-    required Widget child,
-  }) : super(key: key, child: child);
+    required Widget super.child,
+  });
 
   @override
   RenderObject createRenderObject(BuildContext context) {

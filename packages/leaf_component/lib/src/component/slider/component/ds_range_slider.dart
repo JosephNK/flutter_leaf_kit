@@ -1,4 +1,4 @@
-part of ds_slider;
+part of '../ds_slider.dart';
 
 class DSRangeSlider extends StatefulWidget {
   final RangeValues values;
@@ -9,14 +9,14 @@ class DSRangeSlider extends StatefulWidget {
   final ValueChanged<RangeValues>? onChanged;
 
   const DSRangeSlider({
-    Key? key,
+    super.key,
     required this.values,
     this.min = 0,
     this.max = 1,
     this.labels,
     this.divisions,
     this.onChanged,
-  }) : super(key: key);
+  });
 
   @override
   State<DSRangeSlider> createState() => _DSRangeSliderState();

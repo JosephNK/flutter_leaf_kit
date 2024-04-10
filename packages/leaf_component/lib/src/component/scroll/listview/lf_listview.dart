@@ -1,4 +1,4 @@
-part of lf_scroll_component;
+part of '../lf_scroll.dart';
 
 class LFListView<T> extends StatefulWidget {
   final Key? storageKey;
@@ -18,7 +18,7 @@ class LFListView<T> extends StatefulWidget {
   final bool hasReachedMax;
 
   const LFListView({
-    Key? key,
+    super.key,
     this.storageKey,
     required this.builder,
     required this.items,
@@ -34,7 +34,7 @@ class LFListView<T> extends StatefulWidget {
     this.scrollable = true,
     this.shrinkWrap = false,
     this.hasReachedMax = true,
-  }) : super(key: key);
+  });
 
   @override
   State<LFListView<T>> createState() => _LFListViewState<T>();

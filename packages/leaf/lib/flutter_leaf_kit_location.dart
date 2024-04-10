@@ -1,1 +1,1 @@
-export 'package:leaf_location/leaf_location.dart';
+export 'package:flutter_leaf_location/leaf_location.dart';

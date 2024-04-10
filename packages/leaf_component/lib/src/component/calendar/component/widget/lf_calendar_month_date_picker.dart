@@ -1,4 +1,4 @@
-part of lf_calendar_view;
+part of '../lf_calendar_view.dart';
 
 class LFCalendarMonthDatePicker {
   static Future<DateTime?> show(
@@ -37,7 +37,6 @@ class _LFCalendarMonthContent extends StatefulWidget {
   final ValueChanged<DateTime>? onOK;
 
   const _LFCalendarMonthContent({
-    Key? key,
     required this.date,
     this.minDate,
     this.maxDate,
@@ -45,7 +44,7 @@ class _LFCalendarMonthContent extends StatefulWidget {
     this.okText = 'OK',
     this.dialog = true,
     this.onOK,
-  }) : super(key: key);
+  });
 
   @override
   State<_LFCalendarMonthContent> createState() =>

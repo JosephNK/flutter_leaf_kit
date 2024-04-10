@@ -1,4 +1,4 @@
-part of lf_scroll_component;
+part of '../lf_scroll.dart';
 
 class LFGridView<T> extends StatefulWidget {
   final Key? storageKey;
@@ -18,7 +18,7 @@ class LFGridView<T> extends StatefulWidget {
   final bool hasReachedMax;
 
   const LFGridView({
-    Key? key,
+    super.key,
     this.storageKey,
     required this.builder,
     required this.items,
@@ -34,7 +34,7 @@ class LFGridView<T> extends StatefulWidget {
     this.shrinkWrap = false,
     this.scrollable = true,
     this.hasReachedMax = true,
-  }) : super(key: key);
+  });
 
   @override
   State<LFGridView> createState() => _LFGridViewState<T>();

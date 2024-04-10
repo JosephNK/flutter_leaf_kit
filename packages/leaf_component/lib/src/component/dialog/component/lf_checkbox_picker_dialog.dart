@@ -1,4 +1,4 @@
-part of lf_dialog;
+part of '../lf_dialog.dart';
 
 /// CustomDialog
 /// https://medium.com/@excogitatr/custom-dialog-in-flutter-d00e0441f1d5
@@ -33,12 +33,11 @@ class _CheckBoxPickerContent extends StatefulWidget {
   final ValueChanged<List<LFDataItem>>? onOK;
 
   const _CheckBoxPickerContent({
-    Key? key,
     required this.items,
     this.values,
     this.title,
     this.onOK,
-  }) : super(key: key);
+  });
 
   @override
   State<_CheckBoxPickerContent> createState() => _CheckBoxPickerContentState();

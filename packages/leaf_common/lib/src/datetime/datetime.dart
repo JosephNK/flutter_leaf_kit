@@ -1,4 +1,4 @@
-part of lf_common;
+part of '../lf_common.dart';
 
 class LFDateTime {
   static final LFDateTime _instance = LFDateTime._internal();

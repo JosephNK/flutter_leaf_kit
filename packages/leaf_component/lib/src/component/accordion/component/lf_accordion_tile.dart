@@ -1,4 +1,4 @@
-part of lf_accordion;
+part of '../lf_accordion.dart';
 
 class LFAccordionTile extends StatefulWidget {
   final String title;
@@ -8,13 +8,13 @@ class LFAccordionTile extends StatefulWidget {
   final Color? borderColor;
 
   const LFAccordionTile({
-    Key? key,
+    super.key,
     required this.title,
     required this.child,
     this.expand,
     this.subtitle,
     this.borderColor,
-  }) : super(key: key);
+  });
 
   @override
   State<LFAccordionTile> createState() => _LFAccordionTileState();

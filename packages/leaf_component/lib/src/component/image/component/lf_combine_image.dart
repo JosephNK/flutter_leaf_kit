@@ -1,4 +1,4 @@
-part of lf_image;
+part of '../lf_image.dart';
 
 class LFCombineImage extends StatelessWidget {
   final LFImageValue image;
@@ -10,7 +10,7 @@ class LFCombineImage extends StatelessWidget {
   final Widget? errorWidget;
 
   const LFCombineImage({
-    Key? key,
+    super.key,
     required this.image,
     this.width = 45.0,
     this.height = 45.0,
@@ -18,7 +18,7 @@ class LFCombineImage extends StatelessWidget {
     this.header,
     this.placeholderWidget,
     this.errorWidget,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

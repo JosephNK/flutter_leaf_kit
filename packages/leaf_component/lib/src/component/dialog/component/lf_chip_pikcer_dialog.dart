@@ -1,4 +1,4 @@
-part of lf_dialog;
+part of '../lf_dialog.dart';
 
 /// CustomDialog
 /// https://medium.com/@excogitatr/custom-dialog-in-flutter-d00e0441f1d5
@@ -36,13 +36,12 @@ class _ChipPickerContent extends StatefulWidget {
   final ValueChanged<List<LFDataItem>>? onOK;
 
   const _ChipPickerContent({
-    Key? key,
     required this.items,
     this.values,
     this.title,
     this.multiple = true,
     this.onOK,
-  }) : super(key: key);
+  });
 
   @override
   State<_ChipPickerContent> createState() => _ChipPickerContentState();

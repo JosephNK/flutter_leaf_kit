@@ -1,4 +1,6 @@
-part of lf_image;
+part of '../lf_image.dart';
+
+typedef LFCacheNetworkImageOnPreBuilder = Function();
 
 class LFCacheNetworkImage extends StatelessWidget {
   final String? url;
@@ -11,9 +13,10 @@ class LFCacheNetworkImage extends StatelessWidget {
   final Map<String, String>? header;
   final Widget? placeholderWidget;
   final Widget? errorWidget;
+  final LFCacheNetworkImageOnPreBuilder? onPreBuilder;
 
   const LFCacheNetworkImage({
-    Key? key,
+    super.key,
     this.url,
     this.width,
     this.height,
@@ -24,7 +27,8 @@ class LFCacheNetworkImage extends StatelessWidget {
     this.header,
     this.placeholderWidget,
     this.errorWidget,
-  }) : super(key: key);
+    this.onPreBuilder,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +51,7 @@ class LFCacheNetworkImage extends StatelessWidget {
     required BoxFit fit,
     required Map<String, String>? httpHeaders,
   }) {
-    LFDeviceManager.shared.checkMemory();
+    onPreBuilder?.call(); // LFDeviceManager.shared.checkMemory();
 
     return cached_network.CachedNetworkImage(
       key: ValueKey(urlString),

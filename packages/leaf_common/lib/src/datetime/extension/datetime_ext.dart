@@ -1,4 +1,4 @@
-part of lf_common;
+part of '../../lf_common.dart';
 
 /// https://www.flutterbeads.com/format-datetime-in-flutter/
 

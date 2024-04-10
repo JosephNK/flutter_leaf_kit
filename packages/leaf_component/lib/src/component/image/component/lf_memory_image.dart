@@ -1,4 +1,4 @@
-part of lf_image;
+part of '../lf_image.dart';
 
 class LFMemoryImage extends StatelessWidget {
   final Uint8List? bytes;
@@ -10,7 +10,7 @@ class LFMemoryImage extends StatelessWidget {
   final Widget? errorWidget;
 
   const LFMemoryImage({
-    Key? key,
+    super.key,
     required this.bytes,
     this.color,
     this.width = 45.0,
@@ -18,7 +18,7 @@ class LFMemoryImage extends StatelessWidget {
     this.fit = BoxFit.cover,
     this.placeholderWidget,
     this.errorWidget,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

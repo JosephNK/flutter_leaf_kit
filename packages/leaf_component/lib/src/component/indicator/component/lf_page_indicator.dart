@@ -1,4 +1,4 @@
-part of lf_indicator;
+part of '../lf_indicator.dart';
 
 class LFPageIndicator extends StatelessWidget {
   final int total;
@@ -8,13 +8,13 @@ class LFPageIndicator extends StatelessWidget {
   final Color? inactiveColor;
 
   const LFPageIndicator({
-    Key? key,
+    super.key,
     required this.total,
     required this.current,
     this.margin = const EdgeInsets.all(0.0),
     this.activeColor,
     this.inactiveColor,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -52,11 +52,11 @@ class LFPageDot extends StatelessWidget {
   final Color? inactiveColor;
 
   const LFPageDot({
-    Key? key,
+    super.key,
     required this.active,
     this.activeColor,
     this.inactiveColor,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

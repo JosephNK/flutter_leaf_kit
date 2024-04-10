@@ -33,7 +33,6 @@ export 'component/tabs/lf_tabs.dart';
 export 'component/text/lf_text.dart';
 export 'component/textfield/lf_textfield.dart';
 export 'component/toast/lf_toast.dart';
-export 'component/webview/lf_webview.dart';
 
 /// Configure & Model
 export 'configure/lf_component_configure.dart';

@@ -1,4 +1,4 @@
-part of lf_badge;
+part of '../lf_badge.dart';
 
 class LFBadge extends StatelessWidget {
   final String? text;
@@ -10,7 +10,7 @@ class LFBadge extends StatelessWidget {
   final EdgeInsets padding;
 
   const LFBadge({
-    Key? key,
+    super.key,
     this.text,
     this.icon,
     this.size = 18.0,
@@ -18,7 +18,7 @@ class LFBadge extends StatelessWidget {
     this.backgroundColor = Colors.red,
     this.iconColor = Colors.white,
     this.padding = const EdgeInsets.all(2.0),
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

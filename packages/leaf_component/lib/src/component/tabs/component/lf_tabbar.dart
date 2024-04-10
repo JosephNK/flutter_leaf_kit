@@ -1,4 +1,4 @@
-part of lf_tabs;
+part of '../lf_tabs.dart';
 
 class LFTabBar extends StatelessWidget {
   final TabController? controller;
@@ -11,7 +11,7 @@ class LFTabBar extends StatelessWidget {
   final List<Tab> tabs;
 
   const LFTabBar({
-    Key? key,
+    super.key,
     required this.controller,
     this.labelColor,
     this.unselectedLabelColor,
@@ -20,7 +20,7 @@ class LFTabBar extends StatelessWidget {
     this.indicatorColor,
     this.indicatorPadding,
     this.tabs = const [],
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

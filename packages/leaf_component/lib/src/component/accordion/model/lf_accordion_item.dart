@@ -1,4 +1,4 @@
-part of lf_accordion;
+part of '../lf_accordion.dart';
 
 class LFAccordionItem<T> {
   final String section;
