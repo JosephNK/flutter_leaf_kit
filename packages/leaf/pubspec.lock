@@ -299,7 +299,7 @@ packages:
       path: "../leaf_component"
       relative: true
     source: path
-    version: "1.0.0"
+    version: "1.0.1"
   flutter_leaf_location:
     dependency: "direct main"
     description:
