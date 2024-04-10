@@ -1,4 +1,4 @@
-part of lf_common;
+part of '../../lf_common.dart';
 
 /// https://www.flutterbeads.com/format-datetime-in-flutter/
 
@@ -153,6 +153,21 @@ extension DateTimeString on DateTime {
     final month = this.month.toString().padLeft(2, '0');
     final day = this.day.toString().padLeft(2, '0');
     return DateTime.parse('$year-$month-$day 23:59:59');
+  }
+
+  String toAgo() {
+    final now = DateTime.now();
+    final difference = now.difference(this);
+    if (difference.inMinutes < 1) {
+      return LFLocalizations.shared.localization.nowAgo;
+    } else if (difference.inHours < 1) {
+      return '${difference.inMinutes} ${LFLocalizations.shared.localization.min} ${LFLocalizations.shared.localization.ago}';
+    } else if (difference.inHours < 23) {
+      return '${difference.inHours} ${LFLocalizations.shared.localization.hour} ${LFLocalizations.shared.localization.ago}';
+    } else if (difference.inDays < 7) {
+      return '${difference.inDays} ${LFLocalizations.shared.localization.day} ${LFLocalizations.shared.localization.ago}';
+    }
+    return toLongDateTimeString();
   }
 
   int weekNumber() {

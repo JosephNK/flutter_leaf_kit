@@ -1,4 +1,4 @@
-part of lf_photo;
+part of '../lf_photo.dart';
 
 ///
 /// Mixin

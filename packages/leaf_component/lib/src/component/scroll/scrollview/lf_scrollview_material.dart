@@ -1,4 +1,4 @@
-part of lf_scroll_component;
+part of '../lf_scroll.dart';
 
 class LFScrollViewMaterial<T> extends StatelessWidget {
   final Widget child;
@@ -10,7 +10,7 @@ class LFScrollViewMaterial<T> extends StatelessWidget {
   final bool scrollable;
 
   const LFScrollViewMaterial({
-    Key? key,
+    super.key,
     required this.child,
     required this.storageKey,
     required this.onRefresh,
@@ -18,7 +18,7 @@ class LFScrollViewMaterial<T> extends StatelessWidget {
     this.padding = const EdgeInsets.all(0),
     this.physics,
     this.scrollable = true,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

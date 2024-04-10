@@ -1,4 +1,4 @@
-part of lf_rate;
+part of '../lf_rate.dart';
 
 class LFRate extends StatelessWidget {
   final int itemCount;
@@ -8,13 +8,13 @@ class LFRate extends StatelessWidget {
   final ValueChanged<double>? onRatingUpdate;
 
   const LFRate({
-    Key? key,
+    super.key,
     required this.itemCount,
     this.initialRating = 0.0,
     this.minRating = 0.0,
     this.icon,
     this.onRatingUpdate,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

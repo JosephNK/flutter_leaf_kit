@@ -1,4 +1,4 @@
-part of leaf_navigation;
+part of '../../leaf_navigation.dart';
 
 class NavigationHelper {
   static bool isExistRoute(BuildContext context, {required String routeName}) {

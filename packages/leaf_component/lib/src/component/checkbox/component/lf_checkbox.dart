@@ -1,4 +1,4 @@
-part of lf_checkbox;
+part of '../lf_checkbox.dart';
 
 enum LFCheckBoxAlign {
   left,
@@ -18,7 +18,7 @@ class LFCheckBox extends StatelessWidget {
   final ValueChanged<bool>? onChanged;
 
   const LFCheckBox({
-    Key? key,
+    super.key,
     this.leading,
     this.activeIcon,
     this.inactiveIcon,
@@ -29,7 +29,7 @@ class LFCheckBox extends StatelessWidget {
     this.align = LFCheckBoxAlign.left,
     this.mainAxisAlignment = MainAxisAlignment.start,
     this.onChanged,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -80,7 +80,7 @@ class LFCheckBox extends StatelessWidget {
           if (align == LFCheckBoxAlign.left)
             ...children
           else
-            ...children.reversed.toList()
+            ...children.reversed
         ],
       ),
     );

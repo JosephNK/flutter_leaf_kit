@@ -1,4 +1,4 @@
-part of lf_image;
+part of '../lf_image.dart';
 
 ///
 /// ref., https://iiro.dev/2017/09/04/clipping-widgets-with-bezier-curves-in-flutter/
@@ -17,7 +17,7 @@ class LFCacheImage extends StatelessWidget {
   final Widget? errorWidget;
 
   const LFCacheImage({
-    Key? key,
+    super.key,
     this.url,
     this.width,
     this.height,
@@ -29,7 +29,7 @@ class LFCacheImage extends StatelessWidget {
     this.header,
     this.placeholderWidget,
     this.errorWidget,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

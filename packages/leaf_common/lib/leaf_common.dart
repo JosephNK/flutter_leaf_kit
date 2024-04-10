@@ -1,6 +1,7 @@
-export 'package:google_fonts/google_fonts.dart' show GoogleFonts;
+export 'package:equatable/equatable.dart';
 export 'package:intl/intl.dart' hide TextDirection;
 export 'package:klc/klc.dart';
+export 'package:provider/provider.dart';
 export 'package:quiver/core.dart';
 export 'package:quiver/iterables.dart';
 export 'package:quiver/strings.dart';

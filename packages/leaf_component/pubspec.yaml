@@ -1,63 +1,44 @@
-name: leaf_component
+name: flutter_leaf_component
 description: A new Flutter package project.
-version: 0.0.2
+version: 1.0.0
 publish_to: 'none'
 homepage: https://github.com/JosephNK/flutter_leaf_kit
 
 environment:
-  sdk: ">=2.17.1 <4.0.0"
+  sdk: ">=3.0.0 <4.0.0"
   flutter: ">=1.17.0"
 
 dependencies:
   flutter:
     sdk: flutter
 
-  leaf_common:
-    git:
-      url: https://github.com/JosephNK/flutter_leaf_kit.git
-      ref: '0.0.2'
-      path: ./packages/leaf_common
-  leaf_data:
-    git:
-      url: https://github.com/JosephNK/flutter_leaf_kit.git
-      ref: '0.0.2'
-      path: ./packages/leaf_data
-  leaf_manager:
-    git:
-      url: https://github.com/JosephNK/flutter_leaf_kit.git
-      ref: '0.0.2'
-      path: ./packages/leaf_manager
-  leaf_navigation:
-    git:
-      url: https://github.com/JosephNK/flutter_leaf_kit.git
-      ref: '0.0.2'
-      path: ./packages/leaf_navigation
-
-  cached_network_image: ^3.3.0
-  cached_network_image_platform_interface: ^3.0.0
-#  cached_network_image:
-#    git:
-#      url: https://github.com/lucasmiranda5/flutter_cached_network_image.git
-#      ref: dart3
-#      path: cached_network_image
-
-  flutter_cache_manager: ^3.3.0
+  cached_network_image: ^3.3.1
+  cached_network_image_platform_interface: ^4.0.0
+  flutter_cache_manager: ^3.3.1
   flutter_rating_bar: ^4.0.1
-  dropdown_button2: ^1.9.2
+  dropdown_button2: ^2.3.9
   expandable_page_view: ^1.0.17
-  webview_flutter: ^4.0.2
-  webview_flutter_android: ^3.2.4
-  webview_flutter_wkwebview: ^3.0.5
-  shimmer: ^2.0.0
-  photo_manager: ^2.6.0
+  shimmer: ^3.0.0
+  photo_manager: ^3.0.0
   visibility_detector: ^0.4.0+2
-  fluttertoast: ^8.2.1
-  easy_rich_text: ^1.2.0
+  fluttertoast: ^8.2.4
+  easy_rich_text: ^2.1.0
   auto_size_text: ^3.0.0
+
+  flutter_leaf_common:
+    git:
+      url: https://github.com/JosephNK/flutter_leaf_kit.git
+      ref: '1.0.0'
+      path: ./packages/leaf_common
+  flutter_leaf_manager:
+    git:
+      url: https://github.com/JosephNK/flutter_leaf_kit.git
+      ref: '1.0.0'
+      path: ./packages/leaf_manager
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^2.0.0
+  flutter_lints: ^3.0.0
 
 flutter:

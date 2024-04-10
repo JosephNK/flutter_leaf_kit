@@ -1,4 +1,4 @@
-part of lf_dialog;
+part of '../lf_dialog.dart';
 
 typedef LFCalendarDatePickerOnOK = Function(
     LFCalendarPickerSelect select, DateTime dateTime);
@@ -59,7 +59,6 @@ class _CalendarDatePickerContent extends StatefulWidget {
   final LFCalendarDatePickerOnOK? onOK;
 
   const _CalendarDatePickerContent({
-    Key? key,
     required this.pickerSelect,
     this.isLunar = false,
     this.isAllDay = false,
@@ -73,7 +72,7 @@ class _CalendarDatePickerContent extends StatefulWidget {
     this.validStartMessage = 'Please set the start date before the end date',
     this.validEndMessage = 'Please set the end date after the start date',
     this.onOK,
-  }) : super(key: key);
+  });
 
   @override
   State<_CalendarDatePickerContent> createState() =>

@@ -1,4 +1,4 @@
-part of lf_accordion;
+part of '../lf_accordion.dart';
 
 class LFAccordionSection extends StatefulWidget {
   final String title;
@@ -8,13 +8,13 @@ class LFAccordionSection extends StatefulWidget {
   final ValueChanged<bool>? onPressed;
 
   const LFAccordionSection({
-    Key? key,
+    super.key,
     required this.title,
     required this.expand,
     this.subtitle,
     this.borderColor,
     this.onPressed,
-  }) : super(key: key);
+  });
 
   @override
   State<LFAccordionSection> createState() => _LFAccordionSectionState();

@@ -1,4 +1,4 @@
-part of lf_common;
+part of '../lf_common.dart';
 
 extension SafeLookup<E> on List<E> {
   E? getSafe(int index) {

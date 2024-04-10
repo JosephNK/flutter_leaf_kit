@@ -1,4 +1,4 @@
-part of lf_dialog;
+part of '../lf_dialog.dart';
 
 /// CustomDialog
 /// https://medium.com/@excogitatr/custom-dialog-in-flutter-d00e0441f1d5
@@ -78,7 +78,6 @@ class _RadioPickerContent extends StatefulWidget {
   final ValueChanged<LFDataItem>? onOK;
 
   const _RadioPickerContent({
-    Key? key,
     required this.items,
     required this.value,
     this.title,
@@ -94,7 +93,7 @@ class _RadioPickerContent extends StatefulWidget {
     this.cancelTextBackgroundColor,
     this.onCancel,
     this.onOK,
-  }) : super(key: key);
+  });
 
   @override
   State<_RadioPickerContent> createState() => _RadioPickerContentState();

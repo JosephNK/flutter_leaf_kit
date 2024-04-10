@@ -1,4 +1,4 @@
-part of lf_common;
+part of '../../lf_common.dart';
 
 extension DateIntString on int {
   String toAgo() {
@@ -10,9 +10,9 @@ extension DateIntString on int {
     if (difference.inSeconds < 60) {
       return LFLocalizations.shared.localization.nowAgo;
     } else if (difference.inMinutes < 60) {
-      return '${difference.inMinutes}${LFLocalizations.shared.localization.min} ${LFLocalizations.shared.localization.ago}';
+      return '${difference.inMinutes} ${LFLocalizations.shared.localization.min} ${LFLocalizations.shared.localization.ago}';
     } else if (difference.inHours < 24) {
-      return '${difference.inHours}${LFLocalizations.shared.localization.hourOther} ${LFLocalizations.shared.localization.ago}';
+      return '${difference.inHours} ${LFLocalizations.shared.localization.hourOther} ${LFLocalizations.shared.localization.ago}';
     } else if (dateTime.year == yesterday.year &&
         dateTime.month == yesterday.month &&
         dateTime.day == yesterday.day) {

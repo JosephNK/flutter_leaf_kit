@@ -1,4 +1,4 @@
-part of lf_text;
+part of '../lf_text.dart';
 
 class LFEasyRichText extends StatelessWidget implements LFBuildText {
   final String text;
@@ -12,7 +12,7 @@ class LFEasyRichText extends StatelessWidget implements LFBuildText {
 
   const LFEasyRichText(
     this.text, {
-    Key? key,
+    super.key,
     this.style,
     this.patternList,
     this.overflow = TextOverflow.ellipsis,
@@ -20,7 +20,7 @@ class LFEasyRichText extends StatelessWidget implements LFBuildText {
     this.textAlign = TextAlign.left,
     this.maxLines = 1,
     this.textSize,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

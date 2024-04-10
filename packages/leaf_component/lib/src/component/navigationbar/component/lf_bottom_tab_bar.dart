@@ -1,4 +1,4 @@
-part of lf_navigationbar;
+part of '../lf_navigationbar.dart';
 
 typedef LFBottomTabBarOnPressed = void Function(
   int index,
@@ -17,7 +17,7 @@ class LFBottomTabBar extends StatefulWidget {
   final LFBottomTabBarOnPressed? onPressed;
 
   const LFBottomTabBar({
-    Key? key,
+    super.key,
     required this.controller,
     this.backgroundColor,
     this.activeColor = Colors.blueAccent,
@@ -28,7 +28,7 @@ class LFBottomTabBar extends StatefulWidget {
     this.notchMargin = 4.0,
     this.show = true,
     this.onPressed,
-  }) : super(key: key);
+  });
 
   @override
   State<LFBottomTabBar> createState() => _LFBottomTabBarState();
@@ -165,7 +165,7 @@ class LSBottomTextIcon extends StatelessWidget {
   final bool isNew;
 
   const LSBottomTextIcon({
-    Key? key,
+    super.key,
     required this.selectedIndex,
     required this.index,
     required this.activeColor,
@@ -174,7 +174,7 @@ class LSBottomTextIcon extends StatelessWidget {
     this.activeIcon,
     this.text,
     this.isNew = false,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -230,10 +230,10 @@ class LFBottomIcon extends StatelessWidget {
   final Color? color;
 
   const LFBottomIcon({
-    Key? key,
+    super.key,
     required this.widget,
     required this.color,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -253,10 +253,10 @@ class LFBottomText extends StatelessWidget {
   final Color? color;
 
   const LFBottomText({
-    Key? key,
+    super.key,
     required this.text,
     required this.color,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -1,22 +1,24 @@
-part of lf_app;
+part of '../lf_app.dart';
+
+typedef LFLayoutAppOnSetupDevice = Function({VoidCallback onBuilder});
 
 class LFLayoutApp extends StatefulWidget {
   final LFAppComponentConfigure? configure;
   final String buildName;
   final Color? backgroundColor;
-  final bool isDeviceManagerSetup;
-  final VoidCallback? onBuilder;
+  final LFLayoutAppOnSetupDevice? onSetupDevice;
+  final VoidCallback onBuilder;
   final Widget child;
 
   const LFLayoutApp({
-    Key? key,
+    super.key,
     required this.child,
     this.buildName = '',
     this.backgroundColor,
     this.configure,
-    this.isDeviceManagerSetup = true,
-    this.onBuilder,
-  }) : super(key: key);
+    this.onSetupDevice,
+    required this.onBuilder,
+  });
 
   @override
   State<LFLayoutApp> createState() => _LFLayoutAppState();
@@ -29,28 +31,22 @@ class _LFLayoutAppState extends State<LFLayoutApp> {
 
     final configure = widget.configure;
     LFComponentConfigure.shared.setup(configure);
-
-    // WidgetsBinding.instance.addPostFrameCallback((_) async {
-    //
-    // });
   }
 
   @override
   Widget build(BuildContext context) {
     final buildName = widget.buildName;
-    final isDeviceManagerSetup = widget.isDeviceManagerSetup;
+    final onSetupDevice = widget.onSetupDevice;
     final onBuilder = widget.onBuilder;
 
     final child = LayoutBuilder(
       builder: (_, constraints) {
         return OrientationBuilder(builder: (_, orientation) {
           if (constraints.maxWidth != 0) {
-            if (isDeviceManagerSetup) {
-              LFDeviceManager.shared.setup(context).then((_) {
-                onBuilder?.call();
-              });
+            if (onSetupDevice != null) {
+              onSetupDevice.call(onBuilder: onBuilder);
             } else {
-              onBuilder?.call();
+              onBuilder.call();
             }
             return Container(
               color: widget.backgroundColor,

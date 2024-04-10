@@ -1,4 +1,4 @@
-part of lf_skeleton;
+part of '../lf_skeleton.dart';
 
 class LFSkeleton extends StatelessWidget {
   final double? width;
@@ -6,28 +6,34 @@ class LFSkeleton extends StatelessWidget {
   final Widget? child;
   final Color? color;
   final double radius;
+  final double baseOpacity;
+  final double highlightOpacity;
   final bool random;
 
   const LFSkeleton({
-    Key? key,
+    super.key,
     this.width,
     this.height,
     this.child,
     this.color,
     this.radius = 0.0,
+    this.baseOpacity = 0.3,
+    this.highlightOpacity = 0.1,
     this.random = false,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
     final randomColor =
         Colors.primaries[Random().nextInt(Colors.primaries.length)];
     final baseColor = random
-        ? randomColor.withOpacity(0.3)
-        : color?.withOpacity(0.3) ?? Colors.grey[300] ?? Colors.grey;
+        ? randomColor.withOpacity(baseOpacity)
+        : color?.withOpacity(baseOpacity) ?? Colors.grey[300] ?? Colors.grey;
     final highlightColor = random
-        ? randomColor.withOpacity(0.1)
-        : color?.withOpacity(0.1) ?? Colors.grey[100] ?? Colors.grey;
+        ? randomColor.withOpacity(highlightOpacity)
+        : color?.withOpacity(highlightOpacity) ??
+            Colors.grey[100] ??
+            Colors.grey;
 
     return Shimmer.fromColors(
       baseColor: baseColor,

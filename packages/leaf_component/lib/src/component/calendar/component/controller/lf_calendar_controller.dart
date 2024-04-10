@@ -1,4 +1,4 @@
-part of lf_calendar_view;
+part of '../lf_calendar_view.dart';
 
 abstract class LFCalendarControllerEvent {}
 

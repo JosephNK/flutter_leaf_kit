@@ -1,4 +1,4 @@
-part of lf_calendar_view;
+part of '../lf_calendar_view.dart';
 
 class LFCalendarPageCell extends StatelessWidget {
   final DateTime dateTime;
@@ -14,7 +14,7 @@ class LFCalendarPageCell extends StatelessWidget {
   final ValueChanged<DateTime>? onSelected;
 
   const LFCalendarPageCell({
-    Key? key,
+    super.key,
     required this.dateTime,
     required this.selectedDateTimes,
     this.cellBuilder,
@@ -26,7 +26,7 @@ class LFCalendarPageCell extends StatelessWidget {
     this.holidayColor = Colors.red,
     this.showToday = true,
     this.onSelected,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

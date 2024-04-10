@@ -1,4 +1,4 @@
-part of lf_appbar;
+part of '../lf_appbar.dart';
 
 class LFAppBarTitle extends StatelessWidget {
   final String? text;
@@ -9,14 +9,14 @@ class LFAppBarTitle extends StatelessWidget {
   final TextStyle? textStyle;
 
   const LFAppBarTitle({
-    Key? key,
+    super.key,
     this.text,
     this.leading,
     this.image,
     this.textColor,
     this.textHeight,
     this.textStyle,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

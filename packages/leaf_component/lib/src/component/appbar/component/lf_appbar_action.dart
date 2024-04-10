@@ -1,4 +1,4 @@
-part of lf_appbar;
+part of '../lf_appbar.dart';
 
 class LFAppBarAction extends StatelessWidget {
   final String? text;
@@ -9,14 +9,14 @@ class LFAppBarAction extends StatelessWidget {
   final VoidCallback? onPressed;
 
   const LFAppBarAction({
-    Key? key,
+    super.key,
     this.text,
     this.icon,
     this.textStyle,
     this.padding = const EdgeInsets.all(8.0),
     this.margin,
     this.onPressed,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

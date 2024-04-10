@@ -1,4 +1,4 @@
-part of lf_button;
+part of '../lf_button.dart';
 
 class LFTopButton extends StatelessWidget {
   final bool isShow;
@@ -8,13 +8,13 @@ class LFTopButton extends StatelessWidget {
   final VoidCallback? onTap;
 
   const LFTopButton({
-    Key? key,
+    super.key,
     required this.isShow,
     this.defaultBottomPosition = -100.0,
     this.bottomPosition = 16.0,
     this.bottomRight = false,
     this.onTap,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -1,4 +1,4 @@
-part of lf_animated;
+part of '../lf_animated.dart';
 
 class LFExpandAnimated extends StatefulWidget {
   final Widget child;
@@ -8,13 +8,13 @@ class LFExpandAnimated extends StatefulWidget {
   final ValueChanged<AnimationStatus>? onAnimationStatus;
 
   const LFExpandAnimated({
-    Key? key,
+    super.key,
     required this.child,
     this.controller,
     this.value,
     this.duration,
     this.onAnimationStatus,
-  }) : super(key: key);
+  });
 
   @override
   State<LFExpandAnimated> createState() => _LFExpandAnimatedState();

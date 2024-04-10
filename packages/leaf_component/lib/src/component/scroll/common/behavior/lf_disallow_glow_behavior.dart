@@ -1,4 +1,4 @@
-part of lf_scroll_common;
+part of '../lf_scroll_common.dart';
 
 class LFDisallowGlowBehavior extends ScrollBehavior {
   @override

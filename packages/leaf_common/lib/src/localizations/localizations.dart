@@ -1,4 +1,4 @@
-part of lf_common;
+part of '../lf_common.dart';
 
 abstract class LFLocalization {
   String get year;

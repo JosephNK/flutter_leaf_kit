@@ -1,4 +1,4 @@
-part of lf_calendar_view;
+part of '../lf_calendar_view.dart';
 
 typedef LFCalendarPageViewOnSizeChanged = void Function(Size size);
 
@@ -16,7 +16,7 @@ class LFCalendarPageView extends StatefulWidget {
   final LFCalendarPageViewOnSizeChanged? onChangeSized;
 
   const LFCalendarPageView({
-    Key? key,
+    super.key,
     required this.pageDateTime,
     required this.selectedDateTimes,
     this.cellBuilder,
@@ -28,7 +28,7 @@ class LFCalendarPageView extends StatefulWidget {
     this.showToday = true,
     this.onSelected,
     this.onChangeSized,
-  }) : super(key: key);
+  });
 
   @override
   State<LFCalendarPageView> createState() => _LFCalendarPageViewState();

@@ -1,4 +1,4 @@
-part of lf_text;
+part of '../lf_text.dart';
 
 // Url RegExp
 final RegExp kLinkUrlRegExp = RegExp(
@@ -42,7 +42,7 @@ class LFLinkText extends StatefulWidget {
 
   const LFLinkText(
     this.text, {
-    Key? key,
+    super.key,
     this.style,
     this.styleUrl = kLinkTextHighlightStyle,
     this.stylePhoneNumber = kLinkTextHighlightStyle,
@@ -53,7 +53,7 @@ class LFLinkText extends StatefulWidget {
     this.textScaleFactor = 1.0,
     this.leadingSpans = const [],
     this.onTap,
-  }) : super(key: key);
+  });
 
   @override
   State<LFLinkText> createState() => _LFLinkTextState();

@@ -1,4 +1,4 @@
-part of lf_animated;
+part of '../lf_animated.dart';
 
 enum LFAnimationStatus { forward, stop, reverse, repeat }
 
@@ -83,64 +83,44 @@ class LFRotateAnimationController extends LFAnimationController {
   final double degree;
 
   LFRotateAnimationController({
-    bool autoAnimation = false,
-    int repeatCount = -1,
-    Duration duration = const Duration(milliseconds: 250),
+    super.autoAnimation,
+    super.repeatCount,
+    super.duration,
     this.degree = pi,
-  }) : super(
-          autoAnimation: autoAnimation,
-          repeatCount: repeatCount,
-          duration: duration,
-        );
+  });
 }
 
 class LFFadeAnimationController extends LFAnimationController {
   final bool isDisappear;
 
   LFFadeAnimationController({
-    bool autoAnimation = false,
-    int repeatCount = -1,
-    Duration duration = const Duration(milliseconds: 250),
+    super.autoAnimation,
+    super.repeatCount,
+    super.duration,
     this.isDisappear = false,
-  }) : super(
-          autoAnimation: autoAnimation,
-          repeatCount: repeatCount,
-          duration: duration,
-        );
+  });
 }
 
 class LFExpandAnimationController extends LFAnimationController {
   LFExpandAnimationController({
-    bool autoAnimation = false,
-    int repeatCount = -1,
-    Duration duration = const Duration(milliseconds: 250),
-  }) : super(
-          autoAnimation: autoAnimation,
-          repeatCount: repeatCount,
-          duration: duration,
-        );
+    super.autoAnimation,
+    super.repeatCount,
+    super.duration,
+  });
 }
 
 class LFBouncingAnimationController extends LFAnimationController {
   LFBouncingAnimationController({
-    bool autoAnimation = false,
-    int repeatCount = -1,
-    Duration duration = const Duration(milliseconds: 250),
-  }) : super(
-          autoAnimation: autoAnimation,
-          repeatCount: repeatCount,
-          duration: duration,
-        );
+    super.autoAnimation,
+    super.repeatCount,
+    super.duration,
+  });
 }
 
 class LFScaleAnimationController extends LFAnimationController {
   LFScaleAnimationController({
-    bool autoAnimation = false,
-    int repeatCount = -1,
-    Duration duration = const Duration(milliseconds: 250),
-  }) : super(
-          autoAnimation: autoAnimation,
-          repeatCount: repeatCount,
-          duration: duration,
-        );
+    super.autoAnimation,
+    super.repeatCount,
+    super.duration,
+  });
 }

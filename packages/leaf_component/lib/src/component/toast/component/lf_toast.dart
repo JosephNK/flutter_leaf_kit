@@ -1,4 +1,4 @@
-part of lf_toast;
+part of '../lf_toast.dart';
 
 class LFToast {
   static Future<bool?> show(

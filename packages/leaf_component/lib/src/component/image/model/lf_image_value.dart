@@ -1,4 +1,4 @@
-part of lf_image;
+part of '../lf_image.dart';
 
 class LFImageValue extends Equatable {
   final String? file;

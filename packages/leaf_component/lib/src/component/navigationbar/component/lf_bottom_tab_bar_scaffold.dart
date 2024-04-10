@@ -1,4 +1,4 @@
-part of lf_navigationbar;
+part of '../lf_navigationbar.dart';
 
 class LFBottomTabBarScaffold extends StatefulWidget {
   final LFBottomTabBarScaffoldController scaffoldController;
@@ -8,13 +8,14 @@ class LFBottomTabBarScaffold extends StatefulWidget {
   final LFBottomTabBarViewsChildren children;
   final PreferredSizeWidget? appBar;
   final EdgeInsetsGeometry padding;
+  final Color? backgroundColor;
   final Color activeColor;
   final Color inactiveColor;
   final bool isShowTabBar;
   final ValueChanged<int>? onPressed;
 
   const LFBottomTabBarScaffold({
-    Key? key,
+    super.key,
     required this.scaffoldController,
     required this.tabItems,
     required this.selectedIndex,
@@ -22,11 +23,12 @@ class LFBottomTabBarScaffold extends StatefulWidget {
     this.deactivateIndex = -1,
     this.appBar,
     this.padding = const EdgeInsets.all(0.0),
+    this.backgroundColor,
     this.activeColor = Colors.blueAccent,
     this.inactiveColor = Colors.grey,
     this.isShowTabBar = true,
     this.onPressed,
-  }) : super(key: key);
+  });
 
   @override
   State<LFBottomTabBarScaffold> createState() => _LFBottomTabBarScaffoldState();
@@ -64,6 +66,7 @@ class _LFBottomTabBarScaffoldState extends State<LFBottomTabBarScaffold> {
     final tabBarViewsController = scaffoldController.tabBarViewsController;
     final tabBarController = scaffoldController.tabBarController;
     final padding = widget.padding;
+    final backgroundColor = widget.backgroundColor;
     final activeColor = widget.activeColor;
     final inactiveColor = widget.inactiveColor;
     final isShowTabBar = widget.isShowTabBar;
@@ -79,6 +82,7 @@ class _LFBottomTabBarScaffoldState extends State<LFBottomTabBarScaffold> {
       bottomNavigationBar: LFBottomTabBar(
         controller: tabBarController,
         padding: padding,
+        backgroundColor: backgroundColor,
         activeColor: activeColor,
         inactiveColor: inactiveColor,
         show: isShowTabBar,

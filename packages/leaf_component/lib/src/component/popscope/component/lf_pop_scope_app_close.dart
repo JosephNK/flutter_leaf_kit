@@ -1,4 +1,4 @@
-part of lf_popsope_component;
+part of '../lf_popscope.dart';
 
 typedef LFPopScopeCallback = Future<void> Function();
 
@@ -9,12 +9,12 @@ class LFPopScopeToAppClose extends StatefulWidget {
   final VoidCallback? onWillPop;
 
   const LFPopScopeToAppClose({
-    Key? key,
+    super.key,
     required this.child,
     required this.closeBeforeCallback,
     this.duration = const Duration(milliseconds: 4000),
     this.onWillPop,
-  }) : super(key: key);
+  });
 
   @override
   State<LFPopScopeToAppClose> createState() => _LFPopScopeToAppCloseState();
@@ -35,16 +35,17 @@ class _LFPopScopeToAppCloseState extends State<LFPopScopeToAppClose> {
   @override
   Widget build(BuildContext context) {
     if (_isAndroid) {
-      return WillPopScope(
-        onWillPop: () async {
+      return PopScope(
+        canPop: false,
+        onPopInvoked: (bool didPop) async {
           if (Platform.isAndroid) {
             // SystemChannels.platform.invokeMethod<void>('SystemNavigator.pop') wrong behavior in Android 12 when using FlutterFragmentActivity
             // https://github.com/flutter/flutter/issues/98133
             final sdkInt = await LFDeviceManager.shared.getAndroidSdkInt();
-            if (sdkInt >= 31) return Future<bool>.value(true);
+            if (sdkInt >= 31) return;
           }
           // ignore: use_build_context_synchronously
-          return _handleWillPop(context);
+          _handleWillPop(context);
         },
         child: widget.child,
       );

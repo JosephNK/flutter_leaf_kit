@@ -1,4 +1,4 @@
-part of lf_calendar_view;
+part of '../lf_calendar_view.dart';
 
 class LFCalendarMonthView extends StatelessWidget {
   final DateTime dateTime;
@@ -11,7 +11,7 @@ class LFCalendarMonthView extends StatelessWidget {
   final ValueChanged<DateTime>? onPickerSelectTap;
 
   const LFCalendarMonthView({
-    Key? key,
+    super.key,
     required this.dateTime,
     this.minDate,
     this.maxDate,
@@ -20,7 +20,7 @@ class LFCalendarMonthView extends StatelessWidget {
     this.onPrev,
     this.onNext,
     this.onPickerSelectTap,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

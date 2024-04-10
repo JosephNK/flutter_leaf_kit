@@ -1,4 +1,4 @@
-part of ds_slider;
+part of '../ds_slider.dart';
 
 class DSSlider extends StatefulWidget {
   final double value;
@@ -9,14 +9,14 @@ class DSSlider extends StatefulWidget {
   final ValueChanged<double>? onChanged;
 
   const DSSlider({
-    Key? key,
+    super.key,
     required this.value,
     this.min = 0,
     this.max = 1,
     this.label,
     this.divisions,
     this.onChanged,
-  }) : super(key: key);
+  });
 
   @override
   State<DSSlider> createState() => _DSSliderState();

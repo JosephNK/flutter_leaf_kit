@@ -1,4 +1,4 @@
-part of lf_textfield;
+part of '../lf_textfield.dart';
 
 enum LFTextFieldStatus { none, clear, reset }
 
@@ -78,7 +78,7 @@ class LFTextField extends StatefulWidget {
   final VoidCallback? onEditingComplete;
 
   const LFTextField({
-    Key? key,
+    super.key,
     required this.controller,
     this.initialValue = '',
     this.text = '',
@@ -123,7 +123,7 @@ class LFTextField extends StatefulWidget {
     this.onChanged,
     this.onSubmitted,
     this.onEditingComplete,
-  }) : super(key: key);
+  });
 
   @override
   State<LFTextField> createState() => _LFTextFieldState();

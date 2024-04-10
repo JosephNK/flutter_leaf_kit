@@ -5,7 +5,7 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:leaf_component/leaf_component.dart';
+import 'package:flutter_leaf_component/leaf_component.dart';
 
 export 'common/lf_scroll_common.dart';
 

@@ -1,4 +1,4 @@
-part of lf_image;
+part of '../lf_image.dart';
 
 class LFCircleAvatarImage extends StatelessWidget {
   final LFImageValue image;
@@ -11,7 +11,7 @@ class LFCircleAvatarImage extends StatelessWidget {
   final Widget? errorWidget;
 
   const LFCircleAvatarImage({
-    Key? key,
+    super.key,
     required this.image,
     this.size = 50,
     this.borderColor = Colors.transparent,
@@ -20,7 +20,7 @@ class LFCircleAvatarImage extends StatelessWidget {
     this.header,
     this.placeholderWidget,
     this.errorWidget,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -1,4 +1,4 @@
-part of lf_appbar;
+part of '../lf_appbar.dart';
 
 const double kLFToolbarHeight = 52.0;
 
@@ -22,7 +22,7 @@ class LFAppBar extends StatelessWidget implements PreferredSizeWidget {
   final VoidCallback? onBackPressed;
 
   const LFAppBar({
-    Key? key,
+    super.key,
     this.title,
     this.titleSpacing,
     this.leading,
@@ -40,7 +40,7 @@ class LFAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.flexibleSpace,
     this.elevation,
     this.onBackPressed,
-  }) : super(key: key);
+  });
 
   IconThemeData get defaultIconTheme =>
       const IconThemeData(color: Colors.black);

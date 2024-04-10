@@ -1,4 +1,4 @@
-part of lf_calendar_view;
+part of '../lf_calendar_view.dart';
 
 typedef LFCalendarProviderOnCellTapped = void Function(
   List<DateTime> dates,

@@ -1,23 +1,21 @@
 name: flutter_leaf_kit
 
-command:
-  bootstrap:
-    usePubspecOverrides: true
-
 packages:
-  - example/**
+  - example/
   - packages/**
 
-#ignore:
-#  - example/**
+ignore:
+  - packages/**/example
 
 scripts:
-  analyze: melos exec -- flutter analyze
-  format: melos exec -- flutter format .
-  get: melos exec -- flutter pub get
-  unittest:
-    run: melos exec -- flutter test
-    select-package:
-      dir-exists:
-        - test
-      scope: "*interface*"
+  analyze:flutter:
+    run: melos exec -c 1 -- flutter analyze
+    description: Analyze (All Packages)
+
+  format:dart:
+    run: melos exec -c 1 -- dart format .
+    description: Formatting (All Packages)
+
+  get:flutter:
+    run: melos exec -c 1 -- flutter pub get
+    description: Get packages (All Packages)

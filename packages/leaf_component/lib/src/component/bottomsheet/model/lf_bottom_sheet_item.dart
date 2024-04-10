@@ -1,4 +1,4 @@
-part of lf_bottom_sheet;
+part of '../lf_bottom_sheet.dart';
 
 class LFBottomSheetItem<T> {
   T? key;

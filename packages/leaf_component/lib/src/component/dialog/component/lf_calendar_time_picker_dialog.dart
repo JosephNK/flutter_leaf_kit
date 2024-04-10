@@ -1,4 +1,4 @@
-part of lf_dialog;
+part of '../lf_dialog.dart';
 
 typedef LFCalendarTimePickerOnOK = Function(
     LFCalendarPickerSelect select, DateTime dateTime);
@@ -53,7 +53,6 @@ class _CalendarTimePickerContent extends StatefulWidget {
   final LFCalendarTimePickerOnOK? onOK;
 
   const _CalendarTimePickerContent({
-    Key? key,
     required this.pickerSelect,
     this.startTime,
     this.endTime,
@@ -65,7 +64,7 @@ class _CalendarTimePickerContent extends StatefulWidget {
     this.validStartMessage = 'Please set the start time before the end time',
     this.validEndMessage = 'Please set the start time before the end time',
     this.onOK,
-  }) : super(key: key);
+  });
 
   @override
   State<_CalendarTimePickerContent> createState() =>

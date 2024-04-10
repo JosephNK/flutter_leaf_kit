@@ -1,4 +1,4 @@
-part of lf_chip;
+part of '../lf_chip.dart';
 
 class LFChip extends StatefulWidget {
   final String text;
@@ -8,13 +8,13 @@ class LFChip extends StatefulWidget {
   final ValueChanged<bool>? onPressed;
 
   const LFChip({
-    Key? key,
+    super.key,
     required this.text,
     this.selected = false,
     this.defaultColor,
     this.selectedColor,
     this.onPressed,
-  }) : super(key: key);
+  });
 
   @override
   State<LFChip> createState() => _LFChipState();

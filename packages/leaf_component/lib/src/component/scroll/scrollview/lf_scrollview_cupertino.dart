@@ -1,4 +1,4 @@
-part of lf_scroll_component;
+part of '../lf_scroll.dart';
 
 class LFScrollViewCupertino<T> extends StatelessWidget {
   final Widget child;
@@ -11,7 +11,7 @@ class LFScrollViewCupertino<T> extends StatelessWidget {
   final bool scrollable;
 
   const LFScrollViewCupertino({
-    Key? key,
+    super.key,
     required this.child,
     required this.storageKey,
     required this.onRefresh,
@@ -20,7 +20,7 @@ class LFScrollViewCupertino<T> extends StatelessWidget {
     this.physics,
     this.shrinkWrap = false,
     this.scrollable = true,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

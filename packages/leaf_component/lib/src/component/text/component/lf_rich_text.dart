@@ -1,4 +1,4 @@
-part of lf_text;
+part of '../lf_text.dart';
 
 class LFRichText extends StatelessWidget implements LFBuildText {
   final InlineSpan text;
@@ -9,14 +9,14 @@ class LFRichText extends StatelessWidget implements LFBuildText {
   final LFTextSize? textSize;
 
   const LFRichText({
-    Key? key,
+    super.key,
     required this.text,
     this.overflow = TextOverflow.ellipsis,
     this.textScaleFactor = 1.0,
     this.textAlign = TextAlign.left,
     this.maxLines = 1,
     this.textSize,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +25,7 @@ class LFRichText extends StatelessWidget implements LFBuildText {
       textAlign: textAlign,
       maxLines: maxLines,
       overflow: overflow,
-      textScaleFactor: buildTextScaleFactor(context),
+      textScaler: TextScaler.linear(buildTextScaleFactor(context)),
     );
   }
 
@@ -47,14 +47,9 @@ class LFRichText extends StatelessWidget implements LFBuildText {
 
 class LFTextSpan extends TextSpan {
   const LFTextSpan({
-    String? text,
-    List<InlineSpan>? children,
-    TextStyle? style,
-    GestureRecognizer? recognizer,
-  }) : super(
-          text: text,
-          children: children,
-          style: style,
-          recognizer: recognizer,
-        );
+    super.text,
+    super.children,
+    super.style,
+    super.recognizer,
+  });
 }

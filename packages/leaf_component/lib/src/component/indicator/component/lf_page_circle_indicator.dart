@@ -1,4 +1,4 @@
-part of lf_indicator;
+part of '../lf_indicator.dart';
 
 class LFPageCircleIndicator extends StatelessWidget {
   final int total;
@@ -9,14 +9,14 @@ class LFPageCircleIndicator extends StatelessWidget {
   final double size;
 
   const LFPageCircleIndicator({
-    Key? key,
+    super.key,
     required this.total,
     required this.current,
     this.margin = const EdgeInsets.all(0.0),
     this.activeColor,
     this.inactiveColor,
     this.size = 4.0,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -57,12 +57,12 @@ class LFPageCircleDot extends StatelessWidget {
   final double size;
 
   const LFPageCircleDot({
-    Key? key,
+    super.key,
     required this.active,
     this.activeColor,
     this.inactiveColor,
     this.size = 4.0,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

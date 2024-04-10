@@ -1,4 +1,4 @@
-part of lf_photo;
+part of '../lf_photo.dart';
 
 ///
 /// LFPhotoAlbumSheetTitleView
@@ -10,12 +10,12 @@ class LFPhotoAlbumSheetTitleView extends StatefulWidget {
   final ValueChanged<AssetPathEntity>? onSelected;
 
   const LFPhotoAlbumSheetTitleView({
-    Key? key,
+    super.key,
     required this.type,
     required this.selectedAssetPath,
     this.textStyle,
     this.onSelected,
-  }) : super(key: key);
+  });
 
   @override
   State<LFPhotoAlbumSheetTitleView> createState() =>

@@ -1,4 +1,4 @@
-part of lf_animated;
+part of '../lf_animated.dart';
 
 class LFFlipAnimated extends StatefulWidget {
   final Widget front;
@@ -7,12 +7,12 @@ class LFFlipAnimated extends StatefulWidget {
   final ValueChanged<bool>? onChanged;
 
   const LFFlipAnimated({
-    Key? key,
+    super.key,
     required this.front,
     required this.rear,
     this.showFrontSide = true,
     this.onChanged,
-  }) : super(key: key);
+  });
 
   @override
   State<LFFlipAnimated> createState() => _LFFlipAnimatedState();
