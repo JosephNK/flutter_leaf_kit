@@ -78,13 +78,13 @@ class MapMarkerBitmapIcon {
 
 class MapMarkerBitmapHttp {
   /// Creates a BitmapDescriptor from an Url
-  Future<BitmapDescriptor?> createBitmapDescriptorFromUrl(String url) async {
-    try {
-      final request = await net.get(Uri.parse(url));
-      final bytes = request.bodyBytes;
-      return BitmapDescriptor.fromBytes(bytes.buffer.asUint8List());
-    } catch (_) {
-      return null;
-    }
-  }
+  // Future<BitmapDescriptor?> createBitmapDescriptorFromUrl(String url) async {
+  //   try {
+  //     final request = await net.get(Uri.parse(url));
+  //     final bytes = request.bodyBytes;
+  //     return BitmapDescriptor.fromBytes(bytes.buffer.asUint8List());
+  //   } catch (_) {
+  //     return null;
+  //   }
+  // }
 }
