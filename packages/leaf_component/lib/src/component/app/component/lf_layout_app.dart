@@ -1,6 +1,6 @@
 part of '../lf_app.dart';
 
-typedef LFLayoutAppOnSetupDevice = Function({VoidCallback onBuilder});
+typedef LFLayoutAppOnSetupDevice = Function(VoidCallback onBuilder);
 
 class LFLayoutApp extends StatefulWidget {
   final LFAppComponentConfigure? configure;
@@ -44,7 +44,7 @@ class _LFLayoutAppState extends State<LFLayoutApp> {
         return OrientationBuilder(builder: (_, orientation) {
           if (constraints.maxWidth != 0) {
             if (onSetupDevice != null) {
-              onSetupDevice.call(onBuilder: onBuilder);
+              onSetupDevice.call(onBuilder);
             } else {
               onBuilder.call();
             }
