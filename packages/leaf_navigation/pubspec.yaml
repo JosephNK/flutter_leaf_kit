@@ -24,7 +24,7 @@ dependencies:
   flutter_leaf_store:
     git:
       url: https://github.com/JosephNK/flutter_leaf_kit.git
-      ref: '1.0.0'
+      ref: 'store_1.0.0'
       path: ./packages/leaf_store
 
 dev_dependencies:
