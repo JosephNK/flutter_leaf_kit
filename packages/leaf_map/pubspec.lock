@@ -228,35 +228,35 @@ packages:
       path: "../leaf_common"
       relative: true
     source: path
-    version: "0.0.5"
+    version: "1.0.0"
   flutter_leaf_location:
     dependency: "direct main"
     description:
       path: "../leaf_location"
       relative: true
     source: path
-    version: "0.0.5"
+    version: "1.0.0"
   flutter_leaf_manager:
     dependency: "direct overridden"
     description:
       path: "../leaf_manager"
       relative: true
     source: path
-    version: "0.0.5"
+    version: "1.0.0"
   flutter_leaf_network:
     dependency: "direct main"
     description:
       path: "../leaf_network"
       relative: true
     source: path
-    version: "0.0.5"
+    version: "1.0.0"
   flutter_leaf_store:
     dependency: "direct overridden"
     description:
       path: "../leaf_store"
       relative: true
     source: path
-    version: "0.0.5"
+    version: "1.0.0"
   flutter_lints:
     dependency: "direct dev"
     description:
