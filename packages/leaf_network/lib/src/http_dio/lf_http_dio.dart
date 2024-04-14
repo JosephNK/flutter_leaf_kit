@@ -9,10 +9,17 @@ import 'package:flutter_leaf_common/leaf_common.dart';
 import 'package:flutter_leaf_manager/leaf_manager.dart';
 
 import 'converter/lf_dio_built_value_converter.dart';
+import 'converter/lf_dio_built_value_json_key.dart';
 import 'converter/lf_dio_exception_converter.dart';
 import 'interceptor/lf_dio_curl_interceptor.dart';
 import 'interceptor/lf_dio_request_interceptor.dart';
-import 'service/base/lf_dio_base_service.dart';
+import 'service/lf_dio_base_service.dart';
+
+export 'package:dio/dio.dart' show DioException;
+
+export 'converter/lf_dio_built_value_json_key.dart';
+export 'response/lf_dio_response.dart';
+export 'service/lf_dio_base_service.dart';
 
 Type _typeOf<T>() => T;
 
@@ -34,6 +41,7 @@ class LFHttpDio {
     required Uri baseUrl,
     required Serializers responseSerializers,
     required List<DioService> services,
+    LFDioBuiltValueJSONUndefinedKey? jsonUndefinedKey,
     LFHttpDioOnHeader? onHeader,
     VoidCallback? onAuthenticatorSuccess,
     VoidCallback? onAuthenticatorFailed,
@@ -48,6 +56,7 @@ class LFHttpDio {
     // Converter
     converter = LFDioBuiltValueConverter(
       serializers: responseSerializers,
+      jsonUndefinedKey: jsonUndefinedKey,
     );
     errorConverter = LFDioExceptionConverter(
       serializers: responseSerializers,

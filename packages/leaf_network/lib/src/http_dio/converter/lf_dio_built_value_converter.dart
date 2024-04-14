@@ -1,22 +1,24 @@
 import 'dart:async';
 import 'dart:convert';
 
-import 'package:built_collection/built_collection.dart';
 import 'package:built_value/serializer.dart';
 import 'package:built_value/standard_json_plugin.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_leaf_common/leaf_common.dart';
 
 import '../response/lf_dio_response.dart';
-import 'base/lf_dio_base_converter.dart';
+import 'lf_dio_base_converter.dart';
+import 'lf_dio_built_value_json_key.dart';
 
 class LFDioBuiltValueConverter implements DioConverter {
   final Serializers serializers;
+  final LFDioBuiltValueJSONUndefinedKey? jsonUndefinedKey;
 
   static Serializers? jsonSerializers;
 
   LFDioBuiltValueConverter({
     required this.serializers,
+    this.jsonUndefinedKey,
   }) {
     LFDioBuiltValueConverter.jsonSerializers = (serializers.toBuilder()
           ..addPlugin(
@@ -36,9 +38,9 @@ class LFDioBuiltValueConverter implements DioConverter {
     );
   }
 
-  BuiltList<T> _deserializeListOf<T>(Iterable value) => BuiltList(
-        value.map((value) => _deserialize<T>(value)).toList(growable: false),
-      );
+  // BuiltList<T> _deserializeListOf<T>(Iterable value) => BuiltList(
+  //       value.map((value) => _deserialize<T>(value)).toList(growable: false),
+  //     );
 
   dynamic _decode<T>(dynamic entity) {
     /// handle case when we want to access to Map<String, dynamic> directly
@@ -49,10 +51,18 @@ class LFDioBuiltValueConverter implements DioConverter {
     }
 
     try {
-      if (entity is List) {
-        return _deserializeListOf<T>(entity);
+      dynamic deserializeEntity = entity;
+      if (jsonUndefinedKey != null) {
+        final collectionKey = jsonUndefinedKey!.collectionKey;
+        final objectKey = jsonUndefinedKey!.objectKey;
+        if (entity is List) {
+          deserializeEntity = {'$collectionKey': entity};
+        }
+        if (entity is! Map && entity is! List) {
+          deserializeEntity = {'$objectKey': entity};
+        }
       }
-      return _deserialize<T>(entity);
+      return _deserialize<T>(deserializeEntity);
     } catch (e) {
       Logging.e(e);
       return null;
@@ -81,14 +91,14 @@ class LFDioBuiltValueConverter implements DioConverter {
         body = '$truncatedJsonString\n......\n...\n';
       }
       Logging.i(
-        '[http_dio :: built_value_converter]\n'
+        '[http_dio :: built_value_converter 1]\n'
         'url: $url\n'
         'body: $body\n'
         'ResultType: $ResultType',
       );
     } catch (_) {
       Logging.i(
-        '[http_dio :: built_value_converter]\n'
+        '[http_dio :: built_value_converter 2]\n'
         'url: $url\n'
         'body: ${response.data}\n'
         'ResultType: $ResultType',

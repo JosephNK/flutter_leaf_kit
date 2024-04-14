@@ -8,7 +8,7 @@ import 'package:flutter_leaf_common/leaf_common.dart';
 
 import '../../http_helper/http_exception.dart';
 import '../response/lf_dio_response.dart';
-import 'base/lf_dio_base_converter.dart';
+import 'lf_dio_base_converter.dart';
 
 class LFDioExceptionConverter implements DioConverter {
   final Serializers serializers;
