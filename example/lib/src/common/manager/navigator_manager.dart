@@ -1,6 +1,7 @@
 import 'package:example/src/common/model/classes/list_item.dart';
 import 'package:flutter/material.dart';
 
+import '../../features/network/ui/network_screen.dart';
 import '../../features/sub/ui/accordion_screen.dart';
 import '../../features/sub/ui/animation_screen.dart';
 import '../../features/sub/ui/avatar_screen.dart';
@@ -13,7 +14,6 @@ import '../../features/sub/ui/chip_screen.dart';
 import '../../features/sub/ui/dialog_screen.dart';
 import '../../features/sub/ui/indicator_screen.dart';
 import '../../features/sub/ui/navigationbar_screen.dart';
-import '../../features/sub/ui/network_screen.dart';
 import '../../features/sub/ui/pageview_screen.dart';
 import '../../features/sub/ui/photo_screen.dart';
 import '../../features/sub/ui/radio_screen.dart';

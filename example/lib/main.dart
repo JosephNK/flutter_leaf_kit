@@ -3,9 +3,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_leaf_common/leaf_common.dart';
-import 'package:flutter_leaf_navigation/leaf_navigation.dart';
-import 'package:flutter_leaf_store/leaf_store.dart';
+import 'package:flutter_leaf_kit/flutter_leaf_kit.dart';
 
 import 'src/app.dart';
 import 'src/features/main/blocs/transition/transition_bloc.dart';
@@ -45,7 +43,7 @@ void main() async {
           Locale('en', 'US'),
           Locale('ko', 'KR'),
         ],
-        path: 'packages/resource/assets/lang',
+        path: 'assets/translations',
         fallbackLocale: const Locale('en', 'US'),
         child: const ExampleApp(),
       ),

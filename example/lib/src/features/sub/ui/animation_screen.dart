@@ -1,7 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_leaf_component/leaf_component.dart';
+import 'package:flutter_leaf_kit/flutter_leaf_kit.dart';
 
 class AnimationScreen extends ScreenStatefulWidget {
   final String title;

@@ -15,21 +15,15 @@ dependencies:
   font_awesome_flutter: ^10.1.0
   eva_icons_flutter: ^3.1.0
 
-#  json_annotation: ^4.7.0
-#  built_value: ^8.4.2
-#  built_collection: ^5.1.1
+  # Build Gen Plugin
+  built_value: ^8.9.2
+  built_collection: ^5.1.1
+  json_annotation: ^4.8.1
+  dart_object_extension: ^0.1.1
 
   # Leaf Kit Plugin
-#  flutter_leaf_kit:
-#    path: ../packages/leaf
-  flutter_leaf_common:
-    path: ../packages/leaf_common
-  flutter_leaf_component:
-    path: ../packages/leaf_component
-  flutter_leaf_navigation:
-    path: ../packages/leaf_navigation
-  flutter_leaf_store:
-    path: ../packages/leaf_store
+  flutter_leaf_kit:
+    path: ../packages/leaf
 
 dev_dependencies:
   flutter_test:
@@ -37,10 +31,11 @@ dev_dependencies:
 
   flutter_lints: ^3.0.0
 
-#  build_runner: ^2.3.3
-#  json_serializable: ^6.5.4
-#  built_value_generator: ^8.4.2
-#  chopper_generator: ^6.0.0
+  # Build Gen Plugin
+  built_value_generator: ^8.9.2
+  build_runner: ^2.4.9
+  json_serializable: ^6.7.1
+  dart_object_extension_gen: ^0.1.1
 
 flutter:
 

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_leaf_common/leaf_common.dart';
-import 'package:flutter_leaf_component/leaf_component.dart';
+import 'package:flutter_leaf_kit/flutter_leaf_kit.dart';
 
 class PhotoScreen extends ScreenStatefulWidget {
   final String title;

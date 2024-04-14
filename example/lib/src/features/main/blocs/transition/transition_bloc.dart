@@ -2,8 +2,7 @@ library transition_blocs;
 
 import 'dart:async';
 
-import 'package:flutter_leaf_common/leaf_common.dart';
-import 'package:flutter_leaf_store/leaf_store.dart';
+import 'package:flutter_leaf_kit/flutter_leaf_kit.dart';
 
 part 'transition_event.dart';
 part 'transition_state.dart';
