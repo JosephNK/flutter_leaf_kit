@@ -21,6 +21,7 @@ import '../../features/sub/ui/photo_screen.dart';
 import '../../features/sub/ui/radio_screen.dart';
 import '../../features/sub/ui/slider_screen.dart';
 import '../../features/sub/ui/textfield_sceen.dart';
+import '../../features/text/ui/text_screen.dart';
 
 dynamic kListObjects = {
   "items": [
@@ -44,6 +45,7 @@ dynamic kListObjects = {
     {"id": "Animation", "title": "Animation"},
     {"id": "Image", "title": "Image"},
     {"id": "PageIndicator", "title": "PageIndicator"},
+    {"id": "Text", "title": "Text"},
   ]
 };
 
@@ -119,6 +121,9 @@ class NavigatorManager {
         break;
       case 'PageIndicator':
         widget = PageIndicatorScreen(title: title);
+        break;
+      case 'Text':
+        widget = TextScreen(title: title);
         break;
     }
 

@@ -17,7 +17,7 @@ class LFText extends StatelessWidget implements LFBuildText {
     this.style,
     this.textAlign = TextAlign.left,
     this.color,
-    this.maxLines = 1,
+    this.maxLines,
     this.overflow = TextOverflow.ellipsis,
     this.textScaleFactor = 1.0,
     this.textSize,
@@ -31,7 +31,7 @@ class LFText extends StatelessWidget implements LFBuildText {
       style: buildTextStyle(context),
       textAlign: textAlign,
       maxLines: maxLines,
-      overflow: overflow,
+      overflow: (maxLines != null) ? overflow : null,
       textScaler: TextScaler.linear(buildTextScaleFactor(context)),
     );
   }

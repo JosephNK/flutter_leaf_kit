@@ -5,7 +5,7 @@ class LFRichText extends StatelessWidget implements LFBuildText {
   final TextAlign textAlign;
   final TextOverflow overflow;
   final double textScaleFactor;
-  final int? maxLines;
+  final int maxLines;
   final LFTextSize? textSize;
 
   const LFRichText({
