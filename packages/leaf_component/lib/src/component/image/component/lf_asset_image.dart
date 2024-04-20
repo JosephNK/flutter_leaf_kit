@@ -3,8 +3,8 @@ part of '../lf_image.dart';
 class LFAssetFileImage extends StatelessWidget {
   final String path;
   final Color? color;
-  final double width;
-  final double height;
+  final double? width;
+  final double? height;
   final BoxFit fit;
   final Widget? placeholderWidget;
   final Widget? errorWidget;
@@ -13,8 +13,8 @@ class LFAssetFileImage extends StatelessWidget {
     super.key,
     required this.path,
     this.color,
-    this.width = 45.0,
-    this.height = 45.0,
+    this.width,
+    this.height,
     this.fit = BoxFit.cover,
     this.placeholderWidget,
     this.errorWidget,

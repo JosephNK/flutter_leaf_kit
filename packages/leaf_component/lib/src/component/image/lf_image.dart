@@ -18,6 +18,6 @@ part 'component/lf_cache_image.dart';
 part 'component/lf_cache_network_image.dart';
 part 'component/lf_cache_provider_image.dart';
 part 'component/lf_circle_avatar_image.dart';
-part 'component/lf_combine_image.dart';
 part 'component/lf_memory_image.dart';
+part 'component/lf_transform_image.dart';
 part 'model/lf_image_value.dart';

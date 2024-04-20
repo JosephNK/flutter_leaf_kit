@@ -1,21 +1,19 @@
 part of '../lf_image.dart';
 
-class LFCombineImage extends StatelessWidget {
+class LFTransformImage extends StatelessWidget {
   final LFImageValue image;
-  final double width;
-  final double height;
+  final double? width;
+  final double? height;
   final BoxFit fit;
-  final Map<String, String>? header;
   final Widget? placeholderWidget;
   final Widget? errorWidget;
 
-  const LFCombineImage({
+  const LFTransformImage({
     super.key,
     required this.image,
-    this.width = 45.0,
-    this.height = 45.0,
+    this.width,
+    this.height,
     this.fit = BoxFit.cover,
-    this.header,
     this.placeholderWidget,
     this.errorWidget,
   });
@@ -26,7 +24,9 @@ class LFCombineImage extends StatelessWidget {
     final file = image.file ?? '';
     final thumbFile = image.thumbFile ?? '';
     final bytes = image.bytes;
+    final header = image.header;
 
+    /// Memory Byte
     if (bytes != null) {
       return LFMemoryImage(
         bytes: bytes,
@@ -38,6 +38,7 @@ class LFCombineImage extends StatelessWidget {
       );
     }
 
+    /// Network URL
     String? urlFile;
     if (isURL(thumbFile)) {
       urlFile = thumbFile;
@@ -56,6 +57,7 @@ class LFCombineImage extends StatelessWidget {
       );
     }
 
+    /// Asset
     return LFAssetFileImage(
       path: file,
       width: width,

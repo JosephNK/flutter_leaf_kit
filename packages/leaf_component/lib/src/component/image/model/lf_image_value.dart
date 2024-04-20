@@ -1,17 +1,24 @@
 part of '../lf_image.dart';
 
 class LFImageValue extends Equatable {
-  final String? file;
+  final String? file; // Url, FilePath, AssetPath
+  final String? thumbFile; // Url, FilePath, AssetPath
   final Uint8List? bytes;
-  final String? thumbFile;
+  final Map<String, String>? header;
 
-  const LFImageValue({this.file, this.bytes, this.thumbFile});
+  const LFImageValue({
+    this.file,
+    this.thumbFile,
+    this.bytes,
+    this.header,
+  });
 
   @override
   List<Object?> get props => [
         file,
-        bytes,
         thumbFile,
+        bytes,
+        header,
       ];
 
   @override
@@ -28,10 +35,12 @@ class LFImageValue extends Equatable {
     String? Function()? file,
     Uint8List? Function()? bytes,
     String? Function()? thumbFile,
+    Map<String, String>? Function()? header,
   }) =>
       LFImageValue(
         file: file != null ? file() : this.file,
         bytes: bytes != null ? bytes() : this.bytes,
         thumbFile: thumbFile != null ? thumbFile() : this.thumbFile,
+        header: header != null ? header() : this.header,
       );
 }
