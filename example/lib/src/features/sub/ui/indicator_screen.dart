@@ -76,25 +76,6 @@ class _IndicatorScreenState extends ScreenState<IndicatorScreen> {
             }),
           ],
         ),
-        const SizedBox(height: 30.0),
-        const LFText('LFPageIndicator'),
-        const Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            LFPageIndicator(
-              total: 5,
-              current: 2.0,
-              margin: EdgeInsets.all(18.0),
-            ),
-            LFPageIndicator(
-              total: 5,
-              current: 0.0,
-              activeColor: Colors.pinkAccent,
-              margin: EdgeInsets.all(8.0),
-            ),
-          ],
-        ),
       ],
     );
   }

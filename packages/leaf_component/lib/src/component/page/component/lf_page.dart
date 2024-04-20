@@ -141,7 +141,7 @@ class _LFPageViewState extends State<LFPageView>
       left: 0.0,
       right: 0.0,
       bottom: 5.0,
-      child: LFPageIndicator(
+      child: LFPageRectIndicator(
         total: total,
         current: _currentPageValue.toDouble(),
         activeColor: Colors.pinkAccent,

@@ -1,13 +1,13 @@
 part of '../lf_indicator.dart';
 
-class LFPageIndicator extends StatelessWidget {
+class LFPageRectIndicator extends StatelessWidget {
   final int total;
   final double current;
   final EdgeInsets margin;
   final Color? activeColor;
   final Color? inactiveColor;
 
-  const LFPageIndicator({
+  const LFPageRectIndicator({
     super.key,
     required this.total,
     required this.current,

@@ -1,5 +1,7 @@
 part of '../lf_indicator.dart';
 
+enum LFPageCircleIndicatorStyle { none, decrease }
+
 class LFPageCircleIndicator extends StatelessWidget {
   final int total;
   final double current;
@@ -7,6 +9,7 @@ class LFPageCircleIndicator extends StatelessWidget {
   final Color? activeColor;
   final Color? inactiveColor;
   final double size;
+  final LFPageCircleIndicatorStyle indicatorStyle;
 
   const LFPageCircleIndicator({
     super.key,
@@ -16,6 +19,7 @@ class LFPageCircleIndicator extends StatelessWidget {
     this.activeColor,
     this.inactiveColor,
     this.size = 4.0,
+    this.indicatorStyle = LFPageCircleIndicatorStyle.none,
   });
 
   @override
@@ -27,26 +31,40 @@ class LFPageCircleIndicator extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         mainAxisSize: MainAxisSize.min,
-        children: [
-          for (int i = 0; i < total; i++)
-            if (i == current.round()) ...[
-              LFPageCircleDot(
-                active: true,
-                activeColor: activeColor,
-                inactiveColor: inactiveColor,
-                size: size,
-              ),
-            ] else ...[
-              LFPageCircleDot(
-                active: false,
-                activeColor: activeColor,
-                inactiveColor: inactiveColor,
-                size: size,
-              ),
-            ]
-        ],
+        children: dots,
       ),
     );
+  }
+
+  int get findActiveIndex {
+    int activeIndex = 0;
+    for (int i = 0; i < total; i++) {
+      final active = (i == current.round());
+      if (active) {
+        activeIndex = i;
+        break;
+      }
+    }
+    return activeIndex;
+  }
+
+  List<Widget> get dots {
+    final activeIndex = findActiveIndex;
+    List<Widget> dots = [];
+    for (int i = 0; i < total; i++) {
+      double size = this.size;
+      if (indicatorStyle == LFPageCircleIndicatorStyle.decrease) {
+        final diff = ((activeIndex - i).abs()) / 10.0;
+        size = size - (size * diff);
+      }
+      dots.add(LFPageCircleDot(
+        active: i == activeIndex,
+        activeColor: activeColor,
+        inactiveColor: inactiveColor,
+        size: size,
+      ));
+    }
+    return dots;
   }
 }
 
