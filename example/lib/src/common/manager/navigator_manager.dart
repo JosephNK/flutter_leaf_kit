@@ -1,6 +1,7 @@
 import 'package:example/src/common/model/classes/list_item.dart';
 import 'package:flutter/material.dart';
 
+import '../../features/image/ui/image_screen.dart';
 import '../../features/network/ui/network_screen.dart';
 import '../../features/sub/ui/accordion_screen.dart';
 import '../../features/sub/ui/animation_screen.dart';
@@ -40,6 +41,7 @@ dynamic kListObjects = {
     {"id": "Calendar", "title": "Calendar"},
     {"id": "Photo", "title": "Photo"},
     {"id": "Animation", "title": "Animation"},
+    {"id": "Image", "title": "Image"},
   ]
 };
 
@@ -109,6 +111,9 @@ class NavigatorManager {
         break;
       case 'Animation':
         widget = AnimationScreen(title: title);
+        break;
+      case 'Image':
+        widget = ImageScreen(title: title);
         break;
     }
 
