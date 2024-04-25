@@ -57,8 +57,7 @@ class LFDioBuiltValueConverter implements DioConverter {
         final objectKey = jsonUndefinedKey!.objectKey;
         if (entity is List) {
           deserializeEntity = {'$collectionKey': entity};
-        }
-        if (entity is! Map && entity is! List) {
+        } else {
           deserializeEntity = {'$objectKey': entity};
         }
       }
