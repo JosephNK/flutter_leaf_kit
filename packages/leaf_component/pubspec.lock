@@ -220,7 +220,7 @@ packages:
       path: "../leaf_common"
       relative: true
     source: path
-    version: "1.0.2"
+    version: "1.0.3"
   flutter_leaf_manager:
     dependency: "direct main"
     description:

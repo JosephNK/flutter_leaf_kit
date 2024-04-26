@@ -1,10 +1,6 @@
 part of '../lf_common.dart';
 
 extension NumberInt on int {
-  String currency({String locale = 'ko_KR', String symbol = ''}) {
-    return _LFNumber.currency(this, locale: locale, symbol: symbol);
-  }
-
   String formatSize() {
     double len = toDouble();
     List<String> units = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB'];
@@ -15,12 +11,22 @@ extension NumberInt on int {
     }
     return '${len.toStringAsFixed(2)} ${units[i]}';
   }
-}
 
-class _LFNumber {
-  static String currency(num value,
-      {String locale = 'ko_KR', String symbol = ''}) {
-    final f = NumberFormat.currency(locale: locale, symbol: symbol);
-    return f.format(value);
+  // locale: 'ko_KR'
+  String currency({
+    String? locale,
+    String? name,
+    String? symbol,
+    int? decimalDigits,
+    String? customPattern,
+  }) {
+    final f = NumberFormat.currency(
+      locale: locale,
+      name: name,
+      symbol: symbol,
+      decimalDigits: decimalDigits,
+      customPattern: customPattern,
+    );
+    return f.format(this);
   }
 }

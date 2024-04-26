@@ -17,7 +17,7 @@ dependencies:
   flutter_leaf_common:
     git:
       url: https://github.com/JosephNK/flutter_leaf_kit.git
-      ref: 'common_1.0.2'
+      ref: 'common_1.0.3'
       path: ./packages/leaf_common
   flutter_leaf_location:
     git:
