@@ -1,6 +1,6 @@
 name: flutter_leaf_kit
 description: A new Flutter package project.
-version: 1.1.11
+version: 1.1.12
 publish_to: 'none'
 homepage: https://github.com/JosephNK/flutter_leaf_kit
 
@@ -20,42 +20,42 @@ dependencies:
   flutter_leaf_component:
     git:
       url: https://github.com/JosephNK/flutter_leaf_kit.git
-      ref: 'component_1.0.4'
+      ref: 'component_1.0.6'
       path: ./packages/leaf_component
   flutter_leaf_location:
     git:
       url: https://github.com/JosephNK/flutter_leaf_kit.git
-      ref: 'location_1.0.0'
+      ref: 'location_1.0.1'
       path: ./packages/leaf_location
   flutter_leaf_map:
     git:
       url: https://github.com/JosephNK/flutter_leaf_kit.git
-      ref: 'map_1.0.0'
+      ref: 'map_1.0.1'
       path: ./packages/leaf_map
   flutter_leaf_navigation:
     git:
       url: https://github.com/JosephNK/flutter_leaf_kit.git
-      ref: 'navigation_1.0.0'
+      ref: 'navigation_1.0.1'
       path: ./packages/leaf_navigation
   flutter_leaf_manager:
     git:
       url: https://github.com/JosephNK/flutter_leaf_kit.git
-      ref: 'manager_1.0.0'
+      ref: 'manager_1.0.1'
       path: ./packages/leaf_manager
   flutter_leaf_network:
     git:
       url: https://github.com/JosephNK/flutter_leaf_kit.git
-      ref: 'network_1.0.5'
+      ref: 'network_1.0.6'
       path: ./packages/leaf_network
   flutter_leaf_store:
     git:
       url: https://github.com/JosephNK/flutter_leaf_kit.git
-      ref: 'store_1.0.0'
+      ref: 'store_1.0.1'
       path: ./packages/leaf_store
   flutter_leaf_webview:
     git:
       url: https://github.com/JosephNK/flutter_leaf_kit.git
-      ref: 'webview_1.0.0'
+      ref: 'webview_1.0.1'
       path: ./packages/leaf_webview
 
 dev_dependencies:

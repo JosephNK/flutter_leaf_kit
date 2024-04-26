@@ -331,14 +331,14 @@ packages:
       path: "../leaf_manager"
       relative: true
     source: path
-    version: "1.0.0"
+    version: "1.0.1"
   flutter_leaf_store:
     dependency: "direct main"
     description:
       path: "../leaf_store"
       relative: true
     source: path
-    version: "1.0.0"
+    version: "1.0.1"
   flutter_lints:
     dependency: "direct dev"
     description:
