@@ -14,19 +14,45 @@ extension NumberInt on int {
 
   // locale: 'ko_KR'
   String currency({
-    String? locale,
+    Locale? locale,
     String? name,
     String? symbol,
     int? decimalDigits,
     String? customPattern,
   }) {
     final f = NumberFormat.currency(
-      locale: locale,
+      locale: locale.toString(),
       name: name,
       symbol: symbol,
       decimalDigits: decimalDigits,
       customPattern: customPattern,
     );
     return f.format(this);
+  }
+
+  String simpleCurrency({
+    Locale? locale,
+    String? name,
+    int? decimalDigits,
+  }) {
+    final f = NumberFormat.simpleCurrency(
+      locale: locale.toString(),
+      name: name,
+      decimalDigits: decimalDigits,
+    );
+    return f.format(this);
+  }
+
+  String currencySymbol({
+    Locale? locale,
+    String? name,
+    int? decimalDigits,
+  }) {
+    final f = NumberFormat.simpleCurrency(
+      locale: locale.toString(),
+      name: name,
+      decimalDigits: decimalDigits,
+    );
+    return f.currencySymbol;
   }
 }
