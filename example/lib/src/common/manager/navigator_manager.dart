@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import '../../features/image/ui/image_screen.dart';
 import '../../features/network/ui/network_screen.dart';
 import '../../features/page_indicator/ui/page_indicator_screen.dart';
+import '../../features/scroll/ui/scroll_screen.dart';
 import '../../features/sub/ui/accordion_screen.dart';
 import '../../features/sub/ui/animation_screen.dart';
 import '../../features/sub/ui/avatar_screen.dart';
@@ -46,6 +47,7 @@ dynamic kListObjects = {
     {"id": "Image", "title": "Image"},
     {"id": "PageIndicator", "title": "PageIndicator"},
     {"id": "Text", "title": "Text"},
+    {"id": "Scroll", "title": "Scroll"},
   ]
 };
 
@@ -125,6 +127,8 @@ class NavigatorManager {
       case 'Text':
         widget = TextScreen(title: title);
         break;
+      case 'Scroll':
+        widget = ScrollScreen(title: title);
     }
 
     return Navigator.push(
