@@ -52,17 +52,34 @@ class _LFGridViewState<T> extends State<LFGridView<T>>
         .asBroadcastStream()
         .listen((event) {
       final type = event.type;
-      final value = event.value;
+      final animated = event.animated;
+      final position = event.position;
       final duration = event.duration ?? const Duration(milliseconds: 300);
       switch (type) {
+        case LFScrollControllerEventType.scrollToPosition:
+          scrollToPosition(
+            context,
+            animated: animated,
+            value: position,
+            animationDuration: duration,
+          );
+          break;
         case LFScrollControllerEventType.scrollToTop:
-          scrollToTop(context, animated: value, animationDuration: duration);
+          scrollToTop(
+            context,
+            animated: animated,
+            animationDuration: duration,
+          );
           break;
         case LFScrollControllerEventType.scrollToBottom:
-          scrollToBottom(context, animated: value, animationDuration: duration);
+          scrollToBottom(
+            context,
+            animated: animated,
+            animationDuration: duration,
+          );
           break;
         case LFScrollControllerEventType.loading:
-          setLoading(value);
+          setLoading(animated);
           break;
       }
     });
@@ -93,17 +110,6 @@ class _LFGridViewState<T> extends State<LFGridView<T>>
   @override
   void loadMore() async {
     await onPullToLoadMore(context, widget.onLoadMore);
-  }
-
-  @override
-  // ignore: unnecessary_overrides
-  void scrollToTop(
-    BuildContext context, {
-    bool animated = false,
-    Duration animationDuration = const Duration(milliseconds: 300),
-  }) {
-    super.scrollToTop(context,
-        animated: animated, animationDuration: animationDuration);
   }
 
   @override

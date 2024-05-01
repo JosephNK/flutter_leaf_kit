@@ -42,19 +42,20 @@ mixin LFScrollControlMixin<T extends StatefulWidget> on State<T>
     }
   }
 
-  void scrollToTop(
+  void scrollToPosition(
     BuildContext context, {
     bool animated = false,
+    double? value,
     Duration animationDuration = const Duration(milliseconds: 300),
+    Curve curve = Curves.fastOutSlowIn,
   }) {
     if (mounted) {
       var scrollController = PrimaryScrollController.of(context);
-
       if (!scrollController.hasClients) {
         return;
       }
 
-      double value = 0.0;
+      if (value == null) return;
 
       if (animated == true) {
         scrollController.animateTo(
@@ -68,6 +69,27 @@ mixin LFScrollControlMixin<T extends StatefulWidget> on State<T>
     }
   }
 
+  void scrollToTop(
+    BuildContext context, {
+    bool animated = false,
+    Duration animationDuration = const Duration(milliseconds: 300),
+  }) {
+    if (mounted) {
+      var scrollController = PrimaryScrollController.of(context);
+      if (!scrollController.hasClients) {
+        return;
+      }
+      double value = 0.0;
+
+      scrollToPosition(
+        context,
+        animated: animated,
+        value: value,
+        animationDuration: animationDuration,
+      );
+    }
+  }
+
   void scrollToBottom(
     BuildContext context, {
     bool animated = false,
@@ -75,22 +97,17 @@ mixin LFScrollControlMixin<T extends StatefulWidget> on State<T>
   }) {
     if (mounted) {
       var scrollController = PrimaryScrollController.of(context);
-
       if (!scrollController.hasClients) {
         return;
       }
-
       double value = scrollController.position.maxScrollExtent;
 
-      if (animated == true) {
-        scrollController.animateTo(
-          value,
-          duration: animationDuration,
-          curve: Curves.fastOutSlowIn,
-        );
-      } else {
-        scrollController.jumpTo(value);
-      }
+      scrollToPosition(
+        context,
+        animated: animated,
+        value: value,
+        animationDuration: animationDuration,
+      );
     }
   }
 

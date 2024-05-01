@@ -1,6 +1,7 @@
 part of '../lf_scroll_common.dart';
 
 enum LFScrollControllerEventType {
+  scrollToPosition,
   scrollToTop,
   scrollToBottom,
   loading,
@@ -8,10 +9,16 @@ enum LFScrollControllerEventType {
 
 class LFScrollControllerEvent {
   final LFScrollControllerEventType type;
-  final bool value;
+  final bool animated;
+  final double? position;
   final Duration? duration;
 
-  LFScrollControllerEvent(this.type, {this.value = false, this.duration});
+  LFScrollControllerEvent(
+    this.type, {
+    this.animated = false,
+    this.position,
+    this.duration,
+  });
 }
 
 mixin LFScrollControllerMixin {
@@ -27,13 +34,31 @@ mixin LFScrollControllerMixin {
     isLoading = false;
   }
 
+  void scrollToPosition({
+    bool animated = false,
+    required double position,
+    Duration animationDuration = const Duration(milliseconds: 300),
+  }) {
+    addEvent(
+      LFScrollControllerEvent(
+        LFScrollControllerEventType.scrollToPosition,
+        animated: animated,
+        position: position,
+        duration: animationDuration,
+      ),
+    );
+  }
+
   void scrollToTop({
     bool animated = false,
     Duration animationDuration = const Duration(milliseconds: 300),
   }) {
     addEvent(
-      LFScrollControllerEvent(LFScrollControllerEventType.scrollToTop,
-          value: animated, duration: animationDuration),
+      LFScrollControllerEvent(
+        LFScrollControllerEventType.scrollToTop,
+        animated: animated,
+        duration: animationDuration,
+      ),
     );
   }
 
@@ -42,15 +67,20 @@ mixin LFScrollControllerMixin {
     Duration animationDuration = const Duration(milliseconds: 300),
   }) {
     addEvent(
-      LFScrollControllerEvent(LFScrollControllerEventType.scrollToBottom,
-          value: animated, duration: animationDuration),
+      LFScrollControllerEvent(
+        LFScrollControllerEventType.scrollToBottom,
+        animated: animated,
+        duration: animationDuration,
+      ),
     );
   }
 
   void loading({bool value = false}) {
     addEvent(
-      LFScrollControllerEvent(LFScrollControllerEventType.loading,
-          value: value),
+      LFScrollControllerEvent(
+        LFScrollControllerEventType.loading,
+        animated: value,
+      ),
     );
   }
 
