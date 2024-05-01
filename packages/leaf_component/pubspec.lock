@@ -220,14 +220,14 @@ packages:
       path: "../leaf_common"
       relative: true
     source: path
-    version: "1.5.1"
+    version: "1.5.2"
   flutter_leaf_manager:
     dependency: "direct main"
     description:
       path: "../leaf_manager"
       relative: true
     source: path
-    version: "1.5.1"
+    version: "1.5.2"
   flutter_lints:
     dependency: "direct dev"
     description:
