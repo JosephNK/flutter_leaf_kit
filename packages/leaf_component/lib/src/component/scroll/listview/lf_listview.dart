@@ -48,31 +48,35 @@ class _LFListViewState<T> extends State<LFListView<T>>
   void initState() {
     super.initState();
 
+    initControlMixin(widget.physics);
+
     _streamSubscription = widget.controller?.streamController?.stream
         .asBroadcastStream()
-        .listen((event) {
+        .listen((event) async {
       final type = event.type;
       final animated = event.animated;
       final position = event.position;
       final duration = event.duration ?? const Duration(milliseconds: 300);
       switch (type) {
         case LFScrollControllerEventType.scrollToPosition:
-          scrollToPosition(
+          setClampingPhysics();
+          await scrollToPosition(
             context,
             animated: animated,
             value: position,
             animationDuration: duration,
           );
+          resetPhysics();
           break;
         case LFScrollControllerEventType.scrollToTop:
-          scrollToTop(
+          await scrollToTop(
             context,
             animated: animated,
             animationDuration: duration,
           );
           break;
         case LFScrollControllerEventType.scrollToBottom:
-          scrollToBottom(
+          await scrollToBottom(
             context,
             animated: animated,
             animationDuration: duration,

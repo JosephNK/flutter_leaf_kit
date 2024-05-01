@@ -11,6 +11,14 @@ mixin LFScrollControlMixin<T extends StatefulWidget> on State<T>
   bool loading = false;
   bool reachedMax = false;
 
+  ScrollPhysics? currentPhysics;
+  ScrollPhysics? backupPhysics;
+
+  initControlMixin(ScrollPhysics? physics) {
+    currentPhysics = physics;
+    backupPhysics = physics;
+  }
+
   Future<void> onPullToRefresh(
     BuildContext context,
     Future<void> Function()? callback,
@@ -42,13 +50,13 @@ mixin LFScrollControlMixin<T extends StatefulWidget> on State<T>
     }
   }
 
-  void scrollToPosition(
+  Future<void> scrollToPosition(
     BuildContext context, {
     bool animated = false,
     double? value,
     Duration animationDuration = const Duration(milliseconds: 300),
     Curve curve = Curves.fastOutSlowIn,
-  }) {
+  }) async {
     if (mounted) {
       var scrollController = PrimaryScrollController.of(context);
       if (!scrollController.hasClients) {
@@ -58,7 +66,7 @@ mixin LFScrollControlMixin<T extends StatefulWidget> on State<T>
       if (value == null) return;
 
       if (animated == true) {
-        scrollController.animateTo(
+        await scrollController.animateTo(
           value,
           duration: animationDuration,
           curve: Curves.fastOutSlowIn,
@@ -69,11 +77,11 @@ mixin LFScrollControlMixin<T extends StatefulWidget> on State<T>
     }
   }
 
-  void scrollToTop(
+  Future<void> scrollToTop(
     BuildContext context, {
     bool animated = false,
     Duration animationDuration = const Duration(milliseconds: 300),
-  }) {
+  }) async {
     if (mounted) {
       var scrollController = PrimaryScrollController.of(context);
       if (!scrollController.hasClients) {
@@ -81,7 +89,7 @@ mixin LFScrollControlMixin<T extends StatefulWidget> on State<T>
       }
       double value = 0.0;
 
-      scrollToPosition(
+      await scrollToPosition(
         context,
         animated: animated,
         value: value,
@@ -90,11 +98,11 @@ mixin LFScrollControlMixin<T extends StatefulWidget> on State<T>
     }
   }
 
-  void scrollToBottom(
+  Future<void> scrollToBottom(
     BuildContext context, {
     bool animated = false,
     Duration animationDuration = const Duration(milliseconds: 300),
-  }) {
+  }) async {
     if (mounted) {
       var scrollController = PrimaryScrollController.of(context);
       if (!scrollController.hasClients) {
@@ -102,7 +110,7 @@ mixin LFScrollControlMixin<T extends StatefulWidget> on State<T>
       }
       double value = scrollController.position.maxScrollExtent;
 
-      scrollToPosition(
+      await scrollToPosition(
         context,
         animated: animated,
         value: value,
@@ -122,6 +130,14 @@ mixin LFScrollControlMixin<T extends StatefulWidget> on State<T>
     if (mounted) {
       reachedMax = value;
     }
+  }
+
+  void setClampingPhysics() {
+    setState(() => currentPhysics = const ClampingScrollPhysics());
+  }
+
+  void resetPhysics() {
+    setState(() => currentPhysics = backupPhysics);
   }
 
   /// ScrollNotification
