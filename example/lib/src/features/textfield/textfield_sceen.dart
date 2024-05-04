@@ -65,6 +65,9 @@ class _TextFieldScreenState extends ScreenState<TextFieldScreen> {
             controller: _textController1,
             placeHolder: 'Normal Typing..',
             maxLength: 10,
+            onChanged: (text) {
+              print('onChanged: $text');
+            },
           ),
           const SizedBox(height: 10.0),
           LFTextField(

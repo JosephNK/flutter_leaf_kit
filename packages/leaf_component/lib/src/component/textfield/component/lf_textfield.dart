@@ -186,7 +186,12 @@ class _LFTextFieldState extends State<LFTextField> {
     _textFieldFocusNode = (focusNode == null) ? FocusNode() : focusNode;
     _textFieldFocusNode.addListener(onFocusNodeChangeListener);
 
-    text = controller.value ?? '';
+    final value = controller.value ?? '';
+    if (isNotEmpty(value)) {
+      _textFieldOnChanged(value);
+    }
+
+    text = value;
     controller.none();
   }
 
@@ -273,7 +278,7 @@ class _LFTextFieldState extends State<LFTextField> {
           fontSize: 16.0,
         );
 
-    /// Handler
+    /// Widgets
     Widget clearButtonWithHandler() {
       final child =
           clearIcon ?? Icon(Icons.clear_rounded, color: buttonClearIconColor);
@@ -283,33 +288,6 @@ class _LFTextFieldState extends State<LFTextField> {
         },
         child: child,
       );
-    }
-
-    void textFieldOnChanged(String value) {
-      final text = value.trim();
-
-      if (maxLines == 1) {
-        setState(() => _showClearButton = text.isNotEmpty);
-      }
-
-      final maxLength = widget.maxLength;
-      if (maxLength != null) {
-        final textLength = text.length;
-        if (textLength <= maxLength) {
-          _prevText = text;
-        } else {
-          _setTextEditingValue(_prevText);
-          // _textController.text = _prevText;
-        }
-        if (textLength > maxLength) return;
-      }
-
-      onChanged?.call(text);
-    }
-
-    void textFieldOnSubmitted(String value) {
-      final text = value.trim();
-      onSubmitted?.call(text);
     }
 
     final prefixIconWidget = prefixIcon;
@@ -452,8 +430,8 @@ class _LFTextFieldState extends State<LFTextField> {
               ),
       ),
       onTap: onTap,
-      onChanged: textFieldOnChanged,
-      onSubmitted: textFieldOnSubmitted,
+      onChanged: _textFieldOnChanged,
+      onSubmitted: _textFieldOnSubmitted,
       onEditingComplete: (onEditingComplete != null)
           ? () => onEditingComplete
           : null, // Done Button not working!
@@ -469,6 +447,41 @@ class _LFTextFieldState extends State<LFTextField> {
         offset: isEmpty(text) ? -1 : text.length,
       ),
     );
+  }
+
+  void _textFieldOnChanged(String value) {
+    final maxLength = widget.maxLength;
+    final maxLines = widget.maxLines;
+    final onChanged = widget.onChanged;
+
+    final text = value.trim();
+
+    if (maxLines == 1) {
+      setState(() => _showClearButton = text.isNotEmpty);
+    }
+
+    if (maxLength != null) {
+      final textLength = text.length;
+      if (textLength <= maxLength) {
+        _prevText = text;
+      } else {
+        if (isEmpty(_prevText)) {
+          _prevText = text.substring(0, maxLength);
+        }
+        _setTextEditingValue(_prevText);
+        // _textController.text = _prevText;
+      }
+      onChanged?.call(_prevText);
+      return;
+    }
+
+    onChanged?.call(text);
+  }
+
+  void _textFieldOnSubmitted(String value) {
+    final onSubmitted = widget.onSubmitted;
+    final text = value.trim();
+    onSubmitted?.call(text);
   }
 
   void clear() {
