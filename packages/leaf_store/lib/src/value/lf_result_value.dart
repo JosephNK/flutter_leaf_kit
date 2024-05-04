@@ -1,13 +1,9 @@
 part of '../../leaf_store.dart';
 
-typedef ResultValueOnErrorMessage = Future<Widget> Function(
-  BuildContext context, {
-  required String errorMessage,
-});
-typedef ResultValueOnException = Future<Widget> Function(
-  BuildContext context, {
-  Object? exception,
-});
+typedef ResultValueOnErrorMessage = Future<void> Function(
+    BuildContext context, String errorMessage);
+typedef ResultValueOnException = Future<void> Function(
+    BuildContext context, Object? exception);
 
 class ResultValue<T> extends Equatable {
   final ErrorValue? errorValue;
@@ -42,7 +38,7 @@ class ResultValue<T> extends Equatable {
     if (context.mounted) {
       final errorMessage = errorValue.errorMessage;
       if (errorMessage != null) {
-        await onErrorMessage?.call(context, errorMessage: errorMessage);
+        await onErrorMessage?.call(context, errorMessage);
       }
     }
     return this;
@@ -56,7 +52,7 @@ class ResultValue<T> extends Equatable {
     if (errorValue == null || errorValue.exception == null) return this;
     if (context.mounted) {
       final exception = errorValue.exception;
-      await onException?.call(context, exception: exception);
+      await onException?.call(context, exception);
     }
     return this;
   }

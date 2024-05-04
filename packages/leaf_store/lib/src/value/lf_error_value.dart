@@ -51,6 +51,9 @@ class ErrorValue extends Equatable {
   factory ErrorValue.fromException({
     dynamic exception,
   }) {
+    if (exception is ErrorValue) {
+      return exception;
+    }
     return ErrorValue(
       statusCode: -9999,
       errorCode: null,
