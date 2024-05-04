@@ -1,27 +1,36 @@
 part of '../lf_textfield.dart';
 
-enum LFTextFieldStatus { none, clear, reset }
+enum LFTextFieldStatus { none, clear, reset, setText }
 
 class LFTextFieldController extends ChangeNotifier {
   final controller = TextEditingController();
 
   LFTextFieldStatus status = LFTextFieldStatus.none;
 
+  String? value;
   String get text => controller.text;
+
   set text(String value) {
-    controller.text = value;
+    this.value = value;
+    status = LFTextFieldStatus.setText;
+    notifyListeners();
   }
 
   void reset() {
     status = LFTextFieldStatus.reset;
     notifyListeners();
-    status = LFTextFieldStatus.none;
+    none();
   }
 
   void clear() {
     status = LFTextFieldStatus.clear;
     notifyListeners();
+    none();
+  }
+
+  void none() {
     status = LFTextFieldStatus.none;
+    notifyListeners();
   }
 
   @override
@@ -33,8 +42,6 @@ class LFTextFieldController extends ChangeNotifier {
 
 class LFTextField extends StatefulWidget {
   final LFTextFieldController controller;
-  final String initialValue;
-  final String text;
   final TextStyle? textStyle;
   final bool autofocus;
   final bool disabled;
@@ -80,8 +87,6 @@ class LFTextField extends StatefulWidget {
   const LFTextField({
     super.key,
     required this.controller,
-    this.initialValue = '',
-    this.text = '',
     this.textStyle,
     this.autofocus = false,
     this.disabled = false,
@@ -144,17 +149,16 @@ class _LFTextFieldState extends State<LFTextField> {
     final suffixIcon = widget.suffixIcon;
     final enableClearButton = widget.enableClearButton;
     final maxLines = widget.maxLines;
+    final maxLength = widget.maxLength ?? 0;
     if (suffixIcon == null && enableClearButton) {
       if (maxLines == 1) {
         _showClearButton = isNotEmpty(newText);
       }
     }
-    _textController.value = TextEditingValue(
-      text: newText,
-      selection: TextSelection.collapsed(
-        offset: isEmpty(newText) ? -1 : newText.length,
-      ),
-    );
+    if (newText.length > maxLength) {
+      newText = newText.substring(0, maxLength);
+    }
+    _setTextEditingValue(newText);
   }
 
   @override
@@ -163,14 +167,16 @@ class _LFTextFieldState extends State<LFTextField> {
 
     final controller = widget.controller;
     final focusNode = widget.focusNode;
-    final initialValue = widget.initialValue;
-    final text = widget.text;
 
     controller.addListener(() {
       if (controller.status == LFTextFieldStatus.reset) {
         reset();
       } else if (controller.status == LFTextFieldStatus.clear) {
         clear();
+      } else if (controller.status == LFTextFieldStatus.setText) {
+        text = controller.value ?? '';
+      } else if (controller.status == LFTextFieldStatus.none) {
+        controller.value = null;
       }
     });
 
@@ -180,7 +186,8 @@ class _LFTextFieldState extends State<LFTextField> {
     _textFieldFocusNode = (focusNode == null) ? FocusNode() : focusNode;
     _textFieldFocusNode.addListener(onFocusNodeChangeListener);
 
-    this.text = isEmpty(text) ? initialValue : text;
+    text = controller.value ?? '';
+    controller.none();
   }
 
   @override
@@ -189,14 +196,6 @@ class _LFTextFieldState extends State<LFTextField> {
     _textFieldFocusNode.removeListener(onFocusNodeChangeListener);
 
     super.dispose();
-  }
-
-  @override
-  void didUpdateWidget(covariant LFTextField oldWidget) {
-    if (oldWidget.text != widget.text) {
-      text = widget.text;
-    }
-    super.didUpdateWidget(oldWidget);
   }
 
   @override
@@ -248,14 +247,14 @@ class _LFTextFieldState extends State<LFTextField> {
     final onSubmitted = widget.onSubmitted;
     final onEditingComplete = widget.onEditingComplete;
 
+    final disabledBackground1Color =
+        disabledBackgroundColor ?? Colors.grey.withOpacity(0.5);
+
     /// Colors
-    var inputBackgroundColor = disabled
-        ? disabledBackgroundColor ?? Colors.grey.withOpacity(0.5)
-        : readOnly
-            ? Colors.grey.withOpacity(0.5)
-            : backgroundColor;
+    var inputBackgroundColor =
+        (disabled || readOnly) ? disabledBackground1Color : backgroundColor;
     if (_hasFocus) {
-      inputBackgroundColor = backgroundColor;
+      //
     }
     var inputPlaceHolderColor = placeHolderColor ?? Colors.grey;
     var inputTextColor =
@@ -276,15 +275,13 @@ class _LFTextFieldState extends State<LFTextField> {
 
     /// Handler
     Widget clearButtonWithHandler() {
+      final child =
+          clearIcon ?? Icon(Icons.clear_rounded, color: buttonClearIconColor);
       return GestureDetector(
         onTap: () {
           clear();
         },
-        child: clearIcon ??
-            Icon(
-              Icons.clear_rounded,
-              color: buttonClearIconColor,
-            ),
+        child: child,
       );
     }
 
@@ -301,13 +298,8 @@ class _LFTextFieldState extends State<LFTextField> {
         if (textLength <= maxLength) {
           _prevText = text;
         } else {
-          _textController.value = TextEditingValue(
-            text: _prevText,
-            selection: TextSelection.collapsed(
-              offset: isEmpty(_prevText) ? -1 : _prevText.length,
-            ),
-          );
-          _textController.text = _prevText;
+          _setTextEditingValue(_prevText);
+          // _textController.text = _prevText;
         }
         if (textLength > maxLength) return;
       }
@@ -322,32 +314,22 @@ class _LFTextFieldState extends State<LFTextField> {
 
     final prefixIconWidget = prefixIcon;
 
-    var suffixIconWidget = suffixIcon ??
-        (enableClearButton
-            ? !_showClearButton
-                ? null
-                : clearButtonWithHandler()
-            : null);
-
-    if (maxLength != null && suffixIconWidget != null) {
-      suffixIconWidget = Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    final suffixIconWidget = Container(
+      margin: EdgeInsets.only(right: contentPadding.right),
+      child: Row(
         mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.end,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          suffixIconWidget,
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10.0),
-            child: Text(
-              '${text.length}/$maxLength',
-              style: const TextStyle(
-                fontSize: 14.0,
-                color: Colors.grey,
-              ),
-            ),
-          ),
+          suffixIcon ?? Container(),
+          enableClearButton
+              ? !_showClearButton
+                  ? Container()
+                  : clearButtonWithHandler()
+              : Container(),
         ],
-      );
-    }
+      ),
+    );
 
     return TextField(
       controller: _textController,
@@ -479,6 +461,15 @@ class _LFTextFieldState extends State<LFTextField> {
   }
 
   /// Methods
+
+  void _setTextEditingValue(String text) {
+    _textController.value = TextEditingValue(
+      text: text,
+      selection: TextSelection.collapsed(
+        offset: isEmpty(text) ? -1 : text.length,
+      ),
+    );
+  }
 
   void clear() {
     final onChanged = widget.onChanged;
