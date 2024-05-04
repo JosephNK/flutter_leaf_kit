@@ -16,7 +16,6 @@ dependencies:
   cached_network_image_platform_interface: ^4.0.0
   flutter_cache_manager: ^3.3.1
   flutter_rating_bar: ^4.0.1
-  dropdown_button2: ^2.3.9
   expandable_page_view: ^1.0.17
   shimmer: ^3.0.0
   photo_manager: ^3.0.0
