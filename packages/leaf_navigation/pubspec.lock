@@ -140,14 +140,14 @@ packages:
       path: "../leaf_common"
       relative: true
     source: path
-    version: "1.5.5"
+    version: "1.5.6"
   flutter_leaf_store:
     dependency: "direct main"
     description:
       path: "../leaf_store"
       relative: true
     source: path
-    version: "1.5.5"
+    version: "1.5.6"
   flutter_lints:
     dependency: "direct dev"
     description:
