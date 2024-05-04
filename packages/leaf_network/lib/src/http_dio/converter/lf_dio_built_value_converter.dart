@@ -94,7 +94,7 @@ class LFDioBuiltValueConverter implements DioConverter {
       return _deserialize<T>(deserializeEntity);
     } catch (e) {
       Logging.e(e);
-      return null;
+      rethrow;
     }
   }
 
