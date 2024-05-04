@@ -149,22 +149,19 @@ class _LFTextFieldState extends State<LFTextField> {
     final suffixIcon = widget.suffixIcon;
     final enableClearButton = widget.enableClearButton;
     final maxLines = widget.maxLines;
-    final maxLength = widget.maxLength ?? 0;
+
     if (suffixIcon == null && enableClearButton) {
       if (maxLines == 1) {
         _showClearButton = isNotEmpty(newText);
       }
     }
-    if (newText.length > maxLength) {
-      newText = newText.substring(0, maxLength);
-    }
+    newText = _textCutString(newText);
+
     _setTextEditingValue(newText);
   }
 
   @override
   void initState() {
-    super.initState();
-
     final controller = widget.controller;
     final focusNode = widget.focusNode;
 
@@ -186,13 +183,14 @@ class _LFTextFieldState extends State<LFTextField> {
     _textFieldFocusNode = (focusNode == null) ? FocusNode() : focusNode;
     _textFieldFocusNode.addListener(onFocusNodeChangeListener);
 
-    final value = controller.value ?? '';
-    if (isNotEmpty(value)) {
-      _textFieldOnChanged(value);
-    }
-
-    text = value;
+    text = controller.value ?? '';
     controller.none();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      widget.onChanged?.call(text);
+    });
+
+    super.initState();
   }
 
   @override
@@ -248,8 +246,6 @@ class _LFTextFieldState extends State<LFTextField> {
     final suffixIconConstraints = widget.suffixIconConstraints;
     final inputFormatters = widget.inputFormatters;
     final onTap = widget.onTap;
-    final onChanged = widget.onChanged;
-    final onSubmitted = widget.onSubmitted;
     final onEditingComplete = widget.onEditingComplete;
 
     final disabledBackground1Color =
@@ -441,12 +437,22 @@ class _LFTextFieldState extends State<LFTextField> {
   /// Methods
 
   void _setTextEditingValue(String text) {
-    _textController.value = TextEditingValue(
-      text: text,
-      selection: TextSelection.collapsed(
-        offset: isEmpty(text) ? -1 : text.length,
-      ),
-    );
+    if (context.mounted) {
+      _textController.value = TextEditingValue(
+        text: text,
+        selection: TextSelection.collapsed(
+          offset: isEmpty(text) ? -1 : text.length,
+        ),
+      );
+    }
+  }
+
+  String _textCutString(String text) {
+    final maxLength = widget.maxLength ?? 0;
+    if (text.length > maxLength && maxLength != 0) {
+      text = text.substring(0, maxLength);
+    }
+    return text;
   }
 
   void _textFieldOnChanged(String value) {
@@ -456,7 +462,7 @@ class _LFTextFieldState extends State<LFTextField> {
 
     final text = value.trim();
 
-    if (maxLines == 1) {
+    if (context.mounted && maxLines == 1) {
       setState(() => _showClearButton = text.isNotEmpty);
     }
 
@@ -466,10 +472,9 @@ class _LFTextFieldState extends State<LFTextField> {
         _prevText = text;
       } else {
         if (isEmpty(_prevText)) {
-          _prevText = text.substring(0, maxLength);
+          _prevText = _textCutString(text);
         }
         _setTextEditingValue(_prevText);
-        // _textController.text = _prevText;
       }
       onChanged?.call(_prevText);
       return;
@@ -494,8 +499,9 @@ class _LFTextFieldState extends State<LFTextField> {
     if (text.isNotEmpty) {
       onSubmitted?.call(text);
     }
-    if (!mounted) return;
-    setState(() => _showClearButton = false);
+    if (context.mounted) {
+      setState(() => _showClearButton = false);
+    }
   }
 
   void reset() {
@@ -512,9 +518,11 @@ class _LFTextFieldState extends State<LFTextField> {
 
     final hasFocus = _textFieldFocusNode.hasFocus;
 
-    setState(() {
-      _hasFocus = hasFocus;
-    });
+    if (context.mounted) {
+      setState(() {
+        _hasFocus = hasFocus;
+      });
+    }
 
     onFocusChanged?.call(hasFocus);
   }

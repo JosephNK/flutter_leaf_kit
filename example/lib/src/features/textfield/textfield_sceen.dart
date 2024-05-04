@@ -25,7 +25,8 @@ class _TextFieldScreenState extends ScreenState<TextFieldScreen> {
 
   @override
   void initState() {
-    _textController1.text = '12345678901';
+    // _textController1.text = '12345678901';
+    _textController5.text = '1234567890-12345';
 
     super.initState();
   }
@@ -93,13 +94,8 @@ class _TextFieldScreenState extends ScreenState<TextFieldScreen> {
             errorText: 'error message',
           ),
           const SizedBox(height: 10.0),
-          LFTextField(
+          TextAreaView(
             controller: _textController5,
-            placeHolder: 'TextArea Typing..',
-            keyboardType: TextInputType.multiline,
-            textInputAction: TextInputAction.newline,
-            minLines: 5,
-            maxLines: 5,
           ),
           Container(
             height: 300.0,
@@ -108,6 +104,54 @@ class _TextFieldScreenState extends ScreenState<TextFieldScreen> {
           // TextField(),
         ],
       ),
+    );
+  }
+}
+
+class TextAreaView extends StatefulWidget {
+  final LFTextFieldController controller;
+
+  const TextAreaView({
+    super.key,
+    required this.controller,
+  });
+
+  @override
+  State<TextAreaView> createState() => _TextAreaViewState();
+}
+
+class _TextAreaViewState extends State<TextAreaView> {
+  int _textCount = 0;
+
+  @override
+  Widget build(BuildContext context) {
+    final controller = widget.controller;
+
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.end,
+      children: [
+        LFTextField(
+          controller: controller,
+          placeHolder: 'TextArea Typing..',
+          // keyboardType: TextInputType.multiline,
+          // textInputAction: TextInputAction.newline,
+          minLines: 5,
+          maxLines: 5,
+          maxLength: 11,
+          onChanged: (text) {
+            final text_ = controller.text;
+            setState(() {
+              _textCount = controller.text.length;
+            });
+            print('onChanged: $text, $text_');
+          },
+        ),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Text('${_textCount.toString()}/11'),
+        ),
+      ],
     );
   }
 }
