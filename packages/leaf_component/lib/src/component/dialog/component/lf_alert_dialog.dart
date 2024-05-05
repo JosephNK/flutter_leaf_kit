@@ -87,7 +87,7 @@ class LFAlertDialog {
     required String? errorMessage,
     VoidCallback? onOk,
   }) async {
-    if (errorMessage == null) return;
+    if (isEmpty(errorMessage)) return;
 
     final okTextStr = LFComponentConfigure.shared.alert?.okText ?? 'OK';
     final okTextStyle = LFComponentConfigure.shared.alert?.okTextStyle;
@@ -97,7 +97,7 @@ class LFAlertDialog {
         LFComponentConfigure.shared.alert?.errorMessageTitle ??
             'Oops! Error :(';
 
-    String errorMessageStr = errorMessage;
+    String errorMessageStr = errorMessage!;
 
     _LFAlertDialog().show(
       context,

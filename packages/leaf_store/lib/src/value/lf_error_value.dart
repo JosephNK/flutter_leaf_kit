@@ -107,14 +107,12 @@ class ErrorValue extends Equatable {
 
   /// Utils
 
-  static ErrorValue getFirstErrorValues(List<ErrorValue?> errorValues) {
-    final errorValue1s = errorValues.whereNotNull().toList();
-    return errorValue1s.first;
+  static ErrorValue? getFirstErrorValues(List<ErrorValue?> errorValues) {
+    return errorValues.firstOrNull;
   }
 
-  static ErrorValue getLastErrorValues(List<ErrorValue?> errorValues) {
-    final errorValue1s = errorValues.whereNotNull().toList();
-    return errorValue1s.last;
+  static ErrorValue? getLastErrorValues(List<ErrorValue?> errorValues) {
+    return errorValues.lastOrNull;
   }
 
   static Future<void> waitForErrorValues(
