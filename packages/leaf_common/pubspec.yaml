@@ -15,6 +15,7 @@ dependencies:
   equatable: ^2.0.5
   provider: ^6.1.2
 
+  collection: ^1.18.0
   easy_localization: ^3.0.5
   logger: ^2.2.0
   quiver: ^3.2.1

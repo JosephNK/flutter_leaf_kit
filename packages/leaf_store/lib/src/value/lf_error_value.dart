@@ -10,6 +10,9 @@ class ErrorValueException implements Exception {
 
 ///////////////////////////////////////////////////////////////////////////////
 
+typedef ErrorValueOnWait = Future<void> Function(
+    BuildContext context, ErrorValue errorValue);
+
 class ErrorValue extends Equatable {
   final int statusCode;
   final String? errorCode;
@@ -32,10 +35,21 @@ class ErrorValue extends Equatable {
       ];
 
   String get displayErrorMessage {
+    final errorMessage = this.errorMessage;
+    if (isEmpty(errorMessage)) {
+      return '';
+    }
+    return '$errorMessage';
+  }
+
+  String get displayErrorMessageWithErrorCode {
     final errorCode = this.errorCode;
     final errorMessage = this.errorMessage;
-    if (isNotEmpty(errorCode)) {
+    if (isNotEmpty(errorMessage) && isNotEmpty(errorCode)) {
       return '$errorMessage ($errorCode)';
+    }
+    if (isEmpty(errorMessage)) {
+      return '';
     }
     return '$errorMessage';
   }
@@ -89,6 +103,29 @@ class ErrorValue extends Equatable {
       errorMessage: errorMessage,
       exception: null,
     );
+  }
+
+  /// Utils
+
+  static ErrorValue getFirstErrorValues(List<ErrorValue?> errorValues) {
+    final errorValue1s = errorValues.whereNotNull().toList();
+    return errorValue1s.first;
+  }
+
+  static ErrorValue getLastErrorValues(List<ErrorValue?> errorValues) {
+    final errorValue1s = errorValues.whereNotNull().toList();
+    return errorValue1s.last;
+  }
+
+  static Future<void> waitForErrorValues(
+    BuildContext context, {
+    required List<ErrorValue?> errorValues,
+    ErrorValueOnWait? onWait,
+  }) async {
+    final errorValue1s = errorValues.whereNotNull().toList();
+    await Future.forEach<ErrorValue>(errorValue1s, (errorValue) async {
+      await onWait?.call(context, errorValue);
+    });
   }
 }
 
