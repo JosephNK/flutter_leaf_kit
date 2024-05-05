@@ -1,5 +1,7 @@
 part of '../../leaf_store.dart';
 
+const kDefaultStatusCode = -9999;
+
 class ErrorValueException implements Exception {
   ErrorValue value;
 
@@ -30,7 +32,12 @@ class ErrorValue extends Equatable {
       ];
 
   String get displayErrorMessage {
-    return '$errorMessage ($errorCode)';
+    final errorCode = this.errorCode;
+    final errorMessage = this.errorMessage;
+    if (isNotEmpty(errorCode)) {
+      return '$errorMessage ($errorCode)';
+    }
+    return '$errorMessage';
   }
 
   Map<String, dynamic> toJson() {
@@ -48,17 +55,39 @@ class ErrorValue extends Equatable {
 
   /// Create
 
+  factory ErrorValue.empty() {
+    return const ErrorValue(
+      statusCode: kDefaultStatusCode,
+      errorCode: null,
+      errorMessage: null,
+      exception: null,
+    );
+  }
+
   factory ErrorValue.fromException({
     dynamic exception,
+    String? errorCode,
   }) {
     if (exception is ErrorValue) {
       return exception;
     }
     return ErrorValue(
-      statusCode: -9999,
-      errorCode: null,
+      statusCode: kDefaultStatusCode,
+      errorCode: errorCode,
       errorMessage: 'Unknown Exception',
       exception: exception,
+    );
+  }
+
+  factory ErrorValue.fromErrorMessage(
+    String errorMessage, {
+    String? errorCode,
+  }) {
+    return ErrorValue(
+      statusCode: kDefaultStatusCode,
+      errorCode: errorCode,
+      errorMessage: errorMessage,
+      exception: null,
     );
   }
 }
