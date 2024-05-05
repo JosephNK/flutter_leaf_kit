@@ -21,7 +21,7 @@ extension NumberInt on int {
     String? customPattern,
   }) {
     final f = NumberFormat.currency(
-      locale: locale.toString(),
+      locale: (locale != null) ? locale.toString() : null,
       name: name,
       symbol: symbol,
       decimalDigits: decimalDigits,
@@ -36,7 +36,7 @@ extension NumberInt on int {
     int? decimalDigits,
   }) {
     final f = NumberFormat.simpleCurrency(
-      locale: locale.toString(),
+      locale: (locale != null) ? locale.toString() : null,
       name: name,
       decimalDigits: decimalDigits,
     );
@@ -49,7 +49,7 @@ extension NumberInt on int {
     int? decimalDigits,
   }) {
     final f = NumberFormat.simpleCurrency(
-      locale: locale.toString(),
+      locale: (locale != null) ? locale.toString() : null,
       name: name,
       decimalDigits: decimalDigits,
     );
