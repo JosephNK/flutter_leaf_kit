@@ -284,63 +284,63 @@ packages:
       path: "../leaf_common"
       relative: true
     source: path
-    version: "1.7.1"
+    version: "1.7.2"
   flutter_leaf_component:
     dependency: "direct main"
     description:
       path: "../leaf_component"
       relative: true
     source: path
-    version: "1.7.1"
+    version: "1.7.2"
   flutter_leaf_location:
     dependency: "direct main"
     description:
       path: "../leaf_location"
       relative: true
     source: path
-    version: "1.7.1"
+    version: "1.7.2"
   flutter_leaf_manager:
     dependency: "direct main"
     description:
       path: "../leaf_manager"
       relative: true
     source: path
-    version: "1.7.1"
+    version: "1.7.2"
   flutter_leaf_map:
     dependency: "direct main"
     description:
       path: "../leaf_map"
       relative: true
     source: path
-    version: "1.7.1"
+    version: "1.7.2"
   flutter_leaf_navigation:
     dependency: "direct main"
     description:
       path: "../leaf_navigation"
       relative: true
     source: path
-    version: "1.7.1"
+    version: "1.7.2"
   flutter_leaf_network:
     dependency: "direct main"
     description:
       path: "../leaf_network"
       relative: true
     source: path
-    version: "1.7.1"
+    version: "1.7.2"
   flutter_leaf_store:
     dependency: "direct main"
     description:
       path: "../leaf_store"
       relative: true
     source: path
-    version: "1.7.1"
+    version: "1.7.2"
   flutter_leaf_webview:
     dependency: "direct main"
     description:
       path: "../leaf_webview"
       relative: true
     source: path
-    version: "1.7.1"
+    version: "1.7.2"
   flutter_lints:
     dependency: "direct dev"
     description:
