@@ -128,3 +128,17 @@ class _ImageScreenState extends ScreenState<ImageScreen> {
     );
   }
 }
+
+class ExampleCacheManager {
+  static const key = 'ExampleCacheManager';
+  static CacheManager instance = CacheManager(
+    Config(
+      key,
+      repo: JsonCacheInfoRepository(databaseName: key),
+      // stalePeriod: const Duration(days: 7),
+      // maxNrOfCacheObjects: 20,
+      // fileSystem: IOFileSystem(key), // not found
+      // fileService: HttpFileService(),
+    ),
+  );
+}

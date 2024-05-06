@@ -12,6 +12,7 @@ class LFCircleAvatarImage extends StatelessWidget {
   final Map<String, String>? header;
   final Widget? placeholderWidget;
   final Widget? errorWidget;
+  final BaseCacheManager? cacheManager;
 
   const LFCircleAvatarImage({
     super.key,
@@ -26,6 +27,7 @@ class LFCircleAvatarImage extends StatelessWidget {
     this.header,
     this.placeholderWidget,
     this.errorWidget,
+    this.cacheManager,
   });
 
   @override
@@ -73,6 +75,7 @@ class LFCircleAvatarImage extends StatelessWidget {
         filterQuality: filterQuality,
         placeholderWidget: placeholderWidget,
         errorWidget: errorWidget,
+        cacheManager: cacheManager,
       );
     }
 

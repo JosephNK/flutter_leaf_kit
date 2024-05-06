@@ -16,6 +16,7 @@ class LFCacheNetworkImage extends StatelessWidget {
   final Widget? placeholderWidget;
   final Widget? errorWidget;
   final LFCacheNetworkImageOnPreBuilder? onPreBuilder;
+  final BaseCacheManager? cacheManager;
 
   const LFCacheNetworkImage({
     super.key,
@@ -30,6 +31,7 @@ class LFCacheNetworkImage extends StatelessWidget {
     this.shimmerHighlightColor,
     this.header,
     this.placeholderWidget,
+    this.cacheManager,
     this.errorWidget,
     this.onPreBuilder,
   });
@@ -63,7 +65,7 @@ class LFCacheNetworkImage extends StatelessWidget {
       width: width,
       height: height,
       fit: fit,
-      cacheManager: CustomCacheManager.instance,
+      cacheManager: cacheManager ?? LFCacheManager.instance,
       placeholderFadeInDuration: const Duration(milliseconds: 0),
       fadeOutDuration: const Duration(milliseconds: 0),
       fadeInDuration: const Duration(milliseconds: 0),
@@ -91,16 +93,30 @@ class LFCacheNetworkImage extends StatelessWidget {
   }
 }
 
-class CustomCacheManager {
+////////////////////////////////////////////////////////////////////////////////
+
+class LFCacheManager {
   static const key = 'LFCachedImageData';
   static CacheManager instance = CacheManager(
     Config(
       key,
+      repo: JsonCacheInfoRepository(databaseName: key),
       // stalePeriod: const Duration(days: 7),
       // maxNrOfCacheObjects: 20,
-      repo: JsonCacheInfoRepository(databaseName: key),
       // fileSystem: IOFileSystem(key),
       // fileService: HttpFileService(),
     ),
   );
+
+  static Future<File> getSingleFile(
+    String url, {
+    String? key,
+    Map<String, String>? headers,
+  }) async {
+    return await DefaultCacheManager().getSingleFile(url);
+  }
+
+  static Future<void> emptyCache() async {
+    await DefaultCacheManager().emptyCache();
+  }
 }

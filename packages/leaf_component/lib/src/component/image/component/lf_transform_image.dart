@@ -10,6 +10,7 @@ class LFTransformImage extends StatelessWidget {
   final FilterQuality filterQuality;
   final Widget? placeholderWidget;
   final Widget? errorWidget;
+  final BaseCacheManager? cacheManager;
 
   const LFTransformImage({
     super.key,
@@ -22,6 +23,7 @@ class LFTransformImage extends StatelessWidget {
     this.filterQuality = FilterQuality.low,
     this.placeholderWidget,
     this.errorWidget,
+    this.cacheManager,
   });
 
   @override
@@ -58,6 +60,7 @@ class LFTransformImage extends StatelessWidget {
         filterQuality: filterQuality,
         placeholderWidget: placeholderWidget,
         errorWidget: errorWidget,
+        cacheManager: cacheManager,
       );
     }
 

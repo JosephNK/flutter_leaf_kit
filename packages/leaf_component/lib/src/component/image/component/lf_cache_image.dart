@@ -17,6 +17,7 @@ class LFCacheImage extends StatelessWidget {
   final Map<String, String>? header;
   final Widget? placeholderWidget;
   final Widget? errorWidget;
+  final BaseCacheManager? cacheManager;
 
   const LFCacheImage({
     super.key,
@@ -33,6 +34,7 @@ class LFCacheImage extends StatelessWidget {
     this.header,
     this.placeholderWidget,
     this.errorWidget,
+    this.cacheManager,
   });
 
   @override
@@ -87,6 +89,7 @@ class LFCacheImage extends StatelessWidget {
         width: width,
         height: height,
         header: header,
+        cacheManager: cacheManager,
       );
     }
 
@@ -103,6 +106,7 @@ class LFCacheImage extends StatelessWidget {
       header: httpHeaders,
       placeholderWidget: placeholderWidget,
       errorWidget: errorWidget,
+      cacheManager: cacheManager,
     );
 
     if (isClipper) {
@@ -126,6 +130,7 @@ class LFWebpCacheNetworkImage extends StatefulWidget {
   final double? width;
   final double? height;
   final Map<String, String>? header;
+  final BaseCacheManager? cacheManager;
 
   const LFWebpCacheNetworkImage({
     super.key,
@@ -133,6 +138,7 @@ class LFWebpCacheNetworkImage extends StatefulWidget {
     required this.width,
     required this.height,
     required this.header,
+    this.cacheManager,
   });
 
   @override
@@ -148,28 +154,31 @@ class _LFWebpCacheNetworkImageState extends State<LFWebpCacheNetworkImage> {
     super.initState();
 
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      final _ = await LFCachedNetworkImageProvider(widget.url,
-              cacheManager: CustomCacheManager.instance)
-          .evict();
+      final _ = await LFCachedNetworkImageProvider(
+        widget.url,
+        cacheManager: widget.cacheManager ?? LFCacheManager.instance,
+      ).evict();
       setState(() => _play = true);
     });
   }
 
   @override
   Widget build(BuildContext context) {
+    final image = (!_play)
+        ? null
+        : DecorationImage(
+            image: LFCachedNetworkImageProvider(
+              widget.url,
+              cacheManager: widget.cacheManager ?? LFCacheManager.instance,
+              headers: widget.header,
+            ),
+          );
+
     return Container(
       width: widget.width,
       height: widget.height,
       decoration: BoxDecoration(
-        image: (!_play)
-            ? null
-            : DecorationImage(
-                image: LFCachedNetworkImageProvider(
-                  widget.url,
-                  cacheManager: CustomCacheManager.instance,
-                  headers: widget.header,
-                ),
-              ),
+        image: image,
       ),
     );
   }
