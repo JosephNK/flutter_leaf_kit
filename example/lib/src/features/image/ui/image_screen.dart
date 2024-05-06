@@ -17,9 +17,11 @@ class ImageScreen extends ScreenStatefulWidget {
 }
 
 class _ImageScreenState extends ScreenState<ImageScreen> {
-  Uint8List? _bytes;
-  final String _networkUrl = 'https://picsum.photos/200';
+  final String _networkUrl = 'https://picsum.photos/300';
   final String _assetFile = 'assets/images/sample400x300.jpg';
+  final String _fileUrl = 'file://xxx.xxx';
+
+  Uint8List? _bytes;
 
   @override
   Color? get backgroundColor => Colors.white;
@@ -50,28 +52,47 @@ class _ImageScreenState extends ScreenState<ImageScreen> {
 
   @override
   Widget buildBody(BuildContext context, Object? state) {
+    final networkUri = Uri.parse(_networkUrl);
+    final assetFileUri = Uri.parse(_assetFile);
+    final fileUri = Uri.parse(_fileUrl);
+    final emptyUri = Uri.parse('');
+
+    // flutter: networkUri: https://picsum.photos/200
+    // flutter: assetFileUri: assets/images/sample400x300.jpg
+    // flutter: fileUri: file://image.png/
+    // flutter: emptyUri:
+    // flutter: networkUri (scheme): https
+    // flutter: assetFileUri (scheme):
+    // flutter: fileUri (scheme): file
+    // flutter: emptyUri (scheme):
+    // flutter: networkUri (path): /200
+    // flutter: assetFileUri (path): assets/images/sample400x300.jpg
+    // flutter: fileUri (path): /
+    // flutter: emptyUri (path):
+
+    debugPrint('networkUri: ${networkUri.toString()}');
+    debugPrint('assetFileUri: ${assetFileUri.toString()}');
+    debugPrint('fileUri: ${fileUri.toString()}');
+    debugPrint('emptyUri: ${emptyUri.toString()}');
+    debugPrint('networkUri (scheme): ${networkUri.scheme}');
+    debugPrint('assetFileUri (scheme): ${assetFileUri.scheme}');
+    debugPrint('fileUri (scheme): ${fileUri.scheme}');
+    debugPrint('emptyUri (scheme): ${emptyUri.scheme}');
+    debugPrint('networkUri (path): ${networkUri.path}');
+    debugPrint('assetFileUri (path): ${assetFileUri.path}');
+    debugPrint('fileUri (path): ${fileUri.path}');
+    debugPrint('emptyUri (path): ${emptyUri.path}');
+
     return SingleChildScrollView(
       child: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const Text('Memory'),
-            (_bytes != null)
-                ? LFTransformImage(
-                    image: LFImageValue(
-                      bytes: _bytes,
-                    ),
-                    // width: 100.0,
-                    // height: 100.0,
-                    // fit: fit,
-                    // placeholderWidget: placeholderWidget,
-                  )
-                : Container(),
             const Text('Network'),
             LFTransformImage(
               image: LFImageValue(
-                file: _networkUrl,
+                origin: networkUri,
                 header: null,
               ),
               width: 100.0,
@@ -82,13 +103,25 @@ class _ImageScreenState extends ScreenState<ImageScreen> {
             const Text('Assets'),
             LFTransformImage(
               image: LFImageValue(
-                file: _assetFile,
+                origin: assetFileUri,
               ),
               width: 100.0,
               height: 100.0,
               // fit: fit,
               // placeholderWidget: placeholderWidget,
-            )
+            ),
+            const Text('Memory'),
+            (_bytes != null)
+                ? LFTransformImage(
+                    image: LFImageValue(
+                      bytes: _bytes,
+                    ),
+                    width: 100.0,
+                    height: 100.0,
+                    // fit: fit,
+                    // placeholderWidget: placeholderWidget,
+                  )
+                : Container(),
           ],
         ),
       ),

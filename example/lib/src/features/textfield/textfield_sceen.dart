@@ -67,7 +67,7 @@ class _TextFieldScreenState extends ScreenState<TextFieldScreen> {
             placeHolder: 'Normal Typing..',
             maxLength: 10,
             onChanged: (text) {
-              print('onChanged: $text');
+              debugPrint('LFTextField onChanged: $text');
             },
           ),
           const SizedBox(height: 10.0),
@@ -144,7 +144,7 @@ class _TextAreaViewState extends State<TextAreaView> {
             setState(() {
               _textCount = controller.text.length;
             });
-            print('onChanged: $text, $text_');
+            debugPrint('LFTextField onChanged: $text, $text_');
           },
         ),
         Padding(

@@ -4,7 +4,7 @@ part of '../lf_image.dart';
 /// ref., https://iiro.dev/2017/09/04/clipping-widgets-with-bezier-curves-in-flutter/
 ///
 class LFCacheImage extends StatelessWidget {
-  final String? url;
+  final Uri? uri;
   final double? width;
   final double? height;
   final BoxFit fit;
@@ -18,7 +18,7 @@ class LFCacheImage extends StatelessWidget {
 
   const LFCacheImage({
     super.key,
-    this.url,
+    required this.uri,
     this.width,
     this.height,
     this.fit = BoxFit.cover,
@@ -37,7 +37,7 @@ class LFCacheImage extends StatelessWidget {
     final header = this.header;
     return _buildWrapNetworkImage(
       context,
-      url: url,
+      uri: uri,
       httpHeaders: header,
     );
   }
@@ -45,10 +45,10 @@ class LFCacheImage extends StatelessWidget {
   // Wrap Network Image
   Widget _buildWrapNetworkImage(
     BuildContext context, {
-    required String? url,
+    required Uri? uri,
     required Map<String, String>? httpHeaders,
   }) {
-    final url = this.url ?? '';
+    final url = this.uri?.toString() ?? '';
 
     Widget getClipperWrapperWidget({required Widget child}) {
       return Stack(

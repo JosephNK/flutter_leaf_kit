@@ -21,8 +21,6 @@ class LFTransformImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final image = this.image;
-    final file = image.file ?? '';
-    final thumbFile = image.thumbFile ?? '';
     final bytes = image.bytes;
     final header = image.header;
 
@@ -39,16 +37,10 @@ class LFTransformImage extends StatelessWidget {
     }
 
     /// Network URL
-    String? urlFile;
-    if (isURL(thumbFile)) {
-      urlFile = thumbFile;
-    } else if (isURL(file)) {
-      urlFile = file;
-    }
-    if (urlFile != null) {
+    if (image.isThumbnailOrOriginURL) {
       return LFCacheImage(
         header: header,
-        url: urlFile,
+        uri: image.getThumbnailOrOriginURL,
         width: width,
         height: height,
         fit: fit,
@@ -59,7 +51,7 @@ class LFTransformImage extends StatelessWidget {
 
     /// Asset
     return LFAssetFileImage(
-      path: file,
+      uri: image.getThumbnailOrOrigin,
       width: width,
       height: height,
       fit: fit,

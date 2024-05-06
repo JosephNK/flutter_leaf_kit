@@ -1,22 +1,30 @@
 part of '../lf_image.dart';
 
 class LFImageValue extends Equatable {
-  final String? file; // Url, FilePath, AssetPath
-  final String? thumbFile; // Url, FilePath, AssetPath
+  // Url
+  // https://picsum.photos/200
+  // assets/images/sample400x300.jpg
+  // file://xxx.xxx
+  final Uri? origin;
+  final Uri? thumbnail;
+
+  // Bytes
   final Uint8List? bytes;
+
+  // only use cache_image
   final Map<String, String>? header;
 
   const LFImageValue({
-    this.file,
-    this.thumbFile,
+    this.origin,
+    this.thumbnail,
     this.bytes,
     this.header,
   });
 
   @override
   List<Object?> get props => [
-        file,
-        thumbFile,
+        origin,
+        thumbnail,
         bytes,
         header,
       ];
@@ -32,15 +40,51 @@ class LFImageValue extends Equatable {
   }
 
   LFImageValue copyWith({
-    String? Function()? file,
+    Uri? Function()? origin,
+    Uri? Function()? thumbnail,
     Uint8List? Function()? bytes,
-    String? Function()? thumbFile,
     Map<String, String>? Function()? header,
   }) =>
       LFImageValue(
-        file: file != null ? file() : this.file,
+        origin: origin != null ? origin() : this.origin,
+        thumbnail: thumbnail != null ? thumbnail() : this.thumbnail,
         bytes: bytes != null ? bytes() : this.bytes,
-        thumbFile: thumbFile != null ? thumbFile() : this.thumbFile,
         header: header != null ? header() : this.header,
       );
+
+  /// Method
+
+  static bool isNotEmptyUri(Uri? uri) {
+    return uri != null && uri.toString() != '';
+  }
+
+  bool get isThumbnailOrOriginURL {
+    Uri? uri;
+    if (isURL(thumbnail.toString())) {
+      uri = thumbnail;
+    } else if (isURL(origin.toString())) {
+      uri = origin;
+    }
+    return uri != null;
+  }
+
+  Uri? get getThumbnailOrOriginURL {
+    Uri? uri;
+    if (isURL(thumbnail.toString())) {
+      uri = thumbnail;
+    } else if (isURL(origin.toString())) {
+      uri = origin;
+    }
+    return uri;
+  }
+
+  Uri? get getThumbnailOrOrigin {
+    Uri? uri;
+    if (LFImageValue.isNotEmptyUri(thumbnail)) {
+      uri = thumbnail;
+    } else if (LFImageValue.isNotEmptyUri(origin)) {
+      uri = origin;
+    }
+    return uri;
+  }
 }

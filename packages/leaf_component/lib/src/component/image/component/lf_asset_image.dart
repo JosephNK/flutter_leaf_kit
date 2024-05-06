@@ -1,7 +1,7 @@
 part of '../lf_image.dart';
 
 class LFAssetFileImage extends StatelessWidget {
-  final String path;
+  final Uri? uri;
   final Color? color;
   final double? width;
   final double? height;
@@ -11,7 +11,7 @@ class LFAssetFileImage extends StatelessWidget {
 
   const LFAssetFileImage({
     super.key,
-    required this.path,
+    required this.uri,
     this.color,
     this.width,
     this.height,
@@ -22,12 +22,15 @@ class LFAssetFileImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final path = this.path;
+    final uri = this.uri;
     final width = this.width;
     final height = this.height;
     final fit = this.fit;
 
-    if (isEmpty(path)) {
+    final uriString = uri?.toString() ?? '';
+    final scheme = uri?.scheme.toLowerCase() ?? '';
+
+    if (!LFImageValue.isNotEmptyUri(uri)) {
       return SizedBox(
         width: width,
         height: height,
@@ -35,8 +38,8 @@ class LFAssetFileImage extends StatelessWidget {
       );
     }
 
-    if (path.startsWith('file://')) {
-      final filePath = path.replaceAll('file://', '');
+    if (scheme.contains('file')) {
+      final filePath = uriString.replaceAll('file://', '');
       if (filePath.endsWith('webp')) {
         // https://github.com/flutter/flutter/issues/24858#issuecomment-460544959
         final _ = imageCache.evict(FileImage(File(filePath)));
@@ -60,7 +63,7 @@ class LFAssetFileImage extends StatelessWidget {
     }
 
     return Image(
-      image: AssetImage(path),
+      image: AssetImage(uriString),
       fit: fit,
       width: width,
       height: height,
