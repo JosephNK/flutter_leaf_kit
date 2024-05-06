@@ -43,8 +43,8 @@ class _PageIndicatorScreenState extends ScreenState<PageIndicatorScreen> {
           ),
           Text('LFPageCircleIndicator'),
           LFPageCircleIndicator(
-            total: 10,
-            current: 2,
+            total: 30,
+            current: 10,
             size: 10.0,
             indicatorStyle: LFPageCircleIndicatorStyle.decrease,
           ),

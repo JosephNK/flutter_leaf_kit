@@ -56,13 +56,18 @@ class LFPageCircleIndicator extends StatelessWidget {
       if (indicatorStyle == LFPageCircleIndicatorStyle.decrease) {
         final diff = ((activeIndex - i).abs()) / 10.0;
         size = size - (size * diff);
+        if (size < 1.0) {
+          size = 0.0;
+        }
       }
-      dots.add(LFPageCircleDot(
-        active: i == activeIndex,
-        activeColor: activeColor,
-        inactiveColor: inactiveColor,
-        size: size,
-      ));
+      if (size != 0.0) {
+        dots.add(LFPageCircleDot(
+          active: i == activeIndex,
+          activeColor: activeColor,
+          inactiveColor: inactiveColor,
+          size: size,
+        ));
+      }
     }
     return dots;
   }
