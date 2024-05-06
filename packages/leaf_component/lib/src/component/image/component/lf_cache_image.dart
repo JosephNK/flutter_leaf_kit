@@ -10,6 +10,8 @@ class LFCacheImage extends StatelessWidget {
   final BoxFit fit;
   final bool isClipper;
   final int? cacheWidth;
+  final int? cacheHeight;
+  final FilterQuality filterQuality;
   final Color? shimmerBaseColor;
   final Color? shimmerHighlightColor;
   final Map<String, String>? header;
@@ -24,6 +26,8 @@ class LFCacheImage extends StatelessWidget {
     this.fit = BoxFit.cover,
     this.isClipper = false,
     this.cacheWidth,
+    this.cacheHeight,
+    this.filterQuality = FilterQuality.low,
     this.shimmerBaseColor,
     this.shimmerHighlightColor,
     this.header,
@@ -92,6 +96,8 @@ class LFCacheImage extends StatelessWidget {
       height: height,
       fit: fit,
       cacheWidth: cacheWidth,
+      cacheHeight: cacheHeight,
+      filterQuality: filterQuality,
       shimmerBaseColor: shimmerBaseColor,
       shimmerHighlightColor: shimmerHighlightColor,
       header: httpHeaders,

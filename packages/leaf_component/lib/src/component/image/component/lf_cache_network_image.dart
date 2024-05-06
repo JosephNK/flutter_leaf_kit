@@ -8,6 +8,8 @@ class LFCacheNetworkImage extends StatelessWidget {
   final double? height;
   final BoxFit fit;
   final int? cacheWidth;
+  final int? cacheHeight;
+  final FilterQuality filterQuality;
   final Color? shimmerBaseColor;
   final Color? shimmerHighlightColor;
   final Map<String, String>? header;
@@ -22,6 +24,8 @@ class LFCacheNetworkImage extends StatelessWidget {
     this.height,
     this.fit = BoxFit.cover,
     this.cacheWidth,
+    this.cacheHeight,
+    this.filterQuality = FilterQuality.low,
     this.shimmerBaseColor,
     this.shimmerHighlightColor,
     this.header,
@@ -65,8 +69,8 @@ class LFCacheNetworkImage extends StatelessWidget {
       fadeInDuration: const Duration(milliseconds: 0),
       imageUrl: urlString,
       memCacheWidth: cacheWidth,
-      //memCacheHeight: 500,
-      //filterQuality: FilterQuality.high,
+      memCacheHeight: cacheHeight,
+      filterQuality: filterQuality,
       placeholder: (context, url) {
         return _buildPlaceholderLoaderImage(context);
       },

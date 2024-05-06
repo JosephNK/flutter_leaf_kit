@@ -6,6 +6,9 @@ class LFMemoryImage extends StatelessWidget {
   final double? width;
   final double? height;
   final BoxFit fit;
+  final int? cacheWidth;
+  final int? cacheHeight;
+  final FilterQuality filterQuality;
   final Widget? placeholderWidget;
   final Widget? errorWidget;
 
@@ -16,6 +19,9 @@ class LFMemoryImage extends StatelessWidget {
     this.width,
     this.height,
     this.fit = BoxFit.cover,
+    this.cacheWidth,
+    this.cacheHeight,
+    this.filterQuality = FilterQuality.low,
     this.placeholderWidget,
     this.errorWidget,
   });
@@ -37,6 +43,9 @@ class LFMemoryImage extends StatelessWidget {
       fit: fit,
       width: width,
       height: height,
+      cacheWidth: cacheWidth,
+      cacheHeight: cacheHeight,
+      filterQuality: filterQuality,
       frameBuilder: (context, child, frame, wasSynchronouslyLoaded) {
         if (wasSynchronouslyLoaded || frame != null) {
           return child;

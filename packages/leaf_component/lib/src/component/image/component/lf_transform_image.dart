@@ -5,6 +5,9 @@ class LFTransformImage extends StatelessWidget {
   final double? width;
   final double? height;
   final BoxFit fit;
+  final int? cacheWidth;
+  final int? cacheHeight;
+  final FilterQuality filterQuality;
   final Widget? placeholderWidget;
   final Widget? errorWidget;
 
@@ -14,6 +17,9 @@ class LFTransformImage extends StatelessWidget {
     this.width,
     this.height,
     this.fit = BoxFit.cover,
+    this.cacheWidth,
+    this.cacheHeight,
+    this.filterQuality = FilterQuality.low,
     this.placeholderWidget,
     this.errorWidget,
   });
@@ -31,6 +37,9 @@ class LFTransformImage extends StatelessWidget {
         width: width,
         height: height,
         fit: fit,
+        cacheWidth: cacheWidth,
+        cacheHeight: cacheHeight,
+        filterQuality: filterQuality,
         placeholderWidget: placeholderWidget,
         errorWidget: errorWidget,
       );
@@ -44,6 +53,9 @@ class LFTransformImage extends StatelessWidget {
         width: width,
         height: height,
         fit: fit,
+        cacheWidth: cacheWidth,
+        cacheHeight: cacheHeight,
+        filterQuality: filterQuality,
         placeholderWidget: placeholderWidget,
         errorWidget: errorWidget,
       );
@@ -55,6 +67,9 @@ class LFTransformImage extends StatelessWidget {
       width: width,
       height: height,
       fit: fit,
+      cacheWidth: cacheWidth,
+      cacheHeight: cacheHeight,
+      filterQuality: filterQuality,
       placeholderWidget: placeholderWidget,
       errorWidget: errorWidget,
     );
