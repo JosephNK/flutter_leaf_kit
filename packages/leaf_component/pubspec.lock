@@ -212,14 +212,14 @@ packages:
       path: "../leaf_common"
       relative: true
     source: path
-    version: "1.7.5"
+    version: "1.7.6"
   flutter_leaf_manager:
     dependency: "direct main"
     description:
       path: "../leaf_manager"
       relative: true
     source: path
-    version: "1.7.5"
+    version: "1.7.6"
   flutter_lints:
     dependency: "direct dev"
     description:
