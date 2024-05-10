@@ -115,6 +115,7 @@ abstract class ScreenState<T extends StatefulExtWidget> extends State<T>
     BuildContext context,
     Object? state, {
     Key? key,
+    bool onlyBody = false,
     LFPopScopeCallback? willPopCallback,
   }) {
     const defaultBackgroundColor = Colors.transparent;
@@ -127,21 +128,23 @@ abstract class ScreenState<T extends StatefulExtWidget> extends State<T>
     final resizeToAvoidBottomInset = this.resizeToAvoidBottomInset;
     final extendBodyBehindAppBar = this.extendBodyBehindAppBar;
 
+    final body = Container(
+      color: defaultBackgroundColor,
+      child: useSafeArea
+          ? SafeArea(
+              left: safeAreaInsets.left,
+              top: safeAreaInsets.top,
+              right: safeAreaInsets.right,
+              bottom: safeAreaInsets.bottom,
+              child: buildBody(context, state),
+            )
+          : buildBody(context, state),
+    );
+
     final scaffold = Scaffold(
       key: key,
       appBar: buildAppbar(context, state),
-      body: Container(
-        color: defaultBackgroundColor,
-        child: useSafeArea
-            ? SafeArea(
-                left: safeAreaInsets.left,
-                top: safeAreaInsets.top,
-                right: safeAreaInsets.right,
-                bottom: safeAreaInsets.bottom,
-                child: buildBody(context, state),
-              )
-            : buildBody(context, state),
-      ),
+      body: body,
       backgroundColor: backgroundColor ?? defaultBackgroundColor,
       bottomNavigationBar: buildBottomNavigationBar(context, state),
       floatingActionButton: buildFloatingActionButton(context, state),
@@ -160,7 +163,7 @@ abstract class ScreenState<T extends StatefulExtWidget> extends State<T>
     );
 
     if (Platform.isIOS) {
-      return scaffold;
+      return !onlyBody ? scaffold : body;
     }
 
     return PopScope(
@@ -170,7 +173,7 @@ abstract class ScreenState<T extends StatefulExtWidget> extends State<T>
           willPopScopeCallback(context);
         }
       },
-      child: scaffold,
+      child: !onlyBody ? scaffold : body,
     );
   }
 
