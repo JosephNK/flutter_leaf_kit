@@ -115,36 +115,19 @@ abstract class ScreenState<T extends StatefulExtWidget> extends State<T>
     BuildContext context,
     Object? state, {
     Key? key,
-    bool onlyBody = false,
-    LFPopScopeCallback? willPopCallback,
   }) {
     const defaultBackgroundColor = Colors.transparent;
 
-    final useSafeArea = this.useSafeArea;
-    final safeAreaInsets = this.safeAreaInsets;
     final backgroundColor = this.backgroundColor;
     final drawerEdgeDragWidth = this.drawerEdgeDragWidth;
     final floatingActionButtonLocation = this.floatingActionButtonLocation;
     final resizeToAvoidBottomInset = this.resizeToAvoidBottomInset;
     final extendBodyBehindAppBar = this.extendBodyBehindAppBar;
 
-    final body = Container(
-      color: defaultBackgroundColor,
-      child: useSafeArea
-          ? SafeArea(
-              left: safeAreaInsets.left,
-              top: safeAreaInsets.top,
-              right: safeAreaInsets.right,
-              bottom: safeAreaInsets.bottom,
-              child: buildBody(context, state),
-            )
-          : buildBody(context, state),
-    );
-
     final scaffold = Scaffold(
       key: key,
       appBar: buildAppbar(context, state),
-      body: body,
+      body: _buildSafeAreaBody(defaultBackgroundColor, state),
       backgroundColor: backgroundColor ?? defaultBackgroundColor,
       bottomNavigationBar: buildBottomNavigationBar(context, state),
       floatingActionButton: buildFloatingActionButton(context, state),
@@ -163,7 +146,7 @@ abstract class ScreenState<T extends StatefulExtWidget> extends State<T>
     );
 
     if (Platform.isIOS) {
-      return !onlyBody ? scaffold : body;
+      return scaffold;
     }
 
     return PopScope(
@@ -173,7 +156,49 @@ abstract class ScreenState<T extends StatefulExtWidget> extends State<T>
           willPopScopeCallback(context);
         }
       },
-      child: !onlyBody ? scaffold : body,
+      child: scaffold,
+    );
+  }
+
+  Widget buildWithoutScaffold(
+    BuildContext context,
+    Object? state, {
+    Key? key,
+  }) {
+    const defaultBackgroundColor = Colors.transparent;
+
+    final body = _buildSafeAreaBody(defaultBackgroundColor, state);
+
+    if (Platform.isIOS) {
+      return body;
+    }
+
+    return PopScope(
+      canPop: canPop,
+      onPopInvoked: (bool didPop) {
+        if (didPop) {
+          willPopScopeCallback(context);
+        }
+      },
+      child: body,
+    );
+  }
+
+  Widget _buildSafeAreaBody(Color? defaultBackgroundColor, Object? state) {
+    final useSafeArea = this.useSafeArea;
+    final safeAreaInsets = this.safeAreaInsets;
+
+    return Container(
+      color: defaultBackgroundColor,
+      child: useSafeArea
+          ? SafeArea(
+              left: safeAreaInsets.left,
+              top: safeAreaInsets.top,
+              right: safeAreaInsets.right,
+              bottom: safeAreaInsets.bottom,
+              child: buildBody(context, state),
+            )
+          : buildBody(context, state),
     );
   }
 
