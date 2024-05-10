@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_leaf_common/leaf_common.dart';
 
-typedef LFHttpDioOnHeader = Future<Map<String, String>> Function();
+typedef LFHttpDioOnHeader = Future<Map<String, dynamic>> Function();
 
 class LFDioRequestInterceptor extends InterceptorsWrapper {
   final LFHttpDioOnHeader? onHeader;
@@ -11,7 +11,7 @@ class LFDioRequestInterceptor extends InterceptorsWrapper {
   @override
   void onRequest(
       RequestOptions options, RequestInterceptorHandler handler) async {
-    Map<String, String> headers = await onHeader?.call() ?? {};
+    Map<String, dynamic> headers = await onHeader?.call() ?? {};
     options.headers = {
       ...options.headers,
       ...headers,

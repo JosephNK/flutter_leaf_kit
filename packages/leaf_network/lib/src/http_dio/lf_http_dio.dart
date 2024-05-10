@@ -19,6 +19,7 @@ export 'package:dio/dio.dart' show DioException;
 
 export 'converter/lf_dio_built_value_json_key.dart';
 export 'interceptor/lf_dio_request_interceptor.dart';
+export 'request/lf_dio_request_header.dart';
 export 'response/lf_dio_response.dart';
 export 'service/lf_dio_base_service.dart';
 
