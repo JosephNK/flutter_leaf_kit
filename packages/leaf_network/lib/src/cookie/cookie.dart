@@ -1,4 +1,4 @@
-import 'package:flutter_leaf_manager/leaf_manager.dart';
+import 'package:flutter_leaf_store/leaf_store.dart';
 import 'package:http/http.dart' as http;
 
 class LFCookieStoreManager {
@@ -22,15 +22,15 @@ class LFCookieStoreManager {
   }
 
   Future<void> setCookie(String cookie) async {
-    await LFSharedPreferencesManager.shared.setString('cookie', cookie);
+    await LFSharedPreferences.shared.setString('cookie', cookie);
   }
 
   Future<String?> getCookie() async {
-    return LFSharedPreferencesManager.shared.getString('cookie');
+    return LFSharedPreferences.shared.getString('cookie');
   }
 
   Future<void> removeCookie() async {
-    await LFSharedPreferencesManager.shared.remove('cookie');
+    await LFSharedPreferences.shared.remove('cookie');
   }
 
   Future<Map<String, String>> getHeader(dynamic uri) async {
