@@ -15,7 +15,6 @@ import 'package:flutter_leaf_common/leaf_common.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart' as ph;
-import 'package:shared_preferences/shared_preferences.dart';
 
 export 'package:permission_handler/permission_handler.dart';
 
@@ -25,5 +24,4 @@ part 'src/device/lf_device.dart';
 part 'src/file/lf_file.dart';
 part 'src/permission/lf_permission.dart';
 part 'src/platform_package/lf_platform_package.dart';
-part 'src/preferences/lf_preferences.dart';
 part 'src/transparency/lf_transparency.dart';

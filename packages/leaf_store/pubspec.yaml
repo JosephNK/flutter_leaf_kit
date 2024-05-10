@@ -12,6 +12,8 @@ dependencies:
   flutter:
     sdk: flutter
 
+  shared_preferences: ^2.2.2
+
   flutter_bloc: ^8.1.5
   bloc_concurrency: ^0.2.5
   stream_transform: ^2.1.0
