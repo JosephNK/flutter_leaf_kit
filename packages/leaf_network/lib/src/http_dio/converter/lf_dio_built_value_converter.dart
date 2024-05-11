@@ -12,12 +12,14 @@ import 'lf_dio_built_value_json_key.dart';
 
 class LFDioBuiltValueConverter implements DioConverter {
   final Serializers serializers;
+  final int printMaxLength;
   final LFDioBuiltValueJSONUndefinedKey? jsonUndefinedKey;
 
   static Serializers? jsonSerializers;
 
   LFDioBuiltValueConverter({
     required this.serializers,
+    this.printMaxLength = 2024,
     this.jsonUndefinedKey,
   }) {
     LFDioBuiltValueConverter.jsonSerializers = (serializers.toBuilder()
@@ -113,7 +115,7 @@ class LFDioBuiltValueConverter implements DioConverter {
 
     try {
       final prettyBody = const JsonEncoder.withIndent('  ').convert(jsonData);
-      const maxLength = 2024; // 최대 길이
+      final maxLength = printMaxLength; // 최대 길이
       String body = prettyBody;
       if (prettyBody.length > maxLength) {
         final truncatedJsonString = prettyBody.substring(0, maxLength);

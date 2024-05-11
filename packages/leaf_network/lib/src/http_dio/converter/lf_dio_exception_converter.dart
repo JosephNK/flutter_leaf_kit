@@ -12,11 +12,13 @@ import 'lf_dio_base_converter.dart';
 
 class LFDioExceptionConverter implements DioConverter {
   final Serializers serializers;
+  final int printMaxLength;
 
   static Serializers? jsonSerializers;
 
   LFDioExceptionConverter({
     required this.serializers,
+    this.printMaxLength = 2024,
   }) {
     LFDioExceptionConverter.jsonSerializers = (serializers.toBuilder()
           ..addPlugin(
@@ -75,7 +77,7 @@ class LFDioExceptionConverter implements DioConverter {
 
     try {
       final prettyBody = const JsonEncoder.withIndent('  ').convert(jsonData);
-      const maxLength = 2024; // 최대 길이
+      final maxLength = printMaxLength; // 최대 길이
       String body = prettyBody;
       if (prettyBody.length > maxLength) {
         final truncatedJsonString = prettyBody.substring(0, maxLength);

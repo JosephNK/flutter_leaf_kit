@@ -44,6 +44,7 @@ class LFHttpDio {
     required Serializers responseSerializers,
     required List<DioService> services,
     LFDioBuiltValueJSONUndefinedKey? jsonUndefinedKey,
+    int printMaxLength = 2024,
     LFHttpDioOnHeader? onHeader,
     VoidCallback? onAuthenticatorSuccess,
     VoidCallback? onAuthenticatorFailed,
