@@ -99,7 +99,7 @@ class LFAlertDialog {
 
     String errorMessageStr = errorMessage!;
 
-    _LFAlertDialog().show(
+    await _LFAlertDialog().show(
       context,
       title: errorTitleStr,
       message: errorMessageStr,
@@ -126,7 +126,7 @@ class LFAlertDialog {
     String message = exception.toString();
 
     if (isNotEmpty(message)) {
-      _LFAlertDialog().show(
+      await _LFAlertDialog().show(
         context,
         title: title,
         message: message,
