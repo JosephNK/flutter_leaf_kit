@@ -15,3 +15,11 @@ extension AssetImageHelper on AssetImage {
     return {'asset': this, 'width': width, 'height': height};
   }
 }
+
+extension ListAssetImageHelper on List<AssetImage> {
+  Future<List<Map<String, dynamic>>> getAsyncSizes() async {
+    return await Future.wait(map((asset) async {
+      return asset.getAsyncSize();
+    }).toList());
+  }
+}
