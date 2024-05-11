@@ -4,7 +4,6 @@ import 'dart:io';
 
 import 'package:built_value/serializer.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter_leaf_common/leaf_common.dart';
 import 'package:flutter_leaf_manager/leaf_manager.dart';
 
@@ -43,12 +42,10 @@ class LFHttpDio {
     required Uri baseUrl,
     required Serializers responseSerializers,
     required List<DioService> services,
+    Interceptors? interceptors,
     LFDioBuiltValueJSONUndefinedKey? jsonUndefinedKey,
     int printMaxLength = 2024,
     LFHttpDioOnHeader? onHeader,
-    VoidCallback? onAuthenticatorSuccess,
-    VoidCallback? onAuthenticatorFailed,
-    VoidCallback? onAuthenticatorFailedToSingIn,
   }) {
     final options = BaseOptions(
       baseUrl: baseUrl.toString(),
@@ -70,6 +67,9 @@ class LFHttpDio {
     dio = Dio(options);
     dio.interceptors.add(LFDioCurlInterceptor());
     dio.interceptors.add(LFDioRequestInterceptor(onHeader: onHeader));
+    if (interceptors != null) {
+      dio.interceptors.addAll(interceptors);
+    }
     // dio.interceptors.add(
     //   LFDioAuthInterceptor(
     //     dio,
