@@ -42,7 +42,7 @@ class LFHttpDio {
     required Uri baseUrl,
     required Serializers responseSerializers,
     required List<DioService> services,
-    Interceptors? interceptors,
+    List<Interceptor>? interceptors,
     LFDioBuiltValueJSONUndefinedKey? jsonUndefinedKey,
     int printMaxLength = 2024,
     LFHttpDioOnHeader? onHeader,
