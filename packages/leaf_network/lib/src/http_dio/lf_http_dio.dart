@@ -59,10 +59,12 @@ class LFHttpDio {
     // Converter
     converter = LFDioBuiltValueConverter(
       serializers: responseSerializers,
+      printMaxLength: printMaxLength,
       jsonUndefinedKey: jsonUndefinedKey,
     );
     errorConverter = LFDioExceptionConverter(
       serializers: responseSerializers,
+      printMaxLength: printMaxLength,
     );
 
     dio = Dio(options);
