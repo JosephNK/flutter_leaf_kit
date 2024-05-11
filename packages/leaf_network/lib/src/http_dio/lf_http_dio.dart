@@ -24,6 +24,8 @@ export 'service/lf_dio_base_service.dart';
 
 Type _typeOf<T>() => T;
 
+typedef LFHttpDioInterceptorBuilder = List<Interceptor>? Function(Dio dio);
+
 class LFHttpDio {
   static final LFHttpDio _instance = LFHttpDio._internal();
 
@@ -42,7 +44,7 @@ class LFHttpDio {
     required Uri baseUrl,
     required Serializers responseSerializers,
     required List<DioService> services,
-    List<Interceptor>? interceptors,
+    LFHttpDioInterceptorBuilder? interceptorBuilder,
     LFDioBuiltValueJSONUndefinedKey? jsonUndefinedKey,
     int printMaxLength = 2024,
     LFHttpDioOnHeader? onHeader,
@@ -67,17 +69,12 @@ class LFHttpDio {
     dio = Dio(options);
     dio.interceptors.add(LFDioCurlInterceptor());
     dio.interceptors.add(LFDioRequestInterceptor(onHeader: onHeader));
-    if (interceptors != null) {
-      dio.interceptors.addAll(interceptors);
+    if (interceptorBuilder != null) {
+      final interceptors = interceptorBuilder(dio);
+      if (interceptors != null) {
+        dio.interceptors.addAll(interceptors);
+      }
     }
-    // dio.interceptors.add(
-    //   LFDioAuthInterceptor(
-    //     dio,
-    //     onSuccess: onAuthenticatorSuccess,
-    //     onFailed: onAuthenticatorFailed,
-    //     onFailedToSignIn: onAuthenticatorFailedToSingIn,
-    //   ),
-    // );
 
     // Setup Services
     services.toSet().forEach((s) {
