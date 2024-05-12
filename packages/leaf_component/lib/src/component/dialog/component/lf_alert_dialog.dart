@@ -9,6 +9,7 @@ class LFAlertDialog {
     BuildContext context, {
     String? title,
     required String message,
+    bool autoPop = true,
     String? okText,
     TextStyle? titleStyle,
     TextStyle? messageStyle,
@@ -32,6 +33,7 @@ class LFAlertDialog {
       context,
       title: title,
       message: message,
+      autoPop: autoPop,
       titleStyle: titleStyleValue,
       messageStyle: messageStyleValue,
       onOK: onOK,
@@ -47,6 +49,7 @@ class LFAlertDialog {
     BuildContext context, {
     String? title,
     required String message,
+    bool autoPop = true,
     TextStyle? titleStyle,
     TextStyle? messageStyle,
     String? okText,
@@ -79,6 +82,7 @@ class LFAlertDialog {
       context,
       title: title,
       message: message,
+      autoPop: autoPop,
       titleStyle: titleStyleValue,
       messageStyle: messageStyleValue,
       onCancel: onCancel,
@@ -172,6 +176,7 @@ class _LFAlertDialog {
     BuildContext context, {
     String? title,
     String? message,
+    bool autoPop = true,
     TextStyle? titleStyle,
     TextStyle? messageStyle,
     String okText = 'OK',
@@ -193,7 +198,7 @@ class _LFAlertDialog {
           actions: [
             _buildOKButton(
               context,
-              autoPop: true,
+              autoPop: autoPop,
               text: okText,
               textStyle: okTextStyle,
               backgroundColor: okTextBackgroundColor,
@@ -302,7 +307,7 @@ class _LFAlertDialog {
     return GestureDetector(
       onTap: () async {
         if (autoPop) {
-          Navigator.maybePop(context);
+          Navigator.maybePop(context, 'CANCEL');
           await Future.delayed(const Duration(milliseconds: 100));
         }
         onPressed?.call();
@@ -338,7 +343,7 @@ class _LFAlertDialog {
     return GestureDetector(
       onTap: () async {
         if (autoPop) {
-          Navigator.maybePop(context);
+          Navigator.maybePop(context, 'OK');
           await Future.delayed(const Duration(milliseconds: 100));
         }
         onPressed?.call();
