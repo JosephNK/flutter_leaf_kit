@@ -28,12 +28,14 @@ class LFSkeleton extends StatelessWidget {
         Colors.primaries[Random().nextInt(Colors.primaries.length)];
     final baseColor = random
         ? randomColor.withOpacity(baseOpacity)
-        : color?.withOpacity(baseOpacity) ?? Colors.grey[300] ?? Colors.grey;
+        : color?.withOpacity(baseOpacity) ??
+            Colors.grey[300]?.withOpacity(baseOpacity) ??
+            Colors.grey.withOpacity(baseOpacity);
     final highlightColor = random
         ? randomColor.withOpacity(highlightOpacity)
         : color?.withOpacity(highlightOpacity) ??
-            Colors.grey[100] ??
-            Colors.grey;
+            Colors.grey[100]?.withOpacity(highlightOpacity) ??
+            Colors.grey.withOpacity(highlightOpacity);
 
     return Shimmer.fromColors(
       baseColor: baseColor,
