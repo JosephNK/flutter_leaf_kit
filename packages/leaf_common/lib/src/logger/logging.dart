@@ -17,12 +17,15 @@ class Logging {
     LoggingManager.shared.logger?.e(message);
   }
 
-  static void debugPrint(dynamic message) {
-    // https://nguyentk217.medium.com/print-large-strings-in-flutter-ffc63a14b92
-    final RegExp pattern = RegExp('.{1,800}'); // 800 is the size of each chunk
-    pattern
-        .allMatches(message)
-        .forEach((RegExpMatch match) => debugPrint(match.group(0)));
+  static void printLong(dynamic message) {
+    if (kDebugMode) {
+      // https://nguyentk217.medium.com/print-large-strings-in-flutter-ffc63a14b92
+      final RegExp pattern =
+          RegExp('.{1,800}'); // 800 is the size of each chunk
+      pattern
+          .allMatches(message)
+          .forEach((RegExpMatch match) => debugPrint(match.group(0)));
+    }
   }
 }
 
