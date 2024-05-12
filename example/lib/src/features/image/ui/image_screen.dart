@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter_leaf_kit/flutter_leaf_kit.dart';
 
+import '../../empty/ui/empty_screen.dart';
+
 class ImageScreen extends ScreenStatefulWidget {
   final String title;
 
@@ -19,6 +21,7 @@ class ImageScreen extends ScreenStatefulWidget {
 class _ImageScreenState extends ScreenState<ImageScreen> {
   final String _networkUrl = 'https://picsum.photos/300';
   final String _assetFile = 'assets/images/sample400x300.jpg';
+  final String _assetFailedFile = 'string';
   final String _fileUrl = 'file://xxx.xxx';
 
   Uint8List? _bytes;
@@ -47,6 +50,22 @@ class _ImageScreenState extends ScreenState<ImageScreen> {
   PreferredSizeWidget? buildAppbar(BuildContext context, Object? state) {
     return LFAppBar(
       title: LFAppBarTitle(text: widget.title),
+      actions: [
+        GestureDetector(
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) =>
+                      const EmptyScreen(title: 'EmptyScreen')),
+            );
+          },
+          child: const Padding(
+            padding: EdgeInsets.all(8.0),
+            child: Text('EmptyScreen'),
+          ),
+        ),
+      ],
     );
   }
 
@@ -54,6 +73,7 @@ class _ImageScreenState extends ScreenState<ImageScreen> {
   Widget buildBody(BuildContext context, Object? state) {
     final networkUri = Uri.parse(_networkUrl);
     final assetFileUri = Uri.parse(_assetFile);
+    final assetFailedFileUri = Uri.parse(_assetFailedFile);
     final fileUri = Uri.parse(_fileUrl);
     final emptyUri = Uri.parse('');
 
@@ -122,6 +142,17 @@ class _ImageScreenState extends ScreenState<ImageScreen> {
                     // placeholderWidget: placeholderWidget,
                   )
                 : Container(),
+            const Text('Assets Failed'),
+            LFTransformImage(
+              image: LFImageValue(
+                origin: assetFailedFileUri,
+                header: null,
+              ),
+              // width: 100.0,
+              // height: 100.0,
+              // fit: fit,
+              // placeholderWidget: placeholderWidget,
+            ),
           ],
         ),
       ),

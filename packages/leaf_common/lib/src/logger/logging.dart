@@ -2,19 +2,19 @@ part of '../lf_common.dart';
 
 class Logging {
   static void d(dynamic message) {
-    LoggingManager.shared.logger.d(message);
+    LoggingManager.shared.logger?.d(message);
   }
 
   static void i(dynamic message) {
-    LoggingManager.shared.logger.i(message);
+    LoggingManager.shared.logger?.i(message);
   }
 
   static void w(dynamic message) {
-    LoggingManager.shared.logger.w(message);
+    LoggingManager.shared.logger?.w(message);
   }
 
   static void e(dynamic message) {
-    LoggingManager.shared.logger.e(message);
+    LoggingManager.shared.logger?.e(message);
   }
 
   static void debugPrint(dynamic message) {
@@ -28,20 +28,27 @@ class Logging {
 
 class LoggingManager {
   static final LoggingManager _instance = LoggingManager._internal();
-
   static LoggingManager get shared => _instance;
+  LoggingManager._internal() {
+    logger = Logger(
+      printer: PrettyPrinter(
+        methodCount: 0, // number of method calls to be displayed
+        errorMethodCount: 8, // number of method calls if stacktrace is provided
+        lineLength: 120, // width of the output
+        colors: Platform.isAndroid, // Colorful log messages
+        printEmojis: true, // Print an emoji for each log message
+        printTime: false, // Should each log print contain a timestamp
+      ),
+      output: PlatformConsoleOutput(),
+    );
+  }
 
-  LoggingManager._internal();
+  Logger? logger;
 
-  var logger = Logger(
-    printer: PrettyPrinter(
-      methodCount: 0, // number of method calls to be displayed
-      errorMethodCount: 8, // number of method calls if stacktrace is provided
-      lineLength: 120, // width of the output
-      colors: Platform.isAndroid, // Colorful log messages
-      printEmojis: true, // Print an emoji for each log message
-      printTime: false, // Should each log print contain a timestamp
-    ),
-    output: PlatformConsoleOutput(),
-  );
+  void setup(PrettyPrinter prettyPrinter) {
+    logger = Logger(
+      printer: prettyPrinter,
+      output: PlatformConsoleOutput(),
+    );
+  }
 }

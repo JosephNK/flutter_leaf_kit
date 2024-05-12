@@ -14,6 +14,8 @@ import 'package:quiver/strings.dart';
 
 import 'logger/console_output.dart';
 
+export 'package:logger/logger.dart' show PrettyPrinter;
+
 part 'datetime/datetime.dart';
 part 'datetime/extension/datetime_ext.dart';
 part 'datetime/extension/int_date_ext.dart';

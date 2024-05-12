@@ -71,23 +71,8 @@ class LFAssetFileImage extends StatelessWidget {
       );
     }
 
-    AssetImage? image;
-    try {
-      image = AssetImage(uriString);
-    } catch (e) {
-      Logging.e('AssetImage Load Error: $e');
-    }
-
-    if (image == null) {
-      return SizedBox(
-        width: width,
-        height: height,
-        child: _buildPlaceholderImage(context),
-      );
-    }
-
-    return Image(
-      image: image,
+    return Image.asset(
+      uriString,
       fit: fit,
       width: width,
       height: height,

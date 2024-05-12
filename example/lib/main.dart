@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
@@ -26,6 +27,15 @@ void main() async {
     Bloc.observer = LFBlocObserver();
 
     await EasyLocalization.ensureInitialized();
+
+    LoggingManager.shared.setup(PrettyPrinter(
+      methodCount: 0, // number of method calls to be displayed
+      errorMethodCount: 10, // number of method calls if stacktrace is provided
+      lineLength: 120, // width of the output
+      colors: Platform.isAndroid, // Colorful log messages
+      printEmojis: true, // Print an emoji for each log message
+      printTime: false, // Should each log print contain a timestamp
+    ));
 
     // FlutterError.onError ( to catch all unhandled-flutter-framework-errors )
     FlutterError.onError = (FlutterErrorDetails details) {
