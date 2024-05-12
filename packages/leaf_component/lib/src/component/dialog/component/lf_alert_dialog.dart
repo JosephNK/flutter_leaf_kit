@@ -5,7 +5,7 @@ class LFAlertDialog {
   static LFAlertDialog get shared => _instance;
   LFAlertDialog._internal();
 
-  static Future<void> show(
+  static Future<dynamic> show(
     BuildContext context, {
     String? title,
     required String message,
@@ -29,7 +29,7 @@ class LFAlertDialog {
         LFComponentConfigure.shared.alert?.okTextBorderColor;
     final buttonPadding = LFComponentConfigure.shared.alert?.buttonPadding;
 
-    await _LFAlertDialog().show(
+    return await _LFAlertDialog().show(
       context,
       title: title,
       message: message,
@@ -45,7 +45,7 @@ class LFAlertDialog {
     );
   }
 
-  static Future<void> confirm(
+  static Future<dynamic> confirm(
     BuildContext context, {
     String? title,
     required String message,
@@ -78,7 +78,7 @@ class LFAlertDialog {
         LFComponentConfigure.shared.alert?.cancelTextBorderColor;
     final buttonPadding = LFComponentConfigure.shared.alert?.buttonPadding;
 
-    await _LFAlertDialog().confirm(
+    return await _LFAlertDialog().confirm(
       context,
       title: title,
       message: message,
@@ -100,7 +100,7 @@ class LFAlertDialog {
     );
   }
 
-  static Future<void> showErrorMessage(
+  static Future<dynamic> showErrorMessage(
     BuildContext context, {
     required String? errorMessage,
     VoidCallback? onOk,
@@ -119,22 +119,26 @@ class LFAlertDialog {
         LFComponentConfigure.shared.alert?.errorMessageTitle ??
             'Oops! Error :(';
 
-    String errorMessageStr = errorMessage!;
+    String? errorMessageStr = errorMessage;
 
-    await _LFAlertDialog().show(
-      context,
-      title: errorTitleStr,
-      message: errorMessageStr,
-      onOK: onOk,
-      okText: okTextStr,
-      okTextStyle: okTextStyle,
-      okTextBackgroundColor: okTextBackgroundColor,
-      okTextBorderColor: okTextBorderColor,
-      okTextPadding: buttonPadding,
-    );
+    if (isNotEmpty(errorMessageStr)) {
+      return await _LFAlertDialog().show(
+        context,
+        title: errorTitleStr,
+        message: errorMessageStr,
+        onOK: onOk,
+        okText: okTextStr,
+        okTextStyle: okTextStyle,
+        okTextBackgroundColor: okTextBackgroundColor,
+        okTextBorderColor: okTextBorderColor,
+        okTextPadding: buttonPadding,
+      );
+    }
+
+    return null;
   }
 
-  static Future<void> showException(
+  static Future<dynamic> showException(
     BuildContext context, {
     Object? exception,
     VoidCallback? onTap,
@@ -156,7 +160,7 @@ class LFAlertDialog {
     String errorMessageStr = exception.toString();
 
     if (isNotEmpty(errorMessageStr)) {
-      await _LFAlertDialog().show(
+      return await _LFAlertDialog().show(
         context,
         title: errorTitleStr,
         message: errorMessageStr,
@@ -168,11 +172,13 @@ class LFAlertDialog {
         okTextPadding: buttonPadding,
       );
     }
+
+    return null;
   }
 }
 
 class _LFAlertDialog {
-  Future<void> show(
+  Future<dynamic> show(
     BuildContext context, {
     String? title,
     String? message,
@@ -186,7 +192,7 @@ class _LFAlertDialog {
     EdgeInsets? okTextPadding,
     VoidCallback? onOK,
   }) async {
-    await showDialog(
+    return await showDialog(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
@@ -212,7 +218,7 @@ class _LFAlertDialog {
     );
   }
 
-  Future<void> confirm(
+  Future<dynamic> confirm(
     BuildContext context, {
     String? title,
     String? message,
@@ -232,7 +238,7 @@ class _LFAlertDialog {
     VoidCallback? onCancel,
     VoidCallback? onOK,
   }) async {
-    await showDialog(
+    return await showDialog(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
