@@ -72,8 +72,9 @@ class LFDioExceptionConverter implements DioConverter {
     Response response,
   ) async {
     final statusCode = response.statusCode ?? 0;
-    final jsonData = response.data;
+    final method = response.requestOptions.method;
     final url = response.requestOptions.uri.toString();
+    final jsonData = response.data;
 
     dynamic printBody;
 
@@ -93,6 +94,7 @@ class LFDioExceptionConverter implements DioConverter {
     Logging.w(
       '[http_dio :: built_value_converter convertError]\n'
       'statusCode: $statusCode\n'
+      'method: $method\n'
       'url: $url\n'
       'body: $printBody\n'
       'ResultType: $ResultType',

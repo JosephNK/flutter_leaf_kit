@@ -110,8 +110,10 @@ class LFDioBuiltValueConverter implements DioConverter {
   FutureOr<LFDioResponse<ResultType>> convertSuccess<ResultType>(
     Response response,
   ) async {
-    final jsonData = response.data;
+    final statusCode = response.statusCode ?? 0;
+    final method = response.requestOptions.method;
     final url = response.requestOptions.uri.toString();
+    final jsonData = response.data;
 
     dynamic printBody;
 
@@ -130,6 +132,8 @@ class LFDioBuiltValueConverter implements DioConverter {
 
     Logging.i(
       '[http_dio :: built_value_converter convertSuccess]\n'
+      'statusCode: $statusCode\n'
+      'method: $method\n'
       'url: $url\n'
       'body: $printBody\n'
       'ResultType: $ResultType',
