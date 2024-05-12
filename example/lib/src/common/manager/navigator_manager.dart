@@ -17,6 +17,7 @@ import '../../features/_sub/ui/pageview_screen.dart';
 import '../../features/_sub/ui/photo_screen.dart';
 import '../../features/_sub/ui/radio_screen.dart';
 import '../../features/_sub/ui/slider_screen.dart';
+import '../../features/file/ui/file_screen.dart';
 import '../../features/image/ui/image_screen.dart';
 import '../../features/network/ui/network_screen.dart';
 import '../../features/page_indicator/ui/page_indicator_screen.dart';
@@ -48,6 +49,7 @@ dynamic kListObjects = {
     {"id": "PageIndicator", "title": "PageIndicator"},
     {"id": "Text", "title": "Text"},
     {"id": "Scroll", "title": "Scroll"},
+    {"id": "File", "title": "File"},
   ]
 };
 
@@ -129,6 +131,8 @@ class NavigatorManager {
         break;
       case 'Scroll':
         widget = ScrollScreen(title: title);
+      case 'File':
+        widget = FileScreen(title: title);
     }
 
     return Navigator.push(

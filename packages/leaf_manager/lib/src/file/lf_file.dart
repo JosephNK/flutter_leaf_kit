@@ -2,121 +2,125 @@ part of '../../leaf_manager.dart';
 
 class LFFileManager {
   static final LFFileManager _instance = LFFileManager._internal();
-
   static LFFileManager get shared => _instance;
-
   LFFileManager._internal();
 
   /// File
-  ///
 
-  Future<bool> createLocalFile(
-    String path, {
-    required String fileName,
-    dynamic content,
+  Future<bool> existsFile(File file) async {
+    return file.existsSync();
+  }
+
+  Future<bool> createOrUpdateFile(
+    File file, {
+    required dynamic content,
+    bool encodeJson = false,
+    bool flush = true,
   }) async {
     try {
-      final file = File('$path/$fileName');
-      file.createSync(recursive: true);
-      if (content != null) {
-        //file.writeAsStringSync(jsonEncode('{}'));
-        file.writeAsStringSync(jsonEncode(content), flush: true);
+      final isExists = await existsFile(file);
+      if (!isExists) {
+        file.createSync(recursive: true);
+      }
+      if (encodeJson) {
+        file.writeAsStringSync(jsonEncode(content), flush: flush);
+      } else {
+        file.writeAsStringSync(content, flush: flush);
       }
       return true;
     } catch (e) {
-      Logging.d('createLocalFile e: $e');
-      return false;
+      debugPrint('createOrUpdateFile Error: $e');
     }
+    return false;
   }
 
-  Future<File> readLocalFileWithName(
-    String path, {
-    required String fileName,
+  Future<dynamic> readAsFile(
+    File file, {
+    bool decodeJson = false,
   }) async {
-    Logging.d('readLocalFileWithName: $path');
-    return File('$path/$fileName');
+    try {
+      final isExists = await existsFile(file);
+      if (isExists) {
+        String content = file.readAsStringSync();
+        if (decodeJson) {
+          return jsonDecode(content);
+        }
+        return content;
+      }
+    } catch (e) {
+      debugPrint('readAsJson Error: $e');
+    }
+    return null;
   }
 
-  Future<File> readLocalFilePath(String path) async {
-    Logging.d('readLocalFilePath: $path');
-    return File(path);
+  Future<Uint8List?> readAsBytesFile(File file) async {
+    try {
+      return await file.readAsBytes();
+    } catch (e) {
+      debugPrint('readAsBytesFile Error: $e');
+    }
+    return null;
   }
 
-  Future<Uint8List> readLocalByteFilePath(String path) async {
-    final file = await readLocalFilePath(path);
-    final bytes = await file.readAsBytes();
-    return bytes;
-  }
-
-  Future<void> writeLocalFile(
-    String path, {
-    required String fileName,
-    dynamic content,
+  Future<File?> writeFile(
+    File file, {
+    required String content,
+    bool flush = true,
   }) async {
-    final file = File('$path/$fileName');
-    file.writeAsStringSync(jsonEncode(content), flush: true);
+    try {
+      file.writeAsStringSync(jsonEncode(content), flush: flush);
+      return file;
+    } catch (e) {
+      debugPrint('writeFile Error: $e');
+    }
+    return null;
   }
 
-  Future<File> writeLocalByteFile(
-    String path, {
-    required String fileName,
+  Future<File?> writeByteFile(
+    File file, {
     required Uint8List bytes,
+    bool flush = true,
   }) async {
-    final file = File('$path/$fileName');
-    await file.writeAsBytes(bytes, flush: true);
-    return file;
+    try {
+      file.writeAsBytesSync(bytes, flush: flush);
+      return file;
+    } catch (e) {
+      debugPrint('writeByteFile Error: $e');
+    }
+    return null;
   }
 
-  Future<void> writeLocalAssetFileCopy(
-    String path, {
-    required String fileName,
+  Future<File?> writeByteBufferFile(
+    File file, {
     required ByteBuffer buffer,
     required ByteData byteData,
-  }) async {
-    final file = File('$path/$fileName');
-    await file.writeAsBytes(
-        buffer.asUint8List(byteData.offsetInBytes, byteData.lengthInBytes),
-        flush: true);
-  }
-
-  Future<bool> deleteLocalFilePathWithName(
-    String path, {
-    required String fileName,
+    bool flush = true,
   }) async {
     try {
-      final file = File('$path/$fileName');
-      file.deleteSync(recursive: true);
-      Logging.d('deleteLocalFilePathWithName success!');
-      return true;
+      await file.writeAsBytes(
+          buffer.asUint8List(byteData.offsetInBytes, byteData.lengthInBytes),
+          flush: flush);
+      return file;
     } catch (e) {
-      Logging.d('deleteLocalFilePathWithName e: $e');
-      return false;
+      debugPrint('writeByteBufferFile Error: $e');
     }
+    return null;
   }
 
-  Future<bool> deleteLocalFilePath(String path) async {
+  Future<bool> deleteFile(File file) async {
     try {
-      final file = File(path);
-      file.deleteSync(recursive: true);
-      Logging.d('deleteLocalFilePath success!');
-      return true;
+      final isExists = await existsFile(file);
+      if (isExists) {
+        file.deleteSync(recursive: true);
+        return true;
+      }
     } catch (e) {
-      Logging.d('deleteLocalFilePath e: $e');
-      return false;
+      debugPrint('DeleteFile Error: $e');
     }
-  }
-
-  Future<dynamic> readAsJson(File file) async {
-    try {
-      return jsonDecode(file.readAsStringSync());
-    } catch (e) {
-      Logging.d('readAsJson e: $e');
-      return null;
-    }
+    return false;
   }
 
   /// Directory
-  ///
 
   Future<void> deleteTemporaryDir() async {
     final cacheDir = await getTemporaryDirectory();
