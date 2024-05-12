@@ -24,6 +24,9 @@ class LFAlertDialog {
     final okTextStyleValue = LFComponentConfigure.shared.alert?.okTextStyle;
     final okTextBackgroundColorValue =
         LFComponentConfigure.shared.alert?.okTextBackgroundColor;
+    final okTextBorderColor =
+        LFComponentConfigure.shared.alert?.okTextBorderColor;
+    final buttonPadding = LFComponentConfigure.shared.alert?.buttonPadding;
 
     await _LFAlertDialog().show(
       context,
@@ -35,6 +38,8 @@ class LFAlertDialog {
       okText: okTextStr,
       okTextStyle: okTextStyleValue,
       okTextBackgroundColor: okTextBackgroundColorValue,
+      okTextBorderColor: okTextBorderColor,
+      okTextPadding: buttonPadding,
     );
   }
 
@@ -60,10 +65,15 @@ class LFAlertDialog {
     final okTextStyleValue = LFComponentConfigure.shared.alert?.okTextStyle;
     final okTextBackgroundColorValue =
         LFComponentConfigure.shared.alert?.okTextBackgroundColor;
+    final okTextBorderColor =
+        LFComponentConfigure.shared.alert?.okTextBorderColor;
     final cancelTextStyleValue =
         LFComponentConfigure.shared.alert?.cancelTextStyle;
     final cancelTextBackgroundColorValue =
         LFComponentConfigure.shared.alert?.cancelTextBackgroundColor;
+    final cancelTextBorderColor =
+        LFComponentConfigure.shared.alert?.cancelTextBorderColor;
+    final buttonPadding = LFComponentConfigure.shared.alert?.buttonPadding;
 
     await _LFAlertDialog().confirm(
       context,
@@ -75,9 +85,13 @@ class LFAlertDialog {
       onOK: onOK,
       okTextStyle: okTextStyleValue,
       okTextBackgroundColor: okTextBackgroundColorValue,
+      okTextBorderColor: okTextBorderColor,
+      okTextPadding: buttonPadding,
       okText: okTextStr,
       cancelTextStyle: cancelTextStyleValue,
       cancelTextBackgroundColor: cancelTextBackgroundColorValue,
+      cancelTextBorderColor: cancelTextBorderColor,
+      cancelTextPadding: buttonPadding,
       cancelText: cancelTextStr,
     );
   }
@@ -93,6 +107,10 @@ class LFAlertDialog {
     final okTextStyle = LFComponentConfigure.shared.alert?.okTextStyle;
     final okTextBackgroundColor =
         LFComponentConfigure.shared.alert?.okTextBackgroundColor;
+    final okTextBorderColor =
+        LFComponentConfigure.shared.alert?.okTextBorderColor;
+    final buttonPadding = LFComponentConfigure.shared.alert?.buttonPadding;
+
     final errorTitleStr =
         LFComponentConfigure.shared.alert?.errorMessageTitle ??
             'Oops! Error :(';
@@ -107,6 +125,8 @@ class LFAlertDialog {
       okText: okTextStr,
       okTextStyle: okTextStyle,
       okTextBackgroundColor: okTextBackgroundColor,
+      okTextBorderColor: okTextBorderColor,
+      okTextPadding: buttonPadding,
     );
   }
 
@@ -121,19 +141,27 @@ class LFAlertDialog {
     final okTextStyle = LFComponentConfigure.shared.alert?.okTextStyle;
     final okTextBackgroundColor =
         LFComponentConfigure.shared.alert?.okTextBackgroundColor;
+    final okTextBorderColor =
+        LFComponentConfigure.shared.alert?.okTextBorderColor;
+    final buttonPadding = LFComponentConfigure.shared.alert?.buttonPadding;
 
-    String title = 'Oops! Exception :(';
-    String message = exception.toString();
+    final errorTitleStr =
+        LFComponentConfigure.shared.alert?.errorMessageTitle ??
+            'Oops! Exception :(';
 
-    if (isNotEmpty(message)) {
+    String errorMessageStr = exception.toString();
+
+    if (isNotEmpty(errorMessageStr)) {
       await _LFAlertDialog().show(
         context,
-        title: title,
-        message: message,
+        title: errorTitleStr,
+        message: errorMessageStr,
         onOK: onTap,
         okText: okTextStr,
         okTextStyle: okTextStyle,
         okTextBackgroundColor: okTextBackgroundColor,
+        okTextBorderColor: okTextBorderColor,
+        okTextPadding: buttonPadding,
       );
     }
   }
@@ -149,6 +177,8 @@ class _LFAlertDialog {
     String okText = 'OK',
     TextStyle? okTextStyle,
     Color? okTextBackgroundColor,
+    Color? okTextBorderColor,
+    EdgeInsets? okTextPadding,
     VoidCallback? onOK,
   }) async {
     await showDialog(
@@ -161,12 +191,16 @@ class _LFAlertDialog {
           content:
               _buildMessage(context, text: message, textStyle: messageStyle),
           actions: [
-            _buildOKButton(context,
-                autoPop: true,
-                text: okText,
-                textStyle: okTextStyle,
-                backgroundColor: okTextBackgroundColor,
-                onPressed: onOK),
+            _buildOKButton(
+              context,
+              autoPop: true,
+              text: okText,
+              textStyle: okTextStyle,
+              backgroundColor: okTextBackgroundColor,
+              borderColor: okTextBorderColor,
+              padding: okTextPadding,
+              onPressed: onOK,
+            ),
           ],
         );
       },
@@ -184,8 +218,12 @@ class _LFAlertDialog {
     String cancelText = 'Cancel',
     TextStyle? okTextStyle,
     Color? okTextBackgroundColor,
+    Color? okTextBorderColor,
+    EdgeInsets? okTextPadding,
     TextStyle? cancelTextStyle,
     Color? cancelTextBackgroundColor,
+    Color? cancelTextBorderColor,
+    EdgeInsets? cancelTextPadding,
     VoidCallback? onCancel,
     VoidCallback? onOK,
   }) async {
@@ -199,24 +237,32 @@ class _LFAlertDialog {
           content:
               _buildMessage(context, text: message, textStyle: messageStyle),
           actions: [
-            _buildCancelButton(context,
-                autoPop: autoPop,
-                text: cancelText,
-                textStyle: cancelTextStyle,
-                backgroundColor: cancelTextBackgroundColor,
-                onPressed: onCancel),
-            _buildOKButton(context,
-                autoPop: autoPop,
-                text: okText,
-                textStyle: okTextStyle,
-                backgroundColor: okTextBackgroundColor,
-                onPressed: onOK),
+            _buildCancelButton(
+              context,
+              autoPop: autoPop,
+              text: cancelText,
+              textStyle: cancelTextStyle,
+              backgroundColor: cancelTextBackgroundColor,
+              borderColor: cancelTextBorderColor,
+              padding: cancelTextPadding,
+              onPressed: onCancel,
+            ),
+            _buildOKButton(
+              context,
+              autoPop: autoPop,
+              text: okText,
+              textStyle: okTextStyle,
+              backgroundColor: okTextBackgroundColor,
+              padding: okTextPadding,
+              onPressed: onOK,
+            ),
           ],
         );
       },
     );
   }
 
+  /// Title Widget
   Widget _buildTitle(
     BuildContext context, {
     String? text = 'Title',
@@ -229,6 +275,7 @@ class _LFAlertDialog {
     );
   }
 
+  /// Message Widget
   Widget _buildMessage(
     BuildContext context, {
     String? text = 'Message',
@@ -241,12 +288,15 @@ class _LFAlertDialog {
     );
   }
 
+  /// Cancel Button Widget
   Widget _buildCancelButton(
     BuildContext context, {
     bool autoPop = true,
     String text = 'Cancel',
     TextStyle? textStyle,
     Color? backgroundColor,
+    Color? borderColor,
+    EdgeInsets? padding,
     VoidCallback? onPressed,
   }) {
     return GestureDetector(
@@ -260,10 +310,12 @@ class _LFAlertDialog {
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10.0),
+          border: borderColor != null ? Border.all(color: borderColor) : null,
           color: backgroundColor ?? Colors.grey.withOpacity(0.5),
         ),
         margin: const EdgeInsets.all(8.0),
-        padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 20.0),
+        padding: padding ??
+            const EdgeInsets.symmetric(vertical: 12.0, horizontal: 20.0),
         child: LFText(
           text,
           style: textStyle ?? const TextStyle(fontSize: 18),
@@ -272,12 +324,15 @@ class _LFAlertDialog {
     );
   }
 
+  /// OK Button Widget
   Widget _buildOKButton(
     BuildContext context, {
     bool autoPop = true,
     String text = 'OK',
     TextStyle? textStyle,
     Color? backgroundColor,
+    Color? borderColor,
+    EdgeInsets? padding,
     VoidCallback? onPressed,
   }) {
     return GestureDetector(
@@ -291,10 +346,12 @@ class _LFAlertDialog {
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10.0),
+          border: borderColor != null ? Border.all(color: borderColor) : null,
           color: backgroundColor ?? Colors.blueAccent,
         ),
         margin: const EdgeInsets.all(8.0),
-        padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 20.0),
+        padding: padding ??
+            const EdgeInsets.symmetric(vertical: 12.0, horizontal: 20.0),
         child: LFText(
           text,
           style: textStyle ?? const TextStyle(fontSize: 18),

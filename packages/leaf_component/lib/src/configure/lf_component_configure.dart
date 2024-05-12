@@ -28,8 +28,11 @@ class LFAlertDialogConfigure {
   final TextStyle? messageStyle;
   final TextStyle? okTextStyle;
   final Color? okTextBackgroundColor;
+  final Color? okTextBorderColor;
   final TextStyle? cancelTextStyle;
   final Color? cancelTextBackgroundColor;
+  final Color? cancelTextBorderColor;
+  final EdgeInsets? buttonPadding;
 
   LFAlertDialogConfigure({
     this.cancelText,
@@ -39,8 +42,11 @@ class LFAlertDialogConfigure {
     this.messageStyle,
     this.okTextStyle,
     this.okTextBackgroundColor,
+    this.okTextBorderColor,
     this.cancelTextStyle,
     this.cancelTextBackgroundColor,
+    this.cancelTextBorderColor,
+    this.buttonPadding,
   });
 }
 
