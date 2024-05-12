@@ -75,6 +75,8 @@ class LFDioExceptionConverter implements DioConverter {
     final jsonData = response.data;
     final url = response.requestOptions.uri.toString();
 
+    dynamic printBody;
+
     try {
       final prettyBody = const JsonEncoder.withIndent('  ').convert(jsonData);
       final maxLength = printMaxLength; // 최대 길이
@@ -83,22 +85,18 @@ class LFDioExceptionConverter implements DioConverter {
         final truncatedJsonString = prettyBody.substring(0, maxLength);
         body = '$truncatedJsonString\n......\n...\n';
       }
-      Logging.w(
-        '[http_dio :: built_value_converter]\n'
-        'statusCode: $statusCode\n'
-        'url: $url\n'
-        'body: $body\n'
-        'ResultType: $ResultType',
-      );
+      printBody = body;
     } catch (_) {
-      Logging.w(
-        '[http_dio :: built_value_converter]\n'
-        'statusCode: $statusCode\n'
-        'url: $url\n'
-        'body: ${response.data}\n'
-        'ResultType: $ResultType',
-      );
+      printBody = response.data;
     }
+
+    Logging.w(
+      '[http_dio :: built_value_converter convertError]\n'
+      'statusCode: $statusCode\n'
+      'url: $url\n'
+      'body: $printBody\n'
+      'ResultType: $ResultType',
+    );
 
     final body = jsonData;
 
