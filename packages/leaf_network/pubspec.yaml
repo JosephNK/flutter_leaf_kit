@@ -12,8 +12,8 @@ dependencies:
   flutter:
     sdk: flutter
 
-  http: ^1.1.0
-  dio: ^5.4.2+1
+  http: ^1.2.1
+  dio: ^5.4.3+1
   dio_intercept_to_curl: ^0.2.0
 
   built_value: ^8.9.2
@@ -38,7 +38,7 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^3.0.0
+  flutter_lints: ^4.0.0
 
   # Build Gen Plugin
   build_runner: ^2.4.9

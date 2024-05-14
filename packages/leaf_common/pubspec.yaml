@@ -16,13 +16,13 @@ dependencies:
   provider: ^6.1.2
 
   collection: ^1.18.0
-  easy_localization: ^3.0.5
-  logger: ^2.2.0
+  easy_localization: ^3.0.7
+  logger: ^2.3.0
   quiver: ^3.2.1
   string_validator: ^1.0.2
 
   klc: ^0.1.0
-  intl: ^0.18.1
+  intl: ^0.19.0
 
 # package_info_plus (temporarily override for chewie)
 dependency_overrides:
@@ -40,6 +40,6 @@ dependency_overrides:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^3.0.0
+  flutter_lints: ^4.0.0
 
 flutter:

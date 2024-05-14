@@ -10,7 +10,7 @@ dependencies:
   flutter:
     sdk: flutter
 
-  cupertino_icons: ^1.0.6
+  cupertino_icons: ^1.0.8
 
   font_awesome_flutter: ^10.1.0
   eva_icons_flutter: ^3.1.0
@@ -18,7 +18,7 @@ dependencies:
   # Build Gen Plugin
   built_value: ^8.9.2
   built_collection: ^5.1.1
-  json_annotation: ^4.8.1
+  json_annotation: ^4.9.0
   dart_object_extension: ^0.1.1
 
   # Leaf Kit Plugin
@@ -28,13 +28,12 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-
-  flutter_lints: ^3.0.0
+  flutter_lints: ^4.0.0
 
   # Build Gen Plugin
   built_value_generator: ^8.9.2
   build_runner: ^2.4.9
-  json_serializable: ^6.7.1
+  json_serializable: ^6.8.0
   dart_object_extension_gen: ^0.1.1
 
 flutter:

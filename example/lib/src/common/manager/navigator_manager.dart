@@ -22,6 +22,7 @@ import '../../features/photo/ui/photo_screen.dart';
 import '../../features/radio/ui/radio_screen.dart';
 import '../../features/scroll/ui/scroll_screen.dart';
 import '../../features/slider/ui/slider_screen.dart';
+import '../../features/store/ui/store_screen.dart';
 import '../../features/text/ui/text_screen.dart';
 import '../../features/textfield/textfield_sceen.dart';
 
@@ -50,6 +51,7 @@ dynamic kListObjects = {
     {"id": "Text", "title": "Text"},
     {"id": "Scroll", "title": "Scroll"},
     {"id": "File", "title": "File"},
+    {"id": "Store", "title": "Store"},
   ]
 };
 
@@ -131,8 +133,13 @@ class NavigatorManager {
         break;
       case 'Scroll':
         widget = ScrollScreen(title: title);
+        break;
       case 'File':
         widget = FileScreen(title: title);
+        break;
+      case 'Store':
+        widget = StoreScreen(title: title);
+        break;
     }
 
     return Navigator.push(

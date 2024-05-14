@@ -19,3 +19,8 @@ scripts:
   get:flutter:
     run: melos exec -c 1 -- flutter pub get
     description: Get packages (All Packages)
+
+  get:pub_outdated:
+    # run: bash scripts/flutter_pub_outdated.sh
+    run: melos exec -c 1 -- dart pub outdated
+    description: Get Flutter pub outdated
