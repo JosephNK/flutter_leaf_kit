@@ -32,7 +32,7 @@ class LFComponentScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<ListItem> items = [
-      ListItem(id: 'accordion', title: 'FileScreen'),
+      ListItem(id: 'accordion', title: 'AccordionScreen'),
       ListItem(id: 'animation', title: 'AnimationScreen'),
       ListItem(id: 'avatar', title: 'AvatarScreen'),
       ListItem(id: 'badge', title: 'BadgeScreen'),
