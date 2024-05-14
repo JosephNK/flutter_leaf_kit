@@ -4,6 +4,8 @@ typedef ResultValueOnErrorMessage = Future<void> Function(
     BuildContext context, String errorMessage);
 typedef ResultValueOnException = Future<void> Function(
     BuildContext context, Object? exception);
+typedef ResultValueOnErrorValue = Future<void> Function(
+    BuildContext context, ErrorValue errorValue);
 
 class ResultValue<T> extends Equatable {
   final ErrorValue? errorValue;
@@ -96,6 +98,29 @@ class ResultValue<T> extends Equatable {
 
   static ResultValue<T> fromEmpty<T>() {
     return ResultValue<T>();
+  }
+
+  /// Helper
+
+  static Future<void> waitForShowErrorValues(
+    BuildContext? context,
+    List<ErrorValue?> errorValues, {
+    ResultValueOnErrorValue? onErrorValue,
+    bool sync = false,
+  }) async {
+    if (context != null && context.mounted) {
+      if (sync) {
+        await ErrorValue.waitForErrorValues(context, errorValues: errorValues,
+            onWait: (context, errorValue) async {
+          await onErrorValue?.call(context, errorValue);
+        });
+      } else {
+        ErrorValue.waitForErrorValues(context, errorValues: errorValues,
+            onWait: (context, errorValue) async {
+          await onErrorValue?.call(context, errorValue);
+        });
+      }
+    }
   }
 }
 
