@@ -3,20 +3,19 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_leaf_kit/flutter_leaf_kit.dart';
 
-class BottomNavigationBarScreen extends StatefulWidget {
+class BottomTabBarScreen extends StatefulWidget {
   final String title;
 
-  const BottomNavigationBarScreen({
+  const BottomTabBarScreen({
     super.key,
     required this.title,
   });
 
   @override
-  State<BottomNavigationBarScreen> createState() =>
-      _BottomNavigationBarScreenState();
+  State<BottomTabBarScreen> createState() => _BottomTabBarScreenState();
 }
 
-class _BottomNavigationBarScreenState extends State<BottomNavigationBarScreen> {
+class _BottomTabBarScreenState extends State<BottomTabBarScreen> {
   final LFBottomTabBarScaffoldController _bottomTabBarScaffoldController =
       LFBottomTabBarScaffoldController();
 
