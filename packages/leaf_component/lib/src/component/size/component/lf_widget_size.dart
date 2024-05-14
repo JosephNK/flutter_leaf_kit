@@ -1,4 +1,4 @@
-part of '../lf_widget_size.dart';
+part of '../size.dart';
 
 typedef OnWidgetSizeChange = void Function(Offset position, Size size);
 

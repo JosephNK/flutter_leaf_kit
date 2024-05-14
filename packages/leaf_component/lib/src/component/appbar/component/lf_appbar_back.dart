@@ -1,4 +1,4 @@
-part of '../lf_appbar.dart';
+part of '../appbar.dart';
 
 class LFAppBarBack extends StatelessWidget {
   final Color? color;

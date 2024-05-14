@@ -1,4 +1,4 @@
-part of '../lf_chip.dart';
+part of '../chip.dart';
 
 class LFChip extends StatefulWidget {
   final String text;

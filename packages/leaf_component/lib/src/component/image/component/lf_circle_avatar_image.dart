@@ -1,4 +1,4 @@
-part of '../lf_image.dart';
+part of '../image.dart';
 
 class LFCircleAvatarImage extends StatelessWidget {
   final LFImageValue image;

@@ -1,4 +1,4 @@
-part of '../lf_painter.dart';
+part of '../painter.dart';
 
 class LFTimelinePainter extends CustomPainter {
   final double width;

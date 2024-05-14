@@ -1,4 +1,4 @@
-part of '../lf_screen.dart';
+part of '../screen.dart';
 
 class ScreenStatelessWidget extends StatelessWidget {
   final Widget child;

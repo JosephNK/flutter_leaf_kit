@@ -1,4 +1,4 @@
-part of '../lf_popscope.dart';
+part of '../popscope.dart';
 
 typedef LFPopScopeCallback = Future<void> Function();
 

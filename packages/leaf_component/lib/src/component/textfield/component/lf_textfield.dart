@@ -1,4 +1,4 @@
-part of '../lf_textfield.dart';
+part of '../textfield.dart';
 
 enum LFTextFieldStatus { none, clear, reset, setText }
 

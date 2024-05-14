@@ -1,4 +1,4 @@
-part of '../lf_chip.dart';
+part of '../chip.dart';
 
 typedef LFChipsOnChanged = Function(
   List<LFDataItem> items,

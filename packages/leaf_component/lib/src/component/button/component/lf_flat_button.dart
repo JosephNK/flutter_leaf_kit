@@ -1,4 +1,4 @@
-part of '../lf_button.dart';
+part of '../button.dart';
 
 class LFFlatButton extends StatelessWidget {
   final String text;

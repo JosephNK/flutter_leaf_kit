@@ -1,4 +1,4 @@
-part of '../lf_photo.dart';
+part of '../photo.dart';
 
 ///
 /// LFPhotoAlbumScrollContentView

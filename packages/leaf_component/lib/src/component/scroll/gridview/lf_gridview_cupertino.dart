@@ -1,4 +1,4 @@
-part of '../lf_scroll.dart';
+part of '../scroll.dart';
 
 class LFGridViewCupertino<T> extends StatelessWidget {
   final Widget Function(BuildContext context, T item, int index) builder;

@@ -1,4 +1,4 @@
-part of '../lf_accordion.dart';
+part of '../accordion.dart';
 
 typedef LFAccordionItemBuilder<T> = Widget Function(
   BuildContext context,

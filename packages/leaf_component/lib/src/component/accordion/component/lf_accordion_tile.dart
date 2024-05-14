@@ -1,4 +1,4 @@
-part of '../lf_accordion.dart';
+part of '../accordion.dart';
 
 class LFAccordionTile extends StatefulWidget {
   final String title;

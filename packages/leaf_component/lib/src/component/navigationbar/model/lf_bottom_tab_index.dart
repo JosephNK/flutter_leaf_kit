@@ -1,4 +1,4 @@
-part of '../lf_navigationbar.dart';
+part of '../navigationbar.dart';
 
 class LFBottomTabIndex {
   final int tabIndex;

@@ -1,4 +1,4 @@
-part of '../lf_appbar.dart';
+part of '../appbar.dart';
 
 const double kLFToolbarHeight = 52.0;
 

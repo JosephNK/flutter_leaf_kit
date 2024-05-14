@@ -1,4 +1,4 @@
-part of '../lf_indicator.dart';
+part of '../indicator.dart';
 
 enum LFPageCircleIndicatorStyle { none, decrease }
 

@@ -38,7 +38,7 @@ class _SliderScreenState extends ScreenState<SliderScreen> {
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        DSSlider(
+        LFSlider(
           value: _sliderValue,
           min: 0,
           max: 10,
@@ -50,7 +50,7 @@ class _SliderScreenState extends ScreenState<SliderScreen> {
           },
         ),
         const SizedBox(height: 50.0),
-        DSRangeSlider(
+        LFRangeSlider(
           values: _rangeSliderValues,
           min: 0,
           max: 10,

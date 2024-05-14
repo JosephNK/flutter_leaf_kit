@@ -1,4 +1,4 @@
-part of '../lf_checkbox.dart';
+part of '../checkbox.dart';
 
 typedef LFCheckboxGroupsOnChanged = Function(
   List<LFDataItem> items,

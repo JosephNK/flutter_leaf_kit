@@ -1,3 +1,3 @@
-part of '../lf_dialog.dart';
+part of '../dialog.dart';
 
 enum LFCalendarPickerSelect { none, start, end }

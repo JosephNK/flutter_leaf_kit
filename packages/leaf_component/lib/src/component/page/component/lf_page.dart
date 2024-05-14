@@ -1,4 +1,4 @@
-part of '../lf_page.dart';
+part of '../page.dart';
 
 class LFPageView extends StatefulWidget {
   final List<Widget> children;

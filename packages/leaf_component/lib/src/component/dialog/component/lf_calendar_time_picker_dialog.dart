@@ -1,4 +1,4 @@
-part of '../lf_dialog.dart';
+part of '../dialog.dart';
 
 typedef LFCalendarTimePickerOnOK = Function(
     LFCalendarPickerSelect select, DateTime dateTime);

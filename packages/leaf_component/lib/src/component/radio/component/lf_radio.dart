@@ -1,4 +1,4 @@
-part of '../lf_radio.dart';
+part of '../radio.dart';
 
 enum LFRadioAlign {
   left,

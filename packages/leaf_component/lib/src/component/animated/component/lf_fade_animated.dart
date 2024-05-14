@@ -1,4 +1,4 @@
-part of '../lf_animated.dart';
+part of '../animated.dart';
 
 class LFFadeAnimated extends StatefulWidget {
   final Widget child;

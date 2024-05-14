@@ -1,4 +1,4 @@
-part of '../lf_dialog.dart';
+part of '../dialog.dart';
 
 /// CustomDialog
 /// https://medium.com/@excogitatr/custom-dialog-in-flutter-d00e0441f1d5

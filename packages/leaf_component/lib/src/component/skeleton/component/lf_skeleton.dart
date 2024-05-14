@@ -1,4 +1,4 @@
-part of '../lf_skeleton.dart';
+part of '../skeleton.dart';
 
 class LFSkeleton extends StatelessWidget {
   final double? width;

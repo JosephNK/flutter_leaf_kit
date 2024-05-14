@@ -1,4 +1,4 @@
-part of '../lf_button.dart';
+part of '../button.dart';
 
 class LFTopButton extends StatelessWidget {
   final bool isShow;

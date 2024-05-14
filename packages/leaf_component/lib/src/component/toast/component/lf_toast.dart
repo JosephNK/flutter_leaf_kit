@@ -1,4 +1,4 @@
-part of '../lf_toast.dart';
+part of '../toast.dart';
 
 enum LFToastType {
   lengthShort,

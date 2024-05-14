@@ -5,4 +5,4 @@ export 'package:flutter_cache_manager/flutter_cache_manager.dart'
 export 'package:photo_manager/photo_manager.dart' hide LatLng;
 export 'package:visibility_detector/visibility_detector.dart';
 
-export 'src/lf_component.dart';
+export 'src/component.dart';

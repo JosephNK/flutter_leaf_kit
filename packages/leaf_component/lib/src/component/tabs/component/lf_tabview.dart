@@ -1,4 +1,4 @@
-part of '../lf_tabs.dart';
+part of '../tabs.dart';
 
 class LFTabView extends StatelessWidget {
   final TabController? controller;

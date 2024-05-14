@@ -7,7 +7,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_leaf_common/leaf_common.dart';
 
-import '../../text/lf_text.dart';
+import '../../text/text.dart';
 
 part 'controller/lf_calendar_controller.dart';
 part 'provider/lf_calendar_provider.dart';

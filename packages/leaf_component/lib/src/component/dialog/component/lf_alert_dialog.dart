@@ -1,4 +1,4 @@
-part of '../lf_dialog.dart';
+part of '../dialog.dart';
 
 class LFAlertDialog {
   static final LFAlertDialog _instance = LFAlertDialog._internal();

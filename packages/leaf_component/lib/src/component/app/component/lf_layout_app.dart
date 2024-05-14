@@ -1,4 +1,4 @@
-part of '../lf_app.dart';
+part of '../app.dart';
 
 typedef LFLayoutAppOnSetupDevice = Function(VoidCallback onBuilder);
 

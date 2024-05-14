@@ -1,4 +1,4 @@
-part of '../lf_appbar.dart';
+part of '../appbar.dart';
 
 class LFAppBarAction extends StatelessWidget {
   final String? text;

@@ -1,4 +1,4 @@
-part of '../lf_image.dart';
+part of '../image.dart';
 
 ///
 /// ref., https://iiro.dev/2017/09/04/clipping-widgets-with-bezier-curves-in-flutter/

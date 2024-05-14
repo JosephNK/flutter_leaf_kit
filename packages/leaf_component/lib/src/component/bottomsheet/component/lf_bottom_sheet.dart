@@ -1,4 +1,4 @@
-part of '../lf_bottom_sheet.dart';
+part of '../bottom_sheet.dart';
 
 class LFBottomSheet {
   static final LFBottomSheet _instance = LFBottomSheet._internal();

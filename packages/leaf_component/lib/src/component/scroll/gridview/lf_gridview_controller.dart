@@ -1,4 +1,4 @@
-part of '../lf_scroll.dart';
+part of '../scroll.dart';
 
 class LFGridViewController with LFScrollControllerMixin {
   LFGridViewController() {

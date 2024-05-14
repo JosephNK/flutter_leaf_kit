@@ -1,4 +1,4 @@
-part of '../lf_switch.dart';
+part of '../switch.dart';
 
 class LFSwitch extends StatelessWidget {
   final bool value;

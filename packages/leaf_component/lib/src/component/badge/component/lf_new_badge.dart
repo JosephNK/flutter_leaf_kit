@@ -1,4 +1,4 @@
-part of '../lf_badge.dart';
+part of '../badge.dart';
 
 class LFNewBadge extends StatelessWidget {
   final double size;

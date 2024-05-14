@@ -1,4 +1,4 @@
-part of '../lf_screen.dart';
+part of '../screen.dart';
 
 mixin class ScreenVariable {
   bool get useSafeArea => true;

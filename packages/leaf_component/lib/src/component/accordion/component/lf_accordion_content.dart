@@ -1,4 +1,4 @@
-part of '../lf_accordion.dart';
+part of '../accordion.dart';
 
 class LFAccordionContent extends StatefulWidget {
   final Widget child;
