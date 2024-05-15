@@ -9,3 +9,17 @@ extension SafeLookup<E> on List<E> {
     }
   }
 }
+
+extension IterableExt<T> on Iterable<T> {
+  Iterable<T> joinSeparator(T separator) {
+    final iterator = this.iterator;
+    if (!iterator.moveNext()) return [];
+    final ll = [iterator.current];
+    while (iterator.moveNext()) {
+      ll
+        ..add(separator)
+        ..add(iterator.current);
+    }
+    return ll;
+  }
+}
