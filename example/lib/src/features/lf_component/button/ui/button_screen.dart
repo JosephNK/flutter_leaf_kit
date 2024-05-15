@@ -75,11 +75,12 @@ class _ButtonScreenState extends ScreenState<ButtonScreen> {
             ),
             color: Colors.grey[300],
           ),
+          margin: const EdgeInsets.all(20.0),
           padding: const EdgeInsets.all(12.0),
-          child: const Stack(
+          child: Stack(
             clipBehavior: Clip.none,
             children: [
-              Row(
+              const Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisSize: MainAxisSize.min,
@@ -89,6 +90,13 @@ class _ButtonScreenState extends ScreenState<ButtonScreen> {
                     textAlign: TextAlign.center,
                   )
                 ],
+              ),
+              Positioned(
+                top: 1.5,
+                right: 1.5,
+                child: LFBadge(
+                  text: 9.toString(),
+                ),
               ),
             ],
           ),

@@ -3,6 +3,7 @@ library lf_button;
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_leaf_common/leaf_common.dart';
 import 'package:flutter_leaf_component/leaf_component.dart';
 
 part 'component/lf_flat_button.dart';

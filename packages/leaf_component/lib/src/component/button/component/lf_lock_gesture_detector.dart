@@ -10,6 +10,7 @@ class LFLockGestureDetector extends StatefulWidget {
   final bool showLoading;
   final bool disabled;
   final BoxDecoration? decoration;
+  final EdgeInsets? margin;
   final EdgeInsets? padding;
   final BorderRadius? borderRadius;
   final LFLockGestureDetectorOnLoaderBuilder? onLoaderBuilder;
@@ -24,6 +25,7 @@ class LFLockGestureDetector extends StatefulWidget {
     this.showLoading = true,
     this.disabled = false,
     this.decoration,
+    this.margin,
     this.padding,
     this.borderRadius,
     this.onLoaderBuilder,
@@ -77,37 +79,63 @@ class _LFLockGestureDetectorState extends State<LFLockGestureDetector> {
 
   @override
   Widget build(BuildContext context) {
-    final loadingWidget = widget.onLoaderBuilder?.call();
+    Widget child = widget.child;
+    Widget? loadingWidget = widget.onLoaderBuilder?.call();
 
-    return LFInkWell(
-      decoration: widget.decoration,
-      padding: widget.padding,
-      borderRadius: widget.borderRadius,
-      disabled: _disabled,
-      onTap: () {
-        if (_lock || _forceLock) {
-          return;
-        }
-        if (!_forceLock) {
-          _startLockTimer();
-        }
-        widget.onTap?.call();
-      },
-      child: Stack(
+    Clip clipBehavior = Clip.hardEdge;
+    List<Positioned> positionedWidgets = [];
+    if (child is Stack) {
+      clipBehavior = child.clipBehavior;
+      positionedWidgets = child.children
+          .map((e) => e is Positioned ? e : null)
+          .whereNotNull()
+          .toList();
+      child = Stack(
+        clipBehavior: clipBehavior,
         children: [
-          widget.child,
-          Positioned.fill(
-            child: Visibility(
-              visible: _loading,
-              child: Center(
-                child: loadingWidget ??
-                    const LFIndicator(
-                      size: LFIndicatorSize.small,
-                    ),
+          ...child.children
+              .map((e) => e is! Positioned ? e : null)
+              .whereNotNull(),
+        ],
+      );
+    }
+
+    return Container(
+      margin: widget.margin,
+      child: LFInkWell(
+        decoration: widget.decoration,
+        borderRadius: widget.borderRadius,
+        disabled: _disabled,
+        onTap: () {
+          if (_lock || _forceLock) {
+            return;
+          }
+          if (!_forceLock) {
+            _startLockTimer();
+          }
+          widget.onTap?.call();
+        },
+        child: Stack(
+          clipBehavior: clipBehavior,
+          children: [
+            Container(
+              padding: widget.padding,
+              child: child,
+            ),
+            Positioned.fill(
+              child: Visibility(
+                visible: _loading,
+                child: Center(
+                  child: loadingWidget ??
+                      const LFIndicator(
+                        size: LFIndicatorSize.small,
+                      ),
+                ),
               ),
             ),
-          ),
-        ],
+            ...positionedWidgets,
+          ],
+        ),
       ),
     );
   }
