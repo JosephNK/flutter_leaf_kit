@@ -60,7 +60,7 @@ class _DialogScreenState extends ScreenState<DialogScreen> {
         Center(
           child: LFFlatButton(
             text: 'Show Alert',
-            onPressed: () {
+            onTap: () {
               LFAlertDialog.show(
                 context,
                 title: 'Title',
@@ -73,7 +73,7 @@ class _DialogScreenState extends ScreenState<DialogScreen> {
         Center(
           child: LFFlatButton(
             text: 'Show CheckBox Picker Dialog',
-            onPressed: () {
+            onTap: () {
               LFCheckboxPickerDialog.show(
                 context,
                 items: _checkboxItems,
@@ -92,7 +92,7 @@ class _DialogScreenState extends ScreenState<DialogScreen> {
         Center(
           child: LFFlatButton(
             text: 'Show Radio Picker Dialog',
-            onPressed: () {
+            onTap: () {
               LFRadioPickerDialog.confirm(
                 context,
                 items: _radioItems,
@@ -111,7 +111,7 @@ class _DialogScreenState extends ScreenState<DialogScreen> {
         Center(
           child: LFFlatButton(
             text: 'Show Chip Picker Dialog',
-            onPressed: () {
+            onTap: () {
               LFChipPickerDialog.show(
                 context,
                 items: _chipItems,
@@ -131,7 +131,7 @@ class _DialogScreenState extends ScreenState<DialogScreen> {
         Center(
           child: LFFlatButton(
             text: 'Show Calendar Date Picker Dialog',
-            onPressed: () {
+            onTap: () {
               LFCalendarDatePickerDialog.show(
                 context,
                 pickerSelect: LFCalendarPickerSelect.start,
@@ -143,7 +143,7 @@ class _DialogScreenState extends ScreenState<DialogScreen> {
         Center(
           child: LFFlatButton(
             text: 'Show Calendar Time Picker Dialog',
-            onPressed: () {
+            onTap: () {
               LFCalendarTimePickerDialog.show(
                 context,
                 pickerSelect: LFCalendarPickerSelect.start,

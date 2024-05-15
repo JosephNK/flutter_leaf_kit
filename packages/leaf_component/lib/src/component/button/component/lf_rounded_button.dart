@@ -5,7 +5,7 @@ class LFRoundedButton extends StatelessWidget {
   final Color? textColor;
   final Color? backgroundColor;
   final TextAlign textAlign;
-  final VoidCallback? onPressed;
+  final VoidCallback? onTap;
 
   const LFRoundedButton({
     super.key,
@@ -13,24 +13,22 @@ class LFRoundedButton extends StatelessWidget {
     this.textColor,
     this.backgroundColor,
     this.textAlign = TextAlign.center,
-    this.onPressed,
+    this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
     return LFInkWell(
-      onTap: onPressed,
-      child: Container(
-        padding: const EdgeInsets.all(10.0),
-        decoration: BoxDecoration(
-          borderRadius: const BorderRadius.all(Radius.circular(6.0)),
-          color: backgroundColor ?? Colors.blueAccent,
-        ),
-        child: LFText(
-          text,
-          color: textColor ?? Colors.white,
-          textAlign: textAlign,
-        ),
+      onTap: onTap,
+      decoration: BoxDecoration(
+        borderRadius: const BorderRadius.all(Radius.circular(6.0)),
+        color: backgroundColor ?? Colors.blueAccent,
+      ),
+      padding: const EdgeInsets.all(10.0),
+      child: LFText(
+        text,
+        color: textColor ?? Colors.white,
+        textAlign: textAlign,
       ),
     );
   }

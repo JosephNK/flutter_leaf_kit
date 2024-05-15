@@ -8,6 +8,7 @@ import 'avatar/ui/avatar_screen.dart';
 import 'badge/ui/badge_screen.dart';
 import 'bottomsheet/ui/bottomsheet_screen.dart';
 import 'bottomtabbar/ui/bottomtabbar_screen.dart';
+import 'button/ui/button_screen.dart';
 import 'calendar/ui/calendar_screen.dart';
 import 'checkbox/ui/checkbox_screen.dart';
 import 'chip/ui/chip_screen.dart';
@@ -38,6 +39,7 @@ class LFComponentScreen extends StatelessWidget {
       ListItem(id: 'badge', title: 'BadgeScreen'),
       ListItem(id: 'bottomsheet', title: 'BottomSheetScreen'),
       ListItem(id: 'bottomtabbar', title: 'BottomTabBarScreen'),
+      ListItem(id: 'button', title: 'ButtonScreen'),
       ListItem(id: 'calendar', title: 'CalendarScreen'),
       ListItem(id: 'checkbox', title: 'CheckboxScreen'),
       ListItem(id: 'chip', title: 'ChipScreen'),
@@ -90,6 +92,9 @@ class LFComponentScreen extends StatelessWidget {
                   break;
                 case 'bottomtabbar':
                   screen = BottomTabBarScreen(title: title);
+                  break;
+                case 'button':
+                  screen = ButtonScreen(title: title);
                   break;
                 case 'calendar':
                   screen = CalendarScreen(title: title);

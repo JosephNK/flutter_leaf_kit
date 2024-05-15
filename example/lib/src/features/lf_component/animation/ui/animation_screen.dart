@@ -106,7 +106,7 @@ class _AnimationScreenState extends ScreenState<AnimationScreen> {
           const SizedBox(height: 10.0),
           LFRoundedButton(
             text: 'Expand (Value)',
-            onPressed: () async {
+            onTap: () async {
               setState(() => _expand = !_expand);
             },
           ),
@@ -122,7 +122,7 @@ class _AnimationScreenState extends ScreenState<AnimationScreen> {
           const SizedBox(height: 10.0),
           LFRoundedButton(
             text: 'Scale',
-            onPressed: () async {
+            onTap: () async {
               if (_scaleController.status == LFAnimationStatus.forward) {
                 _scaleController.reverse();
               } else {
@@ -140,7 +140,7 @@ class _AnimationScreenState extends ScreenState<AnimationScreen> {
           const SizedBox(height: 10.0),
           LFRoundedButton(
             text: 'Bouncing',
-            onPressed: () async {
+            onTap: () async {
               await _bouncingController.forward();
               await _bouncingController.reverse();
             },
@@ -155,7 +155,7 @@ class _AnimationScreenState extends ScreenState<AnimationScreen> {
           const SizedBox(height: 10.0),
           LFRoundedButton(
             text: 'Expand',
-            onPressed: () {
+            onTap: () {
               if (_expandController.status == LFAnimationStatus.forward) {
                 _expandController.reverse();
                 return;
@@ -171,7 +171,7 @@ class _AnimationScreenState extends ScreenState<AnimationScreen> {
           const SizedBox(height: 10.0),
           LFRoundedButton(
             text: 'Fade',
-            onPressed: () {
+            onTap: () {
               if (_fadeController.status == LFAnimationStatus.repeat) {
                 _fadeController.stop();
                 return;
@@ -187,7 +187,7 @@ class _AnimationScreenState extends ScreenState<AnimationScreen> {
           const SizedBox(height: 10.0),
           LFRoundedButton(
             text: 'Rotate',
-            onPressed: () {
+            onTap: () {
               if (_rotateController.status == LFAnimationStatus.repeat) {
                 _rotateController.forwardWithStop();
                 return;

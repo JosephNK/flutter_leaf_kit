@@ -54,7 +54,7 @@ class _FileScreenState extends ScreenState<FileScreen> {
         const SizedBox(height: 15.0),
         LFFlatButton(
           text: 'Write',
-          onPressed: () async {
+          onTap: () async {
             final documentPath = await LFFileManager.shared
                 .getApplicationDocumentsDirectoryPath();
             final jsonFile = File('$documentPath/test.json');
@@ -76,7 +76,7 @@ class _FileScreenState extends ScreenState<FileScreen> {
         const SizedBox(height: 15.0),
         LFFlatButton(
           text: 'Read',
-          onPressed: () async {
+          onTap: () async {
             final documentPath = await LFFileManager.shared
                 .getApplicationDocumentsDirectoryPath();
             final jsonFile = File('$documentPath/test.json');
@@ -91,7 +91,7 @@ class _FileScreenState extends ScreenState<FileScreen> {
         const SizedBox(height: 15.0),
         LFFlatButton(
           text: 'Delete',
-          onPressed: () async {
+          onTap: () async {
             final documentPath = await LFFileManager.shared
                 .getApplicationDocumentsDirectoryPath();
             final jsonFile = File('$documentPath/test.json');

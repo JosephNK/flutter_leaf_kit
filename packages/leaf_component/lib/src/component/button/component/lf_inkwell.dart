@@ -27,8 +27,8 @@ class LFInkWell extends StatelessWidget {
     return Material(
       type: MaterialType.transparency,
       child: InkWell(
-        onTap: disabled ? null : onTap,
         borderRadius: borderRadius,
+        onTap: disabled ? null : onTap,
         child: Ink(
           padding: padding,
           width: width,

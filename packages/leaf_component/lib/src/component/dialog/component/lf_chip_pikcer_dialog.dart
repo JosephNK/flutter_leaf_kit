@@ -137,7 +137,7 @@ class _ChipPickerContentState extends State<_ChipPickerContent> {
                   text: 'Close',
                   textColor: Colors.black54,
                   backgroundColor: Colors.transparent,
-                  onPressed: () {
+                  onTap: () {
                     Navigator.of(context).pop();
                   },
                 ),
@@ -146,7 +146,7 @@ class _ChipPickerContentState extends State<_ChipPickerContent> {
                   text: 'OK',
                   textColor: Colors.blueAccent,
                   backgroundColor: Colors.transparent,
-                  onPressed: () {
+                  onTap: () {
                     Navigator.of(context).pop();
                     onOK?.call(_values ?? []);
                   },

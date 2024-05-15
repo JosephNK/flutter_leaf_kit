@@ -131,7 +131,7 @@ class _CheckBoxPickerContentState extends State<_CheckBoxPickerContent> {
                   text: 'Close',
                   textColor: Colors.black54,
                   backgroundColor: Colors.transparent,
-                  onPressed: () {
+                  onTap: () {
                     Navigator.of(context).pop();
                   },
                 ),
@@ -140,7 +140,7 @@ class _CheckBoxPickerContentState extends State<_CheckBoxPickerContent> {
                   text: 'OK',
                   textColor: Colors.blueAccent,
                   backgroundColor: Colors.transparent,
-                  onPressed: () {
+                  onTap: () {
                     Navigator.of(context).pop();
                     onOK?.call(_values ?? []);
                   },

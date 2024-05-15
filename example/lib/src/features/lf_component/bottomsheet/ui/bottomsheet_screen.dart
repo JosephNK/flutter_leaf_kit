@@ -40,7 +40,7 @@ class _BottomSheetScreenState extends ScreenState<BottomSheetScreen> {
         Center(
           child: LFFlatButton(
             text: 'Show',
-            onPressed: () {
+            onTap: () {
               LFBottomSheet.show(
                 context,
                 items: [
