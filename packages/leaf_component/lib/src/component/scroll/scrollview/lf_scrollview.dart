@@ -9,6 +9,7 @@ class LFScrollView extends StatefulWidget {
   final bool disallowGlow;
   final bool shrinkWrap; // Only Use LFScrollViewCupertino
   final bool scrollable;
+  final bool enableTapUnFocus;
   final LFScrollViewController? controller;
   final LFScrollViewRefresh? onRefresh;
   final LFScrollViewDidScroll? onDidScroll;
@@ -24,6 +25,7 @@ class LFScrollView extends StatefulWidget {
     this.disallowGlow = false,
     this.shrinkWrap = false,
     this.scrollable = true,
+    this.enableTapUnFocus = false,
     this.onRefresh,
     this.onDidScroll,
   });
@@ -117,7 +119,15 @@ class _LFScrollViewState extends State<LFScrollView> with LFScrollControlMixin {
 
         return didScrollWithLoadMore(scrollNotification);
       },
-      child: _buildPlatform(context),
+      child: GestureDetector(
+        behavior: widget.enableTapUnFocus ? HitTestBehavior.opaque : null,
+        onTap: widget.enableTapUnFocus
+            ? () {
+                FocusScope.of(context).unfocus();
+              }
+            : null,
+        child: _buildPlatform(context),
+      ),
     );
   }
 

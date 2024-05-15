@@ -15,6 +15,10 @@ class ScrollScreen extends ScreenStatefulWidget {
 
 class _ScrollScreenState extends ScreenState<ScrollScreen> {
   final LFScrollViewController _scrollViewController = LFScrollViewController();
+  final LFTextFieldController _textFieldController1 = LFTextFieldController();
+  final LFTextFieldController _textFieldController2 = LFTextFieldController();
+  final FocusNode _textFieldFocusNode1 = FocusNode();
+  final FocusNode _textFieldFocusNode2 = FocusNode();
 
   @override
   Color? get backgroundColor => Colors.white;
@@ -39,12 +43,39 @@ class _ScrollScreenState extends ScreenState<ScrollScreen> {
       disallowGlow: false,
       shrinkWrap: false,
       scrollable: true,
+      enableTapUnFocus: true,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Container(color: Colors.red, height: 300.0),
-          Container(color: Colors.blue, height: 300.0),
+          Container(
+            color: Colors.red,
+            height: 300.0,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                LFTextField(
+                  controller: _textFieldController1,
+                  focusNode: _textFieldFocusNode1,
+                  backgroundColor: Colors.orange,
+                ),
+              ],
+            ),
+          ),
+          Container(
+            color: Colors.blue,
+            height: 300.0,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                LFTextField(
+                  controller: _textFieldController2,
+                  focusNode: _textFieldFocusNode2,
+                  backgroundColor: Colors.deepPurple,
+                ),
+              ],
+            ),
+          ),
           Container(color: Colors.yellow, height: 300.0),
           Container(color: Colors.orange, height: 300.0),
           Container(color: Colors.pink, height: 300.0),

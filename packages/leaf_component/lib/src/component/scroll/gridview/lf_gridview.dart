@@ -15,6 +15,7 @@ class LFGridView<T> extends StatefulWidget {
   final bool disallowGlow;
   final bool shrinkWrap;
   final bool scrollable;
+  final bool enableTapUnFocus;
   final bool hasReachedMax;
 
   const LFGridView({
@@ -33,6 +34,7 @@ class LFGridView<T> extends StatefulWidget {
     this.disallowGlow = false,
     this.shrinkWrap = false,
     this.scrollable = true,
+    this.enableTapUnFocus = false,
     this.hasReachedMax = true,
   });
 
@@ -136,7 +138,15 @@ class _LFGridViewState<T> extends State<LFGridView<T>>
 
         return didScrollWithLoadMore(scrollNotification);
       },
-      child: _buildPlatform(context),
+      child: GestureDetector(
+        behavior: widget.enableTapUnFocus ? HitTestBehavior.opaque : null,
+        onTap: widget.enableTapUnFocus
+            ? () {
+                FocusScope.of(context).unfocus();
+              }
+            : null,
+        child: _buildPlatform(context),
+      ),
     );
   }
 
