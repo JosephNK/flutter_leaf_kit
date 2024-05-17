@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
@@ -18,6 +19,8 @@ class BottomTabBarScreen extends StatefulWidget {
 class _BottomTabBarScreenState extends State<BottomTabBarScreen> {
   final LFBottomTabBarScaffoldController _bottomTabBarScaffoldController =
       LFBottomTabBarScaffoldController();
+
+  StreamSubscription<int>? _subscription;
 
   final List<LFBottomTabItem> _tabItems = [
     LFBottomTabItem(
@@ -41,7 +44,16 @@ class _BottomTabBarScreenState extends State<BottomTabBarScreen> {
   ];
 
   @override
+  void initState() {
+    _subscription = _bottomTabBarScaffoldController.addSubscription((value) {
+      print(value);
+    });
+    super.initState();
+  }
+
+  @override
   void dispose() {
+    _subscription?.cancel();
     _bottomTabBarScaffoldController.dispose();
 
     super.dispose();

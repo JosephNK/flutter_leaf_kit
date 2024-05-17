@@ -6,6 +6,7 @@ class LFBottomTabBarScaffoldController {
   LFBottomTabBarViewsController tabBarViewsController =
       LFBottomTabBarViewsController();
   LFBottomTabBarController tabBarController = LFBottomTabBarController();
+  StreamController<int> streamController = StreamController<int>.broadcast();
 
   LFBottomTabBarScaffoldController();
 
@@ -21,9 +22,18 @@ class LFBottomTabBarScaffoldController {
     tabBarController.updateTabBadge(tabIndex: tabIndex, isNew: isNew);
   }
 
+  StreamSubscription<int> addSubscription(void Function(int event) onData) {
+    return streamController.stream.listen(onData);
+  }
+
+  void addChangeIndexEvent(int index) {
+    streamController.sink.add(index);
+  }
+
   void dispose() {
     tabBarViewsController.dispose();
     tabBarController.dispose();
+    streamController.close();
   }
 
   static List<LFBottomTabItem> makeNewItems(

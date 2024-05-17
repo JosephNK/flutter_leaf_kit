@@ -93,6 +93,7 @@ class _LFBottomTabBarScaffoldState extends State<LFBottomTabBarScaffold> {
             tabBarController.selectedIndex = index;
           }
           if (!isSameIndex) {
+            scaffoldController.addChangeIndexEvent(index);
             onPressed?.call(index);
           }
         },
