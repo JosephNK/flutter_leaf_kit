@@ -10,5 +10,6 @@ part 'component/lf_easy_rich_text.dart';
 part 'component/lf_link_text.dart';
 part 'component/lf_rich_text.dart';
 part 'component/lf_text.dart';
+part 'component/lf_underline_text.dart';
 part 'interface/lf_build_text.dart';
 part 'types/lf_text_size.dart';
