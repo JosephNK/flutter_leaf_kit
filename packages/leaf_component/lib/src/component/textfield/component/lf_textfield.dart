@@ -186,9 +186,9 @@ class _LFTextFieldState extends State<LFTextField> {
     text = controller.value ?? '';
     controller.none();
 
-    WidgetsBinding.instance.addPostFrameCallback((_) async {
-      widget.onChanged?.call(text);
-    });
+    // WidgetsBinding.instance.addPostFrameCallback((_) async {
+    //   widget.onChanged?.call(text);
+    // });
 
     super.initState();
   }
