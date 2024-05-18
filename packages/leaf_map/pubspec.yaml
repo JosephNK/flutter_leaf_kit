@@ -1,6 +1,6 @@
 name: flutter_leaf_map
 description: A new Flutter package project.
-version: 1.9.13-dev
+version: 1.9.14-dev
 publish_to: 'none'
 homepage: https://github.com/JosephNK/flutter_leaf_kit
 
@@ -17,12 +17,12 @@ dependencies:
   flutter_leaf_common:
     git:
       url: https://github.com/JosephNK/flutter_leaf_kit.git
-      ref: 'v1.9.13-dev'
+      ref: 'v1.9.14-dev'
       path: ./packages/leaf_common
   flutter_leaf_location:
     git:
       url: https://github.com/JosephNK/flutter_leaf_kit.git
-      ref: 'v1.9.13-dev'
+      ref: 'v1.9.14-dev'
       path: ./packages/leaf_location
 
 dev_dependencies:
