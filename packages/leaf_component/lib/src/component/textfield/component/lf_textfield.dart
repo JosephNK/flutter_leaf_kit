@@ -460,7 +460,7 @@ class _LFTextFieldState extends State<LFTextField> {
     final maxLines = widget.maxLines;
     final onChanged = widget.onChanged;
 
-    final text = value.trim();
+    final text = value;
 
     if (context.mounted && maxLines == 1) {
       setState(() => _showClearButton = text.isNotEmpty);
