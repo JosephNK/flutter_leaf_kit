@@ -4,13 +4,8 @@ part of '../textfield.dart';
 // inputFormatters: [
 //  FilteringTextInputFormatter.digitsOnly, // 숫자만!
 //  PhoneNumberFormatter(), // 자동 하이픈
-//  PhoneNumberLengthLimitingTextInputFormatter(13) // 13자리만 입력 받도록 하이픈 2개+숫자 11개
+//  NumberLengthLimitingTextInputFormatter(13) // 13자리만 입력 받도록 하이픈 2개 + 숫자 11개
 // ],
-
-class PhoneNumberLengthLimitingTextInputFormatter
-    extends LengthLimitingTextInputFormatter {
-  PhoneNumberLengthLimitingTextInputFormatter(super.maxLength);
-}
 
 class PhoneNumberFormatter extends TextInputFormatter {
   @override
