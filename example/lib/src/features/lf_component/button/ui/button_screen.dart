@@ -58,15 +58,14 @@ class _ButtonScreenState extends ScreenState<ButtonScreen> {
         ),
         const SizedBox(height: 10.0),
         LFLockGestureDetector(
-          // loading: _loading,
+          loading: _loading,
           lockDuration: const Duration(seconds: 1),
           onTap: () {
             print('onTap');
-            // setState(() {
-            //   _loading = !_loading;
-            // });
+            setState(() {
+              _loading = !_loading;
+            });
           },
-          borderRadius: BorderRadius.circular(8.0),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8.0),
             border: Border.all(
@@ -74,8 +73,9 @@ class _ButtonScreenState extends ScreenState<ButtonScreen> {
               width: 1.0,
             ),
             color: Colors.grey[300],
+            boxShadow: TestBoxShadow.shadows,
           ),
-          margin: const EdgeInsets.all(20.0),
+          margin: const EdgeInsets.all(10.0),
           padding: const EdgeInsets.all(12.0),
           child: Stack(
             clipBehavior: Clip.none,
@@ -92,11 +92,49 @@ class _ButtonScreenState extends ScreenState<ButtonScreen> {
                 ],
               ),
               Positioned(
-                top: 1.5,
-                right: 1.5,
-                child: LFBadge(
-                  text: 9.toString(),
-                ),
+                top: 0,
+                right: 0,
+                child: LFBadge(text: 9.toString()),
+              ),
+            ],
+          ),
+        ),
+        const SizedBox(height: 10.0),
+        LFLockGestureDetector(
+          lockDuration: const Duration(seconds: 1),
+          onTap: () {
+            print('onTap');
+          },
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(8.0),
+            border: Border.all(
+              color: Colors.orange,
+              width: 1.0,
+            ),
+            color: Colors.grey[300],
+            boxShadow: TestBoxShadow.shadows,
+          ),
+          margin: const EdgeInsets.all(10.0),
+          padding: const EdgeInsets.all(12.0),
+          enabledInkWell: false,
+          child: Stack(
+            clipBehavior: Clip.none,
+            children: [
+              const Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  LFText(
+                    'Hello World',
+                    textAlign: TextAlign.center,
+                  )
+                ],
+              ),
+              Positioned(
+                top: 0,
+                right: 0,
+                child: LFBadge(text: 9.toString()),
               ),
             ],
           ),
@@ -104,4 +142,21 @@ class _ButtonScreenState extends ScreenState<ButtonScreen> {
       ],
     );
   }
+}
+
+class TestBoxShadow {
+  static const List<BoxShadow> shadows = [
+    BoxShadow(
+      color: Colors.black,
+      offset: Offset(0, 4),
+      blurRadius: 8,
+      spreadRadius: -2,
+    ),
+    BoxShadow(
+      color: Color(0x0f101828),
+      offset: Offset(0, 2),
+      blurRadius: 4,
+      spreadRadius: -2,
+    ),
+  ];
 }

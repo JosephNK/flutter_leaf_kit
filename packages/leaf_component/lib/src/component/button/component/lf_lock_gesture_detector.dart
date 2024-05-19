@@ -12,7 +12,7 @@ class LFLockGestureDetector extends StatefulWidget {
   final BoxDecoration? decoration;
   final EdgeInsets? margin;
   final EdgeInsets? padding;
-  final BorderRadius? borderRadius;
+  final bool enabledInkWell;
   final LFLockGestureDetectorOnLoaderBuilder? onLoaderBuilder;
   final VoidCallback? onTap;
 
@@ -27,7 +27,7 @@ class LFLockGestureDetector extends StatefulWidget {
     this.decoration,
     this.margin,
     this.padding,
-    this.borderRadius,
+    this.enabledInkWell = true,
     this.onLoaderBuilder,
     this.onTap,
   });
@@ -100,45 +100,71 @@ class _LFLockGestureDetectorState extends State<LFLockGestureDetector> {
       );
     }
 
-    return Container(
-      margin: widget.margin,
-      child: LFInkWell(
-        decoration: widget.decoration,
-        borderRadius: widget.borderRadius,
-        disabled: _disabled,
-        onTap: () {
-          if (_lock || _forceLock) {
-            return;
-          }
-          if (!_forceLock) {
-            _startLockTimer();
-          }
-          widget.onTap?.call();
-        },
-        child: Stack(
-          clipBehavior: clipBehavior,
-          children: [
-            Container(
-              padding: widget.padding,
-              child: child,
-            ),
-            Positioned.fill(
-              child: Visibility(
-                visible: _loading,
-                child: Center(
-                  child: loadingWidget ??
-                      const LFIndicator(
-                        size: LFIndicatorSize.small,
-                      ),
-                ),
-              ),
-            ),
-            ...positionedWidgets,
-          ],
+    final margin = widget.margin;
+    final padding = widget.padding;
+    final decoration = widget.decoration;
+    final enabledInkWell = widget.enabledInkWell;
+    final decBorderRadius = decoration?.borderRadius;
+
+    final childWidget = Stack(
+      clipBehavior: clipBehavior,
+      children: [
+        Container(
+          padding: padding,
+          child: child,
         ),
+        Positioned.fill(
+          child: Visibility(
+            visible: _loading,
+            child: Center(
+              child: loadingWidget ??
+                  const LFIndicator(
+                    size: LFIndicatorSize.small,
+                  ),
+            ),
+          ),
+        ),
+        ...positionedWidgets,
+      ],
+    );
+
+    void onTap() {
+      if (_lock || _forceLock || _disabled) {
+        return;
+      }
+      if (!_forceLock) {
+        _startLockTimer();
+      }
+      widget.onTap?.call();
+    }
+
+    if (enabledInkWell) {
+      final borderRadius =
+          (decBorderRadius is BorderRadius) ? decBorderRadius : null;
+      return Container(
+        margin: margin,
+        child: LFInkWell(
+          decoration: decoration,
+          borderRadius: borderRadius,
+          disabled: _disabled,
+          onTap: onTap,
+          child: childWidget,
+        ),
+      );
+    }
+
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        decoration: decoration,
+        margin: margin,
+        // padding: padding,
+        child: childWidget,
       ),
     );
   }
+
+  /// Timer
 
   void _startLockTimer() {
     _toggleLoading(true);
@@ -155,6 +181,8 @@ class _LFLockGestureDetectorState extends State<LFLockGestureDetector> {
     _timer?.cancel();
     _timer = null;
   }
+
+  /// Loading
 
   void _toggleLoading(bool loading) {
     if (widget.showLoading && context.mounted) {
