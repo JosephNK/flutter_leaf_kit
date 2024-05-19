@@ -140,14 +140,14 @@ packages:
       path: "../leaf_common"
       relative: true
     source: path
-    version: "1.9.18-dev"
+    version: "1.9.19-dev"
   flutter_leaf_store:
     dependency: "direct main"
     description:
       path: "../leaf_store"
       relative: true
     source: path
-    version: "1.9.18-dev"
+    version: "1.9.19-dev"
   flutter_lints:
     dependency: "direct dev"
     description:
