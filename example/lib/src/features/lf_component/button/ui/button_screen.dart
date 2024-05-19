@@ -102,9 +102,9 @@ class _ButtonScreenState extends ScreenState<ButtonScreen> {
         const SizedBox(height: 10.0),
         LFLockGestureDetector(
           lockDuration: const Duration(seconds: 1),
-          onTap: () {
-            print('onTap');
-          },
+          // onTap: () {
+          //   print('onTap');
+          // },
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8.0),
             border: Border.all(

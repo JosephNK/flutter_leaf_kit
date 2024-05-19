@@ -105,6 +105,7 @@ class _LFLockGestureDetectorState extends State<LFLockGestureDetector> {
     final decoration = widget.decoration;
     final enabledInkWell = widget.enabledInkWell;
     final decBorderRadius = decoration?.borderRadius;
+    final onTap = widget.onTap;
 
     final childWidget = Stack(
       clipBehavior: clipBehavior,
@@ -128,14 +129,14 @@ class _LFLockGestureDetectorState extends State<LFLockGestureDetector> {
       ],
     );
 
-    void onTap() {
+    void onGestureTap() {
       if (_lock || _forceLock || _disabled) {
         return;
       }
       if (!_forceLock) {
         _startLockTimer();
       }
-      widget.onTap?.call();
+      onTap?.call();
     }
 
     if (enabledInkWell) {
@@ -147,14 +148,14 @@ class _LFLockGestureDetectorState extends State<LFLockGestureDetector> {
           decoration: decoration,
           borderRadius: borderRadius,
           disabled: _disabled,
-          onTap: onTap,
+          onTap: onTap != null ? onGestureTap : null,
           child: childWidget,
         ),
       );
     }
 
     return GestureDetector(
-      onTap: onTap,
+      onTap: onTap != null ? onGestureTap : null,
       child: Container(
         decoration: decoration,
         margin: margin,
