@@ -1,4 +1,9 @@
-part of '../../leaf_manager.dart';
+import 'dart:convert';
+import 'dart:io';
+import 'dart:typed_data';
+
+import 'package:flutter/foundation.dart';
+import 'package:path_provider/path_provider.dart';
 
 class LFFileManager {
   static final LFFileManager _instance = LFFileManager._internal();

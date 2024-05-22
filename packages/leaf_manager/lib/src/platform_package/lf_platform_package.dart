@@ -1,39 +1,11 @@
-part of '../../leaf_manager.dart';
+import 'dart:io';
 
-enum BuildType {
-  production,
-  development,
-  staging,
-  test,
-}
+import 'package:flutter/foundation.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 
-extension BuildTypeExt on BuildType {
-  String get longName {
-    switch (this) {
-      case BuildType.production:
-        return 'production';
-      case BuildType.development:
-        return 'development';
-      case BuildType.staging:
-        return 'staging';
-      case BuildType.test:
-        return 'test';
-    }
-  }
+import 'lf_build_type.dart';
 
-  String get shortName {
-    switch (this) {
-      case BuildType.production:
-        return 'prod';
-      case BuildType.development:
-        return 'dev';
-      case BuildType.staging:
-        return 'stg';
-      case BuildType.test:
-        return 'test';
-    }
-  }
-}
+export 'lf_build_type.dart';
 
 class PlatformPackage {
   final BuildType buildType;

@@ -1,10 +1,8 @@
-part of '../../leaf_manager.dart';
+import 'package:flutter_app_badger/flutter_app_badger.dart';
 
 class LFAppBadgerManager {
   static final LFAppBadgerManager _instance = LFAppBadgerManager._internal();
-
   static LFAppBadgerManager get shared => _instance;
-
   LFAppBadgerManager._internal();
 
   Future<bool> isAppBadgeSupported() async {

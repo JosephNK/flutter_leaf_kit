@@ -1,10 +1,10 @@
-part of '../../leaf_manager.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter_leaf_common/leaf_common.dart';
+import 'package:permission_handler/permission_handler.dart' as ph;
 
 class LFPermissionManager {
   static final LFPermissionManager _instance = LFPermissionManager._internal();
-
   static LFPermissionManager get shared => _instance;
-
   LFPermissionManager._internal();
 
   // isGranted 안전 하게 퍼미션 체크 후
