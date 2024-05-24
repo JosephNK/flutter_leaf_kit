@@ -22,6 +22,7 @@ part 'datetime/extension/int_date_ext.dart';
 part 'datetime/extension/string_date_ext.dart';
 part 'extension/asset_images.dart';
 part 'extension/colors.dart';
+part 'extension/focus_node.dart';
 part 'extension/global_key.dart';
 part 'extension/lists.dart';
 part 'extension/maps.dart';
