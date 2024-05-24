@@ -1,22 +1,24 @@
 part of '../lf_common.dart';
 
 extension FocusNodeHelper on FocusNode {
-  void ensureVisibleRequestFocus({
+  Future<void> ensureVisibleRequestFocus({
     double alignment = 0.5,
     Duration duration = Duration.zero,
     Curve curve = Curves.ease,
     ScrollPositionAlignmentPolicy alignmentPolicy =
         ScrollPositionAlignmentPolicy.explicit,
-  }) {
+  }) async {
     requestFocus();
     if (context != null) {
-      Scrollable.ensureVisible(
+      await Scrollable.ensureVisible(
         context!,
         alignment: alignment,
         duration: duration,
         curve: curve,
         alignmentPolicy: alignmentPolicy,
-      );
+      ).catchError((e) {
+        Logging.e('Scrollable ensureVisible Error: e');
+      });
     }
   }
 }
