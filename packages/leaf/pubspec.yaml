@@ -1,6 +1,6 @@
 name: flutter_leaf_kit
 description: A new Flutter package project.
-version: 1.9.21-dev
+version: 1.9.22-dev
 publish_to: 'none'
 homepage: https://github.com/JosephNK/flutter_leaf_kit
 
@@ -15,47 +15,47 @@ dependencies:
   flutter_leaf_common:
     git:
       url: https://github.com/JosephNK/flutter_leaf_kit.git
-      ref: 'v1.9.21-dev'
+      ref: 'v1.9.22-dev'
       path: ./packages/leaf_common
   flutter_leaf_component:
     git:
       url: https://github.com/JosephNK/flutter_leaf_kit.git
-      ref: 'v1.9.21-dev'
+      ref: 'v1.9.22-dev'
       path: ./packages/leaf_component
   flutter_leaf_location:
     git:
       url: https://github.com/JosephNK/flutter_leaf_kit.git
-      ref: 'v1.9.21-dev'
+      ref: 'v1.9.22-dev'
       path: ./packages/leaf_location
   flutter_leaf_map:
     git:
       url: https://github.com/JosephNK/flutter_leaf_kit.git
-      ref: 'v1.9.21-dev'
+      ref: 'v1.9.22-dev'
       path: ./packages/leaf_map
   flutter_leaf_navigation:
     git:
       url: https://github.com/JosephNK/flutter_leaf_kit.git
-      ref: 'v1.9.21-dev'
+      ref: 'v1.9.22-dev'
       path: ./packages/leaf_navigation
   flutter_leaf_manager:
     git:
       url: https://github.com/JosephNK/flutter_leaf_kit.git
-      ref: 'v1.9.21-dev'
+      ref: 'v1.9.22-dev'
       path: ./packages/leaf_manager
   flutter_leaf_network:
     git:
       url: https://github.com/JosephNK/flutter_leaf_kit.git
-      ref: 'v1.9.21-dev'
+      ref: 'v1.9.22-dev'
       path: ./packages/leaf_network
   flutter_leaf_store:
     git:
       url: https://github.com/JosephNK/flutter_leaf_kit.git
-      ref: 'v1.9.21-dev'
+      ref: 'v1.9.22-dev'
       path: ./packages/leaf_store
   flutter_leaf_webview:
     git:
       url: https://github.com/JosephNK/flutter_leaf_kit.git
-      ref: 'v1.9.21-dev'
+      ref: 'v1.9.22-dev'
       path: ./packages/leaf_webview
 
 dev_dependencies:
