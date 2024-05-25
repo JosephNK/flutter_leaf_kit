@@ -12,6 +12,7 @@ class LFBottomTabBarScaffold extends StatefulWidget {
   final Color activeColor;
   final Color inactiveColor;
   final bool isShowTabBar;
+  final bool autoSelected;
   final ValueChanged<int>? onPressed;
 
   const LFBottomTabBarScaffold({
@@ -27,6 +28,7 @@ class LFBottomTabBarScaffold extends StatefulWidget {
     this.activeColor = Colors.blueAccent,
     this.inactiveColor = Colors.grey,
     this.isShowTabBar = true,
+    this.autoSelected = true,
     this.onPressed,
   });
 
@@ -70,6 +72,7 @@ class _LFBottomTabBarScaffoldState extends State<LFBottomTabBarScaffold> {
     final activeColor = widget.activeColor;
     final inactiveColor = widget.inactiveColor;
     final isShowTabBar = widget.isShowTabBar;
+    final autoSelected = widget.autoSelected;
     final deactivateIndex = widget.deactivateIndex;
     final onPressed = widget.onPressed;
 
@@ -88,12 +91,10 @@ class _LFBottomTabBarScaffoldState extends State<LFBottomTabBarScaffold> {
         show: isShowTabBar,
         onPressed: (index) {
           bool isSameIndex = (tabBarController.selectedIndex == index);
-          if (index != deactivateIndex) {
-            tabBarViewsController.selectedIndex = index;
-            tabBarController.selectedIndex = index;
-          }
-          if (!isSameIndex) {
-            scaffoldController.addChangeIndexEvent(index);
+          if (!isSameIndex && index != deactivateIndex) {
+            if (autoSelected) {
+              scaffoldController.selectedIndex = index;
+            }
             onPressed?.call(index);
           }
         },

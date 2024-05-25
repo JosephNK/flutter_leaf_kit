@@ -46,7 +46,7 @@ class _BottomTabBarScreenState extends State<BottomTabBarScreen> {
   @override
   void initState() {
     _subscription = _bottomTabBarScaffoldController.addSubscription((value) {
-      print(value);
+      print('bottomTabBar subscription: $value');
     });
     super.initState();
   }
@@ -73,32 +73,164 @@ class _BottomTabBarScreenState extends State<BottomTabBarScreen> {
       ),
       scaffoldController: _bottomTabBarScaffoldController,
       tabItems: _tabItems,
-      selectedIndex: 0,
+      selectedIndex: 1,
+      autoSelected: false,
       children: (tabItems) {
         return [
-          ...[0, 1, 2].map((e) {
-            return Container(
-              color:
-                  Colors.primaries[Random().nextInt(Colors.primaries.length)],
-              child: GestureDetector(
-                onTap: () {
-                  const i = 2;
-                  _bottomTabBarScaffoldController.updateTabBadge(
-                    tabIndex: i,
-                    isNew: !tabItems[i].isNew,
-                  );
-                },
-                child: Center(
-                  child: Text('Button $e'),
-                ),
-              ),
-            );
-          }),
+          SubScreen0(
+            index: tabItems[0].bottomTabIndex,
+          ),
+          SubScreen1(
+            index: tabItems[1].bottomTabIndex,
+          ),
+          SubScreen2(
+            index: tabItems[2].bottomTabIndex,
+            onTap: () {
+              _bottomTabBarScaffoldController.updateTabBadge(
+                tabIndex: 2,
+                isNew: !tabItems[2].isNew,
+              );
+            },
+          )
         ];
       },
       onPressed: (index) {
         _bottomTabBarScaffoldController.selectedIndex = index;
       },
+    );
+  }
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+class SubScreen0 extends ScreenStatefulWidget {
+  final VoidCallback? onTap;
+
+  const SubScreen0({
+    super.key,
+    super.index,
+    this.onTap,
+  });
+
+  @override
+  State<SubScreen0> createState() => _SubScreen0State();
+}
+
+class _SubScreen0State extends ScreenState<SubScreen0> {
+  @override
+  Color? get backgroundColor =>
+      Colors.primaries[Random().nextInt(Colors.primaries.length)];
+
+  @override
+  SafeAreaInsets get safeAreaInsets =>
+      SafeAreaInsets.fromLTRB(true, false, true, true);
+
+  @override
+  Widget? buildScreen(BuildContext context) {
+    Logging.i('SubScreen0 buildScreen called');
+    return buildScaffold(context, null);
+  }
+
+  @override
+  PreferredSizeWidget? buildAppbar(BuildContext context, Object? state) {
+    return null;
+  }
+
+  @override
+  Widget buildBody(BuildContext context, Object? state) {
+    return GestureDetector(
+      onTap: widget.onTap,
+      child: const Center(
+        child: Text('SubScreen0'),
+      ),
+    );
+  }
+}
+
+class SubScreen1 extends ScreenStatefulWidget {
+  final VoidCallback? onTap;
+
+  const SubScreen1({
+    super.key,
+    super.index,
+    this.onTap,
+  });
+
+  @override
+  State<SubScreen1> createState() => _SubScreen1State();
+}
+
+class _SubScreen1State extends ScreenState<SubScreen1> {
+  @override
+  Color? get backgroundColor =>
+      Colors.primaries[Random().nextInt(Colors.primaries.length)];
+
+  @override
+  SafeAreaInsets get safeAreaInsets =>
+      SafeAreaInsets.fromLTRB(true, false, true, true);
+
+  @override
+  Widget? buildScreen(BuildContext context) {
+    Logging.i('SubScreen1 buildScreen called');
+    return buildScaffold(context, null);
+  }
+
+  @override
+  PreferredSizeWidget? buildAppbar(BuildContext context, Object? state) {
+    return null;
+  }
+
+  @override
+  Widget buildBody(BuildContext context, Object? state) {
+    return GestureDetector(
+      onTap: widget.onTap,
+      child: const Center(
+        child: Text('SubScreen1'),
+      ),
+    );
+  }
+}
+
+class SubScreen2 extends ScreenStatefulWidget {
+  final VoidCallback? onTap;
+
+  const SubScreen2({
+    super.key,
+    super.index,
+    this.onTap,
+  });
+
+  @override
+  State<SubScreen2> createState() => _SubScreen2State();
+}
+
+class _SubScreen2State extends ScreenState<SubScreen2> {
+  @override
+  Color? get backgroundColor =>
+      Colors.primaries[Random().nextInt(Colors.primaries.length)];
+
+  @override
+  SafeAreaInsets get safeAreaInsets =>
+      SafeAreaInsets.fromLTRB(true, false, true, true);
+
+  @override
+  Widget? buildScreen(BuildContext context) {
+    Logging.i('SubScreen2 buildScreen called');
+    return buildScaffold(context, null);
+  }
+
+  @override
+  PreferredSizeWidget? buildAppbar(BuildContext context, Object? state) {
+    return null;
+  }
+
+  @override
+  Widget buildBody(BuildContext context, Object? state) {
+    return GestureDetector(
+      onTap: widget.onTap,
+      child: const Center(
+        child: Text('SubScreen2'),
+      ),
     );
   }
 }

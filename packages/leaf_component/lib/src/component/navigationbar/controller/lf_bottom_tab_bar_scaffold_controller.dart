@@ -10,12 +10,14 @@ class LFBottomTabBarScaffoldController {
 
   LFBottomTabBarScaffoldController();
 
+  int _previousIndex = 0;
   int _selectedIndex = 0;
   int get selectedIndex => _selectedIndex;
   set selectedIndex(int index) {
     _selectedIndex = index;
     tabBarViewsController.updateSelected(selectedIndex: index);
     tabBarController.updateSelected(selectedIndex: index);
+    addChangeIndexEvent(index);
   }
 
   void updateTabBadge({required int tabIndex, required bool isNew}) {
@@ -27,6 +29,10 @@ class LFBottomTabBarScaffoldController {
   }
 
   void addChangeIndexEvent(int index) {
+    if (_previousIndex == index) {
+      return;
+    }
+    _previousIndex = index;
     streamController.sink.add(index);
   }
 

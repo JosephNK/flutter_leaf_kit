@@ -187,6 +187,12 @@ class LSBottomTextIcon extends StatelessWidget {
 
     final icon = (activeIcon != null && isActive) ? activeIcon : defaultIcon;
 
+    EdgeInsets padding = const EdgeInsets.all(8.0);
+    final useMaterial3 = Theme.of(context).useMaterial3;
+    if (useMaterial3) {
+      padding = const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0);
+    }
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
@@ -194,7 +200,7 @@ class LSBottomTextIcon extends StatelessWidget {
         Stack(
           children: [
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: padding,
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
