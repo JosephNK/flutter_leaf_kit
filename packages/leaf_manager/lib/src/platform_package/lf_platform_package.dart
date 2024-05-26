@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
+import 'package:flutter_leaf_common/leaf_common.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
 import 'lf_build_type.dart';
@@ -30,9 +31,18 @@ class PlatformPackage {
   bool get isStaging => (buildType == BuildType.staging);
   bool get isTest => (buildType == BuildType.test);
 
-  String get displayAppVersion {
-    final deployment = kDebugMode ? buildType.name : '';
-    return '$deployment v.$packageVersion($packageBuildNumber)';
+  String getDisplayAppVersion({
+    bool showBuildNumber = false,
+    bool showDeployment = true,
+  }) {
+    final deployment = showDeployment ? buildType.name : '';
+    final version = showBuildNumber
+        ? '$packageVersion($packageBuildNumber)'
+        : packageVersion;
+    if (isNotEmpty(deployment)) {
+      return '$deployment $version';
+    }
+    return version;
   }
 
   String userAgent(String appName) {
