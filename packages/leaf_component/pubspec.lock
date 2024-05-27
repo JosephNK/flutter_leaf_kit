@@ -229,6 +229,13 @@ packages:
       relative: true
     source: path
     version: "1.9.24-dev"
+  flutter_leaf_datetime:
+    dependency: "direct main"
+    description:
+      path: "../leaf_datetime"
+      relative: true
+    source: path
+    version: "1.9.24-dev"
   flutter_leaf_manager:
     dependency: "direct main"
     description:
@@ -299,6 +306,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.19.0"
+  jiffy:
+    dependency: transitive
+    description:
+      name: jiffy
+      sha256: "3497caaa36d36a29033e66803c9739ce6bccbc7e241ca46070f76ee9e6f6eb0c"
+      url: "https://pub.dev"
+    source: hosted
+    version: "6.3.1"
+  jiffy_klc:
+    dependency: transitive
+    description:
+      name: jiffy_klc
+      sha256: f4e4b569be3e60c46f363df0889b7495ab2bd4cc88b1acb3f631523bd4061b0f
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.0"
   klc:
     dependency: transitive
     description:

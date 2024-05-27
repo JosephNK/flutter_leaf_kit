@@ -46,7 +46,7 @@ class _BottomTabBarScreenState extends State<BottomTabBarScreen> {
   @override
   void initState() {
     _subscription = _bottomTabBarScaffoldController.addSubscription((value) {
-      print('bottomTabBar subscription: $value');
+      debugPrint('bottomTabBar subscription: $value');
     });
     super.initState();
   }

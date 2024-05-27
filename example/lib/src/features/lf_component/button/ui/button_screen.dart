@@ -61,7 +61,6 @@ class _ButtonScreenState extends ScreenState<ButtonScreen> {
           loading: _loading,
           lockDuration: const Duration(seconds: 1),
           onTap: () {
-            print('onTap');
             setState(() {
               _loading = !_loading;
             });

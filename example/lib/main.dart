@@ -70,7 +70,7 @@ class ExampleApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // LFLocalizations Config
-    LFLocalizations.shared.config(context);
+    LFLocalizations.shared.config(context, locale: context.locale);
 
     return MultiBlocProvider(
       providers: [

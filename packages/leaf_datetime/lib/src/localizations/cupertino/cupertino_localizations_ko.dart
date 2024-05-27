@@ -1,4 +1,7 @@
-part of '../lf_common.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
+
+import '../localization/lf_localization.dart';
 
 class CupertinoLocalizationsKoFixedDelegate
     extends LocalizationsDelegate<CupertinoLocalizations> {

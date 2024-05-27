@@ -152,8 +152,9 @@ class _LFCalendarMonthContentState extends State<_LFCalendarMonthContent> {
               Expanded(
                 child: GestureDetector(
                   onTap: () {
-                    final dateTime =
-                        LFDateTime.parse('$_selectedYear-$_selectedMonth-01');
+                    final dateTime = LFDate.parseFromString(
+                            '$_selectedYear-$_selectedMonth-01')
+                        .dateTime;
                     widget.onOK?.call(dateTime);
                     Navigator.pop(context, dateTime);
                   },

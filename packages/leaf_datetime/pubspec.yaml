@@ -1,0 +1,32 @@
+name: flutter_leaf_datetime
+description: A new Flutter package project.
+version: 1.9.24-dev
+publish_to: 'none'
+homepage: https://github.com/JosephNK/flutter_leaf_kit
+
+environment:
+  sdk: ">=3.0.0 <4.0.0"
+  flutter: ">=1.17.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  jiffy: ^6.3.1
+  jiffy_klc: ^1.0.0
+  intl: ^0.19.0
+
+  flutter_leaf_common:
+    git:
+      url: https://github.com/JosephNK/flutter_leaf_kit.git
+      ref: 'v1.9.24-dev'
+      path: ./packages/leaf_common
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+
+  test: ^1.16.5
+
+flutter:

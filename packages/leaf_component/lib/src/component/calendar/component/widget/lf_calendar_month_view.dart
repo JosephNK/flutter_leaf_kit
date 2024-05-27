@@ -24,8 +24,8 @@ class LFCalendarMonthView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final year = dateTime.toYearString();
-    final month = dateTime.toMonthString();
+    final year = dateTime.toCalYearString();
+    final month = dateTime.toCalMonthString();
 
     return Column(
       children: [
@@ -58,8 +58,9 @@ class LFCalendarMonthView extends StatelessWidget {
             GestureDetector(
               onTap: () async {
                 if (onPickerSelectTap == null) return;
-                final date = LFDateTime.parse(
-                    dateTime.toDateTimeString(format: 'yyyy-MM-dd'));
+                final date =
+                    LFDate.parseFromString(dateTime.toCalYearMonthDayString())
+                        .dateTime;
                 final _ = await LFCalendarMonthDatePicker.show(
                   context,
                   date: date,

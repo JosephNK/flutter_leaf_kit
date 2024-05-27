@@ -94,20 +94,21 @@ class _CalendarDatePickerContentState
     final isLunar = widget.isLunar;
 
     _controller = LFCalendarController();
-    _startDate = widget.startDate ?? LFDateTime.today();
-    _endDate = widget.endDate ?? LFDateTime.today();
+    _startDate = widget.startDate ?? LFDate.now().dateTime;
+    _endDate = widget.endDate ?? LFDate.now().dateTime;
 
     switch (pickerSelect) {
       case LFCalendarPickerSelect.none:
       case LFCalendarPickerSelect.start:
         _defaultDate = !isLunar
             ? _startDate
-            : LFDateTime.parse(_startDate.toLunarDateString());
+            : LFDate.parseFromString(_startDate.toCalLunarDateString())
+                .dateTime;
         break;
       case LFCalendarPickerSelect.end:
         _defaultDate = !isLunar
             ? _endDate
-            : LFDateTime.parse(_endDate.toLunarDateString());
+            : LFDate.parseFromString(_endDate.toCalLunarDateString()).dateTime;
         break;
     }
   }
@@ -173,7 +174,7 @@ class _CalendarDatePickerContentState
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             LFAutoSizeText(
-                              _startDate.toWeekDayDateString(
+                              _startDate.toCalWeekDayDateString(
                                   short: true,
                                   isLunar: isLunar,
                                   visiblePrefix: isLunar),
@@ -188,7 +189,7 @@ class _CalendarDatePickerContentState
                               child: Padding(
                                 padding: const EdgeInsets.only(top: 2.0),
                                 child: LFText(
-                                  _startDate.toWeekDayDateString(
+                                  _startDate.toCalWeekDayDateString(
                                       short: true,
                                       isLunar: false,
                                       visiblePrefix: isLunar),
@@ -212,7 +213,7 @@ class _CalendarDatePickerContentState
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
                             LFAutoSizeText(
-                              _endDate.toWeekDayDateString(
+                              _endDate.toCalWeekDayDateString(
                                   short: true,
                                   isLunar: isLunar,
                                   visiblePrefix: isLunar),
@@ -227,7 +228,7 @@ class _CalendarDatePickerContentState
                               child: Padding(
                                 padding: const EdgeInsets.only(top: 2.0),
                                 child: LFText(
-                                  _endDate.toWeekDayDateString(
+                                  _endDate.toCalWeekDayDateString(
                                       short: true,
                                       isLunar: isLunar,
                                       visiblePrefix: isLunar),
@@ -313,7 +314,7 @@ class _CalendarDatePickerContentState
     final pickerSelect = widget.pickerSelect;
     final dateTime = !isLunar
         ? selectedDate
-        : LFDateTime.parse(selectedDate.toSolarDateString());
+        : LFDate.parseFromString(selectedDate.toCalSolarDateString()).dateTime;
     switch (pickerSelect) {
       case LFCalendarPickerSelect.none:
       case LFCalendarPickerSelect.start:
@@ -359,15 +360,17 @@ class _CalendarDatePickerContentState
     late DateTime toDateTime;
     late DateTime resultDateTime;
 
-    final startDate = _startDate.toDateTimeString(format: 'yyyy-MM-dd');
-    final startTime = _startDate.toDateTimeString(format: 'HH:mm');
-    final endDate = _endDate.toDateTimeString(format: 'yyyy-MM-dd');
-    final updateStartDateTime = LFDateTime.parse('$startDate $startTime');
-    final updateEndDateTime = LFDateTime.parse('$endDate $startTime');
+    final startDate = _startDate.toCalYearMonthDayString();
+    final startTime = _startDate.toCalHHmmString();
+    final endDate = _endDate.toCalYearMonthDayString();
+    final updateStartDateTime =
+        LFDate.parseFromString('$startDate $startTime').dateTime;
+    final updateEndDateTime =
+        LFDate.parseFromString('$endDate $startTime').dateTime;
 
-    if (updateStartDateTime.isSameDate(updateEndDateTime)) {
-      _startDate = updateStartDateTime.toDayStartDateTime();
-      _endDate = updateEndDateTime.toDayEndDateTime();
+    if (updateStartDateTime.isSameDateTime(updateEndDateTime, onlyDate: true)) {
+      _startDate = updateStartDateTime.toCalDayStartDateTime();
+      _endDate = updateEndDateTime.toCalDayEndDateTime();
     }
 
     switch (pickerSelect) {
@@ -385,9 +388,9 @@ class _CalendarDatePickerContentState
     }
 
     final f =
-        LFDateTime.parse(fromDateTime.toDateTimeString(format: 'yyyy-MM-dd'));
+        LFDate.parseFromString(fromDateTime.toCalYearMonthDayString()).dateTime;
     final t =
-        LFDateTime.parse(toDateTime.toDateTimeString(format: 'yyyy-MM-dd'));
+        LFDate.parseFromString(toDateTime.toCalYearMonthDayString()).dateTime;
 
     String? validMessage;
 

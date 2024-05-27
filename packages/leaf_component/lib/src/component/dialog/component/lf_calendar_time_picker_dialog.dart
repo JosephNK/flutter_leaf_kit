@@ -81,8 +81,8 @@ class _CalendarTimePickerContentState
   void initState() {
     super.initState();
 
-    _startTime = widget.startTime ?? LFDateTime.today();
-    _endTime = widget.endTime ?? LFDateTime.today();
+    _startTime = widget.startTime ?? LFDate.now().dateTime;
+    _endTime = widget.endTime ?? LFDate.now().dateTime;
     final pickerSelect = widget.pickerSelect;
     switch (pickerSelect) {
       case LFCalendarPickerSelect.none:
@@ -145,7 +145,7 @@ class _CalendarTimePickerContentState
                     children: [
                       Expanded(
                         child: LFText(
-                          _startTime.toMeridiemTimeString(),
+                          _startTime.toCalMeridiemTimeString(),
                           style: TextStyle(
                               fontSize: 18.0, color: _getStartTimeColor()),
                           textAlign: TextAlign.left,
@@ -158,7 +158,7 @@ class _CalendarTimePickerContentState
                       ),
                       Expanded(
                         child: LFText(
-                          _endTime.toMeridiemTimeString(),
+                          _endTime.toCalMeridiemTimeString(),
                           style: TextStyle(
                               fontSize: 18.0, color: _getEndTimeColor()),
                           textAlign: TextAlign.right,
@@ -258,13 +258,17 @@ class _CalendarTimePickerContentState
     }
 
     final fDay =
-        LFDateTime.parse(fromTime.toDateTimeString(format: 'yyyy-MM-dd'));
+        LFDate.parseFromString(fromTime.toCalYearMonthDayString()).dateTime;
     final tDay =
-        LFDateTime.parse(toTime.toDateTimeString(format: 'yyyy-MM-dd'));
+        LFDate.parseFromString(toTime.toCalYearMonthDayString()).dateTime;
 
-    if (fDay.isSameDate(tDay)) {
-      final f = LFDateTime.parse(fromTime.toDateTimeString());
-      final t = LFDateTime.parse(toTime.toDateTimeString());
+    if (fDay.isSameDateTime(tDay, onlyDate: true)) {
+      final f =
+          LFDate.parseFromString(fromTime.toCalYearMonthDayHourMinuteString())
+              .dateTime;
+      final t =
+          LFDate.parseFromString(toTime.toCalYearMonthDayHourMinuteString())
+              .dateTime;
 
       String? validMessage;
 

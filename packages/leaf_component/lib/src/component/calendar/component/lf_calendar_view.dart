@@ -6,8 +6,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_leaf_common/leaf_common.dart';
+import 'package:flutter_leaf_datetime/leaf_datetime.dart';
 
 import '../../text/text.dart';
+import '../component/date/extension_calendar.dart';
 
 part 'controller/lf_calendar_controller.dart';
 part 'provider/lf_calendar_provider.dart';
@@ -99,7 +101,7 @@ class _LFCalendarViewState extends State<LFCalendarView> {
   void initState() {
     super.initState();
 
-    final defaultDate = widget.defaultDate ?? LFDateTime.today();
+    final defaultDate = widget.defaultDate ?? LFDate.now().dateTime;
     final minDate = widget.minDate ?? DateTime(1900);
     final maxDate = widget.maxDate ?? DateTime(2200);
 
@@ -110,7 +112,7 @@ class _LFCalendarViewState extends State<LFCalendarView> {
     final initialPage = _calculateFocusedPage(
         LFCalendarFormat.month, minDate, _defaultDateTime);
     final todayPage = _calculateFocusedPage(
-        LFCalendarFormat.month, minDate, LFDateTime.today());
+        LFCalendarFormat.month, minDate, LFDate.now().dateTime);
 
     _initialPage = initialPage;
     _todayPage = todayPage;
@@ -377,7 +379,7 @@ class _LFCalendarViewState extends State<LFCalendarView> {
     // 페이지 전환 후 [오늘] 날짜로 선택 효과 & onDateSelected 함수 호출
     context
         .read<LFCalendarProvider>()
-        .select(LFDateTime.today(), useSendEvent: true);
+        .select(LFDate.now().dateTime, useSendEvent: true);
   }
 
   void onActionAtPrevious(
@@ -467,6 +469,6 @@ class _LFCalendarViewState extends State<LFCalendarView> {
     final day = (dayDateTime == null)
         ? monthDateTime.day.toString().padLeft(2, '0')
         : dayDateTime.day.toString().padLeft(2, '0');
-    return LFDateTime.parse('$year-$month-$day');
+    return LFDate.parseFromString('$year-$month-$day').dateTime;
   }
 }
