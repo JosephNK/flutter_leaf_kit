@@ -154,13 +154,32 @@ class LFDate {
   }
 
   /// Querying
-  bool isBefore(LFDate other) => _jiffy.isBefore(other.jiffy);
-  bool isAfter(LFDate other) => _jiffy.isAfter(other.jiffy);
-  bool isSame(LFDate other) => _jiffy.isSame(other.jiffy);
+  bool isBefore(LFDate other, {Unit unit = Unit.microsecond}) =>
+      _jiffy.isBefore(other.jiffy, unit: unit);
+
+  bool isAfter(LFDate other, {Unit unit = Unit.microsecond}) =>
+      _jiffy.isAfter(other.jiffy, unit: unit);
+
+  bool isSame(LFDate other, {Unit unit = Unit.microsecond}) =>
+      _jiffy.isSame(other.jiffy, unit: unit);
+
+  bool isSameOrAfter(LFDate other, {Unit unit = Unit.microsecond}) =>
+      _jiffy.isSameOrAfter(other.jiffy, unit: unit);
+
+  bool isSameOrBefore(LFDate other, {Unit unit = Unit.microsecond}) =>
+      _jiffy.isSameOrBefore(other.jiffy, unit: unit);
+
   bool isBetween(
     LFDate otherFrom,
     LFDate otherTo, {
     Unit unit = Unit.microsecond,
   }) =>
       _jiffy.isBetween(otherFrom.jiffy, otherTo.jiffy, unit: unit);
+
+  num diff(
+    LFDate other, {
+    Unit unit = Unit.microsecond,
+    bool asFloat = false,
+  }) =>
+      _jiffy.diff(other.jiffy, unit: unit, asFloat: asFloat);
 }
