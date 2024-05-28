@@ -1,4 +1,5 @@
 export 'package:intl/intl.dart' hide TextDirection;
+export 'package:jiffy/jiffy.dart';
 
 export 'src/extension/extension_datetime.dart';
 export 'src/lf_date.dart';

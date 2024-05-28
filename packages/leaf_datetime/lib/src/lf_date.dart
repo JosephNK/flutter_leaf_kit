@@ -8,7 +8,7 @@ class LFDate {
     _jiffy = jiffy;
   }
 
-  // Jiffy get jiffy => _jiffy;
+  Jiffy get jiffy => _jiffy;
 
   DateTime get dateTime => _jiffy.dateTime;
 
@@ -101,4 +101,66 @@ class LFDate {
   String toSolarFromLunarFormat(String format) {
     return toSolarFromLunar().format(pattern: format);
   }
+
+  /// Manipulation
+  LFDate add({
+    int microseconds = 0,
+    int milliseconds = 0,
+    int seconds = 0,
+    int minutes = 0,
+    int hours = 0,
+    int days = 0,
+    int weeks = 0,
+    int months = 0,
+    int years = 0,
+  }) {
+    _jiffy = _jiffy.add(
+      microseconds: microseconds,
+      milliseconds: milliseconds,
+      seconds: seconds,
+      minutes: minutes,
+      hours: hours,
+      days: days,
+      weeks: weeks,
+      months: months,
+      years: years,
+    );
+    return this;
+  }
+
+  LFDate subtract({
+    int microseconds = 0,
+    int milliseconds = 0,
+    int seconds = 0,
+    int minutes = 0,
+    int hours = 0,
+    int days = 0,
+    int weeks = 0,
+    int months = 0,
+    int years = 0,
+  }) {
+    _jiffy = _jiffy.subtract(
+      microseconds: microseconds,
+      milliseconds: milliseconds,
+      seconds: seconds,
+      minutes: minutes,
+      hours: hours,
+      days: days,
+      weeks: weeks,
+      months: months,
+      years: years,
+    );
+    return this;
+  }
+
+  /// Querying
+  bool isBefore(LFDate other) => _jiffy.isBefore(other.jiffy);
+  bool isAfter(LFDate other) => _jiffy.isAfter(other.jiffy);
+  bool isSame(LFDate other) => _jiffy.isSame(other.jiffy);
+  bool isBetween(
+    LFDate otherFrom,
+    LFDate otherTo, {
+    Unit unit = Unit.microsecond,
+  }) =>
+      _jiffy.isBetween(otherFrom.jiffy, otherTo.jiffy, unit: unit);
 }
