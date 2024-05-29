@@ -165,17 +165,7 @@ class _LFTextFieldState extends State<LFTextField> {
     final controller = widget.controller;
     final focusNode = widget.focusNode;
 
-    controller.addListener(() {
-      if (controller.status == LFTextFieldStatus.reset) {
-        reset();
-      } else if (controller.status == LFTextFieldStatus.clear) {
-        clear();
-      } else if (controller.status == LFTextFieldStatus.setText) {
-        text = controller.value ?? '';
-      } else if (controller.status == LFTextFieldStatus.none) {
-        controller.value = null;
-      }
-    });
+    controller.addListener(onControllerNotifyListener);
 
     _textController = controller.controller;
     _textController.addListener(onControllerInputListener);
@@ -195,6 +185,7 @@ class _LFTextFieldState extends State<LFTextField> {
 
   @override
   void dispose() {
+    widget.controller.removeListener(onControllerNotifyListener);
     _textController.removeListener(onControllerInputListener);
     _textFieldFocusNode.removeListener(onFocusNodeChangeListener);
 
@@ -510,6 +501,19 @@ class _LFTextFieldState extends State<LFTextField> {
   }
 
   /// Listener
+
+  void onControllerNotifyListener() {
+    final controller = widget.controller;
+    if (controller.status == LFTextFieldStatus.reset) {
+      reset();
+    } else if (controller.status == LFTextFieldStatus.clear) {
+      clear();
+    } else if (controller.status == LFTextFieldStatus.setText) {
+      text = controller.value ?? '';
+    } else if (controller.status == LFTextFieldStatus.none) {
+      controller.value = null;
+    }
+  }
 
   void onControllerInputListener() {}
 
