@@ -14,8 +14,6 @@ class ToastScreen extends ScreenStatefulWidget {
 }
 
 class _ToastScreenState extends ScreenState<ToastScreen> {
-  bool _loading = false;
-
   @override
   Color? get backgroundColor => Colors.white;
 
@@ -43,7 +41,24 @@ class _ToastScreenState extends ScreenState<ToastScreen> {
               child: LFButton(
                 text: 'Toast',
                 onTap: () {
-                  LFToast.show(context, message: 'message');
+                  LFToast.showToast(
+                    context,
+                    message: 'message',
+                  );
+                },
+              ),
+            ),
+            const SizedBox(height: 16),
+            Center(
+              child: LFButton(
+                text: 'ToastNotification',
+                onTap: () {
+                  LFToast.showNotification(
+                    context,
+                    message: 'message',
+                    // style: LFToastNotificationStyle.simple,
+                    alignment: const Alignment(1.0, -0.5),
+                  );
                 },
               ),
             ),

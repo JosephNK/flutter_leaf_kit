@@ -288,7 +288,7 @@ class _CalendarTimePickerContentState
       }
 
       if (validMessage != null) {
-        LFToast.show(context, message: validMessage);
+        LFToast.showToast(context, message: validMessage);
         return;
       }
     }
