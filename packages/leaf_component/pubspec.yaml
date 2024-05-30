@@ -21,6 +21,7 @@ dependencies:
   photo_manager: ^3.1.1
   visibility_detector: ^0.4.0+2
   fluttertoast: ^8.2.5
+  toastification: ^2.0.0
   easy_rich_text: ^2.1.0
   auto_size_text: ^3.0.0
 

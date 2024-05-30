@@ -24,6 +24,7 @@ import 'scroll/ui/scroll_screen.dart';
 import 'slider/ui/slider_screen.dart';
 import 'text/ui/text_screen.dart';
 import 'textfield/textfield_sceen.dart';
+import 'toast/ui/toast_screen.dart';
 
 class LFComponentScreen extends StatelessWidget {
   final String title;
@@ -55,6 +56,7 @@ class LFComponentScreen extends StatelessWidget {
       ListItem(id: 'slider', title: 'SliderScreen'),
       ListItem(id: 'text', title: 'TextScreen'),
       ListItem(id: 'textfield', title: 'TextFieldScreen'),
+      ListItem(id: 'toast', title: 'ToastScreen'),
     ];
 
     return Scaffold(
@@ -140,6 +142,9 @@ class LFComponentScreen extends StatelessWidget {
                   break;
                 case 'textfield':
                   screen = TextFieldScreen(title: title);
+                  break;
+                case 'toast':
+                  screen = ToastScreen(title: title);
                   break;
               }
 
