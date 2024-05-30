@@ -20,8 +20,8 @@ class LFBottomTabBarScaffoldController {
     addChangeIndexEvent(index);
   }
 
-  void updateTabBadge({required int tabIndex, required bool isNew}) {
-    tabBarController.updateTabBadge(tabIndex: tabIndex, isNew: isNew);
+  void updateTabBadge({required int tabIndex, required int badgeCount}) {
+    tabBarController.updateTabBadge(tabIndex: tabIndex, badgeCount: badgeCount);
   }
 
   StreamSubscription<int> addSubscription(void Function(int event) onData) {

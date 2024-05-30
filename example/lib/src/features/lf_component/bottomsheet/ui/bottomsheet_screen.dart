@@ -38,7 +38,7 @@ class _BottomSheetScreenState extends ScreenState<BottomSheetScreen> {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Center(
-          child: LFFlatButton(
+          child: LFButton(
             text: 'Show',
             onTap: () {
               LFBottomSheet.show(

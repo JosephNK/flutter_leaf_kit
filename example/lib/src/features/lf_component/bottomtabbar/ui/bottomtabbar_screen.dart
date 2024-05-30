@@ -27,19 +27,19 @@ class _BottomTabBarScreenState extends State<BottomTabBarScreen> {
       bottomTabIndex: LFBottomTabIndex(tabIndex: 0),
       defaultIcon: const Icon(Icons.home),
       text: 'Home',
-      isNew: false,
+      badgeCount: 0,
     ),
     LFBottomTabItem(
       bottomTabIndex: LFBottomTabIndex(tabIndex: 1),
       defaultIcon: const Icon(Icons.feed),
       text: 'Feed',
-      isNew: false,
+      badgeCount: 0,
     ),
     LFBottomTabItem(
       bottomTabIndex: LFBottomTabIndex(tabIndex: 2),
       defaultIcon: const Icon(Icons.settings),
       text: 'Setup',
-      isNew: true,
+      badgeCount: 1,
     ),
   ];
 
@@ -88,7 +88,7 @@ class _BottomTabBarScreenState extends State<BottomTabBarScreen> {
             onTap: () {
               _bottomTabBarScaffoldController.updateTabBadge(
                 tabIndex: 2,
-                isNew: !tabItems[2].isNew,
+                badgeCount: tabItems[2].badgeCount,
               );
             },
           )

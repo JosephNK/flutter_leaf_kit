@@ -1,30 +1,35 @@
 part of '../button.dart';
 
-class LFRoundedButton extends StatelessWidget {
+class LFButton extends StatelessWidget {
   final String text;
   final Color? textColor;
   final Color? backgroundColor;
   final TextAlign textAlign;
+  final BorderRadius? borderRadius;
+  final EdgeInsets? padding;
   final VoidCallback? onTap;
 
-  const LFRoundedButton({
+  const LFButton({
     super.key,
     required this.text,
     this.textColor,
     this.backgroundColor,
     this.textAlign = TextAlign.center,
+    this.borderRadius = const BorderRadius.all(Radius.circular(0)),
+    this.padding = const EdgeInsets.all(10.0),
     this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
-    return LFInkWell(
+    return LFLockGestureDetector(
       onTap: onTap,
+      showLoading: false,
       decoration: BoxDecoration(
-        borderRadius: const BorderRadius.all(Radius.circular(6.0)),
+        borderRadius: borderRadius,
         color: backgroundColor ?? Colors.blueAccent,
       ),
-      padding: const EdgeInsets.all(10.0),
+      padding: padding,
       child: LFText(
         text,
         color: textColor ?? Colors.white,

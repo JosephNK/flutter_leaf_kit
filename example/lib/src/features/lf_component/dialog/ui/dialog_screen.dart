@@ -58,7 +58,7 @@ class _DialogScreenState extends ScreenState<DialogScreen> {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Center(
-          child: LFFlatButton(
+          child: LFButton(
             text: 'Show Alert',
             onTap: () {
               LFAlertDialog.show(
@@ -71,7 +71,7 @@ class _DialogScreenState extends ScreenState<DialogScreen> {
         ),
         const SizedBox(height: 10.0),
         Center(
-          child: LFFlatButton(
+          child: LFButton(
             text: 'Show CheckBox Picker Dialog',
             onTap: () {
               LFCheckboxPickerDialog.show(
@@ -90,7 +90,7 @@ class _DialogScreenState extends ScreenState<DialogScreen> {
         ),
         const SizedBox(height: 10.0),
         Center(
-          child: LFFlatButton(
+          child: LFButton(
             text: 'Show Radio Picker Dialog',
             onTap: () {
               LFRadioPickerDialog.confirm(
@@ -109,7 +109,7 @@ class _DialogScreenState extends ScreenState<DialogScreen> {
         ),
         const SizedBox(height: 10.0),
         Center(
-          child: LFFlatButton(
+          child: LFButton(
             text: 'Show Chip Picker Dialog',
             onTap: () {
               LFChipPickerDialog.show(
@@ -129,7 +129,7 @@ class _DialogScreenState extends ScreenState<DialogScreen> {
         ),
         const SizedBox(height: 10.0),
         Center(
-          child: LFFlatButton(
+          child: LFButton(
             text: 'Show Calendar Date Picker Dialog',
             onTap: () {
               LFCalendarDatePickerDialog.show(
@@ -141,7 +141,7 @@ class _DialogScreenState extends ScreenState<DialogScreen> {
         ),
         const SizedBox(height: 10.0),
         Center(
-          child: LFFlatButton(
+          child: LFButton(
             text: 'Show Calendar Time Picker Dialog',
             onTap: () {
               LFCalendarTimePickerDialog.show(

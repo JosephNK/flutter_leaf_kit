@@ -104,7 +104,7 @@ class _AnimationScreenState extends ScreenState<AnimationScreen> {
             ),
           ),
           const SizedBox(height: 10.0),
-          LFRoundedButton(
+          LFButton(
             text: 'Expand (Value)',
             onTap: () async {
               setState(() => _expand = !_expand);
@@ -120,7 +120,7 @@ class _AnimationScreenState extends ScreenState<AnimationScreen> {
             ),
           ),
           const SizedBox(height: 10.0),
-          LFRoundedButton(
+          LFButton(
             text: 'Scale',
             onTap: () async {
               if (_scaleController.status == LFAnimationStatus.forward) {
@@ -138,7 +138,7 @@ class _AnimationScreenState extends ScreenState<AnimationScreen> {
             ),
           ),
           const SizedBox(height: 10.0),
-          LFRoundedButton(
+          LFButton(
             text: 'Bouncing',
             onTap: () async {
               await _bouncingController.forward();
@@ -153,7 +153,7 @@ class _AnimationScreenState extends ScreenState<AnimationScreen> {
             ),
           ),
           const SizedBox(height: 10.0),
-          LFRoundedButton(
+          LFButton(
             text: 'Expand',
             onTap: () {
               if (_expandController.status == LFAnimationStatus.forward) {
@@ -169,7 +169,7 @@ class _AnimationScreenState extends ScreenState<AnimationScreen> {
             child: const Icon(Icons.account_balance, size: 45.0),
           ),
           const SizedBox(height: 10.0),
-          LFRoundedButton(
+          LFButton(
             text: 'Fade',
             onTap: () {
               if (_fadeController.status == LFAnimationStatus.repeat) {
@@ -185,7 +185,7 @@ class _AnimationScreenState extends ScreenState<AnimationScreen> {
             child: const Icon(Icons.rotate_right, size: 45.0),
           ),
           const SizedBox(height: 10.0),
-          LFRoundedButton(
+          LFButton(
             text: 'Rotate',
             onTap: () {
               if (_rotateController.status == LFAnimationStatus.repeat) {

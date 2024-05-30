@@ -52,7 +52,7 @@ class _FileScreenState extends ScreenState<FileScreen> {
           textAlign: TextAlign.center,
         ),
         const SizedBox(height: 15.0),
-        LFFlatButton(
+        LFButton(
           text: 'Write',
           onTap: () async {
             final documentPath = await LFFileManager.shared
@@ -74,7 +74,7 @@ class _FileScreenState extends ScreenState<FileScreen> {
           },
         ),
         const SizedBox(height: 15.0),
-        LFFlatButton(
+        LFButton(
           text: 'Read',
           onTap: () async {
             final documentPath = await LFFileManager.shared
@@ -89,7 +89,7 @@ class _FileScreenState extends ScreenState<FileScreen> {
           },
         ),
         const SizedBox(height: 15.0),
-        LFFlatButton(
+        LFButton(
           text: 'Delete',
           onTap: () async {
             final documentPath = await LFFileManager.shared

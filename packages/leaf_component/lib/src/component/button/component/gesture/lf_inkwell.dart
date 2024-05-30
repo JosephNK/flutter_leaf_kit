@@ -1,4 +1,4 @@
-part of '../button.dart';
+part of '../../button.dart';
 
 class LFInkWell extends StatelessWidget {
   final Widget child;

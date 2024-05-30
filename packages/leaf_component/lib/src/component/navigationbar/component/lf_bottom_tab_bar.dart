@@ -68,12 +68,12 @@ class _LFBottomTabBarState extends State<LFBottomTabBar> {
 
       if (event is LFBottomTabBarBadgeEvent) {
         final tabIndex = event.tabIndex;
-        final isNew = event.isNew;
+        final badgeCount = event.badgeCount;
 
         final newItems = _tabItems.map((item) {
           if (item.bottomTabIndex.tabIndex == tabIndex) {
             return item.copyWith(
-              isNew: isNew,
+              badgeCount: badgeCount,
             );
           }
           return item;
@@ -126,7 +126,7 @@ class _LFBottomTabBarState extends State<LFBottomTabBar> {
                 final defaultIcon = item.defaultIcon;
                 final activeIcon = item.activeIcon;
                 final text = item.text;
-                final isNew = item.isNew;
+                final badgeCount = item.badgeCount;
 
                 return Expanded(
                   child: GestureDetector(
@@ -141,7 +141,7 @@ class _LFBottomTabBarState extends State<LFBottomTabBar> {
                       defaultIcon: defaultIcon,
                       activeIcon: activeIcon,
                       text: text,
-                      isNew: isNew,
+                      badgeCount: badgeCount,
                     ),
                   ),
                 );
@@ -162,7 +162,9 @@ class LSBottomTextIcon extends StatelessWidget {
   final Widget? defaultIcon;
   final Widget? activeIcon;
   final String? text;
-  final bool isNew;
+  final Widget? badgeWidget;
+  final Alignment? badgeAlignment;
+  final int badgeCount;
 
   const LSBottomTextIcon({
     super.key,
@@ -173,7 +175,9 @@ class LSBottomTextIcon extends StatelessWidget {
     required this.defaultIcon,
     this.activeIcon,
     this.text,
-    this.isNew = false,
+    this.badgeWidget,
+    this.badgeAlignment,
+    this.badgeCount = 0,
   });
 
   @override
@@ -188,9 +192,11 @@ class LSBottomTextIcon extends StatelessWidget {
     final icon = (activeIcon != null && isActive) ? activeIcon : defaultIcon;
 
     EdgeInsets padding = const EdgeInsets.all(8.0);
+    Alignment alignment = const Alignment(0.7, -0.95);
     final useMaterial3 = Theme.of(context).useMaterial3;
     if (useMaterial3) {
-      padding = const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0);
+      padding = const EdgeInsets.symmetric(horizontal: 8.0, vertical: 0.0);
+      alignment = const Alignment(0.7, -1.4);
     }
 
     return Row(
@@ -217,10 +223,17 @@ class LSBottomTextIcon extends StatelessWidget {
             ),
             Positioned.fill(
               child: Visibility(
-                visible: isNew,
-                child: const Align(
-                  alignment: Alignment(0.7, -0.95),
-                  child: LFNewBadge(),
+                visible: badgeCount != 0,
+                child: Align(
+                  alignment: badgeAlignment ?? alignment,
+                  child: badgeWidget ??
+                      LFBadge(
+                        text: badgeCount.toString(),
+                        textStyle: const TextStyle(
+                          fontSize: 12.0,
+                          color: Colors.white,
+                        ),
+                      ),
                 ),
               ),
             )

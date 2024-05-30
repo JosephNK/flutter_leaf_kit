@@ -22,11 +22,11 @@ class LFBottomTabBarItemsEvent extends LFBottomTabBarEvent {
 
 class LFBottomTabBarBadgeEvent extends LFBottomTabBarEvent {
   final int tabIndex;
-  final bool isNew;
+  final int badgeCount;
 
   LFBottomTabBarBadgeEvent({
     required this.tabIndex,
-    this.isNew = false,
+    this.badgeCount = 0,
   });
 }
 
@@ -67,9 +67,9 @@ mixin LFBottomTabBarMixIn {
     );
   }
 
-  void updateTabBadge({required int tabIndex, required bool isNew}) {
+  void updateTabBadge({required int tabIndex, required int badgeCount}) {
     addEvent(
-      LFBottomTabBarBadgeEvent(tabIndex: tabIndex, isNew: isNew),
+      LFBottomTabBarBadgeEvent(tabIndex: tabIndex, badgeCount: badgeCount),
     );
   }
 }

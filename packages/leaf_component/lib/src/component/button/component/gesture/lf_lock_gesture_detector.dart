@@ -1,10 +1,10 @@
-part of '../button.dart';
+part of '../../button.dart';
 
 typedef LFLockGestureDetectorOnLoaderBuilder = Widget Function();
 
 class LFLockGestureDetector extends StatefulWidget {
   final Widget child;
-  final Duration lockDuration;
+  final Duration duration;
   final bool forceLock;
   final bool loading;
   final bool showLoading;
@@ -19,7 +19,7 @@ class LFLockGestureDetector extends StatefulWidget {
   const LFLockGestureDetector({
     super.key,
     required this.child,
-    this.lockDuration = const Duration(milliseconds: 250),
+    this.duration = const Duration(milliseconds: 250),
     this.forceLock = false,
     this.loading = false,
     this.showLoading = true,
@@ -116,7 +116,7 @@ class _LFLockGestureDetectorState extends State<LFLockGestureDetector> {
         ),
         Positioned.fill(
           child: Visibility(
-            visible: _loading,
+            visible: _loading && widget.showLoading,
             child: Center(
               child: loadingWidget ??
                   const LFIndicator(
@@ -139,6 +139,8 @@ class _LFLockGestureDetectorState extends State<LFLockGestureDetector> {
       onTap?.call();
     }
 
+    final connectOnTap = onTap != null ? onGestureTap : null;
+
     if (enabledInkWell) {
       final borderRadius =
           (decBorderRadius is BorderRadius) ? decBorderRadius : null;
@@ -148,14 +150,14 @@ class _LFLockGestureDetectorState extends State<LFLockGestureDetector> {
           decoration: decoration,
           borderRadius: borderRadius,
           disabled: _disabled,
-          onTap: onTap != null ? onGestureTap : null,
+          onTap: connectOnTap,
           child: childWidget,
         ),
       );
     }
 
     return GestureDetector(
-      onTap: onTap != null ? onGestureTap : null,
+      onTap: connectOnTap,
       child: Container(
         decoration: decoration,
         margin: margin,
@@ -171,7 +173,7 @@ class _LFLockGestureDetectorState extends State<LFLockGestureDetector> {
     _toggleLoading(true);
     _lock = true;
     _timer?.cancel();
-    _timer = Timer(widget.lockDuration, () {
+    _timer = Timer(widget.duration, () {
       _toggleLoading(false);
       _lock = false;
     });
@@ -186,7 +188,7 @@ class _LFLockGestureDetectorState extends State<LFLockGestureDetector> {
   /// Loading
 
   void _toggleLoading(bool loading) {
-    if (widget.showLoading && context.mounted) {
+    if (context.mounted) {
       setState(() {
         _loading = loading;
       });

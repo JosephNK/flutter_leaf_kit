@@ -127,7 +127,7 @@ class _CheckBoxPickerContentState extends State<_CheckBoxPickerContent> {
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                LFFlatButton(
+                LFButton(
                   text: 'Close',
                   textColor: Colors.black54,
                   backgroundColor: Colors.transparent,
@@ -136,7 +136,7 @@ class _CheckBoxPickerContentState extends State<_CheckBoxPickerContent> {
                   },
                 ),
                 const SizedBox(width: 8.0),
-                LFFlatButton(
+                LFButton(
                   text: 'OK',
                   textColor: Colors.blueAccent,
                   backgroundColor: Colors.transparent,

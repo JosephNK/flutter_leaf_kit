@@ -133,7 +133,7 @@ class _ChipPickerContentState extends State<_ChipPickerContent> {
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                LFFlatButton(
+                LFButton(
                   text: 'Close',
                   textColor: Colors.black54,
                   backgroundColor: Colors.transparent,
@@ -142,7 +142,7 @@ class _ChipPickerContentState extends State<_ChipPickerContent> {
                   },
                 ),
                 const SizedBox(width: 8.0),
-                LFFlatButton(
+                LFButton(
                   text: 'OK',
                   textColor: Colors.blueAccent,
                   backgroundColor: Colors.transparent,

@@ -33,111 +33,135 @@ class _ButtonScreenState extends ScreenState<ButtonScreen> {
 
   @override
   Widget buildBody(BuildContext context, Object? state) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
+    return Stack(
       children: [
-        Center(
-          child: LFFlatButton(
-            text: 'Button',
-            onTap: () {},
-          ),
+        Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            const Padding(
+              padding: EdgeInsets.symmetric(vertical: 8.0),
+              child: LFText(
+                'LFButton',
+                textAlign: TextAlign.center,
+              ),
+            ),
+            Center(
+              child: LFButton(
+                text: 'Button',
+                onTap: () {
+                  debugPrint('LFButton onTap');
+                },
+              ),
+            ),
+            const Padding(
+              padding: EdgeInsets.symmetric(vertical: 8.0),
+              child: LFText(
+                'LFLockGestureDetector with InkWell',
+                textAlign: TextAlign.center,
+              ),
+            ),
+            LFLockGestureDetector(
+              loading: _loading,
+              duration: const Duration(seconds: 1),
+              onTap: () {
+                setState(() {
+                  _loading = !_loading;
+                });
+              },
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(8.0),
+                border: Border.all(
+                  color: Colors.orange,
+                  width: 1.0,
+                ),
+                color: Colors.grey[300],
+                boxShadow: TestBoxShadow.shadows,
+              ),
+              padding: const EdgeInsets.all(12.0),
+              child: Stack(
+                clipBehavior: Clip.none,
+                children: [
+                  const Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      LFText(
+                        'Hello World',
+                        textAlign: TextAlign.center,
+                      )
+                    ],
+                  ),
+                  Positioned(
+                    top: 0,
+                    right: 0,
+                    child: LFBadge(text: 9.toString()),
+                  ),
+                ],
+              ),
+            ),
+            const Padding(
+              padding: EdgeInsets.symmetric(vertical: 8.0),
+              child: LFText(
+                'LFLockGestureDetector without InkWell',
+                textAlign: TextAlign.center,
+              ),
+            ),
+            LFLockGestureDetector(
+              duration: const Duration(seconds: 1),
+              // onTap: () {
+              //   print('onTap');
+              // },
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(8.0),
+                border: Border.all(
+                  color: Colors.orange,
+                  width: 1.0,
+                ),
+                color: Colors.grey[300],
+                boxShadow: TestBoxShadow.shadows,
+              ),
+              padding: const EdgeInsets.all(12.0),
+              enabledInkWell: false,
+              child: Stack(
+                clipBehavior: Clip.none,
+                children: [
+                  const Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      LFText(
+                        'Hello World',
+                        textAlign: TextAlign.center,
+                      )
+                    ],
+                  ),
+                  Positioned(
+                    top: 0,
+                    right: 0,
+                    child: LFBadge(text: 9.toString()),
+                  ),
+                ],
+              ),
+            )
+          ],
         ),
-        const SizedBox(height: 10.0),
-        Center(
-          child: LFRoundedButton(
-            text: 'Button',
-            onTap: () {},
-          ),
-        ),
-        const SizedBox(height: 10.0),
-        const Center(
-          child: LFTopButton(
-            isShow: false,
-          ),
-        ),
-        const SizedBox(height: 10.0),
-        LFLockGestureDetector(
-          loading: _loading,
-          lockDuration: const Duration(seconds: 1),
+        LFCornerPositionButton(
+          rightTop: LFCornerPosition(show: 10.0, hide: -100),
+          show: true,
           onTap: () {
-            setState(() {
-              _loading = !_loading;
-            });
+            debugPrint('LFCornerPositionButton onTap');
           },
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(8.0),
-            border: Border.all(
-              color: Colors.orange,
-              width: 1.0,
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Icon(
+              Icons.arrow_upward_sharp,
+              color: Colors.black.withOpacity(0.6),
             ),
-            color: Colors.grey[300],
-            boxShadow: TestBoxShadow.shadows,
-          ),
-          margin: const EdgeInsets.all(10.0),
-          padding: const EdgeInsets.all(12.0),
-          child: Stack(
-            clipBehavior: Clip.none,
-            children: [
-              const Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  LFText(
-                    'Hello World',
-                    textAlign: TextAlign.center,
-                  )
-                ],
-              ),
-              Positioned(
-                top: 0,
-                right: 0,
-                child: LFBadge(text: 9.toString()),
-              ),
-            ],
           ),
         ),
-        const SizedBox(height: 10.0),
-        LFLockGestureDetector(
-          lockDuration: const Duration(seconds: 1),
-          // onTap: () {
-          //   print('onTap');
-          // },
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(8.0),
-            border: Border.all(
-              color: Colors.orange,
-              width: 1.0,
-            ),
-            color: Colors.grey[300],
-            boxShadow: TestBoxShadow.shadows,
-          ),
-          margin: const EdgeInsets.all(10.0),
-          padding: const EdgeInsets.all(12.0),
-          enabledInkWell: false,
-          child: Stack(
-            clipBehavior: Clip.none,
-            children: [
-              const Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  LFText(
-                    'Hello World',
-                    textAlign: TextAlign.center,
-                  )
-                ],
-              ),
-              Positioned(
-                top: 0,
-                right: 0,
-                child: LFBadge(text: 9.toString()),
-              ),
-            ],
-          ),
-        )
       ],
     );
   }

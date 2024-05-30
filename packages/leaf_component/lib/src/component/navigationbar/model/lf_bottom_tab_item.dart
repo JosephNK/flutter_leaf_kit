@@ -5,14 +5,14 @@ class LFBottomTabItem extends Equatable {
   final Widget? defaultIcon;
   final Widget? activeIcon;
   final String? text;
-  final bool isNew;
+  final int badgeCount;
 
   const LFBottomTabItem({
     required this.bottomTabIndex,
     required this.defaultIcon,
     this.activeIcon,
     this.text,
-    this.isNew = false,
+    this.badgeCount = 0,
   });
 
   @override
@@ -21,7 +21,7 @@ class LFBottomTabItem extends Equatable {
         defaultIcon,
         activeIcon,
         text,
-        isNew,
+        badgeCount,
       ];
 
   LFBottomTabItem copyWith({
@@ -29,14 +29,14 @@ class LFBottomTabItem extends Equatable {
     Widget? defaultIcon,
     Widget? activeIcon,
     String? text,
-    bool? isNew,
+    int? badgeCount,
   }) {
     return LFBottomTabItem(
       bottomTabIndex: bottomTabIndex ?? this.bottomTabIndex,
       defaultIcon: defaultIcon ?? this.defaultIcon,
       activeIcon: activeIcon ?? this.activeIcon,
       text: text ?? this.text,
-      isNew: isNew ?? this.isNew,
+      badgeCount: badgeCount ?? this.badgeCount,
     );
   }
 }
