@@ -5,6 +5,7 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 import '../indicator/indicator.dart';
 import 'common/lf_scroll_common.dart';
@@ -24,3 +25,7 @@ part 'scrollview/lf_scrollview.dart';
 part 'scrollview/lf_scrollview_controller.dart';
 part 'scrollview/lf_scrollview_cupertino.dart';
 part 'scrollview/lf_scrollview_material.dart';
+part 'staggered_gridview/lf_staggered_gridview.dart';
+part 'staggered_gridview/lf_staggered_gridview_controller.dart';
+part 'staggered_gridview/lf_staggered_gridview_cupertino.dart';
+part 'staggered_gridview/lf_staggered_gridview_material.dart';
