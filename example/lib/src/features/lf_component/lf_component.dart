@@ -22,6 +22,7 @@ import 'photo/ui/photo_screen.dart';
 import 'radio/ui/radio_screen.dart';
 import 'scroll/ui/scroll_screen.dart';
 import 'slider/ui/slider_screen.dart';
+import 'switch/ui/switch_screen.dart';
 import 'text/ui/text_screen.dart';
 import 'textfield/textfield_sceen.dart';
 import 'toast/ui/toast_screen.dart';
@@ -57,7 +58,8 @@ class LFComponentScreen extends StatelessWidget {
       ListItem(id: 'text', title: 'TextScreen'),
       ListItem(id: 'textfield', title: 'TextFieldScreen'),
       ListItem(id: 'toast', title: 'ToastScreen'),
-    ];
+      ListItem(id: 'switch', title: 'SwitchScreen'),
+    ]..sort((a, b) => a.id.compareTo(b.id));
 
     return Scaffold(
       appBar: LFAppBar(
@@ -145,6 +147,9 @@ class LFComponentScreen extends StatelessWidget {
                   break;
                 case 'toast':
                   screen = ToastScreen(title: title);
+                  break;
+                case 'switch':
+                  screen = SwitchScreen(title: title);
                   break;
               }
 

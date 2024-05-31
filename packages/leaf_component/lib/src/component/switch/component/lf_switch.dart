@@ -2,35 +2,69 @@ part of '../switch.dart';
 
 class LFSwitch extends StatelessWidget {
   final bool value;
-  final Color? activeColor;
   final Color? activeTrackColor;
-  final bool isIOSStyle;
+  final Color? trackColor;
+  final Color? thumbColor;
+  final bool isIOS;
   final ValueChanged<bool>? onChanged;
 
   const LFSwitch({
     super.key,
     required this.value,
-    this.activeColor,
     this.activeTrackColor,
-    this.isIOSStyle = false,
+    this.trackColor,
+    this.thumbColor,
+    this.isIOS = false,
     this.onChanged,
   });
 
   @override
   Widget build(BuildContext context) {
-    if (Platform.isIOS || isIOSStyle) {
+    if (isIOS) {
       return CupertinoSwitch(
         value: value,
-        activeColor: activeColor,
-        trackColor: activeTrackColor,
+        activeColor: activeTrackColor,
+        trackColor: trackColor,
+        thumbColor: thumbColor,
+        applyTheme: false,
         onChanged: onChanged,
       );
     }
     return Switch(
       value: value,
-      materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-      activeColor: activeColor,
-      activeTrackColor: activeTrackColor,
+      thumbColor: WidgetStateProperty.resolveWith<Color?>(
+        (Set<WidgetState> states) {
+          if (states.contains(WidgetState.disabled)) {
+            return thumbColor?.withOpacity(0.5);
+          }
+          if (states.contains(WidgetState.selected)) {
+            return thumbColor;
+          }
+          if (states.contains(WidgetState.hovered)) {
+            return thumbColor;
+          }
+          return thumbColor;
+        },
+      ),
+      trackColor: WidgetStateProperty.resolveWith<Color?>(
+        (Set<WidgetState> states) {
+          if (states.contains(WidgetState.disabled)) {
+            return trackColor?.withOpacity(0.5);
+          }
+          if (states.contains(WidgetState.selected)) {
+            return activeTrackColor;
+          }
+          if (states.contains(WidgetState.hovered)) {
+            return activeTrackColor;
+          }
+          return trackColor;
+        },
+      ),
+      trackOutlineWidth: WidgetStateProperty.resolveWith<double?>(
+        (Set<WidgetState> states) {
+          return 0.0;
+        },
+      ),
       onChanged: onChanged,
     );
   }
