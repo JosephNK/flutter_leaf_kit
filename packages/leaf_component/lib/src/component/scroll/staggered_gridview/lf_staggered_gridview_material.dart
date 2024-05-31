@@ -71,7 +71,7 @@ class LFStaggeredGridViewMaterial<T> extends StatelessWidget {
           child: gridViewWidget,
         ),
         if (!hasReachedMax) ...[
-          LFListViewIndicator(
+          LFStaggeredGridViewIndicator(
             loading: loading,
           ),
         ]

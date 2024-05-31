@@ -84,7 +84,7 @@ class LFStaggeredGridViewCupertino<T> extends StatelessWidget {
           gridViewWidget,
           if (!hasReachedMax) ...[
             SliverToBoxAdapter(
-              child: LFListViewIndicator(
+              child: LFStaggeredGridViewIndicator(
                 loading: loading,
               ),
             ),
