@@ -1,8 +1,12 @@
 import 'dart:async';
-import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_leaf_kit/flutter_leaf_kit.dart';
+
+import 'screens/feed_screen.dart';
+import 'screens/home_screen.dart';
+import 'screens/modal_screen.dart';
+import 'screens/setup_screen.dart';
 
 class BottomTabBarScreen extends StatefulWidget {
   final String title;
@@ -72,165 +76,40 @@ class _BottomTabBarScreenState extends State<BottomTabBarScreen> {
         ],
       ),
       scaffoldController: _bottomTabBarScaffoldController,
+      animationType: LSBottomTextIconAnimationType.bounce,
       tabItems: _tabItems,
       selectedIndex: 1,
       autoSelected: false,
       children: (tabItems) {
         return [
-          SubScreen0(
+          HomeScreen(
             index: tabItems[0].bottomTabIndex,
           ),
-          SubScreen1(
+          FeedScreen(
             index: tabItems[1].bottomTabIndex,
           ),
-          SubScreen2(
+          SetupScreen(
             index: tabItems[2].bottomTabIndex,
-            onTap: () {
+            onScreenTap: () {
               _bottomTabBarScaffoldController.updateTabBadge(
                 tabIndex: 2,
-                badgeCount: tabItems[2].badgeCount,
+                badgeCount: 9,
               );
             },
           )
         ];
       },
       onPressed: (index) {
+        if (index == 0) {
+          LFNavigation.pushNamed(
+            context,
+            '/ModalScreen',
+            child: const ModalScreen(),
+          );
+          return;
+        }
         _bottomTabBarScaffoldController.selectedIndex = index;
       },
-    );
-  }
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
-class SubScreen0 extends ScreenStatefulWidget {
-  final VoidCallback? onTap;
-
-  const SubScreen0({
-    super.key,
-    super.index,
-    this.onTap,
-  });
-
-  @override
-  State<SubScreen0> createState() => _SubScreen0State();
-}
-
-class _SubScreen0State extends ScreenState<SubScreen0> {
-  @override
-  Color? get backgroundColor =>
-      Colors.primaries[Random().nextInt(Colors.primaries.length)];
-
-  @override
-  SafeAreaInsets get safeAreaInsets =>
-      SafeAreaInsets.fromLTRB(true, false, true, true);
-
-  @override
-  Widget? buildScreen(BuildContext context) {
-    Logging.i('SubScreen0 buildScreen called');
-    return buildScaffold(context, null);
-  }
-
-  @override
-  PreferredSizeWidget? buildAppbar(BuildContext context, Object? state) {
-    return null;
-  }
-
-  @override
-  Widget buildBody(BuildContext context, Object? state) {
-    return GestureDetector(
-      onTap: widget.onTap,
-      child: const Center(
-        child: Text('SubScreen0'),
-      ),
-    );
-  }
-}
-
-class SubScreen1 extends ScreenStatefulWidget {
-  final VoidCallback? onTap;
-
-  const SubScreen1({
-    super.key,
-    super.index,
-    this.onTap,
-  });
-
-  @override
-  State<SubScreen1> createState() => _SubScreen1State();
-}
-
-class _SubScreen1State extends ScreenState<SubScreen1> {
-  @override
-  Color? get backgroundColor =>
-      Colors.primaries[Random().nextInt(Colors.primaries.length)];
-
-  @override
-  SafeAreaInsets get safeAreaInsets =>
-      SafeAreaInsets.fromLTRB(true, false, true, true);
-
-  @override
-  Widget? buildScreen(BuildContext context) {
-    Logging.i('SubScreen1 buildScreen called');
-    return buildScaffold(context, null);
-  }
-
-  @override
-  PreferredSizeWidget? buildAppbar(BuildContext context, Object? state) {
-    return null;
-  }
-
-  @override
-  Widget buildBody(BuildContext context, Object? state) {
-    return GestureDetector(
-      onTap: widget.onTap,
-      child: const Center(
-        child: Text('SubScreen1'),
-      ),
-    );
-  }
-}
-
-class SubScreen2 extends ScreenStatefulWidget {
-  final VoidCallback? onTap;
-
-  const SubScreen2({
-    super.key,
-    super.index,
-    this.onTap,
-  });
-
-  @override
-  State<SubScreen2> createState() => _SubScreen2State();
-}
-
-class _SubScreen2State extends ScreenState<SubScreen2> {
-  @override
-  Color? get backgroundColor =>
-      Colors.primaries[Random().nextInt(Colors.primaries.length)];
-
-  @override
-  SafeAreaInsets get safeAreaInsets =>
-      SafeAreaInsets.fromLTRB(true, false, true, true);
-
-  @override
-  Widget? buildScreen(BuildContext context) {
-    Logging.i('SubScreen2 buildScreen called');
-    return buildScaffold(context, null);
-  }
-
-  @override
-  PreferredSizeWidget? buildAppbar(BuildContext context, Object? state) {
-    return null;
-  }
-
-  @override
-  Widget buildBody(BuildContext context, Object? state) {
-    return GestureDetector(
-      onTap: widget.onTap,
-      child: const Center(
-        child: Text('SubScreen2'),
-      ),
     );
   }
 }

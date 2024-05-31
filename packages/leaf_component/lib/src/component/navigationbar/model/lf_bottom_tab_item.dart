@@ -6,6 +6,7 @@ class LFBottomTabItem extends Equatable {
   final Widget? activeIcon;
   final String? text;
   final int badgeCount;
+  final Alignment? badgeAlignment;
 
   const LFBottomTabItem({
     required this.bottomTabIndex,
@@ -13,6 +14,7 @@ class LFBottomTabItem extends Equatable {
     this.activeIcon,
     this.text,
     this.badgeCount = 0,
+    this.badgeAlignment,
   });
 
   @override
@@ -22,6 +24,7 @@ class LFBottomTabItem extends Equatable {
         activeIcon,
         text,
         badgeCount,
+        badgeAlignment,
       ];
 
   LFBottomTabItem copyWith({
@@ -30,6 +33,7 @@ class LFBottomTabItem extends Equatable {
     Widget? activeIcon,
     String? text,
     int? badgeCount,
+    Alignment? badgeAlignment,
   }) {
     return LFBottomTabItem(
       bottomTabIndex: bottomTabIndex ?? this.bottomTabIndex,
@@ -37,6 +41,7 @@ class LFBottomTabItem extends Equatable {
       activeIcon: activeIcon ?? this.activeIcon,
       text: text ?? this.text,
       badgeCount: badgeCount ?? this.badgeCount,
+      badgeAlignment: badgeAlignment ?? this.badgeAlignment,
     );
   }
 }

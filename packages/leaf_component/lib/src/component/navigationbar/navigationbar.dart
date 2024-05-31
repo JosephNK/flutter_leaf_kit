@@ -5,6 +5,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_leaf_common/leaf_common.dart';
 
+import '../animated/animated.dart';
 import '../badge/badge.dart';
 
 part 'component/lf_bottom_tab_bar.dart';

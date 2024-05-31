@@ -49,7 +49,7 @@ class LFNavigation {
     BuildContext context,
     String routeName, {
     required Widget child, // Widget, MultiBlocProvider
-    LFNavigatorPushType pushType = LFNavigatorPushType.basicCupertino,
+    LFNavigatorPushType pushType = LFNavigatorPushType.basicMaterial,
   }) async {
     Logging.i('[LFNavigation PushNamed] PushType :: $routeName => $pushType');
 

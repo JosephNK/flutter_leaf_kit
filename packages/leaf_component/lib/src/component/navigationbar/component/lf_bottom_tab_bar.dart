@@ -6,12 +6,14 @@ typedef LFBottomTabBarOnPressed = void Function(
 
 class LFBottomTabBar extends StatefulWidget {
   final LFBottomTabBarController controller;
+  final LSBottomTextIconAnimationType type;
   final Color? backgroundColor;
   final Color activeColor;
   final Color inactiveColor;
   final NotchedShape? shape;
   final Clip clipBehavior;
-  final EdgeInsetsGeometry padding;
+  final EdgeInsetsGeometry? padding;
+  final double? height;
   final double notchMargin;
   final bool show;
   final LFBottomTabBarOnPressed? onPressed;
@@ -19,12 +21,14 @@ class LFBottomTabBar extends StatefulWidget {
   const LFBottomTabBar({
     super.key,
     required this.controller,
+    required this.type,
     this.backgroundColor,
     this.activeColor = Colors.blueAccent,
     this.inactiveColor = Colors.grey,
     this.shape,
     this.clipBehavior = Clip.none,
-    this.padding = const EdgeInsets.all(0.0),
+    this.padding,
+    this.height,
     this.notchMargin = 4.0,
     this.show = true,
     this.onPressed,
@@ -103,9 +107,17 @@ class _LFBottomTabBarState extends State<LFBottomTabBar> {
     final notchMargin = widget.notchMargin;
     final show = widget.show;
     final padding = widget.padding;
+    final height = widget.height;
 
     final items = _tabItems;
     final selectedIndex = _selectedIndex;
+
+    EdgeInsetsGeometry? defaultPadding = padding;
+    final useMaterial3 = Theme.of(context).useMaterial3;
+    if (!useMaterial3) {
+      defaultPadding =
+          const EdgeInsets.symmetric(vertical: 8.0, horizontal: 8.0);
+    }
 
     return Visibility(
       visible: show,
@@ -115,46 +127,56 @@ class _LFBottomTabBarState extends State<LFBottomTabBar> {
         clipBehavior: clipBehavior,
         color: backgroundColor ?? Colors.white,
         notchMargin: notchMargin,
-        child: Padding(
-          padding: padding,
-          child: Row(
-            children: [
-              ...items.asMap().entries.map((e) {
-                final index = e.key;
-                final item = e.value;
+        padding: defaultPadding,
+        height: height,
+        child: Row(
+          children: [
+            ...items.asMap().entries.map((e) {
+              final index = e.key;
+              final item = e.value;
 
-                final defaultIcon = item.defaultIcon;
-                final activeIcon = item.activeIcon;
-                final text = item.text;
-                final badgeCount = item.badgeCount;
+              final defaultIcon = item.defaultIcon;
+              final activeIcon = item.activeIcon;
+              final text = item.text;
+              final badgeCount = item.badgeCount;
+              final badgeAlignment = item.badgeAlignment;
 
-                return Expanded(
-                  child: GestureDetector(
-                    onTap: () {
-                      widget.onPressed?.call(index);
-                    },
-                    child: LSBottomTextIcon(
-                      selectedIndex: selectedIndex,
-                      index: index,
-                      activeColor: activeColor,
-                      inactiveColor: inactiveColor,
-                      defaultIcon: defaultIcon,
-                      activeIcon: activeIcon,
-                      text: text,
-                      badgeCount: badgeCount,
-                    ),
+              return Expanded(
+                child: GestureDetector(
+                  behavior: HitTestBehavior.opaque,
+                  onTap: () {
+                    widget.onPressed?.call(index);
+                  },
+                  child: LSBottomTextIcon(
+                    type: widget.type,
+                    selectedIndex: selectedIndex,
+                    index: index,
+                    activeColor: activeColor,
+                    inactiveColor: inactiveColor,
+                    defaultIcon: defaultIcon,
+                    activeIcon: activeIcon,
+                    text: text,
+                    badgeCount: badgeCount,
+                    badgeAlignment: badgeAlignment,
                   ),
-                );
-              })
-            ],
-          ),
+                ),
+              );
+            })
+          ],
         ),
       ),
     );
   }
 }
 
-class LSBottomTextIcon extends StatelessWidget {
+enum LSBottomTextIconAnimationType {
+  none,
+  expand,
+  bounce,
+}
+
+class LSBottomTextIcon extends StatefulWidget {
+  final LSBottomTextIconAnimationType type;
   final int selectedIndex;
   final int index;
   final Color activeColor;
@@ -168,6 +190,7 @@ class LSBottomTextIcon extends StatelessWidget {
 
   const LSBottomTextIcon({
     super.key,
+    required this.type,
     required this.selectedIndex,
     required this.index,
     required this.activeColor,
@@ -181,54 +204,61 @@ class LSBottomTextIcon extends StatelessWidget {
   });
 
   @override
+  State<LSBottomTextIcon> createState() => _LSBottomTextIconState();
+}
+
+class _LSBottomTextIconState extends State<LSBottomTextIcon> {
+  bool _bouncingLoaded = false;
+
+  @override
   Widget build(BuildContext context) {
-    final isActive = (selectedIndex == index);
-    final activeColor = this.activeColor;
-    final inactiveColor = this.inactiveColor;
-    final defaultIcon = this.defaultIcon;
-    final activeIcon = this.activeIcon;
+    final isActive = (widget.selectedIndex == widget.index);
+    final type = widget.type;
+    final activeColor = widget.activeColor;
+    final inactiveColor = widget.inactiveColor;
+    final defaultIcon = widget.defaultIcon;
+    final activeIcon = widget.activeIcon;
     final color = isActive ? activeColor : inactiveColor;
 
     final icon = (activeIcon != null && isActive) ? activeIcon : defaultIcon;
 
-    EdgeInsets padding = const EdgeInsets.all(8.0);
-    Alignment alignment = const Alignment(0.7, -0.95);
-    final useMaterial3 = Theme.of(context).useMaterial3;
-    if (useMaterial3) {
-      padding = const EdgeInsets.symmetric(horizontal: 8.0, vertical: 0.0);
-      alignment = const Alignment(0.7, -1.4);
+    Alignment defaultBadgeAlignment =
+        widget.badgeAlignment ?? const Alignment(1.0, -1.4);
+
+    late Widget bottomTextWidget;
+    if (type == LSBottomTextIconAnimationType.expand) {
+      bottomTextWidget = LFExpandAnimated(
+        value: isActive,
+        child: LFBottomText(text: widget.text, color: color),
+      );
+    } else {
+      bottomTextWidget = LFBottomText(text: widget.text, color: color);
     }
 
-    return Row(
+    Widget iconTextWidget = Row(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Stack(
           children: [
-            Padding(
-              padding: padding,
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  LFBottomIcon(
-                    widget: icon,
-                    color: color,
-                  ),
-                  LFBottomText(
-                    text: text,
-                    color: color,
-                  ),
-                ],
-              ),
+            Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                LFBottomIcon(
+                  widget: icon,
+                  color: color,
+                ),
+                bottomTextWidget,
+              ],
             ),
             Positioned.fill(
               child: Visibility(
-                visible: badgeCount != 0,
+                visible: widget.badgeCount != 0,
                 child: Align(
-                  alignment: badgeAlignment ?? alignment,
-                  child: badgeWidget ??
+                  alignment: defaultBadgeAlignment,
+                  child: widget.badgeWidget ??
                       LFBadge(
-                        text: badgeCount.toString(),
+                        text: widget.badgeCount.toString(),
                         textStyle: const TextStyle(
                           fontSize: 12.0,
                           color: Colors.white,
@@ -236,10 +266,30 @@ class LSBottomTextIcon extends StatelessWidget {
                       ),
                 ),
               ),
-            )
+            ),
           ],
         )
       ],
+    );
+
+    late Widget child;
+    if (type == LSBottomTextIconAnimationType.bounce) {
+      child = LFBouncingAnimated(
+        value: isActive,
+        curve: Curves.bounceInOut,
+        enableInitAnimation: isActive,
+        onAnimationStatus: (status) {
+          if (_bouncingLoaded) return;
+        },
+        child: iconTextWidget,
+      );
+    } else {
+      child = iconTextWidget;
+    }
+
+    return Container(
+      constraints: const BoxConstraints(minHeight: kBottomNavigationBarHeight),
+      child: child,
     );
   }
 }
@@ -282,7 +332,7 @@ class LFBottomText extends StatelessWidget {
     return Visibility(
       visible: isNotEmpty(text),
       child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 2.0),
+        padding: const EdgeInsets.only(top: 2.0),
         child: Text(
           text ?? '',
           style: DefaultTextStyle.of(context).style.copyWith(

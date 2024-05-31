@@ -4,7 +4,9 @@ class LFBouncingAnimated extends StatefulWidget {
   final Widget child;
   final LFBouncingAnimationController? controller;
   final bool? value;
-  final Duration? duration;
+  final Duration duration;
+  final Curve curve;
+  final bool enableInitAnimation;
   final ValueChanged<AnimationStatus>? onAnimationStatus;
 
   const LFBouncingAnimated({
@@ -12,7 +14,9 @@ class LFBouncingAnimated extends StatefulWidget {
     required this.child,
     this.controller,
     this.value,
-    this.duration,
+    this.duration = const Duration(milliseconds: 250),
+    this.curve = Curves.elasticIn,
+    this.enableInitAnimation = true,
     this.onAnimationStatus,
   });
 
@@ -33,7 +37,7 @@ class _LFBouncingAnimatedState extends State<LFBouncingAnimated>
     _innerController = widget.controller ??
         LFBouncingAnimationController(
           autoAnimation: false,
-          duration: widget.duration ?? const Duration(milliseconds: 250),
+          duration: widget.duration,
         );
     final controller = _innerController;
     final autoAnimation = controller.autoAnimation;
@@ -58,7 +62,7 @@ class _LFBouncingAnimatedState extends State<LFBouncingAnimated>
     });
 
     _animation = Tween(begin: 1.0, end: 1.2).animate(
-      CurvedAnimation(parent: animationController!, curve: Curves.elasticIn),
+      CurvedAnimation(parent: animationController!, curve: widget.curve),
     );
     _animation.addStatusListener(animationCallback);
 
@@ -66,7 +70,7 @@ class _LFBouncingAnimatedState extends State<LFBouncingAnimated>
       if (autoAnimation) {
         runAutoAnimating();
       } else {
-        runManualAnimating();
+        runManualAnimating(animated: widget.enableInitAnimation);
       }
     });
   }
@@ -112,16 +116,16 @@ class _LFBouncingAnimatedState extends State<LFBouncingAnimated>
     }
   }
 
-  void runManualAnimating() async {
+  void runManualAnimating({bool animated = true}) async {
     final controller = widget.controller ?? _innerController;
     final value = widget.value;
-    if (value != null) {
+    if (value != null && animated) {
       if (value) {
-        await controller.forward();
         await controller.reverse();
+        await controller.forward();
       } else {
-        await controller.reverse();
         await controller.forward();
+        await controller.reverse();
       }
     }
   }

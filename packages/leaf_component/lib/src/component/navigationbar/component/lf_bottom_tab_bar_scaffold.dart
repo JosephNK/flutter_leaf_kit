@@ -6,8 +6,10 @@ class LFBottomTabBarScaffold extends StatefulWidget {
   final int selectedIndex;
   final int deactivateIndex;
   final LFBottomTabBarViewsChildren children;
+  final LSBottomTextIconAnimationType animationType;
   final PreferredSizeWidget? appBar;
-  final EdgeInsetsGeometry padding;
+  final EdgeInsetsGeometry? padding;
+  final double? height;
   final Color? backgroundColor;
   final Color activeColor;
   final Color inactiveColor;
@@ -21,9 +23,11 @@ class LFBottomTabBarScaffold extends StatefulWidget {
     required this.tabItems,
     required this.selectedIndex,
     required this.children,
+    this.animationType = LSBottomTextIconAnimationType.none,
     this.deactivateIndex = -1,
     this.appBar,
-    this.padding = const EdgeInsets.all(0.0),
+    this.padding,
+    this.height,
     this.backgroundColor,
     this.activeColor = Colors.blueAccent,
     this.inactiveColor = Colors.grey,
@@ -67,7 +71,9 @@ class _LFBottomTabBarScaffoldState extends State<LFBottomTabBarScaffold> {
     final scaffoldController = widget.scaffoldController;
     final tabBarViewsController = scaffoldController.tabBarViewsController;
     final tabBarController = scaffoldController.tabBarController;
+    final animationType = widget.animationType;
     final padding = widget.padding;
+    final height = widget.height;
     final backgroundColor = widget.backgroundColor;
     final activeColor = widget.activeColor;
     final inactiveColor = widget.inactiveColor;
@@ -84,7 +90,9 @@ class _LFBottomTabBarScaffoldState extends State<LFBottomTabBarScaffold> {
       ),
       bottomNavigationBar: LFBottomTabBar(
         controller: tabBarController,
+        type: animationType,
         padding: padding,
+        height: height,
         backgroundColor: backgroundColor,
         activeColor: activeColor,
         inactiveColor: inactiveColor,

@@ -17,7 +17,7 @@ class LFBadge extends StatelessWidget {
     this.textStyle,
     this.backgroundColor = Colors.red,
     this.iconColor = Colors.white,
-    this.padding = const EdgeInsets.all(2.0),
+    this.padding = const EdgeInsets.symmetric(horizontal: 3.0),
   });
 
   @override
