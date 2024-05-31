@@ -80,7 +80,7 @@ class LFAssetFileImage extends StatelessWidget {
         if (wasSynchronouslyLoaded || frame != null) {
           return child;
         }
-        return LFSkeleton(color: color);
+        return LFSkeleton(baseColor: color, highlightColor: color);
       },
       errorBuilder: (context, error, stackTrace) {
         return _buildErrorImage(context);
