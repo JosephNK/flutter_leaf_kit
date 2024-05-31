@@ -43,24 +43,12 @@ class _LFScaleAnimatedState extends State<LFScaleAnimated>
     );
     _animationController = animationController;
 
-    controller.addListener(() async {
-      final status = controller.status;
-      switch (status) {
-        case LFAnimationStatus.forward:
-          break;
-        case LFAnimationStatus.stop:
-          break;
-        case LFAnimationStatus.reverse:
-          break;
-        case LFAnimationStatus.repeat:
-          break;
-      }
-    });
-
     _animation = Tween(begin: 0.0, end: 1.0).animate(CurvedAnimation(
         parent: animationController!, curve: Curves.easeInOutBack));
 
     _animation.addStatusListener(animationCallback);
+
+    _innerController.addListener(_controllerListener);
 
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       if (autoAnimation) {
@@ -73,6 +61,7 @@ class _LFScaleAnimatedState extends State<LFScaleAnimated>
 
   @override
   void dispose() {
+    _innerController.removeListener(_controllerListener);
     _animation.removeStatusListener(animationCallback);
     _animationController?.stop();
     _animationController?.dispose();
@@ -95,6 +84,20 @@ class _LFScaleAnimatedState extends State<LFScaleAnimated>
       scale: _animation,
       child: widget.child,
     );
+  }
+
+  void _controllerListener() {
+    final status = _innerController.status;
+    switch (status) {
+      case LFAnimationStatus.forward:
+        break;
+      case LFAnimationStatus.stop:
+        break;
+      case LFAnimationStatus.reverse:
+        break;
+      case LFAnimationStatus.repeat:
+        break;
+    }
   }
 
   void animationCallback(AnimationStatus status) {

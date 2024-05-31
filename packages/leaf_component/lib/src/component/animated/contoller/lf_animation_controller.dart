@@ -77,6 +77,12 @@ class LFAnimationController extends ChangeNotifier {
     _tickerFuture = animationController.forward(from: value);
     return _tickerFuture;
   }
+
+  @override
+  void addListener(VoidCallback listener) {
+    // TODO: implement addListener
+    super.addListener(listener);
+  }
 }
 
 class LFRotateAnimationController extends LFAnimationController {

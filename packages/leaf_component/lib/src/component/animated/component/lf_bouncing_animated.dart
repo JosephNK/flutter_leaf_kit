@@ -47,24 +47,12 @@ class _LFBouncingAnimatedState extends State<LFBouncingAnimated>
     );
     _animationController = animationController;
 
-    controller.addListener(() async {
-      final status = controller.status;
-      switch (status) {
-        case LFAnimationStatus.forward:
-          break;
-        case LFAnimationStatus.stop:
-          break;
-        case LFAnimationStatus.reverse:
-          break;
-        case LFAnimationStatus.repeat:
-          break;
-      }
-    });
-
     _animation = Tween(begin: 1.0, end: 1.2).animate(
       CurvedAnimation(parent: animationController!, curve: widget.curve),
     );
     _animation.addStatusListener(animationCallback);
+
+    _innerController.addListener(_controllerListener);
 
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       if (autoAnimation) {
@@ -77,6 +65,7 @@ class _LFBouncingAnimatedState extends State<LFBouncingAnimated>
 
   @override
   void dispose() {
+    _innerController.removeListener(_controllerListener);
     _animation.removeStatusListener(animationCallback);
     _animationController?.stop();
     _animationController?.dispose();
@@ -99,6 +88,20 @@ class _LFBouncingAnimatedState extends State<LFBouncingAnimated>
       scale: _animation,
       child: widget.child,
     );
+  }
+
+  void _controllerListener() {
+    final status = _innerController.status;
+    switch (status) {
+      case LFAnimationStatus.forward:
+        break;
+      case LFAnimationStatus.stop:
+        break;
+      case LFAnimationStatus.reverse:
+        break;
+      case LFAnimationStatus.repeat:
+        break;
+    }
   }
 
   void animationCallback(AnimationStatus status) {

@@ -44,22 +44,10 @@ class _LFRotateAnimatedState extends State<LFRotateAnimated>
     );
     _animationController = animationController;
 
-    controller.addListener(() {
-      final status = controller.status;
-      switch (status) {
-        case LFAnimationStatus.forward:
-          break;
-        case LFAnimationStatus.stop:
-          break;
-        case LFAnimationStatus.reverse:
-          break;
-        case LFAnimationStatus.repeat:
-          break;
-      }
-    });
-
     _animation = Tween(begin: 0.0, end: degree).animate(animationController!);
     _animation.addStatusListener(animationCallback);
+
+    _innerController.addListener(_controllerListener);
 
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       if (autoAnimation) {
@@ -72,6 +60,7 @@ class _LFRotateAnimatedState extends State<LFRotateAnimated>
 
   @override
   void dispose() {
+    _innerController.removeListener(_controllerListener);
     _animation.removeStatusListener(animationCallback);
     _animationController?.stop();
     _animationController?.dispose();
@@ -102,6 +91,20 @@ class _LFRotateAnimatedState extends State<LFRotateAnimated>
         );
       },
     );
+  }
+
+  void _controllerListener() {
+    final status = _innerController.status;
+    switch (status) {
+      case LFAnimationStatus.forward:
+        break;
+      case LFAnimationStatus.stop:
+        break;
+      case LFAnimationStatus.reverse:
+        break;
+      case LFAnimationStatus.repeat:
+        break;
+    }
   }
 
   void animationCallback(AnimationStatus status) {

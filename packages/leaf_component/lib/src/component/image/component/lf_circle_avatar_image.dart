@@ -17,7 +17,7 @@ class LFCircleAvatarImage extends StatelessWidget {
   const LFCircleAvatarImage({
     super.key,
     required this.image,
-    this.size = 50,
+    this.size = 45,
     this.borderColor = Colors.transparent,
     this.borderWidth = 0.0,
     this.fit = BoxFit.cover,

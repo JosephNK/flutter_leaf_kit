@@ -43,23 +43,11 @@ class _LFExpandAnimatedState extends State<LFExpandAnimated>
     );
     _animationController = animationController;
 
-    controller.addListener(() async {
-      final status = controller.status;
-      switch (status) {
-        case LFAnimationStatus.forward:
-          break;
-        case LFAnimationStatus.stop:
-          break;
-        case LFAnimationStatus.reverse:
-          break;
-        case LFAnimationStatus.repeat:
-          break;
-      }
-    });
-
     _animation =
         CurvedAnimation(parent: animationController!, curve: Curves.ease);
     _animation.addStatusListener(animationCallback);
+
+    _innerController.addListener(_controllerListener);
 
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       if (autoAnimation) {
@@ -72,6 +60,7 @@ class _LFExpandAnimatedState extends State<LFExpandAnimated>
 
   @override
   void dispose() {
+    _innerController.removeListener(_controllerListener);
     _animation.removeStatusListener(animationCallback);
     _animationController?.stop();
     _animationController?.dispose();
@@ -100,6 +89,20 @@ class _LFExpandAnimatedState extends State<LFExpandAnimated>
       sizeFactor: _animation,
       child: widget.child,
     );
+  }
+
+  void _controllerListener() {
+    final status = _innerController.status;
+    switch (status) {
+      case LFAnimationStatus.forward:
+        break;
+      case LFAnimationStatus.stop:
+        break;
+      case LFAnimationStatus.reverse:
+        break;
+      case LFAnimationStatus.repeat:
+        break;
+    }
   }
 
   void animationCallback(AnimationStatus status) {

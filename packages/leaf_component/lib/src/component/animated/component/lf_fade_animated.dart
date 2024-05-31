@@ -44,20 +44,6 @@ class _LFFadeAnimatedState extends State<LFFadeAnimated>
     );
     _animationController = animationController;
 
-    controller.addListener(() {
-      final status = controller.status;
-      switch (status) {
-        case LFAnimationStatus.forward:
-          break;
-        case LFAnimationStatus.stop:
-          break;
-        case LFAnimationStatus.reverse:
-          break;
-        case LFAnimationStatus.repeat:
-          break;
-      }
-    });
-
     if (!isDisappear) {
       _animation = Tween<double>(begin: 0.0, end: 1.0).animate(
           CurvedAnimation(parent: animationController!, curve: Curves.easeIn));
@@ -66,6 +52,8 @@ class _LFFadeAnimatedState extends State<LFFadeAnimated>
           CurvedAnimation(parent: animationController!, curve: Curves.easeOut));
     }
     _animation.addStatusListener(animationCallback);
+
+    _innerController.addListener(_controllerListener);
 
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       if (autoAnimation) {
@@ -78,6 +66,7 @@ class _LFFadeAnimatedState extends State<LFFadeAnimated>
 
   @override
   void dispose() {
+    _innerController.removeListener(_controllerListener);
     _animation.removeStatusListener(animationCallback);
     _animationController?.stop();
     _animationController?.dispose();
@@ -100,6 +89,20 @@ class _LFFadeAnimatedState extends State<LFFadeAnimated>
       opacity: _animation,
       child: widget.child,
     );
+  }
+
+  void _controllerListener() {
+    final status = _innerController.status;
+    switch (status) {
+      case LFAnimationStatus.forward:
+        break;
+      case LFAnimationStatus.stop:
+        break;
+      case LFAnimationStatus.reverse:
+        break;
+      case LFAnimationStatus.repeat:
+        break;
+    }
   }
 
   void animationCallback(AnimationStatus status) {

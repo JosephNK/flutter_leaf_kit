@@ -39,13 +39,12 @@ class _AvatarScreenState extends ScreenState<AvatarScreen> {
           LFCircleAvatarImage(
             image: LFImageValue(
                 origin: Uri.parse('https://picsum.photos/200/300')),
-            size: 25,
           ),
-          const SizedBox(height: 20.0),
-          LFCacheImage(
-            uri: Uri.parse('https://picsum.photos/150/150'),
-            // width: 150,
-            // height: 150,
+          const SizedBox(height: 16.0),
+          LFCircleAvatarImage(
+            image: LFImageValue(
+                origin: Uri.parse('https://picsum.photos/200/300')),
+            size: 25,
           ),
         ],
       ),

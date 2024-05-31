@@ -31,6 +31,13 @@ class _BadgeScreenState extends ScreenState<BadgeScreen> {
 
   @override
   Widget buildBody(BuildContext context, Object? state) {
+    const TextStyle textStyle = TextStyle(
+      fontSize: 16.0,
+      fontWeight: FontWeight.bold,
+      color: Colors.white,
+    );
+    const backgroundColor = Colors.red;
+
     return const Column(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
@@ -39,12 +46,35 @@ class _BadgeScreenState extends ScreenState<BadgeScreen> {
           child: LFBadge(
             text: 'N',
             size: 28.0,
-            textStyle: TextStyle(
-              fontSize: 16.0,
-              fontWeight: FontWeight.bold,
-              color: Colors.white,
-            ),
-            backgroundColor: Colors.red,
+            textStyle: textStyle,
+            backgroundColor: backgroundColor,
+          ),
+        ),
+        SizedBox(height: 16.0),
+        Center(
+          child: LFBadge(
+            text: '1',
+            size: 28.0,
+            textStyle: textStyle,
+            backgroundColor: backgroundColor,
+          ),
+        ),
+        SizedBox(height: 16.0),
+        Center(
+          child: LFBadge(
+            text: '10',
+            size: 28.0,
+            textStyle: textStyle,
+            backgroundColor: backgroundColor,
+          ),
+        ),
+        SizedBox(height: 16.0),
+        Center(
+          child: LFBadge(
+            text: '999',
+            size: 28.0,
+            textStyle: textStyle,
+            backgroundColor: backgroundColor,
           ),
         ),
       ],

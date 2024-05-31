@@ -22,7 +22,7 @@ class _AnimationScreenState extends ScreenState<AnimationScreen> {
   late LFBouncingAnimationController _bouncingController;
   late LFScaleAnimationController _scaleController;
 
-  bool _expand = false;
+  bool _expand = true;
 
   @override
   Color? get backgroundColor => Colors.white;
@@ -39,7 +39,7 @@ class _AnimationScreenState extends ScreenState<AnimationScreen> {
     );
 
     _fadeController = LFFadeAnimationController(
-      autoAnimation: true,
+      autoAnimation: false,
       repeatCount: -1,
       duration: const Duration(milliseconds: 1000),
       isDisappear: false,
@@ -81,7 +81,7 @@ class _AnimationScreenState extends ScreenState<AnimationScreen> {
   }
 
   @override
-  PreferredSizeWidget? buildAppbar(BuildContext context, Object? lstate) {
+  PreferredSizeWidget? buildAppbar(BuildContext context, Object? state) {
     return LFAppBar(
       title: LFAppBarTitle(text: widget.title),
     );
@@ -89,113 +89,148 @@ class _AnimationScreenState extends ScreenState<AnimationScreen> {
 
   @override
   Widget buildBody(BuildContext context, Object? state) {
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          ///
-          const SizedBox(height: 10.0),
-          LFExpandAnimated(
-            value: _expand,
-            duration: const Duration(milliseconds: 550),
-            child: const Center(
-              child: Icon(Icons.access_alarm, size: 45.0),
+    return SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 24.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            /// Scale
+            const SizedBox(height: 24.0),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                LFScaleAnimated(
+                  controller: _scaleController,
+                  child: const Center(
+                    child: Icon(Icons.backpack, size: 45.0),
+                  ),
+                ),
+                LFButton(
+                  text: 'Scale',
+                  onTap: () async {
+                    if (_scaleController.status == LFAnimationStatus.forward) {
+                      _scaleController.reverse();
+                    } else {
+                      _scaleController.forward();
+                    }
+                  },
+                ),
+              ],
             ),
-          ),
-          const SizedBox(height: 10.0),
-          LFButton(
-            text: 'Expand (Value)',
-            onTap: () async {
-              setState(() => _expand = !_expand);
-            },
-          ),
 
-          ///
-          const SizedBox(height: 30.0),
-          LFScaleAnimated(
-            controller: _scaleController,
-            child: const Center(
-              child: Icon(Icons.backpack, size: 50.0),
+            /// Bouncing
+            const SizedBox(height: 24.0),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                LFBouncingAnimated(
+                  controller: _bouncingController,
+                  child: const Center(
+                    child: Icon(Icons.access_alarm, size: 50.0),
+                  ),
+                ),
+                LFButton(
+                  text: 'Bouncing',
+                  onTap: () async {
+                    await _bouncingController.forward();
+                    await _bouncingController.reverse();
+                  },
+                ),
+              ],
             ),
-          ),
-          const SizedBox(height: 10.0),
-          LFButton(
-            text: 'Scale',
-            onTap: () async {
-              if (_scaleController.status == LFAnimationStatus.forward) {
-                _scaleController.reverse();
-              } else {
-                _scaleController.forward();
-              }
-            },
-          ),
-          const SizedBox(height: 10.0),
-          LFBouncingAnimated(
-            controller: _bouncingController,
-            child: const Center(
-              child: Icon(Icons.access_alarm, size: 50.0),
+
+            /// Expand
+            const SizedBox(height: 24.0),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                LFExpandAnimated(
+                  controller: _expandController,
+                  child: const Center(
+                    child: Icon(Icons.access_alarm, size: 45.0),
+                  ),
+                ),
+                LFButton(
+                  text: 'Expand',
+                  onTap: () {
+                    if (_expandController.status == LFAnimationStatus.forward) {
+                      _expandController.reverse();
+                      return;
+                    }
+                    _expandController.forward();
+                  },
+                ),
+              ],
             ),
-          ),
-          const SizedBox(height: 10.0),
-          LFButton(
-            text: 'Bouncing',
-            onTap: () async {
-              await _bouncingController.forward();
-              await _bouncingController.reverse();
-            },
-          ),
-          const SizedBox(height: 10.0),
-          LFExpandAnimated(
-            controller: _expandController,
-            child: const Center(
-              child: Icon(Icons.access_alarm, size: 45.0),
+
+            /// Expand (Value)
+            const SizedBox(height: 10.0),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                LFExpandAnimated(
+                  value: _expand,
+                  duration: const Duration(milliseconds: 550),
+                  child: const Center(
+                    child: Icon(Icons.access_alarm, size: 45.0),
+                  ),
+                ),
+                LFButton(
+                  text: 'Expand (Value)',
+                  onTap: () async {
+                    setState(() => _expand = !_expand);
+                  },
+                ),
+              ],
             ),
-          ),
-          const SizedBox(height: 10.0),
-          LFButton(
-            text: 'Expand',
-            onTap: () {
-              if (_expandController.status == LFAnimationStatus.forward) {
-                _expandController.reverse();
-                return;
-              }
-              _expandController.forward();
-            },
-          ),
-          const SizedBox(height: 10.0),
-          LFFadeAnimated(
-            controller: _fadeController,
-            child: const Icon(Icons.account_balance, size: 45.0),
-          ),
-          const SizedBox(height: 10.0),
-          LFButton(
-            text: 'Fade',
-            onTap: () {
-              if (_fadeController.status == LFAnimationStatus.repeat) {
-                _fadeController.stop();
-                return;
-              }
-              _fadeController.repeat();
-            },
-          ),
-          const SizedBox(height: 10.0),
-          LFRotateAnimated(
-            controller: _rotateController,
-            child: const Icon(Icons.rotate_right, size: 45.0),
-          ),
-          const SizedBox(height: 10.0),
-          LFButton(
-            text: 'Rotate',
-            onTap: () {
-              if (_rotateController.status == LFAnimationStatus.repeat) {
-                _rotateController.forwardWithStop();
-                return;
-              }
-              _rotateController.repeat();
-            },
-          ),
-        ],
+
+            /// Fade
+            const SizedBox(height: 24.0),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                LFFadeAnimated(
+                  controller: _fadeController,
+                  child: const Icon(Icons.account_balance, size: 45.0),
+                ),
+                LFButton(
+                  text: 'Fade',
+                  onTap: () {
+                    if (_fadeController.status == LFAnimationStatus.forward) {
+                      _fadeController.reverse();
+                      return;
+                    }
+                    _fadeController.forward();
+                  },
+                ),
+              ],
+            ),
+
+            /// Rotate
+            const SizedBox(height: 24.0),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                LFRotateAnimated(
+                  controller: _rotateController,
+                  child: const Icon(Icons.rotate_right, size: 45.0),
+                ),
+                LFButton(
+                  text: 'Rotate (Repeat)',
+                  onTap: () {
+                    if (_rotateController.status == LFAnimationStatus.repeat) {
+                      _rotateController.forwardWithStop();
+                      return;
+                    }
+                    _rotateController.repeat();
+                  },
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
