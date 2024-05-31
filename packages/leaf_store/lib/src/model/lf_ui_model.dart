@@ -1,6 +1,10 @@
 part of '../../leaf_store.dart';
 
-class UIModel extends Equatable {
+abstract class UIModelInterface {
+  T? getPayload<T>();
+}
+
+abstract class UIModel extends Equatable implements UIModelInterface {
   final Object? payload;
 
   const UIModel({
@@ -11,11 +15,4 @@ class UIModel extends Equatable {
   List<Object?> get props => [
         payload,
       ];
-
-  T? getPayload<T>() {
-    if (payload is T) {
-      return payload as T;
-    }
-    return null;
-  }
 }
