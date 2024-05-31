@@ -28,4 +28,5 @@ part 'scrollview/lf_scrollview_material.dart';
 part 'staggered_gridview/lf_staggered_gridview.dart';
 part 'staggered_gridview/lf_staggered_gridview_controller.dart';
 part 'staggered_gridview/lf_staggered_gridview_cupertino.dart';
+part 'staggered_gridview/lf_staggered_gridview_indicator.dart';
 part 'staggered_gridview/lf_staggered_gridview_material.dart';

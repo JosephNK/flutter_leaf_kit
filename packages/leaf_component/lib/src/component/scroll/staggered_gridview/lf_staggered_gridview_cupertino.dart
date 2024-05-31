@@ -12,6 +12,7 @@ class LFStaggeredGridViewCupertino<T> extends StatelessWidget {
   final ScrollPhysics? physics;
   final bool shrinkWrap;
   final bool scrollable;
+  final bool hasReachedMax;
 
   const LFStaggeredGridViewCupertino({
     super.key,
@@ -26,6 +27,7 @@ class LFStaggeredGridViewCupertino<T> extends StatelessWidget {
     this.physics,
     this.shrinkWrap = false,
     this.scrollable = true,
+    this.hasReachedMax = true,
   });
 
   @override
@@ -73,11 +75,20 @@ class LFStaggeredGridViewCupertino<T> extends StatelessWidget {
             : const NeverScrollableScrollPhysics(),
         shrinkWrap: shrinkWrap,
         slivers: [
-          (onRefresh != null)
-              ? refreshControlWidget
-              : const SliverToBoxAdapter(),
+          if (onRefresh != null) ...[
+            refreshControlWidget,
+          ] else ...[
+            const SliverToBoxAdapter(),
+          ],
           headerWidget,
           gridViewWidget,
+          if (!hasReachedMax) ...[
+            SliverToBoxAdapter(
+              child: LFListViewIndicator(
+                loading: loading,
+              ),
+            ),
+          ]
         ],
       ),
     );

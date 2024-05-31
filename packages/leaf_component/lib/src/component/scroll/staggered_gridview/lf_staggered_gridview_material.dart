@@ -63,31 +63,30 @@ class LFStaggeredGridViewMaterial<T> extends StatelessWidget {
       },
     );
 
-    if (onRefresh == null) {
-      return Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          (header != null) ? header! : Container(),
-          Flexible(
-            child: gridViewWidget,
+    final gridWidget = Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        (header != null) ? header! : Container(),
+        Flexible(
+          child: gridViewWidget,
+        ),
+        if (!hasReachedMax) ...[
+          LFListViewIndicator(
+            loading: loading,
           ),
-        ],
-      );
+        ]
+      ],
+    );
+
+    if (onRefresh == null) {
+      return gridWidget;
     }
 
     return RefreshIndicator(
       onRefresh: () async {
         await onRefresh?.call();
       },
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          (header != null) ? header! : Container(),
-          Flexible(
-            child: gridViewWidget,
-          ),
-        ],
-      ),
+      child: gridWidget,
     );
   }
 }

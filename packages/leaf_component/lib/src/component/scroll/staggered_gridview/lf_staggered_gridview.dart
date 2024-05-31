@@ -200,6 +200,7 @@ class _LFStaggeredGridViewState<T> extends State<LFStaggeredGridView<T>>
       physics: widget.physics,
       shrinkWrap: widget.shrinkWrap,
       scrollable: widget.scrollable,
+      hasReachedMax: widget.hasReachedMax,
     );
   }
 }

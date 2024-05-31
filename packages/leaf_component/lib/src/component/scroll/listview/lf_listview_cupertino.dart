@@ -39,6 +39,14 @@ class LFListViewCupertino<T> extends StatelessWidget {
     var totalCount = items.length + 1;
     if (header != null) totalCount += 1;
 
+    final refreshControlWidget = CupertinoSliverRefreshControl(
+      refreshTriggerPullDistance: 100.0,
+      refreshIndicatorExtent: 30.0,
+      onRefresh: () async {
+        await onRefresh?.call();
+      },
+    );
+
     return CustomScrollView(
       key: storageKey,
       controller: PrimaryScrollController.of(context),
@@ -51,13 +59,7 @@ class LFListViewCupertino<T> extends StatelessWidget {
       shrinkWrap: shrinkWrap,
       slivers: [
         if (onRefresh != null) ...[
-          CupertinoSliverRefreshControl(
-            refreshTriggerPullDistance: 100.0,
-            refreshIndicatorExtent: 30.0,
-            onRefresh: () async {
-              await onRefresh?.call();
-            },
-          ),
+          refreshControlWidget,
         ] else ...[
           const SliverToBoxAdapter(),
         ],
