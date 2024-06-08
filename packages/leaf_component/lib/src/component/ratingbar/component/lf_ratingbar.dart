@@ -9,11 +9,13 @@ class LFRatingBar extends StatelessWidget {
   final double itemSize;
   final bool tapOnlyMode;
   final bool updateOnDrag;
-  final ValueChanged<double>? onRatingUpdate;
+  final bool ignoreGestures;
+  final ValueChanged<double> onRatingUpdate;
 
   const LFRatingBar({
     super.key,
     required this.itemCount,
+    required this.onRatingUpdate,
     this.ratingWidget,
     this.initialRating = 0.0,
     this.minRating = 0.0,
@@ -21,7 +23,7 @@ class LFRatingBar extends StatelessWidget {
     this.itemSize = 40.0,
     this.tapOnlyMode = false,
     this.updateOnDrag = false,
-    this.onRatingUpdate,
+    this.ignoreGestures = false,
   });
 
   @override
@@ -38,15 +40,14 @@ class LFRatingBar extends StatelessWidget {
       itemPadding: itemPadding,
       tapOnlyMode: tapOnlyMode,
       updateOnDrag: updateOnDrag,
+      ignoreGestures: ignoreGestures,
       ratingWidget: ratingWidget ??
           RatingWidget(
             full: const Icon(Icons.star, color: Colors.red),
             half: const Icon(Icons.star_half, color: Colors.red),
             empty: const Icon(Icons.star_border, color: Colors.red),
           ),
-      onRatingUpdate: (rating) {
-        onRatingUpdate?.call(rating);
-      },
+      onRatingUpdate: onRatingUpdate,
     );
   }
 }
