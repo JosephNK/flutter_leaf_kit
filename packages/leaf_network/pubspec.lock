@@ -332,21 +332,21 @@ packages:
       path: "../leaf_common"
       relative: true
     source: path
-    version: "1.9.37-dev"
+    version: "1.9.38-dev"
   flutter_leaf_manager:
     dependency: "direct main"
     description:
       path: "../leaf_manager"
       relative: true
     source: path
-    version: "1.9.37-dev"
+    version: "1.9.38-dev"
   flutter_leaf_store:
     dependency: "direct main"
     description:
       path: "../leaf_store"
       relative: true
     source: path
-    version: "1.9.37-dev"
+    version: "1.9.38-dev"
   flutter_lints:
     dependency: "direct dev"
     description:
