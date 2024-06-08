@@ -21,4 +21,8 @@ extension FocusNodeHelper on FocusNode {
       });
     }
   }
+
+  void removeFocus(BuildContext context) {
+    FocusScope.of(context).requestFocus(this);
+  }
 }

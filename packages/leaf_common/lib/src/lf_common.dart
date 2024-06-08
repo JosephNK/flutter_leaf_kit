@@ -20,6 +20,7 @@ part 'extension/focus_node.dart';
 part 'extension/global_key.dart';
 part 'extension/lists.dart';
 part 'extension/maps.dart';
+part 'extension/media_query.dart';
 part 'extension/numbers.dart';
 part 'logger/logging.dart';
 part 'types/types.dart';
