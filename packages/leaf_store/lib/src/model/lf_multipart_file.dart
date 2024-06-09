@@ -15,8 +15,8 @@ class LFMultipartFile extends UIModel {
       ];
 
   @override
-  T? getPayload<T>() {
-    throw UnimplementedError();
+  String? getPayload<String>() {
+    return payload as String?;
   }
 
   Uri? getHttpUri() {
