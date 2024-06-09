@@ -1,10 +1,11 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_leaf_kit/flutter_leaf_kit.dart';
+import 'package:image_picker/image_picker.dart';
 
 import '../services/responses/responses.dart';
-import '../services/services/currency_dio_service.dart';
 import '../services/services/products_dio_service.dart';
-import '../services/services/reviews_dio_service.dart';
 
 class NetworkScreen extends ScreenStatefulWidget {
   final String title;
@@ -19,6 +20,8 @@ class NetworkScreen extends ScreenStatefulWidget {
 }
 
 class _NetworkScreenState extends ScreenState<NetworkScreen> {
+  List<LFMultipartFile> _files = [];
+
   @override
   Color? get backgroundColor => Colors.white;
 
@@ -29,16 +32,17 @@ class _NetworkScreenState extends ScreenState<NetworkScreen> {
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       // HTTP Init
       LFHttpDio.shared.init(
-        baseUrl: Uri.parse('https://xxx.xxx.xxx'),
+        baseUrl: Uri.parse('https://dummyjson.com'),
         responseSerializers: responseMergedSerializers,
         jsonUndefinedKey: LFDioBuiltValueJSONUndefinedKey(
           collectionKey: 'items',
           objectKey: 'item',
+          excludeStructs: [
+            {'products': Object()},
+          ],
         ),
         services: [
           ProductsDioService(),
-          ReviewsDioService(),
-          CurrencyDioService(),
         ],
       );
     });
@@ -69,9 +73,9 @@ class _NetworkScreenState extends ScreenState<NetworkScreen> {
               minimumSize: const Size(150, 80),
             ),
             onPressed: () {
-              _action1();
+              _getAction();
             },
-            child: const Text('TEST 1'),
+            child: const Text('Get Test'),
           ),
           const SizedBox(height: 10.0),
           ElevatedButton(
@@ -80,9 +84,9 @@ class _NetworkScreenState extends ScreenState<NetworkScreen> {
               minimumSize: const Size(150, 80),
             ),
             onPressed: () {
-              _action2();
+              _postAction();
             },
-            child: const Text('TEST 2'),
+            child: const Text('Multipart Test'),
           ),
           const SizedBox(height: 10.0),
           ElevatedButton(
@@ -91,16 +95,18 @@ class _NetworkScreenState extends ScreenState<NetworkScreen> {
               minimumSize: const Size(150, 80),
             ),
             onPressed: () {
-              _action3();
+              _addImage();
             },
-            child: const Text('TEST 3'),
+            child: const Text('Add ImageFile Test'),
           ),
+          const SizedBox(height: 10.0),
+          Text('${_files.length} Files'),
         ],
       ),
     );
   }
 
-  Future<void> _action1() async {
+  Future<void> _getAction() async {
     try {
       final apiService = LFHttpDio.shared.getService<ProductsDioService>();
       final response = await apiService.get(limit: 5);
@@ -116,10 +122,13 @@ class _NetworkScreenState extends ScreenState<NetworkScreen> {
     }
   }
 
-  Future<void> _action2() async {
+  Future<void> _postAction() async {
     try {
-      final apiService = LFHttpDio.shared.getService<ReviewsDioService>();
-      final response = await apiService.get();
+      final apiService = LFHttpDio.shared.getService<ProductsDioService>();
+      final response = await apiService.postAdd(
+        title: 'Test Title',
+        files: _files,
+      );
       if (response.isSuccessful) {
         final body = response.data;
         Logging.d('body: $body');
@@ -132,19 +141,18 @@ class _NetworkScreenState extends ScreenState<NetworkScreen> {
     }
   }
 
-  Future<void> _action3() async {
+  Future<void> _addImage() async {
     try {
-      final apiService = LFHttpDio.shared.getService<CurrencyDioService>();
-      final response = await apiService.get();
-      if (response.isSuccessful) {
-        final body = response.data;
-        Logging.d('body: $body');
-      } else {
-        final error = response.error;
-        Logging.e('error: $error');
+      final ImagePicker picker = ImagePicker();
+      final XFile? image = await picker.pickImage(source: ImageSource.gallery);
+      if (image != null && context.mounted) {
+        final file = LFMultipartFile.fromFile(File(image.path));
+        setState(() {
+          _files = [..._files, file];
+        });
       }
-    } on Exception catch (e) {
-      Logging.e('Exception e: $e');
+    } catch (e) {
+      print('error: $e');
     }
   }
 }

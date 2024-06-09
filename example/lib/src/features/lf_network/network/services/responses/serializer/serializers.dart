@@ -10,9 +10,7 @@ import '../responses.dart';
 part 'serializers.g.dart';
 
 @SerializersFor([
-  ProductsGetPickResponse,
-  ReviewsGetsResponse,
-  CurrencyResponse,
+  ProductsGetAllResponse,
 ])
 final Serializers responseSerializers = (_$responseSerializers.toBuilder()
       ..addPlugin(

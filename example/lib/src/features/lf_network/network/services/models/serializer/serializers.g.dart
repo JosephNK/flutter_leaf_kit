@@ -6,9 +6,7 @@ part of 'serializers.dart';
 // BuiltValueGenerator
 // **************************************************************************
 
-Serializers _$modelSerializers = (new Serializers().toBuilder()
-      ..add(ProductDTO.serializer)
-      ..add(ReviewsDTO.serializer))
-    .build();
+Serializers _$modelSerializers =
+    (new Serializers().toBuilder()..add(ProductDTO.serializer)).build();
 
 // ignore_for_file: deprecated_member_use_from_same_package,type=lint

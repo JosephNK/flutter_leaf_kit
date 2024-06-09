@@ -1,32 +1,37 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'currency_response.dart';
+part of 'products_response.dart';
 
 // **************************************************************************
 // BuiltValueGenerator
 // **************************************************************************
 
-Serializer<CurrencyResponse> _$currencyResponseSerializer =
-    new _$CurrencyResponseSerializer();
+Serializer<ProductsGetAllResponse> _$productsGetAllResponseSerializer =
+    new _$ProductsGetAllResponseSerializer();
 
-class _$CurrencyResponseSerializer
-    implements StructuredSerializer<CurrencyResponse> {
+class _$ProductsGetAllResponseSerializer
+    implements StructuredSerializer<ProductsGetAllResponse> {
   @override
-  final Iterable<Type> types = const [CurrencyResponse, _$CurrencyResponse];
+  final Iterable<Type> types = const [
+    ProductsGetAllResponse,
+    _$ProductsGetAllResponse
+  ];
   @override
-  final String wireName = 'CurrencyResponse';
+  final String wireName = 'ProductsGetAllResponse';
 
   @override
-  Iterable<Object?> serialize(Serializers serializers, CurrencyResponse object,
+  Iterable<Object?> serialize(
+      Serializers serializers, ProductsGetAllResponse object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object?>[];
     Object? value;
-    value = object.item;
+    value = object.products;
     if (value != null) {
       result
-        ..add('item')
+        ..add('products')
         ..add(serializers.serialize(value,
-            specifiedType: const FullType(String)));
+            specifiedType:
+                const FullType(BuiltList, const [const FullType(ProductDTO)])));
     }
     value = object.result;
     if (value != null) {
@@ -53,10 +58,10 @@ class _$CurrencyResponseSerializer
   }
 
   @override
-  CurrencyResponse deserialize(
+  ProductsGetAllResponse deserialize(
       Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = new CurrencyResponseBuilder();
+    final result = new ProductsGetAllResponseBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
@@ -64,9 +69,11 @@ class _$CurrencyResponseSerializer
       iterator.moveNext();
       final Object? value = iterator.current;
       switch (key) {
-        case 'item':
-          result.item = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String?;
+        case 'products':
+          result.products.replace(serializers.deserialize(value,
+                  specifiedType: const FullType(
+                      BuiltList, const [const FullType(ProductDTO)]))!
+              as BuiltList<Object?>);
           break;
         case 'result':
           result.result = serializers.deserialize(value,
@@ -87,9 +94,9 @@ class _$CurrencyResponseSerializer
   }
 }
 
-class _$CurrencyResponse extends CurrencyResponse {
+class _$ProductsGetAllResponse extends ProductsGetAllResponse {
   @override
-  final String? item;
+  final BuiltList<ProductDTO>? products;
   @override
   final bool? result;
   @override
@@ -97,26 +104,28 @@ class _$CurrencyResponse extends CurrencyResponse {
   @override
   final ErrorData? error;
 
-  factory _$CurrencyResponse(
-          [void Function(CurrencyResponseBuilder)? updates]) =>
-      (new CurrencyResponseBuilder()..update(updates))._build();
+  factory _$ProductsGetAllResponse(
+          [void Function(ProductsGetAllResponseBuilder)? updates]) =>
+      (new ProductsGetAllResponseBuilder()..update(updates))._build();
 
-  _$CurrencyResponse._({this.item, this.result, this.meta, this.error})
+  _$ProductsGetAllResponse._(
+      {this.products, this.result, this.meta, this.error})
       : super._();
 
   @override
-  CurrencyResponse rebuild(void Function(CurrencyResponseBuilder) updates) =>
+  ProductsGetAllResponse rebuild(
+          void Function(ProductsGetAllResponseBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
-  CurrencyResponseBuilder toBuilder() =>
-      new CurrencyResponseBuilder()..replace(this);
+  ProductsGetAllResponseBuilder toBuilder() =>
+      new ProductsGetAllResponseBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is CurrencyResponse &&
-        item == other.item &&
+    return other is ProductsGetAllResponse &&
+        products == other.products &&
         result == other.result &&
         meta == other.meta &&
         error == other.error;
@@ -125,7 +134,7 @@ class _$CurrencyResponse extends CurrencyResponse {
   @override
   int get hashCode {
     var _$hash = 0;
-    _$hash = $jc(_$hash, item.hashCode);
+    _$hash = $jc(_$hash, products.hashCode);
     _$hash = $jc(_$hash, result.hashCode);
     _$hash = $jc(_$hash, meta.hashCode);
     _$hash = $jc(_$hash, error.hashCode);
@@ -135,8 +144,8 @@ class _$CurrencyResponse extends CurrencyResponse {
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper(r'CurrencyResponse')
-          ..add('item', item)
+    return (newBuiltValueToStringHelper(r'ProductsGetAllResponse')
+          ..add('products', products)
           ..add('result', result)
           ..add('meta', meta)
           ..add('error', error))
@@ -144,16 +153,18 @@ class _$CurrencyResponse extends CurrencyResponse {
   }
 }
 
-class CurrencyResponseBuilder
+class ProductsGetAllResponseBuilder
     implements
-        Builder<CurrencyResponse, CurrencyResponseBuilder>,
+        Builder<ProductsGetAllResponse, ProductsGetAllResponseBuilder>,
         SuccessResponseBuilder,
         ErrorResponseBuilder {
-  _$CurrencyResponse? _$v;
+  _$ProductsGetAllResponse? _$v;
 
-  String? _item;
-  String? get item => _$this._item;
-  set item(covariant String? item) => _$this._item = item;
+  ListBuilder<ProductDTO>? _products;
+  ListBuilder<ProductDTO> get products =>
+      _$this._products ??= new ListBuilder<ProductDTO>();
+  set products(covariant ListBuilder<ProductDTO>? products) =>
+      _$this._products = products;
 
   bool? _result;
   bool? get result => _$this._result;
@@ -167,12 +178,12 @@ class CurrencyResponseBuilder
   ErrorDataBuilder get error => _$this._error ??= new ErrorDataBuilder();
   set error(covariant ErrorDataBuilder? error) => _$this._error = error;
 
-  CurrencyResponseBuilder();
+  ProductsGetAllResponseBuilder();
 
-  CurrencyResponseBuilder get _$this {
+  ProductsGetAllResponseBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
-      _item = $v.item;
+      _products = $v.products?.toBuilder();
       _result = $v.result;
       _meta = $v.meta?.toBuilder();
       _error = $v.error?.toBuilder();
@@ -183,38 +194,41 @@ class CurrencyResponseBuilder
 
   @override
 // ignore: override_on_non_overriding_method
-  void replace(covariant CurrencyResponse other) {
+  void replace(covariant ProductsGetAllResponse other) {
     ArgumentError.checkNotNull(other, 'other');
-    _$v = other as _$CurrencyResponse;
+    _$v = other as _$ProductsGetAllResponse;
   }
 
   @override
-  void update(void Function(CurrencyResponseBuilder)? updates) {
+  void update(void Function(ProductsGetAllResponseBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
   @override
-  CurrencyResponse build() => _build();
+  ProductsGetAllResponse build() => _build();
 
-  _$CurrencyResponse _build() {
-    _$CurrencyResponse _$result;
+  _$ProductsGetAllResponse _build() {
+    _$ProductsGetAllResponse _$result;
     try {
       _$result = _$v ??
-          new _$CurrencyResponse._(
-              item: item,
+          new _$ProductsGetAllResponse._(
+              products: _products?.build(),
               result: result,
               meta: _meta?.build(),
               error: _error?.build());
     } catch (_) {
       late String _$failedField;
       try {
+        _$failedField = 'products';
+        _products?.build();
+
         _$failedField = 'meta';
         _meta?.build();
         _$failedField = 'error';
         _error?.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
-            r'CurrencyResponse', _$failedField, e.toString());
+            r'ProductsGetAllResponse', _$failedField, e.toString());
       }
       rethrow;
     }

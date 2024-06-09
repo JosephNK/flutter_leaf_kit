@@ -36,6 +36,18 @@ class LFMultipartFile extends UIModel {
     return file.readAsBytesSync();
   }
 
+  String? getExtension() {
+    final uri = this.uri;
+    if (uri == null) return null;
+    return uri.extension();
+  }
+
+  String? getFileName() {
+    final uri = this.uri;
+    if (uri == null) return null;
+    return uri.fileName();
+  }
+
   bool _isHttp() {
     final uri = this.uri;
     if (uri == null) return false;

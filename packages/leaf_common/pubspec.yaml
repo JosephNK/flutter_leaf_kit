@@ -21,6 +21,8 @@ dependencies:
   quiver: ^3.2.1
   string_validator: ^1.0.2
 
+  path: ^1.9.0
+
 # package_info_plus (temporarily override for chewie)
 dependency_overrides:
   wakelock:

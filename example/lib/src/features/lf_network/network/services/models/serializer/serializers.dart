@@ -7,7 +7,6 @@ part 'serializers.g.dart';
 
 @SerializersFor([
   ProductDTO,
-  ReviewsDTO,
 ])
 final Serializers modelSerializers = (_$modelSerializers.toBuilder()
       ..addPlugin(

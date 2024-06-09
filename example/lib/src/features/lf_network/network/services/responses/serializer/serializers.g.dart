@@ -7,19 +7,13 @@ part of 'serializers.dart';
 // **************************************************************************
 
 Serializers _$responseSerializers = (new Serializers().toBuilder()
-      ..add(CurrencyResponse.serializer)
       ..add(ErrorData.serializer)
       ..add(MetaData.serializer)
       ..add(ProductDTO.serializer)
-      ..add(ProductsGetPickResponse.serializer)
-      ..add(ReviewsDTO.serializer)
-      ..add(ReviewsGetsResponse.serializer)
+      ..add(ProductsGetAllResponse.serializer)
       ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(ProductDTO)]),
-          () => new ListBuilder<ProductDTO>())
-      ..addBuilderFactory(
-          const FullType(BuiltList, const [const FullType(ReviewsDTO)]),
-          () => new ListBuilder<ReviewsDTO>()))
+          () => new ListBuilder<ProductDTO>()))
     .build();
 
 // ignore_for_file: deprecated_member_use_from_same_package,type=lint

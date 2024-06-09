@@ -43,7 +43,15 @@ class LFDioCurlInterceptor extends InterceptorsWrapper {
     if (options.data != null) {
       // FormData can't be JSON-serialized, so keep only their fields attributes
       if (options.data is FormData) {
-        options.data = Map.fromEntries(options.data.fields);
+        final FormData data = options.data;
+        final fields = data.fields;
+        final files = data.files;
+
+        options.data = Map.fromEntries(fields);
+
+        for (var file in files) {
+          components.add('-f "${file.key}=@${file.value.filename}"');
+        }
       }
 
       final data = json.encode(options.data).replaceAll('"', '\\"');
