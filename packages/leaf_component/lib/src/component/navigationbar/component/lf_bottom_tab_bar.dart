@@ -208,7 +208,7 @@ class LSBottomTextIcon extends StatefulWidget {
 }
 
 class _LSBottomTextIconState extends State<LSBottomTextIcon> {
-  bool _bouncingLoaded = false;
+  final bool _bouncingLoaded = false;
 
   @override
   Widget build(BuildContext context) {
