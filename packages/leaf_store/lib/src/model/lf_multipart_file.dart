@@ -20,18 +20,12 @@ class LFMultipartFile extends UIModel {
   }
 
   Uri? getHttpUri() {
-    final uri = this.uri;
-    if (uri == null) return null;
-    String scheme = uri.scheme;
-    if (scheme == 'http' || scheme == 'https') {
-      return uri;
-    }
-    return null;
+    return _isHttp() ? uri : null;
   }
 
   File? getFile() {
     final uri = this.uri;
-    if (uri == null) return null;
+    if (uri == null || _isHttp()) return null;
     final file = File(uri.path);
     return file;
   }
@@ -40,6 +34,13 @@ class LFMultipartFile extends UIModel {
     final file = getFile();
     if (file == null) return null;
     return file.readAsBytesSync();
+  }
+
+  bool _isHttp() {
+    final uri = this.uri;
+    if (uri == null) return false;
+    final scheme = uri.scheme;
+    return scheme == 'http' || scheme == 'https';
   }
 
   factory LFMultipartFile.fromUri(Uri uri) {
