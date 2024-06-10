@@ -15,6 +15,7 @@ import 'logger/console_output.dart';
 
 export 'package:logger/logger.dart' show PrettyPrinter;
 
+part 'cancelable/cancelable_future.dart';
 part 'extension/asset_images.dart';
 part 'extension/colors.dart';
 part 'extension/focus_node.dart';
