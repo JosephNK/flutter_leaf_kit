@@ -17,7 +17,7 @@ class SetupScreen extends ScreenStatefulWidget {
 
 class _SetupScreenState extends ScreenState<SetupScreen> {
   @override
-  Color? get backgroundColor => Colors.teal;
+  Color? get backgroundColor => Color(0xfff9fafb);
 
   @override
   SafeAreaInsets get safeAreaInsets =>

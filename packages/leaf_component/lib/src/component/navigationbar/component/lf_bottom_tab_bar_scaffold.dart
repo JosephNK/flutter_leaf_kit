@@ -10,9 +10,11 @@ class LFBottomTabBarScaffold extends StatefulWidget {
   final PreferredSizeWidget? appBar;
   final EdgeInsetsGeometry? padding;
   final double? height;
+  final double? elevation;
+  final double notchMargin;
   final Color? backgroundColor;
-  final Color activeColor;
-  final Color inactiveColor;
+  final BorderRadius? borderRadius;
+  final List<BoxShadow>? boxShadow;
   final bool isShowTabBar;
   final bool autoSelected;
   final ValueChanged<int>? onPressed;
@@ -28,9 +30,11 @@ class LFBottomTabBarScaffold extends StatefulWidget {
     this.appBar,
     this.padding,
     this.height,
+    this.elevation,
+    this.notchMargin = 4.0,
     this.backgroundColor,
-    this.activeColor = Colors.blueAccent,
-    this.inactiveColor = Colors.grey,
+    this.borderRadius,
+    this.boxShadow,
     this.isShowTabBar = true,
     this.autoSelected = true,
     this.onPressed,
@@ -74,9 +78,11 @@ class _LFBottomTabBarScaffoldState extends State<LFBottomTabBarScaffold> {
     final animationType = widget.animationType;
     final padding = widget.padding;
     final height = widget.height;
+    final elevation = widget.elevation;
+    final notchMargin = widget.notchMargin;
     final backgroundColor = widget.backgroundColor;
-    final activeColor = widget.activeColor;
-    final inactiveColor = widget.inactiveColor;
+    final borderRadius = widget.borderRadius;
+    final boxShadow = widget.boxShadow;
     final isShowTabBar = widget.isShowTabBar;
     final autoSelected = widget.autoSelected;
     final deactivateIndex = widget.deactivateIndex;
@@ -84,6 +90,7 @@ class _LFBottomTabBarScaffoldState extends State<LFBottomTabBarScaffold> {
 
     return Scaffold(
       appBar: appbar,
+      backgroundColor: Colors.transparent,
       body: LFBottomTabBarViews(
         controller: tabBarViewsController,
         children: children,
@@ -93,9 +100,11 @@ class _LFBottomTabBarScaffoldState extends State<LFBottomTabBarScaffold> {
         type: animationType,
         padding: padding,
         height: height,
+        elevation: elevation,
+        notchMargin: notchMargin,
         backgroundColor: backgroundColor,
-        activeColor: activeColor,
-        inactiveColor: inactiveColor,
+        borderRadius: borderRadius,
+        boxShadow: boxShadow,
         show: isShowTabBar,
         onPressed: (index) {
           bool isSameIndex = (tabBarController.selectedIndex == index);
