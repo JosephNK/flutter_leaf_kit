@@ -1,3 +1,4 @@
+export 'package:async/async.dart';
 export 'package:collection/collection.dart';
 export 'package:easy_localization/easy_localization.dart';
 export 'package:equatable/equatable.dart';
