@@ -8,6 +8,7 @@ class LFScrollViewMaterial<T> extends StatelessWidget {
   final EdgeInsets? padding;
   final ScrollPhysics? physics;
   final bool scrollable;
+  final bool reverse;
 
   const LFScrollViewMaterial({
     super.key,
@@ -18,6 +19,7 @@ class LFScrollViewMaterial<T> extends StatelessWidget {
     this.padding = const EdgeInsets.all(0),
     this.physics,
     this.scrollable = true,
+    this.reverse = false,
   });
 
   @override
@@ -44,6 +46,7 @@ class LFScrollViewMaterial<T> extends StatelessWidget {
               )
             : const NeverScrollableScrollPhysics(),
         padding: padding,
+        reverse: reverse,
         child: child,
       ),
     );

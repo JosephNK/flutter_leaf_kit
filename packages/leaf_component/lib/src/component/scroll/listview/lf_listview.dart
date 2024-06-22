@@ -15,6 +15,7 @@ class LFListView<T> extends StatefulWidget {
   final bool disallowGlow;
   final bool shrinkWrap;
   final bool scrollable;
+  final bool reverse;
   final bool enableTapUnFocus;
   final bool hasReachedMax;
 
@@ -33,6 +34,7 @@ class LFListView<T> extends StatefulWidget {
     this.keyboardDismissBehavior = ScrollViewKeyboardDismissBehavior.manual,
     this.disallowGlow = false,
     this.scrollable = true,
+    this.reverse = false,
     this.shrinkWrap = false,
     this.enableTapUnFocus = false,
     this.hasReachedMax = true,
@@ -169,6 +171,7 @@ class _LFListViewState<T> extends State<LFListView<T>>
         physics: widget.physics,
         keyboardDismissBehavior: widget.keyboardDismissBehavior,
         scrollable: widget.scrollable,
+        reverse: widget.reverse,
         shrinkWrap: widget.shrinkWrap,
         hasReachedMax: widget.hasReachedMax,
       );
@@ -198,6 +201,7 @@ class _LFListViewState<T> extends State<LFListView<T>>
       physics: widget.physics,
       keyboardDismissBehavior: widget.keyboardDismissBehavior,
       scrollable: widget.scrollable,
+      reverse: widget.reverse,
       shrinkWrap: widget.shrinkWrap,
       hasReachedMax: widget.hasReachedMax,
     );

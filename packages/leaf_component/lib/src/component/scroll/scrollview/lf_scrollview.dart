@@ -10,6 +10,7 @@ class LFScrollView extends StatefulWidget {
   final bool shrinkWrap; // Only Use LFScrollViewCupertino
   final bool scrollable;
   final bool enableTapUnFocus;
+  final bool reverse;
   final LFScrollViewController? controller;
   final LFScrollViewRefresh? onRefresh;
   final LFScrollViewDidScroll? onDidScroll;
@@ -26,6 +27,7 @@ class LFScrollView extends StatefulWidget {
     this.shrinkWrap = false,
     this.scrollable = true,
     this.enableTapUnFocus = false,
+    this.reverse = false,
     this.onRefresh,
     this.onDidScroll,
   });
@@ -143,6 +145,7 @@ class _LFScrollViewState extends State<LFScrollView> with LFScrollControlMixin {
         physics: currentPhysics,
         padding: widget.padding,
         scrollable: widget.scrollable,
+        reverse: widget.reverse,
         autoKeyboardHide: widget.autoKeyboardHide,
         child: widget.child,
       );
@@ -168,6 +171,7 @@ class _LFScrollViewState extends State<LFScrollView> with LFScrollControlMixin {
       padding: widget.padding,
       shrinkWrap: widget.shrinkWrap,
       scrollable: widget.scrollable,
+      reverse: widget.reverse,
       autoKeyboardHide: widget.autoKeyboardHide,
       child: widget.child,
     );

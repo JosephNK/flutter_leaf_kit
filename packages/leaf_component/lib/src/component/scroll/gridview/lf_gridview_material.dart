@@ -12,6 +12,7 @@ class LFGridViewMaterial<T> extends StatelessWidget {
   final ScrollPhysics? physics;
   final bool shrinkWrap;
   final bool scrollable;
+  final bool reverse;
 
   const LFGridViewMaterial({
     super.key,
@@ -26,6 +27,7 @@ class LFGridViewMaterial<T> extends StatelessWidget {
     this.physics,
     this.shrinkWrap = false,
     this.scrollable = true,
+    this.reverse = false,
   });
 
   @override
@@ -53,6 +55,7 @@ class LFGridViewMaterial<T> extends StatelessWidget {
           : const NeverScrollableScrollPhysics(),
       padding: padding,
       shrinkWrap: shrinkWrap,
+      reverse: reverse,
       itemBuilder: (context, index) {
         final itemIndex = index;
         final item = items[itemIndex];

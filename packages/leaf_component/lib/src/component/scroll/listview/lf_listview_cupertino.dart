@@ -12,6 +12,7 @@ class LFListViewCupertino<T> extends StatelessWidget {
   final ScrollViewKeyboardDismissBehavior keyboardDismissBehavior;
   final bool shrinkWrap;
   final bool scrollable;
+  final bool reverse;
   final bool hasReachedMax;
 
   const LFListViewCupertino({
@@ -27,6 +28,7 @@ class LFListViewCupertino<T> extends StatelessWidget {
     this.keyboardDismissBehavior = ScrollViewKeyboardDismissBehavior.manual,
     this.shrinkWrap = false,
     this.scrollable = true,
+    this.reverse = false,
     this.hasReachedMax = true,
   });
 
@@ -57,6 +59,7 @@ class LFListViewCupertino<T> extends StatelessWidget {
           : const NeverScrollableScrollPhysics(),
       keyboardDismissBehavior: keyboardDismissBehavior,
       shrinkWrap: shrinkWrap,
+      reverse: reverse,
       slivers: [
         if (onRefresh != null) ...[
           refreshControlWidget,

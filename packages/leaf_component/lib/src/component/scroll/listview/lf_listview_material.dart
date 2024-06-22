@@ -12,6 +12,7 @@ class LFListViewMaterial<T> extends StatelessWidget {
   final ScrollViewKeyboardDismissBehavior keyboardDismissBehavior;
   final bool shrinkWrap;
   final bool scrollable;
+  final bool reverse;
   final bool hasReachedMax;
 
   const LFListViewMaterial({
@@ -27,6 +28,7 @@ class LFListViewMaterial<T> extends StatelessWidget {
     this.keyboardDismissBehavior = ScrollViewKeyboardDismissBehavior.manual,
     this.shrinkWrap = false,
     this.scrollable = true,
+    this.reverse = false,
     this.hasReachedMax = true,
   });
 
@@ -51,6 +53,7 @@ class LFListViewMaterial<T> extends StatelessWidget {
       keyboardDismissBehavior: keyboardDismissBehavior,
       padding: padding,
       shrinkWrap: shrinkWrap,
+      reverse: reverse,
       itemBuilder: (context, index) {
         if (header != null && index == 0) {
           return header!;

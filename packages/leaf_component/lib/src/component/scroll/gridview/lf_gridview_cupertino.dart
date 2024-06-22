@@ -12,6 +12,7 @@ class LFGridViewCupertino<T> extends StatelessWidget {
   final ScrollPhysics? physics;
   final bool shrinkWrap;
   final bool scrollable;
+  final bool reverse;
 
   const LFGridViewCupertino({
     super.key,
@@ -26,6 +27,7 @@ class LFGridViewCupertino<T> extends StatelessWidget {
     this.physics,
     this.shrinkWrap = false,
     this.scrollable = true,
+    this.reverse = false,
   });
 
   @override
@@ -78,6 +80,7 @@ class LFGridViewCupertino<T> extends StatelessWidget {
             )
           : const NeverScrollableScrollPhysics(),
       shrinkWrap: shrinkWrap,
+      reverse: reverse,
       slivers: [
         (onRefresh != null) ? refreshControlWidget : const SliverToBoxAdapter(),
         headerWidget,

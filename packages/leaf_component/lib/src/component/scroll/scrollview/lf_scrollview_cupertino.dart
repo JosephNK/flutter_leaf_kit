@@ -9,6 +9,7 @@ class LFScrollViewCupertino<T> extends StatelessWidget {
   final ScrollPhysics? physics;
   final bool shrinkWrap;
   final bool scrollable;
+  final bool reverse;
 
   const LFScrollViewCupertino({
     super.key,
@@ -20,6 +21,7 @@ class LFScrollViewCupertino<T> extends StatelessWidget {
     this.physics,
     this.shrinkWrap = false,
     this.scrollable = true,
+    this.reverse = false,
   });
 
   @override
@@ -40,6 +42,7 @@ class LFScrollViewCupertino<T> extends StatelessWidget {
             )
           : const NeverScrollableScrollPhysics(),
       shrinkWrap: shrinkWrap,
+      reverse: reverse,
       slivers: [
         onRefresh == null
             ? const SliverToBoxAdapter()

@@ -15,6 +15,7 @@ class LFGridView<T> extends StatefulWidget {
   final bool disallowGlow;
   final bool shrinkWrap;
   final bool scrollable;
+  final bool reverse;
   final bool enableTapUnFocus;
   final bool hasReachedMax;
 
@@ -34,6 +35,7 @@ class LFGridView<T> extends StatefulWidget {
     this.disallowGlow = false,
     this.shrinkWrap = false,
     this.scrollable = true,
+    this.reverse = false,
     this.enableTapUnFocus = false,
     this.hasReachedMax = true,
   });
@@ -168,6 +170,7 @@ class _LFGridViewState<T> extends State<LFGridView<T>>
         physics: widget.physics,
         shrinkWrap: widget.shrinkWrap,
         scrollable: widget.scrollable,
+        reverse: widget.reverse,
       );
 
       if (widget.disallowGlow) {
@@ -196,6 +199,7 @@ class _LFGridViewState<T> extends State<LFGridView<T>>
       physics: widget.physics,
       shrinkWrap: widget.shrinkWrap,
       scrollable: widget.scrollable,
+      reverse: widget.reverse,
     );
   }
 }
