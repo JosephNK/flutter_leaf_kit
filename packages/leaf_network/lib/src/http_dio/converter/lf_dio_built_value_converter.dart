@@ -60,17 +60,22 @@ class LFDioBuiltValueConverter implements DioConverter {
         final excludeStructs = jsonUndefinedKey!.excludeStructs ?? [];
 
         if (entity is List) {
+          /// collectionKey 설정시,
+          /// (entity 데이터 collectionKey 묶는 용도)
+
+          /// example
+          /// [{'name': 'Kim'}, {'name': 'Park'}]
           deserializeEntity = {'$collectionKey': entity};
-        }
+        } else {
+          /// objectKey 설정시,
+          /// entity 데이터 Keys 중에서 없는 Key 로 설정.
+          /// (objectKey 는 임의로 Single Object 묶는 용도)
 
-        /// objectKey 설정시,
-        /// entity 데이터 Keys 중에서 없는 Key 로 설정.
-        /// (objectKey 는 임의로 Single Object 묶는 용도임)
-
-        /// example
-        /// "Kim", 5232, false
-        if (entity is! Map) {
-          deserializeEntity = {'$objectKey': entity};
+          /// example
+          /// "Kim", 5232, false
+          if (entity is! Map) {
+            deserializeEntity = {'$objectKey': entity};
+          }
         }
 
         /// example
