@@ -228,21 +228,21 @@ packages:
       path: "../leaf_common"
       relative: true
     source: path
-    version: "1.9.47-dev"
+    version: "1.9.48-dev"
   flutter_leaf_datetime:
     dependency: "direct main"
     description:
       path: "../leaf_datetime"
       relative: true
     source: path
-    version: "1.9.47-dev"
+    version: "1.9.48-dev"
   flutter_leaf_manager:
     dependency: "direct main"
     description:
       path: "../leaf_manager"
       relative: true
     source: path
-    version: "1.9.47-dev"
+    version: "1.9.48-dev"
   flutter_lints:
     dependency: "direct dev"
     description:
