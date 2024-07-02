@@ -1,5 +1,11 @@
 part of '../lf_common.dart';
 
+class LFExtFocusNode {
+  static void removeFocus(BuildContext context) {
+    FocusScope.of(context).requestFocus(FocusNode());
+  }
+}
+
 extension FocusNodeHelper on FocusNode {
   Future<void> ensureVisibleRequestFocus({
     double alignment = 0.5,
@@ -20,9 +26,5 @@ extension FocusNodeHelper on FocusNode {
         Logging.e('Scrollable ensureVisible Error: e');
       });
     }
-  }
-
-  void removeFocus(BuildContext context) {
-    FocusScope.of(context).requestFocus(this);
   }
 }
