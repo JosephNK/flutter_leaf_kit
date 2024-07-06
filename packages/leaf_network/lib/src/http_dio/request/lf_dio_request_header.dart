@@ -11,9 +11,17 @@ const Map<String, String> kContentTypeMultipartHeader = {
   HttpHeaders.contentTypeHeader: 'multipart/form-data',
 };
 
+typedef LFDioDeviceOSHeader = Map<String, String> Function(String os);
+typedef LFDioVersionHeader = Map<String, String> Function(String version);
+typedef LFDioAuthorizationHeader = Map<String, String> Function(
+    String authorization);
+
 class LFDioRequestHeader {
   static Future<Map<String, dynamic>> getHeaders({
     String? authorization,
+    LFDioDeviceOSHeader? deviceOSHeader,
+    LFDioVersionHeader? versionHeader,
+    LFDioAuthorizationHeader? authorizationHeader,
   }) async {
     final os = Platform.isIOS ? DeviceOS.ios : DeviceOS.android;
     final appVersion = (await PlatformPackage.fromInfo()).packageVersion;
@@ -25,6 +33,18 @@ class LFDioRequestHeader {
     if (isNotEmpty(authorization)) {
       // headers[HttpHeaders.authorizationHeader] = 'Bearer $accessToken';
       headers[HttpHeaders.authorizationHeader] = authorization!;
+    }
+    if (deviceOSHeader != null) {
+      headers.remove('X-LF-DEVICE-OS');
+      headers.addAll(deviceOSHeader(os.value));
+    }
+    if (versionHeader != null) {
+      headers.remove('X-LF-APP-VERSION');
+      headers.addAll(versionHeader(appVersion));
+    }
+    if (authorizationHeader != null) {
+      headers.remove(HttpHeaders.authorizationHeader);
+      headers.addAll(authorizationHeader(authorization!));
     }
 
     return headers;
