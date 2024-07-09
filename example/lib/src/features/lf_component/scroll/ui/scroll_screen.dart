@@ -39,7 +39,7 @@ class _ScrollScreenState extends ScreenState<ScrollScreen> {
   Widget buildBody(BuildContext context, Object? state) {
     return LFScrollView(
       controller: _scrollViewController,
-      autoKeyboardHide: false,
+      dragKeyboardHide: false,
       disallowGlow: false,
       shrinkWrap: false,
       scrollable: true,
