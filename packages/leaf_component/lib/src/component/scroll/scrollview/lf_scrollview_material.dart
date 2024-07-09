@@ -4,7 +4,7 @@ class LFScrollViewMaterial<T> extends StatelessWidget {
   final Widget child;
   final Key? storageKey;
   final LFScrollViewRefresh? onRefresh;
-  final bool autoKeyboardHide;
+  final bool dragKeyboardHide;
   final EdgeInsets? padding;
   final ScrollPhysics? physics;
   final bool scrollable;
@@ -15,7 +15,7 @@ class LFScrollViewMaterial<T> extends StatelessWidget {
     required this.child,
     required this.storageKey,
     required this.onRefresh,
-    this.autoKeyboardHide = false,
+    this.dragKeyboardHide = false,
     this.padding = const EdgeInsets.all(0),
     this.physics,
     this.scrollable = true,
@@ -28,27 +28,19 @@ class LFScrollViewMaterial<T> extends StatelessWidget {
   }
 
   Widget _buildMaterialListView(BuildContext context) {
-    final scrollView = GestureDetector(
-      behavior: HitTestBehavior.opaque,
-      onPanDown: (_) {
-        if (autoKeyboardHide) {
-          FocusScope.of(context).requestFocus(FocusNode());
-        }
-      },
-      child: SingleChildScrollView(
-        key: storageKey,
-        keyboardDismissBehavior: autoKeyboardHide
-            ? ScrollViewKeyboardDismissBehavior.onDrag
-            : ScrollViewKeyboardDismissBehavior.manual,
-        physics: scrollable
-            ? AlwaysScrollableScrollPhysics(
-                parent: physics ?? const BouncingScrollPhysics(),
-              )
-            : const NeverScrollableScrollPhysics(),
-        padding: padding,
-        reverse: reverse,
-        child: child,
-      ),
+    final scrollView = SingleChildScrollView(
+      key: storageKey,
+      keyboardDismissBehavior: dragKeyboardHide
+          ? ScrollViewKeyboardDismissBehavior.onDrag
+          : ScrollViewKeyboardDismissBehavior.manual,
+      physics: scrollable
+          ? AlwaysScrollableScrollPhysics(
+              parent: physics ?? const BouncingScrollPhysics(),
+            )
+          : const NeverScrollableScrollPhysics(),
+      padding: padding,
+      reverse: reverse,
+      child: child,
     );
 
     if (onRefresh == null) {

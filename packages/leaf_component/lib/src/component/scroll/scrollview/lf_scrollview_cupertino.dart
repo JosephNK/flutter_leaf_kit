@@ -4,7 +4,7 @@ class LFScrollViewCupertino<T> extends StatelessWidget {
   final Widget child;
   final Key? storageKey;
   final LFScrollViewRefresh? onRefresh;
-  final bool autoKeyboardHide;
+  final bool dragKeyboardHide;
   final EdgeInsets? padding;
   final ScrollPhysics? physics;
   final bool shrinkWrap;
@@ -16,7 +16,7 @@ class LFScrollViewCupertino<T> extends StatelessWidget {
     required this.child,
     required this.storageKey,
     required this.onRefresh,
-    this.autoKeyboardHide = false,
+    this.dragKeyboardHide = false,
     this.padding = const EdgeInsets.all(0),
     this.physics,
     this.shrinkWrap = false,
@@ -32,7 +32,7 @@ class LFScrollViewCupertino<T> extends StatelessWidget {
   Widget _buildCupertinoListView(BuildContext context) {
     return CustomScrollView(
       key: storageKey,
-      keyboardDismissBehavior: autoKeyboardHide
+      keyboardDismissBehavior: dragKeyboardHide
           ? ScrollViewKeyboardDismissBehavior.onDrag
           : ScrollViewKeyboardDismissBehavior.manual,
       controller: PrimaryScrollController.of(context),

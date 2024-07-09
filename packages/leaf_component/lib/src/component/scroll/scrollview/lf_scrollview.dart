@@ -3,7 +3,7 @@ part of '../scroll.dart';
 class LFScrollView extends StatefulWidget {
   final Key? storageKey;
   final Widget child;
-  final bool autoKeyboardHide;
+  final bool dragKeyboardHide;
   final ScrollPhysics? physics;
   final EdgeInsets? padding;
   final bool disallowGlow;
@@ -20,7 +20,7 @@ class LFScrollView extends StatefulWidget {
     this.storageKey,
     required this.child,
     this.controller,
-    this.autoKeyboardHide = false,
+    this.dragKeyboardHide = false,
     this.physics,
     this.padding,
     this.disallowGlow = false,
@@ -146,7 +146,7 @@ class _LFScrollViewState extends State<LFScrollView> with LFScrollControlMixin {
         padding: widget.padding,
         scrollable: widget.scrollable,
         reverse: widget.reverse,
-        autoKeyboardHide: widget.autoKeyboardHide,
+        dragKeyboardHide: widget.dragKeyboardHide,
         child: widget.child,
       );
 
@@ -172,7 +172,7 @@ class _LFScrollViewState extends State<LFScrollView> with LFScrollControlMixin {
       shrinkWrap: widget.shrinkWrap,
       scrollable: widget.scrollable,
       reverse: widget.reverse,
-      autoKeyboardHide: widget.autoKeyboardHide,
+      dragKeyboardHide: widget.dragKeyboardHide,
       child: widget.child,
     );
   }
