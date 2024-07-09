@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter_leaf_kit/flutter_leaf_kit_common.dart';
 import 'package:flutter_leaf_kit/flutter_leaf_kit_network.dart';
 import 'package:flutter_leaf_kit/flutter_leaf_kit_store.dart';
@@ -36,8 +37,8 @@ class ProductsDioService extends DioService {
           .map((file) {
             final path = file.getFile()?.path;
             if (path == null) return null;
-            print('path: $path');
-            print('path1: ${file.getPayload<String>()}');
+            debugPrint('path: $path');
+            debugPrint('path1: ${file.getPayload<String>()}');
             return MultipartFile.fromFileSync(
               path,
               filename: '${file.getPayload<String>()}.jpg',

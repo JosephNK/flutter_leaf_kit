@@ -152,7 +152,7 @@ class _NetworkScreenState extends ScreenState<NetworkScreen> {
         });
       }
     } catch (e) {
-      print('error: $e');
+      debugPrint('error: $e');
     }
   }
 }
