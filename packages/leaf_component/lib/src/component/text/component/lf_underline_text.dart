@@ -17,18 +17,23 @@ class LFUnderlineText extends StatelessWidget {
   Widget build(BuildContext context) {
     return RichText(
       text: TextSpan(
-        children: _textWidgetSpan(text),
+        children: LFUnderlineSpans().textWidgetSpan(text, style: style),
       ),
     );
   }
+}
 
-  List<WidgetSpan> _textWidgetSpan(String text) {
-    TextStyle textStyle =
-        style != null ? style! : const TextStyle(fontSize: 21);
+class LFUnderlineSpans {
+  List<WidgetSpan> textWidgetSpan(
+    String text, {
+    TextStyle? style,
+    VoidCallback? onTap,
+  }) {
+    TextStyle textStyle = style ?? const TextStyle(fontSize: 21);
     Color color = textStyle.color ?? Colors.black;
     double fontSize = textStyle.fontSize ?? 21;
     double lineHeight = textStyle.height ?? 1.13;
-    double height = fontSize * 1.13;
+    double height = fontSize * lineHeight;
     double marginBottom =
         lineHeight > 1.13 ? (lineHeight - 1.13) * fontSize : 0;
     textStyle = textStyle.copyWith(height: 1);
@@ -37,17 +42,21 @@ class LFUnderlineText extends StatelessWidget {
       String char = text.substring(t, t + 1);
       spans.add(
         WidgetSpan(
-          child: Container(
-            height: height,
-            margin: EdgeInsets.only(
-                top: marginBottom / 2, bottom: marginBottom / 2),
-            child: DecoratedBox(
-              decoration: BoxDecoration(
-                border: Border(bottom: BorderSide(color: color)),
-              ),
-              child: Text(
-                char,
-                style: textStyle,
+          child: GestureDetector(
+            behavior: HitTestBehavior.opaque,
+            onTap: onTap,
+            child: Container(
+              height: height,
+              margin: EdgeInsets.only(
+                  top: marginBottom / 2, bottom: marginBottom / 2),
+              child: DecoratedBox(
+                decoration: BoxDecoration(
+                  border: Border(bottom: BorderSide(color: color)),
+                ),
+                child: Text(
+                  char,
+                  style: textStyle,
+                ),
               ),
             ),
           ),

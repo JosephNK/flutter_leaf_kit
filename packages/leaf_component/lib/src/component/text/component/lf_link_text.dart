@@ -20,7 +20,7 @@ const TextStyle kLinkTextHighlightStyle = TextStyle(
   color: Colors.blue,
 );
 
-enum LFLinkTextType { url, phoneNumber, email }
+enum LFLinkTextType { url, phoneNumber, email, matches }
 
 typedef LFLinkTextOnTap = void Function(
   LFLinkTextType type,
@@ -29,10 +29,12 @@ typedef LFLinkTextOnTap = void Function(
 
 class LFLinkText extends StatefulWidget {
   final String text;
+  final List<String> matchTexts;
   final TextStyle? style;
   final TextStyle? styleUrl;
   final TextStyle? stylePhoneNumber;
   final TextStyle? styleEmail;
+  final TextStyle? styleMatches;
   final TextAlign textAlign;
   final TextOverflow overflow;
   final int maxLines;
@@ -44,9 +46,11 @@ class LFLinkText extends StatefulWidget {
     this.text, {
     super.key,
     this.style,
+    this.matchTexts = const [],
     this.styleUrl = kLinkTextHighlightStyle,
     this.stylePhoneNumber = kLinkTextHighlightStyle,
     this.styleEmail = kLinkTextHighlightStyle,
+    this.styleMatches,
     this.textAlign = TextAlign.left,
     this.maxLines = 1,
     this.overflow = TextOverflow.ellipsis,
@@ -103,8 +107,17 @@ class _LFLinkTextState extends State<LFLinkText> {
   // TextSpans 배열 만들기
   void addSpans() {
     final text = widget.text;
-    final regExp = RegExp(
-        '(${kLinkUrlRegExp.pattern})|(${kLinkPhoneNumberRegExp.pattern})|(${kLinkEmailRegExp.pattern})');
+    final matchTexts = widget.matchTexts;
+
+    final baseReg =
+        '(${kLinkUrlRegExp.pattern})|(${kLinkPhoneNumberRegExp.pattern})|(${kLinkEmailRegExp.pattern})';
+
+    RegExp regExp = RegExp(baseReg);
+    String matches = '';
+    if (matchTexts.isNotEmpty) {
+      matches = matchTexts.join('|');
+      regExp = RegExp('$baseReg|($matches)');
+    }
 
     List<TextSpan> spans = [];
 
@@ -162,6 +175,22 @@ class _LFLinkTextState extends State<LFLinkText> {
           },
         );
 
+        /// Matches Type
+        addMatchTextSpan(
+          value,
+          type: LFLinkTextType.matches,
+          regExp: RegExp(matches),
+          style: widget.styleMatches,
+          onMatch: (textSpan) {
+            if (isFind) return;
+            isFind = true;
+            spans.add(textSpan);
+          },
+          onTap: (type, id) {
+            widget.onTap?.call(type, id);
+          },
+        );
+
         return '';
       },
       onNonMatch: (String text) {
@@ -190,14 +219,30 @@ extension _LFLinkTextStateMatchAddSpan on _LFLinkTextState {
         regExp,
         onMatch: (Match match) {
           final name = match.group(0);
-          onMatch?.call(LFTextSpan(
-            text: name,
-            style: style,
-            recognizer: TapGestureRecognizer()
-              ..onTap = () {
-                onTap?.call(type, name);
-              },
-          ));
+          if (type == LFLinkTextType.matches) {
+            onMatch?.call(LFTextSpan(
+              children: LFUnderlineSpans().textWidgetSpan(
+                name ?? '',
+                style: style,
+                onTap: () {
+                  onTap?.call(type, name);
+                },
+              ),
+              recognizer: TapGestureRecognizer()
+                ..onTap = () {
+                  onTap?.call(type, name);
+                },
+            ));
+          } else {
+            onMatch?.call(LFTextSpan(
+              text: name,
+              style: style,
+              recognizer: TapGestureRecognizer()
+                ..onTap = () {
+                  onTap?.call(type, name);
+                },
+            ));
+          }
           return '';
         },
         onNonMatch: (String text) => '',

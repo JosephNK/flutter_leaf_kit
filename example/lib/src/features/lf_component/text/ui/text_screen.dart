@@ -34,7 +34,7 @@ class _TextScreenState extends ScreenState<TextScreen> {
 
   @override
   Widget buildBody(BuildContext context, Object? state) {
-    return Center(
+    return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
@@ -56,6 +56,46 @@ class _TextScreenState extends ScreenState<TextScreen> {
             LFText(
               _longText,
               maxLines: null,
+            ),
+            const Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Text('LFEasyRichText'),
+            ),
+            LFEasyRichText(
+              'Hello! My Name is Kim',
+              patternList: [
+                LFEasyRichTextPattern(
+                  targetString: 'Kim',
+                  style: const TextStyle(
+                    fontSize: 16.0,
+                    color: Colors.orange,
+                    fontWeight: FontWeight.bold,
+                    decoration: TextDecoration.underline,
+                  ),
+                ),
+              ],
+            ),
+            const Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Text('LFLinkText'),
+            ),
+            LFLinkText(
+              '이용약관 및 개인정보 수집 및 이용에 동의합니다. abc@gmil.com',
+              matchTexts: const ['이용약관', '개인정보 수집'],
+              maxLines: 2,
+              style: const TextStyle(
+                fontSize: 16.0,
+                color: Colors.black,
+                height: 2.0,
+              ),
+              styleMatches: const TextStyle(
+                color: Colors.orange,
+                fontSize: 16.0,
+                height: 1.1,
+              ),
+              onTap: (text, id) {
+                debugPrint('LFLinkText onTap text: $text, id: $id');
+              },
             ),
           ],
         ),
