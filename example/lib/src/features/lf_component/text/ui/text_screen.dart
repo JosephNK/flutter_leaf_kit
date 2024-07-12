@@ -93,8 +93,8 @@ class _TextScreenState extends ScreenState<TextScreen> {
                 fontSize: 16.0,
                 height: 1.1,
               ),
-              onTap: (text, id) {
-                debugPrint('LFLinkText onTap text: $text, id: $id');
+              onTap: (type, id) {
+                debugPrint('LFLinkText onTap $type, ${type.name} id: $id');
               },
             ),
           ],
