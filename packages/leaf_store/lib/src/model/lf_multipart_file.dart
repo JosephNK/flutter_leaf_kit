@@ -15,8 +15,8 @@ class LFMultipartFile extends UIModel {
       ];
 
   @override
-  String? getPayload<String>() {
-    return payload as String?;
+  T? getPayload<T>() {
+    return payload as T?;
   }
 
   Uri? getHttpUri() {
@@ -55,16 +55,16 @@ class LFMultipartFile extends UIModel {
     return scheme == 'http' || scheme == 'https';
   }
 
-  factory LFMultipartFile.fromUri(Uri uri) {
+  factory LFMultipartFile.fromUri(Uri uri, {Object? payload}) {
     return LFMultipartFile(
-      payload: const Uuid().v5(Uuid.NAMESPACE_URL, uri.path),
+      payload: payload ?? const Uuid().v5(Uuid.NAMESPACE_URL, uri.path),
       uri: uri,
     );
   }
 
-  factory LFMultipartFile.fromFile(File file) {
+  factory LFMultipartFile.fromFile(File file, {Object? payload}) {
     return LFMultipartFile(
-      payload: const Uuid().v5(Uuid.NAMESPACE_URL, file.path),
+      payload: payload ?? const Uuid().v5(Uuid.NAMESPACE_URL, file.path),
       uri: Uri.file(file.path),
     );
   }
