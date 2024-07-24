@@ -31,7 +31,7 @@ class _NetworkScreenState extends ScreenState<NetworkScreen> {
 
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       // HTTP Init
-      LFHttpDio.shared.init(
+      LFHttpSharedDio.shared.init(
         baseUrl: Uri.parse('https://dummyjson.com'),
         responseSerializers: responseMergedSerializers,
         jsonUndefinedKey: LFDioBuiltValueJSONUndefinedKey(
@@ -108,7 +108,8 @@ class _NetworkScreenState extends ScreenState<NetworkScreen> {
 
   Future<void> _getAction() async {
     try {
-      final apiService = LFHttpDio.shared.getService<ProductsDioService>();
+      final apiService =
+          LFHttpSharedDio.shared.getService<ProductsDioService>();
       final response = await apiService.get(limit: 5);
       if (response.isSuccessful) {
         final body = response.data;
@@ -124,7 +125,8 @@ class _NetworkScreenState extends ScreenState<NetworkScreen> {
 
   Future<void> _postAction() async {
     try {
-      final apiService = LFHttpDio.shared.getService<ProductsDioService>();
+      final apiService =
+          LFHttpSharedDio.shared.getService<ProductsDioService>();
       final response = await apiService.postAdd(
         title: 'Test Title',
         files: _files,
