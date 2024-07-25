@@ -10,6 +10,7 @@ class LFAlertDialog {
     String? title,
     required String message,
     bool autoPop = true,
+    bool barrierDismissible = true,
     String? okText,
     TextStyle? titleStyle,
     TextStyle? messageStyle,
@@ -34,6 +35,7 @@ class LFAlertDialog {
       title: title,
       message: message,
       autoPop: autoPop,
+      barrierDismissible: barrierDismissible,
       titleStyle: titleStyleValue,
       messageStyle: messageStyleValue,
       onOK: onOK,
@@ -50,6 +52,7 @@ class LFAlertDialog {
     String? title,
     required String message,
     bool autoPop = true,
+    bool barrierDismissible = true,
     TextStyle? titleStyle,
     TextStyle? messageStyle,
     String? okText,
@@ -83,6 +86,7 @@ class LFAlertDialog {
       title: title,
       message: message,
       autoPop: autoPop,
+      barrierDismissible: barrierDismissible,
       titleStyle: titleStyleValue,
       messageStyle: messageStyleValue,
       onCancel: onCancel,
@@ -103,6 +107,7 @@ class LFAlertDialog {
   static Future<dynamic> showErrorMessage(
     BuildContext context, {
     required String? errorMessage,
+    bool barrierDismissible = true,
     VoidCallback? onOk,
   }) async {
     if (isEmpty(errorMessage)) return;
@@ -126,6 +131,7 @@ class LFAlertDialog {
         context,
         title: errorTitleStr,
         message: errorMessageStr,
+        barrierDismissible: barrierDismissible,
         onOK: onOk,
         okText: okTextStr,
         okTextStyle: okTextStyle,
@@ -141,6 +147,7 @@ class LFAlertDialog {
   static Future<dynamic> showException(
     BuildContext context, {
     Object? exception,
+    bool barrierDismissible = true,
     VoidCallback? onTap,
   }) async {
     if (exception == null) return;
@@ -164,6 +171,7 @@ class LFAlertDialog {
         context,
         title: errorTitleStr,
         message: errorMessageStr,
+        barrierDismissible: barrierDismissible,
         onOK: onTap,
         okText: okTextStr,
         okTextStyle: okTextStyle,
@@ -183,6 +191,7 @@ class _LFAlertDialog {
     String? title,
     String? message,
     bool autoPop = true,
+    bool barrierDismissible = true,
     TextStyle? titleStyle,
     TextStyle? messageStyle,
     String okText = 'OK',
@@ -194,6 +203,7 @@ class _LFAlertDialog {
   }) async {
     return await showDialog(
       context: context,
+      barrierDismissible: barrierDismissible,
       builder: (BuildContext context) {
         return AlertDialog(
           title: isEmpty(title)
@@ -225,6 +235,7 @@ class _LFAlertDialog {
     TextStyle? titleStyle,
     TextStyle? messageStyle,
     bool autoPop = true,
+    bool barrierDismissible = true,
     String okText = 'OK',
     String cancelText = 'Cancel',
     TextStyle? okTextStyle,
@@ -240,6 +251,7 @@ class _LFAlertDialog {
   }) async {
     return await showDialog(
       context: context,
+      barrierDismissible: barrierDismissible,
       builder: (BuildContext context) {
         return AlertDialog(
           title: isEmpty(title)
