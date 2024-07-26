@@ -30,9 +30,14 @@ class LFDioRequestHeader {
       'X-LF-DEVICE-OS': os.value,
       'X-LF-APP-VERSION': appVersion,
     };
-    if (isNotEmpty(authorization)) {
-      // headers[HttpHeaders.authorizationHeader] = 'Bearer $accessToken';
-      headers[HttpHeaders.authorizationHeader] = authorization!;
+    if (isNotEmpty(authorization) && authorization != null) {
+      if (authorizationHeader != null) {
+        headers.remove(HttpHeaders.authorizationHeader);
+        headers.addAll(authorizationHeader(authorization));
+      } else {
+        // headers[HttpHeaders.authorizationHeader] = 'Bearer $accessToken';
+        headers[HttpHeaders.authorizationHeader] = authorization;
+      }
     }
     if (deviceOSHeader != null) {
       headers.remove('X-LF-DEVICE-OS');
@@ -41,10 +46,6 @@ class LFDioRequestHeader {
     if (versionHeader != null) {
       headers.remove('X-LF-APP-VERSION');
       headers.addAll(versionHeader(appVersion));
-    }
-    if (authorizationHeader != null) {
-      headers.remove(HttpHeaders.authorizationHeader);
-      headers.addAll(authorizationHeader(authorization!));
     }
 
     return headers;
