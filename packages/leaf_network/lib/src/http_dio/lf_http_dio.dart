@@ -26,64 +26,7 @@ Type _typeOf<T>() => T;
 
 typedef LFHttpDioInterceptorBuilder = List<Interceptor>? Function(Dio dio);
 
-class LFHttpSharedDio {
-  static final LFHttpSharedDio _instance = LFHttpSharedDio._internal();
-  static LFHttpSharedDio get shared => _instance;
-  LFHttpSharedDio._internal() {
-    Logging.d('LFHttpSharedDio Init');
-  }
-
-  late LFHttpDio lfHttpDio;
-
-  void init({
-    required Uri baseUrl,
-    required Serializers responseSerializers,
-    required List<DioService> services,
-    LFHttpDioInterceptorBuilder? interceptorBuilder,
-    LFDioBuiltValueJSONUndefinedKey? jsonUndefinedKey,
-    Duration connectTimeout = const Duration(seconds: 5),
-    Duration receiveTimeout = const Duration(seconds: 60),
-    int printMaxLength = 2024,
-    LFHttpDioOnHeader? onHeader,
-  }) {
-    lfHttpDio = LFHttpDio().init(
-      baseUrl: baseUrl,
-      responseSerializers: responseSerializers,
-      services: services,
-      interceptorBuilder: interceptorBuilder,
-      jsonUndefinedKey: jsonUndefinedKey,
-      connectTimeout: connectTimeout,
-      receiveTimeout: receiveTimeout,
-      printMaxLength: printMaxLength,
-      onHeader: onHeader,
-    );
-  }
-
-  ServiceType getService<ServiceType extends DioService>() {
-    final Type serviceType = _typeOf<ServiceType>();
-    if (serviceType == dynamic || serviceType == DioService) {
-      throw Exception(
-        'Service type should be provided, `dynamic` is not allowed.',
-      );
-    }
-    final DioService? service = lfHttpDio.services[serviceType];
-    if (service == null) {
-      throw Exception('Service of type \'$serviceType\' not found.');
-    }
-
-    return service as ServiceType;
-  }
-}
-
 class LFHttpDio {
-  // static final LFHttpDio _instance = LFHttpDio._internal();
-  //
-  // static LFHttpDio get shared => _instance;
-  //
-  // LFHttpDio._internal() {
-  //   Logging.d('LFHttpDio Init');
-  // }
-
   late Dio dio;
   late LFDioBuiltValueConverter converter;
   late LFDioExceptionConverter errorConverter;
@@ -211,5 +154,56 @@ extension LFHttpDioHelper on LFHttpDio {
     final savePath =
         '${await LFFileManager.shared.getTemporaryDirectoryPath()}/$fileName';
     return savePath;
+  }
+}
+
+/// Not Recommend
+
+class LFHttpSharedDio {
+  static final LFHttpSharedDio _instance = LFHttpSharedDio._internal();
+  static LFHttpSharedDio get shared => _instance;
+  LFHttpSharedDio._internal() {
+    Logging.d('LFHttpSharedDio Init');
+  }
+
+  late LFHttpDio lfHttpDio;
+
+  void init({
+    required Uri baseUrl,
+    required Serializers responseSerializers,
+    required List<DioService> services,
+    LFHttpDioInterceptorBuilder? interceptorBuilder,
+    LFDioBuiltValueJSONUndefinedKey? jsonUndefinedKey,
+    Duration connectTimeout = const Duration(seconds: 5),
+    Duration receiveTimeout = const Duration(seconds: 60),
+    int printMaxLength = 2024,
+    LFHttpDioOnHeader? onHeader,
+  }) {
+    lfHttpDio = LFHttpDio().init(
+      baseUrl: baseUrl,
+      responseSerializers: responseSerializers,
+      services: services,
+      interceptorBuilder: interceptorBuilder,
+      jsonUndefinedKey: jsonUndefinedKey,
+      connectTimeout: connectTimeout,
+      receiveTimeout: receiveTimeout,
+      printMaxLength: printMaxLength,
+      onHeader: onHeader,
+    );
+  }
+
+  ServiceType getService<ServiceType extends DioService>() {
+    final Type serviceType = _typeOf<ServiceType>();
+    if (serviceType == dynamic || serviceType == DioService) {
+      throw Exception(
+        'Service type should be provided, `dynamic` is not allowed.',
+      );
+    }
+    final DioService? service = lfHttpDio.services[serviceType];
+    if (service == null) {
+      throw Exception('Service of type \'$serviceType\' not found.');
+    }
+
+    return service as ServiceType;
   }
 }
