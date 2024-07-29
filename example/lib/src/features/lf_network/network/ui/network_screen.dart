@@ -30,6 +30,16 @@ class _NetworkScreenState extends ScreenState<NetworkScreen> {
     super.initState();
 
     WidgetsBinding.instance.addPostFrameCallback((_) async {
+      try {
+        final multipartFile = LFMultipartFile.fromFile(File(
+            '/data/user/0/com.shop.sazo.test/cache/2cc2858a-6c92-4935-be07-1f8855c9a7ab/Screenshot_20240724_230117_One UI Home.jpg'));
+        debugPrint('multipartFile: ${multipartFile.uri}');
+        final bytes = multipartFile.getFileBytes();
+        debugPrint('bytes: ${bytes?.length}');
+      } catch (e) {
+        debugPrint('error: $e');
+      }
+
       // HTTP Init
       LFHttpSharedDio.shared.init(
         baseUrl: Uri.parse('https://dummyjson.com'),
