@@ -23,17 +23,34 @@ class LFMultipartFile extends UIModel {
     return _isHttp() ? uri : null;
   }
 
-  File? getFile() {
+  File? getFile({bool isRemoveScheme = true}) {
     final uri = this.uri;
     if (uri == null || _isHttp()) return null;
-    final file = File(uri.path);
-    return file;
+    try {
+      String path = uri.path;
+      if (isRemoveScheme) {
+        final schemes = ['file://'];
+        for (var scheme in schemes) {
+          path = path.replaceAll(scheme, '');
+        }
+      }
+      final file = File(path);
+      return file;
+    } catch (e) {
+      Logging.e('getFile Error: $e');
+      return null;
+    }
   }
 
-  Uint8List? getFileBytes() {
-    final file = getFile();
+  Uint8List? getFileBytes({bool isRemoveScheme = true}) {
+    final file = getFile(isRemoveScheme: isRemoveScheme);
     if (file == null) return null;
-    return file.readAsBytesSync();
+    try {
+      return file.readAsBytesSync();
+    } catch (e) {
+      Logging.e('getFileBytes Error: $e');
+      return null;
+    }
   }
 
   String? getExtension() {
