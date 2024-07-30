@@ -35,7 +35,7 @@ class ProductsDioService extends DioService {
       const url = '/products/add';
       final uploadFiles = files
           .map((file) {
-            final path = file.getFile()?.path;
+            final path = file.getPath();
             if (path == null) return null;
             debugPrint('path: $path');
             debugPrint('path1: ${file.getPayload<String>()}');

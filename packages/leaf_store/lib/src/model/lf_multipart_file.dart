@@ -2,16 +2,19 @@ part of '../../leaf_store.dart';
 
 class LFMultipartFile extends UIModel {
   final Uri? uri;
+  final XFile? xFile;
 
   const LFMultipartFile({
     required super.payload,
     required this.uri,
+    required this.xFile,
   });
 
   @override
   List<Object?> get props => [
         payload,
         uri,
+        xFile,
       ];
 
   @override
@@ -23,24 +26,11 @@ class LFMultipartFile extends UIModel {
     return _isHttp() ? uri : null;
   }
 
-  File? getFile() {
-    final uri = this.uri;
-    if (uri == null || _isHttp()) return null;
-    try {
-      String uriPath = uri.path;
-      String path = Uri.decodeFull(uriPath);
-      final file = File(path);
-      return file;
-    } catch (e) {
-      Logging.e('getFile Error: $e');
-      return null;
-    }
-  }
-
   Uint8List? getFileBytes() {
-    final file = getFile();
-    if (file == null) return null;
+    final xFile = this.xFile;
+    if (xFile == null) return null;
     try {
+      final file = File(xFile.path);
       return file.readAsBytesSync();
     } catch (e) {
       Logging.e('getFileBytes Error: $e');
@@ -50,34 +40,64 @@ class LFMultipartFile extends UIModel {
 
   String? getExtension() {
     final uri = this.uri;
-    if (uri == null) return null;
-    return uri.extension();
+    final xFile = this.xFile;
+    if (uri != null) {
+      return uri.extension();
+    }
+    if (xFile != null) {
+      return xFile.path.extension();
+    }
+    return null;
   }
 
   String? getFileName() {
     final uri = this.uri;
-    if (uri == null) return null;
-    return uri.fileName();
+    final xFile = this.xFile;
+    if (uri != null) {
+      return uri.fileName();
+    }
+    if (xFile != null) {
+      return xFile.path.fileName();
+    }
+    return null;
   }
+
+  String? getPath() {
+    final uri = this.uri;
+    final xFile = this.xFile;
+    if (uri != null) {
+      return uri.path;
+    }
+    if (xFile != null) {
+      return xFile.path;
+    }
+    return null;
+  }
+
+  /// Private
 
   bool _isHttp() {
     final uri = this.uri;
     if (uri == null) return false;
-    final scheme = uri.scheme;
+    final scheme = uri.scheme.toLowerCase();
     return scheme == 'http' || scheme == 'https';
   }
+
+  /// Factory
 
   factory LFMultipartFile.fromUri(Uri uri, {Object? payload}) {
     return LFMultipartFile(
       payload: payload ?? const Uuid().v5(Uuid.NAMESPACE_URL, uri.path),
       uri: uri,
+      xFile: null,
     );
   }
 
-  factory LFMultipartFile.fromFile(File file, {Object? payload}) {
+  factory LFMultipartFile.fromXFile(XFile xFile, {Object? payload}) {
     return LFMultipartFile(
-      payload: payload ?? const Uuid().v5(Uuid.NAMESPACE_URL, file.path),
-      uri: Uri.file(file.path),
+      payload: payload ?? const Uuid().v5(Uuid.NAMESPACE_URL, xFile.path),
+      uri: null,
+      xFile: xFile,
     );
   }
 }

@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_leaf_kit/flutter_leaf_kit.dart';
 import 'package:image_picker/image_picker.dart';
@@ -31,7 +29,7 @@ class _NetworkScreenState extends ScreenState<NetworkScreen> {
 
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       try {
-        final multipartFile = LFMultipartFile.fromFile(File(
+        final multipartFile = LFMultipartFile.fromXFile(XFile(
             '/data/user/0/com.shop.sazo.test/cache/2cc2858a-6c92-4935-be07-1f8855c9a7ab/Screenshot_20240724_230117_One UI Home.jpg'));
         debugPrint('multipartFile: ${multipartFile.uri}');
         final bytes = multipartFile.getFileBytes();
@@ -158,7 +156,7 @@ class _NetworkScreenState extends ScreenState<NetworkScreen> {
       final ImagePicker picker = ImagePicker();
       final XFile? image = await picker.pickImage(source: ImageSource.gallery);
       if (image != null && context.mounted) {
-        final file = LFMultipartFile.fromFile(File(image.path));
+        final file = LFMultipartFile.fromXFile(image);
         setState(() {
           _files = [..._files, file];
         });
