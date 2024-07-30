@@ -18,13 +18,11 @@ extension HttpDioMediaMimeTypeExt on HttpDioMediaMimeType {
 class HttpDioHelper {
   MultipartFile? convertFromFile(
     LFMultipartFile file, {
-    List<String> allowExt = const ['.jpg', '.jpeg', '.png'],
     HttpDioMediaMimeType mediaMimeType = HttpDioMediaMimeType.image,
   }) {
     final path = file.getPath();
     final ext = file.getExtension();
     if (path == null || ext == null) return null;
-    if (!allowExt.contains(ext)) return null;
     final extension = ((ext == '.jpg') ? '.jpeg' : ext).replaceAll('.', '');
     final fileName = file.getPayload<String>();
     return MultipartFile.fromFileSync(

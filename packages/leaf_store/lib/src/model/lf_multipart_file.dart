@@ -74,6 +74,25 @@ class LFMultipartFile extends UIModel {
     return null;
   }
 
+  bool checkAllowExt([
+    List<String> allowExt = const ['.jpg', '.jpeg', '.png'],
+  ]) {
+    final ext = getExtension();
+    if (!allowExt.contains(ext)) {
+      return false;
+    }
+    return true;
+  }
+
+  LFMultipartFile? pipeCheckAllowExt([
+    List<String> allowExt = const ['.jpg', '.jpeg', '.png'],
+  ]) {
+    if (!checkAllowExt(allowExt)) {
+      return null;
+    }
+    return this;
+  }
+
   /// Private
 
   bool _isHttp() {
