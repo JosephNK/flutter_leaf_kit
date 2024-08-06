@@ -1,5 +1,7 @@
 part of '../../leaf_store.dart';
 
+const kAllowFiles = ['.jpg', '.jpeg', '.png'];
+
 class LFMultipartFile extends UIModel {
   final Uri? uri;
   final XFile? xFile;
@@ -75,7 +77,7 @@ class LFMultipartFile extends UIModel {
   }
 
   bool checkAllowExt([
-    List<String> allowExt = const ['.jpg', '.jpeg', '.png'],
+    List<String> allowExt = kAllowFiles,
   ]) {
     final ext = getExtension();
     if (!allowExt.contains(ext)) {
@@ -85,7 +87,7 @@ class LFMultipartFile extends UIModel {
   }
 
   LFMultipartFile? pipeCheckAllowExt([
-    List<String> allowExt = const ['.jpg', '.jpeg', '.png'],
+    List<String> allowExt = kAllowFiles,
   ]) {
     if (!checkAllowExt(allowExt)) {
       return null;

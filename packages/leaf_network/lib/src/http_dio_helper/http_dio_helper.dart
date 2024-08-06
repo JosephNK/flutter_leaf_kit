@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter_leaf_common/leaf_common.dart';
 import 'package:flutter_leaf_store/leaf_store.dart';
 import 'package:http_parser/http_parser.dart';
 
@@ -16,13 +17,15 @@ extension HttpDioMediaMimeTypeExt on HttpDioMediaMimeType {
 }
 
 class HttpDioHelper {
-  MultipartFile? convertFromFile(
+  MultipartFile convertFromFile(
     LFMultipartFile file, {
     HttpDioMediaMimeType mediaMimeType = HttpDioMediaMimeType.image,
   }) {
     final path = file.getPath();
     final ext = file.getExtension();
-    if (path == null || ext == null) return null;
+    if (path == null || ext == null) {
+      throw LFMessageException('File Path or Ext is null');
+    }
     final extension = ((ext == '.jpg') ? '.jpeg' : ext).replaceAll('.', '');
     final fileName = file.getPayload<String>();
     return MultipartFile.fromFileSync(
