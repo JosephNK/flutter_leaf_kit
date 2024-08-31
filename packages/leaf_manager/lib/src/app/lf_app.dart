@@ -1,9 +1,9 @@
 import 'dart:io';
 
+import 'package:app_badge_plus/app_badge_plus.dart';
 import 'package:app_tracking_transparency/app_tracking_transparency.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_app_badger/flutter_app_badger.dart';
 import 'package:flutter_leaf_common/leaf_common.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart' as ul;
@@ -129,20 +129,20 @@ class LFAppManager {
 
   /// AppBadge
   Future<bool> isAppBadgeSupported() async {
-    return await FlutterAppBadger.isAppBadgeSupported();
+    return await AppBadgePlus.isSupported();
   }
 
   Future<void> updateBadgeCount(int count) async {
-    final isAppBadgeSupported = await FlutterAppBadger.isAppBadgeSupported();
-    if (isAppBadgeSupported) {
-      FlutterAppBadger.updateBadgeCount(count);
+    final isSupported = await isAppBadgeSupported();
+    if (isSupported) {
+      AppBadgePlus.updateBadge(count);
     }
   }
 
   Future<void> removeBadge() async {
-    final isAppBadgeSupported = await FlutterAppBadger.isAppBadgeSupported();
-    if (isAppBadgeSupported) {
-      FlutterAppBadger.removeBadge();
+    final isSupported = await isAppBadgeSupported();
+    if (isSupported) {
+      AppBadgePlus.updateBadge(0);
     }
   }
 }

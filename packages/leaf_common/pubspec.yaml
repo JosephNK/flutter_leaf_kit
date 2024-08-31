@@ -15,11 +15,11 @@ dependencies:
   equatable: ^2.0.5
   provider: ^6.1.2
 
-  collection: ^1.18.0
+  collection: ^1.18.0 # depends 1.19.0
   easy_localization: ^3.0.7
-  logger: ^2.3.0
-  quiver: ^3.2.1
-  string_validator: ^1.0.2
+  logger: ^2.4.0
+  quiver: ^3.2.2
+  string_validator: ^1.1.0
   async: ^2.11.0
 
   path: ^1.9.0

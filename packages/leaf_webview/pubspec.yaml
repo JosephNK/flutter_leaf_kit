@@ -12,9 +12,9 @@ dependencies:
   flutter:
     sdk: flutter
 
-  webview_flutter: ^4.7.0
-  webview_flutter_android: ^3.16.1
-  webview_flutter_wkwebview: ^3.13.0
+  webview_flutter: ^4.9.0
+  webview_flutter_android: ^3.16.7
+  webview_flutter_wkwebview: ^3.15.0
 
   flutter_leaf_common:
     git:

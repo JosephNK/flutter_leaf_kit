@@ -12,7 +12,7 @@ dependencies:
   flutter:
     sdk: flutter
 
-  google_maps_flutter: ^2.6.1
+  google_maps_flutter: ^2.9.0
 
   flutter_leaf_common:
     git:
