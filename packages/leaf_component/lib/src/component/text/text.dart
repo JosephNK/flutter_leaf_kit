@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 
 part 'component/lf_auto_size_text.dart';
 part 'component/lf_easy_rich_text.dart';
+part 'component/lf_expandable_text.dart';
 part 'component/lf_link_text.dart';
 part 'component/lf_rich_text.dart';
 part 'component/lf_text.dart';
