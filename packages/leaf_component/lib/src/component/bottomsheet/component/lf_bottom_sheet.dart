@@ -8,6 +8,7 @@ class LFBottomSheet {
   static void show<T>(
     BuildContext context, {
     required List<LFBottomSheetItem<T>> items,
+    bool isCupertino = true,
     LFBottomSheetItem? selectItem,
     ValueChanged<LFBottomSheetItem<T>>? onTap,
     VoidCallback? onClose,
@@ -17,7 +18,7 @@ class LFBottomSheet {
     final inactiveColor = configure?.inactiveColor;
     final cancelText = configure?.cancelText ?? 'Cancel';
 
-    if (Platform.isIOS) {
+    if (Platform.isIOS && isCupertino) {
       /// Cupertino
       showCupertinoModalPopup(
         context: context,
