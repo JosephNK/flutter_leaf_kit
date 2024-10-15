@@ -72,6 +72,8 @@ class LFTextField extends StatefulWidget {
   final Color? placeHolderColor;
   final Color? clearIconColor;
   final Color? disabledClearIconColor;
+  final bool enableSuggestions;
+  final bool autocorrect;
   final Widget? prefixIcon;
   final Widget? suffixIcon;
   final Widget? clearIcon;
@@ -117,6 +119,8 @@ class LFTextField extends StatefulWidget {
     this.placeHolderColor,
     this.clearIconColor,
     this.disabledClearIconColor,
+    this.enableSuggestions = true,
+    this.autocorrect = true,
     this.prefixIcon,
     this.suffixIcon,
     this.clearIcon,
@@ -230,6 +234,8 @@ class _LFTextFieldState extends State<LFTextField> {
     final placeHolderColor = widget.placeHolderColor;
     final clearIconColor = widget.clearIconColor;
     final disabledClearIconColor = widget.disabledClearIconColor;
+    final enableSuggestions = widget.enableSuggestions;
+    final autocorrect = widget.autocorrect;
     final prefixIcon = widget.prefixIcon;
     final suffixIcon = widget.suffixIcon;
     final clearIcon = widget.clearIcon;
@@ -316,8 +322,8 @@ class _LFTextFieldState extends State<LFTextField> {
       minLines: minLines,
       maxLines: maxLines,
       obscureText: obscureText,
-      enableSuggestions: false,
-      autocorrect: false,
+      enableSuggestions: enableSuggestions,
+      autocorrect: autocorrect,
       inputFormatters: inputFormatters,
       decoration: InputDecoration(
         prefixIcon: prefixIconWidget,
