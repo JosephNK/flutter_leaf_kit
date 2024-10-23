@@ -28,6 +28,7 @@ import 'switch/ui/switch_screen.dart';
 import 'text/ui/text_screen.dart';
 import 'textfield/textfield_sceen.dart';
 import 'toast/ui/toast_screen.dart';
+import 'webview/ui/webview_screen.dart';
 
 class LFComponentScreen extends StatelessWidget {
   final String title;
@@ -63,6 +64,7 @@ class LFComponentScreen extends StatelessWidget {
       ListItem(id: 'switch', title: 'SwitchScreen'),
       ListItem(id: 'listview', title: 'ListViewScreen'),
       ListItem(id: 'gridview', title: 'GridViewScreen'),
+      ListItem(id: 'webview', title: 'WebViewScreen'),
     ]..sort((a, b) => a.id.compareTo(b.id));
 
     return Scaffold(
@@ -160,6 +162,9 @@ class LFComponentScreen extends StatelessWidget {
                   break;
                 case 'gridview':
                   screen = GridViewScreen(title: title);
+                  break;
+                case 'webview':
+                  screen = WebViewScreen(title: title);
                   break;
               }
 
