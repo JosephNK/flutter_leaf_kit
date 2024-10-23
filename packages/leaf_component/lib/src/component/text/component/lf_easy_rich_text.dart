@@ -37,7 +37,7 @@ class LFEasyRichText extends StatelessWidget implements LFBuildText {
       textAlign: textAlign,
       maxLines: maxLines,
       overflow: overflow,
-      textScaleFactor: buildTextScaleFactor(context),
+      textScaler: TextScaler.linear(buildTextScaleFactor(context)),
     );
   }
 
