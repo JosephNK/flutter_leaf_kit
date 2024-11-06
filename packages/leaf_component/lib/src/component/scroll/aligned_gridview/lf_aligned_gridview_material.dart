@@ -1,6 +1,6 @@
 part of '../scroll.dart';
 
-class LFStaggeredGridViewMaterial<T> extends StatelessWidget {
+class LFAlignedGridViewMaterial<T> extends StatelessWidget {
   final Widget Function(BuildContext context, T item, int index) builder;
   final Key? storageKey;
   final LFScrollViewRefresh? onRefresh;
@@ -15,7 +15,7 @@ class LFStaggeredGridViewMaterial<T> extends StatelessWidget {
   final bool scrollable;
   final bool hasReachedMax;
 
-  const LFStaggeredGridViewMaterial({
+  const LFAlignedGridViewMaterial({
     super.key,
     required this.builder,
     required this.storageKey,
@@ -71,7 +71,7 @@ class LFStaggeredGridViewMaterial<T> extends StatelessWidget {
           child: gridViewWidget,
         ),
         if (!hasReachedMax) ...[
-          LFStaggeredGridViewIndicator(
+          LFAlignedGridViewIndicator(
             loading: loading,
           ),
         ]

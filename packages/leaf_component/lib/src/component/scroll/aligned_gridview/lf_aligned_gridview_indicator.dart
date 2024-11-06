@@ -1,9 +1,9 @@
 part of '../scroll.dart';
 
-class LFStaggeredGridViewIndicator extends StatelessWidget {
+class LFAlignedGridViewIndicator extends StatelessWidget {
   final bool loading;
 
-  const LFStaggeredGridViewIndicator({
+  const LFAlignedGridViewIndicator({
     super.key,
     required this.loading,
   });

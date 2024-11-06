@@ -14,8 +14,8 @@ class GridViewScreen extends ScreenStatefulWidget {
 }
 
 class _GridViewScreenState extends ScreenState<GridViewScreen> {
-  final LFStaggeredGridViewController _gridViewController =
-      LFStaggeredGridViewController();
+  final LFAlignedGridViewController _gridViewController =
+      LFAlignedGridViewController();
 
   @override
   Color? get backgroundColor => Colors.white;
@@ -34,7 +34,7 @@ class _GridViewScreenState extends ScreenState<GridViewScreen> {
 
   @override
   Widget buildBody(BuildContext context, Object? state) {
-    return LFStaggeredGridView<int>(
+    return LFAlignedGridView<int>(
       controller: _gridViewController,
       items: List<int>.generate(20, (i) => i + 1),
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(

@@ -1,6 +1,6 @@
 part of '../scroll.dart';
 
-class LFStaggeredGridViewCupertino<T> extends StatelessWidget {
+class LFAlignedGridViewCupertino<T> extends StatelessWidget {
   final Widget Function(BuildContext context, T item, int index) builder;
   final Key? storageKey;
   final LFScrollViewRefresh? onRefresh;
@@ -14,7 +14,7 @@ class LFStaggeredGridViewCupertino<T> extends StatelessWidget {
   final bool scrollable;
   final bool hasReachedMax;
 
-  const LFStaggeredGridViewCupertino({
+  const LFAlignedGridViewCupertino({
     super.key,
     required this.builder,
     required this.storageKey,
@@ -84,7 +84,7 @@ class LFStaggeredGridViewCupertino<T> extends StatelessWidget {
           gridViewWidget,
           if (!hasReachedMax) ...[
             SliverToBoxAdapter(
-              child: LFStaggeredGridViewIndicator(
+              child: LFAlignedGridViewIndicator(
                 loading: loading,
               ),
             ),

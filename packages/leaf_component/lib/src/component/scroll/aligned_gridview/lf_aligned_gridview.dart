@@ -1,10 +1,10 @@
 part of '../scroll.dart';
 
-class LFStaggeredGridView<T> extends StatefulWidget {
+class LFAlignedGridView<T> extends StatefulWidget {
   final Key? storageKey;
   final Widget Function(BuildContext context, T item, int index) builder;
   final List<T> items;
-  final LFStaggeredGridViewController? controller;
+  final LFAlignedGridViewController? controller;
   final LFScrollViewRefresh? onRefresh;
   final LFScrollViewLoadMore? onLoadMore;
   final LFScrollViewDidScroll? onDidScroll;
@@ -19,7 +19,7 @@ class LFStaggeredGridView<T> extends StatefulWidget {
   final bool enableTapUnFocus;
   final bool hasReachedMax;
 
-  const LFStaggeredGridView({
+  const LFAlignedGridView({
     super.key,
     this.storageKey,
     required this.builder,
@@ -41,10 +41,10 @@ class LFStaggeredGridView<T> extends StatefulWidget {
   });
 
   @override
-  State<LFStaggeredGridView> createState() => _LFStaggeredGridViewState<T>();
+  State<LFAlignedGridView> createState() => _LFAlignedGridViewState<T>();
 }
 
-class _LFStaggeredGridViewState<T> extends State<LFStaggeredGridView<T>>
+class _LFAlignedGridViewState<T> extends State<LFAlignedGridView<T>>
     with LFScrollControlMixin {
   StreamSubscription<LFScrollControllerEvent>? _streamSubscription;
 
@@ -101,7 +101,7 @@ class _LFStaggeredGridViewState<T> extends State<LFStaggeredGridView<T>>
   }
 
   @override
-  void didUpdateWidget(covariant LFStaggeredGridView<T> oldWidget) {
+  void didUpdateWidget(covariant LFAlignedGridView<T> oldWidget) {
     if (oldWidget.hasReachedMax != widget.hasReachedMax) {
       setReachedMax(widget.hasReachedMax);
     }
@@ -154,7 +154,7 @@ class _LFStaggeredGridViewState<T> extends State<LFStaggeredGridView<T>>
 
   Widget _buildPlatform(BuildContext context) {
     if (Platform.isAndroid) {
-      final gridView = LFStaggeredGridViewMaterial(
+      final gridView = LFAlignedGridViewMaterial(
         builder: widget.builder,
         storageKey: widget.storageKey,
         onRefresh: (widget.onRefresh != null)
@@ -184,7 +184,7 @@ class _LFStaggeredGridViewState<T> extends State<LFStaggeredGridView<T>>
       return gridView;
     }
 
-    return LFStaggeredGridViewCupertino(
+    return LFAlignedGridViewCupertino(
       builder: widget.builder,
       storageKey: widget.storageKey,
       onRefresh: (widget.onRefresh != null)

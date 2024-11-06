@@ -12,6 +12,11 @@ import 'common/lf_scroll_common.dart';
 
 export 'common/lf_scroll_common.dart';
 
+part 'aligned_gridview/lf_aligned_gridview.dart';
+part 'aligned_gridview/lf_aligned_gridview_controller.dart';
+part 'aligned_gridview/lf_aligned_gridview_cupertino.dart';
+part 'aligned_gridview/lf_aligned_gridview_indicator.dart';
+part 'aligned_gridview/lf_aligned_gridview_material.dart';
 part 'gridview/lf_gridview.dart';
 part 'gridview/lf_gridview_controller.dart';
 part 'gridview/lf_gridview_cupertino.dart';
@@ -25,8 +30,3 @@ part 'scrollview/lf_scrollview.dart';
 part 'scrollview/lf_scrollview_controller.dart';
 part 'scrollview/lf_scrollview_cupertino.dart';
 part 'scrollview/lf_scrollview_material.dart';
-part 'staggered_gridview/lf_staggered_gridview.dart';
-part 'staggered_gridview/lf_staggered_gridview_controller.dart';
-part 'staggered_gridview/lf_staggered_gridview_cupertino.dart';
-part 'staggered_gridview/lf_staggered_gridview_indicator.dart';
-part 'staggered_gridview/lf_staggered_gridview_material.dart';
