@@ -19,6 +19,7 @@ class LFAppBar extends StatelessWidget implements PreferredSizeWidget {
   final double? toolbarHeight;
   final Widget? flexibleSpace;
   final double? elevation;
+  final SystemUiOverlayStyle? systemOverlayStyle;
   final VoidCallback? onBackPressed;
 
   const LFAppBar({
@@ -39,6 +40,7 @@ class LFAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.toolbarHeight,
     this.flexibleSpace,
     this.elevation,
+    this.systemOverlayStyle,
     this.onBackPressed,
   });
 
@@ -104,6 +106,7 @@ class LFAppBar extends StatelessWidget implements PreferredSizeWidget {
         titleTextStyle: defaultTitleTextStyle,
         // shape: const Border(bottom: BorderSide(color: Colors.orange, width: 1)),
         elevation: elevation,
+        systemOverlayStyle: systemOverlayStyle,
       ),
     );
   }
