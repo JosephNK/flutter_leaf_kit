@@ -19,6 +19,11 @@ class LFDeviceManager {
   double _textScaleFactor = 1.0;
   double get textScaleFactor => _textScaleFactor;
 
+  double get statusBarHeight => MediaQueryData.fromView(
+          WidgetsBinding.instance.platformDispatcher.views.single)
+      .padding
+      .top;
+
   Size _deviceSize = Size.zero;
   Size get deviceSize => _deviceSize;
 
@@ -88,6 +93,10 @@ class LFDeviceManager {
       return info.version.sdkInt;
     }
     return 0;
+  }
+
+  double getStatusBarHeight(BuildContext context) {
+    return MediaQueryData.fromView(View.of(context)).padding.top;
   }
 
   Future<bool> openAppSettings() async {
