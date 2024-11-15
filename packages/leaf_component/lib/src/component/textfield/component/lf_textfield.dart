@@ -313,6 +313,7 @@ class _LFTextFieldState extends State<LFTextField> {
       style: textFieldTextStyle.copyWith(
         decoration: TextDecoration.none,
         color: inputTextColor,
+        decorationThickness: 0,
       ),
       textAlign: textAlign,
       textAlignVertical: TextAlignVertical.center,
