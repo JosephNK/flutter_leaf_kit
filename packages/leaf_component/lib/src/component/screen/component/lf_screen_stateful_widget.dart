@@ -23,7 +23,7 @@ abstract class ScreenBuild {
   void onDrawerChanged(BuildContext context, bool isOpened);
   void onEndDrawerChanged(BuildContext context, bool isOpened);
   // only Android
-  Future<bool> willPopScopeCallback(BuildContext context);
+  void willPopScopeCallback(BuildContext context, bool didPop, dynamic result);
 }
 
 abstract class StatefulExtWidget extends StatefulWidget {
@@ -151,10 +151,8 @@ abstract class ScreenState<T extends StatefulExtWidget> extends State<T>
 
     return PopScope(
       canPop: canPop,
-      onPopInvoked: (bool didPop) {
-        if (didPop) {
-          willPopScopeCallback(context);
-        }
+      onPopInvokedWithResult: (didPop, result) {
+        willPopScopeCallback(context, didPop, result);
       },
       child: scaffold,
     );
@@ -175,10 +173,8 @@ abstract class ScreenState<T extends StatefulExtWidget> extends State<T>
 
     return PopScope(
       canPop: canPop,
-      onPopInvoked: (bool didPop) {
-        if (didPop) {
-          willPopScopeCallback(context);
-        }
+      onPopInvokedWithResult: (didPop, result) {
+        willPopScopeCallback(context, didPop, result);
       },
       child: body,
     );
@@ -229,9 +225,8 @@ abstract class ScreenState<T extends StatefulExtWidget> extends State<T>
   void onEndDrawerChanged(BuildContext context, bool isOpened) {}
 
   @override
-  Future<bool> willPopScopeCallback(BuildContext context) {
-    return Future<bool>.value(true);
-  }
+  void willPopScopeCallback(
+      BuildContext context, bool didPop, dynamic result) {}
 }
 
 extension ScreenStateFunction on ScreenState {
