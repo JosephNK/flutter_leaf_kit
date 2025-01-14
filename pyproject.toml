@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "flutter_leaf_kit"
+version = "0.0.1"
+description = "Flutter Leaf Kit Project."
+authors = ["JosephNK <nkw0608@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+package-mode = false
+
+[tool.poetry.dependencies]
+python = ">=3.11,<3.12"
+ruamel-yaml = "^0.18.10"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
