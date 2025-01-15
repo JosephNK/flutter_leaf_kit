@@ -7,6 +7,7 @@ part 'serializers.g.dart';
 
 @SerializersFor([
   ProductDTO,
+  ProfileDTO,
 ])
 final Serializers modelSerializers = (_$modelSerializers.toBuilder()
       ..addPlugin(

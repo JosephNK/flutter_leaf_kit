@@ -4,6 +4,7 @@ import 'package:image_picker/image_picker.dart';
 
 import '../services/responses/responses.dart';
 import '../services/services/products_dio_service.dart';
+import '../services/services/profile_dio_service.dart';
 
 class NetworkScreen extends ScreenStatefulWidget {
   final String title;
@@ -51,6 +52,7 @@ class _NetworkScreenState extends ScreenState<NetworkScreen> {
         ),
         services: [
           ProductsDioService(),
+          ProfileDioService(),
         ],
       );
     });
@@ -103,6 +105,17 @@ class _NetworkScreenState extends ScreenState<NetworkScreen> {
               minimumSize: const Size(150, 80),
             ),
             onPressed: () {
+              _getAction1();
+            },
+            child: const Text('Get Profile Test'),
+          ),
+          const SizedBox(height: 10.0),
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              textStyle: const TextStyle(fontSize: 20),
+              minimumSize: const Size(150, 80),
+            ),
+            onPressed: () {
               _addImage();
             },
             child: const Text('Add ImageFile Test'),
@@ -122,6 +135,24 @@ class _NetworkScreenState extends ScreenState<NetworkScreen> {
       if (response.isSuccessful) {
         final body = response.data;
         Logging.d('body: $body');
+      } else {
+        final error = response.error;
+        Logging.e('error: $error');
+      }
+    } on Exception catch (e) {
+      Logging.e('Exception e: $e');
+    }
+  }
+
+  Future<void> _getAction1() async {
+    try {
+      final apiService = LFHttpSharedDio.shared.getService<ProfileDioService>();
+      final response = await apiService.getProfileMe();
+      if (response.isSuccessful) {
+        final body = response.data;
+        final item = body?.item;
+        Logging.d('body: $body');
+        Logging.d('item: $item');
       } else {
         final error = response.error;
         Logging.e('error: $error');

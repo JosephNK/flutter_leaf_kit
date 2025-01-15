@@ -11,6 +11,8 @@ Serializers _$responseSerializers = (new Serializers().toBuilder()
       ..add(MetaData.serializer)
       ..add(ProductDTO.serializer)
       ..add(ProductsGetAllResponse.serializer)
+      ..add(ProfileDTO.serializer)
+      ..add(ProfileMeGetResponse.serializer)
       ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(ProductDTO)]),
           () => new ListBuilder<ProductDTO>()))
