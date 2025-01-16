@@ -34,6 +34,7 @@ class _ImageScreenState extends ScreenState<ImageScreen> {
     super.initState();
 
     WidgetsBinding.instance.addPostFrameCallback((_) async {
+      await Future.delayed(const Duration(milliseconds: 750));
       final bytes = await rootBundle.load('assets/images/sample400x300.jpg');
       setState(() {
         _bytes = bytes.buffer.asUint8List();
@@ -120,39 +121,50 @@ class _ImageScreenState extends ScreenState<ImageScreen> {
               // fit: fit,
               // placeholderWidget: placeholderWidget,
             ),
-            const Text('Assets'),
-            LFTransformImage(
-              image: LFImageValue(
-                origin: assetFileUri,
-              ),
-              width: 100.0,
-              height: 100.0,
-              // fit: fit,
-              // placeholderWidget: placeholderWidget,
-            ),
-            const Text('Memory'),
-            (_bytes != null)
-                ? LFTransformImage(
-                    image: LFImageValue(
-                      bytes: _bytes,
-                    ),
-                    width: 100.0,
-                    height: 100.0,
-                    // fit: fit,
-                    // placeholderWidget: placeholderWidget,
-                  )
-                : Container(),
-            const Text('Assets Failed'),
-            LFTransformImage(
-              image: LFImageValue(
-                origin: assetFailedFileUri,
-                header: null,
-              ),
-              // width: 100.0,
-              // height: 100.0,
-              // fit: fit,
-              // placeholderWidget: placeholderWidget,
-            ),
+            // const Divider(),
+            // const Text('Assets'),
+            // LFTransformImage(
+            //   image: LFImageValue(
+            //     origin: assetFileUri,
+            //   ),
+            //   width: 100.0,
+            //   height: 100.0,
+            //   // fit: fit,
+            //   // placeholderWidget: placeholderWidget,
+            // ),
+            // const Divider(),
+            // const Text('Memory'),
+            // Container(
+            //   decoration: BoxDecoration(
+            //     borderRadius: BorderRadius.circular(100.0),
+            //     shape: BoxShape.rectangle,
+            //   ),
+            //   child: ClipRRect(
+            //     borderRadius: BorderRadius.circular(100.0),
+            //     child: LFTransformImage(
+            //       image: LFImageValue(
+            //         bytes: _bytes,
+            //       ),
+            //       width: 100.0,
+            //       height: 100.0,
+            //       shimmerBaseColor: Colors.red,
+            //       // fit: fit,
+            //       // placeholderWidget: placeholderWidget,
+            //     ),
+            //   ),
+            // ),
+            // const Divider(),
+            // const Text('Assets Failed'),
+            // LFTransformImage(
+            //   image: LFImageValue(
+            //     origin: assetFailedFileUri,
+            //     header: null,
+            //   ),
+            //   width: 100.0,
+            //   height: 100.0,
+            //   // fit: fit,
+            //   // placeholderWidget: placeholderWidget,
+            // ),
           ],
         ),
       ),

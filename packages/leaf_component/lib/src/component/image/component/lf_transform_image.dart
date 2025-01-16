@@ -8,6 +8,8 @@ class LFTransformImage extends StatelessWidget {
   final int? cacheWidth;
   final int? cacheHeight;
   final FilterQuality filterQuality;
+  final Color? shimmerBaseColor;
+  final Color? shimmerHighlightColor;
   final Widget? placeholderWidget;
   final Widget? errorWidget;
   final BaseCacheManager? cacheManager;
@@ -21,6 +23,8 @@ class LFTransformImage extends StatelessWidget {
     this.cacheWidth,
     this.cacheHeight,
     this.filterQuality = FilterQuality.low,
+    this.shimmerBaseColor,
+    this.shimmerHighlightColor,
     this.placeholderWidget,
     this.errorWidget,
     this.cacheManager,
@@ -39,6 +43,8 @@ class LFTransformImage extends StatelessWidget {
         width: width,
         height: height,
         fit: fit,
+        shimmerBaseColor: shimmerBaseColor,
+        shimmerHighlightColor: shimmerHighlightColor,
         cacheWidth: cacheWidth,
         cacheHeight: cacheHeight,
         filterQuality: filterQuality,
@@ -58,6 +64,8 @@ class LFTransformImage extends StatelessWidget {
         cacheWidth: cacheWidth,
         cacheHeight: cacheHeight,
         filterQuality: filterQuality,
+        shimmerBaseColor: shimmerBaseColor,
+        shimmerHighlightColor: shimmerHighlightColor,
         placeholderWidget: placeholderWidget,
         errorWidget: errorWidget,
         cacheManager: cacheManager,
@@ -70,6 +78,8 @@ class LFTransformImage extends StatelessWidget {
       width: width,
       height: height,
       fit: fit,
+      shimmerBaseColor: shimmerBaseColor,
+      shimmerHighlightColor: shimmerHighlightColor,
       cacheWidth: cacheWidth,
       cacheHeight: cacheHeight,
       filterQuality: filterQuality,

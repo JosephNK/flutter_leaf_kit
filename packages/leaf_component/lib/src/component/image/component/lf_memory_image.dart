@@ -2,26 +2,28 @@ part of '../image.dart';
 
 class LFMemoryImage extends StatelessWidget {
   final Uint8List? bytes;
-  final Color? color;
   final double? width;
   final double? height;
   final BoxFit fit;
   final int? cacheWidth;
   final int? cacheHeight;
   final FilterQuality filterQuality;
+  final Color? shimmerBaseColor;
+  final Color? shimmerHighlightColor;
   final Widget? placeholderWidget;
   final Widget? errorWidget;
 
   const LFMemoryImage({
     super.key,
     required this.bytes,
-    this.color,
     this.width,
     this.height,
     this.fit = BoxFit.cover,
     this.cacheWidth,
     this.cacheHeight,
     this.filterQuality = FilterQuality.low,
+    this.shimmerBaseColor,
+    this.shimmerHighlightColor,
     this.placeholderWidget,
     this.errorWidget,
   });
@@ -38,33 +40,59 @@ class LFMemoryImage extends StatelessWidget {
       );
     }
 
-    return Image.memory(
-      bytes,
-      fit: fit,
+    return SizedBox(
       width: width,
       height: height,
-      cacheWidth: cacheWidth,
-      cacheHeight: cacheHeight,
-      filterQuality: filterQuality,
-      frameBuilder: (context, child, frame, wasSynchronouslyLoaded) {
-        if (wasSynchronouslyLoaded || frame != null) {
-          return child;
-        }
-        return LFSkeleton(baseColor: color, highlightColor: color);
-      },
-      errorBuilder: (context, error, stackTrace) {
-        return _buildErrorImage(context);
-      },
+      child: Stack(
+        children: [
+          _buildPlaceholderImage(context),
+          Image.memory(
+            bytes,
+            fit: fit,
+            width: width,
+            height: height,
+            cacheWidth: cacheWidth,
+            cacheHeight: cacheHeight,
+            filterQuality: filterQuality,
+            frameBuilder: (context, child, frame, wasSynchronouslyLoaded) {
+              if (wasSynchronouslyLoaded) return child;
+              return AnimatedOpacity(
+                opacity: frame == null ? 0 : 1,
+                duration: const Duration(seconds: 3),
+                curve: Curves.fastLinearToSlowEaseIn,
+                child: child,
+              );
+            },
+            errorBuilder: (context, error, stackTrace) {
+              return _buildErrorImage(context);
+            },
+          ),
+        ],
+      ),
     );
   }
 
   // Placeholder Image
   Widget _buildPlaceholderImage(BuildContext context) {
-    return placeholderWidget ?? Container(color: Colors.grey);
+    final baseColor = shimmerBaseColor;
+    final highlightColor = (shimmerHighlightColor != null)
+        ? shimmerHighlightColor
+        : baseColor?.withValues(alpha: 0.5);
+    return placeholderWidget ??
+        LFSkeleton(baseColor: baseColor, highlightColor: highlightColor);
   }
 
   // Error Image
   Widget _buildErrorImage(BuildContext context) {
-    return errorWidget ?? const Icon(Icons.error);
+    final baseColor = shimmerBaseColor;
+    return errorWidget ??
+        Container(
+          color: baseColor ?? Colors.grey[300],
+          width: width,
+          height: height,
+          child: const Center(
+            child: Icon(Icons.error),
+          ),
+        );
   }
 }
