@@ -66,6 +66,10 @@ class LFWebViewController {
   Future<Object> runJavaScriptReturningResult(String javaScript) {
     return webViewController.runJavaScriptReturningResult(javaScript);
   }
+
+  Future<void> setUserAgent(String userAgent) async {
+    await webViewController.setUserAgent(userAgent);
+  }
 }
 
 class LFWebView extends StatefulWidget {
