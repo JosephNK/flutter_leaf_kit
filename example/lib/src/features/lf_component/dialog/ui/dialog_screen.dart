@@ -65,6 +65,21 @@ class _DialogScreenState extends ScreenState<DialogScreen> {
                 context,
                 title: 'Title',
                 message: 'Message',
+                visibleCloseButton: true,
+                expandableButton: true,
+              );
+            },
+          ),
+        ),
+        const SizedBox(height: 10.0),
+        Center(
+          child: LFButton(
+            text: 'Show Confirm Alert',
+            onTap: () {
+              LFAlertDialog.confirm(
+                context,
+                title: 'Title',
+                message: 'Message',
               );
             },
           ),

@@ -11,30 +11,21 @@ class LFRadioPickerDialog {
     required LFDataItem value,
     String? title,
     String? message,
-    bool autoPop = true,
     TextStyle? titleStyle,
     TextStyle? messageStyle,
     String? okText,
+    TextStyle? okTextStyle,
+    Color? okTextBackgroundColor,
+    Color? okTextBorderColor,
+    EdgeInsets? okTextPadding,
+    String? cancelText,
+    TextStyle? cancelTextStyle,
+    Color? cancelTextBackgroundColor,
+    Color? cancelTextBorderColor,
+    EdgeInsets? cancelTextPadding,
     VoidCallback? onCancel,
     ValueChanged<LFDataItem>? onOK,
   }) async {
-    final cancelTextStr =
-        LFComponentConfigure.shared.alert?.cancelText ?? 'Close';
-    final okTextStr =
-        okText ?? LFComponentConfigure.shared.alert?.okText ?? 'OK';
-
-    final titleStyleValue =
-        titleStyle ?? LFComponentConfigure.shared.alert?.titleStyle;
-    final messageStyleValue =
-        messageStyle ?? LFComponentConfigure.shared.alert?.messageStyle;
-    final okTextStyleValue = LFComponentConfigure.shared.alert?.okTextStyle;
-    final okTextBackgroundColorValue =
-        LFComponentConfigure.shared.alert?.okTextBackgroundColor;
-    final cancelTextStyleValue =
-        LFComponentConfigure.shared.alert?.cancelTextStyle;
-    final cancelTextBackgroundColorValue =
-        LFComponentConfigure.shared.alert?.cancelTextBackgroundColor;
-
     return await showDialog(
       context: context,
       builder: (context) {
@@ -43,15 +34,18 @@ class LFRadioPickerDialog {
           value: value,
           title: title,
           message: message,
-          titleStyle: titleStyleValue,
-          messageStyle: messageStyleValue,
-          autoPop: autoPop,
-          okTextStyle: okTextStyleValue,
-          okTextBackgroundColor: okTextBackgroundColorValue,
-          okText: okTextStr,
-          cancelTextStyle: cancelTextStyleValue,
-          cancelTextBackgroundColor: cancelTextBackgroundColorValue,
-          cancelText: cancelTextStr,
+          titleStyle: titleStyle,
+          messageStyle: messageStyle,
+          okText: okText,
+          okTextStyle: okTextStyle,
+          okTextBackgroundColor: okTextBackgroundColor,
+          okTextBorderColor: okTextBorderColor,
+          okTextPadding: okTextPadding,
+          cancelText: cancelText,
+          cancelTextStyle: cancelTextStyle,
+          cancelTextBackgroundColor: cancelTextBackgroundColor,
+          cancelTextBorderColor: cancelTextBorderColor,
+          cancelTextPadding: cancelTextPadding,
           onCancel: onCancel,
           onOK: onOK,
         );
@@ -67,13 +61,16 @@ class _RadioPickerContent extends StatefulWidget {
   final String? message;
   final TextStyle? titleStyle;
   final TextStyle? messageStyle;
-  final bool autoPop;
-  final String okText;
-  final String cancelText;
+  final String? okText;
   final TextStyle? okTextStyle;
   final Color? okTextBackgroundColor;
+  final Color? okTextBorderColor;
+  final EdgeInsets? okTextPadding;
+  final String? cancelText;
   final TextStyle? cancelTextStyle;
   final Color? cancelTextBackgroundColor;
+  final Color? cancelTextBorderColor;
+  final EdgeInsets? cancelTextPadding;
   final VoidCallback? onCancel;
   final ValueChanged<LFDataItem>? onOK;
 
@@ -84,13 +81,16 @@ class _RadioPickerContent extends StatefulWidget {
     this.message,
     this.titleStyle,
     this.messageStyle,
-    this.autoPop = true,
-    this.okText = 'OK',
-    this.cancelText = 'Cancel',
+    this.okText,
     this.okTextStyle,
     this.okTextBackgroundColor,
+    this.okTextBorderColor,
+    this.okTextPadding,
+    this.cancelText,
     this.cancelTextStyle,
     this.cancelTextBackgroundColor,
+    this.cancelTextBorderColor,
+    this.cancelTextPadding,
     this.onCancel,
     this.onOK,
   });
@@ -128,17 +128,20 @@ class _RadioPickerContentState extends State<_RadioPickerContent> {
 
   @override
   Widget build(BuildContext context) {
-    final title = widget.title ?? '';
-    final message = widget.message ?? '';
+    final title = widget.title;
+    final message = widget.message;
     final titleStyle = widget.titleStyle;
     final messageStyle = widget.messageStyle;
-    final autoPop = widget.autoPop;
     final okText = widget.okText;
     final cancelText = widget.cancelText;
     final okTextStyle = widget.okTextStyle;
     final okTextBackgroundColor = widget.okTextBackgroundColor;
+    final okTextBorderColor = widget.okTextBorderColor;
+    final okTextPadding = widget.okTextPadding;
     final cancelTextStyle = widget.cancelTextStyle;
     final cancelTextBackgroundColor = widget.cancelTextBackgroundColor;
+    final cancelTextBorderColor = widget.cancelTextBorderColor;
+    final cancelTextPadding = widget.cancelTextPadding;
     final items = widget.items;
     final onCancel = widget.onCancel;
     final onOK = widget.onOK;
@@ -161,22 +164,20 @@ class _RadioPickerContentState extends State<_RadioPickerContent> {
             Visibility(
               visible: isNotEmpty(title),
               child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 8.0, horizontal: 4.0),
-                child: LFText(
-                  title,
-                  style: titleStyle,
+                padding: const EdgeInsets.all(8.0),
+                child: LFDialogTitle(
+                  text: title,
+                  textStyle: titleStyle,
                 ),
               ),
             ),
             Visibility(
               visible: isNotEmpty(message),
               child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 10.0, horizontal: 4.0),
-                child: LFText(
-                  message,
-                  style: messageStyle,
+                padding: const EdgeInsets.all(8.0),
+                child: LFDialogMessage(
+                  text: message,
+                  textStyle: messageStyle,
                 ),
               ),
             ),
@@ -202,86 +203,33 @@ class _RadioPickerContentState extends State<_RadioPickerContent> {
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                _buildCancelButton(
-                  context,
-                  autoPop: autoPop,
+                LFDialogCancelButton(
+                  autoPop: false,
                   text: cancelText,
                   textStyle: cancelTextStyle,
                   backgroundColor: cancelTextBackgroundColor,
-                  onPressed: onCancel,
+                  borderColor: cancelTextBorderColor,
+                  padding: cancelTextPadding,
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                    onCancel?.call();
+                  },
                 ),
-                const SizedBox(width: 8.0),
-                _buildOKButton(context,
-                    autoPop: autoPop,
-                    text: okText,
-                    textStyle: okTextStyle,
-                    backgroundColor: okTextBackgroundColor,
-                    onPressed: onOK),
+                LFDialogOKButton(
+                  autoPop: false,
+                  text: okText,
+                  textStyle: okTextStyle,
+                  backgroundColor: okTextBackgroundColor,
+                  borderColor: okTextBorderColor,
+                  padding: okTextPadding,
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                    onOK?.call(_value);
+                  },
+                ),
               ],
             )
           ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildCancelButton(
-    BuildContext context, {
-    bool autoPop = true,
-    String text = 'Cancel',
-    TextStyle? textStyle,
-    Color? backgroundColor,
-    VoidCallback? onPressed,
-  }) {
-    return GestureDetector(
-      onTap: () async {
-        if (autoPop) {
-          Navigator.maybePop(context);
-          await Future.delayed(const Duration(milliseconds: 100));
-        }
-        onPressed?.call();
-      },
-      child: Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10.0),
-          color: backgroundColor ?? Colors.grey.withOpacity(0.5),
-        ),
-        margin: const EdgeInsets.all(8.0),
-        padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 20.0),
-        child: LFText(
-          text,
-          style: textStyle ?? const TextStyle(fontSize: 18),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildOKButton(
-    BuildContext context, {
-    bool autoPop = true,
-    String text = 'OK',
-    TextStyle? textStyle,
-    Color? backgroundColor,
-    ValueChanged<LFDataItem>? onPressed,
-  }) {
-    return GestureDetector(
-      onTap: () async {
-        if (autoPop) {
-          Navigator.maybePop(context);
-          await Future.delayed(const Duration(milliseconds: 100));
-        }
-        onPressed?.call(_value);
-      },
-      child: Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10.0),
-          color: backgroundColor ?? Colors.blueAccent,
-        ),
-        margin: const EdgeInsets.all(8.0),
-        padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 20.0),
-        child: LFText(
-          text,
-          style: textStyle ?? const TextStyle(fontSize: 18),
         ),
       ),
     );

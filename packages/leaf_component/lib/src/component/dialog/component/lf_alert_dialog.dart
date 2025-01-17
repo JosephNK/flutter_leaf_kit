@@ -11,39 +11,33 @@ class LFAlertDialog {
     required String message,
     bool autoPop = true,
     bool barrierDismissible = true,
-    String? okText,
+    bool visibleCloseButton = false,
+    bool expandableButton = false,
     TextStyle? titleStyle,
     TextStyle? messageStyle,
+    String? okText,
+    TextStyle? okTextStyle,
+    Color? okTextBackgroundColor,
+    Color? okTextBorderColor,
+    EdgeInsets? okTextPadding,
     VoidCallback? onOK,
   }) async {
-    final okTextStr =
-        okText ?? LFComponentConfigure.shared.alert?.okText ?? 'OK';
-
-    final titleStyleValue =
-        titleStyle ?? LFComponentConfigure.shared.alert?.titleStyle;
-    final messageStyleValue =
-        messageStyle ?? LFComponentConfigure.shared.alert?.messageStyle;
-    final okTextStyleValue = LFComponentConfigure.shared.alert?.okTextStyle;
-    final okTextBackgroundColorValue =
-        LFComponentConfigure.shared.alert?.okTextBackgroundColor;
-    final okTextBorderColor =
-        LFComponentConfigure.shared.alert?.okTextBorderColor;
-    final buttonPadding = LFComponentConfigure.shared.alert?.buttonPadding;
-
     return await _LFAlertDialog().show(
       context,
       title: title,
       message: message,
       autoPop: autoPop,
       barrierDismissible: barrierDismissible,
-      titleStyle: titleStyleValue,
-      messageStyle: messageStyleValue,
-      onOK: onOK,
-      okText: okTextStr,
-      okTextStyle: okTextStyleValue,
-      okTextBackgroundColor: okTextBackgroundColorValue,
+      visibleCloseButton: visibleCloseButton,
+      expandableButton: expandableButton,
+      titleStyle: titleStyle,
+      messageStyle: messageStyle,
+      okText: okText,
+      okTextStyle: okTextStyle,
+      okTextBackgroundColor: okTextBackgroundColor,
       okTextBorderColor: okTextBorderColor,
-      okTextPadding: buttonPadding,
+      okTextPadding: okTextPadding,
+      onOK: onOK,
     );
   }
 
@@ -56,51 +50,38 @@ class LFAlertDialog {
     TextStyle? titleStyle,
     TextStyle? messageStyle,
     String? okText,
+    TextStyle? okTextStyle,
+    Color? okTextBackgroundColor,
+    Color? okTextBorderColor,
+    EdgeInsets? okTextPadding,
+    String? cancelText,
+    TextStyle? cancelTextStyle,
+    Color? cancelTextBackgroundColor,
+    Color? cancelTextBorderColor,
+    EdgeInsets? cancelTextPadding,
     VoidCallback? onCancel,
     VoidCallback? onOK,
   }) async {
-    final cancelTextStr =
-        LFComponentConfigure.shared.alert?.cancelText ?? 'Close';
-    final okTextStr =
-        okText ?? LFComponentConfigure.shared.alert?.okText ?? 'OK';
-
-    final titleStyleValue =
-        titleStyle ?? LFComponentConfigure.shared.alert?.titleStyle;
-    final messageStyleValue =
-        messageStyle ?? LFComponentConfigure.shared.alert?.messageStyle;
-    final okTextStyleValue = LFComponentConfigure.shared.alert?.okTextStyle;
-    final okTextBackgroundColorValue =
-        LFComponentConfigure.shared.alert?.okTextBackgroundColor;
-    final okTextBorderColor =
-        LFComponentConfigure.shared.alert?.okTextBorderColor;
-    final cancelTextStyleValue =
-        LFComponentConfigure.shared.alert?.cancelTextStyle;
-    final cancelTextBackgroundColorValue =
-        LFComponentConfigure.shared.alert?.cancelTextBackgroundColor;
-    final cancelTextBorderColor =
-        LFComponentConfigure.shared.alert?.cancelTextBorderColor;
-    final buttonPadding = LFComponentConfigure.shared.alert?.buttonPadding;
-
     return await _LFAlertDialog().confirm(
       context,
       title: title,
       message: message,
       autoPop: autoPop,
       barrierDismissible: barrierDismissible,
-      titleStyle: titleStyleValue,
-      messageStyle: messageStyleValue,
+      titleStyle: titleStyle,
+      messageStyle: messageStyle,
+      okText: okText,
+      okTextStyle: okTextStyle,
+      okTextBackgroundColor: okTextBackgroundColor,
+      okTextBorderColor: okTextBorderColor,
+      okTextPadding: okTextPadding,
+      cancelText: cancelText,
+      cancelTextStyle: cancelTextStyle,
+      cancelTextBackgroundColor: cancelTextBackgroundColor,
+      cancelTextBorderColor: cancelTextBorderColor,
+      cancelTextPadding: cancelTextPadding,
       onCancel: onCancel,
       onOK: onOK,
-      okTextStyle: okTextStyleValue,
-      okTextBackgroundColor: okTextBackgroundColorValue,
-      okTextBorderColor: okTextBorderColor,
-      okTextPadding: buttonPadding,
-      okText: okTextStr,
-      cancelTextStyle: cancelTextStyleValue,
-      cancelTextBackgroundColor: cancelTextBackgroundColorValue,
-      cancelTextBorderColor: cancelTextBorderColor,
-      cancelTextPadding: buttonPadding,
-      cancelText: cancelTextStr,
     );
   }
 
@@ -108,17 +89,14 @@ class LFAlertDialog {
     BuildContext context, {
     required String? errorMessage,
     bool barrierDismissible = true,
+    String? okText,
+    TextStyle? okTextStyle,
+    Color? okTextBackgroundColor,
+    Color? okTextBorderColor,
+    EdgeInsets? okTextPadding,
     VoidCallback? onOk,
   }) async {
     if (isEmpty(errorMessage)) return;
-
-    final okTextStr = LFComponentConfigure.shared.alert?.okText ?? 'OK';
-    final okTextStyle = LFComponentConfigure.shared.alert?.okTextStyle;
-    final okTextBackgroundColor =
-        LFComponentConfigure.shared.alert?.okTextBackgroundColor;
-    final okTextBorderColor =
-        LFComponentConfigure.shared.alert?.okTextBorderColor;
-    final buttonPadding = LFComponentConfigure.shared.alert?.buttonPadding;
 
     final errorTitleStr =
         LFComponentConfigure.shared.alert?.errorMessageTitle ??
@@ -126,18 +104,18 @@ class LFAlertDialog {
 
     String? errorMessageStr = errorMessage;
 
-    if (isNotEmpty(errorMessageStr)) {
+    if (isNotEmpty(errorMessageStr) && errorMessageStr != null) {
       return await _LFAlertDialog().show(
         context,
         title: errorTitleStr,
         message: errorMessageStr,
         barrierDismissible: barrierDismissible,
         onOK: onOk,
-        okText: okTextStr,
+        okText: okText,
         okTextStyle: okTextStyle,
         okTextBackgroundColor: okTextBackgroundColor,
         okTextBorderColor: okTextBorderColor,
-        okTextPadding: buttonPadding,
+        okTextPadding: okTextPadding,
       );
     }
 
@@ -148,17 +126,16 @@ class LFAlertDialog {
     BuildContext context, {
     Object? exception,
     bool barrierDismissible = true,
+    TextStyle? titleStyle,
+    TextStyle? messageStyle,
+    String? okText,
+    TextStyle? okTextStyle,
+    Color? okTextBackgroundColor,
+    Color? okTextBorderColor,
+    EdgeInsets? okTextPadding,
     VoidCallback? onTap,
   }) async {
     if (exception == null) return;
-
-    final okTextStr = LFComponentConfigure.shared.alert?.okText ?? 'Close';
-    final okTextStyle = LFComponentConfigure.shared.alert?.okTextStyle;
-    final okTextBackgroundColor =
-        LFComponentConfigure.shared.alert?.okTextBackgroundColor;
-    final okTextBorderColor =
-        LFComponentConfigure.shared.alert?.okTextBorderColor;
-    final buttonPadding = LFComponentConfigure.shared.alert?.buttonPadding;
 
     final errorTitleStr =
         LFComponentConfigure.shared.alert?.errorMessageTitle ??
@@ -172,12 +149,14 @@ class LFAlertDialog {
         title: errorTitleStr,
         message: errorMessageStr,
         barrierDismissible: barrierDismissible,
-        onOK: onTap,
-        okText: okTextStr,
+        titleStyle: titleStyle,
+        messageStyle: messageStyle,
+        okText: okText,
         okTextStyle: okTextStyle,
         okTextBackgroundColor: okTextBackgroundColor,
         okTextBorderColor: okTextBorderColor,
-        okTextPadding: buttonPadding,
+        okTextPadding: okTextPadding,
+        onOK: onTap,
       );
     }
 
@@ -189,12 +168,14 @@ class _LFAlertDialog {
   Future<dynamic> show(
     BuildContext context, {
     String? title,
-    String? message,
+    required String message,
     bool autoPop = true,
     bool barrierDismissible = true,
+    bool visibleCloseButton = false,
+    bool expandableButton = false,
     TextStyle? titleStyle,
     TextStyle? messageStyle,
-    String okText = 'OK',
+    String? okText,
     TextStyle? okTextStyle,
     Color? okTextBackgroundColor,
     Color? okTextBorderColor,
@@ -205,23 +186,83 @@ class _LFAlertDialog {
       context: context,
       barrierDismissible: barrierDismissible,
       builder: (BuildContext context) {
+        late Widget titleWidget, messageWidget;
+
+        if (visibleCloseButton) {
+          titleWidget = Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const SizedBox(height: 24.0),
+                    LFDialogTitle(
+                      text: title,
+                      textStyle: titleStyle,
+                    ),
+                  ],
+                ),
+              ),
+              GestureDetector(
+                behavior: HitTestBehavior.opaque,
+                onTap: () {
+                  if (autoPop) {
+                    Navigator.of(context).pop();
+                  }
+                },
+                child: const Icon(LucideIcons.x, size: 24.0),
+              ),
+            ],
+          );
+        } else {
+          titleWidget = LFDialogTitle(
+            text: title,
+            textStyle: titleStyle,
+          );
+        }
+
+        messageWidget = LFDialogMessage(
+          text: message,
+          textStyle: messageStyle,
+        );
+
         return AlertDialog(
-          title: isEmpty(title)
-              ? null
-              : _buildTitle(context, text: title, textStyle: titleStyle),
-          content:
-              _buildMessage(context, text: message, textStyle: messageStyle),
+          title: isEmpty(title) ? null : titleWidget,
+          content: messageWidget,
+          actionsPadding:
+              const EdgeInsets.only(left: 16.0, right: 16.0, bottom: 16.0),
           actions: [
-            _buildOKButton(
-              context,
-              autoPop: autoPop,
-              text: okText,
-              textStyle: okTextStyle,
-              backgroundColor: okTextBackgroundColor,
-              borderColor: okTextBorderColor,
-              padding: okTextPadding,
-              onPressed: onOK,
-            ),
+            if (expandableButton) ...[
+              Row(
+                children: [
+                  Expanded(
+                    child: LFDialogOKButton(
+                      autoPop: autoPop,
+                      text: okText,
+                      textStyle: okTextStyle,
+                      backgroundColor: okTextBackgroundColor,
+                      borderColor: okTextBorderColor,
+                      padding: okTextPadding,
+                      onPressed: onOK,
+                    ),
+                  ),
+                ],
+              )
+            ] else ...[
+              LFDialogOKButton(
+                autoPop: autoPop,
+                text: okText,
+                textStyle: okTextStyle,
+                backgroundColor: okTextBackgroundColor,
+                borderColor: okTextBorderColor,
+                padding: okTextPadding,
+                onPressed: onOK,
+              ),
+            ],
           ],
         );
       },
@@ -231,17 +272,17 @@ class _LFAlertDialog {
   Future<dynamic> confirm(
     BuildContext context, {
     String? title,
-    String? message,
+    required String message,
     TextStyle? titleStyle,
     TextStyle? messageStyle,
     bool autoPop = true,
     bool barrierDismissible = true,
-    String okText = 'OK',
-    String cancelText = 'Cancel',
+    String? okText,
     TextStyle? okTextStyle,
     Color? okTextBackgroundColor,
     Color? okTextBorderColor,
     EdgeInsets? okTextPadding,
+    String? cancelText,
     TextStyle? cancelTextStyle,
     Color? cancelTextBackgroundColor,
     Color? cancelTextBorderColor,
@@ -249,19 +290,29 @@ class _LFAlertDialog {
     VoidCallback? onCancel,
     VoidCallback? onOK,
   }) async {
+    late Widget titleWidget, messageWidget;
+
+    titleWidget = LFDialogTitle(
+      text: title,
+      textStyle: titleStyle,
+    );
+
+    messageWidget = LFDialogMessage(
+      text: message,
+      textStyle: messageStyle,
+    );
+
     return await showDialog(
       context: context,
       barrierDismissible: barrierDismissible,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: isEmpty(title)
-              ? null
-              : _buildTitle(context, text: title, textStyle: titleStyle),
-          content:
-              _buildMessage(context, text: message, textStyle: messageStyle),
+          title: isEmpty(title) ? null : titleWidget,
+          content: messageWidget,
+          actionsPadding:
+              const EdgeInsets.only(left: 16.0, right: 16.0, bottom: 16.0),
           actions: [
-            _buildCancelButton(
-              context,
+            LFDialogCancelButton(
               autoPop: autoPop,
               text: cancelText,
               textStyle: cancelTextStyle,
@@ -270,8 +321,7 @@ class _LFAlertDialog {
               padding: cancelTextPadding,
               onPressed: onCancel,
             ),
-            _buildOKButton(
-              context,
+            LFDialogOKButton(
               autoPop: autoPop,
               text: okText,
               textStyle: okTextStyle,
@@ -282,104 +332,6 @@ class _LFAlertDialog {
           ],
         );
       },
-    );
-  }
-
-  /// Title Widget
-  Widget _buildTitle(
-    BuildContext context, {
-    String? text = 'Title',
-    TextStyle? textStyle,
-  }) {
-    return LFText(
-      text ?? '',
-      style: textStyle ?? const TextStyle(fontSize: 18),
-      maxLines: 2,
-    );
-  }
-
-  /// Message Widget
-  Widget _buildMessage(
-    BuildContext context, {
-    String? text = 'Message',
-    TextStyle? textStyle,
-  }) {
-    return LFText(
-      text ?? '',
-      style: textStyle ?? const TextStyle(fontSize: 16),
-      maxLines: 5,
-    );
-  }
-
-  /// Cancel Button Widget
-  Widget _buildCancelButton(
-    BuildContext context, {
-    bool autoPop = true,
-    String text = 'Cancel',
-    TextStyle? textStyle,
-    Color? backgroundColor,
-    Color? borderColor,
-    EdgeInsets? padding,
-    VoidCallback? onPressed,
-  }) {
-    return GestureDetector(
-      onTap: () async {
-        if (autoPop) {
-          Navigator.maybePop(context, 'CANCEL');
-          await Future.delayed(const Duration(milliseconds: 100));
-        }
-        onPressed?.call();
-      },
-      child: Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10.0),
-          border: borderColor != null ? Border.all(color: borderColor) : null,
-          color: backgroundColor ?? Colors.grey.withOpacity(0.5),
-        ),
-        margin: const EdgeInsets.all(8.0),
-        padding: padding ??
-            const EdgeInsets.symmetric(vertical: 12.0, horizontal: 20.0),
-        child: LFText(
-          text,
-          style: textStyle ?? const TextStyle(fontSize: 18),
-        ),
-      ),
-    );
-  }
-
-  /// OK Button Widget
-  Widget _buildOKButton(
-    BuildContext context, {
-    bool autoPop = true,
-    String text = 'OK',
-    TextStyle? textStyle,
-    Color? backgroundColor,
-    Color? borderColor,
-    EdgeInsets? padding,
-    VoidCallback? onPressed,
-  }) {
-    return GestureDetector(
-      onTap: () async {
-        if (autoPop) {
-          Navigator.maybePop(context, 'OK');
-          await Future.delayed(const Duration(milliseconds: 100));
-        }
-        onPressed?.call();
-      },
-      child: Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10.0),
-          border: borderColor != null ? Border.all(color: borderColor) : null,
-          color: backgroundColor ?? Colors.blueAccent,
-        ),
-        margin: const EdgeInsets.all(8.0),
-        padding: padding ??
-            const EdgeInsets.symmetric(vertical: 12.0, horizontal: 20.0),
-        child: LFText(
-          text,
-          style: textStyle ?? const TextStyle(fontSize: 18),
-        ),
-      ),
     );
   }
 }

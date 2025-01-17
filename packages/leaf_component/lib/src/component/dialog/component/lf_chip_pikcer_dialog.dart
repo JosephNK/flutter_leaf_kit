@@ -9,8 +9,20 @@ class LFChipPickerDialog {
     BuildContext context, {
     required List<LFDataItem> items,
     List<LFDataItem>? values,
-    String? title,
     bool multiple = true,
+    String? title,
+    TextStyle? titleStyle,
+    TextStyle? messageStyle,
+    String? okText,
+    TextStyle? okTextStyle,
+    Color? okTextBackgroundColor,
+    Color? okTextBorderColor,
+    EdgeInsets? okTextPadding,
+    String? cancelText,
+    TextStyle? cancelTextStyle,
+    Color? cancelTextBackgroundColor,
+    Color? cancelTextBorderColor,
+    EdgeInsets? cancelTextPadding,
     ValueChanged<List<LFDataItem>>? onOK,
   }) async {
     return await showDialog(
@@ -19,8 +31,20 @@ class LFChipPickerDialog {
         return _ChipPickerContent(
           items: items,
           values: values,
-          title: title,
           multiple: multiple,
+          title: title,
+          titleStyle: titleStyle,
+          messageStyle: messageStyle,
+          okText: okText,
+          okTextStyle: okTextStyle,
+          okTextBackgroundColor: okTextBackgroundColor,
+          okTextBorderColor: okTextBorderColor,
+          okTextPadding: okTextPadding,
+          cancelText: cancelText,
+          cancelTextStyle: cancelTextStyle,
+          cancelTextBackgroundColor: cancelTextBackgroundColor,
+          cancelTextBorderColor: cancelTextBorderColor,
+          cancelTextPadding: cancelTextPadding,
           onOK: onOK,
         );
       },
@@ -31,15 +55,39 @@ class LFChipPickerDialog {
 class _ChipPickerContent extends StatefulWidget {
   final List<LFDataItem> items;
   final List<LFDataItem>? values;
-  final String? title;
   final bool multiple;
+  final String? title;
+  final TextStyle? titleStyle;
+  final TextStyle? messageStyle;
+  final String? okText;
+  final TextStyle? okTextStyle;
+  final Color? okTextBackgroundColor;
+  final Color? okTextBorderColor;
+  final EdgeInsets? okTextPadding;
+  final String? cancelText;
+  final TextStyle? cancelTextStyle;
+  final Color? cancelTextBackgroundColor;
+  final Color? cancelTextBorderColor;
+  final EdgeInsets? cancelTextPadding;
   final ValueChanged<List<LFDataItem>>? onOK;
 
   const _ChipPickerContent({
     required this.items,
     this.values,
-    this.title,
     this.multiple = true,
+    this.title,
+    this.titleStyle,
+    this.messageStyle,
+    this.okText,
+    this.okTextStyle,
+    this.okTextBackgroundColor,
+    this.okTextBorderColor,
+    this.okTextPadding,
+    this.cancelText,
+    this.cancelTextStyle,
+    this.cancelTextBackgroundColor,
+    this.cancelTextBorderColor,
+    this.cancelTextPadding,
     this.onOK,
   });
 
@@ -77,9 +125,20 @@ class _ChipPickerContentState extends State<_ChipPickerContent> {
 
   @override
   Widget build(BuildContext context) {
-    final title = widget.title ?? '';
     final multiple = widget.multiple;
     final items = widget.items;
+    final title = widget.title;
+    final titleStyle = widget.titleStyle;
+    final okText = widget.okText;
+    final okTextStyle = widget.okTextStyle;
+    final okTextBackgroundColor = widget.okTextBackgroundColor;
+    final okTextBorderColor = widget.okTextBorderColor;
+    final okTextPadding = widget.okTextPadding;
+    final cancelText = widget.cancelText;
+    final cancelTextStyle = widget.cancelTextStyle;
+    final cancelTextBackgroundColor = widget.cancelTextBackgroundColor;
+    final cancelTextBorderColor = widget.cancelTextBorderColor;
+    final cancelTextPadding = widget.cancelTextPadding;
     final onOK = widget.onOK;
 
     return Dialog(
@@ -101,12 +160,9 @@ class _ChipPickerContentState extends State<_ChipPickerContent> {
               visible: isNotEmpty(title),
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: LFText(
-                  title,
-                  style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 16.0,
-                  ),
+                child: LFDialogTitle(
+                  text: title,
+                  textStyle: titleStyle,
                 ),
               ),
             ),
@@ -133,20 +189,25 @@ class _ChipPickerContentState extends State<_ChipPickerContent> {
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                LFButton(
-                  text: 'Close',
-                  textColor: Colors.black54,
-                  backgroundColor: Colors.transparent,
-                  onTap: () {
+                LFDialogCancelButton(
+                  autoPop: false,
+                  text: cancelText,
+                  textStyle: cancelTextStyle,
+                  backgroundColor: cancelTextBackgroundColor,
+                  borderColor: cancelTextBorderColor,
+                  padding: cancelTextPadding,
+                  onPressed: () {
                     Navigator.of(context).pop();
                   },
                 ),
-                const SizedBox(width: 8.0),
-                LFButton(
-                  text: 'OK',
-                  textColor: Colors.blueAccent,
-                  backgroundColor: Colors.transparent,
-                  onTap: () {
+                LFDialogOKButton(
+                  autoPop: false,
+                  text: okText,
+                  textStyle: okTextStyle,
+                  backgroundColor: okTextBackgroundColor,
+                  borderColor: okTextBorderColor,
+                  padding: okTextPadding,
+                  onPressed: () {
                     Navigator.of(context).pop();
                     onOK?.call(_values ?? []);
                   },
