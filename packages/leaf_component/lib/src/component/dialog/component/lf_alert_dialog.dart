@@ -230,11 +230,16 @@ class _LFAlertDialog {
           textStyle: messageStyle,
         );
 
+        final borderRadius = LFComponentConfigure.shared.alert?.borderRadius;
+
         return AlertDialog(
           title: isEmpty(title) ? null : titleWidget,
           content: messageWidget,
           actionsPadding:
               const EdgeInsets.only(left: 16.0, right: 16.0, bottom: 16.0),
+          shape: (borderRadius != null)
+              ? RoundedRectangleBorder(borderRadius: borderRadius)
+              : null,
           actions: [
             if (expandableButton) ...[
               Row(
@@ -302,6 +307,8 @@ class _LFAlertDialog {
       textStyle: messageStyle,
     );
 
+    final borderRadius = LFComponentConfigure.shared.alert?.borderRadius;
+
     return await showDialog(
       context: context,
       barrierDismissible: barrierDismissible,
@@ -311,6 +318,9 @@ class _LFAlertDialog {
           content: messageWidget,
           actionsPadding:
               const EdgeInsets.only(left: 16.0, right: 16.0, bottom: 16.0),
+          shape: (borderRadius != null)
+              ? RoundedRectangleBorder(borderRadius: borderRadius)
+              : null,
           actions: [
             LFDialogCancelButton(
               autoPop: autoPop,

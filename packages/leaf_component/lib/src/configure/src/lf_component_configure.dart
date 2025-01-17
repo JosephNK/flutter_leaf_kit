@@ -33,6 +33,7 @@ class LFAlertDialogConfigure {
   final Color? cancelTextBackgroundColor;
   final Color? cancelTextBorderColor;
   final EdgeInsets? buttonPadding;
+  final BorderRadius? borderRadius;
 
   LFAlertDialogConfigure({
     this.cancelText,
@@ -47,6 +48,7 @@ class LFAlertDialogConfigure {
     this.cancelTextBackgroundColor,
     this.cancelTextBorderColor,
     this.buttonPadding,
+    this.borderRadius,
   });
 }
 
