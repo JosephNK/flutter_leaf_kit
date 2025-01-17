@@ -1,6 +1,6 @@
 name: flutter_leaf_webview
 description: A new Flutter package project.
-version: 1.9.74-dev
+version: 1.9.75-dev
 publish_to: 'none'
 homepage: https://github.com/JosephNK/flutter_leaf_kit
 
@@ -13,13 +13,13 @@ dependencies:
     sdk: flutter
 
   webview_flutter: ^4.10.0
-  webview_flutter_android: ^4.0.0
-  webview_flutter_wkwebview: ^3.16.0
+  webview_flutter_android: ^4.3.0
+  webview_flutter_wkwebview: ^3.17.0
 
   flutter_leaf_common:
     git:
       url: https://github.com/JosephNK/flutter_leaf_kit.git
-      ref: 'v1.9.74-dev'
+      ref: 'v1.9.75-dev'
       path: ./packages/leaf_common
 
 dev_dependencies:
