@@ -53,120 +53,153 @@ class _DialogScreenState extends ScreenState<DialogScreen> {
 
   @override
   Widget buildBody(BuildContext context, Object? state) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        Center(
-          child: LFButton(
-            text: 'Show Alert',
-            onTap: () {
-              LFAlertDialog.show(
-                context,
-                title: 'Title',
-                message: 'Message',
-                visibleCloseButton: true,
-                expandableButton: true,
-              );
-            },
+    return Container(
+      color: Colors.grey[300],
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Center(
+            child: LFButton(
+              text: 'Show Alert',
+              onTap: () {
+                LFAlertDialog.show(
+                  context,
+                  title: 'Title',
+                  message: 'Message',
+                  visibleCloseButton: true,
+                  expandableButton: true,
+                );
+              },
+            ),
           ),
-        ),
-        const SizedBox(height: 10.0),
-        Center(
-          child: LFButton(
-            text: 'Show Confirm Alert',
-            onTap: () {
-              LFAlertDialog.confirm(
-                context,
-                title: 'Title',
-                message: 'Message',
-              );
-            },
+          const Divider(),
+          Center(
+            child: LFButton(
+              text: 'Show Confirm Alert',
+              onTap: () {
+                LFAlertDialog.confirm(
+                  context,
+                  title: 'Title',
+                  message: 'Message',
+                );
+              },
+            ),
           ),
-        ),
-        const SizedBox(height: 10.0),
-        Center(
-          child: LFButton(
-            text: 'Show CheckBox Picker Dialog',
-            onTap: () {
-              LFCheckboxPickerDialog.show(
-                context,
-                items: _checkboxItems,
-                values: _selectedCheckboxItems,
-                title: 'CheckBox Picker',
-                onOK: (values) {
-                  setState(() {
-                    _selectedCheckboxItems = values;
-                  });
-                },
-              );
-            },
+          const Divider(),
+          Center(
+            child: LFButton(
+              text: 'Show CheckBox Picker Dialog',
+              onTap: () {
+                LFCheckboxPickerDialog.show(
+                  context,
+                  items: _checkboxItems,
+                  values: _selectedCheckboxItems,
+                  title: 'CheckBox Picker',
+                  onOK: (values) {
+                    setState(() {
+                      _selectedCheckboxItems = values;
+                    });
+                  },
+                );
+              },
+            ),
           ),
-        ),
-        const SizedBox(height: 10.0),
-        Center(
-          child: LFButton(
-            text: 'Show Radio Picker Dialog',
-            onTap: () {
-              LFRadioPickerDialog.confirm(
-                context,
-                items: _radioItems,
-                value: _selectedRadioItem,
-                title: 'Radio Picker',
-                onOK: (value) {
-                  setState(() {
-                    _selectedRadioItem = value;
-                  });
-                },
-              );
-            },
+          const Divider(),
+          Center(
+            child: LFButton(
+              text: 'Show Radio Picker Dialog',
+              onTap: () {
+                LFRadioPickerDialog.confirm(
+                  context,
+                  items: _radioItems,
+                  value: _selectedRadioItem,
+                  title: 'Radio Picker',
+                  onOK: (value) {
+                    setState(() {
+                      _selectedRadioItem = value;
+                    });
+                  },
+                );
+              },
+            ),
           ),
-        ),
-        const SizedBox(height: 10.0),
-        Center(
-          child: LFButton(
-            text: 'Show Chip Picker Dialog',
-            onTap: () {
-              LFChipPickerDialog.show(
-                context,
-                items: _chipItems,
-                values: _selectedChipItems,
-                title: 'Chip Picker',
-                multiple: true,
-                onOK: (values) {
-                  setState(() {
-                    _selectedChipItems = values;
-                  });
-                },
-              );
-            },
+          const Divider(),
+          Center(
+            child: LFButton(
+              text: 'Show Chip Picker Dialog',
+              onTap: () {
+                LFChipPickerDialog.show(
+                  context,
+                  items: _chipItems,
+                  values: _selectedChipItems,
+                  title: 'Chip Picker',
+                  multiple: true,
+                  onOK: (values) {
+                    setState(() {
+                      _selectedChipItems = values;
+                    });
+                  },
+                );
+              },
+            ),
           ),
-        ),
-        const SizedBox(height: 10.0),
-        Center(
-          child: LFButton(
-            text: 'Show Calendar Date Picker Dialog',
-            onTap: () {
-              LFCalendarDatePickerDialog.show(
-                context,
-                pickerSelect: LFCalendarPickerSelect.start,
-              );
-            },
+          const Divider(),
+          Center(
+            child: LFButton(
+              text: 'Show Calendar Between Date Picker Dialog',
+              onTap: () {
+                LFCalendarBetweenDatePickerDialog.show(
+                  context,
+                  pickerSelect: LFCalendarBetweenPickerSelect.start,
+                  // isLunar: true,
+                  // isAllDay: true,
+                );
+              },
+            ),
           ),
-        ),
-        const SizedBox(height: 10.0),
-        Center(
-          child: LFButton(
-            text: 'Show Calendar Time Picker Dialog',
-            onTap: () {
-              LFCalendarTimePickerDialog.show(
-                context,
-                pickerSelect: LFCalendarPickerSelect.start,
-              );
-            },
+          const Divider(),
+          Center(
+            child: LFButton(
+              text: 'Show Calendar Between Time Picker Dialog',
+              onTap: () {
+                LFCalendarBetweenTimePickerDialog.show(
+                  context,
+                  pickerSelect: LFCalendarBetweenPickerSelect.start,
+                );
+              },
+            ),
           ),
-        ),
-      ],
+          const Divider(),
+          Center(
+            child: LFButton(
+              text: 'Show Calendar Date Picker Dialog',
+              onTap: () {
+                LFCalendarDatePickerDialog.show(
+                  context,
+                  onOK: (dateTime) {
+                    print('Selected dateTime: $dateTime');
+                  },
+                );
+              },
+            ),
+          ),
+          const Divider(),
+          Center(
+            child: LFButton(
+              text: 'Show Calendar Time Picker Dialog',
+              onTap: () {
+                LFCalendarTimePickerDialog.show(
+                  context,
+                  onOK: (dateTime) {
+                    print('Selected dateTime: $dateTime');
+                  },
+                );
+              },
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

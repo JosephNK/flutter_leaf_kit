@@ -1,41 +1,30 @@
 part of '../dialog.dart';
 
-typedef LFCalendarDatePickerOnOK = Function(
-    LFCalendarPickerSelect select, DateTime dateTime);
+typedef LFCalendarDatePickerOnOK = Function(DateTime dateTime);
 
 class LFCalendarDatePickerDialog {
   static Future show(
     BuildContext context, {
-    required LFCalendarPickerSelect pickerSelect,
-    bool isLunar = false,
-    bool isAllDay = false,
-    DateTime? startDate,
-    DateTime? endDate,
-    Color activeColor = Colors.purple,
-    Color inactiveColor = Colors.grey,
-    String startText = 'Start',
-    String endText = 'End',
-    String okText = 'OK',
-    String validStartMessage = 'Please set the start date before the end date',
-    String validEndMessage = 'Please set the end date after the start date',
+    DateTime? date,
+    Color? activeColor,
+    String? okText,
+    TextStyle? okTextStyle,
+    Color? okTextBackgroundColor,
+    Color? okTextBorderColor,
+    EdgeInsets? okTextPadding,
     LFCalendarDatePickerOnOK? onOK,
   }) async {
     return await showDialog(
       context: context,
       builder: (context) {
         return _CalendarDatePickerContent(
-          pickerSelect: pickerSelect,
-          isLunar: isLunar,
-          isAllDay: isAllDay,
-          startDate: startDate,
-          endDate: endDate,
+          date: date,
           activeColor: activeColor,
-          inactiveColor: inactiveColor,
-          startText: startText,
-          endText: endText,
           okText: okText,
-          validStartMessage: validStartMessage,
-          validEndMessage: validEndMessage,
+          okTextStyle: okTextStyle,
+          okTextBackgroundColor: okTextBackgroundColor,
+          okTextBorderColor: okTextBorderColor,
+          okTextPadding: okTextPadding,
           onOK: onOK,
         );
       },
@@ -44,33 +33,23 @@ class LFCalendarDatePickerDialog {
 }
 
 class _CalendarDatePickerContent extends StatefulWidget {
-  final LFCalendarPickerSelect pickerSelect;
-  final bool isLunar;
-  final bool isAllDay;
-  final DateTime? startDate;
-  final DateTime? endDate;
-  final Color activeColor;
-  final Color inactiveColor;
-  final String startText;
-  final String endText;
-  final String okText;
-  final String validStartMessage;
-  final String validEndMessage;
+  final DateTime? date;
+  final Color? activeColor;
+  final String? okText;
+  final TextStyle? okTextStyle;
+  final Color? okTextBackgroundColor;
+  final Color? okTextBorderColor;
+  final EdgeInsets? okTextPadding;
   final LFCalendarDatePickerOnOK? onOK;
 
   const _CalendarDatePickerContent({
-    required this.pickerSelect,
-    this.isLunar = false,
-    this.isAllDay = false,
-    this.startDate,
-    this.endDate,
-    this.activeColor = Colors.purple,
-    this.inactiveColor = Colors.grey,
-    this.startText = 'Start',
-    this.endText = 'End',
-    this.okText = 'OK',
-    this.validStartMessage = 'Please set the start date before the end date',
-    this.validEndMessage = 'Please set the end date after the start date',
+    this.date,
+    this.activeColor,
+    this.okText,
+    this.okTextStyle,
+    this.okTextBackgroundColor,
+    this.okTextBorderColor,
+    this.okTextPadding,
     this.onOK,
   });
 
@@ -83,34 +62,15 @@ class _CalendarDatePickerContentState
     extends State<_CalendarDatePickerContent> {
   late LFCalendarController _controller;
   late DateTime _defaultDate;
-  late DateTime _startDate;
-  late DateTime _endDate;
+  late DateTime _date;
 
   @override
   void initState() {
     super.initState();
 
-    final pickerSelect = widget.pickerSelect;
-    final isLunar = widget.isLunar;
-
     _controller = LFCalendarController();
-    _startDate = widget.startDate ?? LFDate.now().dateTime;
-    _endDate = widget.endDate ?? LFDate.now().dateTime;
-
-    switch (pickerSelect) {
-      case LFCalendarPickerSelect.none:
-      case LFCalendarPickerSelect.start:
-        _defaultDate = !isLunar
-            ? _startDate
-            : LFDate.parseFromString(_startDate.toCalLunarDateString())
-                .dateTime;
-        break;
-      case LFCalendarPickerSelect.end:
-        _defaultDate = !isLunar
-            ? _endDate
-            : LFDate.parseFromString(_endDate.toCalLunarDateString()).dateTime;
-        break;
-    }
+    _date = widget.date ?? LFDate.now().dateTime;
+    _defaultDate = _date;
   }
 
   @override
@@ -122,13 +82,14 @@ class _CalendarDatePickerContentState
 
   @override
   Widget build(BuildContext context) {
-    final pickerSelect = widget.pickerSelect;
-    final isLunar = widget.isLunar;
-    final activeColor = widget.activeColor;
-    final inactiveColor = widget.inactiveColor;
-    final startText = widget.startText;
-    final endText = widget.endText;
+    final activeColor = widget.activeColor ??
+        LFComponentConfigure.shared.pickerCalendar?.activeColor ??
+        Colors.blueAccent;
     final okText = widget.okText;
+    final okTextStyle = widget.okTextStyle;
+    final okTextBackgroundColor = widget.okTextBackgroundColor;
+    final okTextBorderColor = widget.okTextBorderColor;
+    final okTextPadding = widget.okTextPadding;
 
     return Dialog(
       insetPadding:
@@ -143,112 +104,6 @@ class _CalendarDatePickerContentState
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            /// Header
-            Visibility(
-              visible: (pickerSelect != LFCalendarPickerSelect.none),
-              child: Column(
-                children: [
-                  /// Header Start & End String
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      LFText(
-                        startText,
-                        style: TextStyle(fontSize: 14.0, color: inactiveColor),
-                        textAlign: TextAlign.left,
-                      ),
-                      LFText(
-                        endText,
-                        style: TextStyle(fontSize: 14.0, color: inactiveColor),
-                        textAlign: TextAlign.right,
-                      ),
-                    ],
-                  ),
-
-                  /// Header Start & End Date
-                  const SizedBox(height: 4.0),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            LFAutoSizeText(
-                              _startDate.toCalWeekDayDateString(
-                                  short: true,
-                                  isLunar: isLunar,
-                                  visiblePrefix: isLunar),
-                              style: TextStyle(
-                                  fontSize: !isLunar ? 18.0 : 16.0,
-                                  color: _getStartDateColor()),
-                              textAlign: TextAlign.left,
-                              minFontSize: 9,
-                            ),
-                            Visibility(
-                              visible: isLunar,
-                              child: Padding(
-                                padding: const EdgeInsets.only(top: 2.0),
-                                child: LFText(
-                                  _startDate.toCalWeekDayDateString(
-                                      short: true,
-                                      isLunar: false,
-                                      visiblePrefix: isLunar),
-                                  style: TextStyle(
-                                      fontSize: 14.0, color: inactiveColor),
-                                  textAlign: TextAlign.left,
-                                  maxLines: 2,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      const Icon(
-                        Icons.arrow_forward_ios,
-                        size: 19.0,
-                        color: Colors.black54,
-                      ),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            LFAutoSizeText(
-                              _endDate.toCalWeekDayDateString(
-                                  short: true,
-                                  isLunar: isLunar,
-                                  visiblePrefix: isLunar),
-                              style: TextStyle(
-                                  fontSize: !isLunar ? 18.0 : 16.0,
-                                  color: _getEndDateColor()),
-                              textAlign: TextAlign.right,
-                              minFontSize: 9,
-                            ),
-                            Visibility(
-                              visible: isLunar,
-                              child: Padding(
-                                padding: const EdgeInsets.only(top: 2.0),
-                                child: LFText(
-                                  _endDate.toCalWeekDayDateString(
-                                      short: true,
-                                      isLunar: isLunar,
-                                      visiblePrefix: isLunar),
-                                  style: TextStyle(
-                                      fontSize: 14.0, color: inactiveColor),
-                                  textAlign: TextAlign.right,
-                                  maxLines: 2,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 15.0),
-                ],
-              ),
-            ),
-
             /// Calendar
             LFCalendarView(
               defaultDate: _defaultDate,
@@ -276,26 +131,16 @@ class _CalendarDatePickerContentState
               child: Row(
                 children: [
                   Expanded(
-                    child: GestureDetector(
-                      onTap: () {
+                    child: LFDialogOKButton(
+                      autoPop: false,
+                      text: okText,
+                      textStyle: okTextStyle,
+                      backgroundColor: okTextBackgroundColor,
+                      borderColor: okTextBorderColor,
+                      padding: okTextPadding,
+                      onPressed: () {
                         _onCallBackOK(context);
                       },
-                      child: Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(14.0),
-                          color: activeColor,
-                        ),
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 12.0, horizontal: 20.0),
-                        child: LFText(
-                          okText,
-                          style: const TextStyle(
-                            fontSize: 18.0,
-                            color: Colors.white,
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
-                      ),
                     ),
                   ),
                 ],
@@ -309,145 +154,19 @@ class _CalendarDatePickerContentState
 
   void _updateSelectDate(DateTime? selectedDate) {
     if (selectedDate == null) return;
-    final isAllDay = widget.isAllDay;
-    final isLunar = widget.isLunar;
-    final pickerSelect = widget.pickerSelect;
-    final dateTime = !isLunar
-        ? selectedDate
-        : LFDate.parseFromString(selectedDate.toCalSolarDateString()).dateTime;
-    switch (pickerSelect) {
-      case LFCalendarPickerSelect.none:
-      case LFCalendarPickerSelect.start:
-        if (!isAllDay) {
-          final isAfter = dateTime.isAfter(_endDate);
-          if (isAfter) {
-            setState(() {
-              _startDate = dateTime;
-              _endDate = dateTime;
-            });
-          } else {
-            setState(() {
-              _startDate = dateTime;
-            });
-          }
-        } else {
-          setState(() {
-            _startDate = dateTime;
-            _endDate = dateTime;
-          });
-        }
-        break;
-      case LFCalendarPickerSelect.end:
-        if (!isAllDay) {
-          setState(() {
-            _endDate = dateTime;
-          });
-        } else {
-          setState(() {
-            _startDate = dateTime;
-            _endDate = dateTime;
-          });
-        }
-        break;
-    }
+    final dateTime = selectedDate;
+    setState(() {
+      _date = dateTime;
+    });
   }
 
   void _onCallBackOK(BuildContext context) {
-    final isAllDay = widget.isAllDay;
-    final pickerSelect = widget.pickerSelect;
+    final date = _date.toCalYearMonthDayString();
+    final time = _date.toCalHHmmString();
+    final updateDateTime = LFDate.parseFromString('$date $time').dateTime;
 
-    late DateTime fromDateTime;
-    late DateTime toDateTime;
-    late DateTime resultDateTime;
-
-    final startDate = _startDate.toCalYearMonthDayString();
-    final startTime = _startDate.toCalHHmmString();
-    final endDate = _endDate.toCalYearMonthDayString();
-    final updateStartDateTime =
-        LFDate.parseFromString('$startDate $startTime').dateTime;
-    final updateEndDateTime =
-        LFDate.parseFromString('$endDate $startTime').dateTime;
-
-    if (updateStartDateTime.isSameDateTime(updateEndDateTime, onlyDate: true)) {
-      _startDate = updateStartDateTime.toCalDayStartDateTime();
-      _endDate = updateEndDateTime.toCalDayEndDateTime();
-    }
-
-    switch (pickerSelect) {
-      case LFCalendarPickerSelect.none:
-      case LFCalendarPickerSelect.start:
-        fromDateTime = _startDate;
-        toDateTime = _endDate;
-        resultDateTime = _startDate;
-        break;
-      case LFCalendarPickerSelect.end:
-        fromDateTime = _endDate;
-        toDateTime = _startDate;
-        resultDateTime = _endDate;
-        break;
-    }
-
-    final f =
-        LFDate.parseFromString(fromDateTime.toCalYearMonthDayString()).dateTime;
-    final t =
-        LFDate.parseFromString(toDateTime.toCalYearMonthDayString()).dateTime;
-
-    String? validMessage;
-
-    switch (pickerSelect) {
-      case LFCalendarPickerSelect.none:
-        break;
-      case LFCalendarPickerSelect.start:
-        if (f.isAfter(t) && !isAllDay) {
-          validMessage = widget.validStartMessage;
-        }
-        break;
-      case LFCalendarPickerSelect.end:
-        if (f.isBefore(t) && !isAllDay) {
-          validMessage = widget.validEndMessage;
-        }
-        break;
-    }
-
-    if (validMessage != null) {
-      LFToast.showToast(context, message: validMessage);
-      return;
-    }
-
-    widget.onOK?.call(pickerSelect, resultDateTime);
+    widget.onOK?.call(updateDateTime);
 
     Navigator.of(context).pop();
-  }
-
-  Color _getStartDateColor() {
-    final isAllDay = widget.isAllDay;
-    final pickerSelect = widget.pickerSelect;
-
-    if (isAllDay) return widget.activeColor;
-
-    switch (pickerSelect) {
-      case LFCalendarPickerSelect.none:
-        return widget.activeColor;
-      case LFCalendarPickerSelect.start:
-        return widget.activeColor;
-      case LFCalendarPickerSelect.end:
-        return widget.inactiveColor;
-    }
-  }
-
-  Color _getEndDateColor() {
-    final isAllDay = widget.isAllDay;
-    final pickerSelect = widget.pickerSelect;
-
-    if (isAllDay) return widget.activeColor;
-
-    switch (pickerSelect) {
-      case LFCalendarPickerSelect.none:
-        return widget.activeColor;
-      case LFCalendarPickerSelect.start:
-        return widget.inactiveColor;
-      case LFCalendarPickerSelect.end:
-        return widget.activeColor;
-    }
   }
 }

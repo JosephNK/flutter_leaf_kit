@@ -65,10 +65,20 @@ class LFBottomSheetConfigure {
   });
 }
 
+/// Picker Calendar Configure
+class LFPickerCalendarConfigure {
+  final Color? activeColor;
+
+  LFPickerCalendarConfigure({
+    this.activeColor = Colors.blueAccent,
+  });
+}
+
 class LFAppComponentConfigure {
   LFAppBarComponentConfigure? appBar;
   LFAlertDialogConfigure? alert;
   LFBottomSheetConfigure? bottomSheet;
+  LFPickerCalendarConfigure? pickerCalendar;
 
   LFAppComponentConfigure();
 
@@ -83,6 +93,10 @@ class LFAppComponentConfigure {
   LFBottomSheetConfigure? setupBottomSheet() {
     return null;
   }
+
+  LFPickerCalendarConfigure? setupPickerCalendar() {
+    return null;
+  }
 }
 
 class LFComponentConfigure {
@@ -95,15 +109,18 @@ class LFComponentConfigure {
     _appBarComponentConfigure = configure?.setupAppbar();
     _alertComponentConfigure = configure?.setupAlert();
     _bottomSheetComponentConfigure = configure?.setupBottomSheet();
+    _pickerCalendarConfigure = configure?.setupPickerCalendar();
     return this;
   }
 
   LFAppBarComponentConfigure? _appBarComponentConfigure;
   LFAlertDialogConfigure? _alertComponentConfigure;
   LFBottomSheetConfigure? _bottomSheetComponentConfigure;
+  LFPickerCalendarConfigure? _pickerCalendarConfigure;
 
   /// Getter
   LFAppBarComponentConfigure? get appBar => _appBarComponentConfigure;
   LFAlertDialogConfigure? get alert => _alertComponentConfigure;
   LFBottomSheetConfigure? get bottomSheet => _bottomSheetComponentConfigure;
+  LFPickerCalendarConfigure? get pickerCalendar => _pickerCalendarConfigure;
 }
