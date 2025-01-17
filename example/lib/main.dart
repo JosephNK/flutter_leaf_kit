@@ -92,7 +92,7 @@ class ExampleApp extends StatelessWidget {
             // navigatorObservers: [
             //   FirebaseAnalyticsObserver(analytics: analytics),
             // ],
-            theme: ThemeData(useMaterial3: true),
+            theme: ThemeData(useMaterial3: false),
             builder: (context, widget) {
               // ErrorWidget.builder = (errorDetails) {
               //   return BFRenderErrorPage(
