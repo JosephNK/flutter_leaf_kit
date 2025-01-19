@@ -79,6 +79,26 @@ class LFWebViewController {
   Future<void> clearLocalStorage() async {
     await webViewController.clearLocalStorage();
   }
+
+  Future<bool> canGoBack() async {
+    return await webViewController.canGoBack();
+  }
+
+  Future<bool> canGoForward() async {
+    return await webViewController.canGoForward();
+  }
+
+  Future<void> goBack() async {
+    await webViewController.goBack();
+  }
+
+  Future<void> goForward() async {
+    await webViewController.goForward();
+  }
+
+  Future<void> reload() async {
+    await webViewController.reload();
+  }
 }
 
 class LFWebView extends StatefulWidget {
