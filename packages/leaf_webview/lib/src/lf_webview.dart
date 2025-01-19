@@ -70,6 +70,14 @@ class LFWebViewController {
   Future<void> setUserAgent(String userAgent) async {
     await webViewController.setUserAgent(userAgent);
   }
+
+  Future<void> clearCache() async {
+    await webViewController.clearCache();
+  }
+
+  Future<void> clearLocalStorage() async {
+    await webViewController.clearLocalStorage();
+  }
 }
 
 class LFWebView extends StatefulWidget {
