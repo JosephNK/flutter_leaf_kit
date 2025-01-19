@@ -222,11 +222,11 @@ class _LFWebViewState extends State<LFWebView> {
     }
 
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      onBeforeLoaded?.call();
+      await onBeforeLoaded?.call();
       if (uri != null) {
-        controller.loadRequest(uri);
+        await controller.loadRequest(uri);
       }
-      onLoaded?.call();
+      await onLoaded?.call();
     });
   }
 
