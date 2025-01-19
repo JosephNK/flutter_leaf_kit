@@ -6,6 +6,7 @@ enum LFWebViewEventType {
   geo,
 }
 
+typedef LFWebViewOnBeforeLoaded = Function();
 typedef LFWebViewOnLoaded = Function();
 typedef LFWebViewOnLoaderBuilder = Widget Function();
 typedef LFWebViewOnHeightFinished = Function(double height);
@@ -87,6 +88,7 @@ class LFWebView extends StatefulWidget {
   final double initHeight;
   final Color backgroundColor;
   final bool allowAllowOrientation;
+  final LFWebViewOnBeforeLoaded? onBeforeLoaded;
   final LFWebViewOnLoaded? onLoaded;
   final LFWebViewOnLoaderBuilder? onLoaderBuilder;
   final LFWebViewOnHeightFinished? onHeightFinished;
@@ -100,6 +102,7 @@ class LFWebView extends StatefulWidget {
     this.initHeight = 0.0,
     this.backgroundColor = const Color(0x00000000),
     this.allowAllowOrientation = false,
+    this.onBeforeLoaded,
     this.onLoaded,
     this.onLoaderBuilder,
     this.onHeightFinished,
@@ -125,6 +128,7 @@ class _LFWebViewState extends State<LFWebView> {
     final backgroundColor = widget.backgroundColor;
     final allowAllowOrientation = widget.allowAllowOrientation;
     final uri = widget.uri;
+    final onBeforeLoaded = widget.onBeforeLoaded;
     final onLoaded = widget.onLoaded;
 
     _contentHeight = initHeight;
@@ -218,6 +222,7 @@ class _LFWebViewState extends State<LFWebView> {
     }
 
     WidgetsBinding.instance.addPostFrameCallback((_) async {
+      onBeforeLoaded?.call();
       if (uri != null) {
         controller.loadRequest(uri);
       }
