@@ -53,6 +53,7 @@ class LFTextField extends StatefulWidget {
   final String? errorText;
   final FocusNode? focusNode;
   final String? placeHolder;
+  final String? counterText;
   final TextInputType keyboardType;
   final TextInputAction textInputAction;
   final TextAlign textAlign;
@@ -101,6 +102,7 @@ class LFTextField extends StatefulWidget {
     this.obscureText = false,
     this.errorText,
     this.placeHolder = 'PlaceHolder',
+    this.counterText,
     this.keyboardType = TextInputType.text,
     this.textInputAction = TextInputAction.done,
     this.textAlign = TextAlign.left,
@@ -218,6 +220,7 @@ class _LFTextFieldState extends State<LFTextField> {
     final textStyle = widget.textStyle;
     final errorText = widget.errorText;
     final placeHolder = widget.placeHolder;
+    final counterText = widget.counterText;
     final keyboardType = widget.keyboardType;
     final textInputAction = widget.textInputAction;
     final textAlign = widget.textAlign;
@@ -343,7 +346,7 @@ class _LFTextFieldState extends State<LFTextField> {
         filled: true,
         contentPadding: contentPadding,
         floatingLabelBehavior: FloatingLabelBehavior.auto,
-        counterText: '',
+        counterText: counterText,
         error: errorWidget,
         errorText: errorText,
         errorStyle: isEmpty(errorText)

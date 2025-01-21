@@ -59,60 +59,63 @@ class _TextFieldScreenState extends ScreenState<TextFieldScreen> {
   @override
   Widget buildBody(BuildContext context, Object? state) {
     return SingleChildScrollView(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const SizedBox(height: 10.0),
-          LFTextField(
-            controller: _textController1,
-            placeHolder: 'Normal Typing..',
-            maxLength: 10,
-            onChanged: (text) {
-              debugPrint('LFTextField onChanged: $text');
-            },
-          ),
-          const SizedBox(height: 10.0),
-          LFTextField(
-            controller: _textController2,
-            placeHolder: 'ReadOnly Typing..',
-            suffixIcon: const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 8.0),
-              child: Icon(Icons.ac_unit),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            LFTextField(
+              controller: _textController1,
+              placeHolder: 'Normal Typing..',
+              maxLength: 10,
+              onChanged: (text) {
+                debugPrint('LFTextField onChanged: $text');
+              },
             ),
-            // contentPadding: const EdgeInsets.all(0.0),
-            readOnly: true,
-          ),
-          const SizedBox(height: 10.0),
-          LFTextField(
-            controller: _textController3,
-            placeHolder: 'Disabled Typing..',
-            disabled: true,
-          ),
-          const SizedBox(height: 10.0),
-          LFTextField(
-            controller: _textController4,
-            placeHolder: 'Error Typing..',
-            errorText: 'error message',
-            errorTextStyle: const TextStyle(color: Colors.orange),
-          ),
-          const SizedBox(height: 10.0),
-          LFTextField(
-            controller: _textController5,
-            placeHolder: 'Error Typing..',
-            errorWidget: const Text('Error Widget'),
-            errorText: null,
-          ),
-          // const SizedBox(height: 10.0),
-          TextAreaView(
-            controller: _textController6,
-          ),
-          Container(
-            height: 300.0,
-          ),
-          // const SizedBox(height: 10.0),
-          // TextField(),
-        ],
+            const Divider(),
+            LFTextField(
+              controller: _textController2,
+              placeHolder: 'ReadOnly Typing..',
+              suffixIcon: const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 8.0),
+                child: Icon(Icons.ac_unit),
+              ),
+              // contentPadding: const EdgeInsets.all(0.0),
+              readOnly: true,
+            ),
+            const Divider(),
+            LFTextField(
+              controller: _textController3,
+              placeHolder: 'Disabled Typing..',
+              disabled: true,
+            ),
+            const Divider(),
+            LFTextField(
+              controller: _textController4,
+              placeHolder: 'Error Typing..',
+              errorText: 'error message',
+              errorTextStyle: const TextStyle(color: Colors.orange),
+            ),
+            const Divider(),
+            LFTextField(
+              controller: _textController5,
+              placeHolder: 'Error Typing..',
+              errorWidget: Container(
+                color: Colors.orange.shade50,
+                child: const Text('Error Widget'),
+              ),
+              errorText: null,
+            ),
+            const Divider(),
+            TextAreaView(
+              controller: _textController6,
+            ),
+            Container(
+              height: 300.0,
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -149,6 +152,7 @@ class _TextAreaViewState extends State<TextAreaView> {
           minLines: 5,
           maxLines: 5,
           maxLength: 11,
+          counterText: '',
           onChanged: (text) {
             final text_ = controller.text;
             setState(() {
