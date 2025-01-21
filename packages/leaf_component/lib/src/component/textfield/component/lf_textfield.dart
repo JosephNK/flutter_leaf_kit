@@ -50,10 +50,8 @@ class LFTextField extends StatefulWidget {
   final bool enableClearButton;
   final bool onlyUnderline;
   final bool obscureText;
-  final String? errorText;
-  final FocusNode? focusNode;
   final String? placeHolder;
-  final String? counterText;
+  final FocusNode? focusNode;
   final TextInputType keyboardType;
   final TextInputAction textInputAction;
   final TextAlign textAlign;
@@ -78,7 +76,11 @@ class LFTextField extends StatefulWidget {
   final Widget? prefixIcon;
   final Widget? suffixIcon;
   final Widget? clearIcon;
+  final Widget? counterWidget;
+  final String? counterText;
+  final TextStyle? countTextStyle;
   final Widget? errorWidget;
+  final String? errorText;
   final TextStyle? errorTextStyle;
   final BoxConstraints? prefixIconConstraints;
   final BoxConstraints? suffixIconConstraints;
@@ -100,9 +102,7 @@ class LFTextField extends StatefulWidget {
     this.enableClearButton = true,
     this.onlyUnderline = true,
     this.obscureText = false,
-    this.errorText,
     this.placeHolder = 'PlaceHolder',
-    this.counterText,
     this.keyboardType = TextInputType.text,
     this.textInputAction = TextInputAction.done,
     this.textAlign = TextAlign.left,
@@ -128,6 +128,10 @@ class LFTextField extends StatefulWidget {
     this.prefixIcon,
     this.suffixIcon,
     this.clearIcon,
+    this.counterWidget,
+    this.counterText,
+    this.countTextStyle,
+    this.errorText,
     this.errorWidget,
     this.errorTextStyle,
     this.prefixIconConstraints,
@@ -218,9 +222,7 @@ class _LFTextFieldState extends State<LFTextField> {
     final enableClearButton = widget.enableClearButton;
     final obscureText = widget.obscureText;
     final textStyle = widget.textStyle;
-    final errorText = widget.errorText;
     final placeHolder = widget.placeHolder;
-    final counterText = widget.counterText;
     final keyboardType = widget.keyboardType;
     final textInputAction = widget.textInputAction;
     final textAlign = widget.textAlign;
@@ -246,7 +248,11 @@ class _LFTextFieldState extends State<LFTextField> {
     final prefixIcon = widget.prefixIcon;
     final suffixIcon = widget.suffixIcon;
     final clearIcon = widget.clearIcon;
+    final counterWidget = widget.counterWidget;
+    final counterText = widget.counterText;
+    final countTextStyle = widget.countTextStyle;
     final errorWidget = widget.errorWidget;
+    final errorText = widget.errorText;
     final errorTextStyle = widget.errorTextStyle;
     final prefixIconConstraints = widget.prefixIconConstraints;
     final suffixIconConstraints = widget.suffixIconConstraints;
@@ -340,18 +346,18 @@ class _LFTextFieldState extends State<LFTextField> {
         suffixIcon: suffixIconWidget,
         prefixIconConstraints: prefixIconConstraints,
         suffixIconConstraints: suffixIconConstraints,
-        isDense: true,
-        isCollapsed: true,
+        isDense: true, // true로 설정하면 기본 여백보다 조금 더 조밀한 레이아웃
+        isCollapsed: true, // true로 설정하면 TextField가 최소한의 크기로 축소
         fillColor: inputBackgroundColor,
         filled: true,
         contentPadding: contentPadding,
         floatingLabelBehavior: FloatingLabelBehavior.auto,
+        counter: counterWidget,
         counterText: counterText,
+        counterStyle: isEmpty(counterText) ? null : countTextStyle,
         error: errorWidget,
         errorText: errorText,
-        errorStyle: isEmpty(errorText)
-            ? null
-            : errorTextStyle ?? const TextStyle(height: 0.0),
+        errorStyle: isEmpty(errorText) ? null : errorTextStyle,
         hintText: isNotEmpty(placeHolder) ? placeHolder : null,
         hintStyle: isNotEmpty(placeHolder)
             ? textFieldTextStyle.copyWith(
