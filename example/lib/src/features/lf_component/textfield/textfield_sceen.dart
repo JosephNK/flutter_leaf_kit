@@ -19,6 +19,7 @@ class _TextFieldScreenState extends ScreenState<TextFieldScreen> {
   final _textController3 = LFTextFieldController();
   final _textController4 = LFTextFieldController();
   final _textController5 = LFTextFieldController();
+  final _textController6 = LFTextFieldController();
 
   @override
   Color? get backgroundColor => Colors.white;
@@ -26,7 +27,7 @@ class _TextFieldScreenState extends ScreenState<TextFieldScreen> {
   @override
   void initState() {
     // _textController1.text = '12345678901';
-    _textController5.text = '1234567890-12345';
+    _textController6.text = '1234567890-12345';
 
     super.initState();
   }
@@ -38,6 +39,7 @@ class _TextFieldScreenState extends ScreenState<TextFieldScreen> {
     _textController3.dispose();
     _textController4.dispose();
     _textController5.dispose();
+    _textController6.dispose();
 
     super.dispose();
   }
@@ -92,10 +94,18 @@ class _TextFieldScreenState extends ScreenState<TextFieldScreen> {
             controller: _textController4,
             placeHolder: 'Error Typing..',
             errorText: 'error message',
+            errorTextStyle: const TextStyle(color: Colors.orange),
           ),
           const SizedBox(height: 10.0),
-          TextAreaView(
+          LFTextField(
             controller: _textController5,
+            placeHolder: 'Error Typing..',
+            errorWidget: const Text('Error Widget'),
+            errorText: null,
+          ),
+          // const SizedBox(height: 10.0),
+          TextAreaView(
+            controller: _textController6,
           ),
           Container(
             height: 300.0,

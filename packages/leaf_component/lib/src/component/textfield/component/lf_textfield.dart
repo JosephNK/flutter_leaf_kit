@@ -77,6 +77,8 @@ class LFTextField extends StatefulWidget {
   final Widget? prefixIcon;
   final Widget? suffixIcon;
   final Widget? clearIcon;
+  final Widget? errorWidget;
+  final TextStyle? errorTextStyle;
   final BoxConstraints? prefixIconConstraints;
   final BoxConstraints? suffixIconConstraints;
   final List<TextInputFormatter>? inputFormatters;
@@ -124,6 +126,8 @@ class LFTextField extends StatefulWidget {
     this.prefixIcon,
     this.suffixIcon,
     this.clearIcon,
+    this.errorWidget,
+    this.errorTextStyle,
     this.prefixIconConstraints,
     this.suffixIconConstraints,
     this.inputFormatters,
@@ -239,6 +243,8 @@ class _LFTextFieldState extends State<LFTextField> {
     final prefixIcon = widget.prefixIcon;
     final suffixIcon = widget.suffixIcon;
     final clearIcon = widget.clearIcon;
+    final errorWidget = widget.errorWidget;
+    final errorTextStyle = widget.errorTextStyle;
     final prefixIconConstraints = widget.prefixIconConstraints;
     final suffixIconConstraints = widget.suffixIconConstraints;
     final inputFormatters = widget.inputFormatters;
@@ -338,8 +344,11 @@ class _LFTextFieldState extends State<LFTextField> {
         contentPadding: contentPadding,
         floatingLabelBehavior: FloatingLabelBehavior.auto,
         counterText: '',
+        error: errorWidget,
         errorText: errorText,
-        errorStyle: (errorText == null) ? null : const TextStyle(height: 0.0),
+        errorStyle: isEmpty(errorText)
+            ? null
+            : errorTextStyle ?? const TextStyle(height: 0.0),
         hintText: isNotEmpty(placeHolder) ? placeHolder : null,
         hintStyle: isNotEmpty(placeHolder)
             ? textFieldTextStyle.copyWith(
