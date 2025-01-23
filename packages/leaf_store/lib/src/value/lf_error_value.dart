@@ -6,6 +6,11 @@ class ErrorValueException implements Exception {
   ErrorValue value;
 
   ErrorValueException(this.value);
+
+  @override
+  String toString() {
+    return 'ErrorValueException: ${value.toJson()}';
+  }
 }
 
 ///////////////////////////////////////////////////////////////////////////////

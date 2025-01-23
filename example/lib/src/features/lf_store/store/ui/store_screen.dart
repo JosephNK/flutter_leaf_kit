@@ -31,6 +31,38 @@ class _StoreScreenState extends ScreenState<StoreScreen> {
 
   @override
   Widget buildBody(BuildContext context, Object? state) {
-    return Container();
+    return Stack(
+      children: [
+        Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Center(
+              child: LFButton(
+                text: 'Test ErrorValue',
+                onTap: () {
+                  try {
+                    const errorValue = ErrorValue(
+                      statusCode: kDefaultStatusCode,
+                      errorCode: 'E001',
+                      errorMessage: 'Error Message',
+                    );
+                    throw ErrorValueException(errorValue);
+                  } catch (e) {
+                    debugPrint('catch (original): ${e.toString()}');
+                    if (e is ErrorValueException) {
+                      final errorValue = e.value;
+                      debugPrint('catch (errorValue): $errorValue');
+                    }
+                  } finally {
+                    debugPrint('Finally');
+                  }
+                },
+              ),
+            )
+          ],
+        ),
+      ],
+    );
   }
 }
