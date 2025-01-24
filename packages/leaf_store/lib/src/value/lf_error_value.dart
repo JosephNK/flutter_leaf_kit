@@ -90,10 +90,12 @@ class ErrorValue extends Equatable {
     if (exception is ErrorValue) {
       return exception;
     }
+    final errorMessage =
+        (exception != null) ? exception.toString() : 'Unknown Exception';
     return ErrorValue(
       statusCode: kDefaultStatusCode,
       errorCode: errorCode,
-      errorMessage: 'Unknown Exception',
+      errorMessage: errorMessage,
       exception: exception,
     );
   }
