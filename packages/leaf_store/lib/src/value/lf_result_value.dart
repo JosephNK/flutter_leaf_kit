@@ -1,5 +1,7 @@
 part of '../../leaf_store.dart';
 
+typedef ResultValueOnError = Future<void> Function(
+    BuildContext context, String? errorMessage, Object? exception);
 typedef ResultValueOnErrorMessage = Future<void> Function(
     BuildContext context, String errorMessage);
 typedef ResultValueOnException = Future<void> Function(
@@ -30,6 +32,20 @@ class ResultValue<T> extends Equatable {
   }
 
   /// Chain
+
+  Future<ResultValue<T>> showIfExistError(
+    BuildContext context, {
+    ResultValueOnError? onError,
+  }) async {
+    final errorValue = this.errorValue;
+    if (errorValue == null || errorValue.errorMessage == null) return this;
+    if (context.mounted) {
+      final errorMessage = errorValue.errorMessage;
+      final exception = errorValue.exception;
+      await onError?.call(context, errorMessage, exception);
+    }
+    return this;
+  }
 
   Future<ResultValue<T>> showIfExistErrorMessage(
     BuildContext context, {
