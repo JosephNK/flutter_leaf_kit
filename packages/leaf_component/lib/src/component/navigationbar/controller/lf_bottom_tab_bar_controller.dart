@@ -6,9 +6,11 @@ abstract class LFBottomTabBarEvent {}
 
 class LFBottomTabBarSelectedEvent extends LFBottomTabBarEvent {
   final int selectedIndex;
+  final int? previousIndex;
 
   LFBottomTabBarSelectedEvent({
     required this.selectedIndex,
+    this.previousIndex,
   });
 }
 
@@ -21,10 +23,12 @@ class LFBottomTabBarItemsEvent extends LFBottomTabBarEvent {
 }
 
 class LFBottomTabBarBadgeEvent extends LFBottomTabBarEvent {
+  final List<LFBottomTabItem> tabItems;
   final int tabIndex;
   final int badgeCount;
 
   LFBottomTabBarBadgeEvent({
+    required this.tabItems,
     required this.tabIndex,
     this.badgeCount = 0,
   });
@@ -55,21 +59,37 @@ mixin LFBottomTabBarMixIn {
     streamController?.sink.add(value);
   }
 
-  void updateSelected({required int selectedIndex}) {
+  void updateSelected({required int selectedIndex, int? previousIndex}) {
     _selectedIndex = selectedIndex;
     addEvent(
-      LFBottomTabBarSelectedEvent(selectedIndex: selectedIndex),
+      LFBottomTabBarSelectedEvent(
+        selectedIndex: selectedIndex,
+        previousIndex: previousIndex,
+      ),
     );
-    tabItems = LFBottomTabBarScaffoldController.makeNewItems(tabItems,
-        selectedIndex: selectedIndex);
+    tabItems = LFBottomTabBarScaffoldController.makeNewItems(
+      tabItems,
+      selectedIndex: selectedIndex,
+    );
     addEvent(
-      LFBottomTabBarItemsEvent(tabItems: tabItems),
+      LFBottomTabBarItemsEvent(
+        tabItems: tabItems,
+      ),
     );
   }
 
   void updateTabBadge({required int tabIndex, required int badgeCount}) {
+    tabItems = LFBottomTabBarScaffoldController.makeUpdateBadgeItems(
+      tabItems,
+      selectedIndex: selectedIndex,
+      badgeCount: badgeCount,
+    );
     addEvent(
-      LFBottomTabBarBadgeEvent(tabIndex: tabIndex, badgeCount: badgeCount),
+      LFBottomTabBarBadgeEvent(
+        tabItems: tabItems,
+        tabIndex: tabIndex,
+        badgeCount: badgeCount,
+      ),
     );
   }
 }

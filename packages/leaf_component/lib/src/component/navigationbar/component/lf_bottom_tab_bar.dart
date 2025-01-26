@@ -1,7 +1,14 @@
 part of '../navigationbar.dart';
 
 typedef LFBottomTabBarOnPressed = void Function(
-  int index,
+  int selectedIndex,
+  bool isActive,
+);
+
+typedef LFBottomTabBarOnSelected = void Function(
+  int selectedIndex,
+  int? previousIndex,
+  bool isActive,
 );
 
 class LFBottomTabBar extends StatefulWidget {
@@ -18,6 +25,7 @@ class LFBottomTabBar extends StatefulWidget {
   final double notchMargin;
   final bool show;
   final LFBottomTabBarOnPressed? onPressed;
+  final LFBottomTabBarOnSelected? onSelected;
 
   const LFBottomTabBar({
     super.key,
@@ -34,6 +42,7 @@ class LFBottomTabBar extends StatefulWidget {
     this.notchMargin = 4.0,
     this.show = true,
     this.onPressed,
+    this.onSelected,
   });
 
   @override
@@ -58,10 +67,15 @@ class _LFBottomTabBarState extends State<LFBottomTabBar> {
         .listen((event) {
       if (event is LFBottomTabBarSelectedEvent) {
         final selectedIndex = event.selectedIndex;
+        final previousIndex = event.previousIndex;
+
+        final isActive = (selectedIndex == previousIndex);
 
         setState(() {
           _selectedIndex = selectedIndex;
         });
+
+        widget.onSelected?.call(selectedIndex, previousIndex, isActive);
       }
 
       if (event is LFBottomTabBarItemsEvent) {
@@ -73,20 +87,12 @@ class _LFBottomTabBarState extends State<LFBottomTabBar> {
       }
 
       if (event is LFBottomTabBarBadgeEvent) {
-        final tabIndex = event.tabIndex;
-        final badgeCount = event.badgeCount;
-
-        final newItems = _tabItems.map((item) {
-          if (item.bottomTabIndex.tabIndex == tabIndex) {
-            return item.copyWith(
-              badgeCount: badgeCount,
-            );
-          }
-          return item;
-        }).toList();
+        final tabItems = event.tabItems;
+        // final tabIndex = event.tabIndex;
+        // final badgeCount = event.badgeCount;
 
         setState(() {
-          _tabItems = newItems;
+          _tabItems = tabItems;
         });
       }
     });
@@ -112,9 +118,6 @@ class _LFBottomTabBarState extends State<LFBottomTabBar> {
     final padding = widget.padding;
     final height = widget.height;
 
-    final items = _tabItems;
-    final selectedIndex = _selectedIndex;
-
     return Visibility(
       visible: show,
       child: Container(
@@ -138,24 +141,17 @@ class _LFBottomTabBarState extends State<LFBottomTabBar> {
             //     ),
             //   ),
             // ),
-            child: Container(
-              child: _buildRow(
-                context,
-                items: items,
-                selectedIndex: selectedIndex,
-              ),
-            ),
+            child: _buildRow(context),
           ),
         ),
       ),
     );
   }
 
-  Widget _buildRow(
-    BuildContext context, {
-    required List<LFBottomTabItem> items,
-    required int selectedIndex,
-  }) {
+  Widget _buildRow(BuildContext context) {
+    final items = _tabItems;
+    final selectedIndex = _selectedIndex;
+
     return Row(
       children: [
         ...items.asMap().entries.map((e) {
@@ -174,7 +170,8 @@ class _LFBottomTabBarState extends State<LFBottomTabBar> {
             child: GestureDetector(
               behavior: HitTestBehavior.opaque,
               onTap: () {
-                widget.onPressed?.call(index);
+                final isActive = (selectedIndex == index);
+                widget.onPressed?.call(index, isActive);
               },
               child: LSBottomTextIcon(
                 type: widget.type,

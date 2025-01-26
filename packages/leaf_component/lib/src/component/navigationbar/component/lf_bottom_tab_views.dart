@@ -36,6 +36,7 @@ class _LFBottomTabBarViewsState extends State<LFBottomTabBarViews> {
         .listen((event) {
       if (event is LFBottomTabBarViewsSelectedEvent) {
         final selectedIndex = event.selectedIndex;
+        // final previousIndex = event.previousIndex;
 
         setState(() {
           _selectedIndex = selectedIndex;

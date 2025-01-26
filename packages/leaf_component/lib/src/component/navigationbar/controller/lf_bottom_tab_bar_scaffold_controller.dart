@@ -15,8 +15,14 @@ class LFBottomTabBarScaffoldController {
   int get selectedIndex => _selectedIndex;
   set selectedIndex(int index) {
     _selectedIndex = index;
-    tabBarViewsController.updateSelected(selectedIndex: index);
-    tabBarController.updateSelected(selectedIndex: index);
+    tabBarViewsController.updateSelected(
+      selectedIndex: index,
+      previousIndex: _previousIndex,
+    );
+    tabBarController.updateSelected(
+      selectedIndex: index,
+      previousIndex: _previousIndex,
+    );
     addChangeIndexEvent(index);
   }
 
@@ -57,5 +63,21 @@ class LFBottomTabBarScaffoldController {
             (index == item.bottomTabIndex.tabIndex) ? didSelected : false,
       ));
     }).toList();
+  }
+
+  static List<LFBottomTabItem> makeUpdateBadgeItems(
+    List<LFBottomTabItem> tabItems, {
+    required int selectedIndex,
+    int badgeCount = 0,
+  }) {
+    final newItems = tabItems.map((item) {
+      if (item.bottomTabIndex.tabIndex == selectedIndex) {
+        return item.copyWith(
+          badgeCount: badgeCount,
+        );
+      }
+      return item;
+    }).toList();
+    return newItems;
   }
 }

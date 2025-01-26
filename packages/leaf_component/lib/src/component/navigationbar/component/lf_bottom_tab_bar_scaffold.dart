@@ -1,5 +1,15 @@
 part of '../navigationbar.dart';
 
+typedef LFBottomTabBarScaffoldOnPressed = void Function(
+  int selectedIndex,
+  bool isActive,
+);
+typedef LFBottomTabBarScaffoldOnSelected = void Function(
+  int selectedIndex,
+  int? previousIndex,
+  bool isActive,
+);
+
 class LFBottomTabBarScaffold extends StatefulWidget {
   final LFBottomTabBarScaffoldController scaffoldController;
   final List<LFBottomTabItem> tabItems;
@@ -17,7 +27,8 @@ class LFBottomTabBarScaffold extends StatefulWidget {
   final List<BoxShadow>? boxShadow;
   final bool isShowTabBar;
   final bool autoSelected;
-  final ValueChanged<int>? onPressed;
+  final LFBottomTabBarScaffoldOnPressed? onPressed;
+  final LFBottomTabBarScaffoldOnSelected? onSelected;
 
   const LFBottomTabBarScaffold({
     super.key,
@@ -38,6 +49,7 @@ class LFBottomTabBarScaffold extends StatefulWidget {
     this.isShowTabBar = true,
     this.autoSelected = true,
     this.onPressed,
+    this.onSelected,
   });
 
   @override
@@ -87,6 +99,7 @@ class _LFBottomTabBarScaffoldState extends State<LFBottomTabBarScaffold> {
     final autoSelected = widget.autoSelected;
     final deactivateIndex = widget.deactivateIndex;
     final onPressed = widget.onPressed;
+    final onSelected = widget.onSelected;
 
     return Scaffold(
       appBar: appbar,
@@ -106,14 +119,17 @@ class _LFBottomTabBarScaffoldState extends State<LFBottomTabBarScaffold> {
         borderRadius: borderRadius,
         boxShadow: boxShadow,
         show: isShowTabBar,
-        onPressed: (index) {
-          bool isSameIndex = (tabBarController.selectedIndex == index);
-          if (!isSameIndex && index != deactivateIndex) {
+        onPressed: (selectedIndex, isActive) {
+          bool isSameIndex = (tabBarController.selectedIndex == selectedIndex);
+          if (!isSameIndex && selectedIndex != deactivateIndex) {
             if (autoSelected) {
-              scaffoldController.selectedIndex = index;
+              scaffoldController.selectedIndex = selectedIndex;
             }
-            onPressed?.call(index);
           }
+          onPressed?.call(selectedIndex, isActive);
+        },
+        onSelected: (selectedIndex, previousIndex, isActive) {
+          onSelected?.call(selectedIndex, previousIndex, isActive);
         },
       ),
     );

@@ -6,9 +6,11 @@ abstract class LFBottomTabBarViewsEvent {}
 
 class LFBottomTabBarViewsSelectedEvent extends LFBottomTabBarViewsEvent {
   final int selectedIndex;
+  final int? previousIndex;
 
   LFBottomTabBarViewsSelectedEvent({
     required this.selectedIndex,
+    this.previousIndex,
   });
 }
 
@@ -45,10 +47,13 @@ mixin LFBottomTabBarViewsMixIn {
     streamController?.sink.add(value);
   }
 
-  void updateSelected({required int selectedIndex}) {
+  void updateSelected({required int selectedIndex, int? previousIndex}) {
     _selectedIndex = selectedIndex;
     addEvent(
-      LFBottomTabBarViewsSelectedEvent(selectedIndex: selectedIndex),
+      LFBottomTabBarViewsSelectedEvent(
+        selectedIndex: selectedIndex,
+        previousIndex: previousIndex,
+      ),
     );
     tabItems = LFBottomTabBarScaffoldController.makeNewItems(tabItems,
         selectedIndex: selectedIndex);
