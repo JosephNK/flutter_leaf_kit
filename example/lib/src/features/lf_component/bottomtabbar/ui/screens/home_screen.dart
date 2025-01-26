@@ -3,11 +3,13 @@ import 'package:flutter_leaf_kit/flutter_leaf_kit_common.dart';
 import 'package:flutter_leaf_kit/flutter_leaf_kit_component.dart';
 
 class HomeScreen extends ScreenStatefulWidget {
+  final LFBottomTabBarScaffoldController bottomTabBarScaffoldController;
   final VoidCallback? onScreenTap;
 
   const HomeScreen({
     super.key,
     super.index,
+    required this.bottomTabBarScaffoldController,
     this.onScreenTap,
   });
 
@@ -39,11 +41,17 @@ class _HomeScreenState extends ScreenState<HomeScreen> {
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
       onTap: widget.onScreenTap,
-      child: const Center(
-        child: Text(
-          'HomeScreen',
-          style: TextStyle(fontSize: 34.0),
-        ),
+      child: const Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Center(
+            child: Text(
+              'HomeScreen',
+              style: TextStyle(fontSize: 34.0),
+            ),
+          ),
+        ],
       ),
     );
   }

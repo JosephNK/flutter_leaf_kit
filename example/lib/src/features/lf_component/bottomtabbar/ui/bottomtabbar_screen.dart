@@ -129,7 +129,7 @@ class _BottomTabBarScreenState extends ScreenState<BottomTabBarScreen> {
       ],
       tabItems: _tabItems,
       selectedIndex: 1,
-      deactivateIndexes: [2],
+      // deactivateIndexes: [2],
       // radius: const BorderRadius.only(
       //   topLeft: Radius.circular(16.0),
       //   topRight: Radius.circular(16.0),
@@ -138,6 +138,7 @@ class _BottomTabBarScreenState extends ScreenState<BottomTabBarScreen> {
         return [
           HomeScreen(
             index: tabItems[0].bottomTabIndex,
+            bottomTabBarScaffoldController: _bottomTabBarScaffoldController,
           ),
           FeedScreen(
             index: tabItems[1].bottomTabIndex,
@@ -145,37 +146,25 @@ class _BottomTabBarScreenState extends ScreenState<BottomTabBarScreen> {
           ),
           SetupScreen(
             index: tabItems[2].bottomTabIndex,
-            onScreenTap: () {
-              _bottomTabBarScaffoldController.updateTabBadge(
-                tabIndex: 2,
-                badgeCount: 9,
-              );
-            },
+            bottomTabBarScaffoldController: _bottomTabBarScaffoldController,
           )
         ];
       },
-      // onPressed: (selectedIndex, isActive) async {
-      //   debugPrint('onPressed: $selectedIndex, $isActive');
-      //   // if (selectedIndex == 0) {
-      //   //   return;
-      //   // }
-      //
-      //   _bottomTabBarScaffoldController.selectedIndex = selectedIndex;
-      // },
       onSelected: (selectedIndex, previousIndex, isActive) async {
         debugPrint('onSelected: $selectedIndex, $previousIndex, $isActive');
+
         if (selectedIndex == 0) {
-          return false;
           await LFNavigation.pushNamed(
             context,
             '/ModalScreen',
             child: const ModalScreen(),
           );
-          if (previousIndex != null) {
-            _bottomTabBarScaffoldController.selectedIndex = previousIndex;
-          }
-          return true;
+          // if (previousIndex != null) {
+          //   _bottomTabBarScaffoldController.selectedIndex = previousIndex;
+          // }
+          return false;
         }
+
         return true;
       },
     );
