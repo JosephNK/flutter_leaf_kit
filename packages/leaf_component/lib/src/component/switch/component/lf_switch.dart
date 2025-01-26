@@ -3,7 +3,7 @@ part of '../switch.dart';
 class LFSwitch extends StatelessWidget {
   final bool value;
   final Color? activeTrackColor;
-  final Color? trackColor;
+  final Color? inactiveTrackColor;
   final Color? thumbColor;
   final bool isIOS;
   final ValueChanged<bool>? onChanged;
@@ -12,7 +12,7 @@ class LFSwitch extends StatelessWidget {
     super.key,
     required this.value,
     this.activeTrackColor,
-    this.trackColor,
+    this.inactiveTrackColor,
     this.thumbColor,
     this.isIOS = false,
     this.onChanged,
@@ -23,8 +23,8 @@ class LFSwitch extends StatelessWidget {
     if (isIOS) {
       return CupertinoSwitch(
         value: value,
-        activeColor: activeTrackColor,
-        trackColor: trackColor,
+        activeTrackColor: activeTrackColor,
+        inactiveTrackColor: inactiveTrackColor,
         thumbColor: thumbColor,
         applyTheme: false,
         onChanged: onChanged,
@@ -35,7 +35,7 @@ class LFSwitch extends StatelessWidget {
       thumbColor: WidgetStateProperty.resolveWith<Color?>(
         (Set<WidgetState> states) {
           if (states.contains(WidgetState.disabled)) {
-            return thumbColor?.withOpacity(0.5);
+            return thumbColor?.withValues(alpha: 0.5);
           }
           if (states.contains(WidgetState.selected)) {
             return thumbColor;
@@ -49,7 +49,7 @@ class LFSwitch extends StatelessWidget {
       trackColor: WidgetStateProperty.resolveWith<Color?>(
         (Set<WidgetState> states) {
           if (states.contains(WidgetState.disabled)) {
-            return trackColor?.withOpacity(0.5);
+            return inactiveTrackColor?.withValues(alpha: 0.5);
           }
           if (states.contains(WidgetState.selected)) {
             return activeTrackColor;
@@ -57,7 +57,7 @@ class LFSwitch extends StatelessWidget {
           if (states.contains(WidgetState.hovered)) {
             return activeTrackColor;
           }
-          return trackColor;
+          return inactiveTrackColor;
         },
       ),
       trackOutlineWidth: WidgetStateProperty.resolveWith<double?>(

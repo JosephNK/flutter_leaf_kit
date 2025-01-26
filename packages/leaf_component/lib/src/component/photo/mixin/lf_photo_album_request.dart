@@ -11,7 +11,6 @@ mixin LFPhotoAlbumRequest {
         type: type,
         filterOption: FilterOptionGroup(
           containsPathModified: true,
-          containsLivePhotos: false,
         ),
       );
       return paths;

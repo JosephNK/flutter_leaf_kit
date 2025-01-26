@@ -71,7 +71,7 @@ class _LFPhotoListViewState extends State<LFPhotoListView> {
     _uncheckedIcon = widget.uncheckedIcon ??
         Icon(
           Icons.check_box_outline_blank,
-          color: Colors.grey.withOpacity(0.8),
+          color: Colors.grey.withValues(alpha: 0.8),
         );
 
     _scrollController.addListener(() {

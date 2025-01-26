@@ -1,5 +1,4 @@
 import 'package:flutter/foundation.dart';
-import 'package:flutter_leaf_kit/flutter_leaf_kit_common.dart';
 import 'package:flutter_leaf_kit/flutter_leaf_kit_network.dart';
 import 'package:flutter_leaf_kit/flutter_leaf_kit_store.dart';
 
@@ -45,7 +44,7 @@ class ProductsDioService extends DioService {
               contentType: MediaType('image', 'jpeg'),
             );
           })
-          .whereNotNull()
+          .nonNulls
           .toList();
       final formData = FormData.fromMap({
         'images': uploadFiles,

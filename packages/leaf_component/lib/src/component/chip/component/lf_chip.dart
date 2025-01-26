@@ -48,9 +48,10 @@ class _LFChipState extends State<LFChip> {
     final onPressed = widget.onPressed;
 
     final backgroundColor = !selected
-        ? defaultColor.withOpacity(0.4)
-        : selectedColor.withOpacity(0.5);
-    final textColor = !selected ? defaultColor : selectedColor.withOpacity(1.0);
+        ? defaultColor.withValues(alpha: 0.4)
+        : selectedColor.withValues(alpha: 0.5);
+    final textColor =
+        !selected ? defaultColor : selectedColor.withValues(alpha: 1.0);
 
     return LFInkWell(
       onTap: () {

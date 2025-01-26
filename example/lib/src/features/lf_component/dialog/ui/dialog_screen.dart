@@ -178,7 +178,7 @@ class _DialogScreenState extends ScreenState<DialogScreen> {
                 LFCalendarDatePickerDialog.show(
                   context,
                   onOK: (dateTime) {
-                    print('Selected dateTime: $dateTime');
+                    debugPrint('Selected dateTime: $dateTime');
                   },
                 );
               },
@@ -192,7 +192,7 @@ class _DialogScreenState extends ScreenState<DialogScreen> {
                 LFCalendarTimePickerDialog.show(
                   context,
                   onOK: (dateTime) {
-                    print('Selected dateTime: $dateTime');
+                    debugPrint('Selected dateTime: $dateTime');
                   },
                 );
               },

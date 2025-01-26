@@ -40,7 +40,8 @@ class LoggingManager {
         lineLength: 120, // width of the output
         colors: Platform.isAndroid, // Colorful log messages
         printEmojis: true, // Print an emoji for each log message
-        printTime: false, // Should each log print contain a timestamp
+        dateTimeFormat:
+            DateTimeFormat.none, // Should each log print contain a timestamp
       ),
       output: PlatformConsoleOutput(),
     );

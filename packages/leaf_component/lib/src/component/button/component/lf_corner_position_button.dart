@@ -91,7 +91,7 @@ class LFCornerPositionButton extends StatelessWidget {
           child: child ??
               Icon(
                 Icons.arrow_upward_sharp,
-                color: Colors.black.withOpacity(0.6),
+                color: Colors.black.withValues(alpha: 0.6),
               ),
         ),
       ),

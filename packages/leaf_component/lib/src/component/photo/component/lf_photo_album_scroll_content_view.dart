@@ -74,7 +74,7 @@ class _LFPhotoAlbumScrollContentViewState
         Visibility(
           visible: visible,
           child: Container(
-            color: Colors.black.withOpacity(0.3),
+            color: Colors.black.withValues(alpha: 0.3),
           ),
         ),
         Positioned(
@@ -311,7 +311,7 @@ class _LFPhotoAlbumEntityTileState extends State<LFPhotoAlbumEntityTile> {
                 child: Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(8.0),
-                    color: Colors.black.withOpacity(0.3),
+                    color: Colors.black.withValues(alpha: 0.3),
                   ),
                   child: const Icon(Icons.check_sharp,
                       color: Colors.white, size: 35.0),

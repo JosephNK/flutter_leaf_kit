@@ -21,7 +21,9 @@ class LFLocationManager {
       }
     }
     final position = await Geolocator.getCurrentPosition(
-      desiredAccuracy: accuracy,
+      locationSettings: LocationSettings(
+        accuracy: accuracy,
+      ),
     );
     return position;
   }

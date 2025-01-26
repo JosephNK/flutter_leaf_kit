@@ -9,7 +9,9 @@ extension GlobalKeyHelper on GlobalKey {
       final keyContext = currentContext;
       if (keyContext != null) {
         Future.delayed(delayDuration).then((value) {
-          Scrollable.ensureVisible(keyContext, duration: scrollDuration);
+          if (keyContext.mounted) {
+            Scrollable.ensureVisible(keyContext, duration: scrollDuration);
+          }
         });
       }
     } catch (e) {

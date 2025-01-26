@@ -108,7 +108,7 @@ class LFMultipartFile extends UIModel {
 
   factory LFMultipartFile.fromUri(Uri uri, {Object? payload}) {
     return LFMultipartFile(
-      payload: payload ?? const Uuid().v5(Uuid.NAMESPACE_URL, uri.path),
+      payload: payload ?? const Uuid().v5(Namespace.url.value, uri.path),
       uri: uri,
       xFile: null,
     );
@@ -116,7 +116,7 @@ class LFMultipartFile extends UIModel {
 
   factory LFMultipartFile.fromXFile(XFile xFile, {Object? payload}) {
     return LFMultipartFile(
-      payload: payload ?? const Uuid().v5(Uuid.NAMESPACE_URL, xFile.path),
+      payload: payload ?? const Uuid().v5(Namespace.url.value, xFile.path),
       uri: null,
       xFile: xFile,
     );

@@ -88,14 +88,12 @@ class _LFLockGestureDetectorState extends State<LFLockGestureDetector> {
       clipBehavior = child.clipBehavior;
       positionedWidgets = child.children
           .map((e) => e is Positioned ? e : null)
-          .whereNotNull()
+          .nonNulls
           .toList();
       child = Stack(
         clipBehavior: clipBehavior,
         children: [
-          ...child.children
-              .map((e) => e is! Positioned ? e : null)
-              .whereNotNull(),
+          ...child.children.map((e) => e is! Positioned ? e : null).nonNulls,
         ],
       );
     }

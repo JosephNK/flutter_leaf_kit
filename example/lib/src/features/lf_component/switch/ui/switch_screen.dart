@@ -35,7 +35,7 @@ class _SwitchScreenState extends ScreenState<SwitchScreen> {
   @override
   Widget buildBody(BuildContext context, Object? state) {
     const activeTrackColor = Colors.red;
-    const trackColor = Colors.grey;
+    const inactiveTrackColor = Colors.grey;
     const thumbColor = Colors.white;
 
     return Column(
@@ -49,7 +49,7 @@ class _SwitchScreenState extends ScreenState<SwitchScreen> {
             LFSwitch(
               value: _onOffCupertino,
               activeTrackColor: activeTrackColor,
-              trackColor: trackColor,
+              inactiveTrackColor: inactiveTrackColor,
               thumbColor: thumbColor,
               isIOS: true,
               onChanged: (value) {
@@ -61,7 +61,7 @@ class _SwitchScreenState extends ScreenState<SwitchScreen> {
             const LFSwitch(
               value: false,
               activeTrackColor: activeTrackColor,
-              trackColor: trackColor,
+              inactiveTrackColor: inactiveTrackColor,
               thumbColor: thumbColor,
               isIOS: true,
             ),
@@ -75,7 +75,7 @@ class _SwitchScreenState extends ScreenState<SwitchScreen> {
             LFSwitch(
               value: _onOff,
               activeTrackColor: activeTrackColor,
-              trackColor: trackColor,
+              inactiveTrackColor: inactiveTrackColor,
               thumbColor: thumbColor,
               isIOS: false,
               onChanged: (value) {
@@ -87,7 +87,7 @@ class _SwitchScreenState extends ScreenState<SwitchScreen> {
             const LFSwitch(
               value: false,
               activeTrackColor: activeTrackColor,
-              trackColor: trackColor,
+              inactiveTrackColor: inactiveTrackColor,
               thumbColor: thumbColor,
               isIOS: false,
             ),

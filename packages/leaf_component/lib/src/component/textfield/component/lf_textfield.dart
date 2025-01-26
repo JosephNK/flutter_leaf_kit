@@ -261,7 +261,7 @@ class _LFTextFieldState extends State<LFTextField> {
     final onEditingComplete = widget.onEditingComplete;
 
     final disabledBackground1Color =
-        disabledBackgroundColor ?? Colors.grey.withOpacity(0.5);
+        disabledBackgroundColor ?? Colors.grey.withValues(alpha: 0.5);
 
     /// Colors
     var inputBackgroundColor =
@@ -272,12 +272,12 @@ class _LFTextFieldState extends State<LFTextField> {
     var inputPlaceHolderColor = placeHolderColor ?? Colors.grey;
     var inputTextColor =
         disabled ? disabledTextColor ?? Colors.grey : textColor ?? Colors.black;
-    var inputBorderColor = borderColor ?? Colors.grey.withOpacity(0.2);
+    var inputBorderColor = borderColor ?? Colors.grey.withValues(alpha: 0.2);
     var inputFocusBorderColor = focusBorderColor ?? inputBorderColor;
     var inputErrorBorderColor = errorBorderColor ?? Colors.red;
     var buttonClearIconColor = disabled
         ? disabledClearIconColor ?? Colors.grey
-        : clearIconColor ?? Colors.black.withOpacity(0.6);
+        : clearIconColor ?? Colors.black.withValues(alpha: 0.6);
 
     /// TextStyle
     final textFieldTextStyle = textStyle ??

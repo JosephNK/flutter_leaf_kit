@@ -13,7 +13,7 @@ import 'package:path/path.dart' as p;
 
 import 'logger/console_output.dart';
 
-export 'package:logger/logger.dart' show PrettyPrinter;
+export 'package:logger/logger.dart' show PrettyPrinter, DateTimeFormat;
 
 part 'cancelable/cancelable_future.dart';
 part 'exception/exception.dart';

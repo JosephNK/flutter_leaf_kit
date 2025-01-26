@@ -129,14 +129,20 @@ class _LFCalendarViewState extends State<LFCalendarView> {
       final context = _providerContext;
       if (context != null) {
         if (event is LFCalendarControllerTodayEvent) {
-          onActionAtToday(context);
+          if (context.mounted) {
+            onActionAtToday(context);
+          }
         }
         if (event is LFCalendarControllerSelectedEvent) {
-          onActionAtSelected(context, event.dateTime, null,
-              useSendEvent: event.useSendEvent);
+          if (context.mounted) {
+            onActionAtSelected(context, event.dateTime, null,
+                useSendEvent: event.useSendEvent);
+          }
         }
         if (event is LFCalendarControllerMonthSelectedEvent) {
-          onActionAtMonthSelected(context, event.dateTime);
+          if (context.mounted) {
+            onActionAtMonthSelected(context, event.dateTime);
+          }
         }
       }
     });

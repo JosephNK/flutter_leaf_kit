@@ -110,7 +110,7 @@ class LFDialogCancelButton extends StatelessWidget {
         this.textStyle ?? cancelTextStyleValue ?? kDefaultDialogButtonTextStyle;
     final backgroundColor = this.backgroundColor ??
         cancelTextBackgroundColorValue ??
-        Colors.grey.withOpacity(0.5);
+        Colors.grey.withValues(alpha: 0.5);
     final borderColor = this.borderColor ?? cancelTextBorderColor;
     final padding =
         this.padding ?? buttonPadding ?? kDefaultDialogButtonPadding;

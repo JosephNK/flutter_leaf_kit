@@ -12,9 +12,9 @@ dependencies:
   flutter:
     sdk: flutter
 
-  jiffy: ^6.3.1
+  jiffy: ^6.3.2
   jiffy_klc: ^1.0.0
-  intl: ^0.19.0
+  intl: ^0.19.0 # easy_localization 3.0.7 depends on intl >=0.17.0-nullsafety <=0.19.0
 
   flutter_leaf_common:
     git:

@@ -61,30 +61,37 @@ class _LFListViewState<T> extends State<LFListView<T>>
       final animated = event.animated;
       final position = event.position;
       final duration = event.duration ?? const Duration(milliseconds: 300);
+      final mContext = context;
       switch (type) {
         case LFScrollControllerEventType.scrollToPosition:
           setClampingPhysics();
-          await scrollToPosition(
-            context,
-            animated: animated,
-            value: position,
-            animationDuration: duration,
-          );
+          if (mContext.mounted) {
+            await scrollToPosition(
+              mContext,
+              animated: animated,
+              value: position,
+              animationDuration: duration,
+            );
+          }
           resetPhysics();
           break;
         case LFScrollControllerEventType.scrollToTop:
-          await scrollToTop(
-            context,
-            animated: animated,
-            animationDuration: duration,
-          );
+          if (mContext.mounted) {
+            await scrollToTop(
+              mContext,
+              animated: animated,
+              animationDuration: duration,
+            );
+          }
           break;
         case LFScrollControllerEventType.scrollToBottom:
-          await scrollToBottom(
-            context,
-            animated: animated,
-            animationDuration: duration,
-          );
+          if (mContext.mounted) {
+            await scrollToBottom(
+              mContext,
+              animated: animated,
+              animationDuration: duration,
+            );
+          }
           break;
         case LFScrollControllerEventType.loading:
           setLoading(animated);

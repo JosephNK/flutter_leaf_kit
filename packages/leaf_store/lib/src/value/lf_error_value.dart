@@ -115,12 +115,12 @@ class ErrorValue extends Equatable {
   /// Utils
 
   static ErrorValue? getFirstErrorValues(List<ErrorValue?> errorValues) {
-    final errorValue1s = errorValues.whereNotNull().toList();
+    final errorValue1s = errorValues.nonNulls.toList();
     return errorValue1s.firstOrNull;
   }
 
   static ErrorValue? getLastErrorValues(List<ErrorValue?> errorValues) {
-    final errorValue1s = errorValues.whereNotNull().toList();
+    final errorValue1s = errorValues.nonNulls.toList();
     return errorValue1s.lastOrNull;
   }
 
@@ -129,9 +129,11 @@ class ErrorValue extends Equatable {
     required List<ErrorValue?> errorValues,
     ErrorValueOnWait? onWait,
   }) async {
-    final errorValue1s = errorValues.whereNotNull().toList();
+    final errorValue1s = errorValues.nonNulls.toList();
     await Future.forEach<ErrorValue>(errorValue1s, (errorValue) async {
-      await onWait?.call(context, errorValue);
+      if (context.mounted) {
+        await onWait?.call(context, errorValue);
+      }
     });
   }
 }

@@ -12,12 +12,12 @@ dependencies:
   flutter:
     sdk: flutter
 
-  equatable: ^2.0.5
+  equatable: ^2.0.7
   provider: ^6.1.2
 
-  collection: ^1.18.0 # depends 1.19.0
+  collection: ^1.19.0 # flutter_leaf_common from path depends on collection ^1.19.1
   easy_localization: ^3.0.7
-  logger: ^2.4.0
+  logger: ^2.5.0
   quiver: ^3.2.2
   string_validator: ^1.1.0
   async: ^2.11.0 # flutter_test from sdk depends on async 2.11.0
@@ -25,17 +25,17 @@ dependencies:
   path: ^1.9.0 # flutter_test from sdk depends on path 1.9.0
 
 # package_info_plus (temporarily override for chewie)
-dependency_overrides:
-  wakelock:
-    git:
-      url: https://github.com/diegotori/wakelock.git
-      ref: main
-      path: wakelock/
-  wakelock_windows:
-    git:
-      url: https://github.com/diegotori/wakelock.git
-      ref: main
-      path: wakelock_windows/
+#dependency_overrides:
+#  wakelock:
+#    git:
+#      url: https://github.com/diegotori/wakelock.git
+#      ref: main
+#      path: wakelock/
+#  wakelock_windows:
+#    git:
+#      url: https://github.com/diegotori/wakelock.git
+#      ref: main
+#      path: wakelock_windows/
 
 dev_dependencies:
   flutter_test:

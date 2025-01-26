@@ -224,7 +224,7 @@ class LFBorderPainter extends CustomPainter {
     final paint = Paint()
       ..style = PaintingStyle.stroke
       ..strokeWidth = 1.0
-      ..color = Colors.black.withOpacity(0.2);
+      ..color = Colors.black.withValues(alpha: 0.2);
     // final path = Path()
     //   ..moveTo(0, 0)
     //   ..lineTo(size.width, 0)

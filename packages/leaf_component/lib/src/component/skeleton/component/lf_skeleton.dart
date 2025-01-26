@@ -25,10 +25,10 @@ class LFSkeleton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final baseColor = (this.baseColor ?? Colors.grey[300] ?? Colors.grey)
-        .withOpacity(baseOpacity);
+        .withValues(alpha: baseOpacity);
     final highlightColor =
         (this.highlightColor ?? Colors.grey[100] ?? Colors.grey)
-            .withOpacity(highlightOpacity);
+            .withValues(alpha: highlightOpacity);
 
     return Shimmer.fromColors(
       baseColor: baseColor,

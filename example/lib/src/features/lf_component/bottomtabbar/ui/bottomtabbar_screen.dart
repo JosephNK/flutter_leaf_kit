@@ -67,10 +67,12 @@ class _BottomTabBarScreenState extends ScreenState<BottomTabBarScreen> {
 
   @override
   void initState() {
-    _subscription = _bottomTabBarScaffoldController.addSubscription((value) {
-      debugPrint('bottomTabBar subscription: $value');
-    });
     super.initState();
+
+    _subscription =
+        _bottomTabBarScaffoldController.addSubscription((index) async {
+      debugPrint('bottomTabBar subscription: $index');
+    });
   }
 
   @override
@@ -127,7 +129,7 @@ class _BottomTabBarScreenState extends ScreenState<BottomTabBarScreen> {
       ],
       tabItems: _tabItems,
       selectedIndex: 1,
-      autoSelected: false,
+      autoSelected: true,
       // radius: const BorderRadius.only(
       //   topLeft: Radius.circular(16.0),
       //   topRight: Radius.circular(16.0),
@@ -139,6 +141,9 @@ class _BottomTabBarScreenState extends ScreenState<BottomTabBarScreen> {
           ),
           FeedScreen(
             index: tabItems[1].bottomTabIndex,
+            onScreenTap: () {
+              _bottomTabBarScaffoldController.selectedIndex = 0;
+            },
           ),
           SetupScreen(
             index: tabItems[2].bottomTabIndex,
@@ -151,16 +156,23 @@ class _BottomTabBarScreenState extends ScreenState<BottomTabBarScreen> {
           )
         ];
       },
-      onPressed: (index) {
-        if (index == 0) {
-          LFNavigation.pushNamed(
+      onPressed: (selectedIndex, isActive) async {
+        debugPrint('onPressed: $selectedIndex, $isActive');
+        //_bottomTabBarScaffoldController.selectedIndex = index;
+      },
+      onSelected: (selectedIndex, previousIndex, isActive) async {
+        debugPrint('onSelected: $selectedIndex, $previousIndex, $isActive');
+        if (selectedIndex == 0) {
+          await LFNavigation.pushNamed(
             context,
             '/ModalScreen',
             child: const ModalScreen(),
           );
+          if (previousIndex != null) {
+            _bottomTabBarScaffoldController.selectedIndex = previousIndex;
+          }
           return;
         }
-        _bottomTabBarScaffoldController.selectedIndex = index;
       },
     );
   }
