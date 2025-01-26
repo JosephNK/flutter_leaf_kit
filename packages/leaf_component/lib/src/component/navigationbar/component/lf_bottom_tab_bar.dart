@@ -5,13 +5,14 @@ typedef LFBottomTabBarOnPressed = void Function(
   bool isActive,
 );
 
-typedef LFBottomTabBarOnSelected = void Function(
+typedef LFBottomTabBarOnSelected = Future<bool> Function(
   int selectedIndex,
   int? previousIndex,
   bool isActive,
 );
 
 class LFBottomTabBar extends StatefulWidget {
+  final LFBottomTabBarScaffoldController scaffoldController;
   final LFBottomTabBarController controller;
   final LSBottomTextIconAnimationType type;
   final Color? backgroundColor;
@@ -29,6 +30,7 @@ class LFBottomTabBar extends StatefulWidget {
 
   const LFBottomTabBar({
     super.key,
+    required this.scaffoldController,
     required this.controller,
     required this.type,
     this.backgroundColor,
@@ -64,18 +66,27 @@ class _LFBottomTabBarState extends State<LFBottomTabBar> {
 
     _streamSubscription = widget.controller.streamController?.stream
         .asBroadcastStream()
-        .listen((event) {
+        .listen((event) async {
       if (event is LFBottomTabBarSelectedEvent) {
         final selectedIndex = event.selectedIndex;
         final previousIndex = event.previousIndex;
 
         final isActive = (selectedIndex == previousIndex);
 
-        setState(() {
-          _selectedIndex = selectedIndex;
-        });
+        final result = await widget.onSelected
+                ?.call(selectedIndex, previousIndex, isActive) ??
+            true;
 
-        widget.onSelected?.call(selectedIndex, previousIndex, isActive);
+        if (result) {
+          widget.scaffoldController.tabBarViewsController.updateSelected(
+            selectedIndex: selectedIndex,
+            previousIndex: previousIndex,
+          );
+
+          setState(() {
+            _selectedIndex = selectedIndex;
+          });
+        }
       }
 
       if (event is LFBottomTabBarItemsEvent) {
@@ -149,12 +160,9 @@ class _LFBottomTabBarState extends State<LFBottomTabBar> {
   }
 
   Widget _buildRow(BuildContext context) {
-    final items = _tabItems;
-    final selectedIndex = _selectedIndex;
-
     return Row(
       children: [
-        ...items.asMap().entries.map((e) {
+        ..._tabItems.asMap().entries.map((e) {
           final index = e.key;
           final item = e.value;
 
@@ -170,12 +178,13 @@ class _LFBottomTabBarState extends State<LFBottomTabBar> {
             child: GestureDetector(
               behavior: HitTestBehavior.opaque,
               onTap: () {
-                final isActive = (selectedIndex == index);
+                final isActive = (_selectedIndex == index);
                 widget.onPressed?.call(index, isActive);
+                // widget.controller.addEvent(value)
               },
               child: LSBottomTextIcon(
                 type: widget.type,
-                selectedIndex: selectedIndex,
+                selectedIndex: _selectedIndex,
                 index: index,
                 defaultIcon: defaultIcon,
                 activeIcon: activeIcon,

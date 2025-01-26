@@ -15,10 +15,11 @@ class LFBottomTabBarScaffoldController {
   int get selectedIndex => _selectedIndex;
   set selectedIndex(int index) {
     _selectedIndex = index;
-    tabBarViewsController.updateSelected(
-      selectedIndex: index,
-      previousIndex: _previousIndex,
-    );
+    // 해당 코드는 'LFBottomTabBarSelectedEvent' 이벤트 안에서 실행 하기 위해 주석 처리
+    // tabBarViewsController.updateSelected(
+    //   selectedIndex: index,
+    //   previousIndex: _previousIndex,
+    // );
     tabBarController.updateSelected(
       selectedIndex: index,
       previousIndex: _previousIndex,

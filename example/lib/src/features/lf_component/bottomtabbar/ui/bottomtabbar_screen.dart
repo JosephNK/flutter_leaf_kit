@@ -129,7 +129,7 @@ class _BottomTabBarScreenState extends ScreenState<BottomTabBarScreen> {
       ],
       tabItems: _tabItems,
       selectedIndex: 1,
-      autoSelected: true,
+      deactivateIndexes: [2],
       // radius: const BorderRadius.only(
       //   topLeft: Radius.circular(16.0),
       //   topRight: Radius.circular(16.0),
@@ -141,9 +141,7 @@ class _BottomTabBarScreenState extends ScreenState<BottomTabBarScreen> {
           ),
           FeedScreen(
             index: tabItems[1].bottomTabIndex,
-            onScreenTap: () {
-              _bottomTabBarScaffoldController.selectedIndex = 0;
-            },
+            bottomTabBarScaffoldController: _bottomTabBarScaffoldController,
           ),
           SetupScreen(
             index: tabItems[2].bottomTabIndex,
@@ -156,13 +154,18 @@ class _BottomTabBarScreenState extends ScreenState<BottomTabBarScreen> {
           )
         ];
       },
-      onPressed: (selectedIndex, isActive) async {
-        debugPrint('onPressed: $selectedIndex, $isActive');
-        //_bottomTabBarScaffoldController.selectedIndex = index;
-      },
+      // onPressed: (selectedIndex, isActive) async {
+      //   debugPrint('onPressed: $selectedIndex, $isActive');
+      //   // if (selectedIndex == 0) {
+      //   //   return;
+      //   // }
+      //
+      //   _bottomTabBarScaffoldController.selectedIndex = selectedIndex;
+      // },
       onSelected: (selectedIndex, previousIndex, isActive) async {
         debugPrint('onSelected: $selectedIndex, $previousIndex, $isActive');
         if (selectedIndex == 0) {
+          return false;
           await LFNavigation.pushNamed(
             context,
             '/ModalScreen',
@@ -171,8 +174,9 @@ class _BottomTabBarScreenState extends ScreenState<BottomTabBarScreen> {
           if (previousIndex != null) {
             _bottomTabBarScaffoldController.selectedIndex = previousIndex;
           }
-          return;
+          return true;
         }
+        return true;
       },
     );
   }

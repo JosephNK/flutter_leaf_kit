@@ -55,10 +55,14 @@ mixin LFBottomTabBarViewsMixIn {
         previousIndex: previousIndex,
       ),
     );
-    tabItems = LFBottomTabBarScaffoldController.makeNewItems(tabItems,
-        selectedIndex: selectedIndex);
+    tabItems = LFBottomTabBarScaffoldController.makeNewItems(
+      tabItems,
+      selectedIndex: selectedIndex,
+    );
     addEvent(
-      LFBottomTabBarViewsItemsEvent(tabItems: tabItems),
+      LFBottomTabBarViewsItemsEvent(
+        tabItems: tabItems,
+      ),
     );
   }
 }

@@ -1,20 +1,10 @@
 part of '../navigationbar.dart';
 
-typedef LFBottomTabBarScaffoldOnPressed = void Function(
-  int selectedIndex,
-  bool isActive,
-);
-typedef LFBottomTabBarScaffoldOnSelected = void Function(
-  int selectedIndex,
-  int? previousIndex,
-  bool isActive,
-);
-
 class LFBottomTabBarScaffold extends StatefulWidget {
   final LFBottomTabBarScaffoldController scaffoldController;
   final List<LFBottomTabItem> tabItems;
   final int selectedIndex;
-  final int deactivateIndex;
+  final List<int> deactivateIndexes;
   final LFBottomTabBarViewsChildren children;
   final LSBottomTextIconAnimationType animationType;
   final PreferredSizeWidget? appBar;
@@ -26,9 +16,7 @@ class LFBottomTabBarScaffold extends StatefulWidget {
   final BorderRadius? borderRadius;
   final List<BoxShadow>? boxShadow;
   final bool isShowTabBar;
-  final bool autoSelected;
-  final LFBottomTabBarScaffoldOnPressed? onPressed;
-  final LFBottomTabBarScaffoldOnSelected? onSelected;
+  final LFBottomTabBarOnSelected? onSelected;
 
   const LFBottomTabBarScaffold({
     super.key,
@@ -37,7 +25,7 @@ class LFBottomTabBarScaffold extends StatefulWidget {
     required this.selectedIndex,
     required this.children,
     this.animationType = LSBottomTextIconAnimationType.none,
-    this.deactivateIndex = -1,
+    this.deactivateIndexes = const [],
     this.appBar,
     this.padding,
     this.height,
@@ -47,8 +35,6 @@ class LFBottomTabBarScaffold extends StatefulWidget {
     this.borderRadius,
     this.boxShadow,
     this.isShowTabBar = true,
-    this.autoSelected = true,
-    this.onPressed,
     this.onSelected,
   });
 
@@ -75,8 +61,15 @@ class _LFBottomTabBarScaffoldState extends State<LFBottomTabBarScaffold> {
       );
     }).toList();
 
+    // Set ScaffoldController SelectedIndex
     scaffoldController.selectedIndex = selectedIndex;
+
+    // Set TabBarViewsController SelectedIndex and TabItems
+    tabBarViewsController.selectedIndex = selectedIndex;
     tabBarViewsController.tabItems = rebuildTabItems;
+
+    // Set TabBarController SelectedIndex and TabItems
+    tabBarController.selectedIndex = selectedIndex;
     tabBarController.tabItems = tabItems;
   }
 
@@ -96,9 +89,7 @@ class _LFBottomTabBarScaffoldState extends State<LFBottomTabBarScaffold> {
     final borderRadius = widget.borderRadius;
     final boxShadow = widget.boxShadow;
     final isShowTabBar = widget.isShowTabBar;
-    final autoSelected = widget.autoSelected;
-    final deactivateIndex = widget.deactivateIndex;
-    final onPressed = widget.onPressed;
+    final deactivateIndexes = widget.deactivateIndexes;
     final onSelected = widget.onSelected;
 
     return Scaffold(
@@ -109,6 +100,7 @@ class _LFBottomTabBarScaffoldState extends State<LFBottomTabBarScaffold> {
         children: children,
       ),
       bottomNavigationBar: LFBottomTabBar(
+        scaffoldController: scaffoldController,
         controller: tabBarController,
         type: animationType,
         padding: padding,
@@ -120,16 +112,25 @@ class _LFBottomTabBarScaffoldState extends State<LFBottomTabBarScaffold> {
         boxShadow: boxShadow,
         show: isShowTabBar,
         onPressed: (selectedIndex, isActive) {
-          bool isSameIndex = (tabBarController.selectedIndex == selectedIndex);
-          if (!isSameIndex && selectedIndex != deactivateIndex) {
-            if (autoSelected) {
-              scaffoldController.selectedIndex = selectedIndex;
-            }
+          // bool isSameIndex = (tabBarController.selectedIndex == selectedIndex);
+          // if (!isSameIndex && selectedIndex != deactivateIndex) {
+          //   if (autoSelected) {
+          //     scaffoldController.selectedIndex = selectedIndex;
+          //   }
+          // }
+          if (deactivateIndexes.contains(selectedIndex)) {
+            return;
           }
-          onPressed?.call(selectedIndex, isActive);
+          scaffoldController.selectedIndex = selectedIndex;
         },
-        onSelected: (selectedIndex, previousIndex, isActive) {
-          onSelected?.call(selectedIndex, previousIndex, isActive);
+        onSelected: (selectedIndex, previousIndex, isActive) async {
+          if (deactivateIndexes.contains(selectedIndex)) {
+            return false;
+          }
+          if (onSelected == null) {
+            return true;
+          }
+          return onSelected.call(selectedIndex, previousIndex, isActive);
         },
       ),
     );

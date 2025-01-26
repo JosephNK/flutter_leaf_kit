@@ -3,11 +3,13 @@ import 'package:flutter_leaf_kit/flutter_leaf_kit_common.dart';
 import 'package:flutter_leaf_kit/flutter_leaf_kit_component.dart';
 
 class FeedScreen extends ScreenStatefulWidget {
+  final LFBottomTabBarScaffoldController bottomTabBarScaffoldController;
   final VoidCallback? onScreenTap;
 
   const FeedScreen({
     super.key,
     super.index,
+    required this.bottomTabBarScaffoldController,
     this.onScreenTap,
   });
 
@@ -39,11 +41,38 @@ class _FeedScreenState extends ScreenState<FeedScreen> {
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
       onTap: widget.onScreenTap,
-      child: const Center(
-        child: Text(
-          'FeedScreen',
-          style: TextStyle(fontSize: 34.0),
-        ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          const Center(
+            child: Text(
+              'FeedScreen',
+              style: TextStyle(fontSize: 34.0),
+            ),
+          ),
+          const Divider(),
+          LFButton(
+            text: 'Move to Index 0',
+            onTap: () {
+              widget.bottomTabBarScaffoldController.selectedIndex = 0;
+            },
+          ),
+          const Divider(),
+          LFButton(
+            text: 'Move to Index 1',
+            onTap: () {
+              widget.bottomTabBarScaffoldController.selectedIndex = 1;
+            },
+          ),
+          const Divider(),
+          LFButton(
+            text: 'Move to Index 2',
+            onTap: () {
+              widget.bottomTabBarScaffoldController.selectedIndex = 2;
+            },
+          ),
+        ],
       ),
     );
   }
