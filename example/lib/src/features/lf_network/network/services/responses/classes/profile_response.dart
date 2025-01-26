@@ -1,11 +1,9 @@
-import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 
 import '../../models/classes/profile_dto.dart';
 import '../../models/model.dart';
 import '../base/error_response.dart';
-import '../base/success_response.dart';
 
 part 'profile_response.g.dart';
 
