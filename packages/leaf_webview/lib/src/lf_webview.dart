@@ -9,6 +9,8 @@ enum LFWebViewEventType {
 typedef LFWebViewOnBeforeLoaded = Function();
 typedef LFWebViewOnLoaded = Function();
 typedef LFWebViewOnLoaderBuilder = Widget Function();
+typedef LFWebViewOnPageStarted = Function();
+typedef LFWebViewOnPageFinished = Function();
 typedef LFWebViewOnHeightFinished = Function(double height);
 typedef LFWebViewOnEvent = Function(LFWebViewEventType type, Object value);
 typedef LFWebViewOnMessageReceived = Function(JavaScriptMessage);
@@ -111,6 +113,8 @@ class LFWebView extends StatefulWidget {
   final bool useHybridComposition;
   final LFWebViewOnBeforeLoaded? onBeforeLoaded;
   final LFWebViewOnLoaded? onLoaded;
+  final LFWebViewOnPageStarted? onPageStarted;
+  final LFWebViewOnPageFinished? onPageFinished;
   final LFWebViewOnLoaderBuilder? onLoaderBuilder;
   final LFWebViewOnHeightFinished? onHeightFinished;
   final LFWebViewOnEvent? onEvent;
@@ -127,6 +131,8 @@ class LFWebView extends StatefulWidget {
     this.onBeforeLoaded,
     this.onLoaded,
     this.onLoaderBuilder,
+    this.onPageStarted,
+    this.onPageFinished,
     this.onHeightFinished,
     this.onEvent,
   });
@@ -152,6 +158,8 @@ class _LFWebViewState extends State<LFWebView> {
     final uri = widget.uri;
     final onBeforeLoaded = widget.onBeforeLoaded;
     final onLoaded = widget.onLoaded;
+    final onPageStarted = widget.onPageStarted;
+    final onPageFinished = widget.onPageFinished;
 
     _contentHeight = initHeight;
 
@@ -211,10 +219,12 @@ class _LFWebViewState extends State<LFWebView> {
       },
       onPageStarted: (String url) {
         Logging.d('[LFWebView] Page started loading: $url');
+        onPageStarted?.call();
       },
       onPageFinished: (String url) async {
         Logging.d('[LFWebView] Page finished loading: $url');
         await updateWebViewHeightAfterOnPageFinished();
+        onPageFinished?.call();
       },
       onWebResourceError: (WebResourceError error) {},
       onNavigationRequest: (NavigationRequest request) async {
