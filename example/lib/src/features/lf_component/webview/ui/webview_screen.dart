@@ -63,6 +63,7 @@ class _WebViewScreenState extends ScreenState<WebViewScreen> {
           Uri.parse('https://flutter.dev/'),
         );
       },
+      useHybridComposition: false,
       onLoaderBuilder: () {
         return const LFIndicator();
       },

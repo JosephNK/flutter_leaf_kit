@@ -108,6 +108,7 @@ class LFWebView extends StatefulWidget {
   final double initHeight;
   final Color backgroundColor;
   final bool allowAllowOrientation;
+  final bool useHybridComposition;
   final LFWebViewOnBeforeLoaded? onBeforeLoaded;
   final LFWebViewOnLoaded? onLoaded;
   final LFWebViewOnLoaderBuilder? onLoaderBuilder;
@@ -122,6 +123,7 @@ class LFWebView extends StatefulWidget {
     this.initHeight = 0.0,
     this.backgroundColor = const Color(0x00000000),
     this.allowAllowOrientation = false,
+    this.useHybridComposition = false,
     this.onBeforeLoaded,
     this.onLoaded,
     this.onLoaderBuilder,
@@ -271,15 +273,27 @@ class _LFWebViewState extends State<LFWebView> {
       return height;
     }
 
+    late WebViewWidget webViewWidget;
+    if (WebViewPlatform.instance is WebKitWebViewPlatform) {
+      webViewWidget = WebViewWidget(
+        controller: controller.webViewController,
+      );
+    } else {
+      webViewWidget = WebViewWidget.fromPlatformCreationParams(
+        params: AndroidWebViewWidgetCreationParams(
+          controller: controller.webViewController.platform,
+          displayWithHybridComposition: widget.useHybridComposition,
+        ),
+      );
+    }
+
     return LayoutBuilder(
       builder: (context, constraints) {
         return SizedBox(
           height: math.max(getHeight(constraints), _contentHeight),
           child: Stack(
             children: [
-              WebViewWidget(
-                controller: controller.webViewController,
-              ),
+              webViewWidget,
               !_loaded
                   ? Align(
                       alignment: Alignment.center,
