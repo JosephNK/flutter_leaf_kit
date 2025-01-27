@@ -58,9 +58,14 @@ class _WebViewScreenState extends ScreenState<WebViewScreen> {
   Widget buildBody(BuildContext context, Object? state) {
     return LFWebView(
       controller: _webViewController,
+      userAgent: 'Custom User Agent',
       onLoaded: () {
         _webViewController.loadRequest(
-          Uri.parse('https://flutter.dev/'),
+          // Uri.parse('https://flutter.dev/'),
+          Uri.parse('http://192.168.0.53:3000/foo'),
+          headers: {
+            'X-Custom-Header': 'foo',
+          },
         );
       },
       useHybridComposition: false,

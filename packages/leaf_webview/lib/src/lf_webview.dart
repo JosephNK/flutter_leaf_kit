@@ -111,6 +111,7 @@ class LFWebView extends StatefulWidget {
   final Color backgroundColor;
   final bool allowAllowOrientation;
   final bool useHybridComposition;
+  final String? userAgent;
   final LFWebViewOnBeforeLoaded? onBeforeLoaded;
   final LFWebViewOnLoaded? onLoaded;
   final LFWebViewOnPageStarted? onPageStarted;
@@ -128,6 +129,7 @@ class LFWebView extends StatefulWidget {
     this.backgroundColor = const Color(0x00000000),
     this.allowAllowOrientation = false,
     this.useHybridComposition = false,
+    this.userAgent,
     this.onBeforeLoaded,
     this.onLoaded,
     this.onLoaderBuilder,
@@ -155,6 +157,7 @@ class _LFWebViewState extends State<LFWebView> {
     final initHeight = widget.initHeight;
     final backgroundColor = widget.backgroundColor;
     final allowAllowOrientation = widget.allowAllowOrientation;
+    final userAgent = widget.userAgent;
     final uri = widget.uri;
     final onBeforeLoaded = widget.onBeforeLoaded;
     final onLoaded = widget.onLoaded;
@@ -234,9 +237,10 @@ class _LFWebViewState extends State<LFWebView> {
     );
 
     webViewController
-      ..loadRequest(Uri.parse('about:blank'))
+      // ..loadRequest(Uri.parse('about:blank'))
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
       ..setBackgroundColor(backgroundColor)
+      ..setUserAgent(userAgent)
       ..setNavigationDelegate(_navigationDelegate);
 
     // Set WebViewController
