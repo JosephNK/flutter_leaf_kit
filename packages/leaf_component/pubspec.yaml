@@ -25,7 +25,8 @@ dependencies:
   toastification: ^2.3.0
   easy_rich_text: ^2.2.0
   auto_size_text_plus: ^3.0.2
-  lucide_icons: ^0.257.0
+  vector_graphics: ^1.1.15
+  flutter_svg: ^2.0.17
 
   flutter_leaf_common:
     git:

@@ -1,0 +1,1 @@
+export 'component/icon.dart';

@@ -13,6 +13,7 @@ export 'component/checkbox/checkbox.dart';
 export 'component/chip/chip.dart';
 export 'component/dialog/dialog.dart';
 export 'component/grid/grid.dart';
+export 'component/icon/icon.dart';
 export 'component/image/image.dart';
 export 'component/indicator/indicator.dart';
 export 'component/navigationbar/navigationbar.dart';

@@ -214,7 +214,7 @@ class _LFAlertDialog {
                     Navigator.of(context).pop();
                   }
                 },
-                child: const Icon(LucideIcons.x, size: 24.0),
+                child: const Icon(Icons.close, size: 24.0),
               ),
             ],
           );

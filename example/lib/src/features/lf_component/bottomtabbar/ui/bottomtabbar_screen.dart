@@ -35,8 +35,16 @@ class _BottomTabBarScreenState extends ScreenState<BottomTabBarScreen> {
   final List<LFBottomTabItem> _tabItems = [
     LFBottomTabItem(
       bottomTabIndex: LFBottomTabIndex(tabIndex: 0),
-      defaultIcon: const Icon(Icons.home, color: Colors.black),
-      activeIcon: const Icon(Icons.home, color: Colors.red),
+      defaultIcon: const LFIcons(
+        Icons.home,
+        color: Colors.grey,
+        width: 40.0,
+      ),
+      activeIcon: const LFIcons(
+        Icons.home,
+        color: Colors.red,
+        width: 40.0,
+      ),
       text: 'Home',
       defaultTextStyle: const TextStyle(fontSize: 10.0, color: Colors.black),
       activeTextStyle: const TextStyle(fontSize: 10.0, color: Colors.red),
@@ -45,8 +53,16 @@ class _BottomTabBarScreenState extends ScreenState<BottomTabBarScreen> {
     ),
     LFBottomTabItem(
       bottomTabIndex: LFBottomTabIndex(tabIndex: 1),
-      defaultIcon: const Icon(Icons.feed, color: Colors.black),
-      activeIcon: const Icon(Icons.feed, color: Colors.red),
+      defaultIcon: const LFIcons(
+        Icons.feed,
+        color: Colors.grey,
+        width: 24.0,
+      ),
+      activeIcon: const LFIcons(
+        Icons.feed,
+        color: Colors.red,
+        width: 24.0,
+      ),
       text: 'Feed',
       defaultTextStyle: const TextStyle(fontSize: 10.0, color: Colors.black),
       activeTextStyle: const TextStyle(fontSize: 10.0, color: Colors.red),
@@ -55,8 +71,16 @@ class _BottomTabBarScreenState extends ScreenState<BottomTabBarScreen> {
     ),
     LFBottomTabItem(
       bottomTabIndex: LFBottomTabIndex(tabIndex: 2),
-      defaultIcon: const Icon(Icons.settings, color: Colors.black),
-      activeIcon: const Icon(Icons.settings, color: Colors.red),
+      defaultIcon: const LFIcons(
+        Icons.settings,
+        color: Colors.grey,
+        width: 24.0,
+      ),
+      activeIcon: const LFIcons(
+        Icons.settings,
+        color: Colors.red,
+        width: 24.0,
+      ),
       text: 'Setup',
       defaultTextStyle: const TextStyle(fontSize: 10.0, color: Colors.black),
       activeTextStyle: const TextStyle(fontSize: 10.0, color: Colors.red),
@@ -95,13 +119,25 @@ class _BottomTabBarScreenState extends ScreenState<BottomTabBarScreen> {
 
   @override
   Widget buildBody(BuildContext context, Object? state) {
+    const icon = LFIcons(
+      Icons.home,
+      color: Colors.grey,
+      width: 30.0,
+    );
+    final newIcon = LFIcons.buildUpdateColor(
+      icon,
+      color: Colors.red,
+    );
+
     return LFBottomTabBarScaffold(
       appBar: LFAppBar(
         title: LFAppBarTitle(text: widget.title),
         actions: [
           LFAppBarAction(
-            icon: const Icon(Icons.home),
-            onPressed: () {},
+            icon: newIcon,
+            onPressed: () {
+              debugPrint('onPressed!!');
+            },
           )
         ],
       ),
