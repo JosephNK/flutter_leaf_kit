@@ -113,7 +113,10 @@ class LFDioExceptionConverter implements DioConverter {
     }
 
     String errorMessage = (object is String) ? object : '';
-    if (parserException != null) {
+    if (isNotEmpty(errorMessage)) {
+      errorMessage = '[ConvertError] $errorMessage';
+    }
+    if (parserException != null && isEmpty(errorMessage)) {
       errorMessage = '[ConvertError] ${parserException.toString()}';
     }
 
