@@ -15,7 +15,6 @@ typedef LFDioDeviceOSHeader = Map<String, String> Function(String os);
 typedef LFDioVersionHeader = Map<String, String> Function(String version);
 typedef LFDioAuthorizationHeader = Map<String, String> Function(
     String authorization);
-typedef LFDioUserAgentHeader = Map<String, String> Function();
 
 class LFDioRequestHeader {
   static Future<Map<String, dynamic>> getHeaders({
@@ -24,7 +23,6 @@ class LFDioRequestHeader {
     LFDioDeviceOSHeader? deviceOSHeader,
     LFDioVersionHeader? versionHeader,
     LFDioAuthorizationHeader? authorizationHeader,
-    LFDioUserAgentHeader? userAgentHeader,
   }) async {
     final os = Platform.isIOS ? DeviceOS.ios : DeviceOS.android;
     final appVersion = (await PlatformPackage.fromInfo()).packageVersion;
@@ -50,8 +48,10 @@ class LFDioRequestHeader {
       headers.remove('X-LF-APP-VERSION');
       headers.addAll(versionHeader(appVersion));
     }
-    if (userAgentHeader != null) {
-      headers.addAll(userAgentHeader());
+    if (userAgent != null) {
+      headers.addAll({
+        HttpHeaders.userAgentHeader: userAgent,
+      });
     }
 
     return headers;
