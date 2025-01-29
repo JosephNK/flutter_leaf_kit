@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:vector_graphics/vector_graphics.dart';
 
 class LFIcons extends StatelessWidget {
   final Object asset;
@@ -22,31 +23,68 @@ class LFIcons extends StatelessWidget {
     final width = this.width;
     final height = this.height;
 
-    final widget = LFIcons.buildSwitcher(
-        asset: asset, color: color, width: width, height: height);
-
-    if (widget != null) {
-      return widget;
-    }
-
-    return SizedBox(
+    return _PrivateIcons(
+      asset: asset,
+      color: color,
       width: width,
       height: height,
     );
   }
 
-  static Widget? buildSwitcher({
-    required Object asset,
-    Color? color,
-    double? width,
-    double? height,
+  static Widget buildUpdateColor(
+    LFIcons icon, {
+    required Color? color,
   }) {
+    final asset = icon.asset;
+    final width = icon.width;
+    final height = icon.height;
+
+    return _PrivateIcons(
+      asset: asset,
+      color: color,
+      width: width,
+      height: height,
+    );
+  }
+}
+
+class _PrivateIcons extends StatelessWidget {
+  final Object asset;
+  final Color? color;
+  final double? width;
+  final double? height;
+
+  const _PrivateIcons({
+    super.key,
+    required this.asset,
+    this.color,
+    this.width,
+    this.height,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final asset = this.asset;
+    final color = this.color;
+    final width = this.width;
+    final height = this.height;
+
     if (asset is IconData) {
       return Icon(asset, color: color, size: width);
     }
 
     if (asset is Icon) {
       return Icon(asset.icon, color: color, size: width);
+    }
+
+    if (asset is AssetBytesLoader) {
+      return SvgPicture(
+        asset,
+        colorFilter:
+            color == null ? null : ColorFilter.mode(color, BlendMode.srcIn),
+        width: width,
+        height: height,
+      );
     }
 
     if (asset is SvgPicture) {
@@ -59,24 +97,9 @@ class LFIcons extends StatelessWidget {
       );
     }
 
-    return null;
-  }
-
-  static Widget buildUpdateColor(
-    LFIcons icon, {
-    required Color? color,
-  }) {
-    final asset = icon.asset;
-    final width = icon.width;
-    final height = icon.height;
-
-    final widget = LFIcons.buildSwitcher(
-        asset: asset, color: color, width: width, height: height);
-
-    if (widget != null) {
-      return widget;
-    }
-
-    return icon;
+    return SizedBox(
+      width: width,
+      height: height,
+    );
   }
 }
