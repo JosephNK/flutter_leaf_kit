@@ -82,7 +82,7 @@ class LFDate {
     return _jiffy.toUtc().dateTime;
   }
 
-  String format(String format) {
+  String format(String? format) {
     return _jiffy.format(pattern: format);
   }
 

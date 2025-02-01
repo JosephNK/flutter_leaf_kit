@@ -12,6 +12,7 @@ import 'button/ui/button_screen.dart';
 import 'calendar/ui/calendar_screen.dart';
 import 'checkbox/ui/checkbox_screen.dart';
 import 'chip/ui/chip_screen.dart';
+import 'datetime/ui/datetime_screen.dart';
 import 'dialog/ui/dialog_screen.dart';
 import 'empty/ui/empty_screen.dart';
 import 'gridview/ui/gridview_screen.dart';
@@ -48,6 +49,7 @@ class LFComponentScreen extends StatelessWidget {
       ListItem(id: 'calendar', title: 'CalendarScreen'),
       ListItem(id: 'checkbox', title: 'CheckboxScreen'),
       ListItem(id: 'chip', title: 'ChipScreen'),
+      ListItem(id: 'datetime', title: 'DateTimeScreen'),
       ListItem(id: 'dialog', title: 'DialogScreen'),
       ListItem(id: 'empty', title: 'EmptyScreen'),
       ListItem(id: 'image', title: 'ImageScreen'),
@@ -114,6 +116,9 @@ class LFComponentScreen extends StatelessWidget {
                   break;
                 case 'chip':
                   screen = ChipScreen(title: title);
+                  break;
+                case 'datetime':
+                  screen = DateTimeScreen(title: title);
                   break;
                 case 'dialog':
                   screen = DialogScreen(title: title);
