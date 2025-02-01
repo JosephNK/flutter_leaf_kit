@@ -38,8 +38,11 @@ class LFDate {
   /// Returns the date ranging from 1 to 31.
   int get date => _jiffy.date;
 
-  factory LFDate.now() {
-    final object = Jiffy.now();
+  factory LFDate.now({bool isUtc = false}) {
+    Jiffy object = Jiffy.now();
+    if (isUtc) {
+      object = object.toUtc();
+    }
     return LFDate._internal(object);
   }
 
