@@ -19,6 +19,7 @@ import 'gridview/ui/gridview_screen.dart';
 import 'image/ui/image_screen.dart';
 import 'indicator/ui/indicator_screen.dart';
 import 'listview/ui/listview_screen.dart';
+import 'notification/ui/notificaion_screen.dart';
 import 'pageindicator/ui/page_indicator_screen.dart';
 import 'paveview/ui/pageview_screen.dart';
 import 'photo/ui/photo_screen.dart';
@@ -64,6 +65,7 @@ class LFComponentScreen extends StatelessWidget {
       ListItem(id: 'textfield', title: 'TextFieldScreen'),
       ListItem(id: 'toast', title: 'ToastScreen'),
       ListItem(id: 'switch', title: 'SwitchScreen'),
+      ListItem(id: 'notification', title: 'NotificationScreen'),
       ListItem(id: 'listview', title: 'ListViewScreen'),
       ListItem(id: 'gridview', title: 'GridViewScreen'),
       ListItem(id: 'webview', title: 'WebViewScreen'),
@@ -161,6 +163,9 @@ class LFComponentScreen extends StatelessWidget {
                   break;
                 case 'switch':
                   screen = SwitchScreen(title: title);
+                  break;
+                case 'notification':
+                  screen = NotificationScreen(title: title);
                   break;
                 case 'listview':
                   screen = ListViewScreen(title: title);

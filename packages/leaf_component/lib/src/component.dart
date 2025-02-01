@@ -17,6 +17,7 @@ export 'component/icon/icon.dart';
 export 'component/image/image.dart';
 export 'component/indicator/indicator.dart';
 export 'component/navigationbar/navigationbar.dart';
+export 'component/notification/notification.dart';
 export 'component/page/page.dart';
 export 'component/painter/painter.dart';
 export 'component/photo/photo.dart';
