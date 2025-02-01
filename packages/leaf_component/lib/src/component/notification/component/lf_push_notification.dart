@@ -56,6 +56,7 @@ class LFPushNotification extends Object {
   final String title;
   final String? body;
   final Map<String, dynamic>? data;
+  final ValueChanged<Map<String, dynamic>?>? onTap;
   final Widget? icon;
   final Decoration? boxDecoration;
   final Duration animationDuration;
@@ -66,6 +67,7 @@ class LFPushNotification extends Object {
     required this.title,
     required this.body,
     required this.data,
+    this.onTap,
     this.icon,
     this.boxDecoration,
     this.animationDuration = const Duration(milliseconds: 450),
@@ -98,6 +100,7 @@ class LFPushNotification extends Object {
           bodyTextStyle: bodyTextStyle,
           onTap: (data) {
             closeOverlay();
+            onTap?.call(data);
           },
         );
       },
