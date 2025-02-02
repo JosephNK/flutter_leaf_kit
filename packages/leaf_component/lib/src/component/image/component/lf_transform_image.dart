@@ -8,6 +8,7 @@ class LFTransformImage extends StatelessWidget {
   final int? cacheWidth;
   final int? cacheHeight;
   final FilterQuality filterQuality;
+  final double? borderRadius;
   final Color? shimmerBaseColor;
   final Color? shimmerHighlightColor;
   final Widget? placeholderWidget;
@@ -23,6 +24,7 @@ class LFTransformImage extends StatelessWidget {
     this.cacheWidth,
     this.cacheHeight,
     this.filterQuality = FilterQuality.low,
+    this.borderRadius,
     this.shimmerBaseColor,
     this.shimmerHighlightColor,
     this.placeholderWidget,
@@ -38,53 +40,74 @@ class LFTransformImage extends StatelessWidget {
 
     /// Memory Byte
     if (bytes != null) {
-      return LFMemoryImage(
-        bytes: bytes,
-        width: width,
-        height: height,
-        fit: fit,
-        shimmerBaseColor: shimmerBaseColor,
-        shimmerHighlightColor: shimmerHighlightColor,
-        cacheWidth: cacheWidth,
-        cacheHeight: cacheHeight,
-        filterQuality: filterQuality,
-        placeholderWidget: placeholderWidget,
-        errorWidget: errorWidget,
+      return _buildWrapper(
+        child: LFMemoryImage(
+          bytes: bytes,
+          width: width,
+          height: height,
+          fit: fit,
+          shimmerBaseColor: shimmerBaseColor,
+          shimmerHighlightColor: shimmerHighlightColor,
+          cacheWidth: cacheWidth,
+          cacheHeight: cacheHeight,
+          filterQuality: filterQuality,
+          placeholderWidget: placeholderWidget,
+          errorWidget: errorWidget,
+        ),
       );
     }
 
     /// Network URL
     if (image.isThumbnailOrOriginURL) {
-      return LFCacheImage(
-        header: header,
-        uri: image.getThumbnailOrOriginURL,
-        width: width,
-        height: height,
-        fit: fit,
-        cacheWidth: cacheWidth,
-        cacheHeight: cacheHeight,
-        filterQuality: filterQuality,
-        shimmerBaseColor: shimmerBaseColor,
-        shimmerHighlightColor: shimmerHighlightColor,
-        placeholderWidget: placeholderWidget,
-        errorWidget: errorWidget,
-        cacheManager: cacheManager,
+      return _buildWrapper(
+        child: LFCacheImage(
+          header: header,
+          uri: image.getThumbnailOrOriginURL,
+          width: width,
+          height: height,
+          fit: fit,
+          cacheWidth: cacheWidth,
+          cacheHeight: cacheHeight,
+          filterQuality: filterQuality,
+          shimmerBaseColor: shimmerBaseColor,
+          shimmerHighlightColor: shimmerHighlightColor,
+          placeholderWidget: placeholderWidget,
+          errorWidget: errorWidget,
+          cacheManager: cacheManager,
+        ),
       );
     }
 
     /// Asset
-    return LFAssetFileImage(
-      uri: image.getThumbnailOrOrigin,
-      width: width,
-      height: height,
-      fit: fit,
-      shimmerBaseColor: shimmerBaseColor,
-      shimmerHighlightColor: shimmerHighlightColor,
-      cacheWidth: cacheWidth,
-      cacheHeight: cacheHeight,
-      filterQuality: filterQuality,
-      placeholderWidget: placeholderWidget,
-      errorWidget: errorWidget,
+    return _buildWrapper(
+      child: LFAssetFileImage(
+        uri: image.getThumbnailOrOrigin,
+        width: width,
+        height: height,
+        fit: fit,
+        shimmerBaseColor: shimmerBaseColor,
+        shimmerHighlightColor: shimmerHighlightColor,
+        cacheWidth: cacheWidth,
+        cacheHeight: cacheHeight,
+        filterQuality: filterQuality,
+        placeholderWidget: placeholderWidget,
+        errorWidget: errorWidget,
+      ),
+    );
+  }
+
+  Widget _buildWrapper({
+    required Widget child,
+  }) {
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(borderRadius ?? 0.0),
+        shape: BoxShape.rectangle,
+      ),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(borderRadius ?? 0.0),
+        child: child,
+      ),
     );
   }
 }
