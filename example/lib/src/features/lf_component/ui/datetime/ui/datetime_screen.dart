@@ -1,3 +1,4 @@
+import 'package:example/src/common/widget_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_leaf_kit/flutter_leaf_kit.dart';
 
@@ -39,12 +40,22 @@ class _DateTimeScreenState extends ScreenState<DateTimeScreen> {
     debugPrint('displayDate: $displayDate'); // displayDate: 2025-01-27 02:36:29
 
     return Column(
-      mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Center(
-          child: LFText(
-            displayDate,
+        WidgetTile(
+          title: 'DateTime',
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const LFText(
+                'DATA\n2025-01-26T17:36:29.209Z => 2025년 1월 27일 오전 2:36:29',
+              ),
+              LFText(
+                'Result\n2025-01-26T17:36:29.209Z => $displayDate',
+              ),
+            ],
           ),
         ),
       ],

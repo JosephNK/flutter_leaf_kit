@@ -1,3 +1,4 @@
+import 'package:example/src/common/widget_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_leaf_kit/flutter_leaf_kit.dart';
 
@@ -37,72 +38,64 @@ class _NotificationScreenState extends ScreenState<NotificationScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const Padding(
-              padding: EdgeInsets.symmetric(vertical: 12.0),
-              child: LFText(
-                'One Time Notification',
-                textAlign: TextAlign.center,
+            WidgetTile(
+              title: 'One Time Notification',
+              child: Center(
+                child: LFButton(
+                  text: 'Show',
+                  onTap: () {
+                    LFPushNotification(
+                      title: 'Hello',
+                      body: 'World',
+                      data: {},
+                    ).show(context);
+                  },
+                ),
               ),
             ),
-            Center(
-              child: LFButton(
-                text: 'Show',
-                onTap: () {
-                  LFPushNotification(
-                    title: 'Hello',
-                    body: 'World',
-                    data: {},
-                  ).show(context);
-                },
-              ),
-            ),
-            const Padding(
-              padding: EdgeInsets.symmetric(vertical: 12.0),
-              child: LFText(
-                'Multiple Time Notification',
-                textAlign: TextAlign.center,
-              ),
-            ),
-            Center(
-              child: LFButton(
-                text: 'Show',
-                onTap: () {
-                  LFStackPushNotification.shared
-                      .enqueue(
-                        LFPushNotification(
-                          title: 'Hello',
-                          body: 'World',
-                          data: {},
-                        ),
-                      )
-                      .show(context);
-
-                  Future.delayed(const Duration(milliseconds: 1000), () {
-                    if (!context.mounted) return;
+            WidgetTile(
+              title: 'Multiple Time Notification',
+              child: Center(
+                child: LFButton(
+                  text: 'Show',
+                  onTap: () {
                     LFStackPushNotification.shared
                         .enqueue(
                           LFPushNotification(
-                            title: 'Hello1',
-                            body: 'World1',
+                            title: 'Hello',
+                            body: 'World',
                             data: {},
                           ),
                         )
                         .show(context);
-                  });
 
-                  Future.delayed(const Duration(milliseconds: 2000), () {
-                    if (!context.mounted) return;
-                    LFStackPushNotification.shared
-                        .enqueue(
-                          LFPushNotification(
-                            title: 'Hello2',
-                            body: 'World2',
-                            data: {},
-                          ),
-                        )
-                        .show(context);
-                  });
-                },
+                    Future.delayed(const Duration(milliseconds: 1000), () {
+                      if (!context.mounted) return;
+                      LFStackPushNotification.shared
+                          .enqueue(
+                            LFPushNotification(
+                              title: 'Hello1',
+                              body: 'World1',
+                              data: {},
+                            ),
+                          )
+                          .show(context);
+                    });
+
+                    Future.delayed(const Duration(milliseconds: 2000), () {
+                      if (!context.mounted) return;
+                      LFStackPushNotification.shared
+                          .enqueue(
+                            LFPushNotification(
+                              title: 'Hello2',
+                              body: 'World2',
+                              data: {},
+                            ),
+                          )
+                          .show(context);
+                    });
+                  },
+                ),
               ),
             ),
           ],

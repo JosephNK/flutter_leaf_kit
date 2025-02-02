@@ -1,3 +1,4 @@
+import 'package:example/src/common/widget_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_leaf_kit/flutter_leaf_kit.dart';
 
@@ -39,113 +40,126 @@ class _ButtonScreenState extends ScreenState<ButtonScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const Padding(
-              padding: EdgeInsets.symmetric(vertical: 8.0),
-              child: LFText(
-                'LFButton',
-                textAlign: TextAlign.center,
-              ),
-            ),
-            Center(
+            WidgetTile(
+              title: 'LFButton',
               child: LFButton(
-                text: 'Button',
+                text: 'LFButton',
                 onTap: () {
                   debugPrint('LFButton onTap');
                 },
               ),
             ),
-            const Padding(
-              padding: EdgeInsets.symmetric(vertical: 8.0),
-              child: LFText(
-                'LFLockGestureDetector with InkWell',
-                textAlign: TextAlign.center,
-              ),
-            ),
-            LFLockGestureDetector(
-              loading: _loading,
-              duration: const Duration(seconds: 1),
-              onTap: () {
-                setState(() {
-                  _loading = !_loading;
-                });
-              },
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8.0),
-                border: Border.all(
-                  color: Colors.orange,
-                  width: 1.0,
+            WidgetTile(
+              title: 'LFLockGestureDetector with InkWell',
+              child: LFLockGestureDetector(
+                loading: _loading,
+                duration: const Duration(seconds: 1),
+                onTap: () {
+                  setState(() {
+                    _loading = !_loading;
+                  });
+                },
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8.0),
+                  border: Border.all(
+                    color: Colors.orange,
+                    width: 1.0,
+                  ),
+                  color: Colors.grey[300],
+                  boxShadow: const [
+                    BoxShadow(
+                      color: Colors.black,
+                      offset: Offset(0, 4),
+                      blurRadius: 8,
+                      spreadRadius: -2,
+                    ),
+                    BoxShadow(
+                      color: Color(0x0f101828),
+                      offset: Offset(0, 2),
+                      blurRadius: 4,
+                      spreadRadius: -2,
+                    ),
+                  ],
                 ),
-                color: Colors.grey[300],
-                boxShadow: TestBoxShadow.shadows,
-              ),
-              padding: const EdgeInsets.all(12.0),
-              child: Stack(
-                clipBehavior: Clip.none,
-                children: [
-                  const Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      LFText(
-                        'Hello World',
-                        textAlign: TextAlign.center,
-                      )
-                    ],
-                  ),
-                  Positioned(
-                    top: 0,
-                    right: 0,
-                    child: LFBadge(text: 9.toString()),
-                  ),
-                ],
-              ),
-            ),
-            const Padding(
-              padding: EdgeInsets.symmetric(vertical: 8.0),
-              child: LFText(
-                'LFLockGestureDetector without InkWell',
-                textAlign: TextAlign.center,
-              ),
-            ),
-            LFLockGestureDetector(
-              duration: const Duration(seconds: 1),
-              // onTap: () {
-              //   print('onTap');
-              // },
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8.0),
-                border: Border.all(
-                  color: Colors.orange,
-                  width: 1.0,
+                padding: const EdgeInsets.all(12.0),
+                enabledInkWell: true,
+                child: Stack(
+                  clipBehavior: Clip.none,
+                  children: [
+                    const Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        LFText(
+                          'enabledInkWell is true',
+                          textAlign: TextAlign.center,
+                        )
+                      ],
+                    ),
+                    Positioned(
+                      top: 0,
+                      right: 0,
+                      child: LFBadge(text: 9.toString()),
+                    ),
+                  ],
                 ),
-                color: Colors.grey[300],
-                boxShadow: TestBoxShadow.shadows,
               ),
-              padding: const EdgeInsets.all(12.0),
-              enabledInkWell: false,
-              child: Stack(
-                clipBehavior: Clip.none,
-                children: [
-                  const Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      LFText(
-                        'Hello World',
-                        textAlign: TextAlign.center,
-                      )
-                    ],
+            ),
+            WidgetTile(
+              title: 'LFLockGestureDetector without InkWell',
+              child: LFLockGestureDetector(
+                duration: const Duration(seconds: 1),
+                // onTap: () {
+                //   print('onTap');
+                // },
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8.0),
+                  border: Border.all(
+                    color: Colors.orange,
+                    width: 1.0,
                   ),
-                  Positioned(
-                    top: 0,
-                    right: 0,
-                    child: LFBadge(text: 9.toString()),
-                  ),
-                ],
+                  color: Colors.grey[300],
+                  boxShadow: const [
+                    BoxShadow(
+                      color: Colors.black,
+                      offset: Offset(0, 4),
+                      blurRadius: 8,
+                      spreadRadius: -2,
+                    ),
+                    BoxShadow(
+                      color: Color(0x0f101828),
+                      offset: Offset(0, 2),
+                      blurRadius: 4,
+                      spreadRadius: -2,
+                    ),
+                  ],
+                ),
+                padding: const EdgeInsets.all(12.0),
+                enabledInkWell: false,
+                child: Stack(
+                  clipBehavior: Clip.none,
+                  children: [
+                    const Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        LFText(
+                          'enabledInkWell is false',
+                          textAlign: TextAlign.center,
+                        )
+                      ],
+                    ),
+                    Positioned(
+                      top: 0,
+                      right: 0,
+                      child: LFBadge(text: 9.toString()),
+                    ),
+                  ],
+                ),
               ),
-            )
+            ),
           ],
         ),
         LFCornerPositionButton(
@@ -165,21 +179,4 @@ class _ButtonScreenState extends ScreenState<ButtonScreen> {
       ],
     );
   }
-}
-
-class TestBoxShadow {
-  static const List<BoxShadow> shadows = [
-    BoxShadow(
-      color: Colors.black,
-      offset: Offset(0, 4),
-      blurRadius: 8,
-      spreadRadius: -2,
-    ),
-    BoxShadow(
-      color: Color(0x0f101828),
-      offset: Offset(0, 2),
-      blurRadius: 4,
-      spreadRadius: -2,
-    ),
-  ];
 }

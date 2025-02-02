@@ -1,3 +1,4 @@
+import 'package:example/src/common/widget_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_leaf_kit/flutter_leaf_kit.dart';
 
@@ -38,28 +39,33 @@ class _SliderScreenState extends ScreenState<SliderScreen> {
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        LFSlider(
-          value: _sliderValue,
-          min: 0,
-          max: 10,
-          divisions: 10,
-          onChanged: (value) {
-            setState(() {
-              _sliderValue = value;
-            });
-          },
+        WidgetTile(
+          title: 'LFSlider',
+          child: LFSlider(
+            value: _sliderValue,
+            min: 0,
+            max: 10,
+            divisions: 10,
+            onChanged: (value) {
+              setState(() {
+                _sliderValue = value;
+              });
+            },
+          ),
         ),
-        const SizedBox(height: 50.0),
-        LFRangeSlider(
-          values: _rangeSliderValues,
-          min: 0,
-          max: 10,
-          divisions: 10,
-          onChanged: (value) {
-            setState(() {
-              _rangeSliderValues = value;
-            });
-          },
+        WidgetTile(
+          title: 'LFRangeSlider',
+          child: LFRangeSlider(
+            values: _rangeSliderValues,
+            min: 0,
+            max: 10,
+            divisions: 10,
+            onChanged: (value) {
+              setState(() {
+                _rangeSliderValues = value;
+              });
+            },
+          ),
         ),
       ],
     );

@@ -1,3 +1,4 @@
+import 'package:example/src/common/widget_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_leaf_kit/flutter_leaf_kit.dart';
 
@@ -36,17 +37,21 @@ class _PageIndicatorScreenState extends ScreenState<PageIndicatorScreen> {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Text('LFPageIndicator'),
-          LFPageRectIndicator(
-            total: 5,
-            current: 2,
+          WidgetTile(
+            title: 'LFPageIndicator',
+            child: LFPageRectIndicator(
+              total: 5,
+              current: 2,
+            ),
           ),
-          Text('LFPageCircleIndicator'),
-          LFPageCircleIndicator(
-            total: 30,
-            current: 10,
-            size: 10.0,
-            indicatorStyle: LFPageCircleIndicatorStyle.decrease,
+          WidgetTile(
+            title: 'LFPageCircleIndicator',
+            child: LFPageCircleIndicator(
+              total: 30,
+              current: 10,
+              size: 10.0,
+              indicatorStyle: LFPageCircleIndicatorStyle.decrease,
+            ),
           ),
         ],
       ),

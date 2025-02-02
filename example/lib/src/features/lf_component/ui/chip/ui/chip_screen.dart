@@ -1,3 +1,4 @@
+import 'package:example/src/common/widget_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_leaf_kit/flutter_leaf_kit.dart';
 
@@ -35,56 +36,53 @@ class _ChipScreenState extends ScreenState<ChipScreen> {
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        const Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            LFChip(
-              text: 'Hello',
-              selected: false,
-            ),
-            SizedBox(width: 10.0),
-            LFChip(
-              text: 'Hello',
-              selected: true,
-            ),
-          ],
+        const WidgetTile(
+          title: 'Chip (Unselected)',
+          child: LFChip(
+            text: 'Hello',
+            selected: false,
+          ),
         ),
-        const SizedBox(height: 10.0),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            LFChips(
-              direction: Axis.horizontal,
-              items: const [
-                LFDataItem(id: 'Hello', text: 'Hello'),
-                LFDataItem(id: 'Hello', text: 'World'),
-              ],
-              values: const [
-                LFDataItem(id: 'Hello', text: 'Hello'),
-              ],
-              onChanged: (values, value) {},
-            ),
-            const SizedBox(width: 10.0),
-            LFChips(
-              direction: Axis.vertical,
-              items: const [
-                LFDataItem(id: 'Travel', text: 'Travel'),
-                LFDataItem(id: 'Dance', text: 'Dance'),
-                LFDataItem(id: 'Fitness', text: 'Fitness'),
-                LFDataItem(id: 'Reading', text: 'Reading'),
-                LFDataItem(id: 'Photography', text: 'Photography'),
-                LFDataItem(id: 'Music', text: 'Music'),
-                LFDataItem(id: 'Movie', text: 'Movie'),
-              ],
-              values: const [
-                LFDataItem(id: 'Dance', text: 'Dance'),
-              ],
-              onChanged: (values, value) {},
-            ),
-          ],
-        )
+        const WidgetTile(
+          title: 'Chip (Selected)',
+          child: LFChip(
+            text: 'Hello',
+            selected: true,
+          ),
+        ),
+        WidgetTile(
+          title: 'Chip (Axis.horizontal)',
+          child: LFChips(
+            direction: Axis.horizontal,
+            items: const [
+              LFDataItem(id: 'Hello', text: 'Hello'),
+              LFDataItem(id: 'Hello', text: 'World'),
+            ],
+            values: const [
+              LFDataItem(id: 'Hello', text: 'Hello'),
+            ],
+            onChanged: (values, value) {},
+          ),
+        ),
+        WidgetTile(
+          title: 'Chip (Axis.vertical)',
+          child: LFChips(
+            direction: Axis.vertical,
+            items: const [
+              LFDataItem(id: 'Travel', text: 'Travel'),
+              LFDataItem(id: 'Dance', text: 'Dance'),
+              LFDataItem(id: 'Fitness', text: 'Fitness'),
+              LFDataItem(id: 'Reading', text: 'Reading'),
+              LFDataItem(id: 'Photography', text: 'Photography'),
+              LFDataItem(id: 'Music', text: 'Music'),
+              LFDataItem(id: 'Movie', text: 'Movie'),
+            ],
+            values: const [
+              LFDataItem(id: 'Dance', text: 'Dance'),
+            ],
+            onChanged: (values, value) {},
+          ),
+        ),
       ],
     );
   }

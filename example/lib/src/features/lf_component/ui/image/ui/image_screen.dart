@@ -1,5 +1,6 @@
 import 'dart:typed_data';
 
+import 'package:example/src/common/widget_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter_leaf_kit/flutter_leaf_kit.dart';
@@ -110,60 +111,57 @@ class _ImageScreenState extends ScreenState<ImageScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const Text('Network'),
-            LFTransformImage(
-              image: LFImageValue(
-                origin: networkUri,
-                header: null,
-              ),
-              width: 100.0,
-              height: 100.0,
-              // fit: fit,
-              // placeholderWidget: placeholderWidget,
-            ),
-            const Divider(),
-            const Text('Assets'),
-            LFTransformImage(
-              image: LFImageValue(
-                origin: assetFileUri,
-              ),
-              width: 100.0,
-              height: 100.0,
-              // fit: fit,
-              // placeholderWidget: placeholderWidget,
-            ),
-            const Divider(),
-            const Text('Memory'),
-            Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(100.0),
-                shape: BoxShape.rectangle,
-              ),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(100.0),
-                child: LFTransformImage(
-                  image: LFImageValue(
-                    bytes: _bytes,
-                  ),
-                  width: 100.0,
-                  height: 100.0,
-                  shimmerBaseColor: Colors.red,
-                  // fit: fit,
-                  // placeholderWidget: placeholderWidget,
+            WidgetTile(
+              title: 'Network',
+              child: LFTransformImage(
+                image: LFImageValue(
+                  origin: networkUri,
+                  header: null,
                 ),
+                width: 100.0,
+                height: 100.0,
+                // fit: fit,
+                // placeholderWidget: placeholderWidget,
               ),
             ),
-            const Divider(),
-            const Text('Assets Failed'),
-            LFTransformImage(
-              image: LFImageValue(
-                origin: assetFailedFileUri,
-                header: null,
+            WidgetTile(
+              title: 'Assets',
+              child: LFTransformImage(
+                image: LFImageValue(
+                  origin: assetFileUri,
+                ),
+                width: 100.0,
+                height: 100.0,
+                // fit: fit,
+                // placeholderWidget: placeholderWidget,
               ),
-              width: 100.0,
-              height: 100.0,
-              // fit: fit,
-              // placeholderWidget: placeholderWidget,
+            ),
+            WidgetTile(
+              title: 'Memory (with borderRadius)',
+              child: LFTransformImage(
+                image: LFImageValue(
+                  bytes: _bytes,
+                ),
+                width: 100.0,
+                height: 100.0,
+                borderRadius: 100.0,
+                shimmerBaseColor: Colors.red,
+                // fit: fit,
+                // placeholderWidget: placeholderWidget,
+              ),
+            ),
+            WidgetTile(
+              title: 'Assets Failed',
+              child: LFTransformImage(
+                image: LFImageValue(
+                  origin: assetFailedFileUri,
+                  header: null,
+                ),
+                width: 100.0,
+                height: 100.0,
+                // fit: fit,
+                // placeholderWidget: placeholderWidget,
+              ),
             ),
           ],
         ),

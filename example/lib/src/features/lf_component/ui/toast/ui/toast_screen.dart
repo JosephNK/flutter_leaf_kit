@@ -1,3 +1,4 @@
+import 'package:example/src/common/widget_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_leaf_kit/flutter_leaf_kit.dart';
 
@@ -37,7 +38,8 @@ class _ToastScreenState extends ScreenState<ToastScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Center(
+            WidgetTile(
+              title: 'Toast',
               child: LFButton(
                 text: 'Toast',
                 onTap: () {
@@ -48,15 +50,39 @@ class _ToastScreenState extends ScreenState<ToastScreen> {
                 },
               ),
             ),
-            const SizedBox(height: 16),
-            Center(
+            WidgetTile(
+              title: 'ToastNotification (Style flat)',
               child: LFButton(
                 text: 'ToastNotification',
                 onTap: () {
                   LFToast.showNotification(
                     context,
                     message: 'message',
-                    // style: LFToastNotificationStyle.simple,
+                  );
+                },
+              ),
+            ),
+            WidgetTile(
+              title: 'ToastNotification (Style simple)',
+              child: LFButton(
+                text: 'ToastNotification',
+                onTap: () {
+                  LFToast.showNotification(
+                    context,
+                    message: 'message',
+                    style: LFToastNotificationStyle.simple,
+                  );
+                },
+              ),
+            ),
+            WidgetTile(
+              title: 'ToastNotification (Alignment)',
+              child: LFButton(
+                text: 'ToastNotification',
+                onTap: () {
+                  LFToast.showNotification(
+                    context,
+                    message: 'message',
                     alignment: const Alignment(1.0, -0.5),
                   );
                 },
@@ -67,21 +93,4 @@ class _ToastScreenState extends ScreenState<ToastScreen> {
       ],
     );
   }
-}
-
-class TestBoxShadow {
-  static const List<BoxShadow> shadows = [
-    BoxShadow(
-      color: Colors.black,
-      offset: Offset(0, 4),
-      blurRadius: 8,
-      spreadRadius: -2,
-    ),
-    BoxShadow(
-      color: Color(0x0f101828),
-      offset: Offset(0, 2),
-      blurRadius: 4,
-      spreadRadius: -2,
-    ),
-  ];
 }

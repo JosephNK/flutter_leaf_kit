@@ -1,3 +1,4 @@
+import 'package:example/src/common/widget_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_leaf_kit/flutter_leaf_kit.dart';
 
@@ -42,56 +43,55 @@ class _SwitchScreenState extends ScreenState<SwitchScreen> {
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            LFSwitch(
-              value: _onOffCupertino,
-              activeTrackColor: activeTrackColor,
-              inactiveTrackColor: inactiveTrackColor,
-              thumbColor: thumbColor,
-              isIOS: true,
-              onChanged: (value) {
-                setState(() {
-                  _onOffCupertino = value;
-                });
-              },
-            ),
-            const LFSwitch(
-              value: false,
-              activeTrackColor: activeTrackColor,
-              inactiveTrackColor: inactiveTrackColor,
-              thumbColor: thumbColor,
-              isIOS: true,
-            ),
-          ],
+        WidgetTile(
+          title: 'LFSwitch (Cupertino)',
+          child: LFSwitch(
+            value: _onOffCupertino,
+            activeTrackColor: activeTrackColor,
+            inactiveTrackColor: inactiveTrackColor,
+            thumbColor: thumbColor,
+            isIOS: true,
+            onChanged: (value) {
+              setState(() {
+                _onOffCupertino = value;
+              });
+            },
+          ),
         ),
-        const SizedBox(height: 20.0),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            LFSwitch(
-              value: _onOff,
-              activeTrackColor: activeTrackColor,
-              inactiveTrackColor: inactiveTrackColor,
-              thumbColor: thumbColor,
-              isIOS: false,
-              onChanged: (value) {
-                setState(() {
-                  _onOff = value;
-                });
-              },
-            ),
-            const LFSwitch(
-              value: false,
-              activeTrackColor: activeTrackColor,
-              inactiveTrackColor: inactiveTrackColor,
-              thumbColor: thumbColor,
-              isIOS: false,
-            ),
-          ],
+        const WidgetTile(
+          title: 'LFSwitch (Cupertino)',
+          child: LFSwitch(
+            value: false,
+            activeTrackColor: activeTrackColor,
+            inactiveTrackColor: inactiveTrackColor,
+            thumbColor: thumbColor,
+            isIOS: true,
+          ),
+        ),
+        WidgetTile(
+          title: 'LFSwitch (Material)',
+          child: LFSwitch(
+            value: _onOff,
+            activeTrackColor: activeTrackColor,
+            inactiveTrackColor: inactiveTrackColor,
+            thumbColor: thumbColor,
+            isIOS: false,
+            onChanged: (value) {
+              setState(() {
+                _onOff = value;
+              });
+            },
+          ),
+        ),
+        const WidgetTile(
+          title: 'LFSwitch (Material)',
+          child: LFSwitch(
+            value: false,
+            activeTrackColor: activeTrackColor,
+            inactiveTrackColor: inactiveTrackColor,
+            thumbColor: thumbColor,
+            isIOS: false,
+          ),
         ),
       ],
     );

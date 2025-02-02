@@ -1,3 +1,4 @@
+import 'package:example/src/common/widget_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_leaf_kit/flutter_leaf_kit.dart';
 
@@ -38,72 +39,81 @@ class _RadioScreenState extends ScreenState<RadioScreen> {
 
   @override
   Widget buildBody(BuildContext context, Object? state) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        const Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            LFRadio(
-              text: 'Hello',
-              value: true,
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          const WidgetTile(
+            title: 'LFRadio',
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                LFRadio(
+                  text: 'Hello',
+                  value: true,
+                ),
+              ],
             ),
-          ],
-        ),
-        const SizedBox(height: 20.0),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            LFRadioGroups(
-              direction: Axis.vertical,
-              items: _items,
-              value: _selectedItem01,
-              onChanged: (item, checked) {
-                setState(() {
-                  _selectedItem01 = item;
-                });
-              },
+          ),
+          WidgetTile(
+            title: 'LFRadioGroups (Axis.vertical)',
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                LFRadioGroups(
+                  direction: Axis.vertical,
+                  items: _items,
+                  value: _selectedItem01,
+                  onChanged: (item, checked) {
+                    setState(() {
+                      _selectedItem01 = item;
+                    });
+                  },
+                ),
+              ],
             ),
-          ],
-        ),
-        const SizedBox(height: 20.0),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            LFRadioGroups(
+          ),
+          WidgetTile(
+            title: 'LFRadioGroups (Axis.horizontal)',
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                LFRadioGroups(
+                  direction: Axis.horizontal,
+                  items: _items,
+                  value: _selectedItem02,
+                  onChanged: (item, checked) {
+                    setState(() {
+                      _selectedItem02 = item;
+                    });
+                  },
+                ),
+              ],
+            ),
+          ),
+          WidgetTile(
+            title: 'LFRadioGroups (MainAxisAlignment.spaceBetween)',
+            child: LFRadioGroups(
               direction: Axis.horizontal,
               items: _items,
               value: _selectedItem02,
+              align: LFRadioAlign.right,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              runSpacing: 3.0,
               onChanged: (item, checked) {
                 setState(() {
                   _selectedItem02 = item;
                 });
               },
             ),
-          ],
-        ),
-        const SizedBox(height: 20.0),
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: LFRadioGroups(
-            direction: Axis.horizontal,
-            items: _items,
-            value: _selectedItem02,
-            align: LFRadioAlign.right,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            runSpacing: 3.0,
-            onChanged: (item, checked) {
-              setState(() {
-                _selectedItem02 = item;
-              });
-            },
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

@@ -1,3 +1,4 @@
+import 'package:example/src/common/widget_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_leaf_kit/flutter_leaf_kit.dart';
 
@@ -42,7 +43,8 @@ class _BadgeScreenState extends ScreenState<BadgeScreen> {
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Center(
+        WidgetTile(
+          title: 'Badge (N)',
           child: LFBadge(
             text: 'N',
             size: 28.0,
@@ -50,8 +52,8 @@ class _BadgeScreenState extends ScreenState<BadgeScreen> {
             backgroundColor: backgroundColor,
           ),
         ),
-        SizedBox(height: 16.0),
-        Center(
+        WidgetTile(
+          title: 'Badge (1)',
           child: LFBadge(
             text: '1',
             size: 28.0,
@@ -59,8 +61,8 @@ class _BadgeScreenState extends ScreenState<BadgeScreen> {
             backgroundColor: backgroundColor,
           ),
         ),
-        SizedBox(height: 16.0),
-        Center(
+        WidgetTile(
+          title: 'Badge (10)',
           child: LFBadge(
             text: '10',
             size: 28.0,
@@ -68,8 +70,8 @@ class _BadgeScreenState extends ScreenState<BadgeScreen> {
             backgroundColor: backgroundColor,
           ),
         ),
-        SizedBox(height: 16.0),
-        Center(
+        WidgetTile(
+          title: 'Badge (999)',
           child: LFBadge(
             text: '999',
             size: 28.0,

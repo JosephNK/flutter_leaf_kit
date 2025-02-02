@@ -1,3 +1,4 @@
+import 'package:example/src/common/widget_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_leaf_kit/flutter_leaf_kit.dart';
 
@@ -35,14 +36,17 @@ class _PageViewScreenState extends ScreenState<PageViewScreen> {
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        LFPageView(
-          // autoPage: true,
-          margin: const EdgeInsets.all(16.0),
-          children: [
-            Container(color: Colors.red, height: 200),
-            Container(color: Colors.blue, height: 200),
-            Container(color: Colors.orange, height: 200),
-          ],
+        WidgetTile(
+          title: 'LFPageView',
+          child: LFPageView(
+            // autoPage: true,
+            margin: const EdgeInsets.all(16.0),
+            children: [
+              Container(color: Colors.yellow, height: 200),
+              Container(color: Colors.blue, height: 200),
+              Container(color: Colors.orange, height: 200),
+            ],
+          ),
         ),
       ],
     );

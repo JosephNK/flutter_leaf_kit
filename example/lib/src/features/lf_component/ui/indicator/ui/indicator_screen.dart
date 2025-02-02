@@ -1,3 +1,4 @@
+import 'package:example/src/common/widget_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_leaf_kit/flutter_leaf_kit.dart';
 
@@ -41,40 +42,44 @@ class _IndicatorScreenState extends ScreenState<IndicatorScreen> {
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        const LFText('LFIndicator'),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            ...sizes.map((size) {
-              return LFIndicator(
-                  padding: const EdgeInsets.all(8.0), size: size);
-            }),
-          ],
+        WidgetTile(
+          title: 'LFIndicator (Default)',
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              ...sizes.map((size) {
+                return LFIndicator(
+                    padding: const EdgeInsets.all(8.0), size: size);
+              }),
+            ],
+          ),
         ),
-        const SizedBox(height: 30.0),
-        const LFText('LFMaterialIndicator'),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            ...sizes.map((size) {
-              return LFMaterialIndicator(
-                  padding: const EdgeInsets.all(8.0), size: size);
-            }),
-          ],
+        WidgetTile(
+          title: 'LFMaterialIndicator',
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              ...sizes.map((size) {
+                return LFMaterialIndicator(
+                    padding: const EdgeInsets.all(8.0), size: size);
+              }),
+            ],
+          ),
         ),
-        const SizedBox(height: 30.0),
-        const LFText('LFCupertinoIndicator'),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            ...sizes.map((size) {
-              return LFCupertinoIndicator(
-                  padding: const EdgeInsets.all(8.0), size: size);
-            }),
-          ],
+        WidgetTile(
+          title: 'LFCupertinoIndicator',
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              ...sizes.map((size) {
+                return LFCupertinoIndicator(
+                    padding: const EdgeInsets.all(8.0), size: size);
+              }),
+            ],
+          ),
         ),
       ],
     );

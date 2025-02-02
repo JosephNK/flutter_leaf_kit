@@ -1,3 +1,4 @@
+import 'package:example/src/common/widget_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_leaf_kit/flutter_leaf_kit.dart';
 
@@ -65,54 +66,72 @@ class _TextFieldScreenState extends ScreenState<TextFieldScreen> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            LFTextField(
-              controller: _textController1,
-              placeHolder: 'Normal Typing..',
-              maxLength: 10,
-              onChanged: (text) {
-                debugPrint('LFTextField onChanged: $text');
-              },
-            ),
-            const Divider(),
-            LFTextField(
-              controller: _textController2,
-              placeHolder: 'ReadOnly Typing..',
-              suffixIcon: const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 8.0),
-                child: Icon(Icons.ac_unit),
+            WidgetTile(
+              title: 'LFTextField (Normal)',
+              child: LFTextField(
+                controller: _textController1,
+                placeHolder: 'Normal Typing..',
+                maxLength: 10,
+                onChanged: (text) {
+                  debugPrint('LFTextField onChanged: $text');
+                },
               ),
-              // contentPadding: const EdgeInsets.all(0.0),
-              readOnly: true,
             ),
-            const Divider(),
-            LFTextField(
-              controller: _textController3,
-              placeHolder: 'Disabled Typing..',
-              disabled: true,
-            ),
-            const Divider(),
-            LFTextField(
-              controller: _textController4,
-              placeHolder: 'Error Typing..',
-              errorText: 'error message',
-              errorTextStyle: const TextStyle(color: Colors.orange),
-            ),
-            const Divider(),
-            LFTextField(
-              controller: _textController5,
-              placeHolder: 'Error Typing..',
-              errorWidget: Container(
-                color: Colors.orange.shade50,
-                child: const Text('Error Widget'),
+            WidgetTile(
+              title: 'LFTextField (ReadOnly)',
+              child: LFTextField(
+                controller: _textController2,
+                placeHolder: 'ReadOnly Typing..',
+                suffixIcon: const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 8.0),
+                  child: Icon(Icons.ac_unit),
+                ),
+                // contentPadding: const EdgeInsets.all(0.0),
+                readOnly: true,
               ),
-              errorText: null,
             ),
-            const Divider(),
-            TextAreaView(
-              controller: _textController6,
+            WidgetTile(
+              title: 'LFTextField (Disabled)',
+              child: LFTextField(
+                controller: _textController3,
+                placeHolder: 'Disabled Typing..',
+                disabled: true,
+              ),
+            ),
+            WidgetTile(
+              title: 'LFTextField (Error Text)',
+              child: LFTextField(
+                controller: _textController4,
+                placeHolder: 'Error Typing..',
+                errorText: 'error message',
+                errorTextStyle: const TextStyle(color: Colors.red),
+              ),
+            ),
+            WidgetTile(
+              title: 'LFTextField (Error Widget)',
+              child: LFTextField(
+                controller: _textController5,
+                placeHolder: 'Error Typing..',
+                errorWidget: Row(
+                  children: [
+                    const Icon(Icons.error, color: Colors.red, size: 20.0),
+                    Container(
+                      color: Colors.red.shade50,
+                      child: const Text('Error Widget'),
+                    ),
+                  ],
+                ),
+                errorText: null,
+              ),
+            ),
+            WidgetTile(
+              title: 'TextAreaView',
+              child: TextAreaView(
+                controller: _textController6,
+              ),
             ),
             Container(
-              height: 300.0,
+              height: 100.0,
             ),
           ],
         ),

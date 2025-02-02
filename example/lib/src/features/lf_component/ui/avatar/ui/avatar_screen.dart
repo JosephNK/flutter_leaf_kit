@@ -1,3 +1,4 @@
+import 'package:example/src/common/widget_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_leaf_kit/flutter_leaf_kit.dart';
 
@@ -36,15 +37,22 @@ class _AvatarScreenState extends ScreenState<AvatarScreen> {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          LFCircleAvatarImage(
-            image: LFImageValue(
-                origin: Uri.parse('https://picsum.photos/200/300')),
+          WidgetTile(
+            title: 'Original Size (https://picsum.photos/200/300)',
+            child: LFCircleAvatarImage(
+              image: LFImageValue(
+                origin: Uri.parse('https://picsum.photos/200/300'),
+              ),
+            ),
           ),
-          const SizedBox(height: 16.0),
-          LFCircleAvatarImage(
-            image: LFImageValue(
-                origin: Uri.parse('https://picsum.photos/200/300')),
-            size: 25,
+          WidgetTile(
+            title: 'Size 25 (https://picsum.photos/200/300)',
+            child: LFCircleAvatarImage(
+              image: LFImageValue(
+                origin: Uri.parse('https://picsum.photos/200/300'),
+              ),
+              size: 25,
+            ),
           ),
         ],
       ),

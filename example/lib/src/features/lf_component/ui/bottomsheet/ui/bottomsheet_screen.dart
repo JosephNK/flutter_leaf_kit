@@ -1,3 +1,4 @@
+import 'package:example/src/common/widget_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_leaf_kit/flutter_leaf_kit.dart';
 
@@ -37,7 +38,8 @@ class _BottomSheetScreenState extends ScreenState<BottomSheetScreen> {
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Center(
+        WidgetTile(
+          title: 'LFBottomSheet Show',
           child: LFButton(
             text: 'Show',
             onTap: () {
@@ -56,7 +58,7 @@ class _BottomSheetScreenState extends ScreenState<BottomSheetScreen> {
               );
             },
           ),
-        ),
+        )
       ],
     );
   }
