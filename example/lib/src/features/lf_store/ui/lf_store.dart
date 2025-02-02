@@ -21,6 +21,7 @@ class LFStoreScreen extends StatelessWidget {
         itemCount: items.length,
         itemBuilder: (context, index) {
           final item = items[index];
+          final title = item.title;
 
           return ListTile(
             title: Text(title),
