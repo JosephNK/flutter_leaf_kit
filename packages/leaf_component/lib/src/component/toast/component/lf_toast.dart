@@ -32,6 +32,9 @@ class LFToast {
     TextStyle? descriptionTextStyle,
     BorderRadiusGeometry? borderRadius,
     BorderSide? borderSide,
+    bool closeOnClick = true,
+    bool dragToClose = true,
+    bool? showIcon,
   }) {
     Color? defaultBackgroundColor = backgroundColor;
     TextStyle? defaultTextStyle = textStyle;
@@ -48,13 +51,16 @@ class LFToast {
           : null,
       type: type?.value ?? LFToastNotificationType.success.value,
       style: style?.value ?? LFToastNotificationStyle.flat.value,
-      alignment: alignment ?? Alignment.topRight,
+      alignment: alignment ?? Alignment.topCenter,
       backgroundColor: defaultBackgroundColor,
       borderRadius: borderRadius,
       borderSide: borderSide,
       autoCloseDuration: duration ?? const Duration(seconds: 5),
       showProgressBar: false,
       closeButtonShowType: CloseButtonShowType.none,
+      closeOnClick: closeOnClick,
+      dragToClose: dragToClose,
+      showIcon: showIcon,
     );
   }
 }
