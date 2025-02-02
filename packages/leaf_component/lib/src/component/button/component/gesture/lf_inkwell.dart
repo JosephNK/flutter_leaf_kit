@@ -24,17 +24,19 @@ class LFInkWell extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      type: MaterialType.transparency,
-      child: InkWell(
-        borderRadius: borderRadius,
-        onTap: disabled ? null : onTap,
-        child: Ink(
-          padding: padding,
-          width: width,
-          height: height,
-          decoration: decoration,
-          child: child,
+    return Container(
+      decoration: decoration,
+      child: Material(
+        type: MaterialType.transparency,
+        child: InkWell(
+          borderRadius: borderRadius,
+          onTap: disabled ? null : onTap,
+          child: Ink(
+            padding: padding,
+            width: width,
+            height: height,
+            child: child,
+          ),
         ),
       ),
     );
