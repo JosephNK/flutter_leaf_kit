@@ -1,32 +1,27 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter_leaf_kit/flutter_leaf_kit_network.dart';
 import 'package:flutter_leaf_kit/flutter_leaf_kit_store.dart';
 
 import '../responses/responses.dart';
 
-class ProductsDioService extends DioService {
-  Future<LFDioResponse<ProductsGetAllResponse>> get({
+class ProductsDioService extends LFDioService {
+  Future<LFDioResponse<ProductsGetAllResponse>> getProductAll({
     int limit = 5,
   }) async {
     try {
       const url = '/products';
-      final response = await dio.get(url, queryParameters: {
+      final queryParameters = {
         'limit': limit,
-      });
-      return await converter
-          .convertJsonResponse<ProductsGetAllResponse>(response);
-    } on DioException catch (e) {
-      if (e.response != null) {
-        return await errorConverter
-            .convertJsonResponse<ProductsGetAllResponse>(e.response!);
-      }
-      rethrow;
+      };
+      return await get<ProductsGetAllResponse>(
+        url,
+        queryParameters: queryParameters,
+      );
     } catch (e) {
       rethrow;
     }
   }
 
-  Future<LFDioResponse<ProductsGetAllResponse>> postAdd({
+  Future<LFDioResponse<ProductsGetAllResponse>> postProductAdd({
     required String title,
     List<LFMultipartFile> files = const [],
   }) async {
@@ -36,8 +31,6 @@ class ProductsDioService extends DioService {
           .map((file) {
             final path = file.getPath();
             if (path == null) return null;
-            debugPrint('path: $path');
-            debugPrint('path1: ${file.getPayload<String>()}');
             return MultipartFile.fromFileSync(
               path,
               filename: '${file.getPayload<String>()}.jpg',
@@ -50,15 +43,10 @@ class ProductsDioService extends DioService {
         'images': uploadFiles,
         'title': title,
       });
-      final response = await dio.post(url, data: formData);
-      return await converter
-          .convertJsonResponse<ProductsGetAllResponse>(response);
-    } on DioException catch (e) {
-      if (e.response != null) {
-        return await errorConverter
-            .convertJsonResponse<ProductsGetAllResponse>(e.response!);
-      }
-      rethrow;
+      return await post<ProductsGetAllResponse>(
+        url,
+        data: formData,
+      );
     } catch (e) {
       rethrow;
     }

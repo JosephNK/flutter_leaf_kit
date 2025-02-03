@@ -131,7 +131,7 @@ class _NetworkScreenState extends ScreenState<NetworkScreen> {
     try {
       final apiService =
           LFHttpSharedDio.shared.getService<ProductsDioService>();
-      final response = await apiService.get(limit: 5);
+      final response = await apiService.getProductAll(limit: 5);
       if (response.isSuccessful) {
         final body = response.data;
         Logging.d('body: $body');
@@ -166,7 +166,7 @@ class _NetworkScreenState extends ScreenState<NetworkScreen> {
     try {
       final apiService =
           LFHttpSharedDio.shared.getService<ProductsDioService>();
-      final response = await apiService.postAdd(
+      final response = await apiService.postProductAdd(
         title: 'Test Title',
         files: _files,
       );
