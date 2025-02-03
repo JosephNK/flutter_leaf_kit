@@ -2,7 +2,7 @@ part of '../../leaf_store.dart';
 
 const kAllowFiles = ['.jpg', '.jpeg', '.png'];
 
-class LFMultipartFile extends UIModel {
+class LFMultipartFile extends UIModelV2<String> {
   final Uri? uri;
   final XFile? xFile;
 
@@ -14,15 +14,10 @@ class LFMultipartFile extends UIModel {
 
   @override
   List<Object?> get props => [
-        payload,
+        super.props,
         uri,
         xFile,
       ];
-
-  @override
-  T? getPayload<T>() {
-    return payload as T?;
-  }
 
   Uri? getHttpUri() {
     return _isHttp() ? uri : null;
@@ -106,7 +101,7 @@ class LFMultipartFile extends UIModel {
 
   /// Factory
 
-  factory LFMultipartFile.fromUri(Uri uri, {Object? payload}) {
+  factory LFMultipartFile.fromUri(Uri uri, {String? payload}) {
     return LFMultipartFile(
       payload: payload ?? const Uuid().v5(Namespace.url.value, uri.path),
       uri: uri,
@@ -114,7 +109,7 @@ class LFMultipartFile extends UIModel {
     );
   }
 
-  factory LFMultipartFile.fromXFile(XFile xFile, {Object? payload}) {
+  factory LFMultipartFile.fromXFile(XFile xFile, {String? payload}) {
     return LFMultipartFile(
       payload: payload ?? const Uuid().v5(Namespace.url.value, xFile.path),
       uri: null,
