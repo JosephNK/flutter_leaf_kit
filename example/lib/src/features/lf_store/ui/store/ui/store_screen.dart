@@ -1,4 +1,5 @@
 import 'package:example/src/common/widget_tile.dart';
+import 'package:example/src/models/person.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_leaf_kit/flutter_leaf_kit.dart';
 
@@ -41,6 +42,42 @@ class _StoreScreenState extends ScreenState<StoreScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
+            WidgetTile(
+              title: 'Test UIModel',
+              child: Column(
+                children: [
+                  LFButton(
+                    text: 'Test',
+                    onTap: () {
+                      const person = Person(
+                        payload: '1',
+                        name: 'John Doe',
+                        age: 30,
+                      );
+                      debugPrint('person: ${person.toString()}');
+                    },
+                  ),
+                ],
+              ),
+            ),
+            WidgetTile(
+              title: 'Test UIModelV2',
+              child: Column(
+                children: [
+                  LFButton(
+                    text: 'Test',
+                    onTap: () {
+                      const person = PersonV2(
+                        payload: '1',
+                        name: 'John Doe',
+                        age: 30,
+                      );
+                      debugPrint('person: ${person.toString()}');
+                    },
+                  ),
+                ],
+              ),
+            ),
             WidgetTile(
               title: 'Test ErrorValue',
               child: Column(

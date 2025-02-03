@@ -55,7 +55,6 @@ class _PrivateIcons extends StatelessWidget {
   final double? height;
 
   const _PrivateIcons({
-    super.key,
     required this.asset,
     this.color,
     this.width,

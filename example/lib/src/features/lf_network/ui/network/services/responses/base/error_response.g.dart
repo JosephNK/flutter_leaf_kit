@@ -252,10 +252,11 @@ class MetaDataBuilder implements Builder<MetaData, MetaDataBuilder> {
   _$MetaData _build() {
     final _$result = _$v ??
         new _$MetaData._(
-            statusCode: statusCode,
-            timestamp: timestamp,
-            path: path,
-            message: message);
+          statusCode: statusCode,
+          timestamp: timestamp,
+          path: path,
+          message: message,
+        );
     replace(_$result);
     return _$result;
   }
@@ -341,7 +342,11 @@ class ErrorDataBuilder implements Builder<ErrorData, ErrorDataBuilder> {
   ErrorData build() => _build();
 
   _$ErrorData _build() {
-    final _$result = _$v ?? new _$ErrorData._(code: code, message: message);
+    final _$result = _$v ??
+        new _$ErrorData._(
+          code: code,
+          message: message,
+        );
     replace(_$result);
     return _$result;
   }

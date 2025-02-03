@@ -33,7 +33,7 @@ class ProductsDioService extends LFDioService {
             if (path == null) return null;
             return MultipartFile.fromFileSync(
               path,
-              filename: '${file.getPayload<String>()}.jpg',
+              filename: '${file.getPayload()}.jpg',
               contentType: MediaType('image', 'jpeg'),
             );
           })

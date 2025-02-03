@@ -212,10 +212,11 @@ class ProductsGetAllResponseBuilder
     try {
       _$result = _$v ??
           new _$ProductsGetAllResponse._(
-              products: _products?.build(),
-              result: result,
-              meta: _meta?.build(),
-              error: _error?.build());
+            products: _products?.build(),
+            result: result,
+            meta: _meta?.build(),
+            error: _error?.build(),
+          );
     } catch (_) {
       late String _$failedField;
       try {

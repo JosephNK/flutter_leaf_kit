@@ -189,10 +189,11 @@ class ProfileDTOBuilder implements Builder<ProfileDTO, ProfileDTOBuilder> {
   _$ProfileDTO _build() {
     final _$result = _$v ??
         new _$ProfileDTO._(
-            id: id,
-            nickName: nickName,
-            phoneNumber: phoneNumber,
-            description: description);
+          id: id,
+          nickName: nickName,
+          phoneNumber: phoneNumber,
+          description: description,
+        );
     replace(_$result);
     return _$result;
   }

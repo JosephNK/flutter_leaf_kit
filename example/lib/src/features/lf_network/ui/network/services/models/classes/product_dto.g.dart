@@ -165,7 +165,11 @@ class ProductDTOBuilder implements Builder<ProductDTO, ProductDTOBuilder> {
 
   _$ProductDTO _build() {
     final _$result = _$v ??
-        new _$ProductDTO._(id: id, title: title, description: description);
+        new _$ProductDTO._(
+          id: id,
+          title: title,
+          description: description,
+        );
     replace(_$result);
     return _$result;
   }

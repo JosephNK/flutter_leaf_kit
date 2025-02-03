@@ -182,9 +182,10 @@ class ProfileMeGetResponseBuilder
     try {
       _$result = _$v ??
           new _$ProfileMeGetResponse._(
-              item: _item?.build(),
-              meta: _meta?.build(),
-              error: _error?.build());
+            item: _item?.build(),
+            meta: _meta?.build(),
+            error: _error?.build(),
+          );
     } catch (_) {
       late String _$failedField;
       try {

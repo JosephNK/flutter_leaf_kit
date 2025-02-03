@@ -27,7 +27,7 @@ class HttpDioHelper {
       throw LFMessageException('File Path or Ext is null');
     }
     final extension = ((ext == '.jpg') ? '.jpeg' : ext).replaceAll('.', '');
-    final fileName = file.getPayload<String>();
+    final fileName = file.getPayload();
     return MultipartFile.fromFileSync(
       path,
       filename: '$fileName.$extension',
