@@ -1,3 +1,4 @@
+import 'package:example/src/common/widget_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_leaf_kit/flutter_leaf_kit.dart';
 
@@ -14,6 +15,9 @@ class StoreScreen extends ScreenStatefulWidget {
 }
 
 class _StoreScreenState extends ScreenState<StoreScreen> {
+  String _catchOriginalString = 'None';
+  String _catchErrorValueExceptionString = 'None';
+
   @override
   Color? get backgroundColor => Colors.white;
 
@@ -37,29 +41,62 @@ class _StoreScreenState extends ScreenState<StoreScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Center(
-              child: LFButton(
-                text: 'Test ErrorValue',
-                onTap: () {
-                  try {
-                    const errorValue = ErrorValue(
-                      statusCode: kDefaultStatusCode,
-                      errorCode: 'E001',
-                      errorMessage: 'Error Message',
-                    );
-                    throw ErrorValueException(errorValue);
-                  } catch (e) {
-                    debugPrint('catch (original): ${e.toString()}');
-                    if (e is ErrorValueException) {
-                      final errorValue = e.value;
-                      debugPrint('catch (errorValue): $errorValue');
-                    }
-                  } finally {
-                    debugPrint('Finally');
-                  }
-                },
+            WidgetTile(
+              title: 'Test ErrorValue',
+              child: Column(
+                children: [
+                  LFButton(
+                    text: 'Test',
+                    onTap: () {
+                      try {
+                        const errorValue = ErrorValue(
+                          statusCode: kDefaultStatusCode,
+                          errorCode: 'E001',
+                          errorMessage: 'Error Message',
+                        );
+                        throw ErrorValueException(errorValue);
+                      } catch (e) {
+                        debugPrint('catch (original): ${e.toString()}');
+                        setState(() {
+                          _catchOriginalString = e.toString();
+                        });
+                        if (e is ErrorValueException) {
+                          final errorValue = e.value;
+                          debugPrint(
+                              'catch (errorValue): ${errorValue.toString()}');
+                          setState(() {
+                            _catchErrorValueExceptionString =
+                                errorValue.toString();
+                          });
+                        }
+                      } finally {
+                        debugPrint('Finally');
+                      }
+                    },
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        const LFText('catch (original):'),
+                        LFText(_catchOriginalString),
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        const LFText('catch (errorValue):'),
+                        LFText(_catchErrorValueExceptionString),
+                      ],
+                    ),
+                  ),
+                ],
               ),
-            )
+            ),
           ],
         ),
       ],

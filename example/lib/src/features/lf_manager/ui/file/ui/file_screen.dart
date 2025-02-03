@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:example/src/common/widget_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_leaf_kit/flutter_leaf_kit.dart';
 
@@ -47,64 +48,75 @@ class _FileScreenState extends ScreenState<FileScreen> {
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        Text(
-          _content,
-          textAlign: TextAlign.center,
+        WidgetTile(
+          title: 'Display File Content',
+          child: Text(
+            _content,
+            textAlign: TextAlign.center,
+          ),
         ),
-        const SizedBox(height: 15.0),
-        LFButton(
-          text: 'Write',
-          onTap: () async {
-            final documentPath = await LFFileManager.shared
-                .getApplicationDocumentsDirectoryPath();
-            final jsonFile = File('$documentPath/test.json');
-            const content = {
-              'items': [
-                {"name": "Kim", "age": 10},
-              ]
-            };
-            final r = await LFFileManager.shared.createOrUpdateFile(
-              jsonFile,
-              content: content,
-              encodeJson: true,
-            );
-            setState(() {
-              _status = r ? 'Success Save' : 'Failed Save';
-            });
-          },
+        WidgetTile(
+          title: 'Display Status',
+          child: Text(
+            _status,
+            textAlign: TextAlign.center,
+          ),
         ),
-        const SizedBox(height: 15.0),
-        LFButton(
-          text: 'Read',
-          onTap: () async {
-            final documentPath = await LFFileManager.shared
-                .getApplicationDocumentsDirectoryPath();
-            final jsonFile = File('$documentPath/test.json');
-            final content = await LFFileManager.shared
-                .readAsFile(jsonFile, decodeJson: true);
-            setState(() {
-              _content = content.toString();
-              _status = (content != null) ? 'Success Read' : 'Failed Read';
-            });
-          },
+        WidgetTile(
+          title: 'File Write',
+          child: LFButton(
+            text: 'Write',
+            onTap: () async {
+              final documentPath = await LFFileManager.shared
+                  .getApplicationDocumentsDirectoryPath();
+              final jsonFile = File('$documentPath/test.json');
+              const content = {
+                'items': [
+                  {"name": "Kim", "age": 10},
+                ]
+              };
+              final r = await LFFileManager.shared.createOrUpdateFile(
+                jsonFile,
+                content: content,
+                encodeJson: true,
+              );
+              setState(() {
+                _status = r ? 'Success Save' : 'Failed Save';
+              });
+            },
+          ),
         ),
-        const SizedBox(height: 15.0),
-        LFButton(
-          text: 'Delete',
-          onTap: () async {
-            final documentPath = await LFFileManager.shared
-                .getApplicationDocumentsDirectoryPath();
-            final jsonFile = File('$documentPath/test.json');
-            final r = await LFFileManager.shared.deleteFile(jsonFile);
-            setState(() {
-              _status = r ? 'Success Delete' : 'Failed Delete';
-            });
-          },
+        WidgetTile(
+          title: 'File Read',
+          child: LFButton(
+            text: 'Read',
+            onTap: () async {
+              final documentPath = await LFFileManager.shared
+                  .getApplicationDocumentsDirectoryPath();
+              final jsonFile = File('$documentPath/test.json');
+              final content = await LFFileManager.shared
+                  .readAsFile(jsonFile, decodeJson: true);
+              setState(() {
+                _content = content.toString();
+                _status = (content != null) ? 'Success Read' : 'Failed Read';
+              });
+            },
+          ),
         ),
-        const SizedBox(height: 15.0),
-        Text(
-          _status,
-          textAlign: TextAlign.center,
+        WidgetTile(
+          title: 'File Delete',
+          child: LFButton(
+            text: 'Delete',
+            onTap: () async {
+              final documentPath = await LFFileManager.shared
+                  .getApplicationDocumentsDirectoryPath();
+              final jsonFile = File('$documentPath/test.json');
+              final r = await LFFileManager.shared.deleteFile(jsonFile);
+              setState(() {
+                _status = r ? 'Success Delete' : 'Failed Delete';
+              });
+            },
+          ),
         ),
       ],
     );

@@ -1,3 +1,4 @@
+import 'package:example/src/common/widget_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_leaf_kit/flutter_leaf_kit.dart';
 import 'package:image_picker/image_picker.dart';
@@ -77,51 +78,50 @@ class _NetworkScreenState extends ScreenState<NetworkScreen> {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              textStyle: const TextStyle(fontSize: 20),
-              minimumSize: const Size(150, 80),
+          WidgetTile(
+            title: 'Get Test',
+            child: LFButton(
+              text: 'Get Test',
+              onTap: () {
+                _getAction();
+              },
             ),
-            onPressed: () {
-              _getAction();
-            },
-            child: const Text('Get Test'),
           ),
-          const SizedBox(height: 10.0),
-          ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              textStyle: const TextStyle(fontSize: 20),
-              minimumSize: const Size(150, 80),
+          WidgetTile(
+            title: 'Multipart Test',
+            child: LFButton(
+              text: 'Multipart Test',
+              onTap: () {
+                _postAction();
+              },
             ),
-            onPressed: () {
-              _postAction();
-            },
-            child: const Text('Multipart Test'),
           ),
-          const SizedBox(height: 10.0),
-          ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              textStyle: const TextStyle(fontSize: 20),
-              minimumSize: const Size(150, 80),
+          WidgetTile(
+            title: 'Get Profile Test',
+            child: LFButton(
+              text: 'Get Profile Test',
+              onTap: () {
+                _getAction1();
+              },
             ),
-            onPressed: () {
-              _getAction1();
-            },
-            child: const Text('Get Profile Test'),
           ),
-          const SizedBox(height: 10.0),
-          ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              textStyle: const TextStyle(fontSize: 20),
-              minimumSize: const Size(150, 80),
+          WidgetTile(
+            title: 'Add ImageFile Test',
+            child: Column(
+              children: [
+                LFButton(
+                  text: 'Add ImageFile Test',
+                  onTap: () {
+                    _addImage();
+                  },
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: LFText('${_files.length} Files'),
+                ),
+              ],
             ),
-            onPressed: () {
-              _addImage();
-            },
-            child: const Text('Add ImageFile Test'),
           ),
-          const SizedBox(height: 10.0),
-          Text('${_files.length} Files'),
         ],
       ),
     );
