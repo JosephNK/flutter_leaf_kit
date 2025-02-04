@@ -36,8 +36,9 @@ abstract class UIModelV2<P> extends Equatable implements UIModelV2Interface {
       ];
 
   P? get payload {
-    throw Exception(
-        'You cannot access the Payload property directly. Please use the getPayload function.');
+    // throw Exception(
+    //     'You cannot access the Payload property directly. Please use the getPayload function.');
+    return _payload;
   }
 
   @override
