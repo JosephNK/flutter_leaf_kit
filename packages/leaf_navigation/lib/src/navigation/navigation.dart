@@ -1,6 +1,21 @@
 part of '../../leaf_navigation.dart';
 
-enum LFNavigatorParamState { flow }
+class LFNavigationParam extends Equatable {
+  final dynamic data;
+
+  const LFNavigationParam({
+    this.data,
+  });
+
+  @override
+  List<Object?> get props => [
+        data,
+      ];
+
+  T? getData<T>() => data as T?;
+}
+
+///////////////////////////////////////////////////////////////////////////////
 
 enum LFNavigatorPushType {
   basicMaterial,
