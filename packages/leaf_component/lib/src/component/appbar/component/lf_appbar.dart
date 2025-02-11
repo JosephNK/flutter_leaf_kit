@@ -19,7 +19,13 @@ class LFAppBar extends StatelessWidget implements PreferredSizeWidget {
   final double? toolbarHeight;
   final Widget? flexibleSpace;
   final double? elevation;
+  final double? scrolledUnderElevation;
+  final bool primary;
   final SystemUiOverlayStyle? systemOverlayStyle;
+  final bool forceMaterialTransparency;
+  final bool excludeHeaderSemantics;
+  final double toolbarOpacity;
+  final double bottomOpacity;
   final VoidCallback? onBackPressed;
 
   const LFAppBar({
@@ -40,7 +46,13 @@ class LFAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.toolbarHeight,
     this.flexibleSpace,
     this.elevation,
+    this.scrolledUnderElevation,
+    this.primary = true,
     this.systemOverlayStyle,
+    this.forceMaterialTransparency = false,
+    this.excludeHeaderSemantics = false,
+    this.toolbarOpacity = 1.0,
+    this.bottomOpacity = 1.0,
     this.onBackPressed,
   });
 
@@ -61,10 +73,8 @@ class LFAppBar extends StatelessWidget implements PreferredSizeWidget {
     final backButtonColor = this.backButtonColor ?? Colors.black;
     final bottomBorderColor = this.bottomBorderColor ??
         LFComponentConfigure.shared.appBar?.bottomBorderColor;
-
     final elevation =
         this.elevation ?? LFComponentConfigure.shared.appBar?.elevation;
-
     final actionsRightMargin = this.actionsRightMargin ??
         LFComponentConfigure.shared.appBar?.actionsRightMargin;
 
@@ -106,7 +116,13 @@ class LFAppBar extends StatelessWidget implements PreferredSizeWidget {
         titleTextStyle: defaultTitleTextStyle,
         // shape: const Border(bottom: BorderSide(color: Colors.orange, width: 1)),
         elevation: elevation,
+        scrolledUnderElevation: scrolledUnderElevation,
+        primary: primary,
         systemOverlayStyle: systemOverlayStyle,
+        forceMaterialTransparency: forceMaterialTransparency,
+        excludeHeaderSemantics: excludeHeaderSemantics,
+        toolbarOpacity: toolbarOpacity,
+        bottomOpacity: bottomOpacity,
       ),
     );
   }
