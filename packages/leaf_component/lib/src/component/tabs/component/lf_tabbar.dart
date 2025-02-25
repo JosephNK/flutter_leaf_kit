@@ -7,7 +7,11 @@ class LFTabBar extends StatelessWidget {
   final TextStyle? labelStyle;
   final TextStyle? unselectedLabelStyle;
   final Color? indicatorColor;
+  final Color? dividerColor;
+  final bool isScrollable;
+  final WidgetStateProperty<Color?>? overlayColor;
   final EdgeInsets? indicatorPadding;
+  final EdgeInsets? labelPadding;
   final List<Tab> tabs;
 
   const LFTabBar({
@@ -18,23 +22,22 @@ class LFTabBar extends StatelessWidget {
     this.labelStyle,
     this.unselectedLabelStyle,
     this.indicatorColor,
+    this.dividerColor,
+    this.isScrollable = false,
+    this.overlayColor,
     this.indicatorPadding,
+    this.labelPadding,
     this.tabs = const [],
   });
 
   @override
   Widget build(BuildContext context) {
-    final labelColor = this.labelColor ?? Colors.blueAccent;
-    final unselectedLabelColor = this.unselectedLabelColor ?? Colors.black54;
-    final indicatorColor = this.indicatorColor ?? Colors.blueAccent;
-
     return TabBar(
       controller: controller,
-      indicatorPadding: indicatorPadding ??
-          const EdgeInsets.symmetric(vertical: 0.0, horizontal: 16.0),
-      labelColor: labelColor,
-      unselectedLabelColor: unselectedLabelColor,
-      indicatorColor: indicatorColor,
+      labelColor: labelColor ?? Colors.blueAccent,
+      unselectedLabelColor: unselectedLabelColor ?? Colors.black54,
+      indicatorColor: indicatorColor ?? Colors.blueAccent,
+      dividerColor: dividerColor,
       labelStyle: labelStyle ??
           const TextStyle(
             fontWeight: FontWeight.bold,
@@ -45,6 +48,11 @@ class LFTabBar extends StatelessWidget {
             fontWeight: FontWeight.normal,
             fontSize: 16.0,
           ),
+      indicatorPadding: indicatorPadding ??
+          const EdgeInsets.symmetric(vertical: 0.0, horizontal: 16.0),
+      labelPadding: labelPadding,
+      isScrollable: isScrollable,
+      overlayColor: overlayColor,
       tabs: tabs,
     );
   }
