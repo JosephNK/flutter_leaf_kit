@@ -218,25 +218,25 @@ class LFDioExceptionConverter implements DioConverter {
     switch (dioExceptionType) {
       case DioExceptionType.connectionTimeout:
         exception =
-            ConnectionTimeoutException(-99999, dioExceptionMessage, null);
+            ConnectionTimeoutException(-99990, dioExceptionMessage, null);
         break;
       case DioExceptionType.sendTimeout:
-        exception = SendTimeoutException(-99999, dioExceptionMessage, null);
+        exception = SendTimeoutException(-99991, dioExceptionMessage, null);
         break;
       case DioExceptionType.receiveTimeout:
-        exception = ReceiveTimeoutException(-99999, dioExceptionMessage, null);
+        exception = ReceiveTimeoutException(-99992, dioExceptionMessage, null);
         break;
       case DioExceptionType.badCertificate:
-        exception = BadCertificateException(-99999, dioExceptionMessage, null);
+        exception = BadCertificateException(-99993, dioExceptionMessage, null);
         break;
       case DioExceptionType.badResponse:
-        exception = BadResponseException(-99999, dioExceptionMessage, null);
+        exception = BadResponseException(-99994, dioExceptionMessage, null);
         break;
       case DioExceptionType.cancel:
-        exception = CancelException(-99999, dioExceptionMessage, null);
+        exception = CancelException(-99995, dioExceptionMessage, null);
         break;
       case DioExceptionType.connectionError:
-        exception = ConnectionErrorException(-99999, dioExceptionMessage, null);
+        exception = ConnectionErrorException(-99996, dioExceptionMessage, null);
         break;
       case DioExceptionType.unknown:
         exception = UnknownException(-99999, dioExceptionMessage, null);

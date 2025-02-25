@@ -1,5 +1,7 @@
 import 'package:dio/dio.dart';
 
+import '../../http_helper/http_exception.dart';
+
 class LFDioResponse<T> extends Response<T> {
   LFDioResponse({
     super.data,
@@ -17,5 +19,21 @@ class LFDioResponse<T> extends Response<T> {
   bool get isSuccessful {
     final statusCode = this.statusCode ?? 0;
     return statusCode >= 200 && statusCode < 300;
+  }
+
+  LFHttpExceptionObject? get exceptionObject {
+    final error = this.error;
+    if (error is LFHttpExceptionObject) {
+      return error;
+    }
+    return null;
+  }
+
+  HTTPException? get httpException {
+    final error = this.error;
+    if (error is LFHttpExceptionObject) {
+      return error.exception;
+    }
+    return null;
   }
 }

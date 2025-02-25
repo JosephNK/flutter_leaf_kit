@@ -109,4 +109,11 @@ class LFHttpExceptionObject extends Object {
   final HTTPException exception;
 
   LFHttpExceptionObject(this.exception);
+
+  @override
+  String toString() {
+    return '\n[*] runtimeType: ${runtimeType.toString()}'
+        '\n[*] exception: ${exception.runtimeType.toString()}'
+        '${exception.toString()}';
+  }
 }
