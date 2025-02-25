@@ -6,6 +6,7 @@ import 'package:image_picker/image_picker.dart';
 import '../services/responses/responses.dart';
 import '../services/services/products_dio_service.dart';
 import '../services/services/profile_dio_service.dart';
+import '../services/services/trail_api_dio_service.dart';
 
 class NetworkScreen extends ScreenStatefulWidget {
   final String title;
@@ -25,6 +26,9 @@ class _NetworkScreenState extends ScreenState<NetworkScreen> {
   @override
   Color? get backgroundColor => Colors.white;
 
+  late LFHttpDio _httpDio1;
+  late LFHttpDio _httpDio2;
+
   @override
   void initState() {
     super.initState();
@@ -41,7 +45,7 @@ class _NetworkScreenState extends ScreenState<NetworkScreen> {
       }
 
       // HTTP Init
-      LFHttpSharedDio.shared.init(
+      _httpDio1 = LFHttpDio().init(
         baseUrl: Uri.parse('https://dummyjson.com'),
         responseSerializers: responseMergedSerializers,
         jsonUndefinedKey: LFDioBuiltValueJSONUndefinedKey(
@@ -54,6 +58,20 @@ class _NetworkScreenState extends ScreenState<NetworkScreen> {
         services: [
           ProductsDioService(),
           ProfileDioService(),
+        ],
+      );
+
+      _httpDio2 = LFHttpDio().init(
+        baseUrl: Uri.parse('http://10.10.20.64:3000'),
+        connectTimeout: const Duration(seconds: 5),
+        receiveTimeout: const Duration(seconds: 5),
+        responseSerializers: responseMergedSerializers,
+        // jsonUndefinedKey: LFDioBuiltValueJSONUndefinedKey(
+        //   collectionKey: 'items',
+        //   objectKey: 'item',
+        // ),
+        services: [
+          TrailApiDioService(),
         ],
       );
     });
@@ -79,11 +97,20 @@ class _NetworkScreenState extends ScreenState<NetworkScreen> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           WidgetTile(
-            title: 'Get Test',
+            title: 'Get Test (dummyjson)',
             child: LFButton(
               text: 'Get Test',
               onTap: () {
                 _getAction();
+              },
+            ),
+          ),
+          WidgetTile(
+            title: 'Timeout Test (Trail)',
+            child: LFButton(
+              text: 'Timeout Test (Trail)',
+              onTap: () {
+                _getActionTimeout();
               },
             ),
           ),
@@ -129,56 +156,72 @@ class _NetworkScreenState extends ScreenState<NetworkScreen> {
 
   Future<void> _getAction() async {
     try {
-      final apiService =
-          LFHttpSharedDio.shared.getService<ProductsDioService>();
+      final apiService = _httpDio1.getService<ProductsDioService>();
       final response = await apiService.getProductAll(limit: 5);
       if (response.isSuccessful) {
         final body = response.data;
-        Logging.d('body: $body');
+        Logging.d('Network_body: $body');
       } else {
         final error = response.error;
-        Logging.e('error: $error');
+        Logging.e('Network_error: $error');
       }
     } on Exception catch (e) {
-      Logging.e('Exception e: $e');
+      Logging.e('Network_Exception e: $e');
+    }
+  }
+
+  Future<void> _getActionTimeout() async {
+    try {
+      final apiService = _httpDio2.getService<TrailApiDioService>();
+      final response = await apiService.timeout();
+      if (response.isSuccessful) {
+        final body = response.data;
+        final message = body?.message;
+        Logging.d('Network_body: $body');
+        Logging.d('Network_message: $message');
+      } else {
+        final httpException = response.httpException;
+        Logging.e('Network_error: $httpException');
+      }
+    } on Exception catch (e) {
+      Logging.e('Network_Exception e: $e');
     }
   }
 
   Future<void> _getAction1() async {
     try {
-      final apiService = LFHttpSharedDio.shared.getService<ProfileDioService>();
+      final apiService = _httpDio1.getService<ProfileDioService>();
       final response = await apiService.getProfileMe();
       if (response.isSuccessful) {
         final body = response.data;
         final item = body?.item;
-        Logging.d('body: $body');
-        Logging.d('item: $item');
+        Logging.d('Network_body: $body');
+        Logging.d('Network_item: $item');
       } else {
         final error = response.error;
-        Logging.e('error: $error');
+        Logging.e('Network_error: $error');
       }
     } on Exception catch (e) {
-      Logging.e('Exception e: $e');
+      Logging.e('Network_Exception e: $e');
     }
   }
 
   Future<void> _postAction() async {
     try {
-      final apiService =
-          LFHttpSharedDio.shared.getService<ProductsDioService>();
+      final apiService = _httpDio1.getService<ProductsDioService>();
       final response = await apiService.postProductAdd(
         title: 'Test Title',
         files: _files,
       );
       if (response.isSuccessful) {
         final body = response.data;
-        Logging.d('body: $body');
+        Logging.d('Network_body: $body');
       } else {
         final error = response.error;
-        Logging.e('error: $error');
+        Logging.e('Network_error: $error');
       }
     } on Exception catch (e) {
-      Logging.e('Exception e: $e');
+      Logging.e('Network_Exception e: $e');
     }
   }
 
@@ -193,7 +236,7 @@ class _NetworkScreenState extends ScreenState<NetworkScreen> {
         });
       }
     } catch (e) {
-      debugPrint('error: $e');
+      debugPrint('Network_error: $e');
     }
   }
 }

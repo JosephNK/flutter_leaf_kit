@@ -13,6 +13,7 @@ Serializers _$responseSerializers = (new Serializers().toBuilder()
       ..add(ProductsGetAllResponse.serializer)
       ..add(ProfileDTO.serializer)
       ..add(ProfileMeGetResponse.serializer)
+      ..add(TrailApiResponse.serializer)
       ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(ProductDTO)]),
           () => new ListBuilder<ProductDTO>()))

@@ -12,6 +12,7 @@ part 'serializers.g.dart';
 @SerializersFor([
   ProductsGetAllResponse,
   ProfileMeGetResponse,
+  TrailApiResponse,
 ])
 final Serializers responseSerializers = (_$responseSerializers.toBuilder()
       ..addPlugin(
