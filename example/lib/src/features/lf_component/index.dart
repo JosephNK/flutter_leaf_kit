@@ -27,6 +27,7 @@ import 'ui/radio/ui/radio_screen.dart';
 import 'ui/scroll/ui/scroll_screen.dart';
 import 'ui/slider/ui/slider_screen.dart';
 import 'ui/switch/ui/switch_screen.dart';
+import 'ui/tabbar/tabbar_sceen.dart';
 import 'ui/text/ui/text_screen.dart';
 import 'ui/textfield/textfield_sceen.dart';
 import 'ui/toast/ui/toast_screen.dart';
@@ -58,6 +59,7 @@ class Index implements InterfaceIndex {
     ListItem(id: 'text', title: 'TextScreen'),
     ListItem(id: 'textfield', title: 'TextFieldScreen'),
     ListItem(id: 'toast', title: 'ToastScreen'),
+    ListItem(id: 'tabbar', title: 'TabbarScreen'),
     ListItem(id: 'switch', title: 'SwitchScreen'),
     ListItem(id: 'notification', title: 'NotificationScreen'),
     ListItem(id: 'listview', title: 'ListViewScreen'),
@@ -141,6 +143,9 @@ class Index implements InterfaceIndex {
         break;
       case 'textfield':
         screen = TextFieldScreen(title: title);
+        break;
+      case 'tabbar':
+        screen = TabBarScreen(title: title);
         break;
       case 'toast':
         screen = ToastScreen(title: title);
