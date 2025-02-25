@@ -68,6 +68,16 @@ class LFDioExceptionConverter implements DioConverter {
     return convertError<ResultType>(response);
   }
 
+  @override
+  FutureOr<LFDioResponse<ResultType>> convertDioException<ResultType>(
+      DioException dioException) {
+    final dioResponse = dioException.response;
+    if (dioResponse != null) {
+      return convertError<ResultType>(dioResponse);
+    }
+    return convertException<ResultType>(dioException);
+  }
+
   FutureOr<LFDioResponse<ResultType>> convertError<ResultType>(
     Response response,
   ) async {
@@ -188,9 +198,54 @@ class LFDioExceptionConverter implements DioConverter {
         break;
     }
 
-    if (statusCode == 401) {
-      throw exception;
+    return resultResponse
+      ..error = LFHttpExceptionObject(
+        exception,
+      );
+  }
+
+  FutureOr<LFDioResponse<ResultType>> convertException<ResultType>(
+    DioException e,
+  ) async {
+    final dioExceptionType = e.type;
+    final dioExceptionMessage = e.message ?? 'Unknown DioException';
+
+    LFDioResponse<ResultType> resultResponse = LFDioResponse<ResultType>(
+      requestOptions: RequestOptions(),
+    );
+
+    HTTPException? exception;
+    switch (dioExceptionType) {
+      case DioExceptionType.connectionTimeout:
+        exception =
+            ConnectionTimeoutException(-99999, dioExceptionMessage, null);
+        break;
+      case DioExceptionType.sendTimeout:
+        exception = SendTimeoutException(-99999, dioExceptionMessage, null);
+        break;
+      case DioExceptionType.receiveTimeout:
+        exception = ReceiveTimeoutException(-99999, dioExceptionMessage, null);
+        break;
+      case DioExceptionType.badCertificate:
+        exception = BadCertificateException(-99999, dioExceptionMessage, null);
+        break;
+      case DioExceptionType.badResponse:
+        exception = BadResponseException(-99999, dioExceptionMessage, null);
+        break;
+      case DioExceptionType.cancel:
+        exception = CancelException(-99999, dioExceptionMessage, null);
+        break;
+      case DioExceptionType.connectionError:
+        exception = ConnectionErrorException(-99999, dioExceptionMessage, null);
+        break;
+      case DioExceptionType.unknown:
+        exception = UnknownException(-99999, dioExceptionMessage, null);
+        break;
     }
-    return resultResponse..error = LFHttpExceptionObject(exception);
+
+    return resultResponse
+      ..error = LFHttpExceptionObject(
+        exception,
+      );
   }
 }

@@ -112,6 +112,12 @@ class LFDioBuiltValueConverter implements DioConverter {
     return convertSuccess<ResultType>(response);
   }
 
+  @override
+  FutureOr<LFDioResponse<ResultType>> convertDioException<ResultType>(
+      DioException dioException) {
+    throw UnimplementedError();
+  }
+
   FutureOr<LFDioResponse<ResultType>> convertSuccess<ResultType>(
     Response response,
   ) async {

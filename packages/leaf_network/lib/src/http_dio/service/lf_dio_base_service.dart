@@ -30,10 +30,7 @@ class LFDioService extends DioService {
       );
       return await converter.convertJsonResponse<T>(response);
     } on DioException catch (e) {
-      if (e.response != null) {
-        return await errorConverter.convertJsonResponse<T>(e.response!);
-      }
-      rethrow;
+      return await errorConverter.convertDioException<T>(e);
     } catch (e) {
       rethrow;
     }
@@ -60,10 +57,7 @@ class LFDioService extends DioService {
       );
       return await converter.convertJsonResponse<T>(response);
     } on DioException catch (e) {
-      if (e.response != null) {
-        return await errorConverter.convertJsonResponse<T>(e.response!);
-      }
-      rethrow;
+      return await errorConverter.convertDioException<T>(e);
     } catch (e) {
       rethrow;
     }
@@ -90,10 +84,7 @@ class LFDioService extends DioService {
       );
       return await converter.convertJsonResponse<T>(response);
     } on DioException catch (e) {
-      if (e.response != null) {
-        return await errorConverter.convertJsonResponse<T>(e.response!);
-      }
-      rethrow;
+      return await errorConverter.convertDioException<T>(e);
     } catch (e) {
       rethrow;
     }
@@ -117,10 +108,7 @@ class LFDioService extends DioService {
       );
       return await converter.convertJsonResponse<T>(response);
     } on DioException catch (e) {
-      if (e.response != null) {
-        return await errorConverter.convertJsonResponse<T>(e.response!);
-      }
-      rethrow;
+      return await errorConverter.convertDioException<T>(e);
     } catch (e) {
       rethrow;
     }

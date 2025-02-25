@@ -55,14 +55,54 @@ class ServiceUnavailableException extends HTTPException {
   ServiceUnavailableException(super.statusCode, super.message, super.value);
 }
 
-/// 인터넷 연결 에러
+/// Internet Connection Error
 class InternetNotConnectException extends HTTPException {
   InternetNotConnectException(super.statusCode, super.message, super.value);
 }
 
-/// 이미지 용량 초과
+/// Image Volume Max Error
 class ImageVolumeMaxException extends HTTPException {
   ImageVolumeMaxException(super.statusCode, super.message, super.value);
+}
+
+/// ConnectionTimeout
+class ConnectionTimeoutException extends HTTPException {
+  ConnectionTimeoutException(super.statusCode, super.message, super.value);
+}
+
+/// SendTimeout
+class SendTimeoutException extends HTTPException {
+  SendTimeoutException(super.statusCode, super.message, super.value);
+}
+
+/// ReceiveTimeout
+class ReceiveTimeoutException extends HTTPException {
+  ReceiveTimeoutException(super.statusCode, super.message, super.value);
+}
+
+/// BadCertificate
+class BadCertificateException extends HTTPException {
+  BadCertificateException(super.statusCode, super.message, super.value);
+}
+
+/// BadResponse
+class BadResponseException extends HTTPException {
+  BadResponseException(super.statusCode, super.message, super.value);
+}
+
+/// Cancel
+class CancelException extends HTTPException {
+  CancelException(super.statusCode, super.message, super.value);
+}
+
+/// ConnectionError
+class ConnectionErrorException extends HTTPException {
+  ConnectionErrorException(super.statusCode, super.message, super.value);
+}
+
+/// Unknown
+class UnknownException extends HTTPException {
+  UnknownException(super.statusCode, super.message, super.value);
 }
 
 class LFHttpExceptionObject extends Object {

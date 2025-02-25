@@ -8,4 +8,7 @@ abstract class DioConverter {
   FutureOr<LFDioResponse<ResultType>> convertJsonResponse<ResultType>(
     Response response,
   );
+  FutureOr<LFDioResponse<ResultType>> convertDioException<ResultType>(
+    DioException dioException,
+  );
 }
