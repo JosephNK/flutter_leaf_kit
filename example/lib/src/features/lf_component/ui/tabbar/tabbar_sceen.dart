@@ -77,9 +77,9 @@ class _TabBarScreenState extends ScreenState<TabBarScreen>
               child: LFTabBar(
                 controller: _tabController1,
                 tabs: const [
-                  Tab(child: Text('상품')),
-                  Tab(child: Text('설명')),
-                  Tab(child: Text('안내')),
+                  Tab(child: Text('상품 정보')),
+                  Tab(child: Text('리뷰')),
+                  Tab(child: Text('주의사항')),
                 ],
               ),
             ),
@@ -100,6 +100,7 @@ class _TabBarScreenState extends ScreenState<TabBarScreen>
                         indicatorColor: Colors.black,
                         labelStyle: const TextStyle(
                           // fontFamily: 'NotoSansJP',
+                          fontFamily: 'NotoSansCJK',
                           fontSize: 16,
                           decoration: TextDecoration.none,
                           fontStyle: FontStyle.normal,
@@ -108,6 +109,7 @@ class _TabBarScreenState extends ScreenState<TabBarScreen>
                         ),
                         unselectedLabelStyle: const TextStyle(
                           // fontFamily: 'NotoSansJP',
+                          fontFamily: 'NotoSansCJK',
                           fontSize: 16,
                           decoration: TextDecoration.none,
                           fontStyle: FontStyle.normal,
@@ -125,6 +127,9 @@ class _TabBarScreenState extends ScreenState<TabBarScreen>
                           Tab(child: Text('상품 정보')),
                           Tab(child: Text('리뷰')),
                           Tab(child: Text('주의사항')),
+                          // Tab(child: Text('商品 情報')),
+                          // Tab(child: Text('レビュー')),
+                          // Tab(child: Text('注意事項')),
                         ],
                       ),
                     ),

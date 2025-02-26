@@ -67,3 +67,45 @@ flutter:
           weight: 800
         - asset: assets/fonts/NotoSansJP-Black.ttf
           weight: 900
+
+#    - family: NotoSansCJK_VF
+#      fonts:
+#        - asset: assets/fonts/NotoSansCJK-VF.otf
+#          weight: 100
+#        - asset: assets/fonts/NotoSansCJK-VF.otf
+#          weight: 200
+#        - asset: assets/fonts/NotoSansCJK-VF.otf
+#          weight: 300
+#        - asset: assets/fonts/NotoSansCJK-VF.otf
+#          weight: 400
+#        - asset: assets/fonts/NotoSansCJK-VF.otf
+#          weight: 500
+#        - asset: assets/fonts/NotoSansCJK-VF.otf
+#          weight: 600
+#        - asset: assets/fonts/NotoSansCJK-VF.otf
+#          weight: 700
+#        - asset: assets/fonts/NotoSansCJK-VF.otf
+#          weight: 800
+#        - asset: assets/fonts/NotoSansCJK-VF.otf
+#          weight: 900
+#
+#    - family: NotoSansCJK
+#      fonts:
+#        - asset: assets/fonts/NotoSansCJK.ttc
+#          weight: 100
+#        - asset: assets/fonts/NotoSansCJK.ttc
+#          weight: 200
+#        - asset: assets/fonts/NotoSansCJK.ttc
+#          weight: 300
+#        - asset: assets/fonts/NotoSansCJK.ttc
+#          weight: 400
+#        - asset: assets/fonts/NotoSansCJK.ttc
+#          weight: 500
+#        - asset: assets/fonts/NotoSansCJK.ttc
+#          weight: 600
+#        - asset: assets/fonts/NotoSansCJK.ttc
+#          weight: 700
+#        - asset: assets/fonts/NotoSansCJK.ttc
+#          weight: 800
+#        - asset: assets/fonts/NotoSansCJK.ttc
+#          weight: 900
