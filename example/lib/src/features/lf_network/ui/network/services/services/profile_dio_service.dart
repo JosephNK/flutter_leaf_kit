@@ -6,7 +6,7 @@ class ProfileDioService extends LFDioService {
   Future<LFDioResponse<ProfileMeGetResponse>> getProfileMe() async {
     try {
       const url = '/profile/me';
-      return await get<ProfileMeGetResponse>(
+      return await get<ProfileMeGetResponse, Null>(
         url,
         options: Options(
           headers: {

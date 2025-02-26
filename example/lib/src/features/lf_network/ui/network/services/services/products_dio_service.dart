@@ -12,7 +12,7 @@ class ProductsDioService extends LFDioService {
       final queryParameters = {
         'limit': limit,
       };
-      return await get<ProductsGetAllResponse>(
+      return await get<ProductsGetAllResponse, Null>(
         url,
         queryParameters: queryParameters,
       );
@@ -43,7 +43,7 @@ class ProductsDioService extends LFDioService {
         'images': uploadFiles,
         'title': title,
       });
-      return await post<ProductsGetAllResponse>(
+      return await post<ProductsGetAllResponse, Null>(
         url,
         data: formData,
       );
