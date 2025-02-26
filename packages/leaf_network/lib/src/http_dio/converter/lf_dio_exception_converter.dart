@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:convert';
 
 import 'package:built_value/serializer.dart';
 import 'package:built_value/standard_json_plugin.dart';
@@ -10,7 +9,7 @@ import '../../http_helper/http_exception.dart';
 import '../response/lf_dio_response.dart';
 import 'lf_dio_base_converter.dart';
 
-class LFDioExceptionConverter implements DioConverter {
+class LFDioExceptionConverter implements DioExceptionConverter {
   final Serializers serializers;
   final int printMaxLength;
 
@@ -38,47 +37,18 @@ class LFDioExceptionConverter implements DioConverter {
     );
   }
 
-  // BuiltList<T> _deserializeListOf<T>(Iterable value) => BuiltList(
-  //       value.map((value) => _deserialize<T>(value)).toList(growable: false),
-  //     );
-
-  // dynamic _decode<T>(dynamic entity) {
-  //   /// handle case when we want to access to Map<String, dynamic> directly
-  //   /// getResource or getMapResource
-  //   /// Avoid dynamic or unconverted value, this could lead to several issues
-  //   if (entity is T) {
-  //     return entity;
-  //   }
-  //
-  //   try {
-  //     if (entity is List) {
-  //       return _deserializeListOf<T>(entity);
-  //     }
-  //     return _deserialize<T>(entity);
-  //   } catch (e) {
-  //     Logging.e(e);
-  //     return null;
-  //   }
-  // }
-
   @override
-  FutureOr<LFDioResponse<ResultType>> convertJsonResponse<ResultType>(
-    Response response,
-  ) async {
-    return convertError<ResultType>(response);
-  }
-
-  @override
-  FutureOr<LFDioResponse<ResultType>> convertDioException<ResultType>(
-      DioException dioException) {
+  FutureOr<LFDioResponse<ResultType>>
+      convertDioException<ResultType, ResultErrorType>(
+          DioException dioException) {
     final dioResponse = dioException.response;
     if (dioResponse != null) {
-      return convertError<ResultType>(dioResponse);
+      return convertError<ResultType, ResultErrorType>(dioResponse);
     }
-    return convertException<ResultType>(dioException);
+    return convertException<ResultType, ResultErrorType>(dioException);
   }
 
-  FutureOr<LFDioResponse<ResultType>> convertError<ResultType>(
+  FutureOr<LFDioResponse<ResultType>> convertError<ResultType, ResultErrorType>(
     Response response,
   ) async {
     final statusCode = response.statusCode ?? 0;
@@ -86,51 +56,52 @@ class LFDioExceptionConverter implements DioConverter {
     final url = response.requestOptions.uri.toString();
     final jsonData = response.data;
 
-    dynamic printBody;
-
-    try {
-      final prettyBody = const JsonEncoder.withIndent('  ').convert(jsonData);
-      final maxLength = printMaxLength; // 최대 길이
-      String body = prettyBody;
-      if (prettyBody.length > maxLength) {
-        final truncatedJsonString = prettyBody.substring(0, maxLength);
-        body = '$truncatedJsonString\n......\n...\n';
-      }
-      printBody = body;
-    } catch (_) {
-      printBody = response.data;
-    }
+    dynamic printBody = getPrintBodyFromResponse(
+      jsonData,
+      response,
+      printMaxLength: printMaxLength,
+    );
 
     Logging.w(
       '[http_dio :: built_value_converter convertError]\n'
-      'statusCode: $statusCode\n'
-      'method: $method\n'
-      'url: $url\n'
-      'body: $printBody\n'
-      'ResultType: $ResultType',
+      '[*] statusCode: $statusCode\n'
+      '[*] method: $method\n'
+      '[*] url: $url\n'
+      '[*] body: $printBody\n'
+      '[*] ResultType: $ResultType\n'
+      '[*] ResultErrorType: $ResultErrorType',
     );
 
     final body = jsonData;
-
-    dynamic object;
+    dynamic bodyObject, bodyErrorObject;
     dynamic parserException;
 
     try {
-      object ??= _deserialize<ResultType>(body);
+      bodyObject ??= _deserialize<ResultErrorType>(body);
     } catch (e) {
-      parserException = e;
-      object ??= body;
+      parserException ??= e;
+      bodyErrorObject ??= body;
     }
 
-    String errorMessage = (object is String) ? object : '';
+    if (ResultErrorType.toString() == 'Null') {
+      try {
+        bodyObject = _deserialize<ResultType>(body);
+      } catch (e) {
+        parserException = e;
+        bodyErrorObject = body;
+      }
+    }
+
+    String errorMessage = (bodyErrorObject is String) ? bodyErrorObject : '';
     if (isNotEmpty(errorMessage)) {
-      errorMessage = '[ConvertError] $errorMessage';
+      errorMessage = '[DioException ConvertError] $errorMessage';
     }
     if (parserException != null && isEmpty(errorMessage)) {
-      errorMessage = '[ConvertError] ${parserException.toString()}';
+      final message = parserException.toString();
+      errorMessage = '[DioException ConvertError] $message';
     }
 
-    final resultResponse = LFDioResponse<ResultType>(
+    final errorResponse = LFDioResponse<ResultType>(
       data: null,
       requestOptions: response.requestOptions,
       statusCode: response.statusCode,
@@ -140,10 +111,6 @@ class LFDioExceptionConverter implements DioConverter {
       extra: response.extra,
       headers: response.headers,
     );
-
-    if (object is ResultType) {
-      return resultResponse..error = object;
-    }
 
     HTTPException? exception;
     switch (statusCode) {
@@ -190,7 +157,7 @@ class LFDioExceptionConverter implements DioConverter {
         );
         break;
       default:
-        exception = HTTPException(
+        exception = UnknownException(
           statusCode,
           errorMessage,
           body,
@@ -198,13 +165,15 @@ class LFDioExceptionConverter implements DioConverter {
         break;
     }
 
-    return resultResponse
-      ..error = LFHttpExceptionObject(
+    return errorResponse
+      ..error = bodyObject
+      ..exception = LFHttpExceptionObject(
         exception,
       );
   }
 
-  FutureOr<LFDioResponse<ResultType>> convertException<ResultType>(
+  FutureOr<LFDioResponse<ResultType>>
+      convertException<ResultType, ResultErrorType>(
     DioException e,
   ) async {
     final dioExceptionType = e.type;
@@ -244,7 +213,7 @@ class LFDioExceptionConverter implements DioConverter {
     }
 
     return resultResponse
-      ..error = LFHttpExceptionObject(
+      ..exception = LFHttpExceptionObject(
         exception,
       );
   }

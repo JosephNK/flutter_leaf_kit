@@ -12,7 +12,7 @@ abstract class DioService {
 
 class LFDioService extends DioService {
   /// Convenience method to make an HTTP GET request.
-  Future<LFDioResponse<T>> get<T>(
+  Future<LFDioResponse<R>> get<R, E>(
     String path, {
     Object? data,
     Map<String, dynamic>? queryParameters,
@@ -28,16 +28,16 @@ class LFDioService extends DioService {
         cancelToken: cancelToken,
         onReceiveProgress: onReceiveProgress,
       );
-      return await converter.convertJsonResponse<T>(response);
+      return await converter.convertJsonResponse<R, E>(response);
     } on DioException catch (e) {
-      return await errorConverter.convertDioException<T>(e);
+      return await errorConverter.convertDioException<R, E>(e);
     } catch (e) {
       rethrow;
     }
   }
 
   /// Convenience method to make an HTTP POST request.
-  Future<LFDioResponse<T>> post<T>(
+  Future<LFDioResponse<R>> post<R, E>(
     String path, {
     Object? data,
     Map<String, dynamic>? queryParameters,
@@ -55,16 +55,16 @@ class LFDioService extends DioService {
         cancelToken: cancelToken,
         onReceiveProgress: onReceiveProgress,
       );
-      return await converter.convertJsonResponse<T>(response);
+      return await converter.convertJsonResponse<R, E>(response);
     } on DioException catch (e) {
-      return await errorConverter.convertDioException<T>(e);
+      return await errorConverter.convertDioException<R, E>(e);
     } catch (e) {
       rethrow;
     }
   }
 
   /// Convenience method to make an HTTP PUT request.
-  Future<LFDioResponse<T>> put<T>(
+  Future<LFDioResponse<R>> put<R, E>(
     String path, {
     Object? data,
     Map<String, dynamic>? queryParameters,
@@ -82,16 +82,16 @@ class LFDioService extends DioService {
         cancelToken: cancelToken,
         onReceiveProgress: onReceiveProgress,
       );
-      return await converter.convertJsonResponse<T>(response);
+      return await converter.convertJsonResponse<R, E>(response);
     } on DioException catch (e) {
-      return await errorConverter.convertDioException<T>(e);
+      return await errorConverter.convertDioException<R, E>(e);
     } catch (e) {
       rethrow;
     }
   }
 
   /// Convenience method to make an HTTP DELETE request.
-  Future<LFDioResponse<T>> delete<T>(
+  Future<LFDioResponse<R>> delete<R, E>(
     String path, {
     Object? data,
     Map<String, dynamic>? queryParameters,
@@ -106,9 +106,9 @@ class LFDioService extends DioService {
         options: options,
         cancelToken: cancelToken,
       );
-      return await converter.convertJsonResponse<T>(response);
+      return await converter.convertJsonResponse<R, E>(response);
     } on DioException catch (e) {
-      return await errorConverter.convertDioException<T>(e);
+      return await errorConverter.convertDioException<R, E>(e);
     } catch (e) {
       rethrow;
     }

@@ -15,25 +15,17 @@ class LFDioResponse<T> extends Response<T> {
   });
 
   Object? error;
+  LFHttpExceptionObject? exception;
 
   bool get isSuccessful {
     final statusCode = this.statusCode ?? 0;
-    return statusCode >= 200 && statusCode < 300;
-  }
-
-  LFHttpExceptionObject? get exceptionObject {
-    final error = this.error;
-    if (error is LFHttpExceptionObject) {
-      return error;
-    }
-    return null;
+    return (statusCode >= 200 && statusCode < 300) &&
+        error == null &&
+        exception == null;
   }
 
   HTTPException? get httpException {
-    final error = this.error;
-    if (error is LFHttpExceptionObject) {
-      return error.exception;
-    }
-    return null;
+    final exception = this.exception;
+    return exception?.exception;
   }
 }
