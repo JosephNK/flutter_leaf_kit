@@ -27,11 +27,14 @@ class LFDeviceManager {
   Size _deviceSize = Size.zero;
   Size get deviceSize => _deviceSize;
 
-  String _deviceName = '';
-  String get deviceName => _deviceName;
+  String _deviceModel = '';
+  String get deviceModel => _deviceModel;
 
   String _deviceOSVersion = '';
   String get deviceOSVersion => _deviceOSVersion;
+
+  String _deviceMachine = '';
+  String get deviceMachine => _deviceMachine;
 
   // Android Read
   // https://github.com/fluttercommunity/android_id
@@ -71,16 +74,19 @@ class LFDeviceManager {
       final model = androidInfo.model;
       final String deviceID =
           androidId ?? await const AndroidId().getId() ?? '';
-      _deviceName = model;
+      _deviceModel = model;
+      _deviceMachine = '';
       _deviceOSVersion = 'Android $release (SDK $sdkInt), $manufacturer';
       _deviceIdentifier = deviceID;
     } else if (Platform.isIOS) {
       final iosInfo = await deviceInfo.iosInfo;
       final systemName = iosInfo.systemName;
       final systemVersion = iosInfo.systemVersion;
+      final machine = iosInfo.utsname.machine;
       final model = iosInfo.model;
       final String deviceID = iosInfo.identifierForVendor ?? '';
-      _deviceName = model;
+      _deviceModel = model;
+      _deviceMachine = machine;
       _deviceOSVersion = '$systemName $systemVersion';
       _deviceIdentifier = deviceID;
     }
