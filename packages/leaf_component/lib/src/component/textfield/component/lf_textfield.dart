@@ -90,6 +90,7 @@ class LFTextField extends StatefulWidget {
   final ValueChanged<String>? onChanged;
   final ValueChanged<String>? onSubmitted;
   final VoidCallback? onEditingComplete;
+  final VoidCallback? onClearPressed;
 
   const LFTextField({
     super.key,
@@ -142,6 +143,7 @@ class LFTextField extends StatefulWidget {
     this.onChanged,
     this.onSubmitted,
     this.onEditingComplete,
+    this.onClearPressed,
   });
 
   @override
@@ -293,6 +295,7 @@ class _LFTextFieldState extends State<LFTextField> {
       return GestureDetector(
         onTap: () {
           clear();
+          widget.onClearPressed?.call();
         },
         child: child,
       );
