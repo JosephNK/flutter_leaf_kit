@@ -1,5 +1,7 @@
 library leaf_manager;
 
+export 'package:app_tracking_transparency/app_tracking_transparency.dart'
+    show TrackingStatus;
 export 'package:permission_handler/permission_handler.dart';
 export 'package:url_launcher/url_launcher.dart'
     show LaunchMode, WebViewConfiguration;
