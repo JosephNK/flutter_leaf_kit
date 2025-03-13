@@ -127,6 +127,24 @@ class LFAppManager {
     }
   }
 
+  Future<String?> getAdvertisingIdentifier() async {
+    try {
+      if (Platform.isIOS) {
+        try {
+          final identifier =
+              await AppTrackingTransparency.getAdvertisingIdentifier();
+          return identifier;
+        } on PlatformException {
+          Logging.d('AppTrackingTransparency PlatformException was thrown');
+          rethrow;
+        }
+      }
+      return null;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
   /// AppBadge
   Future<bool> isAppBadgeSupported() async {
     return await AppBadgePlus.isSupported();
