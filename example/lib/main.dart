@@ -52,7 +52,7 @@ void main() async {
       EasyLocalization(
         supportedLocales: const [
           Locale('en', 'US'),
-          Locale('ko', 'KR'),
+          // Locale('ko', 'KR'),
         ],
         path: 'assets/translations',
         fallbackLocale: const Locale('en', 'US'),

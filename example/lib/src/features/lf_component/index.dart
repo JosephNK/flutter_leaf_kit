@@ -23,6 +23,7 @@ import 'ui/notification/ui/notificaion_screen.dart';
 import 'ui/pageindicator/ui/page_indicator_screen.dart';
 import 'ui/paveview/ui/pageview_screen.dart';
 import 'ui/photo/ui/photo_screen.dart';
+import 'ui/picker/ui/picker_screen.dart';
 import 'ui/radio/ui/radio_screen.dart';
 import 'ui/scroll/ui/scroll_screen.dart';
 import 'ui/slider/ui/slider_screen.dart';
@@ -65,6 +66,7 @@ class Index implements InterfaceIndex {
     ListItem(id: 'listview', title: 'ListViewScreen'),
     ListItem(id: 'gridview', title: 'GridViewScreen'),
     ListItem(id: 'webview', title: 'WebViewScreen'),
+    ListItem(id: 'picker', title: 'PickerScreen'),
   ]..sort((a, b) => a.id.compareTo(b.id));
 
   @override
@@ -164,6 +166,9 @@ class Index implements InterfaceIndex {
         break;
       case 'webview':
         screen = WebViewScreen(title: title);
+        break;
+      case 'picker':
+        screen = PickerScreen(title: title);
         break;
     }
 

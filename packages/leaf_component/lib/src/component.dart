@@ -21,6 +21,7 @@ export 'component/notification/notification.dart';
 export 'component/page/page.dart';
 export 'component/painter/painter.dart';
 export 'component/photo/photo.dart';
+export 'component/picker/picker.dart';
 export 'component/popscope/popscope.dart';
 export 'component/radio/radio.dart';
 export 'component/ratingbar/ratingbar.dart';
