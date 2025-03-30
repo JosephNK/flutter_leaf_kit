@@ -27,14 +27,15 @@ class LFDatePicker extends StatefulWidget {
 class _LFDatePickerState extends State<LFDatePicker> {
   late DateTime _dateTime;
   bool _isExpanded = false;
+  bool _isVisibled = false;
 
   String get formattedDate {
-    final int hour24 = _dateTime.hour;
-    final int hour12 = hour24 % 12 == 0 ? 12 : hour24 % 12;
-    final String formattedHour12 = hour12.toString().padLeft(2, '0');
-    final int minute = _dateTime.minute;
-    final String period = hour24 < 12 ? 'AM' : 'PM';
-    return '$formattedHour12:$minute $period';
+    final int year = _dateTime.year;
+    final int month = _dateTime.month;
+    final int day = _dateTime.day;
+    final String formattedMonth = month.toString().padLeft(2, '0');
+    final String formattedDay = day.toString().padLeft(2, '0');
+    return '$formattedMonth.$formattedDay $year';
   }
 
   @override
@@ -50,8 +51,14 @@ class _LFDatePickerState extends State<LFDatePicker> {
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
       onTap: () {
+        final value = !_isExpanded;
         setState(() {
-          _isExpanded = !_isExpanded;
+          _isExpanded = value;
+        });
+        Future.delayed(const Duration(milliseconds: 300), () {
+          setState(() {
+            _isVisibled = value;
+          });
         });
       },
       child: Container(
@@ -114,7 +121,7 @@ class _LFDatePickerState extends State<LFDatePicker> {
                           ),
                           Expanded(
                             child: Visibility(
-                              visible: _isExpanded,
+                              visible: _isVisibled,
                               child: DateCalendarView(
                                   // mode: CupertinoDatePickerMode.time,
                                   // minuteInterval: widget.minuteInterval,
