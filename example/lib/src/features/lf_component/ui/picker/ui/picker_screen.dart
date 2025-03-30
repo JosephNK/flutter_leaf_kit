@@ -46,7 +46,21 @@ class _PickerScreenState extends ScreenState<PickerScreen> {
               children: [
                 LFTimePicker(
                   onChanged: (time) {
-                    print('time: $time');
+                    Logging.d('time: $time');
+                  },
+                ),
+              ],
+            ),
+          ),
+          WidgetTile(
+            title: 'DatePicker',
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                LFDatePicker(
+                  onChanged: (date) {
+                    Logging.d('date: $date');
                   },
                 ),
               ],
