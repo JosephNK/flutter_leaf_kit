@@ -19,7 +19,6 @@ class DateCalendarHeaderView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final weekDays = LFLocalizations.shared.localization.shortWeekdays;
-
     final monthYear = LFDate.parseFromDateTime(date).format('MMMM yyyy');
 
     return Column(
@@ -37,10 +36,10 @@ class DateCalendarHeaderView extends StatelessWidget {
                       fontSize: 16.0,
                     ),
                   ),
-                  const Icon(LucideIcons.chevronRight, size: 18.0),
+                  // const Icon(LucideIcons.chevronRight, size: 18.0),
                 ],
               ),
-              Spacer(),
+              const Spacer(),
               Row(
                 children: [
                   GestureDetector(

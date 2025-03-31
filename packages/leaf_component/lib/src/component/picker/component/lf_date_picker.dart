@@ -27,7 +27,7 @@ class LFDatePicker extends StatefulWidget {
 class _LFDatePickerState extends State<LFDatePicker> {
   late DateTime _dateTime;
   bool _isExpanded = false;
-  bool _isVisibled = false;
+  bool _isVisible = false;
 
   String get formattedDate {
     final int year = _dateTime.year;
@@ -42,7 +42,7 @@ class _LFDatePickerState extends State<LFDatePicker> {
   void initState() {
     super.initState();
 
-    final initialDateTime = widget.initialDateTime ?? DateTime.now();
+    final initialDateTime = widget.initialDateTime ?? LFDate.now().dateTime;
     _dateTime = initialDateTime;
   }
 
@@ -57,7 +57,7 @@ class _LFDatePickerState extends State<LFDatePicker> {
         });
         Future.delayed(const Duration(milliseconds: 300), () {
           setState(() {
-            _isVisibled = value;
+            _isVisible = value;
           });
         });
       },
@@ -121,19 +121,16 @@ class _LFDatePickerState extends State<LFDatePicker> {
                           ),
                           Expanded(
                             child: Visibility(
-                              visible: _isVisibled,
+                              visible: _isVisible,
                               child: DateCalendarView(
-                                  // mode: CupertinoDatePickerMode.time,
-                                  // minuteInterval: widget.minuteInterval,
-                                  // initialDateTime: _dateTime,
-                                  // use24hFormat: false,
-                                  // onDateTimeChanged: (time) {
-                                  //   setState(() {
-                                  //     _dateTime = time;
-                                  //   });
-                                  //   widget.onChanged?.call(time);
-                                  // },
-                                  ),
+                                selectedDateTime: _dateTime,
+                                onDateTimeChanged: (time) {
+                                  setState(() {
+                                    _dateTime = time;
+                                  });
+                                  widget.onChanged?.call(time);
+                                },
+                              ),
                             ),
                           ),
                         ],

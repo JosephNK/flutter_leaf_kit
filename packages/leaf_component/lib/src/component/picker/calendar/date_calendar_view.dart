@@ -5,7 +5,14 @@ import 'date_calendar_cell.dart';
 import 'date_calendar_header_view.dart';
 
 class DateCalendarView extends StatefulWidget {
-  const DateCalendarView({super.key});
+  final DateTime selectedDateTime;
+  final ValueChanged<DateTime>? onDateTimeChanged;
+
+  const DateCalendarView({
+    super.key,
+    required this.selectedDateTime,
+    this.onDateTimeChanged,
+  });
 
   @override
   State<DateCalendarView> createState() => _DateCalendarViewState();
@@ -13,16 +20,29 @@ class DateCalendarView extends StatefulWidget {
 
 class _DateCalendarViewState extends State<DateCalendarView> {
   final GlobalKey _gridKey = GlobalKey();
+  late DateTime _selectedDateTime;
   List<DateTime> _dateTimes = [];
-  DateTime pageDateTime = LFDate.now().dateTime;
 
   @override
   void initState() {
     super.initState();
 
+    _selectedDateTime = widget.selectedDateTime;
+
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      setDateTimes(pageDateTime);
+      _setDateTimes(_selectedDateTime);
     });
+  }
+
+  @override
+  void didUpdateWidget(covariant DateCalendarView oldWidget) {
+    if (oldWidget.selectedDateTime != widget.selectedDateTime) {
+      setState(() {
+        _selectedDateTime = widget.selectedDateTime;
+        _setDateTimes(_selectedDateTime);
+      });
+    }
+    super.didUpdateWidget(oldWidget);
   }
 
   @override
@@ -30,12 +50,14 @@ class _DateCalendarViewState extends State<DateCalendarView> {
     return Column(
       children: [
         DateCalendarHeaderView(
-          date: pageDateTime,
+          date: _selectedDateTime,
           onLeftTap: () {
-            //
+            final dateTime = _selectedDateTime.addMonths(-1);
+            widget.onDateTimeChanged?.call(dateTime);
           },
           onRightTap: () {
-            //
+            final dateTime = _selectedDateTime.addMonths(1);
+            widget.onDateTimeChanged?.call(dateTime);
           },
         ),
         GridView.builder(
@@ -49,26 +71,23 @@ class _DateCalendarViewState extends State<DateCalendarView> {
           physics: const NeverScrollableScrollPhysics(),
           itemBuilder: (context, index) {
             final dateTime = _dateTimes[index];
-            final isDisabled = (pageDateTime.month != dateTime.month);
+            final isDisabled = (_selectedDateTime.month != dateTime.month);
 
             return Material(
               type: MaterialType.transparency,
-              child: GestureDetector(
-                behavior: HitTestBehavior.opaque,
-                onTap: () {
-                  if (isDisabled) return;
-                  // onSelected?.call(dateTime);
+              child: LayoutBuilder(
+                builder: (context, constraints) {
+                  return DateCalendarCell(
+                    width: constraints.maxWidth,
+                    height: constraints.maxHeight,
+                    dateTime: dateTime,
+                    selectedDateTime: _selectedDateTime,
+                    isDisabled: isDisabled,
+                    onSelected: (dateTime) {
+                      widget.onDateTimeChanged?.call(dateTime);
+                    },
+                  );
                 },
-                child: LayoutBuilder(
-                  builder: (context, constraints) {
-                    return DateCalendarCell(
-                      width: constraints.maxWidth,
-                      height: constraints.maxHeight,
-                      dateTime: dateTime,
-                      isDisabled: isDisabled,
-                    );
-                  },
-                ),
               ),
             );
           },
@@ -77,7 +96,7 @@ class _DateCalendarViewState extends State<DateCalendarView> {
     );
   }
 
-  void setDateTimes(DateTime now) {
+  void _setDateTimes(DateTime now) {
     _dateTimes = [];
     final firstDayOfMonth = DateTime(now.year, now.month, 1);
     int daysToSubtract = firstDayOfMonth.weekday % 7;
@@ -85,27 +104,21 @@ class _DateCalendarViewState extends State<DateCalendarView> {
         firstDayOfMonth.subtract(Duration(days: daysToSubtract));
     DateTime date = calendarStart;
     for (int week = 0; week < 6; week++) {
-      String weekRow = '';
+      // String weekRow = '';
       for (int day = 0; day < 7; day++) {
-        // 현재 달의 날짜인 경우에는 굵게 표시
+        // 현재 달의 날짜인 경우 굵게 표시
         if (date.month == now.month) {
-          weekRow += '${date.day.toString().padLeft(2)} ';
+          // weekRow += '${date.day.toString().padLeft(2)} ';
           _dateTimes.add(date);
         } else {
-          // 다른 달의 날짜는 희미하게 표시 (여기서는 간단히 구분)
-          weekRow += ('${date.day.toString().padLeft(2)} ');
+          // 다른 달의 날짜는 희미 하게 표시 (여기서 간단히 구분)
+          // weekRow += ('${date.day.toString().padLeft(2)} ');
           _dateTimes.add(date);
         }
         date = date.add(const Duration(days: 1));
       }
-      print(weekRow);
+      // print(weekRow);
     }
     setState(() {});
-  }
-
-  int _getMonthCount(DateTime first, DateTime last) {
-    final yearDif = last.year - first.year;
-    final monthDif = last.month - first.month;
-    return yearDif * 12 + monthDif;
   }
 }
