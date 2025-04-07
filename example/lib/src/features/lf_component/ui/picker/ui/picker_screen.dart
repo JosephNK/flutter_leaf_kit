@@ -16,7 +16,7 @@ class PickerScreen extends ScreenStatefulWidget {
 
 class _PickerScreenState extends ScreenState<PickerScreen> {
   @override
-  Color? get backgroundColor => Colors.white;
+  Color? get backgroundColor => Colors.grey;
 
   @override
   Widget? buildScreen(BuildContext context) {
@@ -45,6 +45,8 @@ class _PickerScreenState extends ScreenState<PickerScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 LFTimePicker(
+                  backgroundColor: Colors.white,
+                  // borderColor: Colors.white,
                   onChanged: (time) {
                     Logging.d('time: $time');
                   },
@@ -59,6 +61,8 @@ class _PickerScreenState extends ScreenState<PickerScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 LFDatePicker(
+                  backgroundColor: Colors.white,
+                  // borderColor: Colors.white,
                   onChanged: (date) {
                     Logging.d('date: $date');
                   },

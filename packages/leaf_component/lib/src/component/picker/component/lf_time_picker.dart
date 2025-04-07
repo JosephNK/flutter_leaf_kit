@@ -5,6 +5,7 @@ class LFTimePicker extends StatefulWidget {
   final Widget? icon;
   final TextStyle? timeTextStyle;
   final Color? borderColor;
+  final Color? backgroundColor;
   final BorderRadius? borderRadius;
   final DateTime? initialDateTime;
   final int minuteInterval;
@@ -16,6 +17,7 @@ class LFTimePicker extends StatefulWidget {
     this.icon,
     this.timeTextStyle,
     this.borderColor,
+    this.backgroundColor,
     this.borderRadius,
     this.initialDateTime,
     this.minuteInterval = 5,
@@ -63,10 +65,13 @@ class _LFTimePickerState extends State<LFTimePicker> {
       child: Container(
         decoration: BoxDecoration(
           border: Border.all(
-            color: widget.borderColor ?? Colors.black,
+            color: _isExpanded
+                ? widget.borderColor ?? Colors.black
+                : Colors.transparent,
             width: 1.0,
           ),
           borderRadius: widget.borderRadius ?? BorderRadius.circular(12.0),
+          color: widget.backgroundColor ?? Colors.white,
         ),
         child: Column(
           children: [

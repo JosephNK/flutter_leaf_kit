@@ -21,6 +21,7 @@ class _TextFieldScreenState extends ScreenState<TextFieldScreen> {
   final _textController4 = LFTextFieldController();
   final _textController5 = LFTextFieldController();
   final _textController6 = LFTextFieldController();
+  final _textController7 = LFTextFieldController();
 
   @override
   Color? get backgroundColor => Colors.white;
@@ -41,6 +42,7 @@ class _TextFieldScreenState extends ScreenState<TextFieldScreen> {
     _textController4.dispose();
     _textController5.dispose();
     _textController6.dispose();
+    _textController7.dispose();
 
     super.dispose();
   }
@@ -66,6 +68,23 @@ class _TextFieldScreenState extends ScreenState<TextFieldScreen> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            WidgetTile(
+              title: 'LFTextField (Counter)',
+              child: LFTextField(
+                controller: _textController7,
+                placeHolder: 'Normal Typing..',
+                maxLength: 10,
+                // counterWidget: Container(
+                //   color: Colors.red,
+                //   width: double.infinity,
+                //   child: const Text('counterWidget'),
+                // ),
+                counterText: '',
+                onChanged: (text) {
+                  debugPrint('LFTextField onChanged: $text');
+                },
+              ),
+            ),
             WidgetTile(
               title: 'LFTextField (Normal)',
               child: LFTextField(
