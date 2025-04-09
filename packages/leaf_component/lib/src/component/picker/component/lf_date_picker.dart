@@ -77,6 +77,8 @@ class _LFDatePickerState extends State<LFDatePicker> {
           color: widget.backgroundColor ?? Colors.white,
         ),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Column(
               mainAxisAlignment: MainAxisAlignment.start,
@@ -121,6 +123,8 @@ class _LFDatePickerState extends State<LFDatePicker> {
                     secondChild: SizedBox(
                       height: 400.0 + 1.0,
                       child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Container(
                             height: 1.0,

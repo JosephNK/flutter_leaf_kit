@@ -50,6 +50,9 @@ class _DateCalendarViewState extends State<DateCalendarView> {
   @override
   Widget build(BuildContext context) {
     return Column(
+      mainAxisSize: MainAxisSize.min,
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         DateCalendarHeaderView(
           date: _selectedDateTime,
@@ -72,6 +75,7 @@ class _DateCalendarViewState extends State<DateCalendarView> {
           ),
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
+          padding: EdgeInsets.zero,
           itemBuilder: (context, index) {
             final dateTime = _dateTimes[index];
             final isDisabled = (_selectedDateTime.month != dateTime.month);
