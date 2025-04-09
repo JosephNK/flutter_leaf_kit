@@ -8,6 +8,7 @@ class LFDatePicker extends StatefulWidget {
   final Color? backgroundColor;
   final BorderRadius? borderRadius;
   final DateTime? initialDateTime;
+  final bool visibleHeader;
   final ValueChanged<DateTime>? onChanged;
 
   const LFDatePicker({
@@ -19,6 +20,7 @@ class LFDatePicker extends StatefulWidget {
     this.backgroundColor,
     this.borderRadius,
     this.initialDateTime,
+    this.visibleHeader = true,
     this.onChanged,
   });
 
@@ -129,6 +131,7 @@ class _LFDatePickerState extends State<LFDatePicker> {
                               visible: _isVisible,
                               child: DateCalendarView(
                                 selectedDateTime: _dateTime,
+                                visibleHeader: widget.visibleHeader,
                                 onDateTimeChanged: (time) {
                                   setState(() {
                                     _dateTime = time;

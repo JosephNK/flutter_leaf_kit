@@ -39,22 +39,6 @@ class _PickerScreenState extends ScreenState<PickerScreen> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           WidgetTile(
-            title: 'TimePicker',
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                LFTimePicker(
-                  backgroundColor: Colors.white,
-                  // borderColor: Colors.white,
-                  onChanged: (time) {
-                    Logging.d('time: $time');
-                  },
-                ),
-              ],
-            ),
-          ),
-          WidgetTile(
             title: 'DatePicker',
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
@@ -65,6 +49,22 @@ class _PickerScreenState extends ScreenState<PickerScreen> {
                   // borderColor: Colors.white,
                   onChanged: (date) {
                     Logging.d('date: $date');
+                  },
+                ),
+              ],
+            ),
+          ),
+          WidgetTile(
+            title: 'TimePicker',
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                LFTimePicker(
+                  backgroundColor: Colors.white,
+                  // borderColor: Colors.white,
+                  onChanged: (time) {
+                    Logging.d('time: $time');
                   },
                 ),
               ],

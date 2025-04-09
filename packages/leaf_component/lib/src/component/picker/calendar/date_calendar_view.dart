@@ -6,11 +6,13 @@ import 'date_calendar_header_view.dart';
 
 class DateCalendarView extends StatefulWidget {
   final DateTime selectedDateTime;
+  final bool visibleHeader;
   final ValueChanged<DateTime>? onDateTimeChanged;
 
   const DateCalendarView({
     super.key,
     required this.selectedDateTime,
+    this.visibleHeader = true,
     this.onDateTimeChanged,
   });
 
@@ -51,6 +53,7 @@ class _DateCalendarViewState extends State<DateCalendarView> {
       children: [
         DateCalendarHeaderView(
           date: _selectedDateTime,
+          visible: widget.visibleHeader,
           onLeftTap: () {
             final dateTime = _selectedDateTime.addMonths(-1);
             widget.onDateTimeChanged?.call(dateTime);
