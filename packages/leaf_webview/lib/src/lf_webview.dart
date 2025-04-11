@@ -70,6 +70,10 @@ class LFWebViewController {
     return webViewController.runJavaScriptReturningResult(javaScript);
   }
 
+  Future<String?> getUserAgent() async {
+    return await webViewController.getUserAgent();
+  }
+
   Future<void> setUserAgent(String userAgent) async {
     await webViewController.setUserAgent(userAgent);
   }
