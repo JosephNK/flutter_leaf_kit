@@ -222,21 +222,32 @@ class _LFWebViewState extends State<LFWebView> {
 
     _navigationDelegate = NavigationDelegate(
       onProgress: (int progress) {
-        Logging.d('[LFWebView] Page Progress: ${progress.toString()}');
+        Logging.d('[LFWebView] onProgress = ${progress.toString()}');
       },
       onPageStarted: (String url) {
-        Logging.d('[LFWebView] Page started loading: $url');
+        Logging.d('[LFWebView] onPageStarted = $url');
         onPageStarted?.call();
       },
       onPageFinished: (String url) async {
-        Logging.d('[LFWebView] Page finished loading: $url');
+        Logging.d('[LFWebView] onPageFinished = $url');
         await updateWebViewHeightAfterOnPageFinished();
         onPageFinished?.call();
       },
-      onWebResourceError: (WebResourceError error) {},
+      onWebResourceError: (WebResourceError error) {
+        Logging.d('[LFWebView] onWebResourceError = ${error.errorCode}');
+      },
       onNavigationRequest: (NavigationRequest request) async {
         Logging.d('[LFWebView] navigationDelegate = ${request.url}');
         return await navigationURLToLinkEvent(request.url);
+      },
+      onHttpAuthRequest: (HttpAuthRequest request) async {
+        Logging.d('[LFWebView] onHttpAuthRequest = ${request.realm}');
+      },
+      onUrlChange: (UrlChange change) {
+        Logging.d('[LFWebView] onUrlChange = ${change.url}');
+      },
+      onHttpError: (HttpResponseError error) {
+        Logging.d('[LFWebView] onHttpError = ${error.response}');
       },
     );
 
