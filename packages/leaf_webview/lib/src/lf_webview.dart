@@ -12,8 +12,9 @@ typedef LFWebViewOnLoaderBuilder = Widget Function();
 typedef LFWebViewOnPageStarted = Function();
 typedef LFWebViewOnPageFinished = Function();
 typedef LFWebViewOnHeightFinished = Function(double height);
-typedef LFWebViewOnEvent = Function(LFWebViewEventType type, Object value);
 typedef LFWebViewOnMessageReceived = Function(JavaScriptMessage);
+typedef LFWebViewOnNavigationDecision = bool Function(
+    LFWebViewEventType? type, String url);
 
 class LFWebViewController {
   LFWebViewController() {
@@ -122,7 +123,7 @@ class LFWebView extends StatefulWidget {
   final LFWebViewOnPageFinished? onPageFinished;
   final LFWebViewOnLoaderBuilder? onLoaderBuilder;
   final LFWebViewOnHeightFinished? onHeightFinished;
-  final LFWebViewOnEvent? onEvent;
+  final LFWebViewOnNavigationDecision? onNavigationDecision;
 
   const LFWebView({
     super.key,
@@ -140,7 +141,7 @@ class LFWebView extends StatefulWidget {
     this.onPageStarted,
     this.onPageFinished,
     this.onHeightFinished,
-    this.onEvent,
+    this.onNavigationDecision,
   });
 
   @override
@@ -337,19 +338,23 @@ class _LFWebViewState extends State<LFWebView> {
   }
 
   Future<NavigationDecision> navigationURLToLinkEvent(String url) async {
-    final onEvent = widget.onEvent;
+    final onNavigationDecision = widget.onNavigationDecision;
     if (url.contains('mailto:')) {
       Logging.d('[LFWebView] navigationDelegate :: Mailto clicked! = $url');
-      onEvent?.call(LFWebViewEventType.mailto, url);
+      final _ = onNavigationDecision?.call(LFWebViewEventType.mailto, url);
       return NavigationDecision.prevent;
     } else if (url.contains('tel:')) {
       Logging.d('[LFWebView] navigationDelegate :: Tel clicked! = $url');
-      onEvent?.call(LFWebViewEventType.tel, url);
+      final _ = onNavigationDecision?.call(LFWebViewEventType.tel, url);
       return NavigationDecision.prevent;
     } else if (url.contains('geo:')) {
       Logging.d('[LFWebView] navigationDelegate :: GEO clicked! = $url');
-      onEvent?.call(LFWebViewEventType.geo, url);
+      final _ = onNavigationDecision?.call(LFWebViewEventType.geo, url);
       return NavigationDecision.prevent;
+    }
+    if (onNavigationDecision != null) {
+      final allow = onNavigationDecision.call(null, url);
+      return allow ? NavigationDecision.navigate : NavigationDecision.prevent;
     }
     return NavigationDecision.navigate;
   }
