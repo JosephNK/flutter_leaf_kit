@@ -28,7 +28,7 @@ dependencies:
   flutter_datetime_picker_plus: ^2.2.0
   vector_graphics: ^1.1.18
   flutter_svg: ^2.0.17
-  lucide_icons: ^0.257.0
+  lucide_icons_flutter: ^2.0.6
 
   flutter_leaf_common:
     git:

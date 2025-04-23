@@ -156,6 +156,5 @@ class _LFDatePickerState extends State<LFDatePicker> {
         ),
       ),
     );
-    ;
   }
 }

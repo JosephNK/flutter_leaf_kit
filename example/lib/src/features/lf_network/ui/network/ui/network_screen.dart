@@ -30,7 +30,7 @@ class _NetworkScreenState extends ScreenState<NetworkScreen> {
   late LFHttpDio _httpDio1;
   late LFHttpDio _httpDio2;
 
-  NetworkRepository _networkRepository = NetworkRepository();
+  final NetworkRepository _networkRepository = NetworkRepository();
 
   @override
   void initState() {
