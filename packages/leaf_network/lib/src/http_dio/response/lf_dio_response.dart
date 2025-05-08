@@ -19,7 +19,7 @@ class LFDioResponse<T> extends Response<T> {
 
   bool get isSuccessful {
     final statusCode = this.statusCode ?? 0;
-    return (statusCode >= 200 && statusCode < 300) &&
+    return (statusCode >= 200 && statusCode < 400) &&
         error == null &&
         exception == null;
   }
