@@ -57,7 +57,16 @@ class LFToast {
       borderSide: borderSide,
       autoCloseDuration: duration ?? const Duration(seconds: 5),
       showProgressBar: false,
-      closeButtonShowType: CloseButtonShowType.none,
+      closeButton: ToastCloseButton(
+        showType: CloseButtonShowType.onHover,
+        buttonBuilder: (context, onClose) {
+          return OutlinedButton.icon(
+            onPressed: onClose,
+            icon: const Icon(Icons.close, size: 20),
+            label: const Text('Close'),
+          );
+        },
+      ),
       closeOnClick: closeOnClick,
       dragToClose: dragToClose,
       showIcon: showIcon,

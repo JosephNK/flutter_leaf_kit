@@ -1,6 +1,6 @@
 name: flutter_leaf_common
 description: A new Flutter package project.
-version: "2.2.1-dev"
+version: "2.3.0-dev"
 publish_to: 'none'
 homepage: https://github.com/JosephNK/flutter_leaf_kit
 
@@ -13,16 +13,16 @@ dependencies:
     sdk: flutter
 
   equatable: ^2.0.7
-  provider: ^6.1.4
+  provider: ^6.1.5
 
-  collection: ^1.19.0 # flutter_leaf_common from path depends on collection ^1.19.1
+  collection: ^1.19.1
   easy_localization: ^3.0.7+1
   logger: ^2.5.0
   quiver: ^3.2.2
   string_validator: ^1.1.0
-  async: ^2.11.0 # flutter_test from sdk depends on async 2.11.0
+  async: ^2.13.0
 
-  path: ^1.9.0 # flutter_test from sdk depends on path 1.9.0
+  path: ^1.9.1
 
 # package_info_plus (temporarily override for chewie)
 #dependency_overrides:

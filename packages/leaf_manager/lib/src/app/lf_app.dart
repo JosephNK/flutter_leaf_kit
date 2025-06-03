@@ -54,10 +54,12 @@ class LFAppManager {
     Rect? sharePositionOrigin,
   }) async {
     try {
-      final result = await Share.share(
-        text,
-        subject: subject,
-        sharePositionOrigin: sharePositionOrigin,
+      final result = await SharePlus.instance.share(
+        ShareParams(
+          text: text,
+          subject: subject,
+          sharePositionOrigin: sharePositionOrigin,
+        ),
       );
       return result.status;
     } catch (e) {
@@ -73,11 +75,13 @@ class LFAppManager {
     Rect? sharePositionOrigin,
   }) async {
     try {
-      final result = await Share.shareXFiles(
-        files,
-        subject: subject,
-        text: text,
-        sharePositionOrigin: sharePositionOrigin,
+      final result = await SharePlus.instance.share(
+        ShareParams(
+          text: text,
+          subject: subject,
+          sharePositionOrigin: sharePositionOrigin,
+          files: files,
+        ),
       );
       return result.status;
     } catch (e) {
@@ -91,9 +95,11 @@ class LFAppManager {
     Rect? sharePositionOrigin,
   }) async {
     try {
-      final result = await Share.shareUri(
-        uri,
-        sharePositionOrigin: sharePositionOrigin,
+      final result = await SharePlus.instance.share(
+        ShareParams(
+          uri: uri,
+          sharePositionOrigin: sharePositionOrigin,
+        ),
       );
       return result.status;
     } catch (e) {

@@ -175,6 +175,14 @@ class CupertinoLocalizationsKoFixed implements CupertinoLocalizations {
   // TODO: implement shareButtonLabel
   String get shareButtonLabel => throw UnimplementedError();
 
+  @override
+  // TODO: implement backButtonLabel
+  String get backButtonLabel => throw UnimplementedError();
+
+  @override
+  // TODO: implement cancelButtonLabel
+  String get cancelButtonLabel => throw UnimplementedError();
+
   /// Creates an object that provides US English resource values for the
   /// cupertino library widgets.
   ///
