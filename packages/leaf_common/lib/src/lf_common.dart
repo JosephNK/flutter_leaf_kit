@@ -29,3 +29,4 @@ part 'extension/strings.dart';
 part 'extension/uris.dart';
 part 'logger/logging.dart';
 part 'types/types.dart';
+part 'utils/type_converter.dart';
