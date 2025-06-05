@@ -1,7 +1,7 @@
 part of '../lf_common.dart';
 
 class LFTypeConverter {
-  static T? convertTo<T>(dynamic value) {
+  T? convertTo<T>(dynamic value) {
     if (value == null) return null;
 
     try {
