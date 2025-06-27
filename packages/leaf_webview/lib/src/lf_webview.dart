@@ -59,6 +59,13 @@ class LFWebViewController {
     );
   }
 
+  Future<void> loadHtmlString(
+    String html, {
+    String? baseUrl,
+  }) async {
+    return webViewController.loadHtmlString(html, baseUrl: baseUrl);
+  }
+
   void addJavaScriptChannel(
     String name, {
     required void Function(JavaScriptMessage) onMessageReceived,
@@ -111,6 +118,7 @@ class LFWebViewController {
 class LFWebView extends StatefulWidget {
   final LFWebViewController controller;
   final Uri? uri;
+  final String? htmlString;
   final bool fullScreen;
   final double initHeight;
   final Color backgroundColor;
@@ -129,6 +137,7 @@ class LFWebView extends StatefulWidget {
     super.key,
     required this.controller,
     this.uri,
+    this.htmlString,
     this.fullScreen = true,
     this.initHeight = 0.0,
     this.backgroundColor = const Color(0x00000000),
@@ -164,6 +173,7 @@ class _LFWebViewState extends State<LFWebView> {
     final allowAllowOrientation = widget.allowAllowOrientation;
     final userAgent = widget.userAgent;
     final uri = widget.uri;
+    final htmlString = widget.htmlString;
     final onBeforeLoaded = widget.onBeforeLoaded;
     final onLoaded = widget.onLoaded;
     final onPageStarted = widget.onPageStarted;
@@ -277,6 +287,8 @@ class _LFWebViewState extends State<LFWebView> {
       await onBeforeLoaded?.call();
       if (uri != null) {
         await controller.loadRequest(uri);
+      } else if (htmlString != null) {
+        await controller.loadHtmlString(htmlString);
       }
       await onLoaded?.call();
     });
