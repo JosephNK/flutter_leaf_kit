@@ -19,7 +19,7 @@ dependencies:
   easy_localization: ^3.0.7+1
   logger: ^2.5.0
   quiver: ^3.2.2
-  string_validator: ^1.1.0
+  string_validator: ^1.2.0
   async: ^2.13.0
 
   path: ^1.9.1

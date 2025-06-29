@@ -22,13 +22,13 @@ dependencies:
   photo_manager: ^3.7.1
   visibility_detector: ^0.4.0+2
   fluttertoast: ^8.2.12
-  toastification: ^3.0.2
+  toastification: ^3.0.3
   easy_rich_text: ^2.2.0
   auto_size_text_plus: ^3.0.2
   flutter_datetime_picker_plus: ^2.2.0
-  vector_graphics: ^1.1.18
-  flutter_svg: ^2.1.0
-  lucide_icons_flutter: ^3.0.4
+  vector_graphics: ^1.1.19
+  flutter_svg: ^2.2.0
+  lucide_icons_flutter: ^3.0.6
 
   flutter_leaf_common:
     git:

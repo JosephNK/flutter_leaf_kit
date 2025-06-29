@@ -42,7 +42,7 @@ dev_dependencies:
   flutter_lints: ^4.0.0
 
   # Build Gen Plugin
-  build_runner: ^2.4.15
+  build_runner: ^2.5.4
   built_value_generator: ^8.10.1
 
 flutter:
