@@ -132,14 +132,14 @@ packages:
       path: "../leaf_common"
       relative: true
     source: path
-    version: "2.3.7-dev"
+    version: "2.3.8-dev"
   flutter_leaf_location:
     dependency: "direct main"
     description:
       path: "../leaf_location"
       relative: true
     source: path
-    version: "2.3.7-dev"
+    version: "2.3.8-dev"
   flutter_lints:
     dependency: "direct dev"
     description:
