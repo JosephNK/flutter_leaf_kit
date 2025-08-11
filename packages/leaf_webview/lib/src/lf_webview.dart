@@ -12,108 +12,8 @@ typedef LFWebViewOnLoaderBuilder = Widget Function();
 typedef LFWebViewOnPageStarted = Function();
 typedef LFWebViewOnPageFinished = Function();
 typedef LFWebViewOnHeightFinished = Function(double height);
-typedef LFWebViewOnMessageReceived = Function(JavaScriptMessage);
 typedef LFWebViewOnNavigationDecision = bool Function(
     LFWebViewEventType? type, String url);
-
-class LFWebViewController {
-  LFWebViewController() {
-    _messageStreamController =
-        StreamController<Map<String, JavaScriptMessage>>();
-    _messageStreamController?.stream.listen((data) {
-      for (final key in data.keys) {
-        final message = data[key];
-        if (onMessageReceived.keys.contains(key) && message != null) {
-          final func = onMessageReceived[key];
-          func?.call(message);
-        }
-      }
-    });
-  }
-
-  void dispose() {
-    _messageStreamController?.close();
-    onMessageReceived.clear();
-  }
-
-  late WebViewController webViewController;
-  StreamController<Map<String, JavaScriptMessage>>? _messageStreamController;
-  List<String> javaScriptChannelNames = [];
-  Map<String, LFWebViewOnMessageReceived> onMessageReceived = {};
-
-  void addJavaScriptMessageStream(Map<String, JavaScriptMessage> data) {
-    _messageStreamController?.sink.add(data);
-  }
-
-  Future<void> loadRequest(
-    Uri uri, {
-    LoadRequestMethod method = LoadRequestMethod.get,
-    Map<String, String> headers = const <String, String>{},
-    Uint8List? body,
-  }) async {
-    return webViewController.loadRequest(
-      uri,
-      method: method,
-      headers: headers,
-      body: body,
-    );
-  }
-
-  Future<void> loadHtmlString(
-    String html, {
-    String? baseUrl,
-  }) async {
-    return webViewController.loadHtmlString(html, baseUrl: baseUrl);
-  }
-
-  void addJavaScriptChannel(
-    String name, {
-    required void Function(JavaScriptMessage) onMessageReceived,
-  }) {
-    javaScriptChannelNames.add(name);
-    this.onMessageReceived[name] = onMessageReceived;
-  }
-
-  Future<Object> runJavaScriptReturningResult(String javaScript) {
-    return webViewController.runJavaScriptReturningResult(javaScript);
-  }
-
-  Future<String?> getUserAgent() async {
-    return await webViewController.getUserAgent();
-  }
-
-  Future<void> setUserAgent(String userAgent) async {
-    await webViewController.setUserAgent(userAgent);
-  }
-
-  Future<void> clearCache() async {
-    await webViewController.clearCache();
-  }
-
-  Future<void> clearLocalStorage() async {
-    await webViewController.clearLocalStorage();
-  }
-
-  Future<bool> canGoBack() async {
-    return await webViewController.canGoBack();
-  }
-
-  Future<bool> canGoForward() async {
-    return await webViewController.canGoForward();
-  }
-
-  Future<void> goBack() async {
-    await webViewController.goBack();
-  }
-
-  Future<void> goForward() async {
-    await webViewController.goForward();
-  }
-
-  Future<void> reload() async {
-    await webViewController.reload();
-  }
-}
 
 class LFWebView extends StatefulWidget {
   final LFWebViewController controller;
@@ -272,7 +172,7 @@ class _LFWebViewState extends State<LFWebView> {
     // Set WebViewController
     controller.webViewController = webViewController;
 
-    // Register Channels
+    // Register Channel for Names
     for (var javaScriptChannelName in controller.javaScriptChannelNames) {
       controller.webViewController.addJavaScriptChannel(
         javaScriptChannelName,
@@ -281,6 +181,12 @@ class _LFWebViewState extends State<LFWebView> {
               .addJavaScriptMessageStream({javaScriptChannelName: message});
         },
       );
+    }
+
+    // Register Channels for Functions
+    for (var onRegisterJavaScriptChannel
+        in controller.onRegisterJavaScriptChannels) {
+      onRegisterJavaScriptChannel.call(webViewController);
     }
 
     WidgetsBinding.instance.addPostFrameCallback((_) async {
