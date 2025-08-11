@@ -9,6 +9,8 @@ enum LFWebViewEventType {
 typedef LFWebViewOnBeforeLoaded = Function();
 typedef LFWebViewOnLoaded = Function();
 typedef LFWebViewOnLoaderBuilder = Widget Function();
+typedef LFWebViewOnCreateWebViewController = Function(
+    WebViewController webViewController);
 typedef LFWebViewOnPageStarted = Function();
 typedef LFWebViewOnPageFinished = Function();
 typedef LFWebViewOnHeightFinished = Function(double height);
@@ -27,6 +29,7 @@ class LFWebView extends StatefulWidget {
   final String? userAgent;
   final LFWebViewOnBeforeLoaded? onBeforeLoaded;
   final LFWebViewOnLoaded? onLoaded;
+  final LFWebViewOnCreateWebViewController? onCreateWebViewController;
   final LFWebViewOnPageStarted? onPageStarted;
   final LFWebViewOnPageFinished? onPageFinished;
   final LFWebViewOnLoaderBuilder? onLoaderBuilder;
@@ -47,6 +50,7 @@ class LFWebView extends StatefulWidget {
     this.onBeforeLoaded,
     this.onLoaded,
     this.onLoaderBuilder,
+    this.onCreateWebViewController,
     this.onPageStarted,
     this.onPageFinished,
     this.onHeightFinished,
@@ -76,6 +80,7 @@ class _LFWebViewState extends State<LFWebView> {
     final htmlString = widget.htmlString;
     final onBeforeLoaded = widget.onBeforeLoaded;
     final onLoaded = widget.onLoaded;
+    final onCreateWebViewController = widget.onCreateWebViewController;
     final onPageStarted = widget.onPageStarted;
     final onPageFinished = widget.onPageFinished;
 
@@ -171,6 +176,9 @@ class _LFWebViewState extends State<LFWebView> {
 
     // Set WebViewController
     controller.webViewController = webViewController;
+
+    // OnCreateWebViewController
+    onCreateWebViewController?.call(webViewController);
 
     // Register Channel for Names
     for (var javaScriptChannelName in controller.javaScriptChannelNames) {
