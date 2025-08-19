@@ -26,7 +26,7 @@ class _WebViewScreenState extends ScreenState<WebViewScreen> {
     super.initState();
 
     _webViewController = LFWebViewController();
-    _webViewController.addJavaScriptChannel(
+    _webViewController.addJavaScriptChannelName(
       'CHANEL_NAME',
       onMessageReceived: (message) {
         final jsonData = jsonDecode(message.message);
