@@ -59,6 +59,11 @@ class LFWebViewController {
     return webViewController.loadFile(absoluteFilePath);
   }
 
+  /// Load the webview with the given [key].
+  Future<void> loadFlutterAsset(String key) async {
+    return webViewController.loadFlutterAsset(key);
+  }
+
   void addJavaScriptMessageStream(Map<String, JavaScriptMessage> data) {
     _messageStreamController?.sink.add(data);
   }

@@ -22,6 +22,7 @@ class LFWebView extends StatefulWidget {
   final Uri? uri;
   final String? htmlString;
   final String? htmlFile;
+  final String? assetFile;
   final bool fullScreen;
   final double initHeight;
   final Color backgroundColor;
@@ -43,6 +44,7 @@ class LFWebView extends StatefulWidget {
     this.uri,
     this.htmlString,
     this.htmlFile,
+    this.assetFile,
     this.fullScreen = true,
     this.initHeight = 0.0,
     this.backgroundColor = const Color(0x00000000),
@@ -81,6 +83,7 @@ class _LFWebViewState extends State<LFWebView> {
     final uri = widget.uri;
     final htmlString = widget.htmlString;
     final htmlFile = widget.htmlFile;
+    final assetFile = widget.assetFile;
     final onInitBeforeLoaded = widget.onInitBeforeLoaded;
     final onInitLoaded = widget.onInitLoaded;
     final onCreateWebViewController = widget.onCreateWebViewController;
@@ -208,6 +211,8 @@ class _LFWebViewState extends State<LFWebView> {
         await controller.loadHtmlString(htmlString);
       } else if (htmlFile != null) {
         await controller.loadFile(htmlFile);
+      } else if (assetFile != null) {
+        await controller.loadFlutterAsset(assetFile);
       }
       await onInitLoaded?.call();
     });
