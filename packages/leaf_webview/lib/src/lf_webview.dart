@@ -21,14 +21,15 @@ class LFWebView extends StatefulWidget {
   final LFWebViewController controller;
   final Uri? uri;
   final String? htmlString;
+  final String? htmlFile;
   final bool fullScreen;
   final double initHeight;
   final Color backgroundColor;
   final bool allowAllowOrientation;
   final bool useHybridComposition;
   final String? userAgent;
-  final LFWebViewOnBeforeLoaded? onBeforeLoaded;
-  final LFWebViewOnLoaded? onLoaded;
+  final LFWebViewOnBeforeLoaded? onInitBeforeLoaded;
+  final LFWebViewOnLoaded? onInitLoaded;
   final LFWebViewOnCreateWebViewController? onCreateWebViewController;
   final LFWebViewOnPageStarted? onPageStarted;
   final LFWebViewOnPageFinished? onPageFinished;
@@ -41,14 +42,15 @@ class LFWebView extends StatefulWidget {
     required this.controller,
     this.uri,
     this.htmlString,
+    this.htmlFile,
     this.fullScreen = true,
     this.initHeight = 0.0,
     this.backgroundColor = const Color(0x00000000),
     this.allowAllowOrientation = false,
     this.useHybridComposition = false,
     this.userAgent,
-    this.onBeforeLoaded,
-    this.onLoaded,
+    this.onInitBeforeLoaded,
+    this.onInitLoaded,
     this.onLoaderBuilder,
     this.onCreateWebViewController,
     this.onPageStarted,
@@ -78,8 +80,9 @@ class _LFWebViewState extends State<LFWebView> {
     final userAgent = widget.userAgent;
     final uri = widget.uri;
     final htmlString = widget.htmlString;
-    final onBeforeLoaded = widget.onBeforeLoaded;
-    final onLoaded = widget.onLoaded;
+    final htmlFile = widget.htmlFile;
+    final onInitBeforeLoaded = widget.onInitBeforeLoaded;
+    final onInitLoaded = widget.onInitLoaded;
     final onCreateWebViewController = widget.onCreateWebViewController;
     final onPageStarted = widget.onPageStarted;
     final onPageFinished = widget.onPageFinished;
@@ -198,13 +201,15 @@ class _LFWebViewState extends State<LFWebView> {
     }
 
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      await onBeforeLoaded?.call();
+      await onInitBeforeLoaded?.call();
       if (uri != null) {
         await controller.loadRequest(uri);
       } else if (htmlString != null) {
         await controller.loadHtmlString(htmlString);
+      } else if (htmlFile != null) {
+        await controller.loadFile(htmlFile);
       }
-      await onLoaded?.call();
+      await onInitLoaded?.call();
     });
   }
 
