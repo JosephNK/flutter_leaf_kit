@@ -105,6 +105,11 @@ class _LFWebViewState extends State<LFWebView> {
     final WebViewController webViewController =
         WebViewController.fromPlatformCreationParams(params);
 
+    if (webViewController.platform is WebKitWebViewController) {
+      (webViewController.platform as WebKitWebViewController)
+          .setAllowsBackForwardNavigationGestures(true);
+    }
+
     if (webViewController.platform is AndroidWebViewController) {
       AndroidWebViewController.enableDebugging(true);
       AndroidWebViewController androidWebViewController =
