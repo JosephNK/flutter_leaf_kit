@@ -27,6 +27,7 @@ class LFWebView extends StatefulWidget {
   final double initHeight;
   final Color backgroundColor;
   final bool allowAllowOrientation;
+  final bool allowsBackForwardNavigationGestures;
   final bool useHybridComposition;
   final String? userAgent;
   final LFWebViewOnBeforeLoaded? onInitBeforeLoaded;
@@ -49,6 +50,7 @@ class LFWebView extends StatefulWidget {
     this.initHeight = 0.0,
     this.backgroundColor = const Color(0x00000000),
     this.allowAllowOrientation = false,
+    this.allowsBackForwardNavigationGestures = true,
     this.useHybridComposition = false,
     this.userAgent,
     this.onInitBeforeLoaded,
@@ -79,6 +81,8 @@ class _LFWebViewState extends State<LFWebView> {
     final initHeight = widget.initHeight;
     final backgroundColor = widget.backgroundColor;
     final allowAllowOrientation = widget.allowAllowOrientation;
+    final allowsBackForwardNavigationGestures =
+        widget.allowsBackForwardNavigationGestures;
     final userAgent = widget.userAgent;
     final uri = widget.uri;
     final htmlString = widget.htmlString;
@@ -107,7 +111,8 @@ class _LFWebViewState extends State<LFWebView> {
 
     if (webViewController.platform is WebKitWebViewController) {
       (webViewController.platform as WebKitWebViewController)
-          .setAllowsBackForwardNavigationGestures(true);
+          .setAllowsBackForwardNavigationGestures(
+              allowsBackForwardNavigationGestures);
     }
 
     if (webViewController.platform is AndroidWebViewController) {
