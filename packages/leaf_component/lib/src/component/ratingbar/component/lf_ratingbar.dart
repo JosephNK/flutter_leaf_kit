@@ -10,6 +10,7 @@ class LFRatingBar extends StatelessWidget {
   final bool tapOnlyMode;
   final bool updateOnDrag;
   final bool ignoreGestures;
+  final bool allowHalfRating;
   final ValueChanged<double> onRatingUpdate;
 
   const LFRatingBar({
@@ -24,6 +25,7 @@ class LFRatingBar extends StatelessWidget {
     this.tapOnlyMode = false,
     this.updateOnDrag = false,
     this.ignoreGestures = false,
+    this.allowHalfRating = true,
   });
 
   @override
@@ -34,7 +36,7 @@ class LFRatingBar extends StatelessWidget {
       initialRating: initialRating,
       minRating: minRating,
       direction: Axis.horizontal,
-      allowHalfRating: true,
+      allowHalfRating: allowHalfRating,
       itemCount: itemCount,
       itemSize: itemSize,
       itemPadding: itemPadding,
