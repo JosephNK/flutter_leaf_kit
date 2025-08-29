@@ -106,7 +106,8 @@ class LFPushNotification extends Object {
       },
     );
 
-    Overlay.of(context).insert(_overlayEntry!);
+    // Overlay.of(context).insert(_overlayEntry!);
+    Navigator.of(context).overlay?.insert(_overlayEntry!);
 
     _timer = Timer(const Duration(seconds: 5), () {
       closeOverlay();
