@@ -319,14 +319,18 @@ class _LFWebViewState extends State<LFWebView> {
       Logging.d('[LFWebView] DocumentHeight: $documentHeight');
       final fullScreen = widget.fullScreen;
       if (!fullScreen) {
-        setState(() {
-          _contentHeight = documentHeight;
-        });
+        if (context.mounted) {
+          setState(() {
+            _contentHeight = documentHeight;
+          });
+        }
       }
       widget.onHeightFinished?.call(documentHeight);
     }
-    setState(() {
-      _loaded = true;
-    });
+    if (context.mounted) {
+      setState(() {
+        _loaded = true;
+      });
+    }
   }
 }
