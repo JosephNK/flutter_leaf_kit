@@ -110,9 +110,11 @@ class _LFWebViewState extends State<LFWebView> {
         WebViewController.fromPlatformCreationParams(params);
 
     if (webViewController.platform is WebKitWebViewController) {
-      (webViewController.platform as WebKitWebViewController)
-          .setAllowsBackForwardNavigationGestures(
-              allowsBackForwardNavigationGestures);
+      WebKitWebViewController iOSWebViewController =
+          (webViewController.platform as WebKitWebViewController);
+      iOSWebViewController.setAllowsBackForwardNavigationGestures(
+          allowsBackForwardNavigationGestures);
+      iOSWebViewController.setInspectable(true);
     }
 
     if (webViewController.platform is AndroidWebViewController) {
