@@ -5,7 +5,7 @@ class LFAlertDialog {
   static LFAlertDialog get shared => _instance;
   LFAlertDialog._internal();
 
-  static Future<dynamic> show(
+  static Future<T?> show<T>(
     BuildContext context, {
     String? title,
     required String message,
@@ -22,7 +22,7 @@ class LFAlertDialog {
     EdgeInsets? okTextPadding,
     VoidCallback? onOK,
   }) async {
-    return await _LFAlertDialog().show(
+    return await _LFAlertDialog().show<T>(
       context,
       title: title,
       message: message,
@@ -41,7 +41,7 @@ class LFAlertDialog {
     );
   }
 
-  static Future<dynamic> confirm(
+  static Future<T?> confirm<T>(
     BuildContext context, {
     String? title,
     required String message,
@@ -62,7 +62,7 @@ class LFAlertDialog {
     VoidCallback? onCancel,
     VoidCallback? onOK,
   }) async {
-    return await _LFAlertDialog().confirm(
+    return await _LFAlertDialog().confirm<T>(
       context,
       title: title,
       message: message,
@@ -85,7 +85,7 @@ class LFAlertDialog {
     );
   }
 
-  static Future<dynamic> showErrorMessage(
+  static Future<T?> showErrorMessage<T>(
     BuildContext context, {
     required String? errorMessage,
     bool barrierDismissible = true,
@@ -96,7 +96,7 @@ class LFAlertDialog {
     EdgeInsets? okTextPadding,
     VoidCallback? onOk,
   }) async {
-    if (isEmpty(errorMessage)) return;
+    if (isEmpty(errorMessage)) return null;
 
     final errorTitleStr =
         LFComponentConfigure.shared.alert?.errorMessageTitle ??
@@ -105,7 +105,7 @@ class LFAlertDialog {
     String? errorMessageStr = errorMessage;
 
     if (isNotEmpty(errorMessageStr) && errorMessageStr != null) {
-      return await _LFAlertDialog().show(
+      return await _LFAlertDialog().show<T>(
         context,
         title: errorTitleStr,
         message: errorMessageStr,
@@ -122,7 +122,7 @@ class LFAlertDialog {
     return null;
   }
 
-  static Future<dynamic> showException(
+  static Future<T?> showException<T>(
     BuildContext context, {
     Object? exception,
     bool barrierDismissible = true,
@@ -135,7 +135,7 @@ class LFAlertDialog {
     EdgeInsets? okTextPadding,
     VoidCallback? onTap,
   }) async {
-    if (exception == null) return;
+    if (exception == null) return null;
 
     final errorTitleStr =
         LFComponentConfigure.shared.alert?.errorMessageTitle ??
@@ -144,7 +144,7 @@ class LFAlertDialog {
     String errorMessageStr = exception.toString();
 
     if (isNotEmpty(errorMessageStr)) {
-      return await _LFAlertDialog().show(
+      return await _LFAlertDialog().show<T>(
         context,
         title: errorTitleStr,
         message: errorMessageStr,
@@ -165,7 +165,7 @@ class LFAlertDialog {
 }
 
 class _LFAlertDialog {
-  Future<dynamic> show(
+  Future<T?> show<T>(
     BuildContext context, {
     String? title,
     required String message,
@@ -182,7 +182,7 @@ class _LFAlertDialog {
     EdgeInsets? okTextPadding,
     VoidCallback? onOK,
   }) async {
-    return await showDialog(
+    return await showDialog<T>(
       context: context,
       barrierDismissible: barrierDismissible,
       builder: (BuildContext context) {
@@ -274,7 +274,7 @@ class _LFAlertDialog {
     );
   }
 
-  Future<dynamic> confirm(
+  Future<T?> confirm<T>(
     BuildContext context, {
     String? title,
     required String message,
@@ -309,7 +309,7 @@ class _LFAlertDialog {
 
     final borderRadius = LFComponentConfigure.shared.alert?.borderRadius;
 
-    return await showDialog(
+    return await showDialog<T>(
       context: context,
       barrierDismissible: barrierDismissible,
       builder: (BuildContext context) {
