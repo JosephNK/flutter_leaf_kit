@@ -16,6 +16,12 @@ typedef LFWebViewOnPageFinished = Function();
 typedef LFWebViewOnHeightFinished = Function(double height);
 typedef LFWebViewOnNavigationDecision = bool Function(
     LFWebViewEventType? type, String url);
+typedef LFWebViewOnJavaScriptAlertDialogIOS = Future<bool?> Function(
+    JavaScriptAlertDialogRequest request);
+typedef LFWebViewOnJavaScriptConfirmDialogIOS = Future<bool?> Function(
+    JavaScriptConfirmDialogRequest request);
+typedef LFWebViewOnJavaScriptTextInputDialogIOS = Future<bool?> Function(
+    JavaScriptTextInputDialogRequest request);
 
 class LFWebView extends StatefulWidget {
   final LFWebViewController controller;
@@ -39,6 +45,9 @@ class LFWebView extends StatefulWidget {
   final LFWebViewOnLoaderBuilder? onLoaderBuilder;
   final LFWebViewOnHeightFinished? onHeightFinished;
   final LFWebViewOnNavigationDecision? onNavigationDecision;
+  final LFWebViewOnJavaScriptAlertDialogIOS? onJavaScriptAlertDialogIOS;
+  final LFWebViewOnJavaScriptConfirmDialogIOS? onJavaScriptConfirmDialogIOS;
+  final LFWebViewOnJavaScriptTextInputDialogIOS? onJavaScriptTextInputDialogIOS;
 
   const LFWebView({
     super.key,
@@ -63,6 +72,9 @@ class LFWebView extends StatefulWidget {
     this.onPageFinished,
     this.onHeightFinished,
     this.onNavigationDecision,
+    this.onJavaScriptAlertDialogIOS,
+    this.onJavaScriptConfirmDialogIOS,
+    this.onJavaScriptTextInputDialogIOS,
   });
 
   @override
@@ -96,6 +108,10 @@ class _LFWebViewState extends State<LFWebView> {
     final onCreateWebViewController = widget.onCreateWebViewController;
     final onPageStarted = widget.onPageStarted;
     final onPageFinished = widget.onPageFinished;
+    final onJavaScriptAlertDialogIOS = widget.onJavaScriptAlertDialogIOS;
+    final onJavaScriptConfirmDialogIOS = widget.onJavaScriptConfirmDialogIOS;
+    final onJavaScriptTextInputDialogIOS =
+        widget.onJavaScriptTextInputDialogIOS;
 
     _contentHeight = initHeight;
 
@@ -118,6 +134,25 @@ class _LFWebViewState extends State<LFWebView> {
       iOSWebViewController.setAllowsBackForwardNavigationGestures(
           allowsBackForwardNavigationGestures);
       iOSWebViewController.setInspectable(isInspectable);
+      if (onJavaScriptAlertDialogIOS != null) {
+        iOSWebViewController.setOnJavaScriptAlertDialog(
+            (JavaScriptAlertDialogRequest request) async {
+          await onJavaScriptAlertDialogIOS.call(request);
+        });
+      }
+      if (onJavaScriptConfirmDialogIOS != null) {
+        iOSWebViewController.setOnJavaScriptConfirmDialog(
+            (JavaScriptConfirmDialogRequest request) async {
+          final result = await onJavaScriptConfirmDialogIOS.call(request);
+          return result ?? false;
+        });
+      }
+      if (onJavaScriptTextInputDialogIOS != null) {
+        iOSWebViewController.setOnJavaScriptTextInputDialog(
+            (JavaScriptTextInputDialogRequest request) async {
+          await onJavaScriptTextInputDialogIOS.call(request);
+        });
+      }
     }
 
     if (webViewController.platform is AndroidWebViewController) {
