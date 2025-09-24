@@ -29,6 +29,7 @@ class LFWebView extends StatefulWidget {
   final bool allowAllowOrientation;
   final bool allowsBackForwardNavigationGestures;
   final bool useHybridComposition;
+  final bool isInspectable;
   final String? userAgent;
   final LFWebViewOnBeforeLoaded? onInitBeforeLoaded;
   final LFWebViewOnLoaded? onInitLoaded;
@@ -52,6 +53,7 @@ class LFWebView extends StatefulWidget {
     this.allowAllowOrientation = false,
     this.allowsBackForwardNavigationGestures = true,
     this.useHybridComposition = false,
+    this.isInspectable = false,
     this.userAgent,
     this.onInitBeforeLoaded,
     this.onInitLoaded,
@@ -83,6 +85,7 @@ class _LFWebViewState extends State<LFWebView> {
     final allowAllowOrientation = widget.allowAllowOrientation;
     final allowsBackForwardNavigationGestures =
         widget.allowsBackForwardNavigationGestures;
+    final isInspectable = widget.isInspectable;
     final userAgent = widget.userAgent;
     final uri = widget.uri;
     final htmlString = widget.htmlString;
@@ -114,7 +117,7 @@ class _LFWebViewState extends State<LFWebView> {
           (webViewController.platform as WebKitWebViewController);
       iOSWebViewController.setAllowsBackForwardNavigationGestures(
           allowsBackForwardNavigationGestures);
-      iOSWebViewController.setInspectable(true);
+      iOSWebViewController.setInspectable(isInspectable);
     }
 
     if (webViewController.platform is AndroidWebViewController) {
