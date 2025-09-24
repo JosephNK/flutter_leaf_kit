@@ -20,7 +20,7 @@ typedef LFWebViewOnJavaScriptAlertDialogIOS = Future<bool?> Function(
     JavaScriptAlertDialogRequest request);
 typedef LFWebViewOnJavaScriptConfirmDialogIOS = Future<bool?> Function(
     JavaScriptConfirmDialogRequest request);
-typedef LFWebViewOnJavaScriptTextInputDialogIOS = Future<bool?> Function(
+typedef LFWebViewOnJavaScriptTextInputDialogIOS = Future<String?> Function(
     JavaScriptTextInputDialogRequest request);
 
 class LFWebView extends StatefulWidget {
@@ -150,7 +150,8 @@ class _LFWebViewState extends State<LFWebView> {
       if (onJavaScriptTextInputDialogIOS != null) {
         iOSWebViewController.setOnJavaScriptTextInputDialog(
             (JavaScriptTextInputDialogRequest request) async {
-          await onJavaScriptTextInputDialogIOS.call(request);
+          final result = await onJavaScriptTextInputDialogIOS.call(request);
+          return result ?? '';
         });
       }
     }
