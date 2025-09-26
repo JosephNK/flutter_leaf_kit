@@ -7,6 +7,25 @@ class LFPermissionManager {
   static LFPermissionManager get shared => _instance;
   LFPermissionManager._internal();
 
+  Future<bool> requestPermission(ph.Permission permission) async {
+    final isGranted = await permission.isGranted;
+    if (!isGranted) {
+      try {
+        ph.PermissionStatus status = await permission.request();
+        if (status == ph.PermissionStatus.permanentlyDenied) {
+          ph.openAppSettings();
+          return false;
+        }
+        if (status != ph.PermissionStatus.granted) {
+          return false;
+        }
+      } catch (e) {
+        return false;
+      }
+    }
+    return true;
+  }
+
   // isGranted 안전 하게 퍼미션 체크 후
   // 퍼미션 없을 경우, request 요청!
   Future<bool> requestSafePermissionStatus({
