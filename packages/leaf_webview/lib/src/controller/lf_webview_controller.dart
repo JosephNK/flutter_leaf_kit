@@ -25,6 +25,19 @@ class LFWebViewController {
     onMessageReceived.clear();
   }
 
+  static clearCookies() {
+    final WebViewCookieManager cookieManager = WebViewCookieManager();
+    if (WebViewPlatform.instance is WebKitWebViewPlatform) {
+      final WebKitWebViewCookieManager webKitManager =
+          cookieManager.platform as WebKitWebViewCookieManager;
+      webKitManager.clearCookies();
+    } else if (WebViewPlatform.instance is AndroidWebViewPlatform) {
+      final AndroidWebViewCookieManager androidManager =
+          cookieManager.platform as AndroidWebViewCookieManager;
+      androidManager.clearCookies();
+    }
+  }
+
   late WebViewController webViewController;
   StreamController<Map<String, JavaScriptMessage>>? _messageStreamController;
   List<String> javaScriptChannelNames = [];
