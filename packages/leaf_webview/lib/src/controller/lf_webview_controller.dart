@@ -37,12 +37,15 @@ class LFWebViewController {
           webViewCookieManager.platform as AndroidWebViewCookieManager;
       await androidManager.clearCookies();
     }
+    Logging.d('All WebViewCookieManager have been cleared.');
 
     // CookieManager clears cookies
     CookieManager cookieManager = CookieManager.instance();
     await cookieManager.deleteAllCookies();
-    Logging.d('All cookies have been cleared.');
+    Logging.d('All CookieManager have been cleared.');
+  }
 
+  static Future<void> deleteAllData() async {
     // WebStorageManager clears web storage data
     await WebStorageManager.instance().deleteAllData();
     Logging.d('All Web Storage Data have been cleared.');
