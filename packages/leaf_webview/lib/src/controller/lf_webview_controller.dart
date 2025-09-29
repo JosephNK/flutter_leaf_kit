@@ -25,17 +25,24 @@ class LFWebViewController {
     onMessageReceived.clear();
   }
 
-  static clearCookies() {
-    final WebViewCookieManager cookieManager = WebViewCookieManager();
+  static Future<void> clearCookies() async {
+    // WebViewCookieManager clears cookies for webview
+    final WebViewCookieManager webViewCookieManager = WebViewCookieManager();
     if (WebViewPlatform.instance is WebKitWebViewPlatform) {
       final WebKitWebViewCookieManager webKitManager =
-          cookieManager.platform as WebKitWebViewCookieManager;
-      webKitManager.clearCookies();
+          webViewCookieManager.platform as WebKitWebViewCookieManager;
+      await webKitManager.clearCookies();
     } else if (WebViewPlatform.instance is AndroidWebViewPlatform) {
       final AndroidWebViewCookieManager androidManager =
-          cookieManager.platform as AndroidWebViewCookieManager;
-      androidManager.clearCookies();
+          webViewCookieManager.platform as AndroidWebViewCookieManager;
+      await androidManager.clearCookies();
     }
+
+    // CookieManager clears cookies
+    CookieManager cookieManager = CookieManager.instance();
+    await cookieManager.deleteAllCookies();
+    await cookieManager.removeSessionCookies();
+    Logging.d('All cookies have been cleared.');
   }
 
   late WebViewController webViewController;
