@@ -41,8 +41,11 @@ class LFWebViewController {
     // CookieManager clears cookies
     CookieManager cookieManager = CookieManager.instance();
     await cookieManager.deleteAllCookies();
-    await cookieManager.removeSessionCookies();
     Logging.d('All cookies have been cleared.');
+
+    // WebStorageManager clears web storage data
+    await WebStorageManager.instance().deleteAllData();
+    Logging.d('All Web Storage Data have been cleared.');
   }
 
   late WebViewController webViewController;
