@@ -47,7 +47,14 @@ class LFWebViewController {
 
   static Future<void> deleteAllData() async {
     // WebStorageManager clears web storage data
-    await WebStorageManager.instance().deleteAllData();
+    if (Platform.isAndroid) {
+      await WebStorageManager.instance().deleteAllData();
+    } else if (Platform.isIOS) {
+      await WebStorageManager.instance().removeDataModifiedSince(
+        dataTypes: WebsiteDataType.ALL,
+        date: DateTime.fromMillisecondsSinceEpoch(0),
+      );
+    }
     Logging.d('All Web Storage Data have been cleared.');
   }
 
