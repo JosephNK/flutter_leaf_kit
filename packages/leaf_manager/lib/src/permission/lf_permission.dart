@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_leaf_common/leaf_common.dart';
 import 'package:permission_handler/permission_handler.dart' as ph;
@@ -8,10 +11,11 @@ class LFPermissionManager {
   LFPermissionManager._internal();
 
   Future<bool> requestPermission(ph.Permission permission) async {
-    final isGranted = await permission.isGranted;
+    final updatePermission = await _permissionForceChange(permission);
+    final isGranted = await updatePermission.isGranted;
     if (!isGranted) {
       try {
-        ph.PermissionStatus status = await permission.request();
+        ph.PermissionStatus status = await updatePermission.request();
         if (status == ph.PermissionStatus.permanentlyDenied) {
           ph.openAppSettings();
           return false;
@@ -50,9 +54,10 @@ class LFPermissionManager {
     required ph.Permission permission,
     required ValueChanged<ph.PermissionStatus> onNotPermission,
   }) async {
+    final updatePermission = await _permissionForceChange(permission);
     ph.PermissionStatus status = ph.PermissionStatus.denied;
     try {
-      status = await permission.request();
+      status = await updatePermission.request();
     } catch (e) {
       Logging.e('[RequestPermission] e => $e');
     }
@@ -68,10 +73,28 @@ class LFPermissionManager {
   Future<bool> isGrantedPermission({
     required ph.Permission permission,
   }) async {
-    var isGranted = await permission.isGranted;
+    final updatePermission = await _permissionForceChange(permission);
+    var isGranted = await updatePermission.isGranted;
     if (!isGranted) {
       return false;
     }
     return true;
+  }
+
+  // Android 13 (API level 33) 이상에서는 사진, 비디오, 오디오에 대한 별도의 권한이 필요합니다.
+  // Android 12 (API level 32) 이하에서는 저장소 권한이 필요
+  // https://github.com/Baseflow/flutter-permission-handler/issues/944#issuecomment-1291033783
+  Future<ph.Permission> _permissionForceChange(ph.Permission permission) async {
+    if (Platform.isAndroid && permission == ph.Permission.photos) {
+      final androidInfo = await DeviceInfoPlugin().androidInfo;
+      if (androidInfo.version.sdkInt <= 32) {
+        /// use [Permissions.storage.status]
+        return ph.Permission.storage;
+      } else {
+        /// use [Permissions.photos.status]
+        return ph.Permission.photos;
+      }
+    }
+    return permission;
   }
 }
