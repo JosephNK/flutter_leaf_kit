@@ -117,9 +117,22 @@ class LFDioBuiltValueConverter implements DioJsonConverter {
       convertSuccess<ResultType, ResultErrorType>(
     Response response,
   ) async {
+    Logging.i(
+      '[http_dio :: built_value_converter response 1]\n'
+      '[*] response: $response\n'
+      '[*] ResultType: $ResultType\n'
+      '[*] ResultErrorType: $ResultErrorType',
+    );
+
     final statusCode = response.statusCode ?? 0;
-    final method = response.requestOptions.method;
-    final url = response.requestOptions.uri.toString();
+    final requestOptions = response.requestOptions;
+    final statusMessage = response.statusMessage;
+    final isRedirect = response.isRedirect;
+    final redirects = response.redirects;
+    final extra = response.extra;
+    final headers = response.headers;
+    final method = requestOptions.method;
+    final url = requestOptions.uri.toString();
     final jsonData = response.data;
 
     dynamic printBody = getPrintBodyFromResponse(
@@ -148,9 +161,6 @@ class LFDioBuiltValueConverter implements DioJsonConverter {
       parserException = e;
       bodyErrorObject = body;
     }
-
-    Logging.i(
-        '[http_dio :: built_value_converter parserException $parserException]');
 
     String errorMessage =
         ((bodyErrorObject is String) ? bodyErrorObject : '').trim();
@@ -183,22 +193,31 @@ class LFDioBuiltValueConverter implements DioJsonConverter {
       );
     }
 
-    Logging.i('[http_dio :: built_value_converter exception $exception]');
+    Logging.i(
+      '[http_dio :: built_value_converter response 2]\n'
+      '[*] response: $response\n'
+      '[*] ResultType: $ResultType\n'
+      '[*] ResultErrorType: $ResultErrorType',
+    );
 
     final successResponse = LFDioResponse<ResultType>(
       data: (bodyObject is ResultType) ? bodyObject : null,
-      requestOptions: response.requestOptions,
-      statusCode: response.statusCode,
-      statusMessage: response.statusMessage,
-      isRedirect: response.isRedirect,
-      redirects: response.redirects,
-      extra: response.extra,
-      headers: response.headers,
+      requestOptions: requestOptions,
+      statusCode: statusCode,
+      statusMessage: statusMessage,
+      isRedirect: isRedirect,
+      redirects: redirects,
+      extra: extra,
+      headers: headers,
     );
 
     if (exception != null) {
       Logging.i(
-          '[http_dio :: built_value_converter successResponse 1 $successResponse]');
+        '[http_dio :: built_value_converter successResponse]\n'
+        '[*] successResponse: $successResponse\n'
+        '[*] ResultType: $ResultType\n'
+        '[*] ResultErrorType: $ResultErrorType',
+      );
 
       return successResponse
         ..error = null
