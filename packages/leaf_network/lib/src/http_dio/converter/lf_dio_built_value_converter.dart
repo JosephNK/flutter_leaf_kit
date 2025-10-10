@@ -149,12 +149,27 @@ class LFDioBuiltValueConverter implements DioJsonConverter {
       bodyErrorObject = body;
     }
 
+    Logging.i(
+        '[http_dio :: built_value_converter parserException $parserException]');
+
     String errorMessage =
         ((bodyErrorObject is String) ? bodyErrorObject : '').trim();
     if (isNotEmpty(errorMessage)) {
+      Logging.i(
+        '[http_dio :: built_value_converter errorMessage]\n'
+        '[*] errorMessage: $errorMessage\n'
+        '[*] ResultType: $ResultType\n'
+        '[*] ResultErrorType: $ResultErrorType',
+      );
       errorMessage = '[DioBuiltValue ConvertError] $errorMessage';
     }
     if (parserException != null) {
+      Logging.i(
+        '[http_dio :: built_value_converter parserException]\n'
+        '[*] parserException: $parserException\n'
+        '[*] ResultType: $ResultType\n'
+        '[*] ResultErrorType: $ResultErrorType',
+      );
       final message = parserException.toString();
       errorMessage = '[DioBuiltValue ConvertError] $message';
     }
@@ -168,6 +183,8 @@ class LFDioBuiltValueConverter implements DioJsonConverter {
       );
     }
 
+    Logging.i('[http_dio :: built_value_converter exception $exception]');
+
     final successResponse = LFDioResponse<ResultType>(
       data: (bodyObject is ResultType) ? bodyObject : null,
       requestOptions: response.requestOptions,
@@ -180,12 +197,18 @@ class LFDioBuiltValueConverter implements DioJsonConverter {
     );
 
     if (exception != null) {
+      Logging.i(
+          '[http_dio :: built_value_converter successResponse 1 $successResponse]');
+
       return successResponse
         ..error = null
         ..exception = LFHttpExceptionObject(
           exception,
         );
     }
+
+    Logging.i(
+        '[http_dio :: built_value_converter successResponse 2 $successResponse]');
 
     return successResponse;
   }
