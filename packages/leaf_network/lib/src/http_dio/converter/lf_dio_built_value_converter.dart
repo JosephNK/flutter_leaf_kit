@@ -149,11 +149,12 @@ class LFDioBuiltValueConverter implements DioJsonConverter {
       bodyErrorObject = body;
     }
 
-    String errorMessage = (bodyErrorObject is String) ? bodyErrorObject : '';
+    String errorMessage =
+        ((bodyErrorObject is String) ? bodyErrorObject : '').trim();
     if (isNotEmpty(errorMessage)) {
       errorMessage = '[DioBuiltValue ConvertError] $errorMessage';
     }
-    if (parserException != null && isEmpty(errorMessage)) {
+    if (parserException != null) {
       final message = parserException.toString();
       errorMessage = '[DioBuiltValue ConvertError] $message';
     }
