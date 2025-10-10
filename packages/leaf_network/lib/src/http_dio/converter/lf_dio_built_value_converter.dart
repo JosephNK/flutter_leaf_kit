@@ -117,13 +117,6 @@ class LFDioBuiltValueConverter implements DioJsonConverter {
       convertSuccess<ResultType, ResultErrorType>(
     Response response,
   ) async {
-    Logging.i(
-      '[http_dio :: built_value_converter response 1]\n'
-      '[*] response: $response\n'
-      '[*] ResultType: $ResultType\n'
-      '[*] ResultErrorType: $ResultErrorType',
-    );
-
     final statusCode = response.statusCode ?? 0;
     final requestOptions = response.requestOptions;
     final statusMessage = response.statusMessage;
@@ -193,13 +186,6 @@ class LFDioBuiltValueConverter implements DioJsonConverter {
       );
     }
 
-    Logging.i(
-      '[http_dio :: built_value_converter response 2]\n'
-      '[*] response: $response\n'
-      '[*] ResultType: $ResultType\n'
-      '[*] ResultErrorType: $ResultErrorType',
-    );
-
     final successResponse = LFDioResponse<ResultType>(
       data: (bodyObject is ResultType) ? bodyObject : null,
       requestOptions: requestOptions,
@@ -212,22 +198,12 @@ class LFDioBuiltValueConverter implements DioJsonConverter {
     );
 
     if (exception != null) {
-      Logging.i(
-        '[http_dio :: built_value_converter successResponse]\n'
-        '[*] successResponse: $successResponse\n'
-        '[*] ResultType: $ResultType\n'
-        '[*] ResultErrorType: $ResultErrorType',
-      );
-
       return successResponse
         ..error = null
         ..exception = LFHttpExceptionObject(
           exception,
         );
     }
-
-    Logging.i(
-        '[http_dio :: built_value_converter successResponse 2 $successResponse]');
 
     return successResponse;
   }
