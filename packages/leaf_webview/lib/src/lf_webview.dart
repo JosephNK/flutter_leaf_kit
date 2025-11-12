@@ -16,6 +16,8 @@ typedef LFWebViewOnPageFinished = Function();
 typedef LFWebViewOnHeightFinished = Function(double height);
 typedef LFWebViewOnNavigationDecision = bool Function(
     LFWebViewEventType? type, String url);
+typedef LFWebViewOnUrlChange = Function(String? url);
+typedef LFWebViewOnHttpError = Function(HttpResponseError error);
 typedef LFWebViewOnJavaScriptAlertDialogIOS = Future<bool?> Function(
     JavaScriptAlertDialogRequest request);
 typedef LFWebViewOnJavaScriptConfirmDialogIOS = Future<bool?> Function(
@@ -45,6 +47,8 @@ class LFWebView extends StatefulWidget {
   final LFWebViewOnLoaderBuilder? onLoaderBuilder;
   final LFWebViewOnHeightFinished? onHeightFinished;
   final LFWebViewOnNavigationDecision? onNavigationDecision;
+  final LFWebViewOnUrlChange? onUrlChange;
+  final LFWebViewOnHttpError? onHttpError;
   final LFWebViewOnJavaScriptAlertDialogIOS? onJavaScriptAlertDialogIOS;
   final LFWebViewOnJavaScriptConfirmDialogIOS? onJavaScriptConfirmDialogIOS;
   final LFWebViewOnJavaScriptTextInputDialogIOS? onJavaScriptTextInputDialogIOS;
@@ -72,6 +76,8 @@ class LFWebView extends StatefulWidget {
     this.onPageFinished,
     this.onHeightFinished,
     this.onNavigationDecision,
+    this.onUrlChange,
+    this.onHttpError,
     this.onJavaScriptAlertDialogIOS,
     this.onJavaScriptConfirmDialogIOS,
     this.onJavaScriptTextInputDialogIOS,
@@ -218,9 +224,11 @@ class _LFWebViewState extends State<LFWebView> {
       },
       onUrlChange: (UrlChange change) {
         Logging.d('[LFWebView] onUrlChange = ${change.url}');
+        widget.onUrlChange?.call(change.url);
       },
       onHttpError: (HttpResponseError error) {
         Logging.d('[LFWebView] onHttpError = ${error.response}');
+        widget.onHttpError?.call(error);
       },
     );
 
