@@ -320,9 +320,12 @@ class _LFWebViewState extends State<LFWebView> {
             children: [
               webViewWidget,
               !_loaded
-                  ? Align(
-                      alignment: Alignment.center,
-                      child: widget.onLoaderBuilder?.call() ?? Container(),
+                  ? Container(
+                      color: Colors.transparent,
+                      child: Align(
+                        alignment: Alignment.center,
+                        child: widget.onLoaderBuilder?.call() ?? Container(),
+                      ),
                     )
                   : Container(),
             ],

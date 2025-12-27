@@ -61,8 +61,8 @@ class _WebViewScreenState extends ScreenState<WebViewScreen> {
       userAgent: 'Custom User Agent',
       onInitLoaded: () {
         _webViewController.loadRequest(
-          // Uri.parse('https://flutter.dev/'),
-          Uri.parse('http://192.168.0.53:3000/foo'),
+          Uri.parse('https://flutter.dev/'),
+          // Uri.parse('http://192.168.0.53:3000/foo'),
           headers: {
             'X-Custom-Header': 'foo',
           },
