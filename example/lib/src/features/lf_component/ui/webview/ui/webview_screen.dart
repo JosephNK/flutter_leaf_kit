@@ -69,6 +69,7 @@ class _WebViewScreenState extends ScreenState<WebViewScreen> {
         );
       },
       useHybridComposition: false,
+      loaderDelay: const Duration(milliseconds: 75),
       onLoaderBuilder: () {
         return const LFIndicator();
       },

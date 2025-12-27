@@ -39,6 +39,7 @@ class LFWebView extends StatefulWidget {
   final bool useHybridComposition;
   final bool isInspectable;
   final String? userAgent;
+  final Duration? loaderDelay;
   final LFWebViewOnBeforeLoaded? onInitBeforeLoaded;
   final LFWebViewOnLoaded? onInitLoaded;
   final LFWebViewOnCreateWebViewController? onCreateWebViewController;
@@ -68,6 +69,7 @@ class LFWebView extends StatefulWidget {
     this.useHybridComposition = false,
     this.isInspectable = false,
     this.userAgent,
+    this.loaderDelay,
     this.onInitBeforeLoaded,
     this.onInitLoaded,
     this.onLoaderBuilder,
@@ -319,15 +321,16 @@ class _LFWebViewState extends State<LFWebView> {
           child: Stack(
             children: [
               webViewWidget,
-              !_loaded
-                  ? Container(
-                      color: Colors.transparent,
-                      child: Align(
-                        alignment: Alignment.center,
-                        child: widget.onLoaderBuilder?.call() ?? Container(),
-                      ),
-                    )
-                  : Container(),
+              if (!_loaded)
+                AbsorbPointer(
+                  absorbing: true,
+                  child: Container(
+                    color: Colors.transparent,
+                    child: Center(
+                      child: widget.onLoaderBuilder?.call() ?? Container(),
+                    ),
+                  ),
+                ),
             ],
           ),
         );
@@ -380,6 +383,10 @@ class _LFWebViewState extends State<LFWebView> {
       widget.onHeightFinished?.call(documentHeight);
     }
     if (context.mounted) {
+      final loaderDelay = widget.loaderDelay;
+      if (loaderDelay != null) {
+        await Future.delayed(loaderDelay);
+      }
       setState(() {
         _loaded = true;
       });
