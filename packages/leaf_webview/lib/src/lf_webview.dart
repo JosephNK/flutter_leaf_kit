@@ -325,12 +325,14 @@ class _LFWebViewState extends State<LFWebView> {
             children: [
               webViewWidget,
               if (_loading)
-                AbsorbPointer(
-                  absorbing: true,
-                  child: Container(
-                    color: Colors.transparent,
-                    child: Center(
-                      child: widget.onLoaderBuilder?.call() ?? Container(),
+                Positioned.fill(
+                  child: AbsorbPointer(
+                    absorbing: true,
+                    child: Container(
+                      color: Colors.white.withValues(alpha: 0.5),
+                      child: Center(
+                        child: widget.onLoaderBuilder?.call() ?? Container(),
+                      ),
                     ),
                   ),
                 ),
