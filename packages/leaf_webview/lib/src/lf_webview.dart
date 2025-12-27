@@ -323,7 +323,10 @@ class _LFWebViewState extends State<LFWebView> {
           height: math.max(getHeight(constraints), _contentHeight),
           child: Stack(
             children: [
-              webViewWidget,
+              AbsorbPointer(
+                absorbing: !_loading,
+                child: webViewWidget,
+              ),
               if (_loading)
                 Positioned.fill(
                   child: AbsorbPointer(
