@@ -323,22 +323,34 @@ class _LFWebViewState extends State<LFWebView> {
           height: math.max(getHeight(constraints), _contentHeight),
           child: Stack(
             children: [
-              AbsorbPointer(
-                absorbing: !_loading,
-                child: webViewWidget,
-              ),
+              webViewWidget,
               if (_loading)
-                Positioned.fill(
-                  child: AbsorbPointer(
-                    absorbing: true,
-                    child: Container(
-                      color: Colors.white.withValues(alpha: 0.5),
-                      child: Center(
-                        child: widget.onLoaderBuilder?.call() ?? Container(),
+                if (Platform.isIOS) ...[
+                  Positioned.fill(
+                    child: PointerInterceptor(
+                      intercepting: true,
+                      debug: false,
+                      child: Container(
+                        color: Colors.transparent,
+                        child: Center(
+                          child: widget.onLoaderBuilder?.call() ?? Container(),
+                        ),
                       ),
                     ),
                   ),
-                ),
+                ] else ...[
+                  Positioned.fill(
+                    child: AbsorbPointer(
+                      absorbing: true,
+                      child: Container(
+                        color: Colors.transparent,
+                        child: Center(
+                          child: widget.onLoaderBuilder?.call() ?? Container(),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
             ],
           ),
         );
