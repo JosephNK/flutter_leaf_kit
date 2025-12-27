@@ -183,6 +183,24 @@ class CupertinoLocalizationsKoFixed implements CupertinoLocalizations {
   // TODO: implement cancelButtonLabel
   String get cancelButtonLabel => throw UnimplementedError();
 
+  @override
+  String get collapsedHint => 'Expanded';
+
+  @override
+  String get expandedHint => 'Collapsed';
+
+  @override
+  String get expansionTileCollapsedHint => 'double tap to expand';
+
+  @override
+  String get expansionTileCollapsedTapHint => 'Expand for more details';
+
+  @override
+  String get expansionTileExpandedHint => 'double tap to collapse';
+
+  @override
+  String get expansionTileExpandedTapHint => 'Collapse';
+
   /// Creates an object that provides US English resource values for the
   /// cupertino library widgets.
   ///
