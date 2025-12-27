@@ -93,7 +93,7 @@ class _LFWebViewState extends State<LFWebView> {
   late NavigationDelegate _navigationDelegate;
 
   double _contentHeight = 0.0;
-  bool _loading = false;
+  bool _loading = true;
 
   @override
   void initState() {
@@ -208,7 +208,7 @@ class _LFWebViewState extends State<LFWebView> {
       onPageStarted: (String url) {
         Logging.d('[LFWebView] onPageStarted = $url');
         setState(() {
-          _loading = false;
+          _loading = true;
         });
         onPageStarted?.call();
       },
@@ -324,7 +324,7 @@ class _LFWebViewState extends State<LFWebView> {
           child: Stack(
             children: [
               webViewWidget,
-              if (!_loading)
+              if (_loading)
                 AbsorbPointer(
                   absorbing: true,
                   child: Container(
@@ -391,7 +391,7 @@ class _LFWebViewState extends State<LFWebView> {
         await Future.delayed(loaderDelay);
       }
       setState(() {
-        _loading = true;
+        _loading = false;
       });
     }
   }
