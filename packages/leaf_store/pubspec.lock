@@ -156,7 +156,7 @@ packages:
       path: "../leaf_common"
       relative: true
     source: path
-    version: "2.3.30-dev"
+    version: "2.4.0-dev"
   flutter_lints:
     dependency: "direct dev"
     description:
