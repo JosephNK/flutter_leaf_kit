@@ -11,6 +11,8 @@ import os
 import sys
 import ruamel.yaml
 from pathlib import Path
+from git import Repo
+from git.exc import GitCommandError
 
 
 def get_project_root() -> Path:
@@ -27,43 +29,94 @@ def main():
     os.chdir(project_root)
 
     # 버전 입력 받기
+    print("📦 Flutter Leaf Kit - Version Update")
+    print()
     if len(sys.argv) > 1:
         update_version = sys.argv[1]
+        print(f"🔢 Version: {update_version}")
     else:
-        update_version = input('Please enter the updated version. (ex., 1.0.0): ')
+        update_version = input("🔢 Please enter the updated version. (ex., 1.0.0): ")
 
-    results = list(Path('./packages').rglob('pubspec.yaml'))
+    results = list(Path("./packages").rglob("pubspec.yaml"))
 
     # Get Sub Package Names
     package_names = list()
     for result in results:
         file_path = str(result)
-        package_name = 'flutter_{}'.format(file_path.replace('packages/', '').replace('/pubspec.yaml', ''))
-        if 'flutter_leaf_' in package_name:
+        package_name = "flutter_{}".format(
+            file_path.replace("packages/", "").replace("/pubspec.yaml", "")
+        )
+        if "flutter_leaf_" in package_name:
             package_names.append(package_name)
 
     # Update Yaml
     for result in results:
         file_path = str(result)
 
-        with open(file_path, 'r') as stream:
+        with open(file_path, "r") as stream:
             data = yaml.load(stream)
 
-            data['version'] = update_version
+            data["version"] = update_version
 
             for sub_package_name in package_names:
                 try:
-                    data['dependencies'][sub_package_name]['git']['ref'] = f'v{update_version}'
+                    data["dependencies"][sub_package_name]["git"][
+                        "ref"
+                    ] = f"v{update_version}"
                 except:
                     continue
 
-        with open(file_path, 'wb') as stream:
+        with open(file_path, "wb") as stream:
             yaml.dump(data, stream)
 
-    print('The Yaml file has been modified.')
+    print("\n📝 Yaml files have been modified.")
 
-    # Run melos bootstrap
-    os.system('melos bootstrap')
+    # Git commit 여부 확인
+    print()
+    print("=" * 50)
+    print("🔄 Git Commit")
+    print(f"   Message: chore: Update version v{update_version}")
+    print("=" * 50)
+    commit_confirm = input("Do you want to commit? (y/n): ").strip().lower()
+
+    if commit_confirm == "y":
+        commit_message = f"chore: Update version v{update_version}"
+        tag_name = f"v{update_version}"
+
+        try:
+            repo = Repo(project_root)
+
+            # Stage all changes
+            repo.git.add("-A")
+
+            # Commit
+            repo.index.commit(commit_message)
+            print(f"\n✅ Committed: {commit_message}")
+
+            # Git push
+            print("\n📤 Pushing to remote...")
+            origin = repo.remote("origin")
+            origin.push()
+            print("✅ Push successful.")
+
+            # Create tag
+            print(f"\n🏷️  Creating tag: {tag_name}")
+            repo.create_tag(tag_name)
+            print(f"✅ Tag created: {tag_name}")
+
+            # Push tag to remote
+            print(f"\n📤 Pushing tag to remote...")
+            origin.push(tag_name)
+            print(f"✅ Tag pushed: {tag_name}")
+
+            print("\n" + "=" * 50)
+            print("🎉 Version update completed!")
+            print("=" * 50)
+
+        except GitCommandError as e:
+            print(f"\n❌ Git error: {e}")
+    else:
+        print("\n⏭️  Commit skipped.")
 
 
 if __name__ == "__main__":

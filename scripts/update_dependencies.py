@@ -140,13 +140,13 @@ def print_report(analysis_results: list[dict], include_major: bool = False) -> i
     for result in analysis_results:
         print()
         print("=" * 60)
-        print(f" {result['name']}")
+        print(f"📦 {result['name']}")
         print("=" * 60)
 
         all_deps = result["dependencies"] + result["dev_dependencies"]
 
         if not all_deps:
-            print("  (외부 의존성 없음)")
+            print("  📭 (외부 의존성 없음)")
             continue
 
         # 테이블 헤더
@@ -158,25 +158,25 @@ def print_report(analysis_results: list[dict], include_major: bool = False) -> i
             status = ""
             if dep["needs_update"]:
                 if dep["is_major"]:
-                    status = "!! Major"
+                    status = "🔴 Major"
                     if include_major:
                         package_updates += 1
                 else:
-                    status = "^ Update"
+                    status = "🟡 Update"
                     package_updates += 1
             else:
-                status = "Latest"
+                status = "🟢 Latest"
 
             print(f"  {dep['name']:<25} {dep['current']:<12} {dep['latest']:<12} {status:<10}")
 
         if package_updates > 0:
-            print(f"\n  업데이트 가능: {package_updates}개")
+            print(f"\n  ⬆️  업데이트 가능: {package_updates}개")
 
         total_updates += package_updates
 
     print()
     print("=" * 60)
-    print(f" 총 업데이트 가능 패키지: {total_updates}개")
+    print(f"📊 총 업데이트 가능 패키지: {total_updates}개")
     print("=" * 60)
 
     return total_updates
@@ -205,7 +205,7 @@ def update_pubspec(pubspec_path: Path, analysis: dict, yaml, include_major: bool
             if section in data and pkg_name in data[section]:
                 data[section][pkg_name] = new_version
                 updated_count += 1
-                print(f"  {pkg_name}: {dep['current']} -> {new_version}")
+                print(f"  ✨ {pkg_name}: {dep['current']} -> {new_version}")
 
     if updated_count > 0:
         with open(pubspec_path, "wb") as f:
@@ -252,15 +252,18 @@ def main():
     pubspec_files = get_packages(project_root, package_filter)
 
     if not pubspec_files:
-        print("pubspec.yaml 파일을 찾을 수 없습니다.")
+        print("❌ pubspec.yaml 파일을 찾을 수 없습니다.")
         return
 
-    print(f"\n{len(pubspec_files)}개의 패키지를 분석합니다...")
+    print()
+    print("🔍 Flutter Leaf Kit - Dependencies Update")
+    print()
+    print(f"📋 {len(pubspec_files)}개의 패키지를 분석합니다...")
 
     # 분석 수행
     analysis_results = []
     for pubspec_path in pubspec_files:
-        print(f"  분석 중: {pubspec_path}")
+        print(f"  🔎 분석 중: {pubspec_path}")
         analysis = analyze_dependencies(pubspec_path, yaml)
         analysis_results.append(analysis)
 
@@ -271,23 +274,23 @@ def main():
         return
 
     if total_updates == 0:
-        print("\n모든 패키지가 최신 버전입니다.")
+        print("\n✅ 모든 패키지가 최신 버전입니다.")
         return
 
     # 업데이트 확인
     print()
-    response = input("업데이트를 진행하시겠습니까? [y/N]: ").strip().lower()
+    response = input("⚡ 업데이트를 진행하시겠습니까? [y/N]: ").strip().lower()
 
     if response != "y":
-        print("업데이트가 취소되었습니다.")
+        print("\n⏭️  업데이트가 취소되었습니다.")
         return
 
     # 업데이트 수행
-    print("\n업데이트 중...")
+    print("\n🔄 업데이트 중...")
     total_updated = 0
 
     for analysis in analysis_results:
-        print(f"\n[{analysis['name']}]")
+        print(f"\n📦 [{analysis['name']}]")
         updated = update_pubspec(
             analysis["path"],
             analysis,
@@ -296,11 +299,10 @@ def main():
         )
         total_updated += updated
 
-    print(f"\n총 {total_updated}개의 의존성이 업데이트되었습니다.")
-
-    # melos bootstrap 실행
-    print("\nmelos bootstrap 실행 중...")
-    os.system("melos bootstrap")
+    print()
+    print("=" * 60)
+    print(f"🎉 총 {total_updated}개의 의존성이 업데이트되었습니다.")
+    print("=" * 60)
 
 
 if __name__ == "__main__":

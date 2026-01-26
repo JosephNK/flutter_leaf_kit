@@ -45,7 +45,7 @@ melos run build
 
 # Update version
 poetry run update-version           # Interactive
-poetry run update-version 2.5.0     # Specify version
+poetry run update-version 2.5.0-dev     # Specify version
 
 # Check dependency updates (pub.dev API)
 poetry run update-deps --report              # Report only
