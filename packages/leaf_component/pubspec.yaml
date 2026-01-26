@@ -3,10 +3,10 @@ description: A new Flutter package project.
 version: "2.4.5-dev"
 publish_to: 'none'
 homepage: https://github.com/JosephNK/flutter_leaf_kit
+resolution: workspace
 
 environment:
-  sdk: ">=3.0.0 <4.0.0"
-  flutter: ">=1.17.0"
+  sdk: ^3.9.0
 
 dependencies:
   flutter:
@@ -17,18 +17,18 @@ dependencies:
   flutter_cache_manager: ^3.4.1
   flutter_rating_bar: ^4.0.1
   flutter_staggered_grid_view: ^0.7.0
-  expandable_page_view: ^1.0.17
+  expandable_page_view: ^1.2.0
   shimmer: ^3.0.0
-  photo_manager: ^3.7.1
+  photo_manager: ^3.8.3
   visibility_detector: ^0.4.0+2
-  fluttertoast: ^8.2.12
+  fluttertoast: ^9.0.0
   toastification: ^3.0.3
   easy_rich_text: ^2.2.0
   auto_size_text_plus: ^3.0.2
   flutter_datetime_picker_plus: ^2.2.0
   vector_graphics: ^1.1.19
-  flutter_svg: ^2.2.0
-  lucide_icons_flutter: ^3.0.6
+  flutter_svg: ^2.2.3
+  lucide_icons_flutter: ^3.1.9
 
   flutter_leaf_common:
     git:
@@ -49,6 +49,6 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^4.0.0
+  flutter_lints: ^6.0.0
 
 flutter:

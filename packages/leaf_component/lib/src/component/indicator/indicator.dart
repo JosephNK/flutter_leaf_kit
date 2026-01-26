@@ -1,5 +1,3 @@
-library lf_indicator;
-
 import 'dart:io';
 
 import 'package:flutter/cupertino.dart';

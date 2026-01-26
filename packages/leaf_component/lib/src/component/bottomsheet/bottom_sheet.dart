@@ -1,5 +1,3 @@
-library lf_bottom_sheet;
-
 import 'dart:io';
 
 import 'package:flutter/cupertino.dart';

@@ -1,5 +1,3 @@
-library lf_scroll_common;
-
 import 'dart:async';
 
 import 'package:flutter/material.dart';

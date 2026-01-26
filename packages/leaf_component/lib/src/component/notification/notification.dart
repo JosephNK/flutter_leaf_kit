@@ -1,5 +1,3 @@
-library lf_notification;
-
 import 'dart:async';
 
 import 'package:flutter/material.dart';

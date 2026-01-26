@@ -65,7 +65,7 @@ class LRUMap<K, V> {
       var evictedKey = _map.keys.first;
       var evictedValue = _map.remove(evictedKey);
       if (_handler != null && evictedValue != null) {
-        _handler?.call(evictedKey, evictedValue);
+        _handler.call(evictedKey, evictedValue);
       }
     }
   }

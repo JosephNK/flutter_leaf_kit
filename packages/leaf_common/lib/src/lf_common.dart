@@ -1,5 +1,3 @@
-library lf_common;
-
 import 'dart:async';
 import 'dart:io';
 import 'dart:math';

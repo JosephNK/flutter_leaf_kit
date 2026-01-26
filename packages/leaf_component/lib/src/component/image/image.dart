@@ -1,5 +1,3 @@
-library lf_image;
-
 import 'dart:io';
 import 'dart:typed_data';
 

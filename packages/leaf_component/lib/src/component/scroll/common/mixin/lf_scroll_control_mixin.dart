@@ -14,7 +14,7 @@ mixin LFScrollControlMixin<T extends StatefulWidget> on State<T>
   ScrollPhysics? currentPhysics;
   ScrollPhysics? backupPhysics;
 
-  initControlMixin(ScrollPhysics? physics) {
+  void initControlMixin(ScrollPhysics? physics) {
     currentPhysics = physics;
     backupPhysics = physics;
   }

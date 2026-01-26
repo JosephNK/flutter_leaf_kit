@@ -1,5 +1,3 @@
-library lf_button;
-
 import 'dart:async';
 
 import 'package:flutter/material.dart';

@@ -1,5 +1,3 @@
-library leaf_map;
-
 import 'dart:math';
 import 'dart:ui';
 

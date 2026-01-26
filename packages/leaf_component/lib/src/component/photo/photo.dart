@@ -1,5 +1,3 @@
-library lf_photo;
-
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';

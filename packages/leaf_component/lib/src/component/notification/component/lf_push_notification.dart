@@ -13,7 +13,7 @@ class LFStackPushNotification {
     return this;
   }
 
-  show(BuildContext context) {
+  void show(BuildContext context) {
     final notification = peek();
     if (notification == null) {
       return;
@@ -205,85 +205,92 @@ class _LFPushNotificationAnimatedWidgetState
       child: AnimatedOpacity(
         duration: animationDuration,
         opacity: _isVisible ? 1.0 : 0.0,
-        child: LayoutBuilder(builder: (context, constraints) {
-          final width = constraints.maxWidth;
-          return Material(
-            child: GestureDetector(
-              onTap: () {
-                _close();
-                onTap?.call(data);
-              },
-              child: Container(
-                width: width,
-                decoration: boxDecoration ??
-                    const BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                      color: Colors.white,
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black26,
-                          blurRadius: 5.0,
-                          offset: Offset(2.0, 2.0),
-                        )
-                      ],
-                    ),
-                padding: const EdgeInsets.symmetric(
-                  vertical: 12.0,
-                  horizontal: 16.0,
-                ),
-                child: Row(
-                  children: [
-                    icon ??
-                        const Icon(
-                          Icons.notifications,
-                          color: Colors.black,
-                          size: 40.0,
-                        ),
-                    Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.only(left: 8.0),
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(vertical: 2.0),
-                              child: LFText(
-                                title,
-                                style: titleTextStyle ??
-                                    const TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 16.0,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                maxLines: 1,
-                              ),
-                            ),
-                            if (body != null)
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            final width = constraints.maxWidth;
+            return Material(
+              child: GestureDetector(
+                onTap: () {
+                  _close();
+                  onTap?.call(data);
+                },
+                child: Container(
+                  width: width,
+                  decoration:
+                      boxDecoration ??
+                      const BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                        color: Colors.white,
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black26,
+                            blurRadius: 5.0,
+                            offset: Offset(2.0, 2.0),
+                          ),
+                        ],
+                      ),
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 12.0,
+                    horizontal: 16.0,
+                  ),
+                  child: Row(
+                    children: [
+                      icon ??
+                          const Icon(
+                            Icons.notifications,
+                            color: Colors.black,
+                            size: 40.0,
+                          ),
+                      Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 8.0),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
                               Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(vertical: 2.0),
+                                padding: const EdgeInsets.symmetric(
+                                  vertical: 2.0,
+                                ),
                                 child: LFText(
-                                  body,
-                                  style: bodyTextStyle ??
+                                  title,
+                                  style:
+                                      titleTextStyle ??
                                       const TextStyle(
                                         color: Colors.black,
-                                        fontSize: 14.0,
-                                        fontWeight: FontWeight.normal,
+                                        fontSize: 16.0,
+                                        fontWeight: FontWeight.bold,
                                       ),
+                                  maxLines: 1,
                                 ),
                               ),
-                          ],
+                              if (body != null)
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                    vertical: 2.0,
+                                  ),
+                                  child: LFText(
+                                    body,
+                                    style:
+                                        bodyTextStyle ??
+                                        const TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 14.0,
+                                          fontWeight: FontWeight.normal,
+                                        ),
+                                  ),
+                                ),
+                            ],
+                          ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
-            ),
-          );
-        }),
+            );
+          },
+        ),
       ),
     );
   }

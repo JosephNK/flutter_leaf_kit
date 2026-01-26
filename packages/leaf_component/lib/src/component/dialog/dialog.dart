@@ -1,5 +1,3 @@
-library lf_dialog;
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_leaf_common/leaf_common.dart';

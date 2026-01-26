@@ -1,5 +1,3 @@
-library lf_text;
-
 import 'package:auto_size_text_plus/auto_size_text_plus.dart';
 import 'package:easy_rich_text/easy_rich_text.dart';
 import 'package:flutter/gestures.dart';

@@ -1,5 +1,3 @@
-library lf_http_dio;
-
 import 'dart:io';
 
 import 'package:built_value/serializer.dart';

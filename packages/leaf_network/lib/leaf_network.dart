@@ -1,5 +1,3 @@
-library leaf_network;
-
 export 'package:http_parser/http_parser.dart';
 
 export 'src/cookie/cookie.dart';

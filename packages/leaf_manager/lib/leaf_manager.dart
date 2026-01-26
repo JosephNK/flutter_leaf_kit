@@ -1,5 +1,3 @@
-library leaf_manager;
-
 export 'package:app_tracking_transparency/app_tracking_transparency.dart'
     show TrackingStatus;
 export 'package:permission_handler/permission_handler.dart';

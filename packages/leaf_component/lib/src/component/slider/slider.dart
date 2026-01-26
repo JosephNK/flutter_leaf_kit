@@ -1,5 +1,3 @@
-library ds_slider;
-
 import 'package:flutter/material.dart';
 
 part 'component/lf_range_slider.dart';

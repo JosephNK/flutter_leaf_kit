@@ -1,5 +1,3 @@
-library lf_accordion;
-
 import 'dart:math';
 
 import 'package:flutter/material.dart';

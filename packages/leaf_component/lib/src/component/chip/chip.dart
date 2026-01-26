@@ -1,5 +1,3 @@
-library lf_chip;
-
 import 'package:flutter/material.dart';
 
 import '../../model/model.dart';

@@ -1,5 +1,3 @@
-library leaf_navigation;
-
 import 'package:flutter/material.dart';
 import 'package:flutter_leaf_common/leaf_common.dart';
 import 'package:flutter_leaf_store/leaf_store.dart';

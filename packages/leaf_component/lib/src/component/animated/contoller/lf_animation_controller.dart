@@ -51,11 +51,12 @@ class LFAnimationController extends ChangeNotifier {
     _tickerFuture = animationController.repeat();
     if (repeatCount != -1) {
       _tickerFuture.timeout(
-          Duration(milliseconds: duration.inMilliseconds * repeatCount),
-          onTimeout: () {
-        animationController.forward(from: 0);
-        animationController.stop(canceled: true);
-      });
+        Duration(milliseconds: duration.inMilliseconds * repeatCount),
+        onTimeout: () {
+          animationController.forward(from: 0);
+          animationController.stop(canceled: true);
+        },
+      );
     }
     return _tickerFuture;
   }
@@ -76,12 +77,6 @@ class LFAnimationController extends ChangeNotifier {
     final value = animationController.value;
     _tickerFuture = animationController.forward(from: value);
     return _tickerFuture;
-  }
-
-  @override
-  void addListener(VoidCallback listener) {
-    // TODO: implement addListener
-    super.addListener(listener);
   }
 }
 

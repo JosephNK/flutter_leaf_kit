@@ -1,5 +1,3 @@
-library lf_appbar;
-
 import 'dart:io';
 
 import 'package:flutter/material.dart';

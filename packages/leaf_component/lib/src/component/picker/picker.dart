@@ -1,5 +1,3 @@
-library lf_picker;
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_leaf_datetime/leaf_datetime.dart';

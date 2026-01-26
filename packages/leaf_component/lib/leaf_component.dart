@@ -1,5 +1,3 @@
-library leaf_component;
-
 export 'package:flutter_cache_manager/flutter_cache_manager.dart'
     show CacheManager, Config, JsonCacheInfoRepository, HttpFileService;
 export 'package:flutter_rating_bar/flutter_rating_bar.dart' show RatingWidget;

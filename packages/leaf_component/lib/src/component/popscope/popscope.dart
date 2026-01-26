@@ -1,5 +1,3 @@
-library lf_popsope_component;
-
 import 'dart:async';
 import 'dart:io';
 

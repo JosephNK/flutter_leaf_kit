@@ -1,5 +1,5 @@
 import 'package:flutter_leaf_datetime/leaf_datetime.dart';
-import 'package:test/test.dart';
+import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   test('Test', () async {

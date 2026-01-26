@@ -1,5 +1,3 @@
-library lf_calendar_view;
-
 import 'dart:async';
 
 import 'package:flutter/cupertino.dart';

@@ -1,7 +1,40 @@
 name: flutter_leaf_kit_workspace
+publish_to: none
 
 environment:
-  sdk: '>=3.0.0 <4.0.0'
+  sdk: ^3.9.0
+
+workspace:
+  - packages/leaf
+  - packages/leaf_common
+  - packages/leaf_component
+  - packages/leaf_datetime
+  - packages/leaf_location
+  - packages/leaf_manager
+  - packages/leaf_map
+  - packages/leaf_navigation
+  - packages/leaf_network
+  - packages/leaf_store
+  - packages/leaf_webview
 
 dev_dependencies:
-  melos: 6.3.3
+  melos: 7.3.0
+
+melos:
+  scripts:
+    analyze:flutter:
+      run: melos exec -c 1 -- flutter analyze
+      description: Analyze (All Packages)
+
+    format:dart:
+      run: melos exec -c 1 -- dart format .
+      description: Formatting (All Packages)
+
+    get:flutter:
+      run: melos exec -c 1 -- flutter pub get
+      description: Get packages (All Packages)
+
+    get:pub_outdated:
+      # run: bash scripts/flutter_pub_outdated.sh
+      run: melos exec -c 1 -- dart pub outdated
+      description: Get Flutter pub outdated

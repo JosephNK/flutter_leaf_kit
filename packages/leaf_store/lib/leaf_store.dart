@@ -1,5 +1,3 @@
-library leaf_store;
-
 import 'dart:io';
 import 'dart:typed_data';
 

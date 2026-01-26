@@ -95,7 +95,7 @@ class LFNavigation {
           context,
           PageRouteBuilder(
             settings: routeSettings,
-            pageBuilder: (_, __, ___) {
+            pageBuilder: (_, _, _) {
               return child;
             },
             transitionsBuilder:
@@ -116,7 +116,7 @@ class LFNavigation {
           context,
           PageRouteBuilder(
             settings: routeSettings,
-            pageBuilder: (_, __, ___) {
+            pageBuilder: (_, _, _) {
               return child;
             },
             transitionDuration: Duration.zero,

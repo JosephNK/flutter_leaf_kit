@@ -11,7 +11,7 @@ class LFNavigationBlocProvider {
       return await Navigator.push(
         context,
         PageRouteBuilder(
-          pageBuilder: (_, __, ___) {
+          pageBuilder: (_, _, _) {
             return provider;
           },
           transitionDuration: const Duration(seconds: 0),
@@ -77,18 +77,17 @@ class LFNavigationBlocProvider {
       context,
       PageRouteBuilder(
         settings: RouteSettings(name: routeName),
-        pageBuilder: (_, __, ___) {
+        pageBuilder: (_, _, _) {
           return provider;
         },
         transitionsBuilder: (context, animation, secondaryAnimation, child) {
           if (transitionType == PageTransitionType.bottomToTop) {
-            final tween =
-                Tween(begin: const Offset(0, 1), end: const Offset(0, 0));
-            final position = tween.animate(animation);
-            return SlideTransition(
-              position: position,
-              child: child,
+            final tween = Tween(
+              begin: const Offset(0, 1),
+              end: const Offset(0, 0),
             );
+            final position = tween.animate(animation);
+            return SlideTransition(position: position, child: child);
           }
           return child;
         },

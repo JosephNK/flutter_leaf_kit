@@ -22,6 +22,7 @@ class Person extends UIModel {
       ];
 
   @override
+  // ignore: avoid_types_as_parameter_names
   String? getPayload<String>() {
     return super.payload as String?;
   }

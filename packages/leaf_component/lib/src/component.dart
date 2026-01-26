@@ -1,6 +1,4 @@
-library lf_component;
-
-/// Component
+// Component
 export 'component/accordion/accordion.dart';
 export 'component/animated/animated.dart';
 export 'component/app/app.dart';
@@ -36,6 +34,6 @@ export 'component/text/text.dart';
 export 'component/textfield/textfield.dart';
 export 'component/toast/toast.dart';
 
-/// Configure & Model
+// Configure & Model
 export 'configure/configure.dart';
 export 'model/model.dart';
