@@ -35,19 +35,12 @@ A personal Flutter utility library package for common modules
 - Export: 각 패키지별 단일 export 파일 (예: `leaf_common.dart`)
 - 상태 관리: BLoC 패턴 사용
 
+## Python 가이드
 
-## 주요 명령어
+Python 스크립트는 Poetry로 관리하며, `scripts/` 폴더에 위치합니다.
 
 ```bash
-# 의존성 설치 (Melos)
-melos bootstrap
-
-# 전체 빌드
-melos run build
-
-# 버전 업데이트
-python update_version.py <version>
-
-# Example 앱 실행
-cd example && flutter run
+poetry install  # 의존성 설치
 ```
+
+주요 명령어는 [README.md](README.md#commands) 참고

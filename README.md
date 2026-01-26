@@ -30,6 +30,33 @@ Below is a partial guide to using the package.
       url: https://github.com/JosephNK/flutter_leaf_kit.git
       ref: main or 'v2.0.0' or 'b23ce51'
       path: ./packages/leaf_component
-  
+
   ...
+```
+
+## Commands
+
+```bash
+# Install dependencies (Melos)
+melos bootstrap
+
+# Build all
+melos run build
+
+# Update version
+poetry run update-version           # Interactive
+poetry run update-version 2.5.0     # Specify version
+
+# Check dependency updates (pub.dev API)
+poetry run update-deps --report              # Report only
+poetry run update-deps                       # Report and update
+poetry run update-deps --package leaf_common # Specific package
+poetry run update-deps --include-major       # Include major updates
+
+# Check dependency status (dart pub outdated)
+poetry run pub-outdated                      # All packages
+poetry run pub-outdated --package leaf_common # Specific package
+
+# Run example app
+cd example && flutter run
 ```

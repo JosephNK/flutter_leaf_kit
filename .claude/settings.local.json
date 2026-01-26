@@ -2,7 +2,8 @@
   "permissions": {
     "allow": [
       "Skill(commit)",
-      "Skill(commit:*)"
+      "Skill(commit:*)",
+      "WebFetch(domain:pub.dev)"
     ]
   }
 }
