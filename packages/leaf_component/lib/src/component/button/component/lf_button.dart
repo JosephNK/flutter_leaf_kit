@@ -4,6 +4,8 @@ class LFButton extends StatelessWidget {
   final String text;
   final TextStyle? textStyle;
   final TextAlign? textAlign;
+  final Widget? leading;
+  final double leadingSpacing;
   final Duration duration;
   final bool forceLock;
   final bool loading;
@@ -21,6 +23,8 @@ class LFButton extends StatelessWidget {
     required this.text,
     this.textStyle,
     this.textAlign = TextAlign.center,
+    this.leading,
+    this.leadingSpacing = 8.0,
     this.duration = const Duration(milliseconds: 250),
     this.forceLock = false,
     this.loading = false,
@@ -36,6 +40,24 @@ class LFButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textWidget = LFText(
+      text,
+      style: textStyle ?? TextStyle(color: Colors.white),
+      textAlign: textAlign,
+    );
+
+    final child = leading != null
+        ? Row(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              leading!,
+              SizedBox(width: leadingSpacing),
+              textWidget,
+            ],
+          )
+        : textWidget;
+
     return LFLockGestureDetector(
       duration: duration,
       forceLock: forceLock,
@@ -48,11 +70,7 @@ class LFButton extends StatelessWidget {
       enabledInkWell: enabledInkWell,
       onLoaderBuilder: onLoaderBuilder,
       onTap: onTap,
-      child: LFText(
-        text,
-        style: textStyle ?? TextStyle(color: Colors.white),
-        textAlign: textAlign,
-      ),
+      child: child,
     );
   }
 }
