@@ -3,6 +3,8 @@
     "allow": [
       "Skill(commit)",
       "Skill(commit:*)",
+      "Skill(update-version)",
+      "Skill(update-version:*)",
       "WebFetch(domain:pub.dev)"
     ]
   }

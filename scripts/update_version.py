@@ -3,12 +3,13 @@
 Flutter Leaf Kit - Version Update Script
 
 Usage:
-    update-version           # 대화형으로 버전 입력
-    update-version 2.5.0     # 버전 직접 지정
+    update-version                      # 대화형으로 버전 입력
+    update-version 2.5.0                # 버전 직접 지정
+    update-version 2.5.0 --auto-commit  # 자동 커밋
 """
 
 import os
-import sys
+import argparse
 import ruamel.yaml
 from pathlib import Path
 from git import Repo
@@ -22,6 +23,11 @@ def get_project_root() -> Path:
 
 
 def main():
+    parser = argparse.ArgumentParser(description="Flutter Leaf Kit - Version Update Script")
+    parser.add_argument("version", nargs="?", help="버전 (예: 2.5.0)")
+    parser.add_argument("--auto-commit", action="store_true", default=False, help="자동 커밋 (기본값: false)")
+    args = parser.parse_args()
+
     yaml = ruamel.yaml.YAML()
     yaml.preserve_quotes = True
 
@@ -31,8 +37,8 @@ def main():
     # 버전 입력 받기
     print("📦 Flutter Leaf Kit - Version Update")
     print()
-    if len(sys.argv) > 1:
-        update_version = sys.argv[1]
+    if args.version:
+        update_version = args.version
         print(f"🔢 Version: {update_version}")
     else:
         update_version = input("🔢 Please enter the updated version. (ex., 1.0.0): ")
@@ -77,7 +83,12 @@ def main():
     print("🔄 Git Commit")
     print(f"   Message: chore: Update version v{update_version}")
     print("=" * 50)
-    commit_confirm = input("Do you want to commit? (y/n): ").strip().lower()
+
+    if args.auto_commit:
+        commit_confirm = "y"
+        print("Auto commit enabled.")
+    else:
+        commit_confirm = input("Do you want to commit? (y/n): ").strip().lower()
 
     if commit_confirm == "y":
         commit_message = f"chore: Update version v{update_version}"
