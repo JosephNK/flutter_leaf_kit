@@ -12,3 +12,4 @@ part 'component/lf_appbar.dart';
 part 'component/lf_appbar_action.dart';
 part 'component/lf_appbar_back.dart';
 part 'component/lf_appbar_title.dart';
+part 'helper/lf_appbar_helper.dart';

@@ -1,12 +1,14 @@
 part of '../appbar.dart';
 
 class LFAppBarBack extends StatelessWidget {
+  final IconData? icon;
   final Color? color;
   final double? size;
   final VoidCallback? onPressed;
 
   const LFAppBarBack({
     super.key,
+    this.icon,
     this.color,
     this.size,
     this.onPressed,
@@ -18,11 +20,7 @@ class LFAppBarBack extends StatelessWidget {
 
     return LFInkWell(
       onTap: onPressed,
-      child: Icon(
-        Icons.arrow_back_ios_new,
-        color: color,
-        size: size,
-      ),
+      child: Icon(icon ?? Icons.arrow_back_ios_new, color: color, size: size),
     );
   }
 }
