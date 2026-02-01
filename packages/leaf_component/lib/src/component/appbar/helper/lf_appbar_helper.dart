@@ -1,7 +1,7 @@
 part of '../appbar.dart';
 
-extension LFAppBarHelper on LFAppBar {
-  Widget? buildLeading(
+class LFAppBarHelper {
+  static Widget? buildLeading(
     BuildContext context, {
     required Widget? leading,
     IconData? backIconData,
