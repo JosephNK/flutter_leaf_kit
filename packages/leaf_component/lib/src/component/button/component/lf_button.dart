@@ -2,37 +2,55 @@ part of '../button.dart';
 
 class LFButton extends StatelessWidget {
   final String text;
-  final Color? textColor;
-  final Color? backgroundColor;
-  final TextAlign textAlign;
-  final BorderRadius? borderRadius;
+  final TextStyle? textStyle;
+  final TextAlign? textAlign;
+  final Duration duration;
+  final bool forceLock;
+  final bool loading;
+  final bool showLoading;
+  final bool disabled;
+  final BoxDecoration? decoration;
+  final EdgeInsets? margin;
   final EdgeInsets? padding;
+  final bool enabledInkWell;
+  final LFLockGestureDetectorOnLoaderBuilder? onLoaderBuilder;
   final VoidCallback? onTap;
 
   const LFButton({
     super.key,
     required this.text,
-    this.textColor,
-    this.backgroundColor,
+    this.textStyle,
     this.textAlign = TextAlign.center,
-    this.borderRadius = const BorderRadius.all(Radius.circular(0)),
+    this.duration = const Duration(milliseconds: 250),
+    this.forceLock = false,
+    this.loading = false,
+    this.showLoading = true,
+    this.disabled = false,
+    this.decoration,
+    this.margin,
     this.padding = const EdgeInsets.all(10.0),
+    this.enabledInkWell = true,
+    this.onLoaderBuilder,
     this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
     return LFLockGestureDetector(
-      onTap: onTap,
-      showLoading: false,
-      decoration: BoxDecoration(
-        borderRadius: borderRadius,
-        color: backgroundColor ?? Colors.blueAccent,
-      ),
+      duration: duration,
+      forceLock: forceLock,
+      loading: loading,
+      showLoading: showLoading,
+      disabled: disabled,
+      decoration: decoration ?? BoxDecoration(color: Colors.blueAccent),
+      margin: margin,
       padding: padding,
+      enabledInkWell: enabledInkWell,
+      onLoaderBuilder: onLoaderBuilder,
+      onTap: onTap,
       child: LFText(
         text,
-        color: textColor ?? Colors.white,
+        style: textStyle ?? TextStyle(color: Colors.white),
         textAlign: textAlign,
       ),
     );
