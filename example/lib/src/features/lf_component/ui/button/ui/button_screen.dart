@@ -5,10 +5,7 @@ import 'package:flutter_leaf_kit/flutter_leaf_kit.dart';
 class ButtonScreen extends ScreenStatefulWidget {
   final String title;
 
-  const ButtonScreen({
-    super.key,
-    required this.title,
-  });
+  const ButtonScreen({super.key, required this.title});
 
   @override
   State<ButtonScreen> createState() => _ButtonScreenState();
@@ -27,9 +24,7 @@ class _ButtonScreenState extends ScreenState<ButtonScreen> {
 
   @override
   PreferredSizeWidget? buildAppbar(BuildContext context, Object? state) {
-    return LFAppBar(
-      title: LFAppBarTitle(text: widget.title),
-    );
+    return LFAppBar(title: LFAppBarTitle(text: widget.title));
   }
 
   @override
@@ -42,11 +37,16 @@ class _ButtonScreenState extends ScreenState<ButtonScreen> {
           children: [
             WidgetTile(
               title: 'LFButton',
-              child: LFButton(
-                text: 'LFButton',
-                onTap: () {
-                  debugPrint('LFButton onTap');
-                },
+              child: SizedBox(
+                width: double.infinity,
+                height: 56.0,
+                child: LFButton(
+                  text: 'LFButton',
+                  leading: const Icon(Icons.touch_app, color: Colors.white),
+                  onTap: () {
+                    debugPrint('LFButton onTap');
+                  },
+                ),
               ),
             ),
             WidgetTile(
@@ -61,10 +61,7 @@ class _ButtonScreenState extends ScreenState<ButtonScreen> {
                 },
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8.0),
-                  border: Border.all(
-                    color: Colors.orange,
-                    width: 1.0,
-                  ),
+                  border: Border.all(color: Colors.orange, width: 1.0),
                   color: Colors.grey[300],
                   boxShadow: const [
                     BoxShadow(
@@ -94,7 +91,7 @@ class _ButtonScreenState extends ScreenState<ButtonScreen> {
                         LFText(
                           'enabledInkWell is true',
                           textAlign: TextAlign.center,
-                        )
+                        ),
                       ],
                     ),
                     Positioned(
@@ -115,10 +112,7 @@ class _ButtonScreenState extends ScreenState<ButtonScreen> {
                 // },
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8.0),
-                  border: Border.all(
-                    color: Colors.orange,
-                    width: 1.0,
-                  ),
+                  border: Border.all(color: Colors.orange, width: 1.0),
                   color: Colors.grey[300],
                   boxShadow: const [
                     BoxShadow(
@@ -148,7 +142,7 @@ class _ButtonScreenState extends ScreenState<ButtonScreen> {
                         LFText(
                           'enabledInkWell is false',
                           textAlign: TextAlign.center,
-                        )
+                        ),
                       ],
                     ),
                     Positioned(

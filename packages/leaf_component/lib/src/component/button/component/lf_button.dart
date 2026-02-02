@@ -70,7 +70,7 @@ class LFButton extends StatelessWidget {
       enabledInkWell: enabledInkWell,
       onLoaderBuilder: onLoaderBuilder,
       onTap: onTap,
-      child: child,
+      child: Center(child: child),
     );
   }
 }

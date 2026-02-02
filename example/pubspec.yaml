@@ -2,9 +2,10 @@ name: example
 description: A new Flutter project.
 publish_to: 'none'
 version: 1.0.0+1
+resolution: workspace
 
 environment:
-  sdk: ">=3.0.0 <4.0.0"
+  sdk: ^3.9.0
 
 dependencies:
   flutter:
@@ -16,27 +17,23 @@ dependencies:
   image_picker: ^1.1.2
 
   # Build Gen Plugin
-  built_value: ^8.10.1
+  built_value: ^8.12.3
   built_collection: ^5.1.1
   json_annotation: ^4.9.0
 
-  # Leaf Kit Plugin
-  flutter_leaf_kit:
-    path: ../packages/leaf
+  # Leaf Kit Plugin (workspace에서 자동 해결)
+  flutter_leaf_kit: any
 
-  # Build Gen Plugin
-  dart_object_extension: ^0.3.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^4.0.0
+  flutter_lints: ^6.0.0
 
   # Build Gen Plugin
-  build_runner: ^2.5.4
-  built_value_generator: ^8.10.1
+  build_runner: ^2.10.5
+  built_value_generator: ^8.12.3
   json_serializable: ^6.8.0
-  dart_object_extension_gen: ^0.3.0
 
 flutter:
 

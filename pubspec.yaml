@@ -5,6 +5,7 @@ environment:
   sdk: ^3.9.0
 
 workspace:
+  - example
   - packages/leaf
   - packages/leaf_common
   - packages/leaf_component
