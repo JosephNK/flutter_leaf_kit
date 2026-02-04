@@ -38,7 +38,7 @@ class LFRadio extends StatelessWidget {
           Icons.radio_button_checked,
           color: Colors.blueAccent,
         );
-    final inactiveIcon = this.activeIcon ??
+    final inactiveIcon = this.inactiveIcon ??
         const Icon(
           Icons.radio_button_off,
           color: Colors.grey,

@@ -7,3 +7,5 @@ export 'package:vector_graphics/vector_graphics.dart' show AssetBytesLoader;
 export 'package:visibility_detector/visibility_detector.dart';
 
 export 'src/component.dart';
+export 'src/theme/theme.dart';
+export 'src/tokens/tokens.dart';

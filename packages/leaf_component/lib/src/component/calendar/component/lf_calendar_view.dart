@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_leaf_common/leaf_common.dart';
 import 'package:flutter_leaf_datetime/leaf_datetime.dart';
@@ -412,14 +411,10 @@ class _LFCalendarViewState extends State<LFCalendarView> {
     context.read<LFCalendarProvider>().setDateTime(pageDateTime);
     context.read<LFCalendarProvider>().removeAll();
 
+    if (selectedDateTimes.isEmpty) return;
+
     final selectedDate = _makeSelectingDateTime(
         monthDateTime: pageDateTime, dayDateTime: selectedDateTimes.first);
-
-    if (kDebugMode) {
-      print(
-        '[LFCalendarView onPageChangedAtDateTime] p: $pageDateTime | s: $selectedDate',
-      );
-    }
 
     // 페이지 전환 후 [selectedDate] 날짜로 선택 효과 & onDateSelected 함수 호출 하지 않음
     context

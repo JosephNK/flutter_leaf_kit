@@ -124,7 +124,6 @@ class _DateCalendarViewState extends State<DateCalendarView> {
         }
         date = date.add(const Duration(days: 1));
       }
-      // print(weekRow);
     }
     setState(() {});
   }

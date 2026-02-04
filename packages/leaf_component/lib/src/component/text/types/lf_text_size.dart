@@ -23,9 +23,9 @@ extension LFTextSizeDouble on double {
   LFTextSize get textSize {
     if (this == 0.8) {
       return LFTextSize.small;
-    } else if (this == 0.8) {
+    } else if (this == 1.0) {
       return LFTextSize.medium;
-    } else if (this == 0.8) {
+    } else if (this == 1.2) {
       return LFTextSize.large;
     }
     return LFTextSize.medium;
