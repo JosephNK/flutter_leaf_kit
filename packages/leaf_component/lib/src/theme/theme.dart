@@ -18,6 +18,7 @@ export 'component/lf_image_theme_data.dart';
 export 'component/lf_indicator_theme_data.dart';
 export 'component/lf_navigationbar_theme_data.dart';
 export 'component/lf_notification_theme_data.dart';
+export 'component/lf_page_view_theme_data.dart';
 export 'component/lf_picker_theme_data.dart';
 export 'component/lf_radio_theme_data.dart';
 export 'component/lf_ratingbar_theme_data.dart';

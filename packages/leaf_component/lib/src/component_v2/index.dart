@@ -19,3 +19,8 @@ export 'animated/index.dart';
 export 'icon/index.dart';
 export 'ratingbar/index.dart';
 export 'image/index.dart';
+
+// Phase 3
+export 'tabs/index.dart';
+export 'accordion/index.dart';
+export 'page/index.dart';

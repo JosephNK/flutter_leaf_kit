@@ -17,6 +17,7 @@ import 'component/lf_image_theme_data.dart';
 import 'component/lf_indicator_theme_data.dart';
 import 'component/lf_navigationbar_theme_data.dart';
 import 'component/lf_notification_theme_data.dart';
+import 'component/lf_page_view_theme_data.dart';
 import 'component/lf_picker_theme_data.dart';
 import 'component/lf_radio_theme_data.dart';
 import 'component/lf_ratingbar_theme_data.dart';
@@ -57,6 +58,7 @@ class LFThemeData {
   final LFAccordionThemeData? accordionTheme;
   final LFImageThemeData? imageTheme;
   final LFNavigationBarThemeData? navigationBarTheme;
+  final LFPageViewThemeData? pageViewTheme;
   final LFPickerThemeData? pickerTheme;
 
   const LFThemeData({
@@ -87,6 +89,7 @@ class LFThemeData {
     this.accordionTheme,
     this.imageTheme,
     this.navigationBarTheme,
+    this.pageViewTheme,
     this.pickerTheme,
   });
 
@@ -140,6 +143,7 @@ class LFThemeData {
     LFAccordionThemeData? accordionTheme,
     LFImageThemeData? imageTheme,
     LFNavigationBarThemeData? navigationBarTheme,
+    LFPageViewThemeData? pageViewTheme,
     LFPickerThemeData? pickerTheme,
   }) {
     return LFThemeData(
@@ -170,6 +174,7 @@ class LFThemeData {
       accordionTheme: accordionTheme ?? this.accordionTheme,
       imageTheme: imageTheme ?? this.imageTheme,
       navigationBarTheme: navigationBarTheme ?? this.navigationBarTheme,
+      pageViewTheme: pageViewTheme ?? this.pageViewTheme,
       pickerTheme: pickerTheme ?? this.pickerTheme,
     );
   }
@@ -205,6 +210,7 @@ class LFThemeData {
       imageTheme: t < 0.5 ? a.imageTheme : b.imageTheme,
       navigationBarTheme:
           t < 0.5 ? a.navigationBarTheme : b.navigationBarTheme,
+      pageViewTheme: t < 0.5 ? a.pageViewTheme : b.pageViewTheme,
       pickerTheme: t < 0.5 ? a.pickerTheme : b.pickerTheme,
     );
   }
