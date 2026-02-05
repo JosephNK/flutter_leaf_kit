@@ -1,0 +1,197 @@
+import 'dart:async';
+
+import 'package:flutter/material.dart';
+
+import 'lf_inkwell_v2.dart';
+
+/// Builder for a custom loading indicator within [LFLockGestureDetectorV2].
+typedef LFLockGestureDetectorOnLoaderBuilderV2 = Widget Function();
+
+/// A gesture detector that locks taps for a brief duration to prevent
+/// accidental double taps (debouncing).
+///
+/// Supports loading, disabled, and force-lock states.
+/// Optionally wraps the child in [LFInkWellV2] for Material ripple.
+///
+/// Standalone V2 version — no dependency on V1 or `LFIndicator`.
+class LFLockGestureDetectorV2 extends StatefulWidget {
+  final Widget child;
+  final Duration duration;
+  final bool forceLock;
+  final bool loading;
+  final bool showLoading;
+  final bool disabled;
+  final BoxDecoration? decoration;
+  final EdgeInsets? margin;
+  final EdgeInsets? padding;
+  final bool enabledInkWell;
+  final LFLockGestureDetectorOnLoaderBuilderV2? onLoaderBuilder;
+  final VoidCallback? onTap;
+
+  const LFLockGestureDetectorV2({
+    super.key,
+    required this.child,
+    this.duration = const Duration(milliseconds: 250),
+    this.forceLock = false,
+    this.loading = false,
+    this.showLoading = true,
+    this.disabled = false,
+    this.decoration,
+    this.margin,
+    this.padding,
+    this.enabledInkWell = true,
+    this.onLoaderBuilder,
+    this.onTap,
+  });
+
+  @override
+  State<LFLockGestureDetectorV2> createState() =>
+      _LFLockGestureDetectorV2State();
+}
+
+class _LFLockGestureDetectorV2State extends State<LFLockGestureDetectorV2> {
+  Timer? _timer;
+  bool _lock = false;
+  bool _forceLock = false;
+  bool _loading = false;
+  bool _disabled = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _forceLock = widget.forceLock;
+    _loading = widget.loading;
+    _disabled = widget.disabled;
+  }
+
+  @override
+  void dispose() {
+    _stopLockTimer();
+    super.dispose();
+  }
+
+  @override
+  void didUpdateWidget(covariant LFLockGestureDetectorV2 oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.forceLock != widget.forceLock) {
+      _forceLock = widget.forceLock;
+    }
+    if (oldWidget.loading != widget.loading) {
+      setState(() {
+        _loading = widget.loading;
+      });
+    }
+    if (oldWidget.disabled != widget.disabled) {
+      setState(() {
+        _disabled = widget.disabled;
+      });
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    Widget child = widget.child;
+    Widget? loadingWidget = widget.onLoaderBuilder?.call();
+
+    Clip clipBehavior = Clip.hardEdge;
+    List<Positioned> positionedWidgets = [];
+    if (child is Stack) {
+      clipBehavior = child.clipBehavior;
+      positionedWidgets = child.children
+          .map((e) => e is Positioned ? e : null)
+          .nonNulls
+          .toList();
+      child = Stack(
+        clipBehavior: clipBehavior,
+        children: [
+          ...child.children.map((e) => e is! Positioned ? e : null).nonNulls,
+        ],
+      );
+    }
+
+    final margin = widget.margin;
+    final decoration = widget.decoration;
+    final decBorderRadius = decoration?.borderRadius;
+    final onTap = widget.onTap;
+
+    final childWidget = Stack(
+      clipBehavior: clipBehavior,
+      children: [
+        Container(
+          padding: widget.padding,
+          child: child,
+        ),
+        Positioned.fill(
+          child: Visibility(
+            visible: _loading && widget.showLoading,
+            child: Center(
+              child: loadingWidget ??
+                  const SizedBox(
+                    width: 20,
+                    height: 20,
+                    child: CircularProgressIndicator(strokeWidth: 2),
+                  ),
+            ),
+          ),
+        ),
+        ...positionedWidgets,
+      ],
+    );
+
+    void onGestureTap() {
+      if (_lock || _forceLock || _disabled) return;
+      if (!_forceLock) _startLockTimer();
+      onTap?.call();
+    }
+
+    final connectOnTap = onTap != null ? onGestureTap : null;
+
+    if (widget.enabledInkWell) {
+      final borderRadius =
+          (decBorderRadius is BorderRadius) ? decBorderRadius : null;
+      return Container(
+        margin: margin,
+        child: LFInkWellV2(
+          decoration: decoration,
+          borderRadius: borderRadius,
+          disabled: _disabled,
+          onTap: connectOnTap,
+          child: childWidget,
+        ),
+      );
+    }
+
+    return GestureDetector(
+      onTap: connectOnTap,
+      child: Container(
+        decoration: decoration,
+        margin: margin,
+        child: childWidget,
+      ),
+    );
+  }
+
+  void _startLockTimer() {
+    _toggleLoading(true);
+    _lock = true;
+    _timer?.cancel();
+    _timer = Timer(widget.duration, () {
+      _toggleLoading(false);
+      _lock = false;
+    });
+  }
+
+  void _stopLockTimer() {
+    _toggleLoading(false);
+    _timer?.cancel();
+    _timer = null;
+  }
+
+  void _toggleLoading(bool loading) {
+    if (context.mounted) {
+      setState(() {
+        _loading = loading;
+      });
+    }
+  }
+}

@@ -4,6 +4,7 @@ import '../tokens/lf_elevation.dart';
 import '../tokens/lf_radius.dart';
 import '../tokens/lf_spacing.dart';
 import '../tokens/lf_typography.dart';
+import 'component/lf_accordion_theme_data.dart';
 import 'component/lf_appbar_theme_data.dart';
 import 'component/lf_badge_theme_data.dart';
 import 'component/lf_bottomsheet_theme_data.dart';
@@ -12,10 +13,15 @@ import 'component/lf_calendar_theme_data.dart';
 import 'component/lf_checkbox_theme_data.dart';
 import 'component/lf_chip_theme_data.dart';
 import 'component/lf_dialog_theme_data.dart';
+import 'component/lf_image_theme_data.dart';
 import 'component/lf_indicator_theme_data.dart';
+import 'component/lf_navigationbar_theme_data.dart';
 import 'component/lf_notification_theme_data.dart';
+import 'component/lf_picker_theme_data.dart';
 import 'component/lf_radio_theme_data.dart';
+import 'component/lf_ratingbar_theme_data.dart';
 import 'component/lf_skeleton_theme_data.dart';
+import 'component/lf_slider_theme_data.dart';
 import 'component/lf_switch_theme_data.dart';
 import 'component/lf_tabbar_theme_data.dart';
 import 'component/lf_textfield_theme_data.dart';
@@ -46,6 +52,12 @@ class LFThemeData {
   final LFSkeletonThemeData? skeletonTheme;
   final LFCalendarThemeData? calendarTheme;
   final LFNotificationThemeData? notificationTheme;
+  final LFSliderThemeData? sliderTheme;
+  final LFRatingBarThemeData? ratingBarTheme;
+  final LFAccordionThemeData? accordionTheme;
+  final LFImageThemeData? imageTheme;
+  final LFNavigationBarThemeData? navigationBarTheme;
+  final LFPickerThemeData? pickerTheme;
 
   const LFThemeData({
     required this.colors,
@@ -70,6 +82,12 @@ class LFThemeData {
     this.skeletonTheme,
     this.calendarTheme,
     this.notificationTheme,
+    this.sliderTheme,
+    this.ratingBarTheme,
+    this.accordionTheme,
+    this.imageTheme,
+    this.navigationBarTheme,
+    this.pickerTheme,
   });
 
   factory LFThemeData.light() {
@@ -117,6 +135,12 @@ class LFThemeData {
     LFSkeletonThemeData? skeletonTheme,
     LFCalendarThemeData? calendarTheme,
     LFNotificationThemeData? notificationTheme,
+    LFSliderThemeData? sliderTheme,
+    LFRatingBarThemeData? ratingBarTheme,
+    LFAccordionThemeData? accordionTheme,
+    LFImageThemeData? imageTheme,
+    LFNavigationBarThemeData? navigationBarTheme,
+    LFPickerThemeData? pickerTheme,
   }) {
     return LFThemeData(
       colors: colors ?? this.colors,
@@ -141,6 +165,12 @@ class LFThemeData {
       skeletonTheme: skeletonTheme ?? this.skeletonTheme,
       calendarTheme: calendarTheme ?? this.calendarTheme,
       notificationTheme: notificationTheme ?? this.notificationTheme,
+      sliderTheme: sliderTheme ?? this.sliderTheme,
+      ratingBarTheme: ratingBarTheme ?? this.ratingBarTheme,
+      accordionTheme: accordionTheme ?? this.accordionTheme,
+      imageTheme: imageTheme ?? this.imageTheme,
+      navigationBarTheme: navigationBarTheme ?? this.navigationBarTheme,
+      pickerTheme: pickerTheme ?? this.pickerTheme,
     );
   }
 
@@ -169,6 +199,13 @@ class LFThemeData {
       calendarTheme: t < 0.5 ? a.calendarTheme : b.calendarTheme,
       notificationTheme:
           t < 0.5 ? a.notificationTheme : b.notificationTheme,
+      sliderTheme: t < 0.5 ? a.sliderTheme : b.sliderTheme,
+      ratingBarTheme: t < 0.5 ? a.ratingBarTheme : b.ratingBarTheme,
+      accordionTheme: t < 0.5 ? a.accordionTheme : b.accordionTheme,
+      imageTheme: t < 0.5 ? a.imageTheme : b.imageTheme,
+      navigationBarTheme:
+          t < 0.5 ? a.navigationBarTheme : b.navigationBarTheme,
+      pickerTheme: t < 0.5 ? a.pickerTheme : b.pickerTheme,
     );
   }
 }

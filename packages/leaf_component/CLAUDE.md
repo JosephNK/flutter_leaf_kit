@@ -1,6 +1,6 @@
 # leaf_component
 
-Lf 디자인 시스템 기반 Flutter UI 컴포넌트 라이브러리.
+LF 디자인 시스템 기반 Flutter UI 컴포넌트 라이브러리.
 
 ## 빌드 & 테스트
 
@@ -81,7 +81,7 @@ Widget build(BuildContext context) {
 ### Colors (`LFColors`)
 
 | 토큰 | 용도 |
-|------|------|
+|------|------| 
 | `primary`, `onPrimary` | 브랜드 주요 색상 |
 | `secondary`, `onSecondary` | 보조 색상 |
 | `surface`, `onSurface` | 카드, AppBar 등 표면 |
