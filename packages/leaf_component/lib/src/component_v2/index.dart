@@ -12,3 +12,10 @@ export 'switch/index.dart';
 export 'chip/index.dart';
 export 'indicator/index.dart';
 export 'skeleton/index.dart';
+
+// Phase 2
+export 'slider/index.dart';
+export 'animated/index.dart';
+export 'icon/index.dart';
+export 'ratingbar/index.dart';
+export 'image/index.dart';
