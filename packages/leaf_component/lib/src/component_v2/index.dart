@@ -40,3 +40,10 @@ export 'dialog/index.dart';
 export 'calendar/index.dart';
 export 'navigationbar/index.dart';
 export 'photo/index.dart';
+
+// Phase 6
+export 'scroll/index.dart';
+
+// Phase 7
+export 'screen/index.dart';
+export 'app/index.dart';

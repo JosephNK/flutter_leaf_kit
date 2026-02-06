@@ -1,5 +1,3 @@
-library transition_blocs;
-
 import 'dart:async';
 
 import 'package:flutter_leaf_kit/flutter_leaf_kit.dart';
@@ -9,33 +7,21 @@ part 'transition_state.dart';
 
 class TransitionBloc extends Bloc<TransitionEvent, TransitionState> {
   TransitionBloc() : super(TransitionSplashState()) {
-    on<TransitionSplashEvent>(
-      (event, emit) => _mapSplashToState(event, emit),
-    );
-    on<TransitionSignInEvent>(
-      (event, emit) => _mapSignInToState(event, emit),
-    );
-    on<TransitionSignUpEvent>(
-      (event, emit) => _mapSignUpToState(event, emit),
-    );
+    on<TransitionSplashEvent>((event, emit) => _mapSplashToState(event, emit));
+    on<TransitionSignInEvent>((event, emit) => _mapSignInToState(event, emit));
+    on<TransitionSignUpEvent>((event, emit) => _mapSignUpToState(event, emit));
     on<TransitionSignUpPasswordEvent>(
       (event, emit) => _mapSignUpPasswordToState(event, emit),
     );
-    on<TransitionHomeEvent>(
-      (event, emit) => _mapHomeToState(event, emit),
-    );
+    on<TransitionHomeEvent>((event, emit) => _mapHomeToState(event, emit));
     on<TransitionPermissionEvent>(
       (event, emit) => _mapPermissionToState(event, emit),
     );
     on<TransitionAuthSMSEvent>(
       (event, emit) => _mapAuthSMSToState(event, emit),
     );
-    on<TransitionTermsEvent>(
-      (event, emit) => _mapTermsToState(event, emit),
-    );
-    on<TransitionErrEvent>(
-      (event, emit) => _mapErrToState(event, emit),
-    );
+    on<TransitionTermsEvent>((event, emit) => _mapTermsToState(event, emit));
+    on<TransitionErrEvent>((event, emit) => _mapErrToState(event, emit));
   }
 
   final duration = const Duration(milliseconds: 100);
