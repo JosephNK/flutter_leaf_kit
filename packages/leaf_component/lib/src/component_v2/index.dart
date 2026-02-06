@@ -34,3 +34,9 @@ export 'popscope/index.dart';
 export 'grid/index.dart';
 export 'size/index.dart';
 export 'painter/index.dart';
+
+// Phase 5
+export 'dialog/index.dart';
+export 'calendar/index.dart';
+export 'navigationbar/index.dart';
+export 'photo/index.dart';
