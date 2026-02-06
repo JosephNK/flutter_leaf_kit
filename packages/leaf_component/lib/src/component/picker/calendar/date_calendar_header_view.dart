@@ -4,6 +4,7 @@ import 'package:lucide_icons_flutter/lucide_icons.dart';
 
 import '../../text/text.dart';
 
+@Deprecated('Use LFDatePickerV2 instead')
 class DateCalendarHeaderView extends StatelessWidget {
   final DateTime date;
   final bool visible;

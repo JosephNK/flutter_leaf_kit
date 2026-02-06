@@ -1,11 +1,13 @@
 part of '../text.dart';
 
+@Deprecated('V1 component deprecated. Use V2 components instead.')
 enum LFTextSize {
   small,
   medium,
   large,
 }
 
+@Deprecated('V1 component deprecated. Use V2 components instead.')
 extension LFTextSizeExt on LFTextSize {
   double get textScaleFactor {
     switch (this) {
@@ -19,6 +21,7 @@ extension LFTextSizeExt on LFTextSize {
   }
 }
 
+@Deprecated('V1 component deprecated. Use V2 components instead.')
 extension LFTextSizeDouble on double {
   LFTextSize get textSize {
     if (this == 0.8) {

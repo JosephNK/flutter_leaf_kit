@@ -1,10 +1,6 @@
 part of '../lf_common.dart';
 
-enum DeviceOS {
-  unknown,
-  android,
-  ios,
-}
+enum DeviceOS { unknown, android, ios }
 
 extension DeviceOSExt on DeviceOS {
   String get value {

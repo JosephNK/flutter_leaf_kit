@@ -1,10 +1,12 @@
 part of '../lf_scroll_common.dart';
 
+@Deprecated('V1 component deprecated. Use V2 components instead.')
 abstract class LFScrollProvider {
   void loadMore();
   void didScroll(LFScrollInfoData scrollData);
 }
 
+@Deprecated('V1 component deprecated. Use V2 components instead.')
 mixin LFScrollControlMixin<T extends StatefulWidget> on State<T>
     implements LFScrollProvider {
   ScrollDirection scrollDirection = ScrollDirection.idle;

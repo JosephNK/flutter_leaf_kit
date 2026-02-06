@@ -6,6 +6,7 @@ part of '../textfield.dart';
 //  NumberLengthLimitingTextInputFormatter(19) // 19자리만 입력 받도록 공백 3개 + 숫자 16개
 // ],
 
+@Deprecated('V1 component deprecated. Use V2 components instead.')
 class CreditCardNumberFormatter extends TextInputFormatter {
   @override
   TextEditingValue formatEditUpdate(

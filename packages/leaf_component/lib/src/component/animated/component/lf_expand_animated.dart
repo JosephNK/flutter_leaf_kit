@@ -1,5 +1,6 @@
 part of '../animated.dart';
 
+@Deprecated('Use LFExpandAnimatedV2 instead')
 class LFExpandAnimated extends StatefulWidget {
   final Widget child;
   final LFExpandAnimationController? controller;

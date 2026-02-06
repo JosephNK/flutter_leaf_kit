@@ -1,7 +1,9 @@
 part of '../popscope.dart';
 
+@Deprecated('Use LFPopScopeAppCloseV2 instead')
 typedef LFPopScopeCallback = Future<void> Function();
 
+@Deprecated('Use LFPopScopeAppCloseV2 instead')
 class LFPopScopeToAppClose extends StatefulWidget {
   final Widget child;
   final LFPopScopeCallback? closeBeforeCallback;

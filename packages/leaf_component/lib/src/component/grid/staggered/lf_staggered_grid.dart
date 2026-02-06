@@ -1,5 +1,6 @@
 part of '../grid.dart';
 
+@Deprecated('Use LFStaggeredGridV2 instead')
 class LFStaggeredGrid extends StatelessWidget {
   final int crossAxisCount;
   final double mainAxisSpacing;
@@ -28,6 +29,7 @@ class LFStaggeredGrid extends StatelessWidget {
   }
 }
 
+@Deprecated('Use LFStaggeredGridTileV2 instead')
 class LFStaggeredGridTile extends StatelessWidget {
   final int crossAxisCellCount;
   final num mainAxisCellCount;

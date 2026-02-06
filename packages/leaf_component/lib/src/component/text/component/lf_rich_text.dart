@@ -1,5 +1,6 @@
 part of '../text.dart';
 
+@Deprecated('V1 component deprecated. Use V2 components instead.')
 class LFRichText extends StatelessWidget implements LFBuildText {
   final InlineSpan text;
   final TextAlign textAlign;
@@ -45,6 +46,7 @@ class LFRichText extends StatelessWidget implements LFBuildText {
   }
 }
 
+@Deprecated('V1 component deprecated. Use V2 components instead.')
 class LFTextSpan extends TextSpan {
   const LFTextSpan({
     super.text,

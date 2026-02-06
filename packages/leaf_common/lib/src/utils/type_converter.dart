@@ -41,7 +41,7 @@ class LFTypeConverter {
       if (T == num) {
         if (value is num) return value as T;
         if (value is String) {
-          // 정수로 파싱ㄴ 먼저 시도
+          // 정수로 파싱 먼저 시도
           if (value.contains('.')) {
             return double.parse(value) as T;
           } else {

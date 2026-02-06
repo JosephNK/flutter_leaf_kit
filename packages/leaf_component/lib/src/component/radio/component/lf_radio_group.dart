@@ -1,10 +1,12 @@
 part of '../radio.dart';
 
+@Deprecated('Use LFRadioGroupV2 instead')
 typedef LFRadioGroupsOnChanged = Function(
   LFDataItem item,
   bool checked,
 );
 
+@Deprecated('Use LFRadioGroupV2 instead')
 class LFRadioGroups extends StatefulWidget {
   final List<LFDataItem> items;
   final LFDataItem? value;

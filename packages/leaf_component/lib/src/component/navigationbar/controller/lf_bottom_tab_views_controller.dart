@@ -2,8 +2,10 @@ part of '../navigationbar.dart';
 
 ///////////////////////////////////////////////////////////////////////////////
 
+@Deprecated('V1 component deprecated. Use V2 components instead.')
 abstract class LFBottomTabBarViewsEvent {}
 
+@Deprecated('V1 component deprecated. Use V2 components instead.')
 class LFBottomTabBarViewsSelectedEvent extends LFBottomTabBarViewsEvent {
   final int selectedIndex;
   final int? previousIndex;
@@ -14,6 +16,7 @@ class LFBottomTabBarViewsSelectedEvent extends LFBottomTabBarViewsEvent {
   });
 }
 
+@Deprecated('V1 component deprecated. Use V2 components instead.')
 class LFBottomTabBarViewsItemsEvent extends LFBottomTabBarViewsEvent {
   final List<LFBottomTabItem> tabItems;
 
@@ -24,6 +27,7 @@ class LFBottomTabBarViewsItemsEvent extends LFBottomTabBarViewsEvent {
 
 ///////////////////////////////////////////////////////////////////////////////
 
+@Deprecated('V1 component deprecated. Use V2 components instead.')
 mixin LFBottomTabBarViewsMixIn {
   late StreamController<LFBottomTabBarViewsEvent>? streamController;
 
@@ -69,6 +73,7 @@ mixin LFBottomTabBarViewsMixIn {
 
 ///////////////////////////////////////////////////////////////////////////////
 
+@Deprecated('V1 component deprecated. Use V2 components instead.')
 class LFBottomTabBarViewsController with LFBottomTabBarViewsMixIn {
   LFBottomTabBarViewsController() {
     init();

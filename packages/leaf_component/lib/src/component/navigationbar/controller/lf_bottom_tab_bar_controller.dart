@@ -2,8 +2,10 @@ part of '../navigationbar.dart';
 
 ///////////////////////////////////////////////////////////////////////////////
 
+@Deprecated('V1 component deprecated. Use V2 components instead.')
 abstract class LFBottomTabBarEvent {}
 
+@Deprecated('V1 component deprecated. Use V2 components instead.')
 class LFBottomTabBarSelectedEvent extends LFBottomTabBarEvent {
   final int selectedIndex;
   final int? previousIndex;
@@ -14,6 +16,7 @@ class LFBottomTabBarSelectedEvent extends LFBottomTabBarEvent {
   });
 }
 
+@Deprecated('V1 component deprecated. Use V2 components instead.')
 class LFBottomTabBarItemsEvent extends LFBottomTabBarEvent {
   final List<LFBottomTabItem> tabItems;
 
@@ -22,6 +25,7 @@ class LFBottomTabBarItemsEvent extends LFBottomTabBarEvent {
   });
 }
 
+@Deprecated('V1 component deprecated. Use V2 components instead.')
 class LFBottomTabBarBadgeEvent extends LFBottomTabBarEvent {
   final List<LFBottomTabItem> tabItems;
   final int tabIndex;
@@ -36,6 +40,7 @@ class LFBottomTabBarBadgeEvent extends LFBottomTabBarEvent {
 
 ///////////////////////////////////////////////////////////////////////////////
 
+@Deprecated('V1 component deprecated. Use V2 components instead.')
 mixin LFBottomTabBarMixIn {
   late StreamController<LFBottomTabBarEvent>? streamController;
 
@@ -96,6 +101,7 @@ mixin LFBottomTabBarMixIn {
 
 ///////////////////////////////////////////////////////////////////////////////
 
+@Deprecated('V1 component deprecated. Use V2 components instead.')
 class LFBottomTabBarController with LFBottomTabBarMixIn {
   LFBottomTabBarController() {
     init();

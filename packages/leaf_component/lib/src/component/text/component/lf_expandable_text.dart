@@ -1,5 +1,6 @@
 part of '../text.dart';
 
+@Deprecated('V1 component deprecated. Use V2 components instead.')
 class LFExpandableText extends StatefulWidget {
   final String text;
   final TextStyle? style;

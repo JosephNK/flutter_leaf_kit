@@ -3,6 +3,7 @@ part of '../photo.dart';
 ///
 /// Mixin
 ///
+@Deprecated('V1 component deprecated. Use V2 components instead.')
 mixin LFPhotoAlbumRequest {
   Future<List<AssetPathEntity>> requestAssetPaths(RequestType type) async {
     final result = await PhotoManager.requestPermissionExtend();

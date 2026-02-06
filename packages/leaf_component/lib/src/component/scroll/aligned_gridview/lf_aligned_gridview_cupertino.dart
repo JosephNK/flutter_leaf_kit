@@ -1,5 +1,6 @@
 part of '../scroll.dart';
 
+@Deprecated('V1 component deprecated. Use V2 components instead.')
 class LFAlignedGridViewCupertino<T> extends StatelessWidget {
   final Widget Function(BuildContext context, T item, int index) builder;
   final Key? storageKey;

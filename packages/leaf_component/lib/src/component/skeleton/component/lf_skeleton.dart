@@ -1,5 +1,6 @@
 part of '../skeleton.dart';
 
+@Deprecated('Use LFSkeletonV2 instead')
 class LFSkeleton extends StatelessWidget {
   final double? width;
   final double? height;

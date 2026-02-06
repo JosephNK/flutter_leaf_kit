@@ -1,5 +1,6 @@
 part of '../appbar.dart';
 
+@Deprecated('Use LFAppBarV2 instead')
 class LFAppBarAction extends StatelessWidget {
   final String? text;
   final Widget? icon;

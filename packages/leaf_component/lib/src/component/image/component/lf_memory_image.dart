@@ -1,5 +1,6 @@
 part of '../image.dart';
 
+@Deprecated('Use LFMemoryImageV2 instead')
 class LFMemoryImage extends StatelessWidget {
   final Uint8List? bytes;
   final double? width;

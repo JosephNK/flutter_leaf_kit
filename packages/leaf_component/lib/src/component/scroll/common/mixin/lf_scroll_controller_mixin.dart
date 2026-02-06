@@ -1,5 +1,6 @@
 part of '../lf_scroll_common.dart';
 
+@Deprecated('V1 component deprecated. Use V2 components instead.')
 enum LFScrollControllerEventType {
   scrollToPosition,
   scrollToTop,
@@ -7,6 +8,7 @@ enum LFScrollControllerEventType {
   loading,
 }
 
+@Deprecated('V1 component deprecated. Use V2 components instead.')
 class LFScrollControllerEvent {
   final LFScrollControllerEventType type;
   final bool animated;
@@ -21,6 +23,7 @@ class LFScrollControllerEvent {
   });
 }
 
+@Deprecated('V1 component deprecated. Use V2 components instead.')
 mixin LFScrollControllerMixin {
   late StreamController<LFScrollControllerEvent>? streamController;
   late bool isLoading;

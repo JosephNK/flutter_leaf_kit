@@ -1,5 +1,6 @@
 part of '../toast.dart';
 
+@Deprecated('Use LFToastV2 instead.')
 class LFToast {
   static Future<bool?> showToast(
     BuildContext context, {

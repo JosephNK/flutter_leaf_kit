@@ -1,5 +1,6 @@
 part of '../scroll.dart';
 
+@Deprecated('V1 component deprecated. Use V2 components instead.')
 class LFListViewIndicator extends StatelessWidget {
   final bool loading;
 

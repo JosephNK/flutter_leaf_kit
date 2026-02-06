@@ -2,6 +2,7 @@ part of '../navigationbar.dart';
 
 ///////////////////////////////////////////////////////////////////////////////
 
+@Deprecated('V1 component deprecated. Use V2 components instead.')
 class LFBottomTabBarScaffoldController {
   LFBottomTabBarViewsController tabBarViewsController =
       LFBottomTabBarViewsController();

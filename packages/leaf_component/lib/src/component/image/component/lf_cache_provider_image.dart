@@ -1,5 +1,6 @@
 part of '../image.dart';
 
+@Deprecated('V1 component deprecated. Use V2 components instead.')
 class LFCachedNetworkImageProvider
     extends cached_network.CachedNetworkImageProvider {
   /// Creates an ImageProvider which loads an image from the [url], using the [scale].

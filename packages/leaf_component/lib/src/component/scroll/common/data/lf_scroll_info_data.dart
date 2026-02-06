@@ -1,5 +1,6 @@
 part of '../lf_scroll_common.dart';
 
+@Deprecated('V1 component deprecated. Use V2 components instead.')
 class LFScrollInfoData extends Equatable {
   final ScrollNotification scrollNotification;
   final double position;

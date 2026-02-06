@@ -7,6 +7,7 @@ const kDefaultDialogButtonTextStyle = TextStyle(fontSize: 16);
 const kDefaultDialogButtonPadding =
     EdgeInsets.symmetric(vertical: 10.0, horizontal: 12.0);
 
+@Deprecated('Use LFAlertDialogV2 instead')
 class LFDialogOKButton extends StatelessWidget {
   final bool autoPop;
   final String? text;
@@ -73,6 +74,7 @@ class LFDialogOKButton extends StatelessWidget {
   }
 }
 
+@Deprecated('Use LFAlertDialogV2 instead')
 class LFDialogCancelButton extends StatelessWidget {
   final bool autoPop;
   final String? text;

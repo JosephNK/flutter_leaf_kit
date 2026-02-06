@@ -1,8 +1,10 @@
 part of '../dialog.dart';
 
+@Deprecated('Use LFAlertDialogV2 instead')
 typedef LFCalendarBetweenDatePickerOnOK = Function(
     LFCalendarBetweenPickerSelect select, DateTime dateTime);
 
+@Deprecated('Use LFAlertDialogV2 instead')
 class LFCalendarBetweenDatePickerDialog {
   static Future show(
     BuildContext context, {

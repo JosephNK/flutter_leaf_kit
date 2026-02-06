@@ -1,5 +1,6 @@
 part of '../animated.dart';
 
+@Deprecated('Use LFFlipAnimatedV2 instead')
 class LFFlipAnimated extends StatefulWidget {
   final Widget front;
   final Widget rear;

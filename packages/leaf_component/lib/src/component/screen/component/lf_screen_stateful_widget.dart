@@ -1,5 +1,6 @@
 part of '../screen.dart';
 
+@Deprecated('Use LFScreenStatefulWidgetV2 instead')
 mixin class ScreenVariable {
   bool get useSafeArea => true;
   SafeAreaInsets get safeAreaInsets =>
@@ -12,6 +13,7 @@ mixin class ScreenVariable {
   bool get canPop => true;
 }
 
+@Deprecated('Use LFScreenStatefulWidgetV2 instead')
 abstract class ScreenBuild {
   Widget? buildScreen(BuildContext context);
   PreferredSizeWidget? buildAppbar(BuildContext context, Object? state);
@@ -26,6 +28,7 @@ abstract class ScreenBuild {
   void willPopScopeCallback(BuildContext context, bool didPop, dynamic result);
 }
 
+@Deprecated('Use LFScreenStatefulWidgetV2 instead')
 abstract class StatefulExtWidget extends StatefulWidget {
   final LFBottomTabIndex? index;
 
@@ -35,10 +38,12 @@ abstract class StatefulExtWidget extends StatefulWidget {
   });
 }
 
+@Deprecated('Use LFScreenStatefulWidgetV2 instead')
 abstract class ScreenStatefulWidget extends StatefulExtWidget {
   const ScreenStatefulWidget({super.key, super.index});
 }
 
+@Deprecated('Use LFScreenStateV2 instead')
 abstract class ScreenState<T extends StatefulExtWidget> extends State<T>
     with ScreenVariable
     implements ScreenBuild {
@@ -229,6 +234,7 @@ abstract class ScreenState<T extends StatefulExtWidget> extends State<T>
       BuildContext context, bool didPop, dynamic result) {}
 }
 
+@Deprecated('V1 component deprecated. Use V2 components instead.')
 extension ScreenStateFunction on ScreenState {
   void _updateActivation() {
     final index = widget.index;
@@ -247,6 +253,7 @@ extension ScreenStateFunction on ScreenState {
   }
 }
 
+@Deprecated('Use SafeAreaInsetsV2 instead')
 class SafeAreaInsets {
   final bool left;
   final bool top;

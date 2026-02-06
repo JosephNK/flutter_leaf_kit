@@ -1,5 +1,6 @@
 part of '../button.dart';
 
+@Deprecated('V1 component deprecated. Use V2 components instead.')
 class LFCornerPosition {
   final double show;
   final double hide;
@@ -10,6 +11,7 @@ class LFCornerPosition {
   });
 }
 
+@Deprecated('V1 component deprecated. Use V2 components instead.')
 class LFCornerPositionButton extends StatelessWidget {
   final bool show;
   final Widget? child;

@@ -1,5 +1,6 @@
 part of '../painter.dart';
 
+@Deprecated('Use LFTimelinePainterV2 instead')
 class LFTimelinePainter extends CustomPainter {
   final double width;
   final StrokeCap strokeCap;

@@ -1,7 +1,9 @@
 part of '../size.dart';
 
+@Deprecated('Use LFWidgetSizeV2 instead')
 typedef OnWidgetSizeChange = void Function(Offset position, Size size);
 
+@Deprecated('Use LFWidgetRenderObjectV2 instead')
 class LFWidgetRenderObject extends RenderProxyBox {
   Size? oldSize;
   Offset? oldPos;
@@ -24,6 +26,7 @@ class LFWidgetRenderObject extends RenderProxyBox {
   }
 }
 
+@Deprecated('Use LFWidgetSizeV2 instead')
 class LFWidgetSize extends SingleChildRenderObjectWidget {
   final OnWidgetSizeChange onChange;
 

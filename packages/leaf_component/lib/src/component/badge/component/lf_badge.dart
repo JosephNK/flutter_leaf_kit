@@ -1,5 +1,6 @@
 part of '../badge.dart';
 
+@Deprecated('Use LFBadgeV2 instead')
 class LFBadge extends StatelessWidget {
   final String? text;
   final IconData? icon;

@@ -1,16 +1,19 @@
 part of '../navigationbar.dart';
 
+@Deprecated('Use LFBottomTabBarV2 instead')
 typedef LFBottomTabBarOnPressed = void Function(
   int selectedIndex,
   bool isActive,
 );
 
+@Deprecated('Use LFBottomTabBarV2 instead')
 typedef LFBottomTabBarOnSelected = Future<bool> Function(
   int selectedIndex,
   int? previousIndex,
   bool isActive,
 );
 
+@Deprecated('Use LFBottomTabBarV2 instead')
 class LFBottomTabBar extends StatefulWidget {
   final LFBottomTabBarScaffoldController scaffoldController;
   final LFBottomTabBarController controller;
@@ -202,12 +205,14 @@ class _LFBottomTabBarState extends State<LFBottomTabBar> {
   }
 }
 
+@Deprecated('V1 component deprecated. Use V2 components instead.')
 enum LSBottomTextIconAnimationType {
   none,
   expand,
   bounce,
 }
 
+@Deprecated('V1 component deprecated. Use V2 components instead.')
 class LSBottomTextIcon extends StatefulWidget {
   final LSBottomTextIconAnimationType type;
   final int selectedIndex;
@@ -333,6 +338,7 @@ class _LSBottomTextIconState extends State<LSBottomTextIcon> {
   }
 }
 
+@Deprecated('V1 component deprecated. Use V2 components instead.')
 class LFBottomIcon extends StatelessWidget {
   final Widget? defaultWidget;
   final Widget? activeWidget;
@@ -367,6 +373,7 @@ class LFBottomIcon extends StatelessWidget {
   }
 }
 
+@Deprecated('V1 component deprecated. Use V2 components instead.')
 class LFBottomText extends StatelessWidget {
   final String? text;
   final TextStyle? defaultTextStyle;

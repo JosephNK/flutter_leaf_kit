@@ -1,5 +1,6 @@
 part of '../image.dart';
 
+@Deprecated('V1 component deprecated. Use V2 components instead.')
 class LFImageValue extends Equatable {
   // Url
   // https://picsum.photos/200

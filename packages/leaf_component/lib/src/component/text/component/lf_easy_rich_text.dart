@@ -1,5 +1,6 @@
 part of '../text.dart';
 
+@Deprecated('V1 component deprecated. Use V2 components instead.')
 class LFEasyRichText extends StatelessWidget implements LFBuildText {
   final String text;
   final TextStyle? style;
@@ -57,6 +58,7 @@ class LFEasyRichText extends StatelessWidget implements LFBuildText {
   }
 }
 
+@Deprecated('V1 component deprecated. Use V2 components instead.')
 class LFEasyRichTextPattern {
   ///target string that you want to format
   final dynamic targetString;

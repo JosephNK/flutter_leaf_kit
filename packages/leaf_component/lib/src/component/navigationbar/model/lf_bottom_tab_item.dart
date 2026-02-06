@@ -1,5 +1,6 @@
 part of '../navigationbar.dart';
 
+@Deprecated('V1 component deprecated. Use V2 components instead.')
 class LFBottomTabItem extends Equatable {
   final LFBottomTabIndex bottomTabIndex;
   final Widget? defaultIcon;

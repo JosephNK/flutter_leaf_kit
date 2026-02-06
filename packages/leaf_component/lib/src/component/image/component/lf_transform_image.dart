@@ -1,5 +1,6 @@
 part of '../image.dart';
 
+@Deprecated('V1 component deprecated. Use V2 components instead.')
 class LFTransformImage extends StatelessWidget {
   final LFImageValue image;
   final double? width;

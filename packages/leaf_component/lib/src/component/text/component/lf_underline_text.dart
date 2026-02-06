@@ -3,6 +3,7 @@ part of '../text.dart';
 //
 // https://github.com/flutter/flutter/issues/42833
 //
+@Deprecated('V1 component deprecated. Use V2 components instead.')
 class LFUnderlineText extends StatelessWidget {
   final String text;
   final TextStyle? style;
@@ -23,6 +24,7 @@ class LFUnderlineText extends StatelessWidget {
   }
 }
 
+@Deprecated('V1 component deprecated. Use V2 components instead.')
 class LFUnderlineSpans {
   List<WidgetSpan> textWidgetSpan(
     String text, {

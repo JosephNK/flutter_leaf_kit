@@ -1,5 +1,6 @@
 part of '../lf_calendar_view.dart';
 
+@Deprecated('Use LFCalendarViewV2 instead')
 class LFCalendarMonthView extends StatelessWidget {
   final DateTime dateTime;
   final DateTime? minDate;

@@ -1,10 +1,12 @@
 part of '../checkbox.dart';
 
+@Deprecated('Use LFCheckBoxGroupV2 instead')
 typedef LFCheckboxGroupsOnChanged = Function(
   List<LFDataItem> items,
   LFDataItem changeItem,
 );
 
+@Deprecated('Use LFCheckBoxGroupV2 instead')
 class LFCheckboxGroups extends StatefulWidget {
   final List<LFDataItem> items;
   final List<LFDataItem>? values;

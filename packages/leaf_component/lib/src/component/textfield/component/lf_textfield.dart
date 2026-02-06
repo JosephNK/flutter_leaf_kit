@@ -1,7 +1,9 @@
 part of '../textfield.dart';
 
+@Deprecated('Use LFTextFieldV2 instead')
 enum LFTextFieldStatus { none, clear, reset, setText }
 
+@Deprecated('Use LFTextFieldControllerV2 instead')
 class LFTextFieldController extends ChangeNotifier {
   final controller = TextEditingController();
 
@@ -40,6 +42,7 @@ class LFTextFieldController extends ChangeNotifier {
   }
 }
 
+@Deprecated('Use LFTextFieldV2 instead')
 class LFTextField extends StatefulWidget {
   final LFTextFieldController controller;
   final TextStyle? textStyle;
@@ -560,6 +563,7 @@ class _LFTextFieldState extends State<LFTextField> {
   }
 }
 
+@Deprecated('V1 component deprecated. Use V2 components instead.')
 class LFNoSpaceFormatter extends TextInputFormatter {
   @override
   TextEditingValue formatEditUpdate(

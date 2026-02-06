@@ -1,5 +1,6 @@
 part of '../scroll.dart';
 
+@Deprecated('Use LFGridViewV2 instead.')
 class LFGridView<T> extends StatefulWidget {
   final Key? storageKey;
   final Widget Function(BuildContext context, T item, int index) builder;

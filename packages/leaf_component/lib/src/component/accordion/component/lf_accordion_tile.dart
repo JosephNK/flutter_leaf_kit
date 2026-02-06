@@ -1,5 +1,6 @@
 part of '../accordion.dart';
 
+@Deprecated('Use LFAccordionTileV2 instead')
 class LFAccordionTile extends StatefulWidget {
   final String title;
   final Widget child;

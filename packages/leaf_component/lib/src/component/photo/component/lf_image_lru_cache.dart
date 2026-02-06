@@ -7,6 +7,7 @@ import 'dart:typed_data';
 
 import 'package:photo_manager/photo_manager.dart';
 
+@Deprecated('Use LFImageLruCacheV2 instead')
 class ImageLruCache {
   static final LRUMap<_ImageCacheEntity, Uint8List> _map = LRUMap(500);
 
@@ -41,8 +42,10 @@ class _ImageCacheEntity {
   int get hashCode => entity.hashCode ^ size.hashCode;
 }
 
+@Deprecated('V1 component deprecated. Use V2 components instead.')
 typedef EvictionHandler<K, V> = Function(K key, V value);
 
+@Deprecated('V1 component deprecated. Use V2 components instead.')
 class LRUMap<K, V> {
   final LinkedHashMap<K, V> _map = LinkedHashMap<K, V>();
   final int _maxSize;

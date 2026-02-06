@@ -7,6 +7,7 @@ part of '../textfield.dart';
 //  NumberLengthLimitingTextInputFormatter(13) // 13자리만 입력 받도록 하이픈 2개 + 숫자 11개
 // ],
 
+@Deprecated('V1 component deprecated. Use V2 components instead.')
 class PhoneNumberFormatter extends TextInputFormatter {
   @override
   TextEditingValue formatEditUpdate(

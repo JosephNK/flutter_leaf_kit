@@ -1,5 +1,6 @@
 part of '../picker.dart';
 
+@Deprecated('Use LFTimePickerV2 instead')
 class LFTimePicker extends StatefulWidget {
   final Widget? label;
   final Widget? icon;

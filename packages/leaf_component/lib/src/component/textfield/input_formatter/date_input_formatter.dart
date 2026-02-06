@@ -5,6 +5,7 @@ part of '../textfield.dart';
 //  DateFormatter(), // 자동 하이픈
 // ],
 
+@Deprecated('V1 component deprecated. Use V2 components instead.')
 class DateFormatter extends TextInputFormatter {
   @override
   TextEditingValue formatEditUpdate(

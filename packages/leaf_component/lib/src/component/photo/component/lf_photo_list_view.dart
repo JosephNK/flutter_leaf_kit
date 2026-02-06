@@ -1,8 +1,10 @@
 part of '../photo.dart';
 
+@Deprecated('Use LFPhotoListViewV2 instead')
 typedef LFPhotosOnSelected = void Function(
   List<AssetEntity> selectedEntities,
 );
+@Deprecated('Use LFPhotoListViewV2 instead')
 typedef LFPhotosOnLimitError = void Function(
   Exception error,
   int limit,
@@ -11,6 +13,7 @@ typedef LFPhotosOnLimitError = void Function(
 ///
 /// LFPhotoListView
 ///
+@Deprecated('Use LFPhotoListViewV2 instead')
 class LFPhotoListView extends StatefulWidget {
   final AssetPathEntity? selectedAssetPath;
   final int selectedLimit;
@@ -225,6 +228,7 @@ class _LFPhotoListViewState extends State<LFPhotoListView> {
 ///
 /// LFPhotoTile
 ///
+@Deprecated('V1 component deprecated. Use V2 components instead.')
 class LFPhotoTile extends StatelessWidget {
   final AssetEntity entity;
   final int size;
@@ -289,6 +293,7 @@ class LFPhotoTile extends StatelessWidget {
 ///
 /// LFPhotoMask
 ///
+@Deprecated('V1 component deprecated. Use V2 components instead.')
 class LFPhotoMask extends StatelessWidget {
   final bool showMask;
   final Color? borderColor;
@@ -320,6 +325,7 @@ class LFPhotoMask extends StatelessWidget {
 ///
 /// LFPhotoCheckBox
 ///
+@Deprecated('V1 component deprecated. Use V2 components instead.')
 class LFPhotoCheckBox extends StatelessWidget {
   final Widget? checkedIcon;
   final Widget? uncheckedIcon;

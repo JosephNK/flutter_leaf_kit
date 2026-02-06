@@ -1,5 +1,6 @@
 part of '../bottom_sheet.dart';
 
+@Deprecated('Use LFBottomSheetV2 instead')
 class LFBottomSheet {
   static final LFBottomSheet _instance = LFBottomSheet._internal();
   static LFBottomSheet get shared => _instance;

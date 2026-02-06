@@ -1,5 +1,6 @@
 part of '../text.dart';
 
+@Deprecated('V1 component deprecated. Use V2 components instead.')
 class LFAutoSizeText extends StatelessWidget implements LFBuildText {
   final String text;
   final TextStyle? style;

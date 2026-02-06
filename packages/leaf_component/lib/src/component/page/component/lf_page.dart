@@ -1,5 +1,6 @@
 part of '../page.dart';
 
+@Deprecated('Use LFPageViewV2 instead')
 class LFPageView extends StatefulWidget {
   final List<Widget> children;
   final int initialPage;

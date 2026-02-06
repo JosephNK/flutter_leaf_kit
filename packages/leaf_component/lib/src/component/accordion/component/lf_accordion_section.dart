@@ -1,5 +1,6 @@
 part of '../accordion.dart';
 
+@Deprecated('Use LFAccordionV2 instead')
 class LFAccordionSection extends StatefulWidget {
   final String title;
   final bool expand;

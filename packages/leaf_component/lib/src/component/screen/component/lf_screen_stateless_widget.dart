@@ -1,5 +1,6 @@
 part of '../screen.dart';
 
+@Deprecated('Use LFScreenStatelessWidgetV2 instead')
 class ScreenStatelessWidget extends StatelessWidget {
   final Widget child;
 

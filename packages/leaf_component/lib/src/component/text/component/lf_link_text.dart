@@ -20,13 +20,16 @@ const TextStyle kLinkTextHighlightStyle = TextStyle(
   color: Colors.blue,
 );
 
+@Deprecated('V1 component deprecated. Use V2 components instead.')
 enum LFLinkTextType { url, phoneNumber, email, matches }
 
+@Deprecated('V1 component deprecated. Use V2 components instead.')
 typedef LFLinkTextOnTap = void Function(
   LFLinkTextType type,
   String? id,
 );
 
+@Deprecated('V1 component deprecated. Use V2 components instead.')
 class LFLinkText extends StatefulWidget {
   final String text;
   final List<String> matchTexts;

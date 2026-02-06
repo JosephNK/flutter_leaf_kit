@@ -1,5 +1,6 @@
 part of '../notification.dart';
 
+@Deprecated('Use LFPushNotificationV2 instead')
 class LFStackPushNotification {
   static final LFStackPushNotification _instance =
       LFStackPushNotification._internal();
@@ -52,6 +53,7 @@ class LFStackPushNotification {
   }
 }
 
+@Deprecated('Use LFPushNotificationV2 instead')
 class LFPushNotification extends Object {
   final String title;
   final String? body;

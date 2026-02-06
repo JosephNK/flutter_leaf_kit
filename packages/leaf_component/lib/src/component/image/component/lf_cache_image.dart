@@ -3,6 +3,7 @@ part of '../image.dart';
 ///
 /// ref., https://iiro.dev/2017/09/04/clipping-widgets-with-bezier-curves-in-flutter/
 ///
+@Deprecated('Use LFCacheImageV2 instead')
 class LFCacheImage extends StatelessWidget {
   final Uri? uri;
   final double? width;
@@ -125,6 +126,7 @@ class LFCacheImage extends StatelessWidget {
 
 ////////////////////////////////////////////////////////////////////////////////
 
+@Deprecated('Use LFCacheImageV2 instead')
 class LFWebpCacheNetworkImage extends StatefulWidget {
   final String url;
   final double? width;
@@ -186,6 +188,7 @@ class _LFWebpCacheNetworkImageState extends State<LFWebpCacheNetworkImage> {
 
 ////////////////////////////////////////////////////////////////////////////////
 
+@Deprecated('V1 component deprecated. Use V2 components instead.')
 class LFImageClipper extends CustomClipper<Path> {
   final bool useClip;
 
@@ -211,6 +214,7 @@ class LFImageClipper extends CustomClipper<Path> {
 
 ////////////////////////////////////////////////////////////////////////////////
 
+@Deprecated('V1 component deprecated. Use V2 components instead.')
 class LFBorderPainter extends CustomPainter {
   final bool useClip;
 

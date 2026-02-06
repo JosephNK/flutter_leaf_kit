@@ -1,5 +1,6 @@
 part of '../scroll.dart';
 
+@Deprecated('Use LFScrollViewV2 instead.')
 class LFScrollView extends StatefulWidget {
   final Key? storageKey;
   final Widget child;

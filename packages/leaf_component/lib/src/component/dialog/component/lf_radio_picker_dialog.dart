@@ -4,6 +4,7 @@ part of '../dialog.dart';
 /// https://medium.com/@excogitatr/custom-dialog-in-flutter-d00e0441f1d5
 ///
 
+@Deprecated('Use LFAlertDialogV2 instead')
 class LFRadioPickerDialog {
   static Future confirm(
     BuildContext context, {

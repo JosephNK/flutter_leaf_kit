@@ -1,5 +1,6 @@
 part of '../slider.dart';
 
+@Deprecated('Use LFRangeSliderV2 instead')
 class LFRangeSlider extends StatefulWidget {
   final RangeValues values;
   final double min;

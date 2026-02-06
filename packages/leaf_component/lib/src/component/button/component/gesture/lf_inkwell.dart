@@ -1,5 +1,6 @@
 part of '../../button.dart';
 
+@Deprecated('Use LFInkWellV2 instead')
 class LFInkWell extends StatelessWidget {
   final Widget child;
   final BoxDecoration? decoration;

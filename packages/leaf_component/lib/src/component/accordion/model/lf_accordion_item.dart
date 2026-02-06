@@ -1,5 +1,6 @@
 part of '../accordion.dart';
 
+@Deprecated('Use LFAccordionItemV2 instead')
 class LFAccordionItem<T> {
   final String section;
   final T data;

@@ -4,6 +4,7 @@ import 'package:flutter_leaf_datetime/leaf_datetime.dart';
 import 'date_calendar_cell.dart';
 import 'date_calendar_header_view.dart';
 
+@Deprecated('Use LFDatePickerV2 instead')
 class DateCalendarView extends StatefulWidget {
   final DateTime selectedDateTime;
   final bool visibleHeader;

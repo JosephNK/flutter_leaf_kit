@@ -1,10 +1,12 @@
 part of '../chip.dart';
 
+@Deprecated('Use LFChipsV2 instead')
 typedef LFChipsOnChanged = Function(
   List<LFDataItem> items,
   LFDataItem changeItem,
 );
 
+@Deprecated('Use LFChipsV2 instead')
 class LFChips extends StatefulWidget {
   final List<LFDataItem> items;
   final List<LFDataItem>? values;

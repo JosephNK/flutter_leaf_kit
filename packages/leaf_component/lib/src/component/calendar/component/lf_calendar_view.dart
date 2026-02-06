@@ -16,12 +16,15 @@ part 'widget/lf_calendar_page_cell.dart';
 part 'widget/lf_calendar_page_view.dart';
 part 'widget/lf_calendar_weekday_view.dart';
 
+@Deprecated('Use LFCalendarViewV2 instead')
 enum LFCalendarFormat { month }
 
+@Deprecated('Use LFCalendarViewV2 instead')
 typedef LFCalendarViewOnMonthOnTap = void Function(
   DateTime month,
 );
 
+@Deprecated('Use LFCalendarViewV2 instead')
 typedef LFCalendarViewOnMonthChanged = void Function(
   DateTime startDateInMonth,
   DateTime endDateInMonth,
@@ -29,16 +32,19 @@ typedef LFCalendarViewOnMonthChanged = void Function(
   DateTime? selectedDate,
 );
 
+@Deprecated('Use LFCalendarViewV2 instead')
 typedef LFCalendarViewOnDateSelected = void Function(
   DateTime? selectedDate,
 );
 
+@Deprecated('Use LFCalendarViewV2 instead')
 typedef LFCalendarCellBuilder = Widget Function(
   BuildContext context,
   DateTime dateTime,
   Size size,
 );
 
+@Deprecated('Use LFCalendarViewV2 instead')
 class LFCalendarView extends StatefulWidget {
   final DateTime? defaultDate;
   final DateTime? minDate;

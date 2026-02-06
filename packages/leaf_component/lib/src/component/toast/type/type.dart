@@ -1,10 +1,12 @@
 part of '../toast.dart';
 
+@Deprecated('Use LFToastV2 instead.')
 enum LFToastType {
   lengthShort,
   lengthLong,
 }
 
+@Deprecated('Use LFToastV2 instead.')
 extension LFToastTypeExt on LFToastType {
   Toast get value {
     switch (this) {
@@ -18,12 +20,14 @@ extension LFToastTypeExt on LFToastType {
 
 ////////////////////////////////////////////////////////////////////////////////
 
+@Deprecated('Use LFToastV2 instead.')
 enum LFToastGravityType {
   top,
   center,
   bottom,
 }
 
+@Deprecated('Use LFToastV2 instead.')
 extension LFToastGravityTypeExt on LFToastGravityType {
   ToastGravity get value {
     switch (this) {
@@ -39,6 +43,7 @@ extension LFToastGravityTypeExt on LFToastGravityType {
 
 ////////////////////////////////////////////////////////////////////////////////
 
+@Deprecated('Use LFToastV2 instead.')
 enum LFToastNotificationType {
   info,
   warning,
@@ -46,6 +51,7 @@ enum LFToastNotificationType {
   error,
 }
 
+@Deprecated('Use LFToastV2 instead.')
 extension LFToastNotificationTypeExt on LFToastNotificationType {
   ToastificationType get value {
     switch (this) {
@@ -63,6 +69,7 @@ extension LFToastNotificationTypeExt on LFToastNotificationType {
 
 ////////////////////////////////////////////////////////////////////////////////
 
+@Deprecated('Use LFToastV2 instead.')
 enum LFToastNotificationStyle {
   minimal,
   fillColored,
@@ -71,6 +78,7 @@ enum LFToastNotificationStyle {
   simple,
 }
 
+@Deprecated('Use LFToastV2 instead.')
 extension LFToastNotificationStyleExt on LFToastNotificationStyle {
   ToastificationStyle get value {
     switch (this) {

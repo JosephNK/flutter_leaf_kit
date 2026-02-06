@@ -1,7 +1,9 @@
 part of '../app.dart';
 
+@Deprecated('Use LFLayoutAppV2 instead')
 typedef LFLayoutAppOnSetupDevice = Function(VoidCallback onBuilder);
 
+@Deprecated('Use LFLayoutAppV2 instead')
 class LFLayoutApp extends StatefulWidget {
   final LFAppComponentConfigure? configure;
   final String buildName;

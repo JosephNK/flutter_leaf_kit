@@ -1,6 +1,7 @@
 part of '../configure.dart';
 
 /// AppBar Configure
+@Deprecated('Use LFAppBarThemeData instead')
 class LFAppBarComponentConfigure {
   final TextStyle? titleStyle;
   final double? backIconSize;
@@ -20,6 +21,7 @@ class LFAppBarComponentConfigure {
 }
 
 /// Alert Configure
+@Deprecated('Use LFDialogThemeData instead')
 class LFAlertDialogConfigure {
   final String? cancelText;
   final String? okText;
@@ -53,6 +55,7 @@ class LFAlertDialogConfigure {
 }
 
 /// BottomSheet Configure
+@Deprecated('Use LFBottomSheetThemeData instead')
 class LFBottomSheetConfigure {
   final Color? activeColor;
   final Color? inactiveColor;
@@ -66,6 +69,7 @@ class LFBottomSheetConfigure {
 }
 
 /// Picker Calendar Configure
+@Deprecated('Use LFPickerThemeData instead')
 class LFPickerCalendarConfigure {
   final Color? activeColor;
 
@@ -74,6 +78,7 @@ class LFPickerCalendarConfigure {
   });
 }
 
+@Deprecated('Use LFThemeData instead')
 class LFAppComponentConfigure {
   LFAppBarComponentConfigure? appBar;
   LFAlertDialogConfigure? alert;
@@ -99,6 +104,7 @@ class LFAppComponentConfigure {
   }
 }
 
+@Deprecated('Use LFTheme instead')
 class LFComponentConfigure {
   static final LFComponentConfigure _instance =
       LFComponentConfigure._internal();

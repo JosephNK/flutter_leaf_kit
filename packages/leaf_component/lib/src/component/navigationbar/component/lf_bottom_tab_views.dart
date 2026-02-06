@@ -1,9 +1,11 @@
 part of '../navigationbar.dart';
 
+@Deprecated('Use LFBottomTabViewsV2 instead')
 typedef LFBottomTabBarViewsChildren = List<Widget> Function(
   List<LFBottomTabItem> tabItems,
 );
 
+@Deprecated('Use LFBottomTabViewsV2 instead')
 class LFBottomTabBarViews extends StatefulWidget {
   final LFBottomTabBarViewsController controller;
   final LFBottomTabBarViewsChildren children;

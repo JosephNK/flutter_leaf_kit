@@ -1,5 +1,6 @@
 part of '../animated.dart';
 
+@Deprecated('Use LFRotateAnimatedV2 instead')
 class LFRotateAnimated extends StatefulWidget {
   final Widget child;
   final LFRotateAnimationController? controller;

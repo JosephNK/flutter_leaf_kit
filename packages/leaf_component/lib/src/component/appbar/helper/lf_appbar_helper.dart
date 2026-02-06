@@ -1,5 +1,6 @@
 part of '../appbar.dart';
 
+@Deprecated('Use LFAppBarV2 instead')
 class LFAppBarHelper {
   static Widget? buildLeading(
     BuildContext context, {

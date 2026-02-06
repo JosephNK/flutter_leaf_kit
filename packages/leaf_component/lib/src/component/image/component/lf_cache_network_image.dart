@@ -1,7 +1,9 @@
 part of '../image.dart';
 
+@Deprecated('Use LFCacheNetworkImageV2 instead')
 typedef LFCacheNetworkImageOnPreBuilder = Function();
 
+@Deprecated('Use LFCacheNetworkImageV2 instead')
 class LFCacheNetworkImage extends StatelessWidget {
   final String? url;
   final double? width;
@@ -95,6 +97,7 @@ class LFCacheNetworkImage extends StatelessWidget {
 
 ////////////////////////////////////////////////////////////////////////////////
 
+@Deprecated('V1 component deprecated. Use V2 components instead.')
 class LFCacheManager {
   static const key = 'LFCachedImageData';
   static CacheManager instance = CacheManager(

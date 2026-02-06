@@ -3,6 +3,7 @@ part of '../photo.dart';
 ///
 /// LFPhotoAlbumScrollTitleView
 ///
+@Deprecated('Use LFPhotoAlbumV2 instead')
 class LFPhotoAlbumScrollTitleView extends StatefulWidget {
   final RequestType type;
   final AssetPathEntity? selectedAssetPath;

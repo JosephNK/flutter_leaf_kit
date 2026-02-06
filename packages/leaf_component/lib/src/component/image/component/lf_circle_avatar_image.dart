@@ -1,5 +1,6 @@
 part of '../image.dart';
 
+@Deprecated('Use LFCircleAvatarImageV2 instead')
 class LFCircleAvatarImage extends StatelessWidget {
   final LFImageValue image;
   final double size;
