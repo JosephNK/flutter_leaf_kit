@@ -24,3 +24,13 @@ export 'image/index.dart';
 export 'tabs/index.dart';
 export 'accordion/index.dart';
 export 'page/index.dart';
+
+// Phase 4
+export 'bottomsheet/index.dart';
+export 'toast/index.dart';
+export 'notification/index.dart';
+export 'picker/index.dart';
+export 'popscope/index.dart';
+export 'grid/index.dart';
+export 'size/index.dart';
+export 'painter/index.dart';
