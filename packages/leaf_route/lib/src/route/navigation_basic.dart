@@ -1,4 +1,4 @@
-part of '../../leaf_navigation.dart';
+part of '../../leaf_route.dart';
 
 class LeafNavigationBasic {
   /// Push

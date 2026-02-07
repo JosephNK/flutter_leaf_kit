@@ -6,7 +6,7 @@ import 'package:stream_transform/stream_transform.dart';
 export 'package:bloc_concurrency/bloc_concurrency.dart';
 export 'package:flutter_bloc/flutter_bloc.dart';
 
-part 'src/bloc/leaf_bloc_base_state.dart';
-part 'src/bloc/leaf_bloc_observer.dart';
-part 'src/bloc/leaf_bloc_screen_consumer.dart';
-part 'src/transformer/leaf_transformer.dart';
+part 'src/leaf_bloc_base_state.dart';
+part 'src/leaf_bloc_observer.dart';
+part 'src/leaf_bloc_screen_consumer.dart';
+part 'src/leaf_bloc_transformer.dart';

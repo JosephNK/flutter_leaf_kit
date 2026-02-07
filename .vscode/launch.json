@@ -151,21 +151,21 @@
             "flutterMode": "release"
         },
         {
-            "name": "leaf_navigation",
-            "cwd": "packages/leaf_navigation",
+            "name": "leaf_route",
+            "cwd": "packages/leaf_route",
             "request": "launch",
             "type": "dart"
         },
         {
-            "name": "leaf_navigation (profile mode)",
-            "cwd": "packages/leaf_navigation",
+            "name": "leaf_route (profile mode)",
+            "cwd": "packages/leaf_route",
             "request": "launch",
             "type": "dart",
             "flutterMode": "profile"
         },
         {
-            "name": "leaf_navigation (release mode)",
-            "cwd": "packages/leaf_navigation",
+            "name": "leaf_route (release mode)",
+            "cwd": "packages/leaf_route",
             "request": "launch",
             "type": "dart",
             "flutterMode": "release"

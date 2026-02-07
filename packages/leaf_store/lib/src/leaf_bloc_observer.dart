@@ -1,14 +1,8 @@
-part of '../../leaf_store.dart';
+part of '../leaf_store.dart';
 
-typedef BlocObserverOnChangeCallback = void Function(
-  BlocBase,
-  Change,
-);
-typedef BlocObserverOnErrorCallback = void Function(
-  BlocBase,
-  Object,
-  StackTrace,
-);
+typedef BlocObserverOnChangeCallback = void Function(BlocBase, Change);
+typedef BlocObserverOnErrorCallback =
+    void Function(BlocBase, Object, StackTrace);
 
 class LeafBlocObserver extends BlocObserver {
   BlocObserverOnChangeCallback? onChangeCallback;

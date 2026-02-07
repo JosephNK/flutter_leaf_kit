@@ -26,7 +26,7 @@ Date/time management and localization (Korean, English).
 
 - Documentation: _coming soon_
 
-### leaf_navigation — Page Navigation
+### leaf_route — Page Navigation
 
 Page navigation helpers and modal presentation utilities.
 

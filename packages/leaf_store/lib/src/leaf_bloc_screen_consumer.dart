@@ -1,14 +1,10 @@
-part of '../../leaf_store.dart';
+part of '../leaf_store.dart';
 
-typedef BlocScreenSuccessListener<S> = void Function(
-  BuildContext context,
-  S state,
-);
+typedef BlocScreenSuccessListener<S> =
+    void Function(BuildContext context, S state);
 
-typedef BlocScreenErrorListener<S> = void Function(
-  BuildContext context,
-  dynamic exception,
-);
+typedef BlocScreenErrorListener<S> =
+    void Function(BuildContext context, dynamic exception);
 
 class BlocScreenConsumer<B extends BlocBase<S>, S> extends StatelessWidget {
   final BlocWidgetBuilder<S> builder;

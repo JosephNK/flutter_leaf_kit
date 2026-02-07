@@ -10,7 +10,7 @@ export 'package:navigation_history_observer/navigation_history_observer.dart'
 export 'package:page_transition/page_transition.dart'
     show PageTransition, PageTransitionType;
 
-part 'src/navigation/navigation.dart';
-part 'src/navigation/navigation_basic.dart';
-part 'src/navigation/navigation_bloc.dart';
-part 'src/navigation/navigation_helper.dart';
+part 'src/route/navigation.dart';
+part 'src/route/navigation_basic.dart';
+part 'src/route/navigation_bloc.dart';
+part 'src/route/navigation_helper.dart';
