@@ -29,4 +29,7 @@ migrate_working_dir/
 .packages
 build/
 
-melos_flutter_leaf_kit.iml
+# Misc
+.iml
+.playwright-mcp/
+.claude/*.local.json
