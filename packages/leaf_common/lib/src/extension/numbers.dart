@@ -1,4 +1,4 @@
-part of '../leaf_common.dart';
+part of '../index.dart';
 
 extension NumberInt on int {
   String formatSize() {
@@ -30,11 +30,7 @@ extension NumberInt on int {
     return f.format(this);
   }
 
-  String simpleCurrency({
-    Locale? locale,
-    String? name,
-    int? decimalDigits,
-  }) {
+  String simpleCurrency({Locale? locale, String? name, int? decimalDigits}) {
     final f = NumberFormat.simpleCurrency(
       locale: (locale != null) ? locale.toString() : null,
       name: name,
@@ -43,11 +39,7 @@ extension NumberInt on int {
     return f.format(this);
   }
 
-  String currencySymbol({
-    Locale? locale,
-    String? name,
-    int? decimalDigits,
-  }) {
+  String currencySymbol({Locale? locale, String? name, int? decimalDigits}) {
     final f = NumberFormat.simpleCurrency(
       locale: (locale != null) ? locale.toString() : null,
       name: name,

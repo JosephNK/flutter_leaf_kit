@@ -1,4 +1,4 @@
-part of '../leaf_common.dart';
+part of '../index.dart';
 
 extension AssetImageHelper on AssetImage {
   Future<Map<String, dynamic>> getAsyncSize() async {
@@ -6,9 +6,11 @@ extension AssetImageHelper on AssetImage {
     Completer<ui.Image> completer = Completer<ui.Image>();
     image.image
         .resolve(const ImageConfiguration())
-        .addListener(ImageStreamListener((ImageInfo image, bool _) {
-      completer.complete(image.image);
-    }));
+        .addListener(
+          ImageStreamListener((ImageInfo image, bool _) {
+            completer.complete(image.image);
+          }),
+        );
     ui.Image info = await completer.future;
     double width = info.width.toDouble();
     double height = info.height.toDouble();
@@ -18,8 +20,10 @@ extension AssetImageHelper on AssetImage {
 
 extension ListAssetImageHelper on List<AssetImage> {
   Future<List<Map<String, dynamic>>> getAsyncSizes() async {
-    return await Future.wait(map((asset) async {
-      return asset.getAsyncSize();
-    }).toList());
+    return await Future.wait(
+      map((asset) async {
+        return asset.getAsyncSize();
+      }).toList(),
+    );
   }
 }

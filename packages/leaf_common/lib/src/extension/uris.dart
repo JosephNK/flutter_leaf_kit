@@ -1,4 +1,4 @@
-part of '../leaf_common.dart';
+part of '../index.dart';
 
 extension UriExt on Uri {
   Uri appendPath(String path) {

@@ -1,4 +1,4 @@
-part of '../leaf_common.dart';
+part of '../index.dart';
 
 class Logging {
   static void d(dynamic message) {
@@ -20,8 +20,9 @@ class Logging {
   static void printLong(dynamic message) {
     if (kDebugMode) {
       // https://nguyentk217.medium.com/print-large-strings-in-flutter-ffc63a14b92
-      final RegExp pattern =
-          RegExp('.{1,800}'); // 800 is the size of each chunk
+      final RegExp pattern = RegExp(
+        '.{1,800}',
+      ); // 800 is the size of each chunk
       pattern
           .allMatches(message)
           .forEach((RegExpMatch match) => debugPrint(match.group(0)));
@@ -50,9 +51,6 @@ class LoggingManager {
   Logger? logger;
 
   void setup(PrettyPrinter prettyPrinter) {
-    logger = Logger(
-      printer: prettyPrinter,
-      output: PlatformConsoleOutput(),
-    );
+    logger = Logger(printer: prettyPrinter, output: PlatformConsoleOutput());
   }
 }

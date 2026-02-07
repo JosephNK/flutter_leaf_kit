@@ -8,4 +8,4 @@ export 'package:quiver/iterables.dart';
 export 'package:quiver/strings.dart';
 export 'package:string_validator/string_validator.dart';
 
-export 'src/leaf_common.dart';
+export 'src/index.dart';

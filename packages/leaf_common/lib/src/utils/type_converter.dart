@@ -1,4 +1,4 @@
-part of '../leaf_common.dart';
+part of '../index.dart';
 
 class LeafTypeConverter {
   T? convertTo<T>(dynamic value) {
