@@ -1,4 +1,4 @@
-part of '../../leaf_store.dart';
+import 'package:equatable/equatable.dart';
 
 /// UIModelV1
 

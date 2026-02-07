@@ -16,8 +16,5 @@ part 'src/bloc/leaf_bloc_base_state.dart';
 part 'src/bloc/leaf_bloc_observer.dart';
 part 'src/bloc/leaf_bloc_screen_consumer.dart';
 part 'src/model/leaf_multipart_file.dart';
-part 'src/model/leaf_ui_model.dart';
 part 'src/preferences/leaf_preferences.dart';
 part 'src/transformer/leaf_transformer.dart';
-part 'src/value/leaf_error_value.dart';
-part 'src/value/leaf_result_value.dart';

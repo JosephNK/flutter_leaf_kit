@@ -1,4 +1,4 @@
-import '../leaf_date.dart';
+import 'leaf_date.dart';
 
 extension LeafDateDateTime on DateTime {
   bool isToday() {

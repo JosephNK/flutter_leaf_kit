@@ -9,8 +9,6 @@ workspace:
   - packages/leaf
   - packages/leaf_common
   - packages/leaf_component
-  - packages/leaf_datetime
-  - packages/leaf_manager
   - packages/leaf_navigation
   - packages/leaf_network
   - packages/leaf_platform

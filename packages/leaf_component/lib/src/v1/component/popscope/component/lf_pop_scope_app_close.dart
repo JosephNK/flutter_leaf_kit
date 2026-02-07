@@ -43,7 +43,8 @@ class _LFPopScopeToAppCloseState extends State<LFPopScopeToAppClose> {
           if (Platform.isAndroid) {
             // SystemChannels.platform.invokeMethod<void>('SystemNavigator.pop') wrong behavior in Android 12 when using FlutterFragmentActivity
             // https://github.com/flutter/flutter/issues/98133
-            final sdkInt = await LeafDeviceManager.shared.getAndroidSdkInt();
+            final sdkInt =
+                (await DeviceInfoPlugin().androidInfo).version.sdkInt;
             if (sdkInt >= 31) return;
           }
           // ignore: use_build_context_synchronously

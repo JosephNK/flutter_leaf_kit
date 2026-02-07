@@ -24,6 +24,11 @@ dependencies:
 
   path: ^1.9.1
 
+  # Datetime
+  jiffy: ^6.4.4
+  jiffy_klc: ^1.0.0
+  intl: ^0.20.2
+
 # package_info_plus (temporarily override for chewie)
 #dependency_overrides:
 #  wakelock:

@@ -22,11 +22,6 @@ dependencies:
       url: https://github.com/JosephNK/flutter_leaf_kit.git
       ref: "v4.0.2-dev"
       path: ./packages/leaf_component
-  flutter_leaf_datetime:
-    git:
-      url: https://github.com/JosephNK/flutter_leaf_kit.git
-      ref: "v4.0.2-dev"
-      path: ./packages/leaf_datetime
   flutter_leaf_platform:
     git:
       url: https://github.com/JosephNK/flutter_leaf_kit.git
@@ -37,11 +32,6 @@ dependencies:
       url: https://github.com/JosephNK/flutter_leaf_kit.git
       ref: "v4.0.2-dev"
       path: ./packages/leaf_navigation
-  flutter_leaf_manager:
-    git:
-      url: https://github.com/JosephNK/flutter_leaf_kit.git
-      ref: "v4.0.2-dev"
-      path: ./packages/leaf_manager
   flutter_leaf_network:
     git:
       url: https://github.com/JosephNK/flutter_leaf_kit.git

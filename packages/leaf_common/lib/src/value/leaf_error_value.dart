@@ -1,4 +1,6 @@
-part of '../../leaf_store.dart';
+import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
+import 'package:quiver/strings.dart';
 
 const kDefaultStatusCode = -9999;
 

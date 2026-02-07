@@ -29,22 +29,13 @@ dependencies:
   vector_graphics: ^1.1.19
   flutter_svg: ^2.2.3
   lucide_icons_flutter: ^3.1.9
+  device_info_plus: ^12.3.0
 
   flutter_leaf_common:
     git:
       url: https://github.com/JosephNK/flutter_leaf_kit.git
       ref: "v4.0.2-dev"
       path: ./packages/leaf_common
-  flutter_leaf_datetime:
-    git:
-      url: https://github.com/JosephNK/flutter_leaf_kit.git
-      ref: "v4.0.2-dev"
-      path: ./packages/leaf_datetime
-  flutter_leaf_manager:
-    git:
-      url: https://github.com/JosephNK/flutter_leaf_kit.git
-      ref: "v4.0.2-dev"
-      path: ./packages/leaf_manager
 
 dev_dependencies:
   flutter_test:

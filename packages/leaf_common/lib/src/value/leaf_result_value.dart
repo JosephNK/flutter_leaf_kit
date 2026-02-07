@@ -1,4 +1,7 @@
-part of '../../leaf_store.dart';
+import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
+
+import 'leaf_error_value.dart';
 
 typedef ResultValueOnError = Future<void> Function(
     BuildContext context, String? errorMessage, Object? exception);

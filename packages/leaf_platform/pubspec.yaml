@@ -25,6 +25,17 @@ dependencies:
   flutter_inappwebview: ^6.1.5
   pointer_interceptor: ^0.10.1+2
 
+  # Manager
+  permission_handler: ^12.0.1
+  path_provider: ^2.1.5
+  device_info_plus: ^12.3.0
+  package_info_plus: ^9.0.0
+  app_tracking_transparency: ^2.0.6+1
+  app_badge_plus: ^1.2.6
+  share_plus: ^12.0.1
+  url_launcher: ^6.3.2
+  android_id: ^0.5.1
+
   flutter_leaf_common:
     git:
       url: https://github.com/JosephNK/flutter_leaf_kit.git
