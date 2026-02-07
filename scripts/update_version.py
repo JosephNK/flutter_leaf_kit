@@ -77,6 +77,13 @@ def main():
 
     print("\n📝 Yaml files have been modified.")
 
+    # 현재 브랜치가 develop인지 확인
+    repo = Repo(project_root)
+    current_branch = repo.active_branch.name
+    if current_branch != "develop":
+        print(f"\n❌ Current branch is '{current_branch}'. This script must be run on the 'develop' branch.")
+        return
+
     # Git commit 여부 확인
     print()
     print("=" * 50)
@@ -95,8 +102,6 @@ def main():
         tag_name = f"v{update_version}"
 
         try:
-            repo = Repo(project_root)
-
             # Stage all changes
             repo.git.add("-A")
 
@@ -123,6 +128,20 @@ def main():
             print("\n" + "=" * 50)
             print("🎉 Version update completed!")
             print("=" * 50)
+
+            # develop -> main 머지 및 푸시
+            print("\n🔀 Merging develop into main...")
+            repo.git.checkout("main")
+            repo.git.merge("develop")
+            print("✅ Merge successful.")
+
+            print("\n📤 Pushing main to remote...")
+            origin.push()
+            print("✅ Main push successful.")
+
+            print("\n🔄 Switching back to develop branch...")
+            repo.git.checkout("develop")
+            print("✅ Back on develop branch.")
 
         except GitCommandError as e:
             print(f"\n❌ Git error: {e}")
