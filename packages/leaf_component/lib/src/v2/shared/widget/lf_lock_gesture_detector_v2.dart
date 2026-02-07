@@ -115,17 +115,16 @@ class _LFLockGestureDetectorV2State extends State<LFLockGestureDetectorV2> {
     final onTap = widget.onTap;
 
     final childWidget = Stack(
+      alignment: Alignment.center,
       clipBehavior: clipBehavior,
       children: [
-        Container(
-          padding: widget.padding,
-          child: child,
-        ),
+        Container(padding: widget.padding, child: child),
         Positioned.fill(
           child: Visibility(
             visible: _loading && widget.showLoading,
             child: Center(
-              child: loadingWidget ??
+              child:
+                  loadingWidget ??
                   const SizedBox(
                     width: 20,
                     height: 20,
@@ -147,8 +146,9 @@ class _LFLockGestureDetectorV2State extends State<LFLockGestureDetectorV2> {
     final connectOnTap = onTap != null ? onGestureTap : null;
 
     if (widget.enabledInkWell) {
-      final borderRadius =
-          (decBorderRadius is BorderRadius) ? decBorderRadius : null;
+      final borderRadius = (decBorderRadius is BorderRadius)
+          ? decBorderRadius
+          : null;
       return Container(
         margin: margin,
         child: LFInkWellV2(
