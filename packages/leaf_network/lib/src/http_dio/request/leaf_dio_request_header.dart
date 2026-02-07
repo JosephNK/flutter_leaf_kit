@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:flutter_leaf_common/leaf_common.dart';
-import 'package:flutter_leaf_manager/leaf_manager.dart';
 
 const Map<String, String> kContentTypeJsonHeader = {
   HttpHeaders.contentTypeHeader: 'application/json',
@@ -17,15 +16,15 @@ typedef LeafDioAuthorizationHeader = Map<String, String> Function(
     String authorization);
 
 class LeafDioRequestHeader {
-  static Future<Map<String, dynamic>> getHeaders({
+  static Map<String, dynamic> getHeaders({
+    required String appVersion,
     String? authorization,
     String? userAgent,
     LeafDioDeviceOSHeader? deviceOSHeader,
     LeafDioVersionHeader? versionHeader,
     LeafDioAuthorizationHeader? authorizationHeader,
-  }) async {
+  }) {
     final os = Platform.isIOS ? DeviceOS.ios : DeviceOS.android;
-    final appVersion = (await LeafAppInfo.fromInfo()).packageVersion;
 
     Map<String, String> headers = {
       'X-LF-DEVICE-OS': os.value,
@@ -36,7 +35,6 @@ class LeafDioRequestHeader {
         headers.remove(HttpHeaders.authorizationHeader);
         headers.addAll(authorizationHeader(authorization));
       } else {
-        // headers[HttpHeaders.authorizationHeader] = 'Bearer $accessToken';
         headers[HttpHeaders.authorizationHeader] = authorization;
       }
     }

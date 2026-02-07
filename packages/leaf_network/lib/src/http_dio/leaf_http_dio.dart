@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:built_value/serializer.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_leaf_common/leaf_common.dart';
-import 'package:flutter_leaf_manager/leaf_manager.dart';
 
 import 'converter/leaf_dio_built_value_converter.dart';
 import 'converter/leaf_dio_built_value_json_key.dart';
@@ -29,6 +28,7 @@ class LeafHttpDio {
   late LeafDioBuiltValueConverter converter;
   late LeafDioExceptionConverter errorConverter;
   final Map<Type, DioService> _services = {};
+  Future<String> Function()? _getTemporaryDirectoryPath;
 
   Map<Type, DioService> get services => _services;
 
@@ -42,7 +42,10 @@ class LeafHttpDio {
     Duration receiveTimeout = const Duration(seconds: 60),
     int printMaxLength = 2024,
     LeafHttpDioOnHeader? onHeader,
+    Future<String> Function()? getTemporaryDirectoryPath,
   }) {
+    _getTemporaryDirectoryPath = getTemporaryDirectoryPath;
+
     final options = BaseOptions(
       baseUrl: baseUrl.toString(),
       connectTimeout: connectTimeout,
@@ -96,6 +99,16 @@ class LeafHttpDio {
     return service as ServiceType;
   }
 
+  Future<String> getTemporarySavePath(String fileName) async {
+    assert(
+      _getTemporaryDirectoryPath != null,
+      'getTemporaryDirectoryPath callback is required for file operations.',
+    );
+    final savePath =
+        '${await _getTemporaryDirectoryPath!()}/$fileName';
+    return savePath;
+  }
+
   Future<File?> isExistFile({required String fileName}) async {
     final savePath = await getTemporarySavePath(fileName);
     if (File(savePath).existsSync()) {
@@ -147,14 +160,6 @@ class LeafHttpDio {
   }
 }
 
-extension LeafHttpDioHelper on LeafHttpDio {
-  Future<String> getTemporarySavePath(String fileName) async {
-    final savePath =
-        '${await LeafFileManager.getTemporaryDirectoryPath()}/$fileName';
-    return savePath;
-  }
-}
-
 /// Not Recommend
 
 class LeafHttpSharedDio {
@@ -176,6 +181,7 @@ class LeafHttpSharedDio {
     Duration receiveTimeout = const Duration(seconds: 60),
     int printMaxLength = 2024,
     LeafHttpDioOnHeader? onHeader,
+    Future<String> Function()? getTemporaryDirectoryPath,
   }) {
     lfHttpDio = LeafHttpDio().init(
       baseUrl: baseUrl,
@@ -187,6 +193,7 @@ class LeafHttpSharedDio {
       receiveTimeout: receiveTimeout,
       printMaxLength: printMaxLength,
       onHeader: onHeader,
+      getTemporaryDirectoryPath: getTemporaryDirectoryPath,
     );
   }
 
