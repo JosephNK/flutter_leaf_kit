@@ -1,0 +1,75 @@
+# Flutter Leaf Kit - LLM Documentation
+
+> A personal Flutter utility library
+
+Repository: https://github.com/JosephNK/flutter_leaf_kit
+
+## Packages
+
+Each package has its own LLM documentation index under `/llms/<package>/llms.txt`.
+
+### leaf_component — UI Component Library
+
+Themed UI components built on Atomic Design (atoms, molecules, organisms, templates) with a design-token-based theme system.
+
+- [Documentation Index](https://github.com/JosephNK/flutter_leaf_kit/blob/main/llms/leaf_component/llms.txt)
+
+### leaf_common — Common Utilities
+
+Shared utilities, extension functions, logging, and exception handling used across all packages.
+
+- Documentation: _coming soon_
+
+### leaf_datetime — Date & Time
+
+Date/time management and localization (Korean, English).
+
+- Documentation: _coming soon_
+
+### leaf_navigation — Page Navigation
+
+Page navigation helpers and modal presentation utilities.
+
+- Documentation: _coming soon_
+
+### leaf_network — HTTP Networking
+
+HTTP communication layer built on Dio with interceptors and response handling.
+
+- Documentation: _coming soon_
+
+### leaf_manager — App & Device Management
+
+App lifecycle, device info, file management, and permission handling.
+
+- Documentation: _coming soon_
+
+### leaf_store — State & Storage
+
+BLoC state management utilities and SharedPreferences helpers.
+
+- Documentation: _coming soon_
+
+### leaf_location — Location Services
+
+Location information management built on Geolocator.
+
+- Documentation: _coming soon_
+
+### leaf_map — Google Maps
+
+Google Maps integration for Flutter.
+
+- Documentation: _coming soon_
+
+### leaf_webview — WebView
+
+WebView integration with controller and callback typedefs.
+
+- Documentation: _coming soon_
+
+### leaf — Umbrella Package
+
+Re-exports all packages above for single-import convenience.
+
+- Documentation: _coming soon_
