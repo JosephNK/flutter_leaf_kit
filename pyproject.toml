@@ -16,6 +16,7 @@ gitpython = "^3.1.0"
 update-version = "scripts.update_version:main"
 update-deps = "scripts.update_dependencies:main"
 pub-outdated = "scripts.pub_outdated:main"
+merge-to-main = "scripts.merge_to_main:main"
 
 [build-system]
 requires = ["poetry-core"]

@@ -57,6 +57,10 @@ poetry run update-deps --include-major       # Include major updates
 poetry run pub-outdated                      # All packages
 poetry run pub-outdated --package leaf_common # Specific package
 
+# Merge develop → main and push
+poetry run merge-to-main             # Execute
+poetry run merge-to-main --dry-run   # Dry run (no push)
+
 # Run example app
 cd example && flutter run
 ```
