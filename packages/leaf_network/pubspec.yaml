@@ -19,6 +19,7 @@ dependencies:
 
   built_value: ^8.12.3
   built_collection: ^5.1.1
+  shared_preferences: ^2.5.4
 
   flutter_leaf_common:
     git:

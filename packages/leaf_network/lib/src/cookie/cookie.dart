@@ -1,5 +1,5 @@
-import 'package:flutter_leaf_store/leaf_store.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LeafCookieStoreManager {
   static final LeafCookieStoreManager _instance =
@@ -22,15 +22,18 @@ class LeafCookieStoreManager {
   }
 
   Future<void> setCookie(String cookie) async {
-    await LeafSharedPreferences.shared.setString('cookie', cookie);
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString('cookie', cookie);
   }
 
   Future<String?> getCookie() async {
-    return LeafSharedPreferences.shared.getString('cookie');
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getString('cookie');
   }
 
   Future<void> removeCookie() async {
-    await LeafSharedPreferences.shared.remove('cookie');
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.remove('cookie');
   }
 
   Future<Map<String, String>> getHeader(dynamic uri) async {

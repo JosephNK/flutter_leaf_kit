@@ -2,15 +2,6 @@
 
 A personal Flutter utility library package for common modules
 
-## Git 커밋 가이드
-
-커밋 시 `/commit` 스킬을 사용합니다.
-
-```bash
-/commit           # 변경사항 분석 후 자동 커밋 메시지 생성
-/commit 메시지    # 입력된 메시지를 subject로 사용
-```
-
 ## 패키지 구조
 
 `packages/` 폴더 아래 7개의 독립 패키지로 구성:
@@ -25,7 +16,7 @@ A personal Flutter utility library package for common modules
 | `leaf_store` | BLoC 상태 관리, SharedPreferences |
 | `leaf` | 모든 패키지 통합 export |
 
-## Python 가이드
+## Python 스크립트 가이드
 
 Python 스크립트는 Poetry로 관리하며, `scripts/` 폴더에 위치합니다.
 
