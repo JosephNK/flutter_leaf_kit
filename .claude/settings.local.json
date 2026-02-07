@@ -9,7 +9,8 @@
       "Skill(update-version)",
       "Skill(update-version:*)",
       "WebFetch(domain:pub.dev)",
-      "WebFetch(domain:github.com)"
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:mantine.dev)"
     ]
   },
   "teammateMode": "tmux"
