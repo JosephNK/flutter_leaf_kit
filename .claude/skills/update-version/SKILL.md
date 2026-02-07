@@ -1,7 +1,6 @@
 ---
 name: update-version
-description: 모든 패키지의 pubspec.yaml 버전을 일괄 업데이트합니다. 새 버전을 릴리스하거나 개발 버전을 올릴 때 사용하세요.
-argument-hint: [버전] (예: 2.5.0-dev)
+description: 모든 패키지의 pubspec.yaml 버전을 일괄 업데이트합니다. 사용법: /update-version [버전] (예: 2.5.0-dev)
 user-invocable: true
 allowed-tools: Bash
 ---
