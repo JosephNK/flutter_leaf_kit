@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../common/theme/theme.dart';
 import '../types/leaf_text_size.dart';
+import 'leaf_underline_spans.dart';
 
 /// A themed text widget that resolves styles from the LF design token system.
 ///
@@ -41,17 +42,36 @@ class LeafText extends StatelessWidget {
     final theme = LeafTheme.of(context);
     final resolvedStyle = _resolveStyle(theme);
     final resolvedScaleFactor = _resolveScaleFactor();
+    final textScaler = TextScaler.linear(resolvedScaleFactor);
+
+    final isUnderline =
+        resolvedStyle.decoration == TextDecoration.underline;
 
     return Semantics(
       label: semanticsLabel ?? text,
-      child: Text(
-        text,
-        style: resolvedStyle,
-        textAlign: textAlign,
-        maxLines: maxLines,
-        overflow: (maxLines != null) ? overflow : null,
-        textScaler: TextScaler.linear(resolvedScaleFactor),
-      ),
+      child: isUnderline
+          ? RichText(
+              text: TextSpan(
+                children: buildUnderlineSpans(
+                  text: text,
+                  style: resolvedStyle,
+                ),
+              ),
+              textAlign: textAlign ?? TextAlign.left,
+              maxLines: maxLines,
+              overflow: (maxLines != null)
+                  ? (overflow ?? TextOverflow.ellipsis)
+                  : TextOverflow.clip,
+              textScaler: textScaler,
+            )
+          : Text(
+              text,
+              style: resolvedStyle,
+              textAlign: textAlign,
+              maxLines: maxLines,
+              overflow: (maxLines != null) ? overflow : null,
+              textScaler: textScaler,
+            ),
     );
   }
 

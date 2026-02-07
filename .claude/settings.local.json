@@ -1,15 +1,16 @@
 {
+  "env": {
+    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1"
+  },
   "permissions": {
     "allow": [
       "Skill(commit)",
       "Skill(commit:*)",
       "Skill(update-version)",
       "Skill(update-version:*)",
-      "WebFetch(domain:pub.dev)"
+      "WebFetch(domain:pub.dev)",
+      "WebFetch(domain:github.com)"
     ]
-  },
-  "env": {
-    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1"
   },
   "teammateMode": "tmux"
 }
