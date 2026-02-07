@@ -1,8 +1,8 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:flutter_leaf_component/src/v2/organisms/calendar/date/extension_calendar_v2.dart';
+import 'package:flutter_leaf_component/src/v2/organisms/calendar/date/extension_calendar.dart';
 
 void main() {
-  group('DateCalendarV2', () {
+  group('DateCalendar', () {
     test('daysInMonthGrid returns 42 elements', () {
       final date = DateTime(2024, 3, 15);
       final grid = date.daysInMonthGrid();

@@ -4,12 +4,12 @@ part of '../dialog.dart';
 /// https://medium.com/@excogitatr/custom-dialog-in-flutter-d00e0441f1d5
 ///
 
-@Deprecated('Use LFAlertDialogV2 instead')
+@Deprecated('Use LeafAlertDialog instead')
 class LFCheckboxPickerDialog {
   static Future show(
     BuildContext context, {
-    required List<LFDataItem> items,
-    List<LFDataItem>? values,
+    required List<LeafDataItem> items,
+    List<LeafDataItem>? values,
     String? title,
     TextStyle? titleStyle,
     TextStyle? messageStyle,
@@ -23,7 +23,7 @@ class LFCheckboxPickerDialog {
     Color? cancelTextBackgroundColor,
     Color? cancelTextBorderColor,
     EdgeInsets? cancelTextPadding,
-    ValueChanged<List<LFDataItem>>? onOK,
+    ValueChanged<List<LeafDataItem>>? onOK,
   }) async {
     return await showDialog(
       context: context,
@@ -52,8 +52,8 @@ class LFCheckboxPickerDialog {
 }
 
 class _CheckBoxPickerContent extends StatefulWidget {
-  final List<LFDataItem> items;
-  final List<LFDataItem>? values;
+  final List<LeafDataItem> items;
+  final List<LeafDataItem>? values;
   final String? title;
   final TextStyle? titleStyle;
   final TextStyle? messageStyle;
@@ -67,7 +67,7 @@ class _CheckBoxPickerContent extends StatefulWidget {
   final Color? cancelTextBackgroundColor;
   final Color? cancelTextBorderColor;
   final EdgeInsets? cancelTextPadding;
-  final ValueChanged<List<LFDataItem>>? onOK;
+  final ValueChanged<List<LeafDataItem>>? onOK;
 
   const _CheckBoxPickerContent({
     required this.items,
@@ -93,13 +93,13 @@ class _CheckBoxPickerContent extends StatefulWidget {
 }
 
 class _CheckBoxPickerContentState extends State<_CheckBoxPickerContent> {
-  List<LFDataItem>? _values;
+  List<LeafDataItem>? _values;
 
   @override
   void initState() {
     super.initState();
 
-    _values = List<LFDataItem>.from(widget.values ?? []);
+    _values = List<LeafDataItem>.from(widget.values ?? []);
   }
 
   @override
@@ -112,7 +112,7 @@ class _CheckBoxPickerContentState extends State<_CheckBoxPickerContent> {
   @override
   void didUpdateWidget(covariant _CheckBoxPickerContent oldWidget) {
     if (oldWidget.values != widget.values) {
-      final values = List<LFDataItem>.from(widget.values ?? []);
+      final values = List<LeafDataItem>.from(widget.values ?? []);
       setState(() {
         _values = values;
       });

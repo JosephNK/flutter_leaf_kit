@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../text/text.dart';
 
-@Deprecated('Use LFDatePickerV2 instead')
+@Deprecated('Use LeafDatePicker instead')
 class DateCalendarCell extends StatelessWidget {
   final DateTime dateTime;
   final DateTime selectedDateTime;

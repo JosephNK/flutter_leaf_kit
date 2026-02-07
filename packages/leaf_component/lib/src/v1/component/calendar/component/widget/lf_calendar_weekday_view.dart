@@ -1,6 +1,6 @@
 part of '../lf_calendar_view.dart';
 
-@Deprecated('Use LFCalendarViewV2 instead')
+@Deprecated('Use LeafCalendarView instead')
 class LFCalendarWeekDayView extends StatelessWidget {
   final Color holidayColor;
 

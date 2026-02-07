@@ -1,12 +1,12 @@
 part of '../radio.dart';
 
-@Deprecated('Use LFRadioAlignV2 instead')
+@Deprecated('Use LeafRadioAlign instead')
 enum LFRadioAlign {
   left,
   right,
 }
 
-@Deprecated('Use LFRadioV2 instead')
+@Deprecated('Use LeafRadio instead')
 class LFRadio extends StatelessWidget {
   final Widget? leading;
   final Widget? activeIcon;

@@ -1,6 +1,6 @@
 part of '../picker.dart';
 
-@Deprecated('Use LFDatePickerV2 instead')
+@Deprecated('Use LeafDatePicker instead')
 class LFDatePicker extends StatefulWidget {
   final Widget? label;
   final Widget? icon;

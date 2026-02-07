@@ -1,15 +1,15 @@
 part of '../chip.dart';
 
-@Deprecated('Use LFChipsV2 instead')
+@Deprecated('Use LeafChips instead')
 typedef LFChipsOnChanged = Function(
-  List<LFDataItem> items,
-  LFDataItem changeItem,
+  List<LeafDataItem> items,
+  LeafDataItem changeItem,
 );
 
-@Deprecated('Use LFChipsV2 instead')
+@Deprecated('Use LeafChips instead')
 class LFChips extends StatefulWidget {
-  final List<LFDataItem> items;
-  final List<LFDataItem>? values;
+  final List<LeafDataItem> items;
+  final List<LeafDataItem>? values;
   final Axis direction;
   final bool multiple;
   final LFChipsOnChanged? onChanged;
@@ -28,7 +28,7 @@ class LFChips extends StatefulWidget {
 }
 
 class _LFChipsState extends State<LFChips> {
-  List<LFDataItem> _values = [];
+  List<LeafDataItem> _values = [];
 
   @override
   void initState() {

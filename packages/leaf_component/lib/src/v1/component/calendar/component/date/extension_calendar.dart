@@ -15,7 +15,7 @@ extension on DateTime {
 
 /// Public Extension
 
-@Deprecated('Use LFCalendarViewV2 instead')
+@Deprecated('Use LeafCalendarView instead')
 extension DateCalendar on DateTime {
   List<DateTime> daysInMonth() {
     final date = this;
@@ -60,7 +60,7 @@ extension DateCalendar on DateTime {
 // }
 }
 
-@Deprecated('Use LFCalendarViewV2 instead')
+@Deprecated('Use LeafCalendarView instead')
 extension DateCalendar1 on DateTime {
   DateTime toCalDayStartDateTime() {
     final dateString = toCalYearMonthDayString();

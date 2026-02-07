@@ -1,6 +1,6 @@
 part of '../tabs.dart';
 
-@Deprecated('Use LFTabViewV2 instead')
+@Deprecated('Use LeafTabView instead')
 class LFTabView extends StatelessWidget {
   final TabController? controller;
   final List<Widget> children;

@@ -7,7 +7,7 @@ import 'dart:typed_data';
 
 import 'package:photo_manager/photo_manager.dart';
 
-@Deprecated('Use LFImageLruCacheV2 instead')
+@Deprecated('Use LeafImageLruCache instead')
 class ImageLruCache {
   static final LRUMap<_ImageCacheEntity, Uint8List> _map = LRUMap(500);
 

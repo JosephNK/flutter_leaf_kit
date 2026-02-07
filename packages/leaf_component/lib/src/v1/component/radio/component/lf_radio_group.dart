@@ -1,15 +1,15 @@
 part of '../radio.dart';
 
-@Deprecated('Use LFRadioGroupV2 instead')
+@Deprecated('Use LeafRadioGroup instead')
 typedef LFRadioGroupsOnChanged = Function(
-  LFDataItem item,
+  LeafDataItem item,
   bool checked,
 );
 
-@Deprecated('Use LFRadioGroupV2 instead')
+@Deprecated('Use LeafRadioGroup instead')
 class LFRadioGroups extends StatefulWidget {
-  final List<LFDataItem> items;
-  final LFDataItem? value;
+  final List<LeafDataItem> items;
+  final LeafDataItem? value;
   final Axis direction;
   final LFRadioAlign align;
   final MainAxisAlignment mainAxisAlignment;
@@ -32,7 +32,7 @@ class LFRadioGroups extends StatefulWidget {
 }
 
 class _LFRadioGroupsState extends State<LFRadioGroups> {
-  LFDataItem? _value;
+  LeafDataItem? _value;
 
   @override
   void initState() {

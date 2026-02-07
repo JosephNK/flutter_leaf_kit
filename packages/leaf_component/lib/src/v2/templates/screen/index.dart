@@ -1,3 +1,4 @@
-export 'model/safe_area_insets_v2.dart';
-export 'widget/lf_screen_stateful_widget_v2.dart';
-export 'widget/lf_screen_stateless_widget_v2.dart';
+// safe_area_insets.dart is NOT exported here to avoid ambiguous_export
+// with V1's SafeAreaInsets. V2 widgets import it directly.
+export 'widget/leaf_screen_stateful_widget.dart';
+export 'widget/leaf_screen_stateless_widget.dart';

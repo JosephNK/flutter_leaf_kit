@@ -1,15 +1,15 @@
 part of '../checkbox.dart';
 
-@Deprecated('Use LFCheckBoxGroupV2 instead')
+@Deprecated('Use LeafCheckBoxGroup instead')
 typedef LFCheckboxGroupsOnChanged = Function(
-  List<LFDataItem> items,
-  LFDataItem changeItem,
+  List<LeafDataItem> items,
+  LeafDataItem changeItem,
 );
 
-@Deprecated('Use LFCheckBoxGroupV2 instead')
+@Deprecated('Use LeafCheckBoxGroup instead')
 class LFCheckboxGroups extends StatefulWidget {
-  final List<LFDataItem> items;
-  final List<LFDataItem>? values;
+  final List<LeafDataItem> items;
+  final List<LeafDataItem>? values;
   final Axis direction;
   final LFCheckBoxAlign align;
   final MainAxisAlignment mainAxisAlignment;
@@ -32,7 +32,7 @@ class LFCheckboxGroups extends StatefulWidget {
 }
 
 class _LFCheckboxGroupsState extends State<LFCheckboxGroups> {
-  List<LFDataItem> _values = [];
+  List<LeafDataItem> _values = [];
 
   @override
   void initState() {

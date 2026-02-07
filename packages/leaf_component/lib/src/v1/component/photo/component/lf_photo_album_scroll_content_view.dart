@@ -3,7 +3,7 @@ part of '../photo.dart';
 ///
 /// LFPhotoAlbumScrollContentView
 ///
-@Deprecated('Use LFPhotoAlbumV2 instead')
+@Deprecated('Use LeafPhotoAlbum instead')
 class LFPhotoAlbumScrollContentView extends StatefulWidget {
   final RequestType type;
   final AssetPathEntity? selectedAssetPath;
@@ -134,7 +134,7 @@ class _LFPhotoAlbumScrollContentViewState
 ///
 /// LFPhotoAlbumScrollContentTile
 ///
-@Deprecated('Use LFPhotoAlbumV2 instead')
+@Deprecated('Use LeafPhotoAlbum instead')
 class LFPhotoAlbumScrollContentTile extends StatefulWidget {
   final AssetPathEntity assetPathEntity;
   final AssetPathEntity? selectedAssetPathEntity;
@@ -244,7 +244,7 @@ class _LFPhotoAlbumScrollContentTileState
 ///
 /// LFPhotoAlbumEntityTile
 ///
-@Deprecated('Use LFPhotoAlbumV2 instead')
+@Deprecated('Use LeafPhotoAlbum instead')
 class LFPhotoAlbumEntityTile extends StatefulWidget {
   final AssetPathEntity assetPathEntity;
   final AssetPathEntity? selectedAssetPathEntity;

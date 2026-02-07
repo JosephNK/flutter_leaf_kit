@@ -1,12 +1,12 @@
 part of '../checkbox.dart';
 
-@Deprecated('Use LFCheckBoxAlignV2 instead')
+@Deprecated('Use LeafCheckBoxAlign instead')
 enum LFCheckBoxAlign {
   left,
   right,
 }
 
-@Deprecated('Use LFCheckBoxV2 instead')
+@Deprecated('Use LeafCheckBox instead')
 class LFCheckBox extends StatelessWidget {
   final Widget? leading;
   final Widget? activeIcon;

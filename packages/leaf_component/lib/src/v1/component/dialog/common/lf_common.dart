@@ -1,4 +1,4 @@
 part of '../dialog.dart';
 
-@Deprecated('Use LFAlertDialogV2 instead')
+@Deprecated('Use LeafAlertDialog instead')
 enum LFCalendarBetweenPickerSelect { none, start, end }

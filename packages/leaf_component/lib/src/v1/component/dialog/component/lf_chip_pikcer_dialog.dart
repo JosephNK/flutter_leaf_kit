@@ -4,12 +4,12 @@ part of '../dialog.dart';
 /// https://medium.com/@excogitatr/custom-dialog-in-flutter-d00e0441f1d5
 ///
 
-@Deprecated('Use LFAlertDialogV2 instead')
+@Deprecated('Use LeafAlertDialog instead')
 class LFChipPickerDialog {
   static Future show(
     BuildContext context, {
-    required List<LFDataItem> items,
-    List<LFDataItem>? values,
+    required List<LeafDataItem> items,
+    List<LeafDataItem>? values,
     bool multiple = true,
     String? title,
     TextStyle? titleStyle,
@@ -24,7 +24,7 @@ class LFChipPickerDialog {
     Color? cancelTextBackgroundColor,
     Color? cancelTextBorderColor,
     EdgeInsets? cancelTextPadding,
-    ValueChanged<List<LFDataItem>>? onOK,
+    ValueChanged<List<LeafDataItem>>? onOK,
   }) async {
     return await showDialog(
       context: context,
@@ -54,8 +54,8 @@ class LFChipPickerDialog {
 }
 
 class _ChipPickerContent extends StatefulWidget {
-  final List<LFDataItem> items;
-  final List<LFDataItem>? values;
+  final List<LeafDataItem> items;
+  final List<LeafDataItem>? values;
   final bool multiple;
   final String? title;
   final TextStyle? titleStyle;
@@ -70,7 +70,7 @@ class _ChipPickerContent extends StatefulWidget {
   final Color? cancelTextBackgroundColor;
   final Color? cancelTextBorderColor;
   final EdgeInsets? cancelTextPadding;
-  final ValueChanged<List<LFDataItem>>? onOK;
+  final ValueChanged<List<LeafDataItem>>? onOK;
 
   const _ChipPickerContent({
     required this.items,
@@ -97,13 +97,13 @@ class _ChipPickerContent extends StatefulWidget {
 }
 
 class _ChipPickerContentState extends State<_ChipPickerContent> {
-  List<LFDataItem>? _values;
+  List<LeafDataItem>? _values;
 
   @override
   void initState() {
     super.initState();
 
-    _values = List<LFDataItem>.from(widget.values ?? []);
+    _values = List<LeafDataItem>.from(widget.values ?? []);
   }
 
   @override
@@ -116,7 +116,7 @@ class _ChipPickerContentState extends State<_ChipPickerContent> {
   @override
   void didUpdateWidget(covariant _ChipPickerContent oldWidget) {
     if (oldWidget.values != widget.values) {
-      final values = List<LFDataItem>.from(widget.values ?? []);
+      final values = List<LeafDataItem>.from(widget.values ?? []);
       setState(() {
         _values = values;
       });

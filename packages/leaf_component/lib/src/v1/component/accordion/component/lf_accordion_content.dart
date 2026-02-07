@@ -1,6 +1,6 @@
 part of '../accordion.dart';
 
-@Deprecated('Use LFAccordionV2 instead')
+@Deprecated('Use LeafAccordion instead')
 class LFAccordionContent extends StatefulWidget {
   final Widget child;
   final bool expand;

@@ -1,10 +1,10 @@
 part of '../photo.dart';
 
-@Deprecated('Use LFPhotoListViewV2 instead')
+@Deprecated('Use LeafPhotoListView instead')
 typedef LFPhotosOnSelected = void Function(
   List<AssetEntity> selectedEntities,
 );
-@Deprecated('Use LFPhotoListViewV2 instead')
+@Deprecated('Use LeafPhotoListView instead')
 typedef LFPhotosOnLimitError = void Function(
   Exception error,
   int limit,
@@ -13,7 +13,7 @@ typedef LFPhotosOnLimitError = void Function(
 ///
 /// LFPhotoListView
 ///
-@Deprecated('Use LFPhotoListViewV2 instead')
+@Deprecated('Use LeafPhotoListView instead')
 class LFPhotoListView extends StatefulWidget {
   final AssetPathEntity? selectedAssetPath;
   final int selectedLimit;

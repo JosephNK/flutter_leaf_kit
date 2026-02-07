@@ -1,6 +1,6 @@
-export 'controller/lf_bottom_tab_bar_controller_v2.dart';
-export 'model/lf_bottom_tab_index_v2.dart';
-export 'model/lf_bottom_tab_item_v2.dart';
-export 'widget/lf_bottom_tab_bar_scaffold_v2.dart';
-export 'widget/lf_bottom_tab_bar_v2.dart';
-export 'widget/lf_bottom_tab_views_v2.dart';
+export 'controller/leaf_bottom_tab_bar_controller.dart';
+export 'model/leaf_bottom_tab_index.dart';
+export 'model/leaf_bottom_tab_item.dart';
+export 'widget/leaf_bottom_tab_bar_scaffold.dart';
+export 'widget/leaf_bottom_tab_bar.dart';
+export 'widget/leaf_bottom_tab_views.dart';

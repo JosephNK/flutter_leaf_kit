@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:vector_graphics/vector_graphics.dart';
 
-@Deprecated('Use LFIconsV2 instead')
+@Deprecated('Use LeafIcons instead')
 class LFIcons extends StatelessWidget {
   final Object asset;
   final Color? color;

@@ -1,6 +1,6 @@
 part of '../animated.dart';
 
-@Deprecated('Use LFFadeAnimatedV2 instead')
+@Deprecated('Use LeafFadeAnimated instead')
 class LFFadeAnimated extends StatefulWidget {
   final Widget child;
   final LFFadeAnimationController? controller;

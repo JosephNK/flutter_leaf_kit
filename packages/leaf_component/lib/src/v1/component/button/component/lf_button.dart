@@ -1,6 +1,6 @@
 part of '../button.dart';
 
-@Deprecated('Use LFButtonV2 instead')
+@Deprecated('Use LeafButton instead')
 class LFButton extends StatelessWidget {
   final String text;
   final TextStyle? textStyle;

@@ -1,6 +1,6 @@
 part of '../appbar.dart';
 
-@Deprecated('Use LFAppBarV2 instead')
+@Deprecated('Use LeafAppBar instead')
 class LFAppBarTitle extends StatelessWidget {
   final String? text;
   final Widget? leading;

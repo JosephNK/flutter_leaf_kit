@@ -4,12 +4,12 @@ part of '../dialog.dart';
 /// https://medium.com/@excogitatr/custom-dialog-in-flutter-d00e0441f1d5
 ///
 
-@Deprecated('Use LFAlertDialogV2 instead')
+@Deprecated('Use LeafAlertDialog instead')
 class LFRadioPickerDialog {
   static Future confirm(
     BuildContext context, {
-    required List<LFDataItem> items,
-    required LFDataItem value,
+    required List<LeafDataItem> items,
+    required LeafDataItem value,
     String? title,
     String? message,
     TextStyle? titleStyle,
@@ -25,7 +25,7 @@ class LFRadioPickerDialog {
     Color? cancelTextBorderColor,
     EdgeInsets? cancelTextPadding,
     VoidCallback? onCancel,
-    ValueChanged<LFDataItem>? onOK,
+    ValueChanged<LeafDataItem>? onOK,
   }) async {
     return await showDialog(
       context: context,
@@ -56,8 +56,8 @@ class LFRadioPickerDialog {
 }
 
 class _RadioPickerContent extends StatefulWidget {
-  final List<LFDataItem> items;
-  final LFDataItem value;
+  final List<LeafDataItem> items;
+  final LeafDataItem value;
   final String? title;
   final String? message;
   final TextStyle? titleStyle;
@@ -73,7 +73,7 @@ class _RadioPickerContent extends StatefulWidget {
   final Color? cancelTextBorderColor;
   final EdgeInsets? cancelTextPadding;
   final VoidCallback? onCancel;
-  final ValueChanged<LFDataItem>? onOK;
+  final ValueChanged<LeafDataItem>? onOK;
 
   const _RadioPickerContent({
     required this.items,
@@ -101,7 +101,7 @@ class _RadioPickerContent extends StatefulWidget {
 }
 
 class _RadioPickerContentState extends State<_RadioPickerContent> {
-  late LFDataItem _value;
+  late LeafDataItem _value;
 
   @override
   void initState() {

@@ -1,6 +1,6 @@
 part of '../scroll.dart';
 
-@Deprecated('Use LFScrollControllerV2 instead.')
+@Deprecated('Use LeafScrollController instead.')
 class LFGridViewController with LFScrollControllerMixin {
   LFGridViewController() {
     init();

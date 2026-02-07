@@ -1,9 +1,9 @@
 part of '../appbar.dart';
 
-@Deprecated('Use LFAppBarV2 instead')
+@Deprecated('Use LeafAppBar instead')
 const double kLFToolbarHeight = 52.0;
 
-@Deprecated('Use LFAppBarV2 instead')
+@Deprecated('Use LeafAppBar instead')
 class LFAppBar extends StatelessWidget implements PreferredSizeWidget {
   final Widget? title;
   final double? titleSpacing;

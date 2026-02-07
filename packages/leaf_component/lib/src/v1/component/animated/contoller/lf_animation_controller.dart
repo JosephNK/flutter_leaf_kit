@@ -1,9 +1,9 @@
 part of '../animated.dart';
 
-@Deprecated('Use LFAnimationControllerV2 instead')
+@Deprecated('Use LeafAnimationController instead')
 enum LFAnimationStatus { forward, stop, reverse, repeat }
 
-@Deprecated('Use LFAnimationControllerV2 instead')
+@Deprecated('Use LeafAnimationController instead')
 class LFAnimationController extends ChangeNotifier {
   // Note: dispose at the place of use
   AnimationController? animationController;
@@ -82,7 +82,7 @@ class LFAnimationController extends ChangeNotifier {
   }
 }
 
-@Deprecated('Use LFRotateAnimationControllerV2 instead')
+@Deprecated('Use LeafRotateAnimationController instead')
 class LFRotateAnimationController extends LFAnimationController {
   final double degree;
 
@@ -94,7 +94,7 @@ class LFRotateAnimationController extends LFAnimationController {
   });
 }
 
-@Deprecated('Use LFFadeAnimationControllerV2 instead')
+@Deprecated('Use LeafFadeAnimationController instead')
 class LFFadeAnimationController extends LFAnimationController {
   final bool isDisappear;
 
@@ -106,7 +106,7 @@ class LFFadeAnimationController extends LFAnimationController {
   });
 }
 
-@Deprecated('Use LFExpandAnimationControllerV2 instead')
+@Deprecated('Use LeafExpandAnimationController instead')
 class LFExpandAnimationController extends LFAnimationController {
   LFExpandAnimationController({
     super.autoAnimation,
@@ -115,7 +115,7 @@ class LFExpandAnimationController extends LFAnimationController {
   });
 }
 
-@Deprecated('Use LFBouncingAnimationControllerV2 instead')
+@Deprecated('Use LeafBouncingAnimationController instead')
 class LFBouncingAnimationController extends LFAnimationController {
   LFBouncingAnimationController({
     super.autoAnimation,
@@ -124,7 +124,7 @@ class LFBouncingAnimationController extends LFAnimationController {
   });
 }
 
-@Deprecated('Use LFScaleAnimationControllerV2 instead')
+@Deprecated('Use LeafScaleAnimationController instead')
 class LFScaleAnimationController extends LFAnimationController {
   LFScaleAnimationController({
     super.autoAnimation,

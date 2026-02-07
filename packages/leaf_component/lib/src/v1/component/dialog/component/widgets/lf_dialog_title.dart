@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../../configure/configure.dart';
 import '../../../text/text.dart';
 
-@Deprecated('Use LFAlertDialogV2 instead')
+@Deprecated('Use LeafAlertDialog instead')
 class LFDialogTitle extends StatelessWidget {
   final String? text;
   final TextStyle? textStyle;

@@ -1,6 +1,6 @@
 part of '../chip.dart';
 
-@Deprecated('Use LFChipV2 instead')
+@Deprecated('Use LeafChip instead')
 class LFChip extends StatefulWidget {
   final String text;
   final bool selected;

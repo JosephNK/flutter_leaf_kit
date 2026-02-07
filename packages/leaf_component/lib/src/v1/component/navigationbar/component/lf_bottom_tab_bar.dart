@@ -1,19 +1,19 @@
 part of '../navigationbar.dart';
 
-@Deprecated('Use LFBottomTabBarV2 instead')
+@Deprecated('Use LeafBottomTabBar instead')
 typedef LFBottomTabBarOnPressed = void Function(
   int selectedIndex,
   bool isActive,
 );
 
-@Deprecated('Use LFBottomTabBarV2 instead')
+@Deprecated('Use LeafBottomTabBar instead')
 typedef LFBottomTabBarOnSelected = Future<bool> Function(
   int selectedIndex,
   int? previousIndex,
   bool isActive,
 );
 
-@Deprecated('Use LFBottomTabBarV2 instead')
+@Deprecated('Use LeafBottomTabBar instead')
 class LFBottomTabBar extends StatefulWidget {
   final LFBottomTabBarScaffoldController scaffoldController;
   final LFBottomTabBarController controller;

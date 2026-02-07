@@ -1,6 +1,6 @@
 part of '../ratingbar.dart';
 
-@Deprecated('Use LFRatingBarV2 instead')
+@Deprecated('Use LeafRatingBar instead')
 class LFRatingBar extends StatelessWidget {
   final int itemCount;
   final RatingWidget? ratingWidget;

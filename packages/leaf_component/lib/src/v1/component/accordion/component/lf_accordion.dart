@@ -1,13 +1,13 @@
 part of '../accordion.dart';
 
-@Deprecated('Use LFAccordionV2 instead')
+@Deprecated('Use LeafAccordion instead')
 typedef LFAccordionItemBuilder<T> = Widget Function(
   BuildContext context,
   int index,
   T item,
 );
 
-@Deprecated('Use LFAccordionV2 instead')
+@Deprecated('Use LeafAccordion instead')
 class LFAccordion<T> extends StatelessWidget {
   final List<LFAccordionItem<T>> items;
   final LFAccordionItemBuilder<T> itemBuilder;

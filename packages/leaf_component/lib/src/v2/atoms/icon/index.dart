@@ -1,1 +1,1 @@
-export 'widget/lf_icons_v2.dart';
+export 'widget/leaf_icons.dart';

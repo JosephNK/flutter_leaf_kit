@@ -1,9 +1,9 @@
 part of '../../button.dart';
 
-@Deprecated('Use LFLockGestureDetectorV2 instead')
+@Deprecated('Use LeafLockGestureDetector instead')
 typedef LFLockGestureDetectorOnLoaderBuilder = Widget Function();
 
-@Deprecated('Use LFLockGestureDetectorV2 instead')
+@Deprecated('Use LeafLockGestureDetector instead')
 class LFLockGestureDetector extends StatefulWidget {
   final Widget child;
   final Duration duration;

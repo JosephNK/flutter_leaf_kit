@@ -3,7 +3,7 @@ part of '../photo.dart';
 ///
 /// LFPhotoAlbumSheetTitleView
 ///
-@Deprecated('Use LFPhotoAlbumV2 instead')
+@Deprecated('Use LeafPhotoAlbum instead')
 class LFPhotoAlbumSheetTitleView extends StatefulWidget {
   final RequestType type;
   final AssetPathEntity? selectedAssetPath;

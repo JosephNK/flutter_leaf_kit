@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_leaf_component/leaf_component.dart';
 
-/// Wraps a widget with [MaterialApp] and [LFTheme] for testing.
+/// Wraps a widget with [MaterialApp] and [LeafTheme] for testing.
 ///
-/// Optionally accepts a custom [LFThemeData]. Defaults to [LFThemeData.light()].
-Widget wrapWithTheme(Widget child, {LFThemeData? theme}) {
+/// Optionally accepts a custom [LeafThemeData]. Defaults to [LeafThemeData.light()].
+Widget wrapWithTheme(Widget child, {LeafThemeData? theme}) {
   return MaterialApp(
-    home: LFTheme(
-      data: theme ?? LFThemeData.light(),
+    home: LeafTheme(
+      data: theme ?? LeafThemeData.light(),
       child: Scaffold(body: child),
     ),
   );

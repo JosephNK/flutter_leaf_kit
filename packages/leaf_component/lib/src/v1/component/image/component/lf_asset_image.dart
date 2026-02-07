@@ -1,6 +1,6 @@
 part of '../image.dart';
 
-@Deprecated('Use LFAssetImageV2 instead')
+@Deprecated('Use LeafAssetImage instead')
 class LFAssetFileImage extends StatelessWidget {
   final Uri? uri;
   final double? width;

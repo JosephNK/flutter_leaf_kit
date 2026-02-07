@@ -1,6 +1,6 @@
 part of '../navigationbar.dart';
 
-@Deprecated('Use LFBottomTabBarScaffoldV2 instead')
+@Deprecated('Use LeafBottomTabBarScaffold instead')
 class LFBottomTabBarScaffold extends StatefulWidget {
   final LFBottomTabBarScaffoldController scaffoldController;
   final List<LFBottomTabItem> tabItems;

@@ -1,6 +1,6 @@
 part of '../switch.dart';
 
-@Deprecated('Use LFSwitchV2 instead')
+@Deprecated('Use LeafSwitch instead')
 class LFSwitch extends StatelessWidget {
   final bool value;
   final Color? activeTrackColor;

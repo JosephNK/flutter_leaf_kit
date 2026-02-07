@@ -1,6 +1,6 @@
 part of '../indicator.dart';
 
-@Deprecated('Use LFPageRectIndicatorV2 instead')
+@Deprecated('Use LeafPageRectIndicator instead')
 class LFPageRectIndicator extends StatelessWidget {
   final int total;
   final double current;
@@ -47,7 +47,7 @@ class LFPageRectIndicator extends StatelessWidget {
   }
 }
 
-@Deprecated('Use LFPageRectIndicatorV2 instead')
+@Deprecated('Use LeafPageRectIndicator instead')
 class LFPageDot extends StatelessWidget {
   final bool active;
   final Color? activeColor;

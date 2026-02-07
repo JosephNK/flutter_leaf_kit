@@ -1,6 +1,6 @@
 part of '../appbar.dart';
 
-@Deprecated('Use LFAppBarV2 instead')
+@Deprecated('Use LeafAppBar instead')
 class LFAppBarBack extends StatelessWidget {
   final IconData? icon;
   final Color? color;

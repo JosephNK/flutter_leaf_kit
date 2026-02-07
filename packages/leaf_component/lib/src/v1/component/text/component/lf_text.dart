@@ -1,6 +1,6 @@
 part of '../text.dart';
 
-@Deprecated('Use LFTextV2 instead')
+@Deprecated('Use LeafText instead')
 class LFText extends StatelessWidget implements LFBuildText {
   final String text;
   final TextStyle? style;

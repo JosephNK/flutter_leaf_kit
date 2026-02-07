@@ -1,6 +1,6 @@
 part of '../animated.dart';
 
-@Deprecated('Use LFBouncingAnimatedV2 instead')
+@Deprecated('Use LeafBouncingAnimated instead')
 class LFBouncingAnimated extends StatefulWidget {
   final Widget child;
   final LFBouncingAnimationController? controller;

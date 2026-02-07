@@ -1,9 +1,9 @@
 part of '../indicator.dart';
 
-@Deprecated('Use LFPageCircleIndicatorV2 instead')
+@Deprecated('Use LeafPageCircleIndicator instead')
 enum LFPageCircleIndicatorStyle { none, decrease }
 
-@Deprecated('Use LFPageCircleIndicatorV2 instead')
+@Deprecated('Use LeafPageCircleIndicator instead')
 class LFPageCircleIndicator extends StatelessWidget {
   final int total;
   final double current;
@@ -75,7 +75,7 @@ class LFPageCircleIndicator extends StatelessWidget {
   }
 }
 
-@Deprecated('Use LFPageCircleIndicatorV2 instead')
+@Deprecated('Use LeafPageCircleIndicator instead')
 class LFPageCircleDot extends StatelessWidget {
   final bool active;
   final Color? activeColor;

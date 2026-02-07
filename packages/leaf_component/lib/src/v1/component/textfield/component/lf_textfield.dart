@@ -1,9 +1,9 @@
 part of '../textfield.dart';
 
-@Deprecated('Use LFTextFieldV2 instead')
+@Deprecated('Use LeafTextField instead')
 enum LFTextFieldStatus { none, clear, reset, setText }
 
-@Deprecated('Use LFTextFieldControllerV2 instead')
+@Deprecated('Use LeafTextFieldController instead')
 class LFTextFieldController extends ChangeNotifier {
   final controller = TextEditingController();
 
@@ -42,7 +42,7 @@ class LFTextFieldController extends ChangeNotifier {
   }
 }
 
-@Deprecated('Use LFTextFieldV2 instead')
+@Deprecated('Use LeafTextField instead')
 class LFTextField extends StatefulWidget {
   final LFTextFieldController controller;
   final TextStyle? textStyle;

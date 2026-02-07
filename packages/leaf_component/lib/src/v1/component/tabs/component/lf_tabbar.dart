@@ -1,6 +1,6 @@
 part of '../tabs.dart';
 
-@Deprecated('Use LFTabBarV2 instead')
+@Deprecated('Use LeafTabBar instead')
 class LFTabBar extends StatelessWidget {
   final TabController? controller;
   final Color? labelColor;

@@ -1,6 +1,6 @@
 part of '../animated.dart';
 
-@Deprecated('Use LFScaleAnimatedV2 instead')
+@Deprecated('Use LeafScaleAnimated instead')
 class LFScaleAnimated extends StatefulWidget {
   final Widget child;
   final LFScaleAnimationController? controller;

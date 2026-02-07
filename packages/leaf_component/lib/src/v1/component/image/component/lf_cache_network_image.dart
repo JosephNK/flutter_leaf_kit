@@ -1,9 +1,9 @@
 part of '../image.dart';
 
-@Deprecated('Use LFCacheNetworkImageV2 instead')
+@Deprecated('Use LeafCacheNetworkImage instead')
 typedef LFCacheNetworkImageOnPreBuilder = Function();
 
-@Deprecated('Use LFCacheNetworkImageV2 instead')
+@Deprecated('Use LeafCacheNetworkImage instead')
 class LFCacheNetworkImage extends StatelessWidget {
   final String? url;
   final double? width;

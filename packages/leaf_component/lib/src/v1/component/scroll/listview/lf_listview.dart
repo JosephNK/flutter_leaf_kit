@@ -1,6 +1,6 @@
 part of '../scroll.dart';
 
-@Deprecated('Use LFListViewV2 instead.')
+@Deprecated('Use LeafListView instead.')
 class LFListView<T> extends StatefulWidget {
   final Key? storageKey;
   final Widget Function(BuildContext context, T item, int index) builder;

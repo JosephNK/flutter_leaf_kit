@@ -1,6 +1,6 @@
 part of '../bottom_sheet.dart';
 
-@Deprecated('Use LFBottomSheetItemV2 instead')
+@Deprecated('Use LeafBottomSheetItem instead')
 class LFBottomSheetItem<T> {
   T? key;
   String title;

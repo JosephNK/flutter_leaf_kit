@@ -1,6 +1,6 @@
 part of '../dialog.dart';
 
-@Deprecated('Use LFAlertDialogV2 instead')
+@Deprecated('Use LeafAlertDialog instead')
 class LFAlertDialog {
   static final LFAlertDialog _instance = LFAlertDialog._internal();
   static LFAlertDialog get shared => _instance;

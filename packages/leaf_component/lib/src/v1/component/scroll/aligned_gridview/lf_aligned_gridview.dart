@@ -1,6 +1,6 @@
 part of '../scroll.dart';
 
-@Deprecated('Use LFAlignedGridViewV2 instead.')
+@Deprecated('Use LeafAlignedGridView instead.')
 class LFAlignedGridView<T> extends StatefulWidget {
   final Key? storageKey;
   final Widget Function(BuildContext context, T item, int index) builder;

@@ -1,7 +1,7 @@
 part of '../configure.dart';
 
 /// AppBar Configure
-@Deprecated('Use LFAppBarThemeData instead')
+@Deprecated('Use LeafAppBarThemeData instead')
 class LFAppBarComponentConfigure {
   final TextStyle? titleStyle;
   final double? backIconSize;
@@ -21,7 +21,7 @@ class LFAppBarComponentConfigure {
 }
 
 /// Alert Configure
-@Deprecated('Use LFDialogThemeData instead')
+@Deprecated('Use LeafDialogThemeData instead')
 class LFAlertDialogConfigure {
   final String? cancelText;
   final String? okText;
@@ -55,7 +55,7 @@ class LFAlertDialogConfigure {
 }
 
 /// BottomSheet Configure
-@Deprecated('Use LFBottomSheetThemeData instead')
+@Deprecated('Use LeafBottomSheetThemeData instead')
 class LFBottomSheetConfigure {
   final Color? activeColor;
   final Color? inactiveColor;
@@ -69,7 +69,7 @@ class LFBottomSheetConfigure {
 }
 
 /// Picker Calendar Configure
-@Deprecated('Use LFPickerThemeData instead')
+@Deprecated('Use LeafPickerThemeData instead')
 class LFPickerCalendarConfigure {
   final Color? activeColor;
 
@@ -78,7 +78,7 @@ class LFPickerCalendarConfigure {
   });
 }
 
-@Deprecated('Use LFThemeData instead')
+@Deprecated('Use LeafThemeData instead')
 class LFAppComponentConfigure {
   LFAppBarComponentConfigure? appBar;
   LFAlertDialogConfigure? alert;
@@ -104,7 +104,7 @@ class LFAppComponentConfigure {
   }
 }
 
-@Deprecated('Use LFTheme instead')
+@Deprecated('Use LeafTheme instead')
 class LFComponentConfigure {
   static final LFComponentConfigure _instance =
       LFComponentConfigure._internal();

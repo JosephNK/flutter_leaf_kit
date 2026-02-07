@@ -1,9 +1,9 @@
 part of '../indicator.dart';
 
-@Deprecated('Use LFIndicatorV2 instead')
+@Deprecated('Use LeafIndicator instead')
 enum LFIndicatorSize { small, medium, large }
 
-@Deprecated('Use LFIndicatorV2 instead')
+@Deprecated('Use LeafIndicator instead')
 extension LFIndicatorSizeExt on LFIndicatorSize {
   double get sizeForMaterial {
     switch (this) {
@@ -28,7 +28,7 @@ extension LFIndicatorSizeExt on LFIndicatorSize {
   }
 }
 
-@Deprecated('Use LFIndicatorV2 instead')
+@Deprecated('Use LeafIndicator instead')
 class LFIndicator extends StatelessWidget {
   final EdgeInsets padding;
   final LFIndicatorSize size;
@@ -58,7 +58,7 @@ class LFIndicator extends StatelessWidget {
   }
 }
 
-@Deprecated('Use LFIndicatorV2 instead')
+@Deprecated('Use LeafIndicator instead')
 class LFMaterialIndicator extends StatelessWidget {
   final EdgeInsets padding;
   final LFIndicatorSize size;
@@ -86,7 +86,7 @@ class LFMaterialIndicator extends StatelessWidget {
   }
 }
 
-@Deprecated('Use LFIndicatorV2 instead')
+@Deprecated('Use LeafIndicator instead')
 class LFCupertinoIndicator extends StatelessWidget {
   final EdgeInsets padding;
   final LFIndicatorSize size;

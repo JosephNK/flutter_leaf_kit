@@ -1,9 +1,9 @@
 part of '../lf_calendar_view.dart';
 
-@Deprecated('Use LFCalendarViewV2 instead')
+@Deprecated('Use LeafCalendarView instead')
 typedef LFCalendarPageViewOnSizeChanged = void Function(Size size);
 
-@Deprecated('Use LFCalendarViewV2 instead')
+@Deprecated('Use LeafCalendarView instead')
 class LFCalendarPageView extends StatefulWidget {
   final DateTime pageDateTime;
   final List<DateTime> selectedDateTimes;

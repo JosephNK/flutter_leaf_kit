@@ -1,14 +1,14 @@
 part of '../lf_calendar_view.dart';
 
-@Deprecated('Use LFCalendarViewV2 instead')
+@Deprecated('Use LeafCalendarView instead')
 abstract class LFCalendarControllerEvent {}
 
-@Deprecated('Use LFCalendarViewV2 instead')
+@Deprecated('Use LeafCalendarView instead')
 class LFCalendarControllerTodayEvent extends LFCalendarControllerEvent {
   LFCalendarControllerTodayEvent();
 }
 
-@Deprecated('Use LFCalendarViewV2 instead')
+@Deprecated('Use LeafCalendarView instead')
 class LFCalendarControllerSelectedEvent extends LFCalendarControllerEvent {
   final DateTime dateTime;
   final bool useSendEvent;
@@ -17,14 +17,14 @@ class LFCalendarControllerSelectedEvent extends LFCalendarControllerEvent {
       {required this.dateTime, this.useSendEvent = false});
 }
 
-@Deprecated('Use LFCalendarViewV2 instead')
+@Deprecated('Use LeafCalendarView instead')
 class LFCalendarControllerMonthSelectedEvent extends LFCalendarControllerEvent {
   final DateTime dateTime;
 
   LFCalendarControllerMonthSelectedEvent({required this.dateTime});
 }
 
-@Deprecated('Use LFCalendarViewV2 instead')
+@Deprecated('Use LeafCalendarView instead')
 mixin LFCalendarControllerMixIn {
   late StreamController<LFCalendarControllerEvent>? streamController;
 
@@ -54,7 +54,7 @@ mixin LFCalendarControllerMixIn {
   }
 }
 
-@Deprecated('Use LFCalendarViewV2 instead')
+@Deprecated('Use LeafCalendarView instead')
 class LFCalendarController with LFCalendarControllerMixIn {
   LFCalendarController() {
     init();

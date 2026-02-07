@@ -1,6 +1,6 @@
 part of '../slider.dart';
 
-@Deprecated('Use LFSliderV2 instead')
+@Deprecated('Use LeafSlider instead')
 class LFSlider extends StatefulWidget {
   final double value;
   final double min;

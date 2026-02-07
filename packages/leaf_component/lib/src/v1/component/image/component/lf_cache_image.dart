@@ -3,7 +3,7 @@ part of '../image.dart';
 ///
 /// ref., https://iiro.dev/2017/09/04/clipping-widgets-with-bezier-curves-in-flutter/
 ///
-@Deprecated('Use LFCacheImageV2 instead')
+@Deprecated('Use LeafCacheImage instead')
 class LFCacheImage extends StatelessWidget {
   final Uri? uri;
   final double? width;
@@ -126,7 +126,7 @@ class LFCacheImage extends StatelessWidget {
 
 ////////////////////////////////////////////////////////////////////////////////
 
-@Deprecated('Use LFCacheImageV2 instead')
+@Deprecated('Use LeafCacheImage instead')
 class LFWebpCacheNetworkImage extends StatefulWidget {
   final String url;
   final double? width;
