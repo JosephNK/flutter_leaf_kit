@@ -150,7 +150,7 @@ class LeafHttpDio {
 extension LeafHttpDioHelper on LeafHttpDio {
   Future<String> getTemporarySavePath(String fileName) async {
     final savePath =
-        '${await LeafFileManager.shared.getTemporaryDirectoryPath()}/$fileName';
+        '${await LeafFileManager.getTemporaryDirectoryPath()}/$fileName';
     return savePath;
   }
 }

@@ -8,17 +8,17 @@ import 'leaf_build_type.dart';
 
 export 'leaf_build_type.dart';
 
-class PlatformPackage {
+class LeafAppInfo {
   final BuildType buildType;
   final String packageName;
   final String packageVersion;
   final String packageBuildNumber;
   final String platform;
 
-  static PlatformPackage? _instance;
-  static PlatformPackage get instance => _instance!;
+  static LeafAppInfo? _instance;
+  static LeafAppInfo get instance => _instance!;
 
-  const PlatformPackage._internal(
+  const LeafAppInfo._internal(
     this.buildType, {
     required this.packageName,
     required this.packageVersion,
@@ -50,7 +50,7 @@ class PlatformPackage {
     return '$appName-$platform-$deployment-$packageVersion.$packageBuildNumber';
   }
 
-  factory PlatformPackage({
+  factory LeafAppInfo({
     required String packageName,
     required String packageVersion,
     required String packageBuildNumber,
@@ -65,13 +65,13 @@ class PlatformPackage {
     var buildType = BuildType.production;
     if (packageName.contains('dev')) {
       buildType = BuildType.development;
-    } else if (packageName.contains('stating')) {
+    } else if (packageName.contains('staging')) {
       buildType = BuildType.staging;
     } else if (packageName.contains('test')) {
       buildType = BuildType.test;
     }
 
-    _instance ??= PlatformPackage._internal(
+    _instance ??= LeafAppInfo._internal(
       buildType,
       packageName: packageName,
       packageVersion: packageVersion,
@@ -82,9 +82,9 @@ class PlatformPackage {
     return _instance!;
   }
 
-  static Future<PlatformPackage> fromInfo() async {
+  static Future<LeafAppInfo> fromInfo() async {
     if (kIsWeb) {
-      return PlatformPackage(
+      return LeafAppInfo(
         packageName: 'web',
         packageVersion: '',
         packageBuildNumber: '',
@@ -94,7 +94,7 @@ class PlatformPackage {
     final packageName = packageInfo.packageName;
     final packageVersion = packageInfo.version;
     final packageBuildNumber = packageInfo.buildNumber;
-    return PlatformPackage(
+    return LeafAppInfo(
       packageName: packageName,
       packageVersion: packageVersion,
       packageBuildNumber: packageBuildNumber,

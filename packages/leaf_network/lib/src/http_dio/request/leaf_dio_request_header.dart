@@ -25,7 +25,7 @@ class LeafDioRequestHeader {
     LeafDioAuthorizationHeader? authorizationHeader,
   }) async {
     final os = Platform.isIOS ? DeviceOS.ios : DeviceOS.android;
-    final appVersion = (await PlatformPackage.fromInfo()).packageVersion;
+    final appVersion = (await LeafAppInfo.fromInfo()).packageVersion;
 
     Map<String, String> headers = {
       'X-LF-DEVICE-OS': os.value,

@@ -6,17 +6,13 @@ import 'package:flutter/foundation.dart';
 import 'package:path_provider/path_provider.dart';
 
 class LeafFileManager {
-  static final LeafFileManager _instance = LeafFileManager._internal();
-  static LeafFileManager get shared => _instance;
-  LeafFileManager._internal();
-
   /// File
 
-  Future<bool> existsFile(File file) async {
+  static Future<bool> existsFile(File file) async {
     return file.existsSync();
   }
 
-  Future<bool> createOrUpdateFile(
+  static Future<bool> createOrUpdateFile(
     File file, {
     required dynamic content,
     bool encodeJson = false,
@@ -39,7 +35,7 @@ class LeafFileManager {
     return false;
   }
 
-  Future<dynamic> readAsFile(
+  static Future<dynamic> readAsFile(
     File file, {
     bool decodeJson = false,
   }) async {
@@ -58,7 +54,7 @@ class LeafFileManager {
     return null;
   }
 
-  Future<Uint8List?> readAsBytesFile(File file) async {
+  static Future<Uint8List?> readAsBytesFile(File file) async {
     try {
       return await file.readAsBytes();
     } catch (e) {
@@ -67,7 +63,7 @@ class LeafFileManager {
     return null;
   }
 
-  Future<File?> writeFile(
+  static Future<File?> writeFile(
     File file, {
     required String content,
     bool flush = true,
@@ -81,7 +77,7 @@ class LeafFileManager {
     return null;
   }
 
-  Future<File?> writeByteFile(
+  static Future<File?> writeByteFile(
     File file, {
     required Uint8List bytes,
     bool flush = true,
@@ -95,7 +91,7 @@ class LeafFileManager {
     return null;
   }
 
-  Future<File?> writeByteBufferFile(
+  static Future<File?> writeByteBufferFile(
     File file, {
     required ByteBuffer buffer,
     required ByteData byteData,
@@ -112,7 +108,7 @@ class LeafFileManager {
     return null;
   }
 
-  Future<bool> deleteFile(File file) async {
+  static Future<bool> deleteFile(File file) async {
     try {
       final isExists = await existsFile(file);
       if (isExists) {
@@ -127,33 +123,28 @@ class LeafFileManager {
 
   /// Directory
 
-  Future<void> deleteTemporaryDir() async {
+  static Future<void> deleteTemporaryDir() async {
     final cacheDir = await getTemporaryDirectory();
     if (cacheDir.existsSync()) {
       cacheDir.deleteSync(recursive: true);
     }
-    // final tempDir = await getTemporaryDirectory();
-    // final libCacheDir = Directory('${tempDir.path}/libCachedImageData');
-    // if (libCacheDir.existsSync()) {
-    //   await libCacheDir.delete(recursive: true);
-    // }
   }
 
-  Future<void> deleteDocumentDir() async {
+  static Future<void> deleteDocumentDir() async {
     final appDir = await getApplicationDocumentsDirectory();
     if (appDir.existsSync()) {
       appDir.deleteSync(recursive: true);
     }
   }
 
-  Future<void> deleteSupportDir() async {
+  static Future<void> deleteSupportDir() async {
     final appDir = await getApplicationSupportDirectory();
     if (appDir.existsSync()) {
       appDir.deleteSync(recursive: true);
     }
   }
 
-  Future<void> deleteExternalStorageDir() async {
+  static Future<void> deleteExternalStorageDir() async {
     final appDir = await getExternalStorageDirectories();
     if (appDir != null) {
       for (var dir in appDir) {
@@ -164,25 +155,25 @@ class LeafFileManager {
     }
   }
 
-  Future<Directory> getTemporaryDirectoryDir() async {
+  static Future<Directory> getTemporaryDirectoryDir() async {
     return await getTemporaryDirectory();
   }
 
-  Future<String> getTemporaryDirectoryPath() async {
+  static Future<String> getTemporaryDirectoryPath() async {
     final directory = await getTemporaryDirectory();
     return directory.path;
   }
 
-  Future<Directory> getApplicationDocumentsDirectoryDir() async {
+  static Future<Directory> getApplicationDocumentsDirectoryDir() async {
     return await getApplicationDocumentsDirectory();
   }
 
-  Future<String> getApplicationDocumentsDirectoryPath() async {
+  static Future<String> getApplicationDocumentsDirectoryPath() async {
     final directory = await getApplicationDocumentsDirectory();
     return directory.path;
   }
 
-  Future<String> getApplicationDocumentsCreateDirectoryPath(
+  static Future<String> getApplicationDocumentsCreateDirectoryPath(
       String folderName) async {
     final Directory appDocDir = await getApplicationDocumentsDirectoryDir();
     final Directory appDocDirFolder =
