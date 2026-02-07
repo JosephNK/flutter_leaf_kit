@@ -31,7 +31,10 @@ abstract class LeafScreenBuild {
   void onDrawerChanged(BuildContext context, bool isOpened);
   void onEndDrawerChanged(BuildContext context, bool isOpened);
   void onPopInvokedWithResult(
-      BuildContext context, bool didPop, dynamic result);
+    BuildContext context,
+    bool didPop,
+    dynamic result,
+  );
 }
 
 /// A [StatefulWidget] base class that optionally carries a tab index for
@@ -39,10 +42,7 @@ abstract class LeafScreenBuild {
 abstract class LeafScreenStatefulWidget extends StatefulWidget {
   final LeafBottomTabIndex? index;
 
-  const LeafScreenStatefulWidget({
-    super.key,
-    this.index,
-  });
+  const LeafScreenStatefulWidget({super.key, this.index});
 }
 
 /// A full-featured [State] base class with built-in [Scaffold] and
@@ -51,7 +51,16 @@ abstract class LeafScreenStatefulWidget extends StatefulWidget {
 /// Uses `Theme.of(context).platform` for web safety.
 /// Uses [LeafTheme] tokens for theming.
 abstract class LeafScreenState<T extends LeafScreenStatefulWidget>
-    extends State<T> with LeafScreenVariable implements LeafScreenBuild {
+    extends State<T>
+    with LeafScreenVariable, AutomaticKeepAliveClientMixin
+    implements LeafScreenBuild {
+  // ------------------------------------------------------------------
+  // Keep-alive – override to `true` in subclasses that need it
+  // ------------------------------------------------------------------
+
+  @override
+  bool get wantKeepAlive => false;
+
   // ------------------------------------------------------------------
   // Lifecycle
   // ------------------------------------------------------------------
@@ -72,6 +81,7 @@ abstract class LeafScreenState<T extends LeafScreenStatefulWidget>
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     final screenWidget = buildScreen(context);
     if (screenWidget != null) return screenWidget;
     return buildScaffold(context, null);
@@ -79,15 +89,10 @@ abstract class LeafScreenState<T extends LeafScreenStatefulWidget>
 
   /// Builds a [Scaffold] with SafeArea body and optional [PopScope] on
   /// non-Apple platforms.
-  Widget buildScaffold(
-    BuildContext context,
-    Object? state, {
-    Key? key,
-  }) {
+  Widget buildScaffold(BuildContext context, Object? state, {Key? key}) {
     final theme = LeafTheme.of(context);
     final colors = theme.colors;
-    final resolvedBg =
-        backgroundColor ?? colors.background;
+    final resolvedBg = backgroundColor ?? colors.background;
 
     final scaffold = Scaffold(
       key: key,
@@ -110,11 +115,7 @@ abstract class LeafScreenState<T extends LeafScreenStatefulWidget>
   }
 
   /// Builds the body widget (with optional SafeArea) *without* Scaffold.
-  Widget buildWithoutScaffold(
-    BuildContext context,
-    Object? state, {
-    Key? key,
-  }) {
+  Widget buildWithoutScaffold(BuildContext context, Object? state, {Key? key}) {
     final body = _buildSafeAreaBody(state);
     return _wrapWithPopScope(body);
   }
@@ -147,7 +148,10 @@ abstract class LeafScreenState<T extends LeafScreenStatefulWidget>
 
   @override
   void onPopInvokedWithResult(
-      BuildContext context, bool didPop, dynamic result) {}
+    BuildContext context,
+    bool didPop,
+    dynamic result,
+  ) {}
 
   /// Called when the user re-taps the currently selected bottom tab.
   void didTabSelected(BuildContext context, LeafBottomTabIndex index) {}
