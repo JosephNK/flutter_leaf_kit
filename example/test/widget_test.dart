@@ -38,16 +38,4 @@ void main() {
   //   expect(person1 == person2, true);
   // });
 
-  // test('Test UIModelV2', () {
-  //   const person1 = PersonV2(payload: '1', name: 'John Doe', age: 30);
-  //   final person1Payload = person1.getPayload();
-
-  //   const person2 = PersonV2(payload: '1', name: 'John Doe', age: 30);
-  //   final person2Payload = person2.getPayload();
-
-  //   debugPrint('person1: $person1, payload: $person1Payload');
-  //   debugPrint('person2: $person2, payload: $person2Payload');
-
-  //   expect(person1 == person2, true);
-  // });
 }

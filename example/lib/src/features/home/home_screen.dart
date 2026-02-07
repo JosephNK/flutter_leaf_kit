@@ -28,7 +28,7 @@ class _HomeScreenState extends LeafScreenState<HomeScreen> {
     _entries = [
       PackageEntry(
         title: 'Components',
-        subtitle: 'V2 UI component library',
+        subtitle: 'UI component library',
         icon: Icons.widgets_outlined,
         builder: (_) => const ComponentCatalogScreen(),
       ),
@@ -65,7 +65,7 @@ class _HomeScreenState extends LeafScreenState<HomeScreen> {
   @override
   PreferredSizeWidget? buildAppBar(BuildContext context, Object? state) {
     return LeafAppBar(
-      title: const LeafAppBarTitle(text: 'Leaf Kit V2'),
+      title: const LeafAppBarTitle(text: 'Leaf Kit'),
       automaticallyImplyLeading: false,
       actions: [
         IconButton(

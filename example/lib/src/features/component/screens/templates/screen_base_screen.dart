@@ -57,14 +57,14 @@ class _ScreenBaseScreenState extends LeafScreenState<ScreenBaseScreen> {
           ],
         ),
         ShowcaseSection(
-          title: 'SafeAreaInsetsV2',
+          title: 'SafeAreaInsets',
           children: [
             ShowcaseTile(
               label: 'Configuration',
               child: Text(
-                'SafeAreaInsetsV2.all() - All sides\n'
-                'SafeAreaInsetsV2.none() - No sides\n'
-                'SafeAreaInsetsV2(top: true, bottom: true)',
+                'SafeAreaInsets.all() - All sides\n'
+                'SafeAreaInsets.none() - No sides\n'
+                'SafeAreaInsets(top: true, bottom: true)',
                 style: typography.bodySmall.copyWith(fontFamily: 'monospace'),
               ),
             ),

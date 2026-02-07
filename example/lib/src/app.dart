@@ -27,7 +27,7 @@ class _ExampleAppState extends State<ExampleApp> {
     return LeafTheme(
       data: themeData,
       child: MaterialApp(
-        title: 'Leaf Kit V2 Example',
+        title: 'Leaf Kit Example',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           useMaterial3: true,

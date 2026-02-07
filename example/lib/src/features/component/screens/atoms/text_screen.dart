@@ -30,7 +30,7 @@ class _TextScreenState extends LeafScreenState<TextScreen> {
           children: [
             ShowcaseTile(
               label: 'Default',
-              child: LeafText('Hello, Leaf Kit V2!'),
+              child: LeafText('Hello, Leaf Kit!'),
             ),
             ShowcaseTile(
               label: 'Custom color',
