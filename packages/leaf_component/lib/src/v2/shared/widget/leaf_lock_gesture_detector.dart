@@ -13,7 +13,7 @@ typedef LeafLockGestureDetectorOnLoaderBuilder = Widget Function();
 /// Supports loading, disabled, and force-lock states.
 /// Optionally wraps the child in [LeafInkWell] for Material ripple.
 ///
-/// Standalone V2 version — no dependency on V1 or `LFIndicator`.
+/// No dependency on `LFIndicator`.
 class LeafLockGestureDetector extends StatefulWidget {
   final Widget child;
   final Duration duration;

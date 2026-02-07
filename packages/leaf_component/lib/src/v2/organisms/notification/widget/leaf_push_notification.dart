@@ -85,7 +85,7 @@ class LeafPushNotification {
 
     _overlayEntry = OverlayEntry(
       builder: (_) {
-        return _LFPushNotificationAnimatedWidgetV2(
+        return _LeafPushNotificationAnimatedWidget(
           title: title,
           body: body,
           data: data,
@@ -123,7 +123,7 @@ class LeafPushNotification {
   }
 }
 
-class _LFPushNotificationAnimatedWidgetV2 extends StatefulWidget {
+class _LeafPushNotificationAnimatedWidget extends StatefulWidget {
   final String title;
   final String? body;
   final Map<String, dynamic>? data;
@@ -134,7 +134,7 @@ class _LFPushNotificationAnimatedWidgetV2 extends StatefulWidget {
   final TextStyle titleTextStyle;
   final TextStyle bodyTextStyle;
 
-  const _LFPushNotificationAnimatedWidgetV2({
+  const _LeafPushNotificationAnimatedWidget({
     required this.title,
     this.body,
     this.data,
@@ -147,12 +147,12 @@ class _LFPushNotificationAnimatedWidgetV2 extends StatefulWidget {
   });
 
   @override
-  State<_LFPushNotificationAnimatedWidgetV2> createState() =>
-      _LFPushNotificationAnimatedWidgetV2State();
+  State<_LeafPushNotificationAnimatedWidget> createState() =>
+      _LeafPushNotificationAnimatedWidgetState();
 }
 
-class _LFPushNotificationAnimatedWidgetV2State
-    extends State<_LFPushNotificationAnimatedWidgetV2> {
+class _LeafPushNotificationAnimatedWidgetState
+    extends State<_LeafPushNotificationAnimatedWidget> {
   bool _isVisible = false;
   Timer? _timer;
 

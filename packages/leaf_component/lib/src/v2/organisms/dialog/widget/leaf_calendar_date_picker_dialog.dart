@@ -25,7 +25,7 @@ class LeafCalendarDatePickerDialog {
     return showDialog(
       context: context,
       builder: (ctx) {
-        return _CalendarDatePickerContentV2(
+        return _CalendarDatePickerContent(
           date: date,
           firstDate: firstDate,
           lastDate: lastDate,
@@ -42,7 +42,7 @@ class LeafCalendarDatePickerDialog {
   }
 }
 
-class _CalendarDatePickerContentV2 extends StatefulWidget {
+class _CalendarDatePickerContent extends StatefulWidget {
   final DateTime? date;
   final DateTime? firstDate;
   final DateTime? lastDate;
@@ -54,7 +54,7 @@ class _CalendarDatePickerContentV2 extends StatefulWidget {
   final EdgeInsets? okTextPadding;
   final ValueChanged<DateTime>? onOK;
 
-  const _CalendarDatePickerContentV2({
+  const _CalendarDatePickerContent({
     this.date,
     this.firstDate,
     this.lastDate,
@@ -68,12 +68,12 @@ class _CalendarDatePickerContentV2 extends StatefulWidget {
   });
 
   @override
-  State<_CalendarDatePickerContentV2> createState() =>
-      _CalendarDatePickerContentV2State();
+  State<_CalendarDatePickerContent> createState() =>
+      _CalendarDatePickerContentState();
 }
 
-class _CalendarDatePickerContentV2State
-    extends State<_CalendarDatePickerContentV2> {
+class _CalendarDatePickerContentState
+    extends State<_CalendarDatePickerContent> {
   late DateTime _selectedDate;
 
   @override

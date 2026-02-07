@@ -3,10 +3,7 @@ import 'package:flutter/widgets.dart';
 /// Status values for programmatic control of [LeafTextFieldController].
 enum LeafTextFieldStatus { none, clear, reset, setText }
 
-/// A controller for programmatic manipulation of V2 text fields.
-///
-/// Standalone V2 version — no dependency on V1.
-/// API-compatible with the V1 `LFTextFieldController`.
+/// A controller for programmatic manipulation of Leaf text fields.
 class LeafTextFieldController extends ChangeNotifier {
   final TextEditingController controller = TextEditingController();
 

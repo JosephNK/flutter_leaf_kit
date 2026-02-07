@@ -8,7 +8,7 @@ import '../model/safe_area_insets.dart';
 ///
 /// Subclass [LeafScreenState] and override getters to customise the scaffold
 /// without touching the build pipeline.
-mixin ScreenVariableV2 {
+mixin LeafScreenVariable {
   bool get useSafeArea => true;
   SafeAreaInsets get safeAreaInsets => const SafeAreaInsets.all();
   bool? get resizeToAvoidBottomInset => null;
@@ -20,7 +20,7 @@ mixin ScreenVariableV2 {
 }
 
 /// Abstract builder that declares the slots a screen can fill.
-abstract class ScreenBuildV2 {
+abstract class LeafScreenBuild {
   Widget? buildScreen(BuildContext context);
   PreferredSizeWidget? buildAppBar(BuildContext context, Object? state);
   Widget buildBody(BuildContext context, Object? state);
@@ -48,13 +48,10 @@ abstract class LeafScreenStatefulWidget extends StatefulWidget {
 /// A full-featured [State] base class with built-in [Scaffold] and
 /// platform-aware [PopScope] handling.
 ///
-/// Key differences from V1:
-/// * No `dart:io` import – uses `Theme.of(context).platform` for web safety.
-/// * No `Logging` dependency – lifecycle logging removed.
-/// * No `LFComponentConfigure` – uses [LeafTheme] tokens.
-/// * `SafeAreaInsets` renamed to [SafeAreaInsets] (immutable).
+/// Uses `Theme.of(context).platform` for web safety.
+/// Uses [LeafTheme] tokens for theming.
 abstract class LeafScreenState<T extends LeafScreenStatefulWidget>
-    extends State<T> with ScreenVariableV2 implements ScreenBuildV2 {
+    extends State<T> with LeafScreenVariable implements LeafScreenBuild {
   // ------------------------------------------------------------------
   // Lifecycle
   // ------------------------------------------------------------------

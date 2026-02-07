@@ -38,7 +38,7 @@ class LeafRadioPickerDialog {
     return showDialog(
       context: context,
       builder: (ctx) {
-        return _RadioPickerContentV2(
+        return _RadioPickerContent(
           items: items,
           value: value,
           title: title,
@@ -63,7 +63,7 @@ class LeafRadioPickerDialog {
   }
 }
 
-class _RadioPickerContentV2 extends StatefulWidget {
+class _RadioPickerContent extends StatefulWidget {
   final List<LeafDataItem> items;
   final LeafDataItem value;
   final String? title;
@@ -83,7 +83,7 @@ class _RadioPickerContentV2 extends StatefulWidget {
   final VoidCallback? onCancel;
   final ValueChanged<LeafDataItem>? onOK;
 
-  const _RadioPickerContentV2({
+  const _RadioPickerContent({
     required this.items,
     required this.value,
     this.title,
@@ -105,10 +105,10 @@ class _RadioPickerContentV2 extends StatefulWidget {
   });
 
   @override
-  State<_RadioPickerContentV2> createState() => _RadioPickerContentV2State();
+  State<_RadioPickerContent> createState() => _RadioPickerContentState();
 }
 
-class _RadioPickerContentV2State extends State<_RadioPickerContentV2> {
+class _RadioPickerContentState extends State<_RadioPickerContent> {
   late LeafDataItem _value;
 
   @override
@@ -118,7 +118,7 @@ class _RadioPickerContentV2State extends State<_RadioPickerContentV2> {
   }
 
   @override
-  void didUpdateWidget(covariant _RadioPickerContentV2 oldWidget) {
+  void didUpdateWidget(covariant _RadioPickerContent oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (oldWidget.value != widget.value) {
       setState(() {

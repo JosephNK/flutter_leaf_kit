@@ -4,15 +4,12 @@ import 'package:flutter/services.dart';
 import '../../../../common/theme/theme.dart';
 import 'leaf_appbar_back.dart';
 
-const double kLFToolbarHeightV2 = 52.0;
+const double kLeafToolbarHeight = 52.0;
 
-/// A themed AppBar widget that resolves all styles from the LF design token
+/// A themed AppBar widget that resolves all styles from the Leaf design token
 /// system.
 ///
-/// Differences from v1 [LFAppBar]:
-///   - No dependency on [LFComponentConfigure]
-///   - Uses [Theme.of(context).platform] instead of [Platform.isIOS]
-///   - Full 3-level style cascade: param > appBarTheme > global tokens
+/// Style cascade: param > appBarTheme > global tokens
 @immutable
 class LeafAppBar extends StatelessWidget implements PreferredSizeWidget {
   final Widget? title;
@@ -86,7 +83,7 @@ class LeafAppBar extends StatelessWidget implements PreferredSizeWidget {
         platform == TargetPlatform.iOS || platform == TargetPlatform.macOS;
     final resolvedCenterTitle = centerTitle ?? isApple;
     final resolvedToolbarHeight =
-        toolbarHeight ?? abTheme?.toolbarHeight ?? kLFToolbarHeightV2;
+        toolbarHeight ?? abTheme?.toolbarHeight ?? kLeafToolbarHeight;
     final resolvedLeadingWidth = leadingWidth ?? resolvedToolbarHeight;
     final resolvedBg = backgroundColor ??
         abTheme?.backgroundColor ??
@@ -150,7 +147,7 @@ class LeafAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Size get preferredSize => Size.fromHeight(
         toolbarHeight ??
-            kLFToolbarHeightV2 + (bottom?.preferredSize.height ?? 0.0),
+            kLeafToolbarHeight + (bottom?.preferredSize.height ?? 0.0),
       );
 
   static PreferredSizeWidget _bottomBorder(Color? color) {

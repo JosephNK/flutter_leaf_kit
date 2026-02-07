@@ -211,7 +211,7 @@ class _LeafListViewState<T> extends State<LeafListView<T>>
         final isLast = (totalCount - 1 == index);
         if (isLast) {
           if (!widget.hasReachedMax) {
-            return _LFScrollLoadingIndicatorV2(loading: loading);
+            return _LeafScrollLoadingIndicator(loading: loading);
           }
           return const SizedBox.shrink();
         }
@@ -271,7 +271,7 @@ class _LeafListViewState<T> extends State<LeafListView<T>>
                 final isLast = (totalCount - 1 == index);
                 if (isLast) {
                   if (!widget.hasReachedMax) {
-                    return _LFScrollLoadingIndicatorV2(loading: loading);
+                    return _LeafScrollLoadingIndicator(loading: loading);
                   }
                   return const SizedBox.shrink();
                 }
@@ -291,10 +291,10 @@ class _LeafListViewState<T> extends State<LeafListView<T>>
 }
 
 /// Shared loading indicator for scroll views (load-more / pagination).
-class _LFScrollLoadingIndicatorV2 extends StatelessWidget {
+class _LeafScrollLoadingIndicator extends StatelessWidget {
   final bool loading;
 
-  const _LFScrollLoadingIndicatorV2({required this.loading});
+  const _LeafScrollLoadingIndicator({required this.loading});
 
   @override
   Widget build(BuildContext context) {

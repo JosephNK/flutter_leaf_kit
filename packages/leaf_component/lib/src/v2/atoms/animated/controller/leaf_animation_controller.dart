@@ -2,7 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 
-/// Animation status for V2 animation controllers.
+/// Animation status for Leaf animation controllers.
 enum LeafAnimationStatus { forward, stop, reverse, repeat }
 
 /// Base animation controller that wraps [AnimationController] with

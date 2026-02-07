@@ -1,4 +1,4 @@
-/// Date utility extensions for the V2 Calendar system.
+/// Date utility extensions for the Leaf Calendar system.
 ///
 /// Provides helpers for generating month day grids, checking "today",
 /// and same-day comparison — all without relying on leaf_datetime.

@@ -39,7 +39,7 @@ class LeafCalendarBetweenDatePickerDialog {
     return showDialog(
       context: context,
       builder: (ctx) {
-        return _BetweenDatePickerContentV2(
+        return _BetweenDatePickerContent(
           pickerSelect: pickerSelect,
           startDate: startDate,
           endDate: endDate,
@@ -63,7 +63,7 @@ class LeafCalendarBetweenDatePickerDialog {
   }
 }
 
-class _BetweenDatePickerContentV2 extends StatefulWidget {
+class _BetweenDatePickerContent extends StatefulWidget {
   final LeafCalendarBetweenPickerSelect pickerSelect;
   final DateTime? startDate;
   final DateTime? endDate;
@@ -83,7 +83,7 @@ class _BetweenDatePickerContentV2 extends StatefulWidget {
   final void Function(
       LeafCalendarBetweenPickerSelect select, DateTime dateTime)? onOK;
 
-  const _BetweenDatePickerContentV2({
+  const _BetweenDatePickerContent({
     required this.pickerSelect,
     this.startDate,
     this.endDate,
@@ -106,12 +106,12 @@ class _BetweenDatePickerContentV2 extends StatefulWidget {
   });
 
   @override
-  State<_BetweenDatePickerContentV2> createState() =>
-      _BetweenDatePickerContentV2State();
+  State<_BetweenDatePickerContent> createState() =>
+      _BetweenDatePickerContentState();
 }
 
-class _BetweenDatePickerContentV2State
-    extends State<_BetweenDatePickerContentV2> {
+class _BetweenDatePickerContentState
+    extends State<_BetweenDatePickerContent> {
   late DateTime _startDate;
   late DateTime _endDate;
   late DateTime _initialDate;

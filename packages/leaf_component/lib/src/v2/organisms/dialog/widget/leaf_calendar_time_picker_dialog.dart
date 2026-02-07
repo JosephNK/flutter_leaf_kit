@@ -23,7 +23,7 @@ class LeafCalendarTimePickerDialog {
     return showDialog(
       context: context,
       builder: (ctx) {
-        return _CalendarTimePickerContentV2(
+        return _CalendarTimePickerContent(
           time: time,
           okText: okText,
           okTextStyle: okTextStyle,
@@ -37,7 +37,7 @@ class LeafCalendarTimePickerDialog {
   }
 }
 
-class _CalendarTimePickerContentV2 extends StatefulWidget {
+class _CalendarTimePickerContent extends StatefulWidget {
   final DateTime? time;
   final String? okText;
   final TextStyle? okTextStyle;
@@ -46,7 +46,7 @@ class _CalendarTimePickerContentV2 extends StatefulWidget {
   final EdgeInsets? okTextPadding;
   final ValueChanged<DateTime>? onOK;
 
-  const _CalendarTimePickerContentV2({
+  const _CalendarTimePickerContent({
     this.time,
     this.okText,
     this.okTextStyle,
@@ -57,12 +57,12 @@ class _CalendarTimePickerContentV2 extends StatefulWidget {
   });
 
   @override
-  State<_CalendarTimePickerContentV2> createState() =>
-      _CalendarTimePickerContentV2State();
+  State<_CalendarTimePickerContent> createState() =>
+      _CalendarTimePickerContentState();
 }
 
-class _CalendarTimePickerContentV2State
-    extends State<_CalendarTimePickerContentV2> {
+class _CalendarTimePickerContentState
+    extends State<_CalendarTimePickerContent> {
   late DateTime _selectedTime;
 
   @override

@@ -227,7 +227,7 @@ class _PhotoGridItem extends StatelessWidget {
       onTap: onTap,
       child: Stack(
         children: [
-          _PhotoThumbnailV2(entity: entity),
+          _PhotoThumbnail(entity: entity),
           _SelectionOverlay(
             checked: checked,
             borderColor: selectedBorderColor,
@@ -265,12 +265,12 @@ class _PhotoGridItem extends StatelessWidget {
 }
 
 /// Renders an [AssetEntity] thumbnail with LRU caching.
-class _PhotoThumbnailV2 extends StatelessWidget {
+class _PhotoThumbnail extends StatelessWidget {
   static const _cacheSize = 64;
 
   final AssetEntity entity;
 
-  const _PhotoThumbnailV2({
+  const _PhotoThumbnail({
     required this.entity,
   });
 

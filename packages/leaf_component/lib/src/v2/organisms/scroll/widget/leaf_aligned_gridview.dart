@@ -212,7 +212,7 @@ class _LeafAlignedGridViewState<T> extends State<LeafAlignedGridView<T>>
         if (widget.header != null) widget.header!,
         Flexible(child: gridViewWidget),
         if (!widget.hasReachedMax)
-          _LFAlignedGridLoadingIndicatorV2(loading: loading),
+          _LeafAlignedGridLoadingIndicator(loading: loading),
       ],
     );
 
@@ -265,7 +265,7 @@ class _LeafAlignedGridViewState<T> extends State<LeafAlignedGridView<T>>
           ),
           if (!widget.hasReachedMax)
             SliverToBoxAdapter(
-              child: _LFAlignedGridLoadingIndicatorV2(loading: loading),
+              child: _LeafAlignedGridLoadingIndicator(loading: loading),
             ),
         ],
       ),
@@ -273,10 +273,10 @@ class _LeafAlignedGridViewState<T> extends State<LeafAlignedGridView<T>>
   }
 }
 
-class _LFAlignedGridLoadingIndicatorV2 extends StatelessWidget {
+class _LeafAlignedGridLoadingIndicator extends StatelessWidget {
   final bool loading;
 
-  const _LFAlignedGridLoadingIndicatorV2({required this.loading});
+  const _LeafAlignedGridLoadingIndicator({required this.loading});
 
   @override
   Widget build(BuildContext context) {

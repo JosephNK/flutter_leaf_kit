@@ -34,7 +34,7 @@ class LeafCheckboxPickerDialog {
     return showDialog(
       context: context,
       builder: (ctx) {
-        return _CheckboxPickerContentV2(
+        return _CheckboxPickerContent(
           items: items,
           values: values,
           title: title,
@@ -56,7 +56,7 @@ class LeafCheckboxPickerDialog {
   }
 }
 
-class _CheckboxPickerContentV2 extends StatefulWidget {
+class _CheckboxPickerContent extends StatefulWidget {
   final List<LeafDataItem> items;
   final List<LeafDataItem>? values;
   final String? title;
@@ -73,7 +73,7 @@ class _CheckboxPickerContentV2 extends StatefulWidget {
   final EdgeInsets? cancelTextPadding;
   final ValueChanged<List<LeafDataItem>>? onOK;
 
-  const _CheckboxPickerContentV2({
+  const _CheckboxPickerContent({
     required this.items,
     this.values,
     this.title,
@@ -92,11 +92,11 @@ class _CheckboxPickerContentV2 extends StatefulWidget {
   });
 
   @override
-  State<_CheckboxPickerContentV2> createState() =>
-      _CheckboxPickerContentV2State();
+  State<_CheckboxPickerContent> createState() =>
+      _CheckboxPickerContentState();
 }
 
-class _CheckboxPickerContentV2State extends State<_CheckboxPickerContentV2> {
+class _CheckboxPickerContentState extends State<_CheckboxPickerContent> {
   late List<LeafDataItem> _values;
 
   @override
@@ -106,7 +106,7 @@ class _CheckboxPickerContentV2State extends State<_CheckboxPickerContentV2> {
   }
 
   @override
-  void didUpdateWidget(covariant _CheckboxPickerContentV2 oldWidget) {
+  void didUpdateWidget(covariant _CheckboxPickerContent oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (oldWidget.values != widget.values) {
       setState(() {

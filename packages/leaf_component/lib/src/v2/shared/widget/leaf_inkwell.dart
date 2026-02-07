@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 /// A simple ink-well wrapper that provides a Material ripple effect.
 ///
-/// Standalone V2 version — no dependency on V1.
+/// Provides a Material ripple effect with optional decoration and padding.
 @immutable
 class LeafInkWell extends StatelessWidget {
   final Widget child;

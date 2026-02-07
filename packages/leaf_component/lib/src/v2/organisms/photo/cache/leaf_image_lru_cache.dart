@@ -8,7 +8,7 @@ import 'package:photo_manager/photo_manager.dart';
 /// Stores thumbnail [Uint8List] data keyed by entity + requested size.
 /// When the cache exceeds [maxSize], the least-recently-used entry is evicted.
 class LeafImageLruCache {
-  static final _LRUMapV2<_ImageCacheKey, Uint8List> _map = _LRUMapV2(500);
+  static final _LRUMap<_ImageCacheKey, Uint8List> _map = _LRUMap(500);
 
   /// Returns cached thumbnail data, or `null` if not found.
   static Uint8List? getData(AssetEntity entity, [int size = 64]) {
@@ -49,11 +49,11 @@ class _ImageCacheKey {
 }
 
 /// Generic LRU map implementation.
-class _LRUMapV2<K, V> {
+class _LRUMap<K, V> {
   final LinkedHashMap<K, V> _map = LinkedHashMap<K, V>();
   final int _maxSize;
 
-  _LRUMapV2(this._maxSize);
+  _LRUMap(this._maxSize);
 
   int get length => _map.length;
 

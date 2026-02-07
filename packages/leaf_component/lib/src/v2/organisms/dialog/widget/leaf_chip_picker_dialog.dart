@@ -34,7 +34,7 @@ class LeafChipPickerDialog {
     return showDialog(
       context: context,
       builder: (ctx) {
-        return _ChipPickerContentV2(
+        return _ChipPickerContent(
           items: items,
           values: values,
           multiple: multiple,
@@ -57,7 +57,7 @@ class LeafChipPickerDialog {
   }
 }
 
-class _ChipPickerContentV2 extends StatefulWidget {
+class _ChipPickerContent extends StatefulWidget {
   final List<LeafDataItem> items;
   final List<LeafDataItem>? values;
   final bool multiple;
@@ -75,7 +75,7 @@ class _ChipPickerContentV2 extends StatefulWidget {
   final EdgeInsets? cancelTextPadding;
   final ValueChanged<List<LeafDataItem>>? onOK;
 
-  const _ChipPickerContentV2({
+  const _ChipPickerContent({
     required this.items,
     this.values,
     this.multiple = true,
@@ -95,10 +95,10 @@ class _ChipPickerContentV2 extends StatefulWidget {
   });
 
   @override
-  State<_ChipPickerContentV2> createState() => _ChipPickerContentV2State();
+  State<_ChipPickerContent> createState() => _ChipPickerContentState();
 }
 
-class _ChipPickerContentV2State extends State<_ChipPickerContentV2> {
+class _ChipPickerContentState extends State<_ChipPickerContent> {
   late List<LeafDataItem> _values;
 
   @override
@@ -108,7 +108,7 @@ class _ChipPickerContentV2State extends State<_ChipPickerContentV2> {
   }
 
   @override
-  void didUpdateWidget(covariant _ChipPickerContentV2 oldWidget) {
+  void didUpdateWidget(covariant _ChipPickerContent oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (oldWidget.values != widget.values) {
       setState(() {

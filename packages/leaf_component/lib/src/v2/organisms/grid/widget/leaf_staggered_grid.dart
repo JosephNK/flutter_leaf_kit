@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
-/// A V2 wrapper around [StaggeredGrid.count] for staggered grid layouts.
+/// A wrapper around [StaggeredGrid.count] for staggered grid layouts.
 ///
 /// No theme required — this is a structural layout widget.
 @immutable
@@ -42,7 +42,7 @@ class LeafStaggeredGrid extends StatelessWidget {
   }
 }
 
-/// A V2 wrapper around [StaggeredGridTile.count].
+/// A wrapper around [StaggeredGridTile.count].
 ///
 /// Defines how many cells a single tile occupies in both axes.
 @immutable

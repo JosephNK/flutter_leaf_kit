@@ -2,14 +2,14 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 
 /// Callback fired when the measured child's position or size changes.
-typedef OnWidgetSizeChangeV2 = void Function(Offset position, Size size);
+typedef LeafOnWidgetSizeChange = void Function(Offset position, Size size);
 
 /// A custom [RenderProxyBox] that reports position and size changes
 /// after each layout via a post-frame callback.
 class LeafWidgetRenderObject extends RenderProxyBox {
   Size? _previousSize;
   Offset? _previousPosition;
-  OnWidgetSizeChangeV2 onChange;
+  LeafOnWidgetSizeChange onChange;
 
   LeafWidgetRenderObject(this.onChange);
 
@@ -40,7 +40,7 @@ class LeafWidgetRenderObject extends RenderProxyBox {
 @immutable
 class LeafWidgetSize extends SingleChildRenderObjectWidget {
   /// Called whenever the child's global position or size changes.
-  final OnWidgetSizeChangeV2 onChange;
+  final LeafOnWidgetSizeChange onChange;
 
   const LeafWidgetSize({
     super.key,

@@ -11,10 +11,7 @@ typedef LeafLayoutAppOnSetupDevice = void Function(VoidCallback onBuilder);
 /// A root-level layout widget that waits for non-zero constraints before
 /// building the main content.
 ///
-/// Key differences from V1:
-/// * No [LFComponentConfigure] dependency – uses [LeafTheme] instead.
-/// * No `leaf_common` dependency (no `isNotEmpty` helper).
-/// * Uses [LeafIndicator] as loading placeholder.
+/// Uses [LeafTheme] for theming and [LeafIndicator] as loading placeholder.
 ///
 /// Style resolution order:
 ///   1. Explicit [backgroundColor]

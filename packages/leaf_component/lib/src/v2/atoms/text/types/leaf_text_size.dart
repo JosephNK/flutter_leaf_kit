@@ -1,6 +1,4 @@
-/// Text scale factor presets for V2 text components.
-///
-/// Standalone V2 version — no dependency on V1.
+/// Text scale factor presets for Leaf text components.
 enum LeafTextSize {
   small,
   medium,
