@@ -18,6 +18,19 @@ flutter test packages/leaf_component
 - 컴포넌트 테마: `LF` + 컴포넌트명 + `ThemeData` (예: `LFButtonThemeData`)
 - Enum: `LF` + 컴포넌트명 + 개념 (예: `LFCheckBoxAlign`, `LFTextSize`)
 
+## 플랫폼 적응성
+
+`Platform.isIOS` 대신 context 기반 감지 사용:
+
+```dart
+// 올바른 방법 (웹 호환)
+final isApple = Theme.of(context).platform == TargetPlatform.iOS
+    || Theme.of(context).platform == TargetPlatform.macOS;
+
+// 잘못된 방법 (웹에서 크래시)
+final isApple = Platform.isIOS;
+```
+
 ## 컴포넌트 작성 규칙
 
 ### 필수 요건
@@ -55,7 +68,7 @@ Widget build(BuildContext context) {
 
 - 각 컴포넌트 카테고리는 barrel 파일 보유 (예: `button.dart`)
 - Dart `part`/`part of` 패턴 사용
-- `component.dart`에서 모든 카테고리 re-export
+- `v2/index.dart`에서 모든 카테고리 re-export
 
 ## 디자인 토큰 시스템
 
@@ -138,37 +151,39 @@ MaterialApp(
 | 단계 | 설명 | 예시 |
 |------|------|------|
 | **Atoms** | 더 이상 분해할 수 없는 기본 UI 요소 | 버튼, 텍스트, 아이콘 |
-| **Molecules** | Atoms를 조합한 기능 단위 | 텍스트 필드, 체크박스 그룹 |
+| **Molecules** | Atoms를 조합한 기능 단위 | 텍스트 필드, 레이팅바, 앱바 |
 | **Organisms** | Molecules/Atoms를 조합한 복합 UI 블록 | 다이얼로그, 캘린더, 바텀시트 |
 | **Templates** | 페이지 수준의 레이아웃 구조 | 스캐폴드, 앱 레이아웃 |
 
 새 컴포넌트 추가 시 위 계층에 맞는 적절한 레벨에 배치하세요.
 
+### 디렉토리 구조
+
+```
+lib/src/v2/
+├── atoms/          (15개: text, icon, badge, button, checkbox, radio, switch,
+│                    chip, slider, indicator, skeleton, animated, image, painter, size)
+├── molecules/      (4개: textfield, ratingbar, appbar, tabs)
+├── organisms/      (11개: accordion, dialog, bottomsheet, toast, notification,
+│                    calendar, page, scroll, photo, picker, grid)
+├── templates/      (4개: screen, app, navigationbar, popscope)
+└── shared/         (공통 위젯, 컨트롤러, 타입)
+```
+
+테스트 디렉토리(`test/v2/`)도 동일한 구조를 따릅니다.
+
 ### Atoms (기본 요소)
 
-`LFText`, `LFIcon`, `LFBadge`, `LFButton`, `LFInkWell`, `LFCheckBox`, `LFRadio`, `LFSwitch`, `LFChip`, `LFSlider`, `LFIndicator`, `LFSkeleton`, Animated 위젯
+`LFText`, `LFIcon`, `LFBadge`, `LFButton`, `LFCheckBox`, `LFRadio`, `LFSwitch`, `LFChip`, `LFSlider`, `LFIndicator`, `LFSkeleton`, Animated 위젯, Image 위젯, `LFTimelinePainter`, `LFWidgetSize`
 
 ### Molecules (조합 요소)
 
-`LFTextField`, `LFChips`, `LFCheckBoxGroup`, `LFRadioGroup`, `LFRatingBar`, `LFAppBar`, `LFTabBar`, `LFAccordionTile`
+`LFTextField`, `LFRatingBar`, `LFAppBar`, `LFTabBar`, `LFTabView`
 
 ### Organisms (복합 UI)
 
-`LFAlertDialog`, `LFBottomSheet`, `LFToast`, `LFCalendarView`, `LFAccordion`, `LFPageView`, `LFPushNotification`, Scroll 뷰, Photo 컴포넌트, Picker
+`LFAccordion`, `LFAlertDialog`, `LFBottomSheet`, `LFToast`, `LFPushNotification`, `LFCalendarView`, `LFPageView`, Scroll 뷰, Photo 컴포넌트, Picker, `LFStaggeredGrid`
 
 ### Templates (페이지 구조)
 
-`ScreenStatefulWidget`, `LFLayoutApp`, `LFBottomTabBarScaffold`, `LFPopScopeAppClose`
-
-## 플랫폼 적응성
-
-`Platform.isIOS` 대신 context 기반 감지 사용:
-
-```dart
-// 올바른 방법 (웹 호환)
-final isApple = Theme.of(context).platform == TargetPlatform.iOS
-    || Theme.of(context).platform == TargetPlatform.macOS;
-
-// 잘못된 방법 (웹에서 크래시)
-final isApple = Platform.isIOS;
-```
+`LFScreenStatefulWidget`, `LFLayoutApp`, `LFBottomTabBarScaffold`, `LFPopScopeAppClose`
