@@ -12,7 +12,7 @@ workspace:
   - packages/leaf_route
   - packages/leaf_network
   - packages/leaf_platform
-  - packages/leaf_store
+  - packages/leaf_state
 
 dev_dependencies:
   melos: 7.3.0

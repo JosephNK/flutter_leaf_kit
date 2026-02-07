@@ -1,4 +1,4 @@
-part of '../leaf_store.dart';
+part of '../leaf_state.dart';
 
 typedef BlocScreenSuccessListener<S> =
     void Function(BuildContext context, S state);

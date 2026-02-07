@@ -191,21 +191,21 @@
             "flutterMode": "release"
         },
         {
-            "name": "leaf_store",
-            "cwd": "packages/leaf_store",
+            "name": "leaf_state",
+            "cwd": "packages/leaf_state",
             "request": "launch",
             "type": "dart"
         },
         {
-            "name": "leaf_store (profile mode)",
-            "cwd": "packages/leaf_store",
+            "name": "leaf_state (profile mode)",
+            "cwd": "packages/leaf_state",
             "request": "launch",
             "type": "dart",
             "flutterMode": "profile"
         },
         {
-            "name": "leaf_store (release mode)",
-            "cwd": "packages/leaf_store",
+            "name": "leaf_state (release mode)",
+            "cwd": "packages/leaf_state",
             "request": "launch",
             "type": "dart",
             "flutterMode": "release"

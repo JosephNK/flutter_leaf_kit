@@ -44,9 +44,9 @@ App lifecycle, device info, file management, and permission handling.
 
 - Documentation: _coming soon_
 
-### leaf_store — State & Storage
+### leaf_state — BLoC State Management
 
-BLoC state management utilities and SharedPreferences helpers.
+BLoC state management utilities.
 
 - Documentation: _coming soon_
 

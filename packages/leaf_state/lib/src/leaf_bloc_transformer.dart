@@ -1,4 +1,4 @@
-part of '../leaf_store.dart';
+part of '../leaf_state.dart';
 
 EventTransformer<Event> debounce<Event>({
   Duration duration = const Duration(milliseconds: 300),

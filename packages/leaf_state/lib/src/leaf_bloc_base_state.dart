@@ -1,4 +1,4 @@
-part of '../leaf_store.dart';
+part of '../leaf_state.dart';
 
 class BlocBaseState extends Equatable {
   final Object? exception;

@@ -13,7 +13,7 @@ A personal Flutter utility library package for common modules
 | `leaf_platform` | 위치 정보, Google Maps, WebView, 앱/디바이스/파일/권한 관리 |
 | `leaf_route` | 페이지 네비게이션, 모달 |
 | `leaf_network` | HTTP 통신 (Dio 기반) |
-| `leaf_store` | BLoC 상태 관리, SharedPreferences |
+| `leaf_state` | BLoC 상태 관리 |
 | `leaf` | 모든 패키지 통합 export |
 
 ## Python 스크립트 가이드
