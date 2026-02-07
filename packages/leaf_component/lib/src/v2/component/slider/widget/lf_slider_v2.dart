@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../theme/lf_theme.dart';
+import '../../../../common/theme/lf_theme.dart';
 
 /// A themed single-value slider.
 ///

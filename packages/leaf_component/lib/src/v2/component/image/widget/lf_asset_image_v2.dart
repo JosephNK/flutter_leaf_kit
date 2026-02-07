@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 
-import '../../../theme/lf_theme.dart';
+import '../../../../common/theme/lf_theme.dart';
 import '../../skeleton/widget/lf_skeleton_v2.dart';
 
 /// An image widget that loads from asset paths or file URIs.

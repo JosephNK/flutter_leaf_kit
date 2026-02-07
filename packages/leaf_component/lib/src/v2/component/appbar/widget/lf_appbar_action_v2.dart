@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../shared/widget/lf_inkwell_v2.dart';
+import '../../../shared/widget/lf_inkwell_v2.dart';
 
 /// Action button widget for [LFAppBarV2].
 ///

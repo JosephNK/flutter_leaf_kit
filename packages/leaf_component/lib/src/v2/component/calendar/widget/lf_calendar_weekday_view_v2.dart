@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../theme/theme.dart';
+import '../../../../common/theme/theme.dart';
 
 /// Default English short weekday labels starting from Sunday.
 const _kDefaultWeekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];

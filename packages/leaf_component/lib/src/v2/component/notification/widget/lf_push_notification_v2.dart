@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 
-import '../../../theme/theme.dart';
+import '../../../../common/theme/theme.dart';
 
 /// A themed push notification overlay widget.
 ///

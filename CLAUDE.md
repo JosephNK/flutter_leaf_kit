@@ -29,12 +29,6 @@ A personal Flutter utility library package for common modules
 | `leaf_webview` | WebView 통합 |
 | `leaf` | 모든 패키지 통합 export |
 
-## 코드 컨벤션
-
-- 클래스 접두사: `Lf` (예: `LfAppBar`, `LfHttp`, `LfDevice`)
-- Export: 각 패키지별 단일 export 파일 (예: `leaf_common.dart`)
-- 상태 관리: BLoC 패턴 사용
-
 ## Python 가이드
 
 Python 스크립트는 Poetry로 관리하며, `scripts/` 폴더에 위치합니다.

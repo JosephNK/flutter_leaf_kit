@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_leaf_component/src/component_v2/navigationbar/index.dart';
-import 'package:flutter_leaf_component/src/theme/theme.dart';
+import 'package:flutter_leaf_component/src/v2/component/navigationbar/index.dart';
+import 'package:flutter_leaf_component/src/common/theme/theme.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 

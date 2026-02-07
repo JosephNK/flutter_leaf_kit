@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../../model/model.dart';
-import '../../../theme/theme.dart';
+import '../../../../common/model/model.dart';
+import '../../../../common/theme/theme.dart';
 import '../../chip/widget/lf_chips_v2.dart';
 import 'lf_dialog_button_v2.dart';
 import 'lf_dialog_title_v2.dart';

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:flutter_leaf_component/src/component_v2/calendar/controller/lf_calendar_controller_v2.dart';
-import 'package:flutter_leaf_component/src/component_v2/calendar/widget/lf_calendar_view_v2.dart';
+import 'package:flutter_leaf_component/src/v2/component/calendar/controller/lf_calendar_controller_v2.dart';
+import 'package:flutter_leaf_component/src/v2/component/calendar/widget/lf_calendar_view_v2.dart';
 
-import '../helpers/theme_test_helper.dart';
+import '../../helpers/theme_test_helper.dart';
 
 /// Wraps [calendar] in a scrollable container so it does not overflow in
 /// the 800×600 test viewport.

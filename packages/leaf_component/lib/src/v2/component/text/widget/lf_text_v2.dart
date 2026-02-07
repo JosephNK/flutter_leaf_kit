@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../../theme/theme.dart';
-import '../../shared/types/lf_text_size.dart';
+import '../../../../common/theme/theme.dart';
+import '../../../shared/types/lf_text_size.dart';
 
 /// A themed text widget that resolves styles from the LF design token system.
 ///

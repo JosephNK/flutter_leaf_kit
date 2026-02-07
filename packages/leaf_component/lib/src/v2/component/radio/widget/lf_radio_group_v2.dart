@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../model/model.dart';
+import '../../../../common/model/model.dart';
 import 'lf_radio_v2.dart';
 
 /// Callback for radio group selection changes.

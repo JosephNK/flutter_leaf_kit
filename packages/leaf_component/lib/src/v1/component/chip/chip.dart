@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../model/model.dart';
+import '../../../common/model/model.dart';
 import '../button/button.dart';
 import '../text/text.dart';
 

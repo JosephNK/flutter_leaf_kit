@@ -1,5 +1,5 @@
 name: example
-description: A new Flutter project.
+description: Flutter Leaf Kit V2 Example App
 publish_to: 'none'
 version: 1.0.0+1
 resolution: workspace
@@ -13,27 +13,13 @@ dependencies:
 
   cupertino_icons: ^1.0.8
 
-  font_awesome_flutter: ^10.8.0
-  image_picker: ^1.1.2
-
-  # Build Gen Plugin
-  built_value: ^8.12.3
-  built_collection: ^5.1.1
-  json_annotation: ^4.9.0
-
   # Leaf Kit Plugin (workspace에서 자동 해결)
   flutter_leaf_kit: any
-
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^6.0.0
-
-  # Build Gen Plugin
-  build_runner: ^2.10.5
-  built_value_generator: ^8.12.3
-  json_serializable: ^6.8.0
 
 flutter:
 
@@ -64,45 +50,3 @@ flutter:
           weight: 800
         - asset: assets/fonts/NotoSansJP-Black.ttf
           weight: 900
-
-#    - family: NotoSansCJK_VF
-#      fonts:
-#        - asset: assets/fonts/NotoSansCJK-VF.otf
-#          weight: 100
-#        - asset: assets/fonts/NotoSansCJK-VF.otf
-#          weight: 200
-#        - asset: assets/fonts/NotoSansCJK-VF.otf
-#          weight: 300
-#        - asset: assets/fonts/NotoSansCJK-VF.otf
-#          weight: 400
-#        - asset: assets/fonts/NotoSansCJK-VF.otf
-#          weight: 500
-#        - asset: assets/fonts/NotoSansCJK-VF.otf
-#          weight: 600
-#        - asset: assets/fonts/NotoSansCJK-VF.otf
-#          weight: 700
-#        - asset: assets/fonts/NotoSansCJK-VF.otf
-#          weight: 800
-#        - asset: assets/fonts/NotoSansCJK-VF.otf
-#          weight: 900
-#
-#    - family: NotoSansCJK
-#      fonts:
-#        - asset: assets/fonts/NotoSansCJK.ttc
-#          weight: 100
-#        - asset: assets/fonts/NotoSansCJK.ttc
-#          weight: 200
-#        - asset: assets/fonts/NotoSansCJK.ttc
-#          weight: 300
-#        - asset: assets/fonts/NotoSansCJK.ttc
-#          weight: 400
-#        - asset: assets/fonts/NotoSansCJK.ttc
-#          weight: 500
-#        - asset: assets/fonts/NotoSansCJK.ttc
-#          weight: 600
-#        - asset: assets/fonts/NotoSansCJK.ttc
-#          weight: 700
-#        - asset: assets/fonts/NotoSansCJK.ttc
-#          weight: 800
-#        - asset: assets/fonts/NotoSansCJK.ttc
-#          weight: 900

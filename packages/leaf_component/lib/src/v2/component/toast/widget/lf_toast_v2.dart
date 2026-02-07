@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:toastification/toastification.dart';
 
-import '../../../theme/theme.dart';
+import '../../../../common/theme/theme.dart';
 import '../type/lf_toast_type_v2.dart';
 
 /// A themed toast utility for showing brief messages and notifications.

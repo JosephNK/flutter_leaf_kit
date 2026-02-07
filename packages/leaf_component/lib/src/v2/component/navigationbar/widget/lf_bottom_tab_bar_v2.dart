@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../theme/theme.dart';
+import '../../../../common/theme/theme.dart';
 import '../../badge/widget/lf_badge_v2.dart';
 import '../controller/lf_bottom_tab_bar_controller_v2.dart';
 import '../model/lf_bottom_tab_item_v2.dart';

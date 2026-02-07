@@ -9,32 +9,6 @@ flutter analyze packages/leaf_component
 flutter test packages/leaf_component
 ```
 
-## 패키지 구조
-
-```
-lib/
-  leaf_component.dart          # 패키지 진입점
-  src/
-    common/                    # 공용 모듈
-      model/                   # 공유 데이터 모델 (LFDataItem, LFDataColorItem)
-      theme/                   # LFThemeData, LFTheme InheritedWidget, ThemeExtension
-        component/             # 컴포넌트별 테마 데이터 (LFButtonThemeData 등)
-      tokens/                  # 디자인 토큰 (colors, typography, spacing, elevation, radius, duration)
-    v1/                        # V1 컴포넌트 (레거시, deprecated)
-      component/               # UI 컴포넌트 (카테고리별 폴더)
-      configure/               # 글로벌 설정 (레거시, theme으로 마이그레이션 예정)
-      index.dart               # V1 barrel export
-    v2/                        # V2 컴포넌트 (신규)
-      component/               # UI 컴포넌트 (카테고리별 폴더)
-      shared/                  # V2 전용 공유 (controller, widget, types)
-      index.dart               # V2 barrel export
-```
-
-## 의존성
-
-- 내부: `leaf_common`, `leaf_datetime`, `leaf_manager`
-- 주요 외부: `cached_network_image`, `flutter_svg`, `shimmer`, `fluttertoast`, `toastification`, `photo_manager`, `lucide_icons_flutter`
-
 ## 네이밍 컨벤션
 
 - 클래스 접두사: `LF` (예: `LFButton`, `LFAppBar`, `LFText`)
@@ -175,45 +149,6 @@ MaterialApp(
 
 `ScreenStatefulWidget`, `LFLayoutApp`, `LFBottomTabBarScaffold`, `LFPopScopeAppClose`
 
-## 컴포넌트 인벤토리
-
-| 카테고리 | 주요 위젯 | 복잡도 |
-|----------|-----------|--------|
-| accordion | LFAccordion, LFAccordionTile, LFAccordionSection | Medium |
-| animated | Bouncing, Expand, Fade, Flip, Rotate, Scale | Medium |
-| app | LFLayoutApp | Low |
-| appbar | LFAppBar, LFAppBarTitle, LFAppBarAction, LFAppBarBack | Medium |
-| badge | LFBadge | Low |
-| bottomsheet | LFBottomSheet | Medium |
-| button | LFButton, LFInkWell, LFLockGestureDetector | Medium |
-| calendar | LFCalendarView (월 네비게이션 포함) | High |
-| checkbox | LFCheckBox, LFCheckBoxGroup | Low |
-| chip | LFChip, LFChips | Low |
-| dialog | LFAlertDialog + Calendar/Checkbox/Radio/Chip picker | High |
-| grid | LFStaggeredGrid | Low |
-| icon | LFIcons (IconData, SVG) | Low |
-| image | Asset, Cache, Network, CircleAvatar, Memory, Transform | Medium |
-| indicator | 플랫폼 적응형 로딩 + 페이지 인디케이터 | Low |
-| navigationbar | 하단 탭 바 시스템 | High |
-| notification | LFPushNotification | Medium |
-| page | LFPageView (auto-paging) | Medium |
-| painter | LFTimelinePainter | Low |
-| photo | 포토 앨범 + LRU 캐시 | High |
-| picker | 날짜/시간 피커 | Medium |
-| popscope | LFPopScopeAppClose | Low |
-| radio | LFRadio, LFRadioGroup | Low |
-| ratingbar | LFRatingBar | Low |
-| screen | ScreenStatefulWidget, ScreenStatelessWidget | Medium |
-| scroll | ListView, GridView, ScrollView (Material/Cupertino) | High |
-| size | LFWidgetSize | Low |
-| skeleton | Shimmer 스켈레톤 로더 | Low |
-| slider | LFSlider, LFRangeSlider | Low |
-| switch | LFSwitch (Material/Cupertino) | Low |
-| tabs | LFTabBar, LFTabView | Low |
-| text | LFText, AutoSize, EasyRich, Expandable, Link, Rich | Medium |
-| textfield | LFTextField + 커스텀 포매터 | High |
-| toast | LFToast (fluttertoast + toastification) | Medium |
-
 ## 플랫폼 적응성
 
 `Platform.isIOS` 대신 context 기반 감지 사용:
@@ -226,33 +161,3 @@ final isApple = Theme.of(context).platform == TargetPlatform.iOS
 // 잘못된 방법 (웹에서 크래시)
 final isApple = Platform.isIOS;
 ```
-
-## 마이그레이션 가이드
-
-### LFComponentConfigure -> LFTheme
-
-`LFComponentConfigure` 싱글톤은 deprecated 예정. `LFTheme` InheritedWidget으로 전환:
-
-```dart
-// 레거시 (deprecated 예정)
-LFComponentConfigure.shared.setup(configure);
-
-// 신규
-LFTheme(
-  data: LFThemeData.light().copyWith(
-    appBarTheme: LFAppBarThemeData(
-      backgroundColor: Colors.indigo,
-    ),
-  ),
-  child: app,
-);
-```
-
-## 알려진 이슈
-
-- `LFTextSizeDouble` 확장: 모든 조건이 `this == 0.8` 비교 (medium, large 분기 미작동)
-- `LFRadio`: `inactiveIcon` 기본값이 `activeIcon`을 참조하는 버그
-- `LFCalendarView`: print 문 잔존
-- 하드코딩 문자열 다수 ('PlaceHolder', 'Cancel', 'OK' 등)
-- `Platform.isIOS` 직접 호출로 웹 빌드 미호환
-- 테스트 0건

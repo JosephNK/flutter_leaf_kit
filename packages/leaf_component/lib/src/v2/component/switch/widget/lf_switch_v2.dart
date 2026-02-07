@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../../../theme/theme.dart';
+import '../../../../common/theme/theme.dart';
 
 /// A themed switch widget that adapts to the platform.
 ///

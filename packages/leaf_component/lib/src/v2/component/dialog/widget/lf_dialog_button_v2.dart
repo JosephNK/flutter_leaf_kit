@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../theme/theme.dart';
+import '../../../../common/theme/theme.dart';
 
 const _kDefaultButtonTextStyle = TextStyle(fontSize: 16);
 const _kDefaultButtonPadding =

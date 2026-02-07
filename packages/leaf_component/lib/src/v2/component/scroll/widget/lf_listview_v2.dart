@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../../../component_v2/indicator/widget/lf_indicator_v2.dart';
+import '../../indicator/widget/lf_indicator_v2.dart';
 import '../common/lf_disallow_glow_behavior_v2.dart';
 import '../common/lf_scroll_control_mixin_v2.dart';
 import '../common/lf_scroll_controller_mixin_v2.dart';

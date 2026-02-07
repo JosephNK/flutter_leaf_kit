@@ -1,6 +1,6 @@
 import 'dart:typed_data';
 
-import 'package:flutter_leaf_component/src/component_v2/photo/cache/lf_image_lru_cache_v2.dart';
+import 'package:flutter_leaf_component/src/v2/component/photo/cache/lf_image_lru_cache_v2.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:photo_manager/photo_manager.dart';
 

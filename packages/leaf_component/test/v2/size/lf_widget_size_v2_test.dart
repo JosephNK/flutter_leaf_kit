@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_leaf_component/leaf_component.dart';
-import 'package:flutter_leaf_component/src/component_v2/size/index.dart';
+import 'package:flutter_leaf_component/src/v2/component/size/index.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import '../helpers/theme_test_helper.dart';
+import '../../helpers/theme_test_helper.dart';
 
 void main() {
   group('LFWidgetSizeV2', () {

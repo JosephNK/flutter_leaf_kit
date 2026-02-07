@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 
-import '../../../theme/theme.dart';
+import '../../../../common/theme/theme.dart';
 
 /// A themed shimmer/skeleton loading placeholder.
 ///

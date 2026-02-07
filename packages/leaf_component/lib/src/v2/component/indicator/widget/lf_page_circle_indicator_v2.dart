@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../theme/theme.dart';
+import '../../../../common/theme/theme.dart';
 
 /// Style for circle indicator dot sizing behaviour.
 enum LFPageCircleIndicatorStyleV2 { none, decrease }

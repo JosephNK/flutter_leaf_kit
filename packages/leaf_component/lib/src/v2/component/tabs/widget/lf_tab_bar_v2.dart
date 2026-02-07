@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../theme/lf_theme.dart';
+import '../../../../common/theme/lf_theme.dart';
 
 @immutable
 class LFTabBarV2 extends StatelessWidget {

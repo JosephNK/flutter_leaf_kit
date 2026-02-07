@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_leaf_component/src/component_v2/photo/widget/lf_photo_list_view_v2.dart';
+import 'package:flutter_leaf_component/src/v2/component/photo/widget/lf_photo_list_view_v2.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import '../helpers/theme_test_helper.dart';
+import '../../helpers/theme_test_helper.dart';
 
 void main() {
   group('LFPhotoListViewV2', () {

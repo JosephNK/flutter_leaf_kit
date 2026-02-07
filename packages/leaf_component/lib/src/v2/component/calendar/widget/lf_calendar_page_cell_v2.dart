@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../theme/theme.dart';
+import '../../../../common/theme/theme.dart';
 import '../date/extension_calendar_v2.dart';
 
 /// Builder for custom content below the day number inside a cell.

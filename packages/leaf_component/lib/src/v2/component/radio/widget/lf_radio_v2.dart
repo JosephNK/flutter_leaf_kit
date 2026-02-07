@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../../theme/theme.dart';
-import '../../shared/widget/lf_inkwell_v2.dart';
+import '../../../../common/theme/theme.dart';
+import '../../../shared/widget/lf_inkwell_v2.dart';
 
 /// Alignment of the radio icon relative to the label text.
 enum LFRadioAlignV2 { left, right }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
-import '../../../theme/lf_theme.dart';
+import '../../../../common/theme/lf_theme.dart';
 
 /// A themed star-rating bar.
 ///

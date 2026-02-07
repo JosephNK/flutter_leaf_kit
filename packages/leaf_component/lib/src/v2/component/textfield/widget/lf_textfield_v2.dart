@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import '../../../theme/theme.dart';
-import '../../shared/controller/lf_textfield_controller_v2.dart';
+import '../../../../common/theme/theme.dart';
+import '../../../shared/controller/lf_textfield_controller_v2.dart';
 
 /// A themed text field widget that resolves all colors from the LF design
 /// token system instead of hardcoded values.

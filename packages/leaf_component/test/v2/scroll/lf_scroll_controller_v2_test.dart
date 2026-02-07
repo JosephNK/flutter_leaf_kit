@@ -1,4 +1,4 @@
-import 'package:flutter_leaf_component/src/component_v2/scroll/index.dart';
+import 'package:flutter_leaf_component/src/v2/component/scroll/index.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {

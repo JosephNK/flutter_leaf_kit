@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_leaf_component/leaf_component.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import '../helpers/theme_test_helper.dart';
+import '../../helpers/theme_test_helper.dart';
 
 /// Wraps a widget for testing with a specific [TargetPlatform].
 Widget _wrapWithPlatform(Widget child, TargetPlatform platform) {

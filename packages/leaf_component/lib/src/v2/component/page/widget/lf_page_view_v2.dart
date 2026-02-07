@@ -1,7 +1,7 @@
 import 'package:expandable_page_view/expandable_page_view.dart';
 import 'package:flutter/material.dart';
 
-import '../../../theme/lf_theme.dart';
+import '../../../../common/theme/lf_theme.dart';
 import '../../indicator/widget/lf_page_rect_indicator_v2.dart';
 
 class LFPageViewV2 extends StatefulWidget {

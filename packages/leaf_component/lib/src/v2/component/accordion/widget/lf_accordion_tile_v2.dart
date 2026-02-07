@@ -2,8 +2,8 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 
-import '../../../theme/lf_theme.dart';
-import '../../shared/widget/lf_inkwell_v2.dart';
+import '../../../../common/theme/lf_theme.dart';
+import '../../../shared/widget/lf_inkwell_v2.dart';
 
 class LFAccordionTileV2 extends StatefulWidget {
   final String title;

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../theme/theme.dart';
+import '../../../../common/theme/theme.dart';
 import '../../indicator/widget/lf_indicator_v2.dart';
 
 /// Callback invoked when the layout constraints are available.

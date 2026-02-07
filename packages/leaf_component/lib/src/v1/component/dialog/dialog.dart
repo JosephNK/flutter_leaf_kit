@@ -4,7 +4,7 @@ import 'package:flutter_leaf_common/leaf_common.dart';
 import 'package:flutter_leaf_datetime/leaf_datetime.dart';
 
 import '../../configure/configure.dart';
-import '../../model/model.dart';
+import '../../../common/model/model.dart';
 import '../calendar/calendar.dart';
 import '../checkbox/checkbox.dart';
 import '../chip/chip.dart';

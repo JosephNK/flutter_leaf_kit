@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../../../theme/theme.dart';
+import '../../../../common/theme/theme.dart';
 import '../model/lf_bottom_sheet_item_v2.dart';
 
 /// A themed bottom sheet that shows a list of action items.

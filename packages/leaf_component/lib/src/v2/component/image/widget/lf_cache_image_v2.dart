@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 
-import '../../../theme/lf_theme.dart';
+import '../../../../common/theme/lf_theme.dart';
 import 'lf_asset_image_v2.dart';
 import 'lf_cache_network_image_v2.dart';
 
