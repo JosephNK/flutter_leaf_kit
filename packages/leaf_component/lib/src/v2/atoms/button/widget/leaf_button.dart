@@ -69,8 +69,18 @@ class LeafButton extends StatelessWidget {
     final resolvedLeadingSpacing =
         leadingSpacing ?? buttonTheme?.leadingSpacing ?? 8.0;
     final resolvedPadding = padding ?? buttonTheme?.padding;
-    final resolvedDecoration =
-        decoration ?? BoxDecoration(color: resolvedBg);
+    final resolvedDecoration = decoration != null
+        ? BoxDecoration(
+            color: decoration!.color ?? resolvedBg,
+            image: decoration!.image,
+            border: decoration!.border,
+            borderRadius: decoration!.borderRadius,
+            boxShadow: decoration!.boxShadow,
+            gradient: decoration!.gradient,
+            backgroundBlendMode: decoration!.backgroundBlendMode,
+            shape: decoration!.shape,
+          )
+        : BoxDecoration(color: resolvedBg);
 
     final textWidget = LeafText(
       text,
