@@ -15,6 +15,7 @@ export 'src/datetime/leaf_date.dart';
 export 'src/index.dart';
 export 'src/localizations/cupertino/cupertino_localizations_ko.dart';
 export 'src/localizations/localizations.dart';
+export 'src/model/leaf_multipart_file.dart';
 export 'src/model/leaf_ui_model.dart';
 export 'src/value/leaf_error_value.dart';
 export 'src/value/leaf_result_value.dart';

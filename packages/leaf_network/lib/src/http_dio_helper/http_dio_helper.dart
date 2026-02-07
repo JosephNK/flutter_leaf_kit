@@ -1,6 +1,5 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_leaf_common/leaf_common.dart';
-import 'package:flutter_leaf_store/leaf_store.dart';
 import 'package:http_parser/http_parser.dart';
 
 enum HttpDioMediaMimeType {
