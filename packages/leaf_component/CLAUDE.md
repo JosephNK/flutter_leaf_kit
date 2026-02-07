@@ -133,6 +133,17 @@ MaterialApp(
 
 ## 컴포넌트 계층 (Atomic Design)
 
+[Atomic Design](https://bradfrost.com/blog/post/atomic-web-design/) 방법론을 기반으로 컴포넌트를 계층화합니다.
+
+| 단계 | 설명 | 예시 |
+|------|------|------|
+| **Atoms** | 더 이상 분해할 수 없는 기본 UI 요소 | 버튼, 텍스트, 아이콘 |
+| **Molecules** | Atoms를 조합한 기능 단위 | 텍스트 필드, 체크박스 그룹 |
+| **Organisms** | Molecules/Atoms를 조합한 복합 UI 블록 | 다이얼로그, 캘린더, 바텀시트 |
+| **Templates** | 페이지 수준의 레이아웃 구조 | 스캐폴드, 앱 레이아웃 |
+
+새 컴포넌트 추가 시 위 계층에 맞는 적절한 레벨에 배치하세요.
+
 ### Atoms (기본 요소)
 
 `LFText`, `LFIcon`, `LFBadge`, `LFButton`, `LFInkWell`, `LFCheckBox`, `LFRadio`, `LFSwitch`, `LFChip`, `LFSlider`, `LFIndicator`, `LFSkeleton`, Animated 위젯
