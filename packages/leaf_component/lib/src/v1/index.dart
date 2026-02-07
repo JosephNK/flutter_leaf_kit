@@ -34,6 +34,5 @@ export 'component/text/text.dart';
 export 'component/textfield/textfield.dart';
 export 'component/toast/toast.dart';
 
-// Configure & Model
+// Configure
 export 'configure/configure.dart';
-export 'model/model.dart';

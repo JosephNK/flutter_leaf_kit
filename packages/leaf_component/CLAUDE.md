@@ -15,12 +15,19 @@ flutter test packages/leaf_component
 lib/
   leaf_component.dart          # 패키지 진입점
   src/
-    tokens/                    # 디자인 토큰 (colors, typography, spacing, elevation, radius, duration)
-    theme/                     # LFThemeData, LFTheme InheritedWidget, ThemeExtension
-      component/               # 컴포넌트별 테마 데이터 (LFButtonThemeData 등)
-    component/                 # UI 컴포넌트 (카테고리별 폴더)
-    configure/                 # 글로벌 설정 (레거시, theme으로 마이그레이션 예정)
-    model/                     # 공유 데이터 모델 (LFDataItem, LFDataColorItem)
+    common/                    # 공용 모듈
+      model/                   # 공유 데이터 모델 (LFDataItem, LFDataColorItem)
+      theme/                   # LFThemeData, LFTheme InheritedWidget, ThemeExtension
+        component/             # 컴포넌트별 테마 데이터 (LFButtonThemeData 등)
+      tokens/                  # 디자인 토큰 (colors, typography, spacing, elevation, radius, duration)
+    v1/                        # V1 컴포넌트 (레거시, deprecated)
+      component/               # UI 컴포넌트 (카테고리별 폴더)
+      configure/               # 글로벌 설정 (레거시, theme으로 마이그레이션 예정)
+      index.dart               # V1 barrel export
+    v2/                        # V2 컴포넌트 (신규)
+      component/               # UI 컴포넌트 (카테고리별 폴더)
+      shared/                  # V2 전용 공유 (controller, widget, types)
+      index.dart               # V2 barrel export
 ```
 
 ## 의존성
