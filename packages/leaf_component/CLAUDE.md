@@ -1,6 +1,6 @@
 # leaf_component
 
-LF 디자인 시스템 기반 Flutter UI 컴포넌트 라이브러리.
+Leaf 디자인 시스템 기반 Flutter UI 컴포넌트 라이브러리.
 
 ## 빌드 & 테스트
 
@@ -11,12 +11,13 @@ flutter test packages/leaf_component
 
 ## 네이밍 컨벤션
 
-- 클래스 접두사: `LF` (예: `LFButton`, `LFAppBar`, `LFText`)
-- 파일 접두사: `lf_` (예: `lf_button.dart`, `lf_appbar.dart`)
-- 토큰 클래스: `LFColors`, `LFTypography`, `LFSpacing`, `LFElevation`, `LFRadius`, `LFDuration`
-- 테마 클래스: `LFThemeData`, `LFTheme`
-- 컴포넌트 테마: `LF` + 컴포넌트명 + `ThemeData` (예: `LFButtonThemeData`)
-- Enum: `LF` + 컴포넌트명 + 개념 (예: `LFCheckBoxAlign`, `LFTextSize`)
+- 클래스 접두사: `Leaf` (예: `LeafButton`, `LeafAppBar`, `LeafText`)
+- 파일 접두사: `leaf_` (예: `leaf_button.dart`, `leaf_appbar.dart`)
+- 토큰 클래스: `LeafColors`, `LeafTypography`, `LeafSpacing`, `LeafElevation`, `LeafRadius`, `LeafDuration`
+- 테마 클래스: `LeafThemeData`, `LeafTheme`
+- 컴포넌트 테마: `Leaf` + 컴포넌트명 + `ThemeData` (예: `LeafButtonThemeData`)
+- Enum: `Leaf` + 컴포넌트명 + 개념 (예: `LeafCheckBoxAlign`, `LeafTextSize`)
+- V1 클래스: `LF` 접두사 유지 (deprecated)
 
 ## 플랫폼 적응성
 
@@ -43,12 +44,12 @@ final isApple = Platform.isIOS;
 ### 스타일 해석 우선순위
 
 ```
-위젯 파라미터 > LFThemeData (context) > 하드코딩 기본값
+위젯 파라미터 > LeafThemeData (context) > 하드코딩 기본값
 ```
 
 ```dart
 Widget build(BuildContext context) {
-  final theme = LFTheme.of(context);
+  final theme = LeafTheme.of(context);
   final colors = theme.colors;
 
   final bgColor = widget.backgroundColor    // 1. 위젯 파라미터
@@ -72,10 +73,10 @@ Widget build(BuildContext context) {
 
 ## 디자인 토큰 시스템
 
-### Colors (`LFColors`)
+### Colors (`LeafColors`)
 
 | 토큰 | 용도 |
-|------|------| 
+|------|------|
 | `primary`, `onPrimary` | 브랜드 주요 색상 |
 | `secondary`, `onSecondary` | 보조 색상 |
 | `surface`, `onSurface` | 카드, AppBar 등 표면 |
@@ -85,31 +86,31 @@ Widget build(BuildContext context) {
 | `active`, `inactive`, `disabled` | 인터랙티브 상태 |
 | `divider`, `shadow`, `overlay` | 구조적 요소 |
 
-프리셋: `LFColors.light()`, `LFColors.dark()`
+프리셋: `LeafColors.light()`, `LeafColors.dark()`
 
-### Typography (`LFTypography`)
+### Typography (`LeafTypography`)
 
 Material Design 3 스케일 기반: `displayLarge` ~ `labelSmall`
 
-### Spacing (`LFSpacing`)
+### Spacing (`LeafSpacing`)
 
 ```
 xs: 2 / sm: 4 / md: 8 / lg: 12 / xl: 16 / xxl: 24 / xxxl: 32
 ```
 
-### Elevation (`LFElevation`)
+### Elevation (`LeafElevation`)
 
 ```
 none: 0 / xs: 1 / sm: 2 / md: 4 / lg: 8 / xl: 16
 ```
 
-### Radius (`LFRadius`)
+### Radius (`LeafRadius`)
 
 ```
 none: 0 / sm: 4 / md: 8 / lg: 12 / xl: 16 / xxl: 20 / full: 50
 ```
 
-### Duration (`LFDuration`)
+### Duration (`LeafDuration`)
 
 ```
 fast: 150ms / normal: 250ms / slow: 300ms / verySlow: 450ms
@@ -117,19 +118,23 @@ fast: 150ms / normal: 250ms / slow: 300ms / verySlow: 450ms
 
 ## 테마 시스템
 
-### LFTheme 사용법
+### LeafTheme 사용법
 
 ```dart
 // 앱 루트에서 테마 제공
-LFTheme(
-  data: LFThemeData.light(),  // 또는 LFThemeData.dark()
+LeafTheme(
+  data: LeafThemeData.light(),  // 또는 LeafThemeData.dark()
   child: MaterialApp(...),
 );
 
 // 컴포넌트에서 테마 접근
-final theme = LFTheme.of(context);
+final theme = LeafTheme.of(context);
 final colors = theme.colors;
 final typography = theme.typography;
+
+// BuildContext 확장
+final colors = context.leafColors;
+final typography = context.leafTypography;
 ```
 
 ### Flutter ThemeData 통합
@@ -138,7 +143,7 @@ final typography = theme.typography;
 MaterialApp(
   theme: ThemeData(
     extensions: [
-      LFThemeDataExtension(data: LFThemeData.light()),
+      LeafThemeDataExtension(data: LeafThemeData.light()),
     ],
   ),
 );
@@ -174,16 +179,16 @@ lib/src/v2/
 
 ### Atoms (기본 요소)
 
-`LFText`, `LFIcon`, `LFBadge`, `LFButton`, `LFCheckBox`, `LFRadio`, `LFSwitch`, `LFChip`, `LFSlider`, `LFIndicator`, `LFSkeleton`, Animated 위젯, Image 위젯, `LFTimelinePainter`, `LFWidgetSize`
+`LeafText`, `LeafIcons`, `LeafBadge`, `LeafButton`, `LeafCheckBox`, `LeafRadio`, `LeafSwitch`, `LeafChip`, `LeafSlider`, `LeafIndicator`, `LeafSkeleton`, Animated 위젯, Image 위젯, `LeafTimelinePainter`, `LeafWidgetSize`
 
 ### Molecules (조합 요소)
 
-`LFTextField`, `LFRatingBar`, `LFAppBar`, `LFTabBar`, `LFTabView`
+`LeafTextField`, `LeafRatingBar`, `LeafAppBar`, `LeafTabBar`, `LeafTabView`
 
 ### Organisms (복합 UI)
 
-`LFAccordion`, `LFAlertDialog`, `LFBottomSheet`, `LFToast`, `LFPushNotification`, `LFCalendarView`, `LFPageView`, Scroll 뷰, Photo 컴포넌트, Picker, `LFStaggeredGrid`
+`LeafAccordion`, `LeafAlertDialog`, `LeafBottomSheet`, `LeafToast`, `LeafPushNotification`, `LeafCalendarView`, `LeafPageView`, Scroll 뷰, Photo 컴포넌트, Picker, `LeafStaggeredGrid`
 
 ### Templates (페이지 구조)
 
-`LFScreenStatefulWidget`, `LFLayoutApp`, `LFBottomTabBarScaffold`, `LFPopScopeAppClose`
+`LeafScreenStatefulWidget`, `LeafLayoutApp`, `LeafBottomTabBarScaffold`, `LeafPopScopeAppClose`
