@@ -111,21 +111,21 @@
             "flutterMode": "release"
         },
         {
-            "name": "leaf_location",
-            "cwd": "packages/leaf_location",
+            "name": "leaf_platform",
+            "cwd": "packages/leaf_platform",
             "request": "launch",
             "type": "dart"
         },
         {
-            "name": "leaf_location (profile mode)",
-            "cwd": "packages/leaf_location",
+            "name": "leaf_platform (profile mode)",
+            "cwd": "packages/leaf_platform",
             "request": "launch",
             "type": "dart",
             "flutterMode": "profile"
         },
         {
-            "name": "leaf_location (release mode)",
-            "cwd": "packages/leaf_location",
+            "name": "leaf_platform (release mode)",
+            "cwd": "packages/leaf_platform",
             "request": "launch",
             "type": "dart",
             "flutterMode": "release"
@@ -146,26 +146,6 @@
         {
             "name": "leaf_manager (release mode)",
             "cwd": "packages/leaf_manager",
-            "request": "launch",
-            "type": "dart",
-            "flutterMode": "release"
-        },
-        {
-            "name": "leaf_map",
-            "cwd": "packages/leaf_map",
-            "request": "launch",
-            "type": "dart"
-        },
-        {
-            "name": "leaf_map (profile mode)",
-            "cwd": "packages/leaf_map",
-            "request": "launch",
-            "type": "dart",
-            "flutterMode": "profile"
-        },
-        {
-            "name": "leaf_map (release mode)",
-            "cwd": "packages/leaf_map",
             "request": "launch",
             "type": "dart",
             "flutterMode": "release"
@@ -230,25 +210,5 @@
             "type": "dart",
             "flutterMode": "release"
         },
-        {
-            "name": "leaf_webview",
-            "cwd": "packages/leaf_webview",
-            "request": "launch",
-            "type": "dart"
-        },
-        {
-            "name": "leaf_webview (profile mode)",
-            "cwd": "packages/leaf_webview",
-            "request": "launch",
-            "type": "dart",
-            "flutterMode": "profile"
-        },
-        {
-            "name": "leaf_webview (release mode)",
-            "cwd": "packages/leaf_webview",
-            "request": "launch",
-            "type": "dart",
-            "flutterMode": "release"
-        }
     ]
 }

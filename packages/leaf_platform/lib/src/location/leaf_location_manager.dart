@@ -56,27 +56,6 @@ class LeafLocationManager {
     }
   }
 
-  // Future<bool> requestAlertPermissionLocation({
-  //   required VoidCallback onShowAlert,
-  // }) async {
-  //   final permission =
-  //       await LocationManager.shared.requestCheckPermissionLocation();
-  //   if (!permission) {
-  //     onShowAlert.call();
-  //     return false;
-  //   }
-  //   return true;
-  // }
-
-  // Future<bool> requestCheckPermissionLocation() async {
-  //   final check = await requestCheckPermission();
-  //   if (!check) {
-  //     final result = await requestPermissionLocation();
-  //     return result;
-  //   }
-  //   return check;
-  // }
-
   Future<bool> requestPermissionLocation() async {
     final status = await Geolocator.requestPermission();
     final isDenied = _isDeniedStatus(status);

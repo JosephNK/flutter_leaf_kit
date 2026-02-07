@@ -1,4 +1,4 @@
-part of '../leaf_map.dart';
+part of 'leaf_map.dart';
 
 class MapMarkerBitmapIcon {
   final double _markerSize;

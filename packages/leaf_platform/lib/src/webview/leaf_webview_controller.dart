@@ -1,4 +1,4 @@
-part of '../../leaf_webview.dart';
+part of 'leaf_webview.dart';
 
 typedef LeafWebViewOnJavaScriptMessageReceived = Function(
     JavaScriptMessage javaScriptMessage);
