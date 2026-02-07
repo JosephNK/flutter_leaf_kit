@@ -1,27 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_leaf_kit/flutter_leaf_kit.dart';
 
-class ScrollViewScreen extends LFScreenStatefulWidgetV2 {
+class ScrollViewScreen extends LeafScreenStatefulWidget {
   const ScrollViewScreen({super.key});
 
   @override
   State<ScrollViewScreen> createState() => _ScrollViewScreenState();
 }
 
-class _ScrollViewScreenState extends LFScreenStateV2<ScrollViewScreen> {
+class _ScrollViewScreenState extends LeafScreenState<ScrollViewScreen> {
   @override
   PreferredSizeWidget? buildAppBar(BuildContext context, Object? state) {
-    return const LFAppBarV2(title: LFAppBarTitleV2(text: 'ScrollView'));
+    return const LeafAppBar(title: LeafAppBarTitle(text: 'ScrollView'));
   }
 
   @override
   Widget buildBody(BuildContext context, Object? state) {
-    final colors = context.lfColors;
-    final typography = context.lfTypography;
-    final spacing = context.lfSpacing;
-    final radius = context.lfRadius;
+    final colors = context.leafColors;
+    final typography = context.leafTypography;
+    final spacing = context.leafSpacing;
+    final radius = context.leafRadius;
 
-    return LFScrollViewV2(
+    return LeafScrollView(
       child: Padding(
         padding: EdgeInsets.all(spacing.xl),
         child: Column(

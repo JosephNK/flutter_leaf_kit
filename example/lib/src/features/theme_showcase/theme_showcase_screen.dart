@@ -4,7 +4,7 @@ import 'package:flutter_leaf_kit/flutter_leaf_kit.dart';
 import '../../common/widgets/showcase_scaffold.dart';
 import '../../common/widgets/showcase_section.dart';
 
-class ThemeShowcaseScreen extends LFScreenStatefulWidgetV2 {
+class ThemeShowcaseScreen extends LeafScreenStatefulWidget {
   const ThemeShowcaseScreen({super.key});
 
   @override
@@ -12,18 +12,18 @@ class ThemeShowcaseScreen extends LFScreenStatefulWidgetV2 {
 }
 
 class _ThemeShowcaseScreenState
-    extends LFScreenStateV2<ThemeShowcaseScreen> {
+    extends LeafScreenState<ThemeShowcaseScreen> {
   @override
   PreferredSizeWidget? buildAppBar(BuildContext context, Object? state) {
-    return const LFAppBarV2(title: LFAppBarTitleV2(text: 'Theme Showcase'));
+    return const LeafAppBar(title: LeafAppBarTitle(text: 'Theme Showcase'));
   }
 
   @override
   Widget buildBody(BuildContext context, Object? state) {
-    final colors = context.lfColors;
-    final typography = context.lfTypography;
-    final spacing = context.lfSpacing;
-    final radius = context.lfRadius;
+    final colors = context.leafColors;
+    final typography = context.leafTypography;
+    final spacing = context.leafSpacing;
+    final radius = context.leafRadius;
 
     return ShowcaseScaffold(
       children: [
@@ -125,7 +125,7 @@ class _ThemeShowcaseScreenState
     );
   }
 
-  Widget _spacingRow(String name, double value, LFColors colors) {
+  Widget _spacingRow(String name, double value, LeafColors colors) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 8),
       child: Row(
@@ -150,7 +150,7 @@ class _ThemeShowcaseScreenState
     );
   }
 
-  Widget _radiusBox(String name, double value, LFColors colors) {
+  Widget _radiusBox(String name, double value, LeafColors colors) {
     return Column(
       children: [
         Container(

@@ -5,33 +5,33 @@ import '../../../../common/widgets/showcase_scaffold.dart';
 import '../../../../common/widgets/showcase_section.dart';
 import '../../../../common/widgets/showcase_tile.dart';
 
-class ScreenBaseScreen extends LFScreenStatefulWidgetV2 {
+class ScreenBaseScreen extends LeafScreenStatefulWidget {
   const ScreenBaseScreen({super.key});
 
   @override
   State<ScreenBaseScreen> createState() => _ScreenBaseScreenState();
 }
 
-class _ScreenBaseScreenState extends LFScreenStateV2<ScreenBaseScreen> {
+class _ScreenBaseScreenState extends LeafScreenState<ScreenBaseScreen> {
   @override
   PreferredSizeWidget? buildAppBar(BuildContext context, Object? state) {
-    return const LFAppBarV2(title: LFAppBarTitleV2(text: 'Screen Base'));
+    return const LeafAppBar(title: LeafAppBarTitle(text: 'Screen Base'));
   }
 
   @override
   Widget buildBody(BuildContext context, Object? state) {
-    final typography = context.lfTypography;
+    final typography = context.leafTypography;
 
     return ShowcaseScaffold(
       children: [
         ShowcaseSection(
-          title: 'LFScreenStatefulWidgetV2',
+          title: 'LeafScreenStatefulWidget',
           children: [
             ShowcaseTile(
               label: 'This screen uses it',
               child: Text(
-                'This very screen extends LFScreenStatefulWidgetV2 '
-                'with LFScreenStateV2. It provides:\n\n'
+                'This very screen extends LeafScreenStatefulWidget '
+                'with LeafScreenState. It provides:\n\n'
                 '- Built-in Scaffold with SafeArea\n'
                 '- buildAppBar() / buildBody() overrides\n'
                 '- PopScope handling (canPop)\n'
@@ -43,12 +43,12 @@ class _ScreenBaseScreenState extends LFScreenStateV2<ScreenBaseScreen> {
           ],
         ),
         ShowcaseSection(
-          title: 'LFScreenStatelessWidgetV2',
+          title: 'LeafScreenStatelessWidget',
           children: [
             ShowcaseTile(
               label: 'Semantic wrapper',
               child: Text(
-                'LFScreenStatelessWidgetV2 is a lightweight '
+                'LeafScreenStatelessWidget is a lightweight '
                 'semantic wrapper that marks a widget as a screen. '
                 'Useful for simple screens without state.',
                 style: typography.bodyMedium,

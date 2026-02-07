@@ -5,23 +5,23 @@ import '../../../../common/widgets/showcase_scaffold.dart';
 import '../../../../common/widgets/showcase_section.dart';
 import '../../../../common/widgets/showcase_tile.dart';
 
-class PageScreen extends LFScreenStatefulWidgetV2 {
+class PageScreen extends LeafScreenStatefulWidget {
   const PageScreen({super.key});
 
   @override
   State<PageScreen> createState() => _PageScreenState();
 }
 
-class _PageScreenState extends LFScreenStateV2<PageScreen> {
+class _PageScreenState extends LeafScreenState<PageScreen> {
   @override
   PreferredSizeWidget? buildAppBar(BuildContext context, Object? state) {
-    return const LFAppBarV2(title: LFAppBarTitleV2(text: 'PageView'));
+    return const LeafAppBar(title: LeafAppBarTitle(text: 'PageView'));
   }
 
   @override
   Widget buildBody(BuildContext context, Object? state) {
-    final colors = context.lfColors;
-    final radius = context.lfRadius;
+    final colors = context.leafColors;
+    final radius = context.leafRadius;
 
     final pages = [
       Colors.blue.shade100,
@@ -39,7 +39,7 @@ class _PageScreenState extends LFScreenStateV2<PageScreen> {
               label: 'With indicators',
               child: SizedBox(
                 height: 200,
-                child: LFPageViewV2(
+                child: LeafPageView(
                   autoPage: true,
                   children: pages.map((color) {
                     return Container(
@@ -71,7 +71,7 @@ class _PageScreenState extends LFScreenStateV2<PageScreen> {
               label: 'Without auto-page',
               child: SizedBox(
                 height: 150,
-                child: LFPageViewV2(
+                child: LeafPageView(
                   autoPage: false,
                   children: pages.map((color) {
                     return Container(

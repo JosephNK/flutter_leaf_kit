@@ -5,24 +5,24 @@ import '../../../../common/widgets/showcase_scaffold.dart';
 import '../../../../common/widgets/showcase_section.dart';
 import '../../../../common/widgets/showcase_tile.dart';
 
-class ButtonScreen extends LFScreenStatefulWidgetV2 {
+class ButtonScreen extends LeafScreenStatefulWidget {
   const ButtonScreen({super.key});
 
   @override
   State<ButtonScreen> createState() => _ButtonScreenState();
 }
 
-class _ButtonScreenState extends LFScreenStateV2<ButtonScreen> {
+class _ButtonScreenState extends LeafScreenState<ButtonScreen> {
   bool _loading = false;
 
   @override
   PreferredSizeWidget? buildAppBar(BuildContext context, Object? state) {
-    return const LFAppBarV2(title: LFAppBarTitleV2(text: 'Button'));
+    return const LeafAppBar(title: LeafAppBarTitle(text: 'Button'));
   }
 
   @override
   Widget buildBody(BuildContext context, Object? state) {
-    final colors = context.lfColors;
+    final colors = context.leafColors;
 
     return ShowcaseScaffold(
       children: [
@@ -31,11 +31,11 @@ class _ButtonScreenState extends LFScreenStateV2<ButtonScreen> {
           children: [
             ShowcaseTile(
               label: 'Default',
-              child: LFButtonV2(text: 'Tap me', onTap: () {}),
+              child: LeafButton(text: 'Tap me', onTap: () {}),
             ),
             ShowcaseTile(
               label: 'Disabled',
-              child: LFButtonV2(text: 'Disabled', disabled: true),
+              child: LeafButton(text: 'Disabled', disabled: true),
             ),
           ],
         ),
@@ -44,7 +44,7 @@ class _ButtonScreenState extends LFScreenStateV2<ButtonScreen> {
           children: [
             ShowcaseTile(
               label: 'Custom colors',
-              child: LFButtonV2(
+              child: LeafButton(
                 text: 'Custom',
                 backgroundColor: colors.secondary,
                 foregroundColor: colors.onSecondary,
@@ -53,7 +53,7 @@ class _ButtonScreenState extends LFScreenStateV2<ButtonScreen> {
             ),
             ShowcaseTile(
               label: 'With leading icon',
-              child: LFButtonV2(
+              child: LeafButton(
                 text: 'Download',
                 leading: const Icon(Icons.download, size: 18),
                 onTap: () {},
@@ -66,7 +66,7 @@ class _ButtonScreenState extends LFScreenStateV2<ButtonScreen> {
           children: [
             ShowcaseTile(
               label: 'Toggle loading',
-              child: LFButtonV2(
+              child: LeafButton(
                 text: 'Submit',
                 loading: _loading,
                 onTap: () {

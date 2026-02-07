@@ -5,17 +5,17 @@ import '../../../../common/widgets/showcase_scaffold.dart';
 import '../../../../common/widgets/showcase_section.dart';
 import '../../../../common/widgets/showcase_tile.dart';
 
-class TextFieldScreen extends LFScreenStatefulWidgetV2 {
+class TextFieldScreen extends LeafScreenStatefulWidget {
   const TextFieldScreen({super.key});
 
   @override
   State<TextFieldScreen> createState() => _TextFieldScreenState();
 }
 
-class _TextFieldScreenState extends LFScreenStateV2<TextFieldScreen> {
-  final _basicController = LFTextFieldControllerV2();
-  final _emailController = LFTextFieldControllerV2();
-  final _passwordController = LFTextFieldControllerV2();
+class _TextFieldScreenState extends LeafScreenState<TextFieldScreen> {
+  final _basicController = LeafTextFieldController();
+  final _emailController = LeafTextFieldController();
+  final _passwordController = LeafTextFieldController();
 
   @override
   void dispose() {
@@ -27,7 +27,7 @@ class _TextFieldScreenState extends LFScreenStateV2<TextFieldScreen> {
 
   @override
   PreferredSizeWidget? buildAppBar(BuildContext context, Object? state) {
-    return const LFAppBarV2(title: LFAppBarTitleV2(text: 'TextField'));
+    return const LeafAppBar(title: LeafAppBarTitle(text: 'TextField'));
   }
 
   @override
@@ -39,7 +39,7 @@ class _TextFieldScreenState extends LFScreenStateV2<TextFieldScreen> {
           children: [
             ShowcaseTile(
               label: 'Default',
-              child: LFTextFieldV2(
+              child: LeafTextField(
                 controller: _basicController,
                 placeHolder: 'Enter text...',
               ),
@@ -51,7 +51,7 @@ class _TextFieldScreenState extends LFScreenStateV2<TextFieldScreen> {
           children: [
             ShowcaseTile(
               label: 'Email',
-              child: LFTextFieldV2(
+              child: LeafTextField(
                 controller: _emailController,
                 placeHolder: 'email@example.com',
                 keyboardType: TextInputType.emailAddress,
@@ -60,7 +60,7 @@ class _TextFieldScreenState extends LFScreenStateV2<TextFieldScreen> {
             ),
             ShowcaseTile(
               label: 'Password',
-              child: LFTextFieldV2(
+              child: LeafTextField(
                 controller: _passwordController,
                 placeHolder: 'Password',
                 obscureText: true,
@@ -74,16 +74,16 @@ class _TextFieldScreenState extends LFScreenStateV2<TextFieldScreen> {
           children: [
             ShowcaseTile(
               label: 'With error',
-              child: LFTextFieldV2(
-                controller: LFTextFieldControllerV2(),
+              child: LeafTextField(
+                controller: LeafTextFieldController(),
                 placeHolder: 'Invalid input',
                 errorText: 'This field is required',
               ),
             ),
             ShowcaseTile(
               label: 'Disabled',
-              child: LFTextFieldV2(
-                controller: LFTextFieldControllerV2(),
+              child: LeafTextField(
+                controller: LeafTextFieldController(),
                 placeHolder: 'Disabled field',
                 disabled: true,
               ),

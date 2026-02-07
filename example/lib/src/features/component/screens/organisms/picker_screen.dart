@@ -5,20 +5,20 @@ import '../../../../common/widgets/showcase_scaffold.dart';
 import '../../../../common/widgets/showcase_section.dart';
 import '../../../../common/widgets/showcase_tile.dart';
 
-class PickerScreen extends LFScreenStatefulWidgetV2 {
+class PickerScreen extends LeafScreenStatefulWidget {
   const PickerScreen({super.key});
 
   @override
   State<PickerScreen> createState() => _PickerScreenState();
 }
 
-class _PickerScreenState extends LFScreenStateV2<PickerScreen> {
+class _PickerScreenState extends LeafScreenState<PickerScreen> {
   DateTime _selectedDate = DateTime.now();
   DateTime _selectedTime = DateTime.now();
 
   @override
   PreferredSizeWidget? buildAppBar(BuildContext context, Object? state) {
-    return const LFAppBarV2(title: LFAppBarTitleV2(text: 'Picker'));
+    return const LeafAppBar(title: LeafAppBarTitle(text: 'Picker'));
   }
 
   @override
@@ -30,7 +30,7 @@ class _PickerScreenState extends LFScreenStateV2<PickerScreen> {
           children: [
             ShowcaseTile(
               label: 'Expandable date picker',
-              child: LFDatePickerV2(
+              child: LeafDatePicker(
                 label: const Text('Select Date'),
                 icon: const Icon(Icons.calendar_today),
                 initialDate: _selectedDate,
@@ -48,7 +48,7 @@ class _PickerScreenState extends LFScreenStateV2<PickerScreen> {
           children: [
             ShowcaseTile(
               label: 'Expandable time picker',
-              child: LFTimePickerV2(
+              child: LeafTimePicker(
                 label: const Text('Select Time'),
                 icon: const Icon(Icons.access_time),
                 initialTime: _selectedTime,

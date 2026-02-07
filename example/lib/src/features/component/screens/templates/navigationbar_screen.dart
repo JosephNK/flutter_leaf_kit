@@ -5,17 +5,17 @@ import '../../../../common/widgets/showcase_scaffold.dart';
 import '../../../../common/widgets/showcase_section.dart';
 import '../../../../common/widgets/showcase_action_tile.dart';
 
-class NavigationBarScreen extends LFScreenStatefulWidgetV2 {
+class NavigationBarScreen extends LeafScreenStatefulWidget {
   const NavigationBarScreen({super.key});
 
   @override
   State<NavigationBarScreen> createState() => _NavigationBarScreenState();
 }
 
-class _NavigationBarScreenState extends LFScreenStateV2<NavigationBarScreen> {
+class _NavigationBarScreenState extends LeafScreenState<NavigationBarScreen> {
   @override
   PreferredSizeWidget? buildAppBar(BuildContext context, Object? state) {
-    return const LFAppBarV2(title: LFAppBarTitleV2(text: 'Navigation Bar'));
+    return const LeafAppBar(title: LeafAppBarTitle(text: 'Navigation Bar'));
   }
 
   @override

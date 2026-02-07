@@ -5,28 +5,28 @@ import '../../../../common/widgets/showcase_scaffold.dart';
 import '../../../../common/widgets/showcase_section.dart';
 import '../../../../common/widgets/showcase_tile.dart';
 
-class CheckboxScreen extends LFScreenStatefulWidgetV2 {
+class CheckboxScreen extends LeafScreenStatefulWidget {
   const CheckboxScreen({super.key});
 
   @override
   State<CheckboxScreen> createState() => _CheckboxScreenState();
 }
 
-class _CheckboxScreenState extends LFScreenStateV2<CheckboxScreen> {
+class _CheckboxScreenState extends LeafScreenState<CheckboxScreen> {
   bool _singleValue = false;
-  List<LFDataItem> _groupValues = [];
+  List<LeafDataItem> _groupValues = [];
 
   @override
   PreferredSizeWidget? buildAppBar(BuildContext context, Object? state) {
-    return const LFAppBarV2(title: LFAppBarTitleV2(text: 'CheckBox'));
+    return const LeafAppBar(title: LeafAppBarTitle(text: 'CheckBox'));
   }
 
   @override
   Widget buildBody(BuildContext context, Object? state) {
     final groupItems = [
-      LFDataItem(id: '1', text: 'Apple'),
-      LFDataItem(id: '2', text: 'Banana'),
-      LFDataItem(id: '3', text: 'Cherry'),
+      LeafDataItem(id: '1', text: 'Apple'),
+      LeafDataItem(id: '2', text: 'Banana'),
+      LeafDataItem(id: '3', text: 'Cherry'),
     ];
 
     return ShowcaseScaffold(
@@ -36,7 +36,7 @@ class _CheckboxScreenState extends LFScreenStateV2<CheckboxScreen> {
           children: [
             ShowcaseTile(
               label: 'Basic',
-              child: LFCheckBoxV2(
+              child: LeafCheckBox(
                 value: _singleValue,
                 text: 'Accept terms',
                 onChanged: (value) => setState(() => _singleValue = value),
@@ -44,10 +44,10 @@ class _CheckboxScreenState extends LFScreenStateV2<CheckboxScreen> {
             ),
             ShowcaseTile(
               label: 'Right aligned',
-              child: LFCheckBoxV2(
+              child: LeafCheckBox(
                 value: _singleValue,
                 text: 'Right align',
-                align: LFCheckBoxAlignV2.right,
+                align: LeafCheckBoxAlign.right,
                 onChanged: (value) => setState(() => _singleValue = value),
               ),
             ),
@@ -58,7 +58,7 @@ class _CheckboxScreenState extends LFScreenStateV2<CheckboxScreen> {
           children: [
             ShowcaseTile(
               label: 'Vertical group',
-              child: LFCheckBoxGroupV2(
+              child: LeafCheckBoxGroup(
                 items: groupItems,
                 values: _groupValues,
                 onChanged: (items, _) {
@@ -68,7 +68,7 @@ class _CheckboxScreenState extends LFScreenStateV2<CheckboxScreen> {
             ),
             ShowcaseTile(
               label: 'Horizontal group',
-              child: LFCheckBoxGroupV2(
+              child: LeafCheckBoxGroup(
                 items: groupItems,
                 values: _groupValues,
                 direction: Axis.horizontal,

@@ -5,26 +5,26 @@ import '../../../../common/widgets/showcase_scaffold.dart';
 import '../../../../common/widgets/showcase_section.dart';
 import '../../../../common/widgets/showcase_tile.dart';
 
-class SizeScreen extends LFScreenStatefulWidgetV2 {
+class SizeScreen extends LeafScreenStatefulWidget {
   const SizeScreen({super.key});
 
   @override
   State<SizeScreen> createState() => _SizeScreenState();
 }
 
-class _SizeScreenState extends LFScreenStateV2<SizeScreen> {
+class _SizeScreenState extends LeafScreenState<SizeScreen> {
   Size? _measuredSize;
 
   @override
   PreferredSizeWidget? buildAppBar(BuildContext context, Object? state) {
-    return const LFAppBarV2(title: LFAppBarTitleV2(text: 'Widget Size'));
+    return const LeafAppBar(title: LeafAppBarTitle(text: 'Widget Size'));
   }
 
   @override
   Widget buildBody(BuildContext context, Object? state) {
-    final colors = context.lfColors;
-    final typography = context.lfTypography;
-    final radius = context.lfRadius;
+    final colors = context.leafColors;
+    final typography = context.leafTypography;
+    final radius = context.leafRadius;
 
     return ShowcaseScaffold(
       children: [
@@ -35,7 +35,7 @@ class _SizeScreenState extends LFScreenStateV2<SizeScreen> {
               label: _measuredSize != null
                   ? 'Measured: ${_measuredSize!.width.toStringAsFixed(1)} x ${_measuredSize!.height.toStringAsFixed(1)}'
                   : 'Measuring...',
-              child: LFWidgetSizeV2(
+              child: LeafWidgetSize(
                 onChange: (_, size) {
                   if (_measuredSize != size) {
                     setState(() => _measuredSize = size);

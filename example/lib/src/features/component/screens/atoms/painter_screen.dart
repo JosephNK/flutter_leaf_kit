@@ -5,22 +5,22 @@ import '../../../../common/widgets/showcase_scaffold.dart';
 import '../../../../common/widgets/showcase_section.dart';
 import '../../../../common/widgets/showcase_tile.dart';
 
-class PainterScreen extends LFScreenStatefulWidgetV2 {
+class PainterScreen extends LeafScreenStatefulWidget {
   const PainterScreen({super.key});
 
   @override
   State<PainterScreen> createState() => _PainterScreenState();
 }
 
-class _PainterScreenState extends LFScreenStateV2<PainterScreen> {
+class _PainterScreenState extends LeafScreenState<PainterScreen> {
   @override
   PreferredSizeWidget? buildAppBar(BuildContext context, Object? state) {
-    return const LFAppBarV2(title: LFAppBarTitleV2(text: 'Painter'));
+    return const LeafAppBar(title: LeafAppBarTitle(text: 'Painter'));
   }
 
   @override
   Widget buildBody(BuildContext context, Object? state) {
-    final colors = context.lfColors;
+    final colors = context.leafColors;
 
     return ShowcaseScaffold(
       children: [
@@ -33,7 +33,7 @@ class _PainterScreenState extends LFScreenStateV2<PainterScreen> {
                 height: 200,
                 width: 40,
                 child: CustomPaint(
-                  painter: LFTimelinePainterV2(
+                  painter: LeafTimelinePainter(
                     width: 40,
                     lineColor: colors.primary,
                     strokeWidth: 2,

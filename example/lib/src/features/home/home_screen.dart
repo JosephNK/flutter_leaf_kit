@@ -5,7 +5,7 @@ import '../../common/models/package_entry.dart';
 import '../component/component_catalog_screen.dart';
 import '../theme_showcase/theme_showcase_screen.dart';
 
-class HomeScreen extends LFScreenStatefulWidgetV2 {
+class HomeScreen extends LeafScreenStatefulWidget {
   const HomeScreen({
     super.key,
     required this.isDark,
@@ -19,7 +19,7 @@ class HomeScreen extends LFScreenStatefulWidgetV2 {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends LFScreenStateV2<HomeScreen> {
+class _HomeScreenState extends LeafScreenState<HomeScreen> {
   late final List<PackageEntry> _entries;
 
   @override
@@ -64,8 +64,8 @@ class _HomeScreenState extends LFScreenStateV2<HomeScreen> {
 
   @override
   PreferredSizeWidget? buildAppBar(BuildContext context, Object? state) {
-    return LFAppBarV2(
-      title: const LFAppBarTitleV2(text: 'Leaf Kit V2'),
+    return LeafAppBar(
+      title: const LeafAppBarTitle(text: 'Leaf Kit V2'),
       automaticallyImplyLeading: false,
       actions: [
         IconButton(
@@ -78,10 +78,10 @@ class _HomeScreenState extends LFScreenStateV2<HomeScreen> {
 
   @override
   Widget buildBody(BuildContext context, Object? state) {
-    final colors = context.lfColors;
-    final typography = context.lfTypography;
-    final spacing = context.lfSpacing;
-    final radius = context.lfRadius;
+    final colors = context.leafColors;
+    final typography = context.leafTypography;
+    final spacing = context.leafSpacing;
+    final radius = context.leafRadius;
 
     return ListView.separated(
       padding: EdgeInsets.all(spacing.xl),
@@ -101,7 +101,7 @@ class _HomeScreenState extends LFScreenStateV2<HomeScreen> {
               subtitle: Text(entry.subtitle, style: typography.bodySmall),
               trailing: entry.enabled
                   ? Icon(Icons.chevron_right, color: colors.onSurfaceVariant)
-                  : LFBadgeV2(text: 'Soon', size: 24),
+                  : LeafBadge(text: 'Soon', size: 24),
               enabled: entry.enabled,
               onTap: entry.enabled
                   ? () => Navigator.push(

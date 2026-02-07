@@ -5,17 +5,17 @@ import '../../../../common/widgets/showcase_scaffold.dart';
 import '../../../../common/widgets/showcase_section.dart';
 import '../../../../common/widgets/showcase_tile.dart';
 
-class IndicatorScreen extends LFScreenStatefulWidgetV2 {
+class IndicatorScreen extends LeafScreenStatefulWidget {
   const IndicatorScreen({super.key});
 
   @override
   State<IndicatorScreen> createState() => _IndicatorScreenState();
 }
 
-class _IndicatorScreenState extends LFScreenStateV2<IndicatorScreen> {
+class _IndicatorScreenState extends LeafScreenState<IndicatorScreen> {
   @override
   PreferredSizeWidget? buildAppBar(BuildContext context, Object? state) {
-    return const LFAppBarV2(title: LFAppBarTitleV2(text: 'Indicator'));
+    return const LeafAppBar(title: LeafAppBarTitle(text: 'Indicator'));
   }
 
   @override
@@ -27,15 +27,15 @@ class _IndicatorScreenState extends LFScreenStateV2<IndicatorScreen> {
           children: [
             ShowcaseTile(
               label: 'Small',
-              child: LFIndicatorV2(size: LFIndicatorSizeV2.small),
+              child: LeafIndicator(size: LeafIndicatorSize.small),
             ),
             ShowcaseTile(
               label: 'Medium',
-              child: LFIndicatorV2(size: LFIndicatorSizeV2.medium),
+              child: LeafIndicator(size: LeafIndicatorSize.medium),
             ),
             ShowcaseTile(
               label: 'Large',
-              child: LFIndicatorV2(size: LFIndicatorSizeV2.large),
+              child: LeafIndicator(size: LeafIndicatorSize.large),
             ),
           ],
         ),
@@ -44,14 +44,14 @@ class _IndicatorScreenState extends LFScreenStateV2<IndicatorScreen> {
           children: [
             ShowcaseTile(
               label: 'Basic (page 2 of 5)',
-              child: LFPageCircleIndicatorV2(total: 5, current: 2),
+              child: LeafPageCircleIndicator(total: 5, current: 2),
             ),
             ShowcaseTile(
               label: 'Decrease style',
-              child: LFPageCircleIndicatorV2(
+              child: LeafPageCircleIndicator(
                 total: 5,
                 current: 2,
-                indicatorStyle: LFPageCircleIndicatorStyleV2.decrease,
+                indicatorStyle: LeafPageCircleIndicatorStyle.decrease,
               ),
             ),
           ],
@@ -61,7 +61,7 @@ class _IndicatorScreenState extends LFScreenStateV2<IndicatorScreen> {
           children: [
             ShowcaseTile(
               label: 'Basic (page 1 of 4)',
-              child: LFPageRectIndicatorV2(total: 4, current: 1),
+              child: LeafPageRectIndicator(total: 4, current: 1),
             ),
           ],
         ),

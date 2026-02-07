@@ -5,24 +5,24 @@ import '../../../../common/widgets/showcase_scaffold.dart';
 import '../../../../common/widgets/showcase_section.dart';
 import '../../../../common/widgets/showcase_tile.dart';
 
-class CalendarScreen extends LFScreenStatefulWidgetV2 {
+class CalendarScreen extends LeafScreenStatefulWidget {
   const CalendarScreen({super.key});
 
   @override
   State<CalendarScreen> createState() => _CalendarScreenState();
 }
 
-class _CalendarScreenState extends LFScreenStateV2<CalendarScreen> {
+class _CalendarScreenState extends LeafScreenState<CalendarScreen> {
   DateTime? _selectedDate;
 
   @override
   PreferredSizeWidget? buildAppBar(BuildContext context, Object? state) {
-    return const LFAppBarV2(title: LFAppBarTitleV2(text: 'Calendar'));
+    return const LeafAppBar(title: LeafAppBarTitle(text: 'Calendar'));
   }
 
   @override
   Widget buildBody(BuildContext context, Object? state) {
-    final typography = context.lfTypography;
+    final typography = context.leafTypography;
 
     return ShowcaseScaffold(
       children: [
@@ -35,7 +35,7 @@ class _CalendarScreenState extends LFScreenStateV2<CalendarScreen> {
                   : 'Tap a date to select',
               child: SizedBox(
                 height: 350,
-                child: LFCalendarViewV2(
+                child: LeafCalendarView(
                   defaultDate: DateTime.now(),
                   minDate: DateTime(2020),
                   maxDate: DateTime(2030),

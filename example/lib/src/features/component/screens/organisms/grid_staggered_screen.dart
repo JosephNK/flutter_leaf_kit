@@ -5,23 +5,23 @@ import '../../../../common/widgets/showcase_scaffold.dart';
 import '../../../../common/widgets/showcase_section.dart';
 import '../../../../common/widgets/showcase_tile.dart';
 
-class GridStaggeredScreen extends LFScreenStatefulWidgetV2 {
+class GridStaggeredScreen extends LeafScreenStatefulWidget {
   const GridStaggeredScreen({super.key});
 
   @override
   State<GridStaggeredScreen> createState() => _GridStaggeredScreenState();
 }
 
-class _GridStaggeredScreenState extends LFScreenStateV2<GridStaggeredScreen> {
+class _GridStaggeredScreenState extends LeafScreenState<GridStaggeredScreen> {
   @override
   PreferredSizeWidget? buildAppBar(BuildContext context, Object? state) {
-    return const LFAppBarV2(title: LFAppBarTitleV2(text: 'Staggered Grid'));
+    return const LeafAppBar(title: LeafAppBarTitle(text: 'Staggered Grid'));
   }
 
   @override
   Widget buildBody(BuildContext context, Object? state) {
-    final colors = context.lfColors;
-    final radius = context.lfRadius;
+    final colors = context.leafColors;
+    final radius = context.leafRadius;
 
     return ShowcaseScaffold(
       children: [
@@ -30,12 +30,12 @@ class _GridStaggeredScreenState extends LFScreenStateV2<GridStaggeredScreen> {
           children: [
             ShowcaseTile(
               label: 'Mixed tile sizes',
-              child: LFStaggeredGridV2(
+              child: LeafStaggeredGrid(
                 crossAxisCount: 4,
                 mainAxisSpacing: 4,
                 crossAxisSpacing: 4,
                 children: [
-                  LFStaggeredGridTileV2(
+                  LeafStaggeredGridTile(
                     crossAxisCellCount: 2,
                     mainAxisCellCount: 2,
                     child: Container(
@@ -46,7 +46,7 @@ class _GridStaggeredScreenState extends LFScreenStateV2<GridStaggeredScreen> {
                       child: const Center(child: Text('2x2')),
                     ),
                   ),
-                  LFStaggeredGridTileV2(
+                  LeafStaggeredGridTile(
                     crossAxisCellCount: 2,
                     mainAxisCellCount: 1,
                     child: Container(
@@ -57,7 +57,7 @@ class _GridStaggeredScreenState extends LFScreenStateV2<GridStaggeredScreen> {
                       child: const Center(child: Text('2x1')),
                     ),
                   ),
-                  LFStaggeredGridTileV2(
+                  LeafStaggeredGridTile(
                     crossAxisCellCount: 1,
                     mainAxisCellCount: 1,
                     child: Container(
@@ -68,7 +68,7 @@ class _GridStaggeredScreenState extends LFScreenStateV2<GridStaggeredScreen> {
                       child: const Center(child: Text('1x1')),
                     ),
                   ),
-                  LFStaggeredGridTileV2(
+                  LeafStaggeredGridTile(
                     crossAxisCellCount: 1,
                     mainAxisCellCount: 1,
                     child: Container(
@@ -79,7 +79,7 @@ class _GridStaggeredScreenState extends LFScreenStateV2<GridStaggeredScreen> {
                       child: const Center(child: Text('1x1')),
                     ),
                   ),
-                  LFStaggeredGridTileV2(
+                  LeafStaggeredGridTile(
                     crossAxisCellCount: 4,
                     mainAxisCellCount: 1,
                     child: Container(

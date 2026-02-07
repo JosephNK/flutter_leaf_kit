@@ -5,28 +5,28 @@ import '../../../../common/widgets/showcase_scaffold.dart';
 import '../../../../common/widgets/showcase_section.dart';
 import '../../../../common/widgets/showcase_tile.dart';
 
-class RadioScreen extends LFScreenStatefulWidgetV2 {
+class RadioScreen extends LeafScreenStatefulWidget {
   const RadioScreen({super.key});
 
   @override
   State<RadioScreen> createState() => _RadioScreenState();
 }
 
-class _RadioScreenState extends LFScreenStateV2<RadioScreen> {
+class _RadioScreenState extends LeafScreenState<RadioScreen> {
   bool _singleValue = false;
-  LFDataItem? _groupValue;
+  LeafDataItem? _groupValue;
 
   @override
   PreferredSizeWidget? buildAppBar(BuildContext context, Object? state) {
-    return const LFAppBarV2(title: LFAppBarTitleV2(text: 'Radio'));
+    return const LeafAppBar(title: LeafAppBarTitle(text: 'Radio'));
   }
 
   @override
   Widget buildBody(BuildContext context, Object? state) {
     final groupItems = [
-      LFDataItem(id: '1', text: 'Small'),
-      LFDataItem(id: '2', text: 'Medium'),
-      LFDataItem(id: '3', text: 'Large'),
+      LeafDataItem(id: '1', text: 'Small'),
+      LeafDataItem(id: '2', text: 'Medium'),
+      LeafDataItem(id: '3', text: 'Large'),
     ];
 
     return ShowcaseScaffold(
@@ -36,7 +36,7 @@ class _RadioScreenState extends LFScreenStateV2<RadioScreen> {
           children: [
             ShowcaseTile(
               label: 'Basic',
-              child: LFRadioV2(
+              child: LeafRadio(
                 value: _singleValue,
                 text: 'Option',
                 onChanged: (value) => setState(() => _singleValue = value),
@@ -44,10 +44,10 @@ class _RadioScreenState extends LFScreenStateV2<RadioScreen> {
             ),
             ShowcaseTile(
               label: 'Right aligned',
-              child: LFRadioV2(
+              child: LeafRadio(
                 value: _singleValue,
                 text: 'Right align',
-                align: LFRadioAlignV2.right,
+                align: LeafRadioAlign.right,
                 onChanged: (value) => setState(() => _singleValue = value),
               ),
             ),
@@ -58,7 +58,7 @@ class _RadioScreenState extends LFScreenStateV2<RadioScreen> {
           children: [
             ShowcaseTile(
               label: 'Vertical group',
-              child: LFRadioGroupV2(
+              child: LeafRadioGroup(
                 items: groupItems,
                 value: _groupValue,
                 onChanged: (item, _) {
@@ -68,7 +68,7 @@ class _RadioScreenState extends LFScreenStateV2<RadioScreen> {
             ),
             ShowcaseTile(
               label: 'Horizontal group',
-              child: LFRadioGroupV2(
+              child: LeafRadioGroup(
                 items: groupItems,
                 value: _groupValue,
                 direction: Axis.horizontal,

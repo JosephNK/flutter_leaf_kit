@@ -1,29 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_leaf_kit/flutter_leaf_kit.dart';
 
-class GridViewScreen extends LFScreenStatefulWidgetV2 {
+class GridViewScreen extends LeafScreenStatefulWidget {
   const GridViewScreen({super.key});
 
   @override
   State<GridViewScreen> createState() => _GridViewScreenState();
 }
 
-class _GridViewScreenState extends LFScreenStateV2<GridViewScreen> {
+class _GridViewScreenState extends LeafScreenState<GridViewScreen> {
   final _items = List.generate(20, (i) => 'Grid ${i + 1}');
 
   @override
   PreferredSizeWidget? buildAppBar(BuildContext context, Object? state) {
-    return const LFAppBarV2(title: LFAppBarTitleV2(text: 'GridView'));
+    return const LeafAppBar(title: LeafAppBarTitle(text: 'GridView'));
   }
 
   @override
   Widget buildBody(BuildContext context, Object? state) {
-    final colors = context.lfColors;
-    final typography = context.lfTypography;
-    final spacing = context.lfSpacing;
-    final radius = context.lfRadius;
+    final colors = context.leafColors;
+    final typography = context.leafTypography;
+    final spacing = context.leafSpacing;
+    final radius = context.leafRadius;
 
-    return LFGridViewV2<String>(
+    return LeafGridView<String>(
       items: _items,
       padding: EdgeInsets.all(spacing.xl),
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(

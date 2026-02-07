@@ -5,7 +5,7 @@ import '../../common/models/component_category.dart';
 import 'component_list_screen.dart';
 import 'component_registry.dart';
 
-class ComponentCatalogScreen extends LFScreenStatefulWidgetV2 {
+class ComponentCatalogScreen extends LeafScreenStatefulWidget {
   const ComponentCatalogScreen({super.key});
 
   @override
@@ -13,20 +13,20 @@ class ComponentCatalogScreen extends LFScreenStatefulWidgetV2 {
 }
 
 class _ComponentCatalogScreenState
-    extends LFScreenStateV2<ComponentCatalogScreen> {
+    extends LeafScreenState<ComponentCatalogScreen> {
   @override
   PreferredSizeWidget? buildAppBar(BuildContext context, Object? state) {
-    return const LFAppBarV2(
-      title: LFAppBarTitleV2(text: 'Components'),
+    return const LeafAppBar(
+      title: LeafAppBarTitle(text: 'Components'),
     );
   }
 
   @override
   Widget buildBody(BuildContext context, Object? state) {
-    final colors = context.lfColors;
-    final typography = context.lfTypography;
-    final spacing = context.lfSpacing;
-    final radius = context.lfRadius;
+    final colors = context.leafColors;
+    final typography = context.leafTypography;
+    final spacing = context.leafSpacing;
+    final radius = context.leafRadius;
     final categories = ComponentCategory.values;
 
     return ListView.separated(

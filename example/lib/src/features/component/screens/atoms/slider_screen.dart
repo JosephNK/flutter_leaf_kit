@@ -5,20 +5,20 @@ import '../../../../common/widgets/showcase_scaffold.dart';
 import '../../../../common/widgets/showcase_section.dart';
 import '../../../../common/widgets/showcase_tile.dart';
 
-class SliderScreen extends LFScreenStatefulWidgetV2 {
+class SliderScreen extends LeafScreenStatefulWidget {
   const SliderScreen({super.key});
 
   @override
   State<SliderScreen> createState() => _SliderScreenState();
 }
 
-class _SliderScreenState extends LFScreenStateV2<SliderScreen> {
+class _SliderScreenState extends LeafScreenState<SliderScreen> {
   double _value = 50;
   RangeValues _rangeValues = const RangeValues(20, 80);
 
   @override
   PreferredSizeWidget? buildAppBar(BuildContext context, Object? state) {
-    return const LFAppBarV2(title: LFAppBarTitleV2(text: 'Slider'));
+    return const LeafAppBar(title: LeafAppBarTitle(text: 'Slider'));
   }
 
   @override
@@ -30,7 +30,7 @@ class _SliderScreenState extends LFScreenStateV2<SliderScreen> {
           children: [
             ShowcaseTile(
               label: 'Continuous (${_value.toInt()})',
-              child: LFSliderV2(
+              child: LeafSlider(
                 value: _value,
                 min: 0,
                 max: 100,
@@ -39,7 +39,7 @@ class _SliderScreenState extends LFScreenStateV2<SliderScreen> {
             ),
             ShowcaseTile(
               label: 'With divisions',
-              child: LFSliderV2(
+              child: LeafSlider(
                 value: _value,
                 min: 0,
                 max: 100,
@@ -54,7 +54,7 @@ class _SliderScreenState extends LFScreenStateV2<SliderScreen> {
           children: [
             ShowcaseTile(
               label: 'Range (${_rangeValues.start.toInt()} - ${_rangeValues.end.toInt()})',
-              child: LFRangeSliderV2(
+              child: LeafRangeSlider(
                 values: _rangeValues,
                 min: 0,
                 max: 100,

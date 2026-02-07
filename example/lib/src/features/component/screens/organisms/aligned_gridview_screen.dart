@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_leaf_kit/flutter_leaf_kit.dart';
 
-class AlignedGridViewScreen extends LFScreenStatefulWidgetV2 {
+class AlignedGridViewScreen extends LeafScreenStatefulWidget {
   const AlignedGridViewScreen({super.key});
 
   @override
@@ -9,22 +9,22 @@ class AlignedGridViewScreen extends LFScreenStatefulWidgetV2 {
 }
 
 class _AlignedGridViewScreenState
-    extends LFScreenStateV2<AlignedGridViewScreen> {
+    extends LeafScreenState<AlignedGridViewScreen> {
   final _items = List.generate(20, (i) => 'Aligned ${i + 1}');
 
   @override
   PreferredSizeWidget? buildAppBar(BuildContext context, Object? state) {
-    return const LFAppBarV2(title: LFAppBarTitleV2(text: 'Aligned GridView'));
+    return const LeafAppBar(title: LeafAppBarTitle(text: 'Aligned GridView'));
   }
 
   @override
   Widget buildBody(BuildContext context, Object? state) {
-    final colors = context.lfColors;
-    final typography = context.lfTypography;
-    final spacing = context.lfSpacing;
-    final radius = context.lfRadius;
+    final colors = context.leafColors;
+    final typography = context.leafTypography;
+    final spacing = context.leafSpacing;
+    final radius = context.leafRadius;
 
-    return LFAlignedGridViewV2<String>(
+    return LeafAlignedGridView<String>(
       items: _items,
       padding: EdgeInsets.all(spacing.xl),
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(

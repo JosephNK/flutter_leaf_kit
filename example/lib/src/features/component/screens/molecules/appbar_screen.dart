@@ -5,22 +5,22 @@ import '../../../../common/widgets/showcase_scaffold.dart';
 import '../../../../common/widgets/showcase_section.dart';
 import '../../../../common/widgets/showcase_tile.dart';
 
-class AppBarScreen extends LFScreenStatefulWidgetV2 {
+class AppBarScreen extends LeafScreenStatefulWidget {
   const AppBarScreen({super.key});
 
   @override
   State<AppBarScreen> createState() => _AppBarScreenState();
 }
 
-class _AppBarScreenState extends LFScreenStateV2<AppBarScreen> {
+class _AppBarScreenState extends LeafScreenState<AppBarScreen> {
   @override
   PreferredSizeWidget? buildAppBar(BuildContext context, Object? state) {
-    return const LFAppBarV2(title: LFAppBarTitleV2(text: 'AppBar'));
+    return const LeafAppBar(title: LeafAppBarTitle(text: 'AppBar'));
   }
 
   @override
   Widget buildBody(BuildContext context, Object? state) {
-    final colors = context.lfColors;
+    final colors = context.leafColors;
 
     return ShowcaseScaffold(
       children: [
@@ -31,8 +31,8 @@ class _AppBarScreenState extends LFScreenStateV2<AppBarScreen> {
               label: 'Default',
               child: SizedBox(
                 height: 56,
-                child: LFAppBarV2(
-                  title: const LFAppBarTitleV2(text: 'Default'),
+                child: LeafAppBar(
+                  title: const LeafAppBarTitle(text: 'Default'),
                   automaticallyImplyLeading: false,
                 ),
               ),
@@ -41,15 +41,15 @@ class _AppBarScreenState extends LFScreenStateV2<AppBarScreen> {
               label: 'With actions',
               child: SizedBox(
                 height: 56,
-                child: LFAppBarV2(
-                  title: const LFAppBarTitleV2(text: 'With Actions'),
+                child: LeafAppBar(
+                  title: const LeafAppBarTitle(text: 'With Actions'),
                   automaticallyImplyLeading: false,
                   actions: [
-                    LFAppBarActionV2(
+                    LeafAppBarAction(
                       icon: const Icon(Icons.search),
                       onPressed: () {},
                     ),
-                    LFAppBarActionV2(
+                    LeafAppBarAction(
                       icon: const Icon(Icons.more_vert),
                       onPressed: () {},
                     ),
@@ -61,8 +61,8 @@ class _AppBarScreenState extends LFScreenStateV2<AppBarScreen> {
               label: 'Custom background',
               child: SizedBox(
                 height: 56,
-                child: LFAppBarV2(
-                  title: const LFAppBarTitleV2(text: 'Custom'),
+                child: LeafAppBar(
+                  title: const LeafAppBarTitle(text: 'Custom'),
                   automaticallyImplyLeading: false,
                   backgroundColor: colors.primary,
                 ),

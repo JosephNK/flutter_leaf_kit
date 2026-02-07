@@ -5,23 +5,23 @@ import '../../../../common/widgets/showcase_scaffold.dart';
 import '../../../../common/widgets/showcase_section.dart';
 import '../../../../common/widgets/showcase_tile.dart';
 
-class TextScreen extends LFScreenStatefulWidgetV2 {
+class TextScreen extends LeafScreenStatefulWidget {
   const TextScreen({super.key});
 
   @override
   State<TextScreen> createState() => _TextScreenState();
 }
 
-class _TextScreenState extends LFScreenStateV2<TextScreen> {
+class _TextScreenState extends LeafScreenState<TextScreen> {
   @override
   PreferredSizeWidget? buildAppBar(BuildContext context, Object? state) {
-    return const LFAppBarV2(title: LFAppBarTitleV2(text: 'Text'));
+    return const LeafAppBar(title: LeafAppBarTitle(text: 'Text'));
   }
 
   @override
   Widget buildBody(BuildContext context, Object? state) {
-    final colors = context.lfColors;
-    final typography = context.lfTypography;
+    final colors = context.leafColors;
+    final typography = context.leafTypography;
 
     return ShowcaseScaffold(
       children: [
@@ -30,11 +30,11 @@ class _TextScreenState extends LFScreenStateV2<TextScreen> {
           children: [
             ShowcaseTile(
               label: 'Default',
-              child: LFTextV2('Hello, Leaf Kit V2!'),
+              child: LeafText('Hello, Leaf Kit V2!'),
             ),
             ShowcaseTile(
               label: 'Custom color',
-              child: LFTextV2('Primary color', color: colors.primary),
+              child: LeafText('Primary color', color: colors.primary),
             ),
           ],
         ),
@@ -43,19 +43,19 @@ class _TextScreenState extends LFScreenStateV2<TextScreen> {
           children: [
             ShowcaseTile(
               label: 'Headline small',
-              child: LFTextV2('Headline', style: typography.headlineSmall),
+              child: LeafText('Headline', style: typography.headlineSmall),
             ),
             ShowcaseTile(
               label: 'Title medium',
-              child: LFTextV2('Title', style: typography.titleMedium),
+              child: LeafText('Title', style: typography.titleMedium),
             ),
             ShowcaseTile(
               label: 'Body medium',
-              child: LFTextV2('Body text', style: typography.bodyMedium),
+              child: LeafText('Body text', style: typography.bodyMedium),
             ),
             ShowcaseTile(
               label: 'Label small',
-              child: LFTextV2('Label', style: typography.labelSmall),
+              child: LeafText('Label', style: typography.labelSmall),
             ),
           ],
         ),
@@ -64,7 +64,7 @@ class _TextScreenState extends LFScreenStateV2<TextScreen> {
           children: [
             ShowcaseTile(
               label: 'Ellipsis (max 1 line)',
-              child: LFTextV2(
+              child: LeafText(
                 'This is a very long text that should be truncated with an ellipsis when it overflows the available space.',
                 maxLines: 1,
               ),

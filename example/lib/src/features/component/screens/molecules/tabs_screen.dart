@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_leaf_kit/flutter_leaf_kit.dart';
 
-class TabsScreen extends LFScreenStatefulWidgetV2 {
+class TabsScreen extends LeafScreenStatefulWidget {
   const TabsScreen({super.key});
 
   @override
   State<TabsScreen> createState() => _TabsScreenState();
 }
 
-class _TabsScreenState extends LFScreenStateV2<TabsScreen>
+class _TabsScreenState extends LeafScreenState<TabsScreen>
     with TickerProviderStateMixin {
   late final TabController _tabController;
 
@@ -26,17 +26,17 @@ class _TabsScreenState extends LFScreenStateV2<TabsScreen>
 
   @override
   PreferredSizeWidget? buildAppBar(BuildContext context, Object? state) {
-    return const LFAppBarV2(title: LFAppBarTitleV2(text: 'Tabs'));
+    return const LeafAppBar(title: LeafAppBarTitle(text: 'Tabs'));
   }
 
   @override
   Widget buildBody(BuildContext context, Object? state) {
-    final typography = context.lfTypography;
-    final spacing = context.lfSpacing;
+    final typography = context.leafTypography;
+    final spacing = context.leafSpacing;
 
     return Column(
       children: [
-        LFTabBarV2(
+        LeafTabBar(
           controller: _tabController,
           tabs: const [
             Tab(text: 'Tab 1'),
@@ -45,7 +45,7 @@ class _TabsScreenState extends LFScreenStateV2<TabsScreen>
           ],
         ),
         Expanded(
-          child: LFTabViewV2(
+          child: LeafTabView(
             controller: _tabController,
             children: [
               Center(

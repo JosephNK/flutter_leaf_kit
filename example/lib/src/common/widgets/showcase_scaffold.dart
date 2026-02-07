@@ -11,7 +11,7 @@ class ShowcaseScaffold extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final spacing = context.lfSpacing;
+    final spacing = context.leafSpacing;
 
     return SingleChildScrollView(
       padding: EdgeInsets.all(spacing.xl),

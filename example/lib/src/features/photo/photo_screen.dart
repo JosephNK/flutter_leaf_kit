@@ -5,22 +5,22 @@ import '../../common/widgets/showcase_scaffold.dart';
 import '../../common/widgets/showcase_section.dart';
 import '../../common/widgets/showcase_tile.dart';
 
-class PhotoScreen extends LFScreenStatefulWidgetV2 {
+class PhotoScreen extends LeafScreenStatefulWidget {
   const PhotoScreen({super.key});
 
   @override
   State<PhotoScreen> createState() => _PhotoScreenState();
 }
 
-class _PhotoScreenState extends LFScreenStateV2<PhotoScreen> {
+class _PhotoScreenState extends LeafScreenState<PhotoScreen> {
   @override
   PreferredSizeWidget? buildAppBar(BuildContext context, Object? state) {
-    return const LFAppBarV2(title: LFAppBarTitleV2(text: 'Photo'));
+    return const LeafAppBar(title: LeafAppBarTitle(text: 'Photo'));
   }
 
   @override
   Widget buildBody(BuildContext context, Object? state) {
-    final typography = context.lfTypography;
+    final typography = context.leafTypography;
 
     return ShowcaseScaffold(
       children: [
@@ -30,7 +30,7 @@ class _PhotoScreenState extends LFScreenStateV2<PhotoScreen> {
             ShowcaseTile(
               label: 'Requires permission',
               child: Text(
-                'LFPhotoAlbumV2 and LFPhotoListViewV2 require '
+                'LeafPhotoAlbum and LeafPhotoListView require '
                 'photo library permission. These components provide:\n\n'
                 '- Album selection\n'
                 '- Photo grid with multi-select\n'

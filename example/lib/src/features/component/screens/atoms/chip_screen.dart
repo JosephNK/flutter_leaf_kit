@@ -5,30 +5,30 @@ import '../../../../common/widgets/showcase_scaffold.dart';
 import '../../../../common/widgets/showcase_section.dart';
 import '../../../../common/widgets/showcase_tile.dart';
 
-class ChipScreen extends LFScreenStatefulWidgetV2 {
+class ChipScreen extends LeafScreenStatefulWidget {
   const ChipScreen({super.key});
 
   @override
   State<ChipScreen> createState() => _ChipScreenState();
 }
 
-class _ChipScreenState extends LFScreenStateV2<ChipScreen> {
+class _ChipScreenState extends LeafScreenState<ChipScreen> {
   bool _chipSelected = false;
-  List<LFDataItem> _multiValues = [];
-  List<LFDataItem> _singleValues = [];
+  List<LeafDataItem> _multiValues = [];
+  List<LeafDataItem> _singleValues = [];
 
   @override
   PreferredSizeWidget? buildAppBar(BuildContext context, Object? state) {
-    return const LFAppBarV2(title: LFAppBarTitleV2(text: 'Chip'));
+    return const LeafAppBar(title: LeafAppBarTitle(text: 'Chip'));
   }
 
   @override
   Widget buildBody(BuildContext context, Object? state) {
     final items = [
-      LFDataItem(id: '1', text: 'Flutter'),
-      LFDataItem(id: '2', text: 'Dart'),
-      LFDataItem(id: '3', text: 'Swift'),
-      LFDataItem(id: '4', text: 'Kotlin'),
+      LeafDataItem(id: '1', text: 'Flutter'),
+      LeafDataItem(id: '2', text: 'Dart'),
+      LeafDataItem(id: '3', text: 'Swift'),
+      LeafDataItem(id: '4', text: 'Kotlin'),
     ];
 
     return ShowcaseScaffold(
@@ -38,7 +38,7 @@ class _ChipScreenState extends LFScreenStateV2<ChipScreen> {
           children: [
             ShowcaseTile(
               label: 'Toggleable',
-              child: LFChipV2(
+              child: LeafChip(
                 text: 'Flutter',
                 selected: _chipSelected,
                 onPressed: (v) => setState(() => _chipSelected = v),
@@ -51,7 +51,7 @@ class _ChipScreenState extends LFScreenStateV2<ChipScreen> {
           children: [
             ShowcaseTile(
               label: 'Horizontal (multi)',
-              child: LFChipsV2(
+              child: LeafChips(
                 items: items,
                 values: _multiValues,
                 onChanged: (items, _) {
@@ -66,7 +66,7 @@ class _ChipScreenState extends LFScreenStateV2<ChipScreen> {
           children: [
             ShowcaseTile(
               label: 'Horizontal (single)',
-              child: LFChipsV2(
+              child: LeafChips(
                 items: items,
                 values: _singleValues,
                 multiple: false,

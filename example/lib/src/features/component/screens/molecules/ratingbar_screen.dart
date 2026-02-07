@@ -5,19 +5,19 @@ import '../../../../common/widgets/showcase_scaffold.dart';
 import '../../../../common/widgets/showcase_section.dart';
 import '../../../../common/widgets/showcase_tile.dart';
 
-class RatingBarScreen extends LFScreenStatefulWidgetV2 {
+class RatingBarScreen extends LeafScreenStatefulWidget {
   const RatingBarScreen({super.key});
 
   @override
   State<RatingBarScreen> createState() => _RatingBarScreenState();
 }
 
-class _RatingBarScreenState extends LFScreenStateV2<RatingBarScreen> {
+class _RatingBarScreenState extends LeafScreenState<RatingBarScreen> {
   double _rating = 3.5;
 
   @override
   PreferredSizeWidget? buildAppBar(BuildContext context, Object? state) {
-    return const LFAppBarV2(title: LFAppBarTitleV2(text: 'Rating Bar'));
+    return const LeafAppBar(title: LeafAppBarTitle(text: 'Rating Bar'));
   }
 
   @override
@@ -29,7 +29,7 @@ class _RatingBarScreenState extends LFScreenStateV2<RatingBarScreen> {
           children: [
             ShowcaseTile(
               label: 'Half rating (${_rating.toStringAsFixed(1)})',
-              child: LFRatingBarV2(
+              child: LeafRatingBar(
                 itemCount: 5,
                 initialRating: _rating,
                 allowHalfRating: true,
@@ -43,7 +43,7 @@ class _RatingBarScreenState extends LFScreenStateV2<RatingBarScreen> {
           children: [
             ShowcaseTile(
               label: 'Read-only',
-              child: LFRatingBarV2(
+              child: LeafRatingBar(
                 itemCount: 5,
                 initialRating: 4.0,
                 ignoreGestures: true,
@@ -52,7 +52,7 @@ class _RatingBarScreenState extends LFScreenStateV2<RatingBarScreen> {
             ),
             ShowcaseTile(
               label: 'Small size',
-              child: LFRatingBarV2(
+              child: LeafRatingBar(
                 itemCount: 5,
                 initialRating: 3.0,
                 itemSize: 20,

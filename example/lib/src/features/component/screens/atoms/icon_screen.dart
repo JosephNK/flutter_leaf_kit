@@ -5,22 +5,22 @@ import '../../../../common/widgets/showcase_scaffold.dart';
 import '../../../../common/widgets/showcase_section.dart';
 import '../../../../common/widgets/showcase_tile.dart';
 
-class IconScreen extends LFScreenStatefulWidgetV2 {
+class IconScreen extends LeafScreenStatefulWidget {
   const IconScreen({super.key});
 
   @override
   State<IconScreen> createState() => _IconScreenState();
 }
 
-class _IconScreenState extends LFScreenStateV2<IconScreen> {
+class _IconScreenState extends LeafScreenState<IconScreen> {
   @override
   PreferredSizeWidget? buildAppBar(BuildContext context, Object? state) {
-    return const LFAppBarV2(title: LFAppBarTitleV2(text: 'Icon'));
+    return const LeafAppBar(title: LeafAppBarTitle(text: 'Icon'));
   }
 
   @override
   Widget buildBody(BuildContext context, Object? state) {
-    final colors = context.lfColors;
+    final colors = context.leafColors;
 
     return ShowcaseScaffold(
       children: [
@@ -32,9 +32,9 @@ class _IconScreenState extends LFScreenStateV2<IconScreen> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  LFIconsV2(Icons.home, color: colors.primary),
-                  LFIconsV2(Icons.settings, color: colors.secondary),
-                  LFIconsV2(Icons.favorite, color: colors.error),
+                  LeafIcons(Icons.home, color: colors.primary),
+                  LeafIcons(Icons.settings, color: colors.secondary),
+                  LeafIcons(Icons.favorite, color: colors.error),
                 ],
               ),
             ),
@@ -48,10 +48,10 @@ class _IconScreenState extends LFScreenStateV2<IconScreen> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  LFIconsV2(Icons.star, width: 16, height: 16),
-                  LFIconsV2(Icons.star, width: 24, height: 24),
-                  LFIconsV2(Icons.star, width: 32, height: 32),
-                  LFIconsV2(Icons.star, width: 48, height: 48),
+                  LeafIcons(Icons.star, width: 16, height: 16),
+                  LeafIcons(Icons.star, width: 24, height: 24),
+                  LeafIcons(Icons.star, width: 32, height: 32),
+                  LeafIcons(Icons.star, width: 48, height: 48),
                 ],
               ),
             ),

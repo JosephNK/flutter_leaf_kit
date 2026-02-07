@@ -24,7 +24,7 @@ class _ExampleAppState extends State<ExampleApp> {
   Widget build(BuildContext context) {
     final themeData = _isDark ? AppTheme.dark() : AppTheme.light();
 
-    return LFTheme(
+    return LeafTheme(
       data: themeData,
       child: MaterialApp(
         title: 'Leaf Kit V2 Example',

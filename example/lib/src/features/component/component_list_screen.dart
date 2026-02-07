@@ -4,7 +4,7 @@ import 'package:flutter_leaf_kit/flutter_leaf_kit.dart';
 import '../../common/models/component_category.dart';
 import 'component_registry.dart';
 
-class ComponentListScreen extends LFScreenStatefulWidgetV2 {
+class ComponentListScreen extends LeafScreenStatefulWidget {
   const ComponentListScreen({
     super.key,
     required this.category,
@@ -16,19 +16,19 @@ class ComponentListScreen extends LFScreenStatefulWidgetV2 {
   State<ComponentListScreen> createState() => _ComponentListScreenState();
 }
 
-class _ComponentListScreenState extends LFScreenStateV2<ComponentListScreen> {
+class _ComponentListScreenState extends LeafScreenState<ComponentListScreen> {
   @override
   PreferredSizeWidget? buildAppBar(BuildContext context, Object? state) {
-    return LFAppBarV2(
-      title: LFAppBarTitleV2(text: widget.category.label),
+    return LeafAppBar(
+      title: LeafAppBarTitle(text: widget.category.label),
     );
   }
 
   @override
   Widget buildBody(BuildContext context, Object? state) {
-    final colors = context.lfColors;
-    final typography = context.lfTypography;
-    final spacing = context.lfSpacing;
+    final colors = context.leafColors;
+    final typography = context.leafTypography;
+    final spacing = context.leafSpacing;
     final items = componentRegistry[widget.category] ?? [];
 
     return ListView.separated(

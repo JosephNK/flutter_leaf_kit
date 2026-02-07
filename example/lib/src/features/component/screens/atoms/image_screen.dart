@@ -5,17 +5,17 @@ import '../../../../common/widgets/showcase_scaffold.dart';
 import '../../../../common/widgets/showcase_section.dart';
 import '../../../../common/widgets/showcase_tile.dart';
 
-class ImageScreen extends LFScreenStatefulWidgetV2 {
+class ImageScreen extends LeafScreenStatefulWidget {
   const ImageScreen({super.key});
 
   @override
   State<ImageScreen> createState() => _ImageScreenState();
 }
 
-class _ImageScreenState extends LFScreenStateV2<ImageScreen> {
+class _ImageScreenState extends LeafScreenState<ImageScreen> {
   @override
   PreferredSizeWidget? buildAppBar(BuildContext context, Object? state) {
-    return const LFAppBarV2(title: LFAppBarTitleV2(text: 'Image'));
+    return const LeafAppBar(title: LeafAppBarTitle(text: 'Image'));
   }
 
   @override
@@ -27,7 +27,7 @@ class _ImageScreenState extends LFScreenStateV2<ImageScreen> {
           children: [
             ShowcaseTile(
               label: 'From assets',
-              child: LFAssetImageV2(
+              child: LeafAssetImage(
                 uri: Uri.parse('assets/images/sample400x300.jpg'),
                 width: 200,
                 height: 150,
@@ -40,7 +40,7 @@ class _ImageScreenState extends LFScreenStateV2<ImageScreen> {
           children: [
             ShowcaseTile(
               label: 'Cached network image',
-              child: LFCacheNetworkImageV2(
+              child: LeafCacheNetworkImage(
                 url: 'https://picsum.photos/200/150',
                 width: 200,
                 height: 150,
@@ -56,15 +56,15 @@ class _ImageScreenState extends LFScreenStateV2<ImageScreen> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  LFCircleAvatarImageV2(
+                  LeafCircleAvatarImage(
                     url: 'https://picsum.photos/100',
                     size: 20,
                   ),
-                  LFCircleAvatarImageV2(
+                  LeafCircleAvatarImage(
                     url: 'https://picsum.photos/100',
                     size: 30,
                   ),
-                  LFCircleAvatarImageV2(
+                  LeafCircleAvatarImage(
                     url: 'https://picsum.photos/100',
                     size: 40,
                   ),

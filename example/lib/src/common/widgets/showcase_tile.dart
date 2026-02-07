@@ -13,10 +13,10 @@ class ShowcaseTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colors = context.lfColors;
-    final typography = context.lfTypography;
-    final spacing = context.lfSpacing;
-    final radius = context.lfRadius;
+    final colors = context.leafColors;
+    final typography = context.leafTypography;
+    final spacing = context.leafSpacing;
+    final radius = context.leafRadius;
 
     return Container(
       width: double.infinity,

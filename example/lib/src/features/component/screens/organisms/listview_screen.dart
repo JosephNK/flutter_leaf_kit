@@ -1,28 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_leaf_kit/flutter_leaf_kit.dart';
 
-class ListViewScreen extends LFScreenStatefulWidgetV2 {
+class ListViewScreen extends LeafScreenStatefulWidget {
   const ListViewScreen({super.key});
 
   @override
   State<ListViewScreen> createState() => _ListViewScreenState();
 }
 
-class _ListViewScreenState extends LFScreenStateV2<ListViewScreen> {
+class _ListViewScreenState extends LeafScreenState<ListViewScreen> {
   final _items = List.generate(30, (i) => 'Item ${i + 1}');
 
   @override
   PreferredSizeWidget? buildAppBar(BuildContext context, Object? state) {
-    return const LFAppBarV2(title: LFAppBarTitleV2(text: 'ListView'));
+    return const LeafAppBar(title: LeafAppBarTitle(text: 'ListView'));
   }
 
   @override
   Widget buildBody(BuildContext context, Object? state) {
-    final colors = context.lfColors;
-    final typography = context.lfTypography;
-    final spacing = context.lfSpacing;
+    final colors = context.leafColors;
+    final typography = context.leafTypography;
+    final spacing = context.leafSpacing;
 
-    return LFListViewV2<String>(
+    return LeafListView<String>(
       items: _items,
       padding: EdgeInsets.all(spacing.xl),
       builder: (context, item, index) {

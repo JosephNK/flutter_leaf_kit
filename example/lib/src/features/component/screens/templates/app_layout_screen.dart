@@ -5,37 +5,37 @@ import '../../../../common/widgets/showcase_scaffold.dart';
 import '../../../../common/widgets/showcase_section.dart';
 import '../../../../common/widgets/showcase_tile.dart';
 
-class AppLayoutScreen extends LFScreenStatefulWidgetV2 {
+class AppLayoutScreen extends LeafScreenStatefulWidget {
   const AppLayoutScreen({super.key});
 
   @override
   State<AppLayoutScreen> createState() => _AppLayoutScreenState();
 }
 
-class _AppLayoutScreenState extends LFScreenStateV2<AppLayoutScreen> {
+class _AppLayoutScreenState extends LeafScreenState<AppLayoutScreen> {
   @override
   PreferredSizeWidget? buildAppBar(BuildContext context, Object? state) {
-    return const LFAppBarV2(title: LFAppBarTitleV2(text: 'App Layout'));
+    return const LeafAppBar(title: LeafAppBarTitle(text: 'App Layout'));
   }
 
   @override
   Widget buildBody(BuildContext context, Object? state) {
-    final typography = context.lfTypography;
+    final typography = context.leafTypography;
 
     return ShowcaseScaffold(
       children: [
         ShowcaseSection(
-          title: 'LFLayoutAppV2',
+          title: 'LeafLayoutApp',
           children: [
             ShowcaseTile(
               label: 'Root app wrapper',
               child: Text(
-                'LFLayoutAppV2 wraps your MaterialApp to provide:\n\n'
+                'LeafLayoutApp wraps your MaterialApp to provide:\n\n'
                 '- Build name banner (DEV/STAGING)\n'
                 '- Device setup callback\n'
                 '- Background color configuration\n\n'
                 'Usage:\n'
-                'LFLayoutAppV2(\n'
+                'LeafLayoutApp(\n'
                 '  buildName: "DEV",\n'
                 '  child: MaterialApp(...),\n'
                 ')',

@@ -5,17 +5,17 @@ import '../../../../common/widgets/showcase_scaffold.dart';
 import '../../../../common/widgets/showcase_section.dart';
 import '../../../../common/widgets/showcase_action_tile.dart';
 
-class NotificationScreen extends LFScreenStatefulWidgetV2 {
+class NotificationScreen extends LeafScreenStatefulWidget {
   const NotificationScreen({super.key});
 
   @override
   State<NotificationScreen> createState() => _NotificationScreenState();
 }
 
-class _NotificationScreenState extends LFScreenStateV2<NotificationScreen> {
+class _NotificationScreenState extends LeafScreenState<NotificationScreen> {
   @override
   PreferredSizeWidget? buildAppBar(BuildContext context, Object? state) {
-    return const LFAppBarV2(title: LFAppBarTitleV2(text: 'Notification'));
+    return const LeafAppBar(title: LeafAppBarTitle(text: 'Notification'));
   }
 
   @override
@@ -30,7 +30,7 @@ class _NotificationScreenState extends LFScreenStateV2<NotificationScreen> {
               buttonText: 'Show Notification',
               description: 'Slides down from top with auto-dismiss',
               onPressed: () {
-                final notification = LFPushNotificationV2(
+                final notification = LeafPushNotification(
                   title: 'New Message',
                   body: 'You have received a new message from Leaf Kit.',
                   onTap: (_) {},

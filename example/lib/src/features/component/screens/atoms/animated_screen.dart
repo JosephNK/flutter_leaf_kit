@@ -5,14 +5,14 @@ import '../../../../common/widgets/showcase_scaffold.dart';
 import '../../../../common/widgets/showcase_section.dart';
 import '../../../../common/widgets/showcase_tile.dart';
 
-class AnimatedScreen extends LFScreenStatefulWidgetV2 {
+class AnimatedScreen extends LeafScreenStatefulWidget {
   const AnimatedScreen({super.key});
 
   @override
   State<AnimatedScreen> createState() => _AnimatedScreenState();
 }
 
-class _AnimatedScreenState extends LFScreenStateV2<AnimatedScreen> {
+class _AnimatedScreenState extends LeafScreenState<AnimatedScreen> {
   bool _bounce = false;
   bool _fade = false;
   bool _scale = false;
@@ -31,12 +31,12 @@ class _AnimatedScreenState extends LFScreenStateV2<AnimatedScreen> {
 
   @override
   PreferredSizeWidget? buildAppBar(BuildContext context, Object? state) {
-    return const LFAppBarV2(title: LFAppBarTitleV2(text: 'Animated'));
+    return const LeafAppBar(title: LeafAppBarTitle(text: 'Animated'));
   }
 
   @override
   Widget buildBody(BuildContext context, Object? state) {
-    final colors = context.lfColors;
+    final colors = context.leafColors;
 
     return ShowcaseScaffold(
       children: [
@@ -47,7 +47,7 @@ class _AnimatedScreenState extends LFScreenStateV2<AnimatedScreen> {
               label: 'Bouncing (tap to toggle)',
               child: GestureDetector(
                 onTap: () => setState(() => _bounce = !_bounce),
-                child: LFBouncingAnimatedV2(
+                child: LeafBouncingAnimated(
                   value: _bounce,
                   child: _sampleBox(colors.primary),
                 ),
@@ -57,7 +57,7 @@ class _AnimatedScreenState extends LFScreenStateV2<AnimatedScreen> {
               label: 'Fade (tap to toggle)',
               child: GestureDetector(
                 onTap: () => setState(() => _fade = !_fade),
-                child: LFFadeAnimatedV2(
+                child: LeafFadeAnimated(
                   value: _fade,
                   child: _sampleBox(colors.secondary),
                 ),
@@ -67,7 +67,7 @@ class _AnimatedScreenState extends LFScreenStateV2<AnimatedScreen> {
               label: 'Scale (tap to toggle)',
               child: GestureDetector(
                 onTap: () => setState(() => _scale = !_scale),
-                child: LFScaleAnimatedV2(
+                child: LeafScaleAnimated(
                   value: _scale,
                   child: _sampleBox(colors.error),
                 ),
@@ -77,7 +77,7 @@ class _AnimatedScreenState extends LFScreenStateV2<AnimatedScreen> {
               label: 'Rotate (tap to toggle)',
               child: GestureDetector(
                 onTap: () => setState(() => _rotate = !_rotate),
-                child: LFRotateAnimatedV2(
+                child: LeafRotateAnimated(
                   value: _rotate,
                   child: _sampleBox(colors.success),
                 ),

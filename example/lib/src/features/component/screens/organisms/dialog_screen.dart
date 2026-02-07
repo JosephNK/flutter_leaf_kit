@@ -5,17 +5,17 @@ import '../../../../common/widgets/showcase_scaffold.dart';
 import '../../../../common/widgets/showcase_section.dart';
 import '../../../../common/widgets/showcase_action_tile.dart';
 
-class DialogScreen extends LFScreenStatefulWidgetV2 {
+class DialogScreen extends LeafScreenStatefulWidget {
   const DialogScreen({super.key});
 
   @override
   State<DialogScreen> createState() => _DialogScreenState();
 }
 
-class _DialogScreenState extends LFScreenStateV2<DialogScreen> {
+class _DialogScreenState extends LeafScreenState<DialogScreen> {
   @override
   PreferredSizeWidget? buildAppBar(BuildContext context, Object? state) {
-    return const LFAppBarV2(title: LFAppBarTitleV2(text: 'Dialog'));
+    return const LeafAppBar(title: LeafAppBarTitle(text: 'Dialog'));
   }
 
   @override
@@ -29,7 +29,7 @@ class _DialogScreenState extends LFScreenStateV2<DialogScreen> {
               label: 'Simple alert',
               buttonText: 'Show Alert',
               onPressed: () {
-                LFAlertDialogV2.show(
+                LeafAlertDialog.show(
                   context,
                   title: 'Alert',
                   message: 'This is a simple alert dialog.',
@@ -40,7 +40,7 @@ class _DialogScreenState extends LFScreenStateV2<DialogScreen> {
               label: 'Confirmation',
               buttonText: 'Show Confirm',
               onPressed: () {
-                LFAlertDialogV2.confirm(
+                LeafAlertDialog.confirm(
                   context,
                   title: 'Confirm',
                   message: 'Are you sure you want to proceed?',

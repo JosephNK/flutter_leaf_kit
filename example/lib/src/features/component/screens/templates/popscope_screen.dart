@@ -5,22 +5,22 @@ import '../../../../common/widgets/showcase_scaffold.dart';
 import '../../../../common/widgets/showcase_section.dart';
 import '../../../../common/widgets/showcase_tile.dart';
 
-class PopScopeScreen extends LFScreenStatefulWidgetV2 {
+class PopScopeScreen extends LeafScreenStatefulWidget {
   const PopScopeScreen({super.key});
 
   @override
   State<PopScopeScreen> createState() => _PopScopeScreenState();
 }
 
-class _PopScopeScreenState extends LFScreenStateV2<PopScopeScreen> {
+class _PopScopeScreenState extends LeafScreenState<PopScopeScreen> {
   @override
   PreferredSizeWidget? buildAppBar(BuildContext context, Object? state) {
-    return const LFAppBarV2(title: LFAppBarTitleV2(text: 'PopScope'));
+    return const LeafAppBar(title: LeafAppBarTitle(text: 'PopScope'));
   }
 
   @override
   Widget buildBody(BuildContext context, Object? state) {
-    final typography = context.lfTypography;
+    final typography = context.leafTypography;
 
     return ShowcaseScaffold(
       children: [
@@ -30,7 +30,7 @@ class _PopScopeScreenState extends LFScreenStateV2<PopScopeScreen> {
             ShowcaseTile(
               label: 'Description',
               child: Text(
-                'LFPopScopeAppCloseV2 wraps a widget to require '
+                'LeafPopScopeAppClose wraps a widget to require '
                 'double-tap back button to close the app on Android. '
                 'This is typically used at the root of your app.',
                 style: typography.bodyMedium,
@@ -39,7 +39,7 @@ class _PopScopeScreenState extends LFScreenStateV2<PopScopeScreen> {
             ShowcaseTile(
               label: 'Usage',
               child: Text(
-                'LFPopScopeAppCloseV2(\n'
+                'LeafPopScopeAppClose(\n'
                 '  child: YourAppContent(),\n'
                 '  duration: Duration(seconds: 2),\n'
                 ')',

@@ -5,17 +5,17 @@ import '../../../../common/widgets/showcase_scaffold.dart';
 import '../../../../common/widgets/showcase_section.dart';
 import '../../../../common/widgets/showcase_action_tile.dart';
 
-class ToastScreen extends LFScreenStatefulWidgetV2 {
+class ToastScreen extends LeafScreenStatefulWidget {
   const ToastScreen({super.key});
 
   @override
   State<ToastScreen> createState() => _ToastScreenState();
 }
 
-class _ToastScreenState extends LFScreenStateV2<ToastScreen> {
+class _ToastScreenState extends LeafScreenState<ToastScreen> {
   @override
   PreferredSizeWidget? buildAppBar(BuildContext context, Object? state) {
-    return const LFAppBarV2(title: LFAppBarTitleV2(text: 'Toast'));
+    return const LeafAppBar(title: LeafAppBarTitle(text: 'Toast'));
   }
 
   @override
@@ -29,7 +29,7 @@ class _ToastScreenState extends LFScreenStateV2<ToastScreen> {
               label: 'Short toast',
               buttonText: 'Show Toast',
               onPressed: () {
-                LFToastV2.showToast(
+                LeafToast.showToast(
                   context,
                   message: 'This is a toast message',
                 );
@@ -44,11 +44,11 @@ class _ToastScreenState extends LFScreenStateV2<ToastScreen> {
               label: 'Success',
               buttonText: 'Show Success',
               onPressed: () {
-                LFToastV2.showNotification(
+                LeafToast.showNotification(
                   context,
                   message: 'Success',
                   description: 'Operation completed successfully.',
-                  type: LFToastNotificationTypeV2.success,
+                  type: LeafToastNotificationType.success,
                 );
               },
             ),
@@ -56,11 +56,11 @@ class _ToastScreenState extends LFScreenStateV2<ToastScreen> {
               label: 'Error',
               buttonText: 'Show Error',
               onPressed: () {
-                LFToastV2.showNotification(
+                LeafToast.showNotification(
                   context,
                   message: 'Error',
                   description: 'Something went wrong.',
-                  type: LFToastNotificationTypeV2.error,
+                  type: LeafToastNotificationType.error,
                 );
               },
             ),
@@ -68,11 +68,11 @@ class _ToastScreenState extends LFScreenStateV2<ToastScreen> {
               label: 'Warning',
               buttonText: 'Show Warning',
               onPressed: () {
-                LFToastV2.showNotification(
+                LeafToast.showNotification(
                   context,
                   message: 'Warning',
                   description: 'Please check your input.',
-                  type: LFToastNotificationTypeV2.warning,
+                  type: LeafToastNotificationType.warning,
                 );
               },
             ),
@@ -80,11 +80,11 @@ class _ToastScreenState extends LFScreenStateV2<ToastScreen> {
               label: 'Info',
               buttonText: 'Show Info',
               onPressed: () {
-                LFToastV2.showNotification(
+                LeafToast.showNotification(
                   context,
                   message: 'Info',
                   description: 'Here is some information.',
-                  type: LFToastNotificationTypeV2.info,
+                  type: LeafToastNotificationType.info,
                 );
               },
             ),

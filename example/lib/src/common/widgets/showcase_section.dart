@@ -13,8 +13,8 @@ class ShowcaseSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final typography = context.lfTypography;
-    final spacing = context.lfSpacing;
+    final typography = context.leafTypography;
+    final spacing = context.leafSpacing;
 
     return Padding(
       padding: EdgeInsets.only(bottom: spacing.xxl),
