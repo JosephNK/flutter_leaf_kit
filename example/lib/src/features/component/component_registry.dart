@@ -1,48 +1,71 @@
 import '../../common/models/component_category.dart';
 import '../../common/models/component_item.dart';
+
+// Atoms
+import 'screens/atoms/animated_screen.dart';
 import 'screens/atoms/badge_screen.dart';
+import 'screens/atoms/button_screen.dart';
 import 'screens/atoms/checkbox_screen.dart';
 import 'screens/atoms/chip_screen.dart';
+import 'screens/atoms/icon_screen.dart';
+import 'screens/atoms/image_screen.dart';
 import 'screens/atoms/indicator_screen.dart';
+import 'screens/atoms/painter_screen.dart';
 import 'screens/atoms/radio_screen.dart';
+import 'screens/atoms/size_screen.dart';
 import 'screens/atoms/skeleton_screen.dart';
+import 'screens/atoms/slider_screen.dart';
 import 'screens/atoms/switch_screen.dart';
-import 'screens/containers/accordion_screen.dart';
-import 'screens/containers/appbar_screen.dart';
-import 'screens/containers/bottomsheet_screen.dart';
-import 'screens/containers/notification_screen.dart';
-import 'screens/containers/page_screen.dart';
-import 'screens/containers/tabs_screen.dart';
-import 'screens/containers/toast_screen.dart';
-import 'screens/layout/app_layout_screen.dart';
-import 'screens/layout/grid_staggered_screen.dart';
-import 'screens/layout/painter_screen.dart';
-import 'screens/layout/screen_base_screen.dart';
-import 'screens/layout/size_screen.dart';
-import 'screens/navigation/navigationbar_screen.dart';
-import 'screens/navigation/popscope_screen.dart';
-import 'screens/pickers/calendar_screen.dart';
-import 'screens/pickers/dialog_screen.dart';
-import 'screens/pickers/picker_screen.dart';
-import 'screens/scroll/aligned_gridview_screen.dart';
-import 'screens/scroll/gridview_screen.dart';
-import 'screens/scroll/listview_screen.dart';
-import 'screens/scroll/scrollview_screen.dart';
-import 'screens/styled/animated_screen.dart';
-import 'screens/styled/button_screen.dart';
-import 'screens/styled/icon_screen.dart';
-import 'screens/styled/image_screen.dart';
-import 'screens/styled/ratingbar_screen.dart';
-import 'screens/styled/slider_screen.dart';
-import 'screens/styled/text_screen.dart';
-import 'screens/styled/textfield_screen.dart';
+import 'screens/atoms/text_screen.dart';
+
+// Molecules
+import 'screens/molecules/appbar_screen.dart';
+import 'screens/molecules/ratingbar_screen.dart';
+import 'screens/molecules/tabs_screen.dart';
+import 'screens/molecules/textfield_screen.dart';
+
+// Organisms
+import 'screens/organisms/accordion_screen.dart';
+import 'screens/organisms/aligned_gridview_screen.dart';
+import 'screens/organisms/bottomsheet_screen.dart';
+import 'screens/organisms/calendar_screen.dart';
+import 'screens/organisms/dialog_screen.dart';
+import 'screens/organisms/grid_staggered_screen.dart';
+import 'screens/organisms/gridview_screen.dart';
+import 'screens/organisms/listview_screen.dart';
+import 'screens/organisms/notification_screen.dart';
+import 'screens/organisms/page_screen.dart';
+import 'screens/organisms/picker_screen.dart';
+import 'screens/organisms/scrollview_screen.dart';
+import 'screens/organisms/toast_screen.dart';
+
+// Templates
+import 'screens/templates/app_layout_screen.dart';
+import 'screens/templates/navigationbar_screen.dart';
+import 'screens/templates/popscope_screen.dart';
+import 'screens/templates/screen_base_screen.dart';
 
 final Map<ComponentCategory, List<ComponentItem>> componentRegistry = {
   ComponentCategory.atoms: [
     ComponentItem(
+      id: 'text',
+      title: 'Text',
+      builder: (_) => const TextScreen(),
+    ),
+    ComponentItem(
+      id: 'icon',
+      title: 'Icon',
+      builder: (_) => const IconScreen(),
+    ),
+    ComponentItem(
       id: 'badge',
       title: 'Badge',
       builder: (_) => const BadgeScreen(),
+    ),
+    ComponentItem(
+      id: 'button',
+      title: 'Button',
+      builder: (_) => const ButtonScreen(),
     ),
     ComponentItem(
       id: 'checkbox',
@@ -65,6 +88,11 @@ final Map<ComponentCategory, List<ComponentItem>> componentRegistry = {
       builder: (_) => const ChipScreen(),
     ),
     ComponentItem(
+      id: 'slider',
+      title: 'Slider',
+      builder: (_) => const SliderScreen(),
+    ),
+    ComponentItem(
       id: 'indicator',
       title: 'Indicator',
       builder: (_) => const IndicatorScreen(),
@@ -74,37 +102,10 @@ final Map<ComponentCategory, List<ComponentItem>> componentRegistry = {
       title: 'Skeleton',
       builder: (_) => const SkeletonScreen(),
     ),
-  ],
-  ComponentCategory.styled: [
     ComponentItem(
-      id: 'button',
-      title: 'Button',
-      builder: (_) => const ButtonScreen(),
-    ),
-    ComponentItem(
-      id: 'text',
-      title: 'Text',
-      builder: (_) => const TextScreen(),
-    ),
-    ComponentItem(
-      id: 'textfield',
-      title: 'TextField',
-      builder: (_) => const TextFieldScreen(),
-    ),
-    ComponentItem(
-      id: 'slider',
-      title: 'Slider',
-      builder: (_) => const SliderScreen(),
-    ),
-    ComponentItem(
-      id: 'icon',
-      title: 'Icon',
-      builder: (_) => const IconScreen(),
-    ),
-    ComponentItem(
-      id: 'ratingbar',
-      title: 'Rating Bar',
-      builder: (_) => const RatingBarScreen(),
+      id: 'animated',
+      title: 'Animated',
+      builder: (_) => const AnimatedScreen(),
     ),
     ComponentItem(
       id: 'image',
@@ -112,12 +113,27 @@ final Map<ComponentCategory, List<ComponentItem>> componentRegistry = {
       builder: (_) => const ImageScreen(),
     ),
     ComponentItem(
-      id: 'animated',
-      title: 'Animated',
-      builder: (_) => const AnimatedScreen(),
+      id: 'painter',
+      title: 'Painter',
+      builder: (_) => const PainterScreen(),
+    ),
+    ComponentItem(
+      id: 'size',
+      title: 'Widget Size',
+      builder: (_) => const SizeScreen(),
     ),
   ],
-  ComponentCategory.containers: [
+  ComponentCategory.molecules: [
+    ComponentItem(
+      id: 'textfield',
+      title: 'TextField',
+      builder: (_) => const TextFieldScreen(),
+    ),
+    ComponentItem(
+      id: 'ratingbar',
+      title: 'Rating Bar',
+      builder: (_) => const RatingBarScreen(),
+    ),
     ComponentItem(
       id: 'appbar',
       title: 'AppBar',
@@ -128,15 +144,17 @@ final Map<ComponentCategory, List<ComponentItem>> componentRegistry = {
       title: 'Tabs',
       builder: (_) => const TabsScreen(),
     ),
+  ],
+  ComponentCategory.organisms: [
     ComponentItem(
       id: 'accordion',
       title: 'Accordion',
       builder: (_) => const AccordionScreen(),
     ),
     ComponentItem(
-      id: 'page',
-      title: 'PageView',
-      builder: (_) => const PageScreen(),
+      id: 'dialog',
+      title: 'Dialog',
+      builder: (_) => const DialogScreen(),
     ),
     ComponentItem(
       id: 'bottomsheet',
@@ -153,37 +171,16 @@ final Map<ComponentCategory, List<ComponentItem>> componentRegistry = {
       title: 'Notification',
       builder: (_) => const NotificationScreen(),
     ),
-  ],
-  ComponentCategory.pickers: [
-    ComponentItem(
-      id: 'dialog',
-      title: 'Dialog',
-      builder: (_) => const DialogScreen(),
-    ),
-    ComponentItem(
-      id: 'picker',
-      title: 'Picker',
-      builder: (_) => const PickerScreen(),
-    ),
     ComponentItem(
       id: 'calendar',
       title: 'Calendar',
       builder: (_) => const CalendarScreen(),
     ),
-  ],
-  ComponentCategory.navigation: [
     ComponentItem(
-      id: 'navigationbar',
-      title: 'Navigation Bar',
-      builder: (_) => const NavigationBarScreen(),
+      id: 'page',
+      title: 'PageView',
+      builder: (_) => const PageScreen(),
     ),
-    ComponentItem(
-      id: 'popscope',
-      title: 'PopScope',
-      builder: (_) => const PopScopeScreen(),
-    ),
-  ],
-  ComponentCategory.scroll: [
     ComponentItem(
       id: 'listview',
       title: 'ListView',
@@ -204,8 +201,18 @@ final Map<ComponentCategory, List<ComponentItem>> componentRegistry = {
       title: 'Aligned GridView',
       builder: (_) => const AlignedGridViewScreen(),
     ),
+    ComponentItem(
+      id: 'picker',
+      title: 'Picker',
+      builder: (_) => const PickerScreen(),
+    ),
+    ComponentItem(
+      id: 'grid_staggered',
+      title: 'Staggered Grid',
+      builder: (_) => const GridStaggeredScreen(),
+    ),
   ],
-  ComponentCategory.layout: [
+  ComponentCategory.templates: [
     ComponentItem(
       id: 'screen_base',
       title: 'Screen Base',
@@ -217,19 +224,14 @@ final Map<ComponentCategory, List<ComponentItem>> componentRegistry = {
       builder: (_) => const AppLayoutScreen(),
     ),
     ComponentItem(
-      id: 'grid_staggered',
-      title: 'Staggered Grid',
-      builder: (_) => const GridStaggeredScreen(),
+      id: 'navigationbar',
+      title: 'Navigation Bar',
+      builder: (_) => const NavigationBarScreen(),
     ),
     ComponentItem(
-      id: 'size',
-      title: 'Widget Size',
-      builder: (_) => const SizeScreen(),
-    ),
-    ComponentItem(
-      id: 'painter',
-      title: 'Painter',
-      builder: (_) => const PainterScreen(),
+      id: 'popscope',
+      title: 'PopScope',
+      builder: (_) => const PopScopeScreen(),
     ),
   ],
 };

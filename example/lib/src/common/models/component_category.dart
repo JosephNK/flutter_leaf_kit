@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 
 enum ComponentCategory {
-  atoms('Basic Elements', Icons.widgets_outlined),
-  styled('Styled Widgets', Icons.brush_outlined),
-  containers('Containers', Icons.inventory_2_outlined),
-  pickers('Pickers & Dialogs', Icons.calendar_month_outlined),
-  navigation('Navigation', Icons.navigation_outlined),
-  scroll('Scrollable Lists', Icons.view_list_outlined),
-  layout('Layout & Utilities', Icons.grid_view_outlined);
+  atoms('Atoms', Icons.widgets_outlined),
+  molecules('Molecules', Icons.extension_outlined),
+  organisms('Organisms', Icons.dashboard_outlined),
+  templates('Templates', Icons.web_outlined);
 
   const ComponentCategory(this.label, this.icon);
 
