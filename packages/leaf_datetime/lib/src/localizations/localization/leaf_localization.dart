@@ -1,7 +1,7 @@
-export 'lf_localization_en.dart';
-export 'lf_localization_ko.dart';
+export 'leaf_localization_en.dart';
+export 'leaf_localization_ko.dart';
 
-abstract class LFLocalization {
+abstract class LeafLocalization {
   String get year;
   String get month;
   String get day;

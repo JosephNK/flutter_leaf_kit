@@ -1,6 +1,6 @@
 part of '../../leaf_navigation.dart';
 
-class LFNavigationBasic {
+class LeafNavigationBasic {
   /// Push
   static Future<T> push<T>(
     BuildContext context, {
@@ -12,7 +12,7 @@ class LFNavigationBasic {
     );
   }
 
-  @Deprecated('Use LFNavigation.pushNamed')
+  @Deprecated('Use LeafNavigation.pushNamed')
   static Future<T?> pushNamed<T>(
     BuildContext context,
     String routeName, {

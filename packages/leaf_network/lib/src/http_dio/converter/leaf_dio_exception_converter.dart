@@ -6,20 +6,20 @@ import 'package:dio/dio.dart';
 import 'package:flutter_leaf_common/leaf_common.dart';
 
 import '../../http_helper/http_exception.dart';
-import '../response/lf_dio_response.dart';
-import 'lf_dio_base_converter.dart';
+import '../response/leaf_dio_response.dart';
+import 'leaf_dio_base_converter.dart';
 
-class LFDioExceptionConverter implements DioExceptionConverter {
+class LeafDioExceptionConverter implements DioExceptionConverter {
   final Serializers serializers;
   final int printMaxLength;
 
   static Serializers? jsonSerializers;
 
-  LFDioExceptionConverter({
+  LeafDioExceptionConverter({
     required this.serializers,
     this.printMaxLength = 2024,
   }) {
-    LFDioExceptionConverter.jsonSerializers = (serializers.toBuilder()
+    LeafDioExceptionConverter.jsonSerializers = (serializers.toBuilder()
           ..addPlugin(
             StandardJsonPlugin(),
           ))
@@ -38,7 +38,7 @@ class LFDioExceptionConverter implements DioExceptionConverter {
   }
 
   @override
-  FutureOr<LFDioResponse<ResultType>>
+  FutureOr<LeafDioResponse<ResultType>>
       convertDioException<ResultType, ResultErrorType>(
           DioException dioException) {
     final dioResponse = dioException.response;
@@ -48,7 +48,7 @@ class LFDioExceptionConverter implements DioExceptionConverter {
     return convertException<ResultType, ResultErrorType>(dioException);
   }
 
-  FutureOr<LFDioResponse<ResultType>> convertError<ResultType, ResultErrorType>(
+  FutureOr<LeafDioResponse<ResultType>> convertError<ResultType, ResultErrorType>(
     Response response,
   ) async {
     final statusCode = response.statusCode ?? 0;
@@ -101,7 +101,7 @@ class LFDioExceptionConverter implements DioExceptionConverter {
       errorMessage = '[DioException ConvertError] $message';
     }
 
-    final errorResponse = LFDioResponse<ResultType>(
+    final errorResponse = LeafDioResponse<ResultType>(
       data: null,
       requestOptions: response.requestOptions,
       statusCode: response.statusCode,
@@ -167,19 +167,19 @@ class LFDioExceptionConverter implements DioExceptionConverter {
 
     return errorResponse
       ..error = bodyObject
-      ..exception = LFHttpExceptionObject(
+      ..exception = LeafHttpExceptionObject(
         exception,
       );
   }
 
-  FutureOr<LFDioResponse<ResultType>>
+  FutureOr<LeafDioResponse<ResultType>>
       convertException<ResultType, ResultErrorType>(
     DioException e,
   ) async {
     final dioExceptionType = e.type;
     final dioExceptionMessage = e.message ?? 'Unknown DioException';
 
-    LFDioResponse<ResultType> resultResponse = LFDioResponse<ResultType>(
+    LeafDioResponse<ResultType> resultResponse = LeafDioResponse<ResultType>(
       requestOptions: RequestOptions(),
     );
 
@@ -213,7 +213,7 @@ class LFDioExceptionConverter implements DioExceptionConverter {
     }
 
     return resultResponse
-      ..exception = LFHttpExceptionObject(
+      ..exception = LeafHttpExceptionObject(
         exception,
       );
   }

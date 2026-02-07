@@ -10,7 +10,7 @@ extension on int {
 extension on DateTime {
   // Magic const: 12 is to maintain compatibility with date_utils
   DateTime get middayDateTimeUTC =>
-      LFDate.parseFromList([year, month, day, 12, 0, 0]).toUtc();
+      LeafDate.parseFromList([year, month, day, 12, 0, 0]).toUtc();
 }
 
 /// Public Extension
@@ -21,7 +21,7 @@ extension DateCalendar on DateTime {
     final date = this;
     final result = <DateTime>[];
     final firstDayOfTheMonth =
-        LFDate.parseFromList([date.year, date.month, 1]).dateTime;
+        LeafDate.parseFromList([date.year, date.month, 1]).dateTime;
     final firstDay =
         firstDayOfTheMonth.add(firstDayOfTheMonth.weekday.daysDuration);
     result.add(firstDay);
@@ -64,50 +64,50 @@ extension DateCalendar on DateTime {
 extension DateCalendar1 on DateTime {
   DateTime toCalDayStartDateTime() {
     final dateString = toCalYearMonthDayString();
-    return LFDate.parseFromString('$dateString 00:00:00').dateTime;
+    return LeafDate.parseFromString('$dateString 00:00:00').dateTime;
   }
 
   DateTime toCalDayEndDateTime() {
     final dateString = toCalYearMonthDayString();
-    return LFDate.parseFromString('$dateString 23:59:59').dateTime;
+    return LeafDate.parseFromString('$dateString 23:59:59').dateTime;
   }
 
   String toCalYearMonthDayHourMinuteString() {
-    return LFDate.parseFromDateTime(this).format('yyyy-MM-dd HH:mm');
+    return LeafDate.parseFromDateTime(this).format('yyyy-MM-dd HH:mm');
   }
 
   String toCalYearMonthDayString() {
-    return LFDate.parseFromDateTime(this).format('yyyy-MM-dd');
+    return LeafDate.parseFromDateTime(this).format('yyyy-MM-dd');
   }
 
   String toCalHHmmString() {
-    return LFDate.parseFromDateTime(this).format('HH:mm');
+    return LeafDate.parseFromDateTime(this).format('HH:mm');
   }
 
   String toCalYearString() {
-    return LFDate.parseFromDateTime(this).format('yyyy');
+    return LeafDate.parseFromDateTime(this).format('yyyy');
   }
 
   String toCalMonthString() {
-    return LFDate.parseFromDateTime(this).format('MM');
+    return LeafDate.parseFromDateTime(this).format('MM');
   }
 
   String toCalDayString() {
-    return LFDate.parseFromDateTime(this).format('dd');
+    return LeafDate.parseFromDateTime(this).format('dd');
   }
 
   String toCalLunarDateString() {
-    return LFDate.parseFromDateTime(this).toLunarFormat('yyyy-MM-dd');
+    return LeafDate.parseFromDateTime(this).toLunarFormat('yyyy-MM-dd');
   }
 
   String toCalSolarDateString() {
-    return LFDate.parseFromDateTime(this).toSolarFromLunarFormat('yyyy-MM-dd');
+    return LeafDate.parseFromDateTime(this).toSolarFromLunarFormat('yyyy-MM-dd');
   }
 
   String toCalMeridiemTimeString() {
     DateFormat? formatter;
     try {
-      if (LFLocalizations.shared.languageCode == 'ko') {
+      if (LeafLocalizations.shared.languageCode == 'ko') {
         formatter = DateFormat('aa hh:mm', 'ko');
       }
     } catch (e) {
@@ -125,11 +125,11 @@ extension DateCalendar1 on DateTime {
   }) {
     DateFormat formatLocaleYearMonthDay() {
       try {
-        final languageCode = LFLocalizations.shared.languageCode;
+        final languageCode = LeafLocalizations.shared.languageCode;
         if (languageCode == 'ko') {
-          final yearUnit = LFLocalizations.shared.localization.year;
-          final monthUnit = LFLocalizations.shared.localization.month;
-          final dayUnit = LFLocalizations.shared.localization.day;
+          final yearUnit = LeafLocalizations.shared.localization.year;
+          final monthUnit = LeafLocalizations.shared.localization.month;
+          final dayUnit = LeafLocalizations.shared.localization.day;
           return DateFormat('yyyy$yearUnit MM$monthUnit dd$dayUnit', 'ko');
         }
       } catch (e) {
@@ -140,7 +140,7 @@ extension DateCalendar1 on DateTime {
 
     DateFormat formatLocaleWeekDay() {
       try {
-        final locale = LFLocalizations.shared.locale.toString();
+        final locale = LeafLocalizations.shared.locale.toString();
         return DateFormat.E(locale);
       } catch (e) {
         debugPrint('formatLocaleWeekDay error: $e');
@@ -156,12 +156,12 @@ extension DateCalendar1 on DateTime {
     }
 
     String prefix = !isLunar
-        ? LFLocalizations.shared.localization.shortSolar
-        : LFLocalizations.shared.localization.shortLunar;
+        ? LeafLocalizations.shared.localization.shortSolar
+        : LeafLocalizations.shared.localization.shortLunar;
     DateTime? dateTime = !isLunar
         ? this
-        : LFDate.parseFromString(
-            LFDate.parseFromDateTime(this).toLunarFormat('yyyy-MM-dd'),
+        : LeafDate.parseFromString(
+            LeafDate.parseFromDateTime(this).toLunarFormat('yyyy-MM-dd'),
           ).dateTime;
     String dateStr = formatLocaleYearMonthDay().format(dateTime);
     String weekDayStr = formatLocaleWeekDay().format(dateTime);

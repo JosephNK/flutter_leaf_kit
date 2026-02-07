@@ -1,6 +1,6 @@
-import 'lf_localization.dart';
+import 'leaf_localization.dart';
 
-class LFLocalizationEn extends LFLocalization {
+class LeafLocalizationEn extends LeafLocalization {
   @override
   String get year => '';
 

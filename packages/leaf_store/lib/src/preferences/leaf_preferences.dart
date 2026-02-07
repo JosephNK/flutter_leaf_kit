@@ -1,9 +1,9 @@
 part of '../../leaf_store.dart';
 
-class LFSharedPreferences {
-  static final LFSharedPreferences _instance = LFSharedPreferences._internal();
-  static LFSharedPreferences get shared => _instance;
-  LFSharedPreferences._internal();
+class LeafSharedPreferences {
+  static final LeafSharedPreferences _instance = LeafSharedPreferences._internal();
+  static LeafSharedPreferences get shared => _instance;
+  LeafSharedPreferences._internal();
 
   /// Private
 

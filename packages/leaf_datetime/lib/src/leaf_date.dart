@@ -1,10 +1,10 @@
 import 'package:jiffy/jiffy.dart';
 import 'package:jiffy_klc/jiffy_klc.dart';
 
-class LFDate {
+class LeafDate {
   late Jiffy _jiffy;
 
-  LFDate._internal(Jiffy jiffy) {
+  LeafDate._internal(Jiffy jiffy) {
     _jiffy = jiffy;
   }
 
@@ -38,20 +38,20 @@ class LFDate {
   /// Returns the date ranging from 1 to 31.
   int get date => _jiffy.date;
 
-  factory LFDate.now({bool isUtc = false}) {
+  factory LeafDate.now({bool isUtc = false}) {
     Jiffy object = Jiffy.now();
     if (isUtc) {
       object = object.toUtc();
     }
-    return LFDate._internal(object);
+    return LeafDate._internal(object);
   }
 
-  factory LFDate.parseFromString(String string, {bool isUtc = false}) {
+  factory LeafDate.parseFromString(String string, {bool isUtc = false}) {
     final object = Jiffy.parse(string, isUtc: isUtc);
-    return LFDate._internal(object);
+    return LeafDate._internal(object);
   }
 
-  factory LFDate.parseFromMicrosecondsSinceEpoch(
+  factory LeafDate.parseFromMicrosecondsSinceEpoch(
     int microsecondsSinceEpoch, {
     bool isUtc = false,
   }) {
@@ -59,22 +59,22 @@ class LFDate {
       microsecondsSinceEpoch,
       isUtc: isUtc,
     );
-    return LFDate._internal(object);
+    return LeafDate._internal(object);
   }
 
-  factory LFDate.parseFromList(List<int> list, {bool isUtc = false}) {
+  factory LeafDate.parseFromList(List<int> list, {bool isUtc = false}) {
     final object = Jiffy.parseFromList(list, isUtc: isUtc);
-    return LFDate._internal(object);
+    return LeafDate._internal(object);
   }
 
-  factory LFDate.parseFromDateTime(DateTime dateTime) {
+  factory LeafDate.parseFromDateTime(DateTime dateTime) {
     final object = Jiffy.parseFromDateTime(dateTime);
-    return LFDate._internal(object);
+    return LeafDate._internal(object);
   }
 
-  factory LFDate.parseFromJiffy(Jiffy jiffy) {
+  factory LeafDate.parseFromJiffy(Jiffy jiffy) {
     final object = Jiffy.parseFromJiffy(jiffy);
-    return LFDate._internal(object);
+    return LeafDate._internal(object);
   }
 
   DateTime toLocal() {
@@ -106,7 +106,7 @@ class LFDate {
   }
 
   /// Manipulation
-  LFDate add({
+  LeafDate add({
     int microseconds = 0,
     int milliseconds = 0,
     int seconds = 0,
@@ -131,7 +131,7 @@ class LFDate {
     return this;
   }
 
-  LFDate subtract({
+  LeafDate subtract({
     int microseconds = 0,
     int milliseconds = 0,
     int seconds = 0,
@@ -157,30 +157,30 @@ class LFDate {
   }
 
   /// Querying
-  bool isBefore(LFDate other, {Unit unit = Unit.microsecond}) =>
+  bool isBefore(LeafDate other, {Unit unit = Unit.microsecond}) =>
       _jiffy.isBefore(other.jiffy, unit: unit);
 
-  bool isAfter(LFDate other, {Unit unit = Unit.microsecond}) =>
+  bool isAfter(LeafDate other, {Unit unit = Unit.microsecond}) =>
       _jiffy.isAfter(other.jiffy, unit: unit);
 
-  bool isSame(LFDate other, {Unit unit = Unit.microsecond}) =>
+  bool isSame(LeafDate other, {Unit unit = Unit.microsecond}) =>
       _jiffy.isSame(other.jiffy, unit: unit);
 
-  bool isSameOrAfter(LFDate other, {Unit unit = Unit.microsecond}) =>
+  bool isSameOrAfter(LeafDate other, {Unit unit = Unit.microsecond}) =>
       _jiffy.isSameOrAfter(other.jiffy, unit: unit);
 
-  bool isSameOrBefore(LFDate other, {Unit unit = Unit.microsecond}) =>
+  bool isSameOrBefore(LeafDate other, {Unit unit = Unit.microsecond}) =>
       _jiffy.isSameOrBefore(other.jiffy, unit: unit);
 
   bool isBetween(
-    LFDate otherFrom,
-    LFDate otherTo, {
+    LeafDate otherFrom,
+    LeafDate otherTo, {
     Unit unit = Unit.microsecond,
   }) =>
       _jiffy.isBetween(otherFrom.jiffy, otherTo.jiffy, unit: unit);
 
   num diff(
-    LFDate other, {
+    LeafDate other, {
     Unit unit = Unit.microsecond,
     bool asFloat = false,
   }) =>

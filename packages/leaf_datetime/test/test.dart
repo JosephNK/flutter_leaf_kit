@@ -3,8 +3,8 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   test('Test', () async {
-    LFDate.parseFromString('2021-05-25T12:00:00.000Z');
-    // print(LFDate.parseFromString('2021-05-25T12:00:00.000Z')
+    LeafDate.parseFromString('2021-05-25T12:00:00.000Z');
+    // print(LeafDate.parseFromString('2021-05-25T12:00:00.000Z')
     //     .format('yyyy-MM-dd HH:mm'));
   });
 }

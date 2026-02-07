@@ -4,8 +4,8 @@ import 'package:dio/dio.dart';
 
 import '../../http_helper/http_exception.dart';
 
-class LFDioResponse<T> extends Response<T> {
-  LFDioResponse({
+class LeafDioResponse<T> extends Response<T> {
+  LeafDioResponse({
     super.data,
     required super.requestOptions,
     super.statusCode,
@@ -17,7 +17,7 @@ class LFDioResponse<T> extends Response<T> {
   });
 
   Object? error;
-  LFHttpExceptionObject? exception;
+  LeafHttpExceptionObject? exception;
 
   bool get isSuccessful {
     final statusCode = this.statusCode ?? 0;
@@ -34,7 +34,7 @@ class LFDioResponse<T> extends Response<T> {
   @override
   String toString() {
     final buffer = StringBuffer();
-    buffer.writeln('LFDioResponse<$T> {');
+    buffer.writeln('LeafDioResponse<$T> {');
 
     // 상태 정보
     buffer.writeln('  statusCode: $statusCode,');

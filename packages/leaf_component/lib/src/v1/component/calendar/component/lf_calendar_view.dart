@@ -104,7 +104,7 @@ class _LFCalendarViewState extends State<LFCalendarView> {
   void initState() {
     super.initState();
 
-    final defaultDate = widget.defaultDate ?? LFDate.now().dateTime;
+    final defaultDate = widget.defaultDate ?? LeafDate.now().dateTime;
     final minDate = widget.minDate ?? DateTime(1900);
     final maxDate = widget.maxDate ?? DateTime(2200);
 
@@ -115,7 +115,7 @@ class _LFCalendarViewState extends State<LFCalendarView> {
     final initialPage = _calculateFocusedPage(
         LFCalendarFormat.month, minDate, _defaultDateTime);
     final todayPage = _calculateFocusedPage(
-        LFCalendarFormat.month, minDate, LFDate.now().dateTime);
+        LFCalendarFormat.month, minDate, LeafDate.now().dateTime);
 
     _initialPage = initialPage;
     _todayPage = todayPage;
@@ -388,7 +388,7 @@ class _LFCalendarViewState extends State<LFCalendarView> {
     // 페이지 전환 후 [오늘] 날짜로 선택 효과 & onDateSelected 함수 호출
     context
         .read<LFCalendarProvider>()
-        .select(LFDate.now().dateTime, useSendEvent: true);
+        .select(LeafDate.now().dateTime, useSendEvent: true);
   }
 
   void onActionAtPrevious(
@@ -474,6 +474,6 @@ class _LFCalendarViewState extends State<LFCalendarView> {
     final day = (dayDateTime == null)
         ? monthDateTime.day.toString().padLeft(2, '0')
         : dayDateTime.day.toString().padLeft(2, '0');
-    return LFDate.parseFromString('$year-$month-$day').dateTime;
+    return LeafDate.parseFromString('$year-$month-$day').dateTime;
   }
 }

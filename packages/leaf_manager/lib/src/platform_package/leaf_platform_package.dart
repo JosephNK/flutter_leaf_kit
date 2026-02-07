@@ -4,9 +4,9 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_leaf_common/leaf_common.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
-import 'lf_build_type.dart';
+import 'leaf_build_type.dart';
 
-export 'lf_build_type.dart';
+export 'leaf_build_type.dart';
 
 class PlatformPackage {
   final BuildType buildType;

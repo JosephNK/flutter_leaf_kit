@@ -59,7 +59,7 @@ class LFCacheNetworkImage extends StatelessWidget {
     required BoxFit fit,
     required Map<String, String>? httpHeaders,
   }) {
-    onPreBuilder?.call(); // LFDeviceManager.shared.checkMemory();
+    onPreBuilder?.call(); // LeafDeviceManager.shared.checkMemory();
 
     return cached_network.CachedNetworkImage(
       key: ValueKey(urlString),

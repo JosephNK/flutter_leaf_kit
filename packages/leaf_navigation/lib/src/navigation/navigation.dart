@@ -1,9 +1,9 @@
 part of '../../leaf_navigation.dart';
 
-class LFNavigationParam extends Equatable {
+class LeafNavigationParam extends Equatable {
   final dynamic data;
 
-  const LFNavigationParam({
+  const LeafNavigationParam({
     this.data,
   });
 
@@ -17,7 +17,7 @@ class LFNavigationParam extends Equatable {
 
 ///////////////////////////////////////////////////////////////////////////////
 
-enum LFNavigatorPushType {
+enum LeafNavigatorPushType {
   basicMaterial,
   basicCupertino,
   basicCupertinoFullScreen,
@@ -26,7 +26,7 @@ enum LFNavigatorPushType {
   cupertinoModal
 }
 
-class LFNavigation {
+class LeafNavigation {
   /// Pop
   static void popUntilUntilNamed(BuildContext context, String routeName) {
     Navigator.popUntil(context, (Route<dynamic> route) {
@@ -64,14 +64,14 @@ class LFNavigation {
     BuildContext context,
     String routeName, {
     required Widget child, // Widget, MultiBlocProvider
-    LFNavigatorPushType pushType = LFNavigatorPushType.basicMaterial,
+    LeafNavigatorPushType pushType = LeafNavigatorPushType.basicMaterial,
   }) async {
-    Logging.i('[LFNavigation PushNamed] PushType :: $routeName => $pushType');
+    Logging.i('[LeafNavigation PushNamed] PushType :: $routeName => $pushType');
 
     RouteSettings routeSettings = RouteSettings(name: routeName);
 
     switch (pushType) {
-      case LFNavigatorPushType.basicMaterial:
+      case LeafNavigatorPushType.basicMaterial:
         PageRoute<T> route = MaterialPageRoute(
           settings: routeSettings,
           builder: (context) {
@@ -79,18 +79,18 @@ class LFNavigation {
           },
         );
         return await Navigator.push(context, route);
-      case LFNavigatorPushType.basicCupertino:
-      case LFNavigatorPushType.basicCupertinoFullScreen:
+      case LeafNavigatorPushType.basicCupertino:
+      case LeafNavigatorPushType.basicCupertinoFullScreen:
         PageRoute<T> route = MaterialWithModalsPageRoute(
           settings: routeSettings,
           fullscreenDialog:
-              (pushType == LFNavigatorPushType.basicCupertinoFullScreen),
+              (pushType == LeafNavigatorPushType.basicCupertinoFullScreen),
           builder: (context) {
             return child;
           },
         );
         return await Navigator.push(context, route);
-      case LFNavigatorPushType.materialModal:
+      case LeafNavigatorPushType.materialModal:
         return await Navigator.push(
           context,
           PageRouteBuilder(
@@ -111,7 +111,7 @@ class LFNavigation {
             transitionDuration: const Duration(milliseconds: 300),
           ),
         );
-      case LFNavigatorPushType.materialModalNoAnimation:
+      case LeafNavigatorPushType.materialModalNoAnimation:
         return await Navigator.push(
           context,
           PageRouteBuilder(
@@ -123,7 +123,7 @@ class LFNavigation {
             reverseTransitionDuration: Duration.zero,
           ),
         );
-      case LFNavigatorPushType.cupertinoModal:
+      case LeafNavigatorPushType.cupertinoModal:
         return await showCupertinoModalBottomSheet(
           context: context,
           settings: routeSettings,

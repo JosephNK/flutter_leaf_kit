@@ -1,32 +1,32 @@
 part of '../leaf_webview.dart';
 
-enum LFWebViewEventType {
+enum LeafWebViewEventType {
   mailto,
   tel,
   geo,
 }
 
-typedef LFWebViewOnBeforeLoaded = Function();
-typedef LFWebViewOnLoaded = Function();
-typedef LFWebViewOnLoaderBuilder = Widget Function();
-typedef LFWebViewOnCreateWebViewController = Function(
+typedef LeafWebViewOnBeforeLoaded = Function();
+typedef LeafWebViewOnLoaded = Function();
+typedef LeafWebViewOnLoaderBuilder = Widget Function();
+typedef LeafWebViewOnCreateWebViewController = Function(
     WebViewController webViewController);
-typedef LFWebViewOnPageStarted = Function();
-typedef LFWebViewOnPageFinished = Function();
-typedef LFWebViewOnHeightFinished = Function(double height);
-typedef LFWebViewOnNavigationDecision = bool Function(
-    LFWebViewEventType? type, String url);
-typedef LFWebViewOnUrlChange = Function(String? url);
-typedef LFWebViewOnHttpError = Function(HttpResponseError error);
-typedef LFWebViewOnJavaScriptAlertDialogIOS = Future<bool?> Function(
+typedef LeafWebViewOnPageStarted = Function();
+typedef LeafWebViewOnPageFinished = Function();
+typedef LeafWebViewOnHeightFinished = Function(double height);
+typedef LeafWebViewOnNavigationDecision = bool Function(
+    LeafWebViewEventType? type, String url);
+typedef LeafWebViewOnUrlChange = Function(String? url);
+typedef LeafWebViewOnHttpError = Function(HttpResponseError error);
+typedef LeafWebViewOnJavaScriptAlertDialogIOS = Future<bool?> Function(
     JavaScriptAlertDialogRequest request);
-typedef LFWebViewOnJavaScriptConfirmDialogIOS = Future<bool?> Function(
+typedef LeafWebViewOnJavaScriptConfirmDialogIOS = Future<bool?> Function(
     JavaScriptConfirmDialogRequest request);
-typedef LFWebViewOnJavaScriptTextInputDialogIOS = Future<String?> Function(
+typedef LeafWebViewOnJavaScriptTextInputDialogIOS = Future<String?> Function(
     JavaScriptTextInputDialogRequest request);
 
-class LFWebView extends StatefulWidget {
-  final LFWebViewController controller;
+class LeafWebView extends StatefulWidget {
+  final LeafWebViewController controller;
   final Uri? uri;
   final String? htmlString;
   final String? htmlFile;
@@ -40,21 +40,21 @@ class LFWebView extends StatefulWidget {
   final bool isInspectable;
   final String? userAgent;
   final Duration? loaderDelay;
-  final LFWebViewOnBeforeLoaded? onInitBeforeLoaded;
-  final LFWebViewOnLoaded? onInitLoaded;
-  final LFWebViewOnCreateWebViewController? onCreateWebViewController;
-  final LFWebViewOnPageStarted? onPageStarted;
-  final LFWebViewOnPageFinished? onPageFinished;
-  final LFWebViewOnLoaderBuilder? onLoaderBuilder;
-  final LFWebViewOnHeightFinished? onHeightFinished;
-  final LFWebViewOnNavigationDecision? onNavigationDecision;
-  final LFWebViewOnUrlChange? onUrlChange;
-  final LFWebViewOnHttpError? onHttpError;
-  final LFWebViewOnJavaScriptAlertDialogIOS? onJavaScriptAlertDialogIOS;
-  final LFWebViewOnJavaScriptConfirmDialogIOS? onJavaScriptConfirmDialogIOS;
-  final LFWebViewOnJavaScriptTextInputDialogIOS? onJavaScriptTextInputDialogIOS;
+  final LeafWebViewOnBeforeLoaded? onInitBeforeLoaded;
+  final LeafWebViewOnLoaded? onInitLoaded;
+  final LeafWebViewOnCreateWebViewController? onCreateWebViewController;
+  final LeafWebViewOnPageStarted? onPageStarted;
+  final LeafWebViewOnPageFinished? onPageFinished;
+  final LeafWebViewOnLoaderBuilder? onLoaderBuilder;
+  final LeafWebViewOnHeightFinished? onHeightFinished;
+  final LeafWebViewOnNavigationDecision? onNavigationDecision;
+  final LeafWebViewOnUrlChange? onUrlChange;
+  final LeafWebViewOnHttpError? onHttpError;
+  final LeafWebViewOnJavaScriptAlertDialogIOS? onJavaScriptAlertDialogIOS;
+  final LeafWebViewOnJavaScriptConfirmDialogIOS? onJavaScriptConfirmDialogIOS;
+  final LeafWebViewOnJavaScriptTextInputDialogIOS? onJavaScriptTextInputDialogIOS;
 
-  const LFWebView({
+  const LeafWebView({
     super.key,
     required this.controller,
     this.uri,
@@ -86,10 +86,10 @@ class LFWebView extends StatefulWidget {
   });
 
   @override
-  State<LFWebView> createState() => _LFWebViewState();
+  State<LeafWebView> createState() => _LeafWebViewState();
 }
 
-class _LFWebViewState extends State<LFWebView> {
+class _LeafWebViewState extends State<LeafWebView> {
   late NavigationDelegate _navigationDelegate;
 
   double _contentHeight = 0.0;
@@ -203,36 +203,36 @@ class _LFWebViewState extends State<LFWebView> {
 
     _navigationDelegate = NavigationDelegate(
       onProgress: (int progress) {
-        Logging.d('[LFWebView] onProgress = ${progress.toString()}');
+        Logging.d('[LeafWebView] onProgress = ${progress.toString()}');
       },
       onPageStarted: (String url) {
-        Logging.d('[LFWebView] onPageStarted = $url');
+        Logging.d('[LeafWebView] onPageStarted = $url');
         setState(() {
           _loading = true;
         });
         onPageStarted?.call();
       },
       onPageFinished: (String url) async {
-        Logging.d('[LFWebView] onPageFinished = $url');
+        Logging.d('[LeafWebView] onPageFinished = $url');
         await updateWebViewHeightAfterOnPageFinished();
         onPageFinished?.call();
       },
       onWebResourceError: (WebResourceError error) {
-        Logging.d('[LFWebView] onWebResourceError = ${error.errorCode}');
+        Logging.d('[LeafWebView] onWebResourceError = ${error.errorCode}');
       },
       onNavigationRequest: (NavigationRequest request) async {
-        Logging.d('[LFWebView] navigationDelegate = ${request.url}');
+        Logging.d('[LeafWebView] navigationDelegate = ${request.url}');
         return await navigationURLToLinkEvent(request.url);
       },
       onHttpAuthRequest: (HttpAuthRequest request) async {
-        Logging.d('[LFWebView] onHttpAuthRequest = ${request.realm}');
+        Logging.d('[LeafWebView] onHttpAuthRequest = ${request.realm}');
       },
       onUrlChange: (UrlChange change) {
-        Logging.d('[LFWebView] onUrlChange = ${change.url}');
+        Logging.d('[LeafWebView] onUrlChange = ${change.url}');
         widget.onUrlChange?.call(change.url);
       },
       onHttpError: (HttpResponseError error) {
-        Logging.d('[LFWebView] onHttpError = ${error.response}');
+        Logging.d('[LeafWebView] onHttpError = ${error.response}');
         widget.onHttpError?.call(error);
       },
     );
@@ -361,16 +361,16 @@ class _LFWebViewState extends State<LFWebView> {
   Future<NavigationDecision> navigationURLToLinkEvent(String url) async {
     final onNavigationDecision = widget.onNavigationDecision;
     if (url.contains('mailto:')) {
-      Logging.d('[LFWebView] navigationDelegate :: Mailto clicked! = $url');
-      final _ = onNavigationDecision?.call(LFWebViewEventType.mailto, url);
+      Logging.d('[LeafWebView] navigationDelegate :: Mailto clicked! = $url');
+      final _ = onNavigationDecision?.call(LeafWebViewEventType.mailto, url);
       return NavigationDecision.prevent;
     } else if (url.contains('tel:')) {
-      Logging.d('[LFWebView] navigationDelegate :: Tel clicked! = $url');
-      final _ = onNavigationDecision?.call(LFWebViewEventType.tel, url);
+      Logging.d('[LeafWebView] navigationDelegate :: Tel clicked! = $url');
+      final _ = onNavigationDecision?.call(LeafWebViewEventType.tel, url);
       return NavigationDecision.prevent;
     } else if (url.contains('geo:')) {
-      Logging.d('[LFWebView] navigationDelegate :: GEO clicked! = $url');
-      final _ = onNavigationDecision?.call(LFWebViewEventType.geo, url);
+      Logging.d('[LeafWebView] navigationDelegate :: GEO clicked! = $url');
+      final _ = onNavigationDecision?.call(LeafWebViewEventType.geo, url);
       return NavigationDecision.prevent;
     }
     if (onNavigationDecision != null) {
@@ -385,13 +385,13 @@ class _LFWebViewState extends State<LFWebView> {
     final webViewController = controller.webViewController;
     final readyState = await webViewController
         .runJavaScriptReturningResult('document.readyState');
-    Logging.d('[LFWebView] readyState: $readyState');
+    Logging.d('[LeafWebView] readyState: $readyState');
     if (readyState == 'complete' || readyState == '"complete"') {
       final height = await webViewController
           .runJavaScriptReturningResult('document.body.scrollHeight');
       final heightStr = height.toString();
       final documentHeight = double.parse(heightStr);
-      Logging.d('[LFWebView] DocumentHeight: $documentHeight');
+      Logging.d('[LeafWebView] DocumentHeight: $documentHeight');
       final fullScreen = widget.fullScreen;
       if (!fullScreen) {
         if (context.mounted) {

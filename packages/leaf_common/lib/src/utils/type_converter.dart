@@ -1,6 +1,6 @@
-part of '../lf_common.dart';
+part of '../leaf_common.dart';
 
-class LFTypeConverter {
+class LeafTypeConverter {
   T? convertTo<T>(dynamic value) {
     if (value == null) return null;
 

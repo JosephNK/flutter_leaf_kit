@@ -18,13 +18,13 @@ extension HttpDioMediaMimeTypeExt on HttpDioMediaMimeType {
 
 class HttpDioHelper {
   MultipartFile convertFromFile(
-    LFMultipartFile file, {
+    LeafMultipartFile file, {
     HttpDioMediaMimeType mediaMimeType = HttpDioMediaMimeType.image,
   }) {
     final path = file.getPath();
     final ext = file.getExtension();
     if (path == null || ext == null) {
-      throw LFMessageException('File Path or Ext is null');
+      throw LeafMessageException('File Path or Ext is null');
     }
     final extension = ((ext == '.jpg') ? '.jpeg' : ext).replaceAll('.', '');
     final fileName = file.getPayload();

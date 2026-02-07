@@ -3,8 +3,8 @@ import 'dart:developer';
 
 import 'package:dio/dio.dart';
 
-class LFDioCurlInterceptor extends InterceptorsWrapper {
-  LFDioCurlInterceptor();
+class LeafDioCurlInterceptor extends InterceptorsWrapper {
+  LeafDioCurlInterceptor();
 
   @override
   void onError(DioException err, ErrorInterceptorHandler handler) {

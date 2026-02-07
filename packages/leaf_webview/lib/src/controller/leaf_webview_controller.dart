@@ -1,12 +1,12 @@
 part of '../../leaf_webview.dart';
 
-typedef LFWebViewOnJavaScriptMessageReceived = Function(
+typedef LeafWebViewOnJavaScriptMessageReceived = Function(
     JavaScriptMessage javaScriptMessage);
-typedef LFWebViewOnRegisterJavaScriptChannel = Function(
+typedef LeafWebViewOnRegisterJavaScriptChannel = Function(
     WebViewController webViewController);
 
-class LFWebViewController {
-  LFWebViewController() {
+class LeafWebViewController {
+  LeafWebViewController() {
     _messageStreamController =
         StreamController<Map<String, JavaScriptMessage>>();
     _messageStreamController?.stream.listen((data) {
@@ -61,8 +61,8 @@ class LFWebViewController {
   late WebViewController webViewController;
   StreamController<Map<String, JavaScriptMessage>>? _messageStreamController;
   List<String> javaScriptChannelNames = [];
-  Map<String, LFWebViewOnJavaScriptMessageReceived> onMessageReceived = {};
-  List<LFWebViewOnRegisterJavaScriptChannel> onRegisterJavaScriptChannels = [];
+  Map<String, LeafWebViewOnJavaScriptMessageReceived> onMessageReceived = {};
+  List<LeafWebViewOnRegisterJavaScriptChannel> onRegisterJavaScriptChannels = [];
 
   /// Load the webview with the given [uri].
   Future<void> loadRequest(
@@ -109,7 +109,7 @@ class LFWebViewController {
     this.onMessageReceived[name] = onMessageReceived;
   }
 
-  void addJavaScriptChannelFunc(LFWebViewOnRegisterJavaScriptChannel func) {
+  void addJavaScriptChannelFunc(LeafWebViewOnRegisterJavaScriptChannel func) {
     onRegisterJavaScriptChannels.add(func);
   }
 

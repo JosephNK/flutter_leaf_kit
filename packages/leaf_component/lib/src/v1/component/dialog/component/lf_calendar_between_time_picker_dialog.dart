@@ -83,8 +83,8 @@ class _CalendarBetweenTimePickerContentState
   void initState() {
     super.initState();
 
-    _startTime = widget.startTime ?? LFDate.now().dateTime;
-    _endTime = widget.endTime ?? LFDate.now().dateTime;
+    _startTime = widget.startTime ?? LeafDate.now().dateTime;
+    _endTime = widget.endTime ?? LeafDate.now().dateTime;
     final pickerSelect = widget.pickerSelect;
     switch (pickerSelect) {
       case LFCalendarBetweenPickerSelect.none:
@@ -260,16 +260,16 @@ class _CalendarBetweenTimePickerContentState
     }
 
     final fDay =
-        LFDate.parseFromString(fromTime.toCalYearMonthDayString()).dateTime;
+        LeafDate.parseFromString(fromTime.toCalYearMonthDayString()).dateTime;
     final tDay =
-        LFDate.parseFromString(toTime.toCalYearMonthDayString()).dateTime;
+        LeafDate.parseFromString(toTime.toCalYearMonthDayString()).dateTime;
 
     if (fDay.isSameDateTime(tDay, onlyDate: true)) {
       final f =
-          LFDate.parseFromString(fromTime.toCalYearMonthDayHourMinuteString())
+          LeafDate.parseFromString(fromTime.toCalYearMonthDayHourMinuteString())
               .dateTime;
       final t =
-          LFDate.parseFromString(toTime.toCalYearMonthDayHourMinuteString())
+          LeafDate.parseFromString(toTime.toCalYearMonthDayHourMinuteString())
               .dateTime;
 
       String? validMessage;

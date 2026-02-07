@@ -3,12 +3,12 @@ import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:geolocator/geolocator.dart';
 
-class LFLocationManager {
-  static final LFLocationManager _instance = LFLocationManager._internal();
+class LeafLocationManager {
+  static final LeafLocationManager _instance = LeafLocationManager._internal();
 
-  static LFLocationManager get shared => _instance;
+  static LeafLocationManager get shared => _instance;
 
-  LFLocationManager._internal();
+  LeafLocationManager._internal();
 
   StreamSubscription<Position>? streamPosition;
 

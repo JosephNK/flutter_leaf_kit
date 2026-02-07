@@ -5,10 +5,10 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_leaf_common/leaf_common.dart';
 import 'package:permission_handler/permission_handler.dart' as ph;
 
-class LFPermissionManager {
-  static final LFPermissionManager _instance = LFPermissionManager._internal();
-  static LFPermissionManager get shared => _instance;
-  LFPermissionManager._internal();
+class LeafPermissionManager {
+  static final LeafPermissionManager _instance = LeafPermissionManager._internal();
+  static LeafPermissionManager get shared => _instance;
+  LeafPermissionManager._internal();
 
   Future<bool> requestPermission(ph.Permission permission) async {
     final updatePermission = await _permissionForceChange(permission);

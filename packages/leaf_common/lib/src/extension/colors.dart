@@ -1,6 +1,6 @@
-part of '../lf_common.dart';
+part of '../leaf_common.dart';
 
-class LFExtColor {
+class LeafExtColor {
   static Color? hexToColor(String hex) {
     try {
       return Color(int.parse(hex.substring(1, 7), radix: 16) + 0xFF000000);

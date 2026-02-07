@@ -3,17 +3,17 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 
-import '../response/lf_dio_response.dart';
+import '../response/leaf_dio_response.dart';
 
 abstract class DioJsonConverter {
-  FutureOr<LFDioResponse<ResultType>>
+  FutureOr<LeafDioResponse<ResultType>>
       convertJsonResponse<ResultType, ResultErrorType>(
     Response response,
   );
 }
 
 abstract class DioExceptionConverter {
-  FutureOr<LFDioResponse<ResultType>>
+  FutureOr<LeafDioResponse<ResultType>>
       convertDioException<ResultType, ResultErrorType>(
     DioException dioException,
   );

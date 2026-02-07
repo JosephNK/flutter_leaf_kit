@@ -1,6 +1,6 @@
-part of '../lf_common.dart';
+part of '../leaf_common.dart';
 
-class LFExtFocusNode {
+class LeafExtFocusNode {
   static void removeFocus(BuildContext context) {
     FocusScope.of(context).requestFocus(FocusNode());
   }

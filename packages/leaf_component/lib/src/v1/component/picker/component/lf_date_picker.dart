@@ -47,7 +47,7 @@ class _LFDatePickerState extends State<LFDatePicker> {
   void initState() {
     super.initState();
 
-    final initialDateTime = widget.initialDateTime ?? LFDate.now().dateTime;
+    final initialDateTime = widget.initialDateTime ?? LeafDate.now().dateTime;
     _dateTime = initialDateTime;
   }
 

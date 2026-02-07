@@ -1,18 +1,18 @@
 import 'package:dio/dio.dart';
 
-import '../converter/lf_dio_built_value_converter.dart';
-import '../converter/lf_dio_exception_converter.dart';
-import '../response/lf_dio_response.dart';
+import '../converter/leaf_dio_built_value_converter.dart';
+import '../converter/leaf_dio_exception_converter.dart';
+import '../response/leaf_dio_response.dart';
 
 abstract class DioService {
   late Dio dio;
-  late LFDioBuiltValueConverter converter;
-  late LFDioExceptionConverter errorConverter;
+  late LeafDioBuiltValueConverter converter;
+  late LeafDioExceptionConverter errorConverter;
 }
 
-class LFDioService extends DioService {
+class LeafDioService extends DioService {
   /// Convenience method to make an HTTP GET request.
-  Future<LFDioResponse<R>> get<R, E>(
+  Future<LeafDioResponse<R>> get<R, E>(
     String path, {
     Object? data,
     Map<String, dynamic>? queryParameters,
@@ -37,7 +37,7 @@ class LFDioService extends DioService {
   }
 
   /// Convenience method to make an HTTP POST request.
-  Future<LFDioResponse<R>> post<R, E>(
+  Future<LeafDioResponse<R>> post<R, E>(
     String path, {
     Object? data,
     Map<String, dynamic>? queryParameters,
@@ -64,7 +64,7 @@ class LFDioService extends DioService {
   }
 
   /// Convenience method to make an HTTP PUT request.
-  Future<LFDioResponse<R>> put<R, E>(
+  Future<LeafDioResponse<R>> put<R, E>(
     String path, {
     Object? data,
     Map<String, dynamic>? queryParameters,
@@ -91,7 +91,7 @@ class LFDioService extends DioService {
   }
 
   /// Convenience method to make an HTTP DELETE request.
-  Future<LFDioResponse<R>> delete<R, E>(
+  Future<LeafDioResponse<R>> delete<R, E>(
     String path, {
     Object? data,
     Map<String, dynamic>? queryParameters,

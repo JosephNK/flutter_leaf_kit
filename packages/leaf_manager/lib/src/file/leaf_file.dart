@@ -5,10 +5,10 @@ import 'dart:typed_data';
 import 'package:flutter/foundation.dart';
 import 'package:path_provider/path_provider.dart';
 
-class LFFileManager {
-  static final LFFileManager _instance = LFFileManager._internal();
-  static LFFileManager get shared => _instance;
-  LFFileManager._internal();
+class LeafFileManager {
+  static final LeafFileManager _instance = LeafFileManager._internal();
+  static LeafFileManager get shared => _instance;
+  LeafFileManager._internal();
 
   /// File
 

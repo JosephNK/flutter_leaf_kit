@@ -2,11 +2,11 @@ part of '../../leaf_store.dart';
 
 const kAllowFiles = ['.jpg', '.jpeg', '.png'];
 
-class LFMultipartFile extends UIModelV2<String> {
+class LeafMultipartFile extends UIModelV2<String> {
   final Uri? uri;
   final XFile? xFile;
 
-  const LFMultipartFile({
+  const LeafMultipartFile({
     required super.payload,
     required this.uri,
     required this.xFile,
@@ -81,7 +81,7 @@ class LFMultipartFile extends UIModelV2<String> {
     return true;
   }
 
-  LFMultipartFile? pipeCheckAllowExt([
+  LeafMultipartFile? pipeCheckAllowExt([
     List<String> allowExt = kAllowFiles,
   ]) {
     if (!checkAllowExt(allowExt)) {
@@ -101,16 +101,16 @@ class LFMultipartFile extends UIModelV2<String> {
 
   /// Factory
 
-  factory LFMultipartFile.fromUri(Uri uri, {String? payload}) {
-    return LFMultipartFile(
+  factory LeafMultipartFile.fromUri(Uri uri, {String? payload}) {
+    return LeafMultipartFile(
       payload: payload ?? const Uuid().v5(Namespace.url.value, uri.path),
       uri: uri,
       xFile: null,
     );
   }
 
-  factory LFMultipartFile.fromXFile(XFile xFile, {String? payload}) {
-    return LFMultipartFile(
+  factory LeafMultipartFile.fromXFile(XFile xFile, {String? payload}) {
+    return LeafMultipartFile(
       payload: payload ?? const Uuid().v5(Namespace.url.value, xFile.path),
       uri: null,
       xFile: xFile,

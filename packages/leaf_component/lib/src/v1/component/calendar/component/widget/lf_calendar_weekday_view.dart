@@ -11,7 +11,7 @@ class LFCalendarWeekDayView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final weekDays = LFLocalizations.shared.localization.shortWeekdays;
+    final weekDays = LeafLocalizations.shared.localization.shortWeekdays;
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,

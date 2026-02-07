@@ -1,4 +1,4 @@
-part of '../lf_common.dart';
+part of '../leaf_common.dart';
 
 extension AssetImageHelper on AssetImage {
   Future<Map<String, dynamic>> getAsyncSize() async {

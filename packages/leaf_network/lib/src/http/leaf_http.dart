@@ -3,7 +3,7 @@ import 'dart:ui' as ui;
 
 import 'package:http/http.dart' as http;
 
-class LFHttp {
+class LeafHttp {
   Future<Uint8List?> resizeDownloadImage(
     Uri uri, {
     required int targetWidth,

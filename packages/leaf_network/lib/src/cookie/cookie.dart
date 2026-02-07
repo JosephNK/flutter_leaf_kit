@@ -1,13 +1,13 @@
 import 'package:flutter_leaf_store/leaf_store.dart';
 import 'package:http/http.dart' as http;
 
-class LFCookieStoreManager {
-  static final LFCookieStoreManager _instance =
-      LFCookieStoreManager._internal();
+class LeafCookieStoreManager {
+  static final LeafCookieStoreManager _instance =
+      LeafCookieStoreManager._internal();
 
-  static LFCookieStoreManager get shared => _instance;
+  static LeafCookieStoreManager get shared => _instance;
 
-  LFCookieStoreManager._internal();
+  LeafCookieStoreManager._internal();
 
   Map<String, String>? _header;
 
@@ -22,19 +22,19 @@ class LFCookieStoreManager {
   }
 
   Future<void> setCookie(String cookie) async {
-    await LFSharedPreferences.shared.setString('cookie', cookie);
+    await LeafSharedPreferences.shared.setString('cookie', cookie);
   }
 
   Future<String?> getCookie() async {
-    return LFSharedPreferences.shared.getString('cookie');
+    return LeafSharedPreferences.shared.getString('cookie');
   }
 
   Future<void> removeCookie() async {
-    await LFSharedPreferences.shared.remove('cookie');
+    await LeafSharedPreferences.shared.remove('cookie');
   }
 
   Future<Map<String, String>> getHeader(dynamic uri) async {
-    final cookie = await LFCookieStoreManager.shared.getCookie();
+    final cookie = await LeafCookieStoreManager.shared.getCookie();
     final header = <String, String>{};
     if (cookie != null) {
       header['cookie'] = cookie;
@@ -48,7 +48,7 @@ class LFCookieStoreManager {
     if (rawCookie != null) {
       final index = rawCookie.indexOf(';');
       final cookie = (index == -1) ? rawCookie : rawCookie.substring(0, index);
-      await LFCookieStoreManager.shared.setCookie(cookie);
+      await LeafCookieStoreManager.shared.setCookie(cookie);
     }
   }
 }

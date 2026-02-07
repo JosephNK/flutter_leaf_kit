@@ -1,6 +1,6 @@
 part of '../../leaf_navigation.dart';
 
-class LFNavigationBlocProvider {
+class LeafNavigationBlocProvider {
   /// Push
   static Future<T> push<T>(
     BuildContext context, {
@@ -28,7 +28,7 @@ class LFNavigationBlocProvider {
     );
   }
 
-  @Deprecated('Use LFNavigation.pushNamed')
+  @Deprecated('Use LeafNavigation.pushNamed')
   static Future<T?> pushNamed<T>(
     BuildContext context,
     String routeName, {

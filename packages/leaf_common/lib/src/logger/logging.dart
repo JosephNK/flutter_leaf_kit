@@ -1,4 +1,4 @@
-part of '../lf_common.dart';
+part of '../leaf_common.dart';
 
 class Logging {
   static void d(dynamic message) {

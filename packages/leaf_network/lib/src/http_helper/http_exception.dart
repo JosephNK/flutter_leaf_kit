@@ -105,10 +105,10 @@ class UnknownException extends HTTPException {
   UnknownException(super.statusCode, super.message, super.value);
 }
 
-class LFHttpExceptionObject extends Object {
+class LeafHttpExceptionObject extends Object {
   final HTTPException exception;
 
-  LFHttpExceptionObject(this.exception);
+  LeafHttpExceptionObject(this.exception);
 
   @override
   String toString() {

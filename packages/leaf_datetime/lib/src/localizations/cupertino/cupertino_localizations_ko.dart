@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 
-import '../localization/lf_localization.dart';
+import '../localization/leaf_localization.dart';
 
 class CupertinoLocalizationsKoFixedDelegate
     extends LocalizationsDelegate<CupertinoLocalizations> {
@@ -27,9 +27,9 @@ class CupertinoLocalizationsKoFixed implements CupertinoLocalizations {
   /// [LocalizationsDelegate] implementations typically call the static [load]
   /// function, rather than constructing this class directly.
   CupertinoLocalizationsKoFixed() {
-    _shortWeekdays = LFLocalizationKo().shortWeekdays;
-    _shortMonths = LFLocalizationKo().shortMonths;
-    _months = LFLocalizationKo().months;
+    _shortWeekdays = LeafLocalizationKo().shortWeekdays;
+    _shortMonths = LeafLocalizationKo().shortMonths;
+    _months = LeafLocalizationKo().months;
   }
 
   late List<String> _shortWeekdays;

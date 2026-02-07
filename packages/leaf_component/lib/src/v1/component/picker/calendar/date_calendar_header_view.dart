@@ -21,8 +21,8 @@ class DateCalendarHeaderView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final weekDays = LFLocalizations.shared.localization.shortWeekdays;
-    final monthYear = LFDate.parseFromDateTime(date).format('MMMM yyyy');
+    final weekDays = LeafLocalizations.shared.localization.shortWeekdays;
+    final monthYear = LeafDate.parseFromDateTime(date).format('MMMM yyyy');
 
     return Visibility(
       visible: visible,

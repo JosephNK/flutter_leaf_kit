@@ -66,7 +66,7 @@ class _CalendarTimePickerContentState
   void initState() {
     super.initState();
 
-    _time = widget.time ?? LFDate.now().dateTime;
+    _time = widget.time ?? LeafDate.now().dateTime;
     _defaultTime = _time;
   }
 

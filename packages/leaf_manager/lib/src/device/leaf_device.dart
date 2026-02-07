@@ -5,10 +5,10 @@ import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart' as ph;
 
-class LFDeviceManager {
-  static final LFDeviceManager _instance = LFDeviceManager._internal();
-  static LFDeviceManager get shared => _instance;
-  LFDeviceManager._internal();
+class LeafDeviceManager {
+  static final LeafDeviceManager _instance = LeafDeviceManager._internal();
+  static LeafDeviceManager get shared => _instance;
+  LeafDeviceManager._internal();
 
   EdgeInsets _widowPadding = const EdgeInsets.all(0.0);
   EdgeInsets get widowPadding => _widowPadding;

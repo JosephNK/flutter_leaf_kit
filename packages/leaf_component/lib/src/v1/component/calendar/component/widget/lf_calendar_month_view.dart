@@ -60,7 +60,7 @@ class LFCalendarMonthView extends StatelessWidget {
               onTap: () async {
                 if (onPickerSelectTap == null) return;
                 final date =
-                    LFDate.parseFromString(dateTime.toCalYearMonthDayString())
+                    LeafDate.parseFromString(dateTime.toCalYearMonthDayString())
                         .dateTime;
                 final _ = await LFCalendarMonthDatePicker.show(
                   context,

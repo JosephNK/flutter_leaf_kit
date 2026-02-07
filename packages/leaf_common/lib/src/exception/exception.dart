@@ -1,9 +1,9 @@
-part of '../lf_common.dart';
+part of '../leaf_common.dart';
 
-class LFMessageException implements Exception {
+class LeafMessageException implements Exception {
   String message;
 
-  LFMessageException(this.message);
+  LeafMessageException(this.message);
 
   @override
   String toString() {

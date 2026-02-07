@@ -8,8 +8,8 @@ import 'package:flutter_leaf_common/leaf_common.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart' as ul;
 
-class LFAppManager {
-  LFAppManager();
+class LeafAppManager {
+  LeafAppManager();
   // int get imageQuality => 100;
   // int get imageSaveAlbumQuality => 100;
   // // ExpireDate 체크 함수

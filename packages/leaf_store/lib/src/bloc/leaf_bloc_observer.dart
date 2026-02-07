@@ -10,11 +10,11 @@ typedef BlocObserverOnErrorCallback = void Function(
   StackTrace,
 );
 
-class LFBlocObserver extends BlocObserver {
+class LeafBlocObserver extends BlocObserver {
   BlocObserverOnChangeCallback? onChangeCallback;
   BlocObserverOnErrorCallback? onErrorCallback;
 
-  LFBlocObserver();
+  LeafBlocObserver();
 
   @override
   void onChange(BlocBase bloc, Change change) {

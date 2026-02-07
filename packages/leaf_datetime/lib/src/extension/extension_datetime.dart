@@ -1,8 +1,8 @@
-import '../lf_date.dart';
+import '../leaf_date.dart';
 
-extension LFDateDateTime on DateTime {
+extension LeafDateDateTime on DateTime {
   bool isToday() {
-    final today = LFDate.now().dateTime;
+    final today = LeafDate.now().dateTime;
     return isSameDateTime(today, onlyDate: true);
   }
 

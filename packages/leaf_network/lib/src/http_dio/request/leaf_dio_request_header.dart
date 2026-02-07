@@ -11,18 +11,18 @@ const Map<String, String> kContentTypeMultipartHeader = {
   HttpHeaders.contentTypeHeader: 'multipart/form-data',
 };
 
-typedef LFDioDeviceOSHeader = Map<String, String> Function(String os);
-typedef LFDioVersionHeader = Map<String, String> Function(String version);
-typedef LFDioAuthorizationHeader = Map<String, String> Function(
+typedef LeafDioDeviceOSHeader = Map<String, String> Function(String os);
+typedef LeafDioVersionHeader = Map<String, String> Function(String version);
+typedef LeafDioAuthorizationHeader = Map<String, String> Function(
     String authorization);
 
-class LFDioRequestHeader {
+class LeafDioRequestHeader {
   static Future<Map<String, dynamic>> getHeaders({
     String? authorization,
     String? userAgent,
-    LFDioDeviceOSHeader? deviceOSHeader,
-    LFDioVersionHeader? versionHeader,
-    LFDioAuthorizationHeader? authorizationHeader,
+    LeafDioDeviceOSHeader? deviceOSHeader,
+    LeafDioVersionHeader? versionHeader,
+    LeafDioAuthorizationHeader? authorizationHeader,
   }) async {
     final os = Platform.isIOS ? DeviceOS.ios : DeviceOS.android;
     final appVersion = (await PlatformPackage.fromInfo()).packageVersion;

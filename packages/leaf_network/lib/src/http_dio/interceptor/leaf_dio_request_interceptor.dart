@@ -1,12 +1,12 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_leaf_common/leaf_common.dart';
 
-typedef LFHttpDioOnHeader = Future<Map<String, dynamic>> Function();
+typedef LeafHttpDioOnHeader = Future<Map<String, dynamic>> Function();
 
-class LFDioRequestInterceptor extends InterceptorsWrapper {
-  final LFHttpDioOnHeader? onHeader;
+class LeafDioRequestInterceptor extends InterceptorsWrapper {
+  final LeafHttpDioOnHeader? onHeader;
 
-  LFDioRequestInterceptor({this.onHeader});
+  LeafDioRequestInterceptor({this.onHeader});
 
   @override
   void onRequest(
@@ -37,7 +37,7 @@ class LFDioRequestInterceptor extends InterceptorsWrapper {
   }
 }
 
-extension LFDioRequestInterceptorHelper on LFDioRequestInterceptor {
+extension LeafDioRequestInterceptorHelper on LeafDioRequestInterceptor {
   Map<String, dynamic> _transformFiles(List<MapEntry> items) {
     Map<String, dynamic> result = {};
     for (var item in items) {
