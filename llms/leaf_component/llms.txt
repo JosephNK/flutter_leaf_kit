@@ -18,6 +18,10 @@ Each link points to a standalone Markdown file under the /llms path.
 - [Theme Data](https://github.com/JosephNK/flutter_leaf_kit/blob/main/llms/leaf_component/common/theme/data.md): Central theme configuration with design tokens and 23 component themes
 - [Context Extensions](https://github.com/JosephNK/flutter_leaf_kit/blob/main/llms/leaf_component/common/theme/context.md): BuildContext extensions for quick theme access
 
+## Model
+
+- [DataItem](https://github.com/JosephNK/flutter_leaf_kit/blob/main/llms/leaf_component/common/model/model.md): Shared data model for selection-based components (CheckBox, Radio, BottomSheet)
+
 ## Atoms
 
 - [Text](https://github.com/JosephNK/flutter_leaf_kit/blob/main/llms/leaf_component/v2/atoms/text.md): Themed text widget with CJK underline workaround
