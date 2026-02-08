@@ -12,7 +12,7 @@ Each package has its own LLM documentation index under `/llms/<package>/llms.txt
 
 Re-exports all packages above for single-import convenience.
 
-- Documentation: _coming soon_
+- [Documentation Index](https://github.com/JosephNK/flutter_leaf_kit/blob/main/llms/leaf/llms.txt)
 
 ### leaf_common — Common Utilities
 
