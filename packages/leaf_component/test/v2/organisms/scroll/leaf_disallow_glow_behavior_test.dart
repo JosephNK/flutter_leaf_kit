@@ -20,17 +20,13 @@ void main() {
       );
 
       // Verify GlowingOverscrollIndicator is NOT present
-      expect(
-        find.byType(GlowingOverscrollIndicator),
-        findsNothing,
-      );
+      expect(find.byType(GlowingOverscrollIndicator), findsNothing);
     });
 
-    testWidgets('returns child directly from buildOverscrollIndicator',
-        (tester) async {
-      await tester.pumpWidget(
-        wrapWithTheme(const SizedBox()),
-      );
+    testWidgets('returns child directly from buildOverscrollIndicator', (
+      tester,
+    ) async {
+      await tester.pumpWidget(wrapWithTheme(const SizedBox()));
 
       final behavior = LeafDisallowGlowBehavior();
       final child = Container();

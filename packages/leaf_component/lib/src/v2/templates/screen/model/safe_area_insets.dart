@@ -16,25 +16,20 @@ class SafeAreaInsets {
 
   /// All edges enabled (default).
   const SafeAreaInsets.all()
-      : left = true,
-        top = true,
-        right = true,
-        bottom = true;
+    : left = true,
+      top = true,
+      right = true,
+      bottom = true;
 
   /// No edges enabled.
   const SafeAreaInsets.none()
-      : left = false,
-        top = false,
-        right = false,
-        bottom = false;
+    : left = false,
+      top = false,
+      right = false,
+      bottom = false;
 
   /// Named constructor matching the LTRB convention.
-  const SafeAreaInsets.fromLTRB(
-    this.left,
-    this.top,
-    this.right,
-    this.bottom,
-  );
+  const SafeAreaInsets.fromLTRB(this.left, this.top, this.right, this.bottom);
 
   /// Selectively enable edges; unspecified edges default to `false`.
   const SafeAreaInsets.only({

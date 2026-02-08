@@ -9,9 +9,7 @@ void main() {
   group('LeafSkeleton', () {
     testWidgets('renders shimmer widget', (tester) async {
       await tester.pumpWidget(
-        wrapWithTheme(
-          const LeafSkeleton(width: 100, height: 20),
-        ),
+        wrapWithTheme(const LeafSkeleton(width: 100, height: 20)),
       );
 
       expect(find.byType(Shimmer), findsOneWidget);
@@ -20,9 +18,7 @@ void main() {
     testWidgets('renders with custom child', (tester) async {
       await tester.pumpWidget(
         wrapWithTheme(
-          const LeafSkeleton(
-            child: SizedBox(width: 200, height: 50),
-          ),
+          const LeafSkeleton(child: SizedBox(width: 200, height: 50)),
         ),
       );
 
@@ -40,10 +36,7 @@ void main() {
       );
 
       await tester.pumpWidget(
-        wrapWithTheme(
-          const LeafSkeleton(width: 100, height: 20),
-          theme: theme,
-        ),
+        wrapWithTheme(const LeafSkeleton(width: 100, height: 20), theme: theme),
       );
 
       expect(find.byType(Shimmer), findsOneWidget);
@@ -51,14 +44,10 @@ void main() {
 
     testWidgets('has loading semantics', (tester) async {
       await tester.pumpWidget(
-        wrapWithTheme(
-          const LeafSkeleton(width: 100, height: 20),
-        ),
+        wrapWithTheme(const LeafSkeleton(width: 100, height: 20)),
       );
 
-      final semantics = tester.widgetList<Semantics>(
-        find.byType(Semantics),
-      );
+      final semantics = tester.widgetList<Semantics>(find.byType(Semantics));
       final hasLoadingLabel = semantics.any(
         (s) => s.properties.label == 'Loading placeholder',
       );

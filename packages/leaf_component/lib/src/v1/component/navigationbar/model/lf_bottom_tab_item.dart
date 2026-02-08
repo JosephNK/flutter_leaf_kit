@@ -24,15 +24,15 @@ class LFBottomTabItem extends Equatable {
 
   @override
   List<Object?> get props => [
-        bottomTabIndex,
-        defaultIcon,
-        activeIcon,
-        text,
-        defaultTextStyle,
-        activeTextStyle,
-        badgeCount,
-        badgeAlignment,
-      ];
+    bottomTabIndex,
+    defaultIcon,
+    activeIcon,
+    text,
+    defaultTextStyle,
+    activeTextStyle,
+    badgeCount,
+    badgeAlignment,
+  ];
 
   LFBottomTabItem copyWith({
     LFBottomTabIndex? bottomTabIndex,

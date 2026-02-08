@@ -13,8 +13,10 @@ class LFCalendarControllerSelectedEvent extends LFCalendarControllerEvent {
   final DateTime dateTime;
   final bool useSendEvent;
 
-  LFCalendarControllerSelectedEvent(
-      {required this.dateTime, this.useSendEvent = false});
+  LFCalendarControllerSelectedEvent({
+    required this.dateTime,
+    this.useSendEvent = false,
+  });
 }
 
 @Deprecated('Use LeafCalendarView instead')
@@ -41,8 +43,12 @@ mixin LFCalendarControllerMixIn {
   }
 
   void fireSelectedEvent(DateTime dateTime, {bool useSendEvent = false}) {
-    _addEvent(LFCalendarControllerSelectedEvent(
-        dateTime: dateTime, useSendEvent: useSendEvent));
+    _addEvent(
+      LFCalendarControllerSelectedEvent(
+        dateTime: dateTime,
+        useSendEvent: useSendEvent,
+      ),
+    );
   }
 
   void fireMonthSelectedEvent(DateTime dateTime) {

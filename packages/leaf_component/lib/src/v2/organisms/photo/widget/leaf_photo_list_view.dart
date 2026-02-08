@@ -6,9 +6,8 @@ import 'package:photo_manager/photo_manager.dart';
 import '../cache/leaf_image_lru_cache.dart';
 
 /// Callback fired when the selection changes.
-typedef LeafPhotoSelectionChanged = void Function(
-  List<AssetEntity> selectedEntities,
-);
+typedef LeafPhotoSelectionChanged =
+    void Function(List<AssetEntity> selectedEntities);
 
 /// Callback fired when the selection limit is exceeded.
 typedef LeafPhotoLimitError = void Function(Exception error, int limit);
@@ -156,8 +155,7 @@ class _LeafPhotoListViewState extends State<LeafPhotoListView> {
       } else {
         if (newSelection.length >= widget.selectionLimit) {
           widget.onLimitError?.call(
-            Exception(
-                'Selection limit of ${widget.selectionLimit} exceeded.'),
+            Exception('Selection limit of ${widget.selectionLimit} exceeded.'),
             widget.selectionLimit,
           );
           return;
@@ -228,10 +226,7 @@ class _PhotoGridItem extends StatelessWidget {
       child: Stack(
         children: [
           _PhotoThumbnail(entity: entity),
-          _SelectionOverlay(
-            checked: checked,
-            borderColor: selectedBorderColor,
-          ),
+          _SelectionOverlay(checked: checked, borderColor: selectedBorderColor),
           Positioned(
             top: 0,
             right: 4,
@@ -239,10 +234,12 @@ class _PhotoGridItem extends StatelessWidget {
               padding: const EdgeInsets.fromLTRB(5, 5, 0, 0),
               child: checked
                   ? (checkedIcon ??
-                      const Icon(Icons.check_box, color: Colors.blueAccent))
+                        const Icon(Icons.check_box, color: Colors.blueAccent))
                   : (uncheckedIcon ??
-                      Icon(Icons.check_box_outline_blank,
-                          color: Colors.grey.withValues(alpha: 0.8))),
+                        Icon(
+                          Icons.check_box_outline_blank,
+                          color: Colors.grey.withValues(alpha: 0.8),
+                        )),
             ),
           ),
           if (entity.type == AssetType.video)
@@ -270,9 +267,7 @@ class _PhotoThumbnail extends StatelessWidget {
 
   final AssetEntity entity;
 
-  const _PhotoThumbnail({
-    required this.entity,
-  });
+  const _PhotoThumbnail({required this.entity});
 
   @override
   Widget build(BuildContext context) {
@@ -283,10 +278,7 @@ class _PhotoThumbnail extends StatelessWidget {
 
     return FutureBuilder<Uint8List?>(
       future: entity.thumbnailDataWithOption(
-        const ThumbnailOption(
-          size: ThumbnailSize.square(150),
-          quality: 100,
-        ),
+        const ThumbnailOption(size: ThumbnailSize.square(150), quality: 100),
       ),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done &&
@@ -314,10 +306,7 @@ class _SelectionOverlay extends StatelessWidget {
   final bool checked;
   final Color? borderColor;
 
-  const _SelectionOverlay({
-    required this.checked,
-    this.borderColor,
-  });
+  const _SelectionOverlay({required this.checked, this.borderColor});
 
   @override
   Widget build(BuildContext context) {
@@ -327,7 +316,9 @@ class _SelectionOverlay extends StatelessWidget {
         decoration: checked
             ? BoxDecoration(
                 border: Border.all(
-                    color: borderColor ?? Colors.blueAccent, width: 3),
+                  color: borderColor ?? Colors.blueAccent,
+                  width: 3,
+                ),
               )
             : const BoxDecoration(),
       ),

@@ -26,7 +26,8 @@ class LFPhotoAlbumScrollContentView extends StatefulWidget {
 }
 
 class _LFPhotoAlbumScrollContentViewState
-    extends State<LFPhotoAlbumScrollContentView> with LFPhotoAlbumRequest {
+    extends State<LFPhotoAlbumScrollContentView>
+    with LFPhotoAlbumRequest {
   late LFExpandAnimationController _expandController;
 
   List<AssetPathEntity> _assetPathEntityList = [];
@@ -74,9 +75,7 @@ class _LFPhotoAlbumScrollContentViewState
       children: [
         Visibility(
           visible: visible,
-          child: Container(
-            color: Colors.black.withValues(alpha: 0.3),
-          ),
+          child: Container(color: Colors.black.withValues(alpha: 0.3)),
         ),
         Positioned(
           top: 0.0,
@@ -95,7 +94,8 @@ class _LFPhotoAlbumScrollContentViewState
                     child: Row(
                       children: [
                         ..._assetPathEntityList.map((assetPathEntity) {
-                          final checked = assetPathEntity.id ==
+                          final checked =
+                              assetPathEntity.id ==
                               _selectedAssetPathEntity?.id;
                           return LFPhotoAlbumScrollContentTile(
                             assetPathEntity: assetPathEntity,
@@ -206,10 +206,7 @@ class _LFPhotoAlbumScrollContentTileState
               const SizedBox(height: 8.0),
               SizedBox(
                 width: 72.0,
-                child: LFText(
-                  name,
-                  textAlign: TextAlign.center,
-                ),
+                child: LFText(name, textAlign: TextAlign.center),
               ),
             ],
           ),
@@ -229,10 +226,7 @@ class _LFPhotoAlbumScrollContentTileState
       _isLoading = true;
     });
 
-    final entities = await assetPathEntity.getAssetListPaged(
-      page: 0,
-      size: 1,
-    );
+    final entities = await assetPathEntity.getAssetListPaged(page: 0, size: 1);
 
     setState(() {
       _entities = entities;
@@ -316,8 +310,11 @@ class _LFPhotoAlbumEntityTileState extends State<LFPhotoAlbumEntityTile> {
                     borderRadius: BorderRadius.circular(8.0),
                     color: Colors.black.withValues(alpha: 0.3),
                   ),
-                  child: const Icon(Icons.check_sharp,
-                      color: Colors.white, size: 35.0),
+                  child: const Icon(
+                    Icons.check_sharp,
+                    color: Colors.white,
+                    size: 35.0,
+                  ),
                 ),
               ),
             ),

@@ -8,11 +8,7 @@ class LFUnderlineText extends StatelessWidget {
   final String text;
   final TextStyle? style;
 
-  const LFUnderlineText(
-    this.text, {
-    super.key,
-    this.style,
-  });
+  const LFUnderlineText(this.text, {super.key, this.style});
 
   @override
   Widget build(BuildContext context) {
@@ -36,8 +32,9 @@ class LFUnderlineSpans {
     double fontSize = textStyle.fontSize ?? 21;
     double lineHeight = textStyle.height ?? 1.13;
     double height = fontSize * lineHeight;
-    double marginBottom =
-        lineHeight > 1.13 ? (lineHeight - 1.13) * fontSize : 0;
+    double marginBottom = lineHeight > 1.13
+        ? (lineHeight - 1.13) * fontSize
+        : 0;
     textStyle = textStyle.copyWith(height: 1);
     List<WidgetSpan> spans = [];
     for (int t = 0; t < text.length; t++) {
@@ -50,15 +47,14 @@ class LFUnderlineSpans {
             child: Container(
               height: height,
               margin: EdgeInsets.only(
-                  top: marginBottom / 2, bottom: marginBottom / 2),
+                top: marginBottom / 2,
+                bottom: marginBottom / 2,
+              ),
               child: DecoratedBox(
                 decoration: BoxDecoration(
                   border: Border(bottom: BorderSide(color: color)),
                 ),
-                child: Text(
-                  char,
-                  style: textStyle,
-                ),
+                child: Text(char, style: textStyle),
               ),
             ),
           ),

@@ -97,9 +97,7 @@ class LFTransformImage extends StatelessWidget {
     );
   }
 
-  Widget _buildWrapper({
-    required Widget child,
-  }) {
+  Widget _buildWrapper({required Widget child}) {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(borderRadius ?? 0.0),

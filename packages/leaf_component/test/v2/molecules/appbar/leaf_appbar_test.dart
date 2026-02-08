@@ -10,9 +10,7 @@ void main() {
           home: LeafTheme(
             data: LeafThemeData.light(),
             child: Scaffold(
-              appBar: const LeafAppBar(
-                title: Text('Test Title'),
-              ),
+              appBar: const LeafAppBar(title: Text('Test Title')),
               body: const SizedBox.shrink(),
             ),
           ),
@@ -37,9 +35,7 @@ void main() {
                         builder: (_) => LeafTheme(
                           data: LeafThemeData.light(),
                           child: const Scaffold(
-                            appBar: LeafAppBar(
-                              title: Text('Page 2'),
-                            ),
+                            appBar: LeafAppBar(title: Text('Page 2')),
                           ),
                         ),
                       ),
@@ -67,9 +63,7 @@ void main() {
         MaterialApp(
           home: LeafTheme(
             data: LeafThemeData.light(),
-            child: const Scaffold(
-              body: LeafAppBarBack(),
-            ),
+            child: const Scaffold(body: LeafAppBarBack()),
           ),
         ),
       );
@@ -82,9 +76,7 @@ void main() {
         MaterialApp(
           home: LeafTheme(
             data: LeafThemeData.light(),
-            child: const Scaffold(
-              body: LeafAppBarBack(icon: Icons.close),
-            ),
+            child: const Scaffold(body: LeafAppBarBack(icon: Icons.close)),
           ),
         ),
       );
@@ -94,18 +86,14 @@ void main() {
 
     testWidgets('resolves color from theme', (tester) async {
       final theme = LeafThemeData.light().copyWith(
-        appBarTheme: const LeafAppBarThemeData(
-          backButtonColor: Colors.red,
-        ),
+        appBarTheme: const LeafAppBarThemeData(backButtonColor: Colors.red),
       );
 
       await tester.pumpWidget(
         MaterialApp(
           home: LeafTheme(
             data: theme,
-            child: const Scaffold(
-              body: LeafAppBarBack(),
-            ),
+            child: const Scaffold(body: LeafAppBarBack()),
           ),
         ),
       );
@@ -121,9 +109,7 @@ void main() {
         MaterialApp(
           home: LeafTheme(
             data: LeafThemeData.light(),
-            child: const Scaffold(
-              body: LeafAppBarAction(text: 'Done'),
-            ),
+            child: const Scaffold(body: LeafAppBarAction(text: 'Done')),
           ),
         ),
       );
@@ -137,9 +123,7 @@ void main() {
           home: LeafTheme(
             data: LeafThemeData.light(),
             child: const Scaffold(
-              body: LeafAppBarAction(
-                icon: Icon(Icons.settings),
-              ),
+              body: LeafAppBarAction(icon: Icon(Icons.settings)),
             ),
           ),
         ),

@@ -1,10 +1,7 @@
 part of '../toast.dart';
 
 @Deprecated('Use LeafToast instead.')
-enum LFToastType {
-  lengthShort,
-  lengthLong,
-}
+enum LFToastType { lengthShort, lengthLong }
 
 @Deprecated('Use LeafToast instead.')
 extension LFToastTypeExt on LFToastType {
@@ -21,11 +18,7 @@ extension LFToastTypeExt on LFToastType {
 ////////////////////////////////////////////////////////////////////////////////
 
 @Deprecated('Use LeafToast instead.')
-enum LFToastGravityType {
-  top,
-  center,
-  bottom,
-}
+enum LFToastGravityType { top, center, bottom }
 
 @Deprecated('Use LeafToast instead.')
 extension LFToastGravityTypeExt on LFToastGravityType {
@@ -44,12 +37,7 @@ extension LFToastGravityTypeExt on LFToastGravityType {
 ////////////////////////////////////////////////////////////////////////////////
 
 @Deprecated('Use LeafToast instead.')
-enum LFToastNotificationType {
-  info,
-  warning,
-  success,
-  error,
-}
+enum LFToastNotificationType { info, warning, success, error }
 
 @Deprecated('Use LeafToast instead.')
 extension LFToastNotificationTypeExt on LFToastNotificationType {

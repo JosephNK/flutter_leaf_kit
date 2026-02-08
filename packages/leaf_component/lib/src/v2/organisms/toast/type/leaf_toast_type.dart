@@ -2,10 +2,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:toastification/toastification.dart';
 
 /// Toast display duration type.
-enum LeafToastType {
-  lengthShort,
-  lengthLong,
-}
+enum LeafToastType { lengthShort, lengthLong }
 
 extension LeafToastTypeExt on LeafToastType {
   Toast get value {
@@ -19,11 +16,7 @@ extension LeafToastTypeExt on LeafToastType {
 }
 
 /// Toast gravity (position) type.
-enum LeafToastGravityType {
-  top,
-  center,
-  bottom,
-}
+enum LeafToastGravityType { top, center, bottom }
 
 extension LeafToastGravityTypeExt on LeafToastGravityType {
   ToastGravity get value {
@@ -39,12 +32,7 @@ extension LeafToastGravityTypeExt on LeafToastGravityType {
 }
 
 /// Toastification notification type.
-enum LeafToastNotificationType {
-  info,
-  warning,
-  success,
-  error,
-}
+enum LeafToastNotificationType { info, warning, success, error }
 
 extension LeafToastNotificationTypeExt on LeafToastNotificationType {
   ToastificationType get value {

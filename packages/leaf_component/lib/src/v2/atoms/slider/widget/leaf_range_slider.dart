@@ -51,7 +51,8 @@ class _LeafRangeSliderState extends State<LeafRangeSlider> {
 
     final resolvedActive =
         widget.activeColor ?? sliderTheme?.activeTrackColor ?? colors.primary;
-    final resolvedInactive = widget.inactiveColor ??
+    final resolvedInactive =
+        widget.inactiveColor ??
         sliderTheme?.inactiveTrackColor ??
         colors.inactive;
 

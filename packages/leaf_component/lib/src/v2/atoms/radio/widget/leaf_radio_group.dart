@@ -4,10 +4,8 @@ import '../../../../common/model/model.dart';
 import 'leaf_radio.dart';
 
 /// Callback for radio group selection changes.
-typedef LeafRadioGroupOnChanged = void Function(
-  LeafDataItem item,
-  bool checked,
-);
+typedef LeafRadioGroupOnChanged =
+    void Function(LeafDataItem item, bool checked);
 
 /// A group of themed radio buttons (single-select).
 ///

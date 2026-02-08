@@ -94,8 +94,9 @@ class _LFCalendarMonthContentState extends State<_LFCalendarMonthContent> {
               children: [
                 Expanded(
                   child: CupertinoPicker.builder(
-                    scrollController:
-                        FixedExtentScrollController(initialItem: _yearIndex),
+                    scrollController: FixedExtentScrollController(
+                      initialItem: _yearIndex,
+                    ),
                     childCount: _yearDif,
                     itemExtent: kItemExtent,
                     onSelectedItemChanged: (index) {
@@ -103,16 +104,17 @@ class _LFCalendarMonthContentState extends State<_LFCalendarMonthContent> {
                       _selectedYear = selectedYear;
                     },
                     itemBuilder: (context, index) {
-                      final dateText =
-                          (_minDate.year + index).toString().padLeft(4, '0');
+                      final dateText = (_minDate.year + index)
+                          .toString()
+                          .padLeft(4, '0');
 
                       return Center(
                         child: Text(
                           dateText,
                           textAlign: TextAlign.center,
-                          style: CupertinoTheme.of(context)
-                              .textTheme
-                              .dateTimePickerTextStyle,
+                          style: CupertinoTheme.of(
+                            context,
+                          ).textTheme.dateTimePickerTextStyle,
                         ),
                       );
                     },
@@ -121,12 +123,15 @@ class _LFCalendarMonthContentState extends State<_LFCalendarMonthContent> {
                 Expanded(
                   child: CupertinoPicker.builder(
                     scrollController: FixedExtentScrollController(
-                        initialItem: _date.month - 1),
+                      initialItem: _date.month - 1,
+                    ),
                     childCount: 12,
                     itemExtent: kItemExtent,
                     onSelectedItemChanged: (index) {
-                      final selectedMonth =
-                          (index + 1).toString().padLeft(2, '0');
+                      final selectedMonth = (index + 1).toString().padLeft(
+                        2,
+                        '0',
+                      );
                       _selectedMonth = selectedMonth;
                     },
                     itemBuilder: (context, index) {
@@ -136,9 +141,9 @@ class _LFCalendarMonthContentState extends State<_LFCalendarMonthContent> {
                         child: Text(
                           dateText,
                           textAlign: TextAlign.center,
-                          style: CupertinoTheme.of(context)
-                              .textTheme
-                              .dateTimePickerTextStyle,
+                          style: CupertinoTheme.of(
+                            context,
+                          ).textTheme.dateTimePickerTextStyle,
                         ),
                       );
                     },
@@ -154,8 +159,8 @@ class _LFCalendarMonthContentState extends State<_LFCalendarMonthContent> {
                 child: GestureDetector(
                   onTap: () {
                     final dateTime = LeafDate.parseFromString(
-                            '$_selectedYear-$_selectedMonth-01')
-                        .dateTime;
+                      '$_selectedYear-$_selectedMonth-01',
+                    ).dateTime;
                     widget.onOK?.call(dateTime);
                     Navigator.pop(context, dateTime);
                   },
@@ -165,7 +170,9 @@ class _LFCalendarMonthContentState extends State<_LFCalendarMonthContent> {
                       color: widget.activeColor,
                     ),
                     padding: const EdgeInsets.symmetric(
-                        vertical: 15.0, horizontal: 20.0),
+                      vertical: 15.0,
+                      horizontal: 20.0,
+                    ),
                     child: LFText(
                       widget.okText,
                       style: const TextStyle(
@@ -178,7 +185,7 @@ class _LFCalendarMonthContentState extends State<_LFCalendarMonthContent> {
                 ),
               ),
             ],
-          )
+          ),
         ],
       ),
     );
@@ -188,11 +195,11 @@ class _LFCalendarMonthContentState extends State<_LFCalendarMonthContent> {
     }
 
     return Dialog(
-      insetPadding:
-          const EdgeInsets.symmetric(horizontal: 40.0, vertical: 80.0),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(20.0),
+      insetPadding: const EdgeInsets.symmetric(
+        horizontal: 40.0,
+        vertical: 80.0,
       ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
       elevation: 4.0,
       backgroundColor: Colors.white,
       child: child,

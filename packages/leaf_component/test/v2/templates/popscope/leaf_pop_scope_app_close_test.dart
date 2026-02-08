@@ -19,9 +19,11 @@ Widget _wrapWithPlatform(Widget child, TargetPlatform platform) {
 /// that was inserted by [LeafPopScopeAppClose].
 bool _hasPopScopeWithCanPopFalse(WidgetTester tester) {
   final popScopes = tester
-      .widgetList(find.byWidgetPredicate(
-        (w) => w is PopScope && w is! LeafPopScopeAppClose,
-      ))
+      .widgetList(
+        find.byWidgetPredicate(
+          (w) => w is PopScope && w is! LeafPopScopeAppClose,
+        ),
+      )
       .toList();
   return popScopes.any((w) {
     final ps = w as PopScope;
@@ -33,11 +35,7 @@ void main() {
   group('LeafPopScopeAppClose', () {
     testWidgets('renders child widget', (tester) async {
       await tester.pumpWidget(
-        wrapWithTheme(
-          const LeafPopScopeAppClose(
-            child: Text('Hello'),
-          ),
-        ),
+        wrapWithTheme(const LeafPopScopeAppClose(child: Text('Hello'))),
       );
 
       expect(find.text('Hello'), findsOneWidget);
@@ -46,9 +44,7 @@ void main() {
     testWidgets('wraps with PopScope on Android platform', (tester) async {
       await tester.pumpWidget(
         _wrapWithPlatform(
-          const LeafPopScopeAppClose(
-            child: Text('Android'),
-          ),
+          const LeafPopScopeAppClose(child: Text('Android')),
           TargetPlatform.android,
         ),
       );
@@ -61,9 +57,7 @@ void main() {
     testWidgets('does not wrap with PopScope on iOS platform', (tester) async {
       await tester.pumpWidget(
         _wrapWithPlatform(
-          const LeafPopScopeAppClose(
-            child: Text('iOS'),
-          ),
+          const LeafPopScopeAppClose(child: Text('iOS')),
           TargetPlatform.iOS,
         ),
       );

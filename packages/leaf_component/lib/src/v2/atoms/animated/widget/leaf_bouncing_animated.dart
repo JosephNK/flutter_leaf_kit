@@ -39,7 +39,8 @@ class _LeafBouncingAnimatedState extends State<LeafBouncingAnimated>
   void initState() {
     super.initState();
 
-    _innerController = widget.controller ??
+    _innerController =
+        widget.controller ??
         LeafBouncingAnimationController(
           autoAnimation: false,
           duration: widget.duration,
@@ -49,9 +50,10 @@ class _LeafBouncingAnimatedState extends State<LeafBouncingAnimated>
     );
     _animationController = ac;
 
-    _animation = Tween(begin: 1.0, end: 1.2).animate(
-      CurvedAnimation(parent: ac!, curve: widget.curve),
-    );
+    _animation = Tween(
+      begin: 1.0,
+      end: 1.2,
+    ).animate(CurvedAnimation(parent: ac!, curve: widget.curve));
     _animation.addStatusListener(_onAnimationStatus);
 
     WidgetsBinding.instance.addPostFrameCallback((_) async {

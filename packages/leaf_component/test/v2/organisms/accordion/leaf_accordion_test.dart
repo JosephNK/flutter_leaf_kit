@@ -6,27 +6,18 @@ import '../../../helpers/theme_test_helper.dart';
 
 void main() {
   final testItems = [
-    const LeafAccordionItem<String>(
-      title: 'Section 1',
-      data: 'data1',
-    ),
+    const LeafAccordionItem<String>(title: 'Section 1', data: 'data1'),
     const LeafAccordionItem<String>(
       title: 'Section 2',
       data: 'data2',
       subtitle: 'Subtitle 2',
     ),
-    const LeafAccordionItem<String>(
-      title: 'Section 3',
-      data: 'data3',
-    ),
+    const LeafAccordionItem<String>(title: 'Section 3', data: 'data3'),
   ];
 
   group('LeafAccordionItem', () {
     test('creates model with required fields', () {
-      const item = LeafAccordionItem<int>(
-        title: 'Test',
-        data: 42,
-      );
+      const item = LeafAccordionItem<int>(title: 'Test', data: 42);
 
       expect(item.title, 'Test');
       expect(item.data, 42);
@@ -151,9 +142,7 @@ void main() {
         ),
       );
 
-      final semantics = tester.widgetList<Semantics>(
-        find.byType(Semantics),
-      );
+      final semantics = tester.widgetList<Semantics>(find.byType(Semantics));
       final hasLabel = semantics.any(
         (s) => s.properties.label == 'Semantic Title',
       );

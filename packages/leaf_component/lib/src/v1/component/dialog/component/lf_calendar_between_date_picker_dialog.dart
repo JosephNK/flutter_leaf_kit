@@ -1,8 +1,8 @@
 part of '../dialog.dart';
 
 @Deprecated('Use LeafAlertDialog instead')
-typedef LFCalendarBetweenDatePickerOnOK = Function(
-    LFCalendarBetweenPickerSelect select, DateTime dateTime);
+typedef LFCalendarBetweenDatePickerOnOK =
+    Function(LFCalendarBetweenPickerSelect select, DateTime dateTime);
 
 @Deprecated('Use LeafAlertDialog instead')
 class LFCalendarBetweenDatePickerDialog {
@@ -120,13 +120,16 @@ class _CalendarBetweenDatePickerContentState
       case LFCalendarBetweenPickerSelect.start:
         _defaultDate = !isLunar
             ? _startDate
-            : LeafDate.parseFromString(_startDate.toCalLunarDateString())
-                .dateTime;
+            : LeafDate.parseFromString(
+                _startDate.toCalLunarDateString(),
+              ).dateTime;
         break;
       case LFCalendarBetweenPickerSelect.end:
         _defaultDate = !isLunar
             ? _endDate
-            : LeafDate.parseFromString(_endDate.toCalLunarDateString()).dateTime;
+            : LeafDate.parseFromString(
+                _endDate.toCalLunarDateString(),
+              ).dateTime;
         break;
     }
   }
@@ -153,11 +156,11 @@ class _CalendarBetweenDatePickerContentState
     final okTextPadding = widget.okTextPadding;
 
     return Dialog(
-      insetPadding:
-          const EdgeInsets.symmetric(horizontal: 40.0, vertical: 80.0),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(20.0),
+      insetPadding: const EdgeInsets.symmetric(
+        horizontal: 40.0,
+        vertical: 80.0,
       ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
       elevation: 4.0,
       backgroundColor: Colors.white,
       child: Padding(
@@ -196,13 +199,16 @@ class _CalendarBetweenDatePickerContentState
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             LFAutoSizeText(
-                              _startDate.toCalWeekDayDateString(context,
-                                  short: true,
-                                  isLunar: isLunar,
-                                  visiblePrefix: isLunar),
+                              _startDate.toCalWeekDayDateString(
+                                context,
+                                short: true,
+                                isLunar: isLunar,
+                                visiblePrefix: isLunar,
+                              ),
                               style: TextStyle(
-                                  fontSize: !isLunar ? 18.0 : 16.0,
-                                  color: _getStartDateColor()),
+                                fontSize: !isLunar ? 18.0 : 16.0,
+                                color: _getStartDateColor(),
+                              ),
                               textAlign: TextAlign.left,
                               minFontSize: 9,
                             ),
@@ -211,12 +217,16 @@ class _CalendarBetweenDatePickerContentState
                               child: Padding(
                                 padding: const EdgeInsets.only(top: 2.0),
                                 child: LFText(
-                                  _startDate.toCalWeekDayDateString(context,
-                                      short: true,
-                                      isLunar: false,
-                                      visiblePrefix: isLunar),
+                                  _startDate.toCalWeekDayDateString(
+                                    context,
+                                    short: true,
+                                    isLunar: false,
+                                    visiblePrefix: isLunar,
+                                  ),
                                   style: TextStyle(
-                                      fontSize: 14.0, color: inactiveColor),
+                                    fontSize: 14.0,
+                                    color: inactiveColor,
+                                  ),
                                   textAlign: TextAlign.left,
                                   maxLines: 2,
                                 ),
@@ -235,13 +245,16 @@ class _CalendarBetweenDatePickerContentState
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
                             LFAutoSizeText(
-                              _endDate.toCalWeekDayDateString(context,
-                                  short: true,
-                                  isLunar: isLunar,
-                                  visiblePrefix: isLunar),
+                              _endDate.toCalWeekDayDateString(
+                                context,
+                                short: true,
+                                isLunar: isLunar,
+                                visiblePrefix: isLunar,
+                              ),
                               style: TextStyle(
-                                  fontSize: !isLunar ? 18.0 : 16.0,
-                                  color: _getEndDateColor()),
+                                fontSize: !isLunar ? 18.0 : 16.0,
+                                color: _getEndDateColor(),
+                              ),
                               textAlign: TextAlign.right,
                               minFontSize: 9,
                             ),
@@ -250,12 +263,16 @@ class _CalendarBetweenDatePickerContentState
                               child: Padding(
                                 padding: const EdgeInsets.only(top: 2.0),
                                 child: LFText(
-                                  _endDate.toCalWeekDayDateString(context,
-                                      short: true,
-                                      isLunar: isLunar,
-                                      visiblePrefix: isLunar),
+                                  _endDate.toCalWeekDayDateString(
+                                    context,
+                                    short: true,
+                                    isLunar: isLunar,
+                                    visiblePrefix: isLunar,
+                                  ),
                                   style: TextStyle(
-                                      fontSize: 14.0, color: inactiveColor),
+                                    fontSize: 14.0,
+                                    color: inactiveColor,
+                                  ),
                                   textAlign: TextAlign.right,
                                   maxLines: 2,
                                 ),
@@ -282,8 +299,8 @@ class _CalendarBetweenDatePickerContentState
               onMonthOnTap: (month) {},
               onMonthChanged:
                   (startDateTime, endDateTime, monthDate, selectedDate) {
-                _updateSelectDate(selectedDate);
-              },
+                    _updateSelectDate(selectedDate);
+                  },
               onDateSelected: (selectedDate) {
                 _updateSelectDate(selectedDate);
               },
@@ -312,7 +329,7 @@ class _CalendarBetweenDatePickerContentState
                   ),
                 ],
               ),
-            )
+            ),
           ],
         ),
       ),
@@ -326,7 +343,9 @@ class _CalendarBetweenDatePickerContentState
     final pickerSelect = widget.pickerSelect;
     final dateTime = !isLunar
         ? selectedDate
-        : LeafDate.parseFromString(selectedDate.toCalSolarDateString()).dateTime;
+        : LeafDate.parseFromString(
+            selectedDate.toCalSolarDateString(),
+          ).dateTime;
     switch (pickerSelect) {
       case LFCalendarBetweenPickerSelect.none:
       case LFCalendarBetweenPickerSelect.start:
@@ -375,10 +394,12 @@ class _CalendarBetweenDatePickerContentState
     final startDate = _startDate.toCalYearMonthDayString();
     final startTime = _startDate.toCalHHmmString();
     final endDate = _endDate.toCalYearMonthDayString();
-    final updateStartDateTime =
-        LeafDate.parseFromString('$startDate $startTime').dateTime;
-    final updateEndDateTime =
-        LeafDate.parseFromString('$endDate $startTime').dateTime;
+    final updateStartDateTime = LeafDate.parseFromString(
+      '$startDate $startTime',
+    ).dateTime;
+    final updateEndDateTime = LeafDate.parseFromString(
+      '$endDate $startTime',
+    ).dateTime;
 
     if (updateStartDateTime.isSameDateTime(updateEndDateTime, onlyDate: true)) {
       _startDate = updateStartDateTime.toCalDayStartDateTime();
@@ -399,10 +420,12 @@ class _CalendarBetweenDatePickerContentState
         break;
     }
 
-    final f =
-        LeafDate.parseFromString(fromDateTime.toCalYearMonthDayString()).dateTime;
-    final t =
-        LeafDate.parseFromString(toDateTime.toCalYearMonthDayString()).dateTime;
+    final f = LeafDate.parseFromString(
+      fromDateTime.toCalYearMonthDayString(),
+    ).dateTime;
+    final t = LeafDate.parseFromString(
+      toDateTime.toCalYearMonthDayString(),
+    ).dateTime;
 
     String? validMessage;
 

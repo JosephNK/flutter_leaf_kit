@@ -50,7 +50,8 @@ class _LeafSliderState extends State<LeafSlider> {
 
     final resolvedActive =
         widget.activeColor ?? sliderTheme?.activeTrackColor ?? colors.primary;
-    final resolvedInactive = widget.inactiveColor ??
+    final resolvedInactive =
+        widget.inactiveColor ??
         sliderTheme?.inactiveTrackColor ??
         colors.inactive;
     final resolvedThumb =

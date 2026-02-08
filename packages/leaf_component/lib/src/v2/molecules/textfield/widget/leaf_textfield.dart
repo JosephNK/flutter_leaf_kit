@@ -186,40 +186,43 @@ class _LeafTextFieldState extends State<LeafTextField> {
         widget.borderRadius ?? tfTheme?.borderRadius ?? 0.0;
     final resolvedBorderWidth =
         widget.borderWidth ?? tfTheme?.borderWidth ?? 1.0;
-    final resolvedContentPadding = widget.contentPadding ??
+    final resolvedContentPadding =
+        widget.contentPadding ??
         tfTheme?.contentPadding ??
         const EdgeInsets.all(16.0);
 
-    final resolvedDisabledBg = widget.disabledBackgroundColor ??
+    final resolvedDisabledBg =
+        widget.disabledBackgroundColor ??
         tfTheme?.disabledBackgroundColor ??
         colors.disabled;
     final resolvedBg = (widget.disabled || widget.readOnly)
         ? resolvedDisabledBg
         : widget.backgroundColor ?? tfTheme?.backgroundColor;
-    final resolvedPlaceholderColor = widget.placeHolderColor ??
-        tfTheme?.placeholderColor ??
-        colors.inactive;
+    final resolvedPlaceholderColor =
+        widget.placeHolderColor ?? tfTheme?.placeholderColor ?? colors.inactive;
     final resolvedTextColor = widget.disabled
         ? widget.disabledTextColor ??
-            tfTheme?.disabledTextColor ??
-            colors.inactive
+              tfTheme?.disabledTextColor ??
+              colors.inactive
         : widget.textColor ?? tfTheme?.textColor ?? colors.onSurface;
     final resolvedBorderColor =
         widget.borderColor ?? tfTheme?.borderColor ?? colors.divider;
-    final resolvedFocusBorderColor = widget.focusBorderColor ??
+    final resolvedFocusBorderColor =
+        widget.focusBorderColor ??
         tfTheme?.focusBorderColor ??
         resolvedBorderColor;
     final resolvedErrorBorderColor =
         widget.errorBorderColor ?? tfTheme?.errorBorderColor ?? colors.error;
     final resolvedClearIconColor = widget.disabled
         ? widget.disabledClearIconColor ??
-            tfTheme?.disabledClearIconColor ??
-            colors.inactive
+              tfTheme?.disabledClearIconColor ??
+              colors.inactive
         : widget.clearIconColor ??
-            tfTheme?.clearIconColor ??
-            colors.onSurface.withValues(alpha: 0.6);
+              tfTheme?.clearIconColor ??
+              colors.onSurface.withValues(alpha: 0.6);
 
-    final resolvedTextStyle = widget.textStyle ??
+    final resolvedTextStyle =
+        widget.textStyle ??
         tfTheme?.textStyle ??
         theme.typography.bodyLarge.copyWith(fontWeight: FontWeight.normal);
 
@@ -238,7 +241,8 @@ class _LeafTextFieldState extends State<LeafTextField> {
                 _clear();
                 widget.onClearPressed?.call();
               },
-              child: widget.clearIcon ??
+              child:
+                  widget.clearIcon ??
                   Icon(Icons.clear_rounded, color: resolvedClearIconColor),
             ),
         ],
@@ -284,21 +288,20 @@ class _LeafTextFieldState extends State<LeafTextField> {
         counterText: widget.counterText,
         counterStyle:
             widget.counterText != null && widget.counterText!.isNotEmpty
-                ? widget.countTextStyle
-                : null,
+            ? widget.countTextStyle
+            : null,
         error: widget.errorWidget,
         errorText: widget.errorText,
         errorStyle: widget.errorText != null && widget.errorText!.isNotEmpty
             ? widget.errorTextStyle
             : null,
         hintText: widget.placeHolder,
-        hintStyle:
-            widget.placeHolder != null && widget.placeHolder!.isNotEmpty
-                ? resolvedTextStyle.copyWith(
-                    decoration: TextDecoration.none,
-                    color: resolvedPlaceholderColor,
-                  )
-                : null,
+        hintStyle: widget.placeHolder != null && widget.placeHolder!.isNotEmpty
+            ? resolvedTextStyle.copyWith(
+                decoration: TextDecoration.none,
+                color: resolvedPlaceholderColor,
+              )
+            : null,
         border: _buildBorder(
           widget.onlyUnderline,
           resolvedBorderRadius,

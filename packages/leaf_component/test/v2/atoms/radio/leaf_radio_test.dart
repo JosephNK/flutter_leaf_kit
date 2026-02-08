@@ -8,9 +8,7 @@ void main() {
   group('LeafRadio', () {
     testWidgets('renders unselected state', (tester) async {
       await tester.pumpWidget(
-        wrapWithTheme(
-          const LeafRadio(text: 'Option 1', value: false),
-        ),
+        wrapWithTheme(const LeafRadio(text: 'Option 1', value: false)),
       );
 
       expect(find.text('Option 1'), findsOneWidget);
@@ -19,9 +17,7 @@ void main() {
 
     testWidgets('renders selected state', (tester) async {
       await tester.pumpWidget(
-        wrapWithTheme(
-          const LeafRadio(text: 'Option 1', value: true),
-        ),
+        wrapWithTheme(const LeafRadio(text: 'Option 1', value: true)),
       );
 
       expect(find.byIcon(Icons.radio_button_checked), findsOneWidget);
@@ -48,9 +44,7 @@ void main() {
 
     testWidgets('resolves colors from theme', (tester) async {
       final theme = LeafThemeData.light().copyWith(
-        radioTheme: const LeafRadioThemeData(
-          activeColor: Colors.purple,
-        ),
+        radioTheme: const LeafRadioThemeData(activeColor: Colors.purple),
       );
 
       await tester.pumpWidget(
@@ -60,9 +54,7 @@ void main() {
         ),
       );
 
-      final icon = tester.widget<Icon>(
-        find.byIcon(Icons.radio_button_checked),
-      );
+      final icon = tester.widget<Icon>(find.byIcon(Icons.radio_button_checked));
       expect(icon.color, Colors.purple);
     });
   });
@@ -75,9 +67,7 @@ void main() {
     ];
 
     testWidgets('renders all items', (tester) async {
-      await tester.pumpWidget(
-        wrapWithTheme(LeafRadioGroup(items: items)),
-      );
+      await tester.pumpWidget(wrapWithTheme(LeafRadioGroup(items: items)));
 
       expect(find.text('X'), findsOneWidget);
       expect(find.text('Y'), findsOneWidget);
@@ -86,9 +76,7 @@ void main() {
 
     testWidgets('shows pre-selected value', (tester) async {
       await tester.pumpWidget(
-        wrapWithTheme(
-          LeafRadioGroup(items: items, value: items[1]),
-        ),
+        wrapWithTheme(LeafRadioGroup(items: items, value: items[1])),
       );
 
       expect(find.byIcon(Icons.radio_button_checked), findsOneWidget);

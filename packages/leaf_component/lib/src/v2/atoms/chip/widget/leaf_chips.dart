@@ -4,10 +4,8 @@ import '../../../../common/model/model.dart';
 import 'leaf_chip.dart';
 
 /// Callback for chip group selection changes.
-typedef LeafChipsOnChanged = void Function(
-  List<LeafDataItem> items,
-  LeafDataItem changedItem,
-);
+typedef LeafChipsOnChanged =
+    void Function(List<LeafDataItem> items, LeafDataItem changedItem);
 
 /// A group of themed chips with single or multi-select support.
 ///

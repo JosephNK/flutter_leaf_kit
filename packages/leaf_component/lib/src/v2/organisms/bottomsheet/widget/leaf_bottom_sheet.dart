@@ -35,7 +35,8 @@ class LeafBottomSheet {
         activeColor ?? componentTheme?.activeColor ?? colors.primary;
     final resolvedInactiveColor =
         inactiveColor ?? componentTheme?.inactiveColor ?? colors.onSurface;
-    final resolvedItemTextStyle = itemTextStyle ?? componentTheme?.itemTextStyle;
+    final resolvedItemTextStyle =
+        itemTextStyle ?? componentTheme?.itemTextStyle;
     final resolvedCancelText =
         cancelText ?? componentTheme?.cancelText ?? 'Cancel';
 
@@ -85,7 +86,8 @@ class LeafBottomSheet {
         return CupertinoActionSheet(
           actions: items.map((item) {
             final active = item.key == selectedItem?.key;
-            final baseStyle = itemTextStyle ??
+            final baseStyle =
+                itemTextStyle ??
                 const TextStyle(fontWeight: FontWeight.normal, fontSize: 18.0);
             final textStyle = baseStyle.copyWith(
               fontWeight: active ? FontWeight.w500 : FontWeight.normal,
@@ -136,9 +138,12 @@ class LeafBottomSheet {
           child: Wrap(
             children: items.map((item) {
               final active = item.key == selectedItem?.key;
-              final baseStyle = itemTextStyle ??
+              final baseStyle =
+                  itemTextStyle ??
                   const TextStyle(
-                      fontWeight: FontWeight.normal, fontSize: 18.0);
+                    fontWeight: FontWeight.normal,
+                    fontSize: 18.0,
+                  );
               final textStyle = baseStyle.copyWith(
                 fontWeight: active ? FontWeight.w500 : FontWeight.normal,
                 color: active ? resolvedActiveColor : resolvedInactiveColor,

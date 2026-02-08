@@ -24,10 +24,7 @@ class LFBadge extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      constraints: BoxConstraints(
-        minHeight: size,
-        minWidth: size,
-      ),
+      constraints: BoxConstraints(minHeight: size, minWidth: size),
       child: Material(
         shape: RoundedRectangleBorder(
           side: BorderSide.none,
@@ -42,14 +39,8 @@ class LFBadge extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisSize: MainAxisSize.min,
             children: [
-              Visibility(
-                visible: (text != null),
-                child: _buildText(),
-              ),
-              Visibility(
-                visible: (icon != null),
-                child: _buildIcon(),
-              ),
+              Visibility(visible: (text != null), child: _buildText()),
+              Visibility(visible: (icon != null), child: _buildIcon()),
             ],
           ),
         ),
@@ -60,20 +51,13 @@ class LFBadge extends StatelessWidget {
   Widget _buildText() {
     final text = this.text;
     final textStyle = this.textStyle;
-    return LFText(
-      text ?? '',
-      style: textStyle,
-    );
+    return LFText(text ?? '', style: textStyle);
   }
 
   Widget _buildIcon() {
     final icon = this.icon;
     final size = this.size;
     final iconColor = this.iconColor;
-    return Icon(
-      icon,
-      color: iconColor,
-      size: size * 0.4,
-    );
+    return Icon(icon, color: iconColor, size: size * 0.4);
   }
 }

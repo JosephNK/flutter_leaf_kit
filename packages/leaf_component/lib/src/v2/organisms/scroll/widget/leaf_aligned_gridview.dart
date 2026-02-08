@@ -55,8 +55,7 @@ class LeafAlignedGridView<T> extends StatefulWidget {
   });
 
   @override
-  State<LeafAlignedGridView<T>> createState() =>
-      _LeafAlignedGridViewState<T>();
+  State<LeafAlignedGridView<T>> createState() => _LeafAlignedGridViewState<T>();
 }
 
 class _LeafAlignedGridViewState<T> extends State<LeafAlignedGridView<T>>
@@ -124,11 +123,9 @@ class _LeafAlignedGridViewState<T> extends State<LeafAlignedGridView<T>>
   // -- Private --
 
   void _listenToController() {
-    _streamSubscription =
-        widget.controller?.stream.listen((event) async {
+    _streamSubscription = widget.controller?.stream.listen((event) async {
       final mContext = context;
-      final duration =
-          event.duration ?? const Duration(milliseconds: 300);
+      final duration = event.duration ?? const Duration(milliseconds: 300);
       switch (event.type) {
         case LeafScrollControllerEventType.scrollToPosition:
           setClampingPhysics();
@@ -195,8 +192,9 @@ class _LeafAlignedGridViewState<T> extends State<LeafAlignedGridView<T>>
       mainAxisSpacing: widget.gridDelegate.mainAxisSpacing,
       crossAxisSpacing: widget.gridDelegate.crossAxisSpacing,
       itemCount: widget.items.length,
-      controller:
-          widget.scrollable ? PrimaryScrollController.of(context) : null,
+      controller: widget.scrollable
+          ? PrimaryScrollController.of(context)
+          : null,
       physics: scrollPhysics,
       keyboardDismissBehavior: widget.keyboardDismissBehavior,
       padding: widget.padding,
@@ -237,8 +235,9 @@ class _LeafAlignedGridViewState<T> extends State<LeafAlignedGridView<T>>
       padding: widget.padding,
       child: CustomScrollView(
         key: widget.storageKey,
-        controller:
-            widget.scrollable ? PrimaryScrollController.of(context) : null,
+        controller: widget.scrollable
+            ? PrimaryScrollController.of(context)
+            : null,
         physics: scrollPhysics,
         shrinkWrap: widget.shrinkWrap,
         slivers: [
@@ -252,8 +251,7 @@ class _LeafAlignedGridViewState<T> extends State<LeafAlignedGridView<T>>
             )
           else
             const SliverToBoxAdapter(),
-          if (widget.header != null)
-            SliverToBoxAdapter(child: widget.header),
+          if (widget.header != null) SliverToBoxAdapter(child: widget.header),
           SliverAlignedGrid.count(
             crossAxisCount: widget.gridDelegate.crossAxisCount,
             mainAxisSpacing: widget.gridDelegate.mainAxisSpacing,

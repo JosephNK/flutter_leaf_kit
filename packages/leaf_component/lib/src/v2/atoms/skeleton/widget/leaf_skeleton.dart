@@ -38,7 +38,8 @@ class LeafSkeleton extends StatelessWidget {
     final colors = theme.colors;
     final skTheme = theme.skeletonTheme;
 
-    final resolvedBaseColor = baseColor ?? skTheme?.baseColor ?? colors.shimmerBase;
+    final resolvedBaseColor =
+        baseColor ?? skTheme?.baseColor ?? colors.shimmerBase;
     final resolvedHighlightColor =
         highlightColor ?? skTheme?.highlightColor ?? colors.shimmerHighlight;
     final resolvedBaseOpacity = baseOpacity ?? skTheme?.baseOpacity ?? 0.3;
@@ -50,9 +51,11 @@ class LeafSkeleton extends StatelessWidget {
       label: 'Loading placeholder',
       child: Shimmer.fromColors(
         baseColor: resolvedBaseColor.withValues(alpha: resolvedBaseOpacity),
-        highlightColor:
-            resolvedHighlightColor.withValues(alpha: resolvedHighlightOpacity),
-        child: child ??
+        highlightColor: resolvedHighlightColor.withValues(
+          alpha: resolvedHighlightOpacity,
+        ),
+        child:
+            child ??
             Container(
               width: width,
               height: height,

@@ -62,10 +62,12 @@ class _LeafChipState extends State<LeafChip> {
         widget.defaultColor ?? chipTheme?.defaultColor ?? colors.onSurface;
     final resolvedSelected =
         widget.selectedColor ?? chipTheme?.selectedColor ?? colors.primary;
-    final resolvedPadding = widget.padding ??
+    final resolvedPadding =
+        widget.padding ??
         chipTheme?.padding ??
         const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8.0);
-    final resolvedRadius = widget.borderRadius ?? chipTheme?.borderRadius ?? 50.0;
+    final resolvedRadius =
+        widget.borderRadius ?? chipTheme?.borderRadius ?? 50.0;
 
     final backgroundColor = !_selected
         ? resolvedDefault.withValues(alpha: 0.4)

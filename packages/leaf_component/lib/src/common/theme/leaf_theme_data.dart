@@ -202,14 +202,12 @@ class LeafThemeData {
       indicatorTheme: t < 0.5 ? a.indicatorTheme : b.indicatorTheme,
       skeletonTheme: t < 0.5 ? a.skeletonTheme : b.skeletonTheme,
       calendarTheme: t < 0.5 ? a.calendarTheme : b.calendarTheme,
-      notificationTheme:
-          t < 0.5 ? a.notificationTheme : b.notificationTheme,
+      notificationTheme: t < 0.5 ? a.notificationTheme : b.notificationTheme,
       sliderTheme: t < 0.5 ? a.sliderTheme : b.sliderTheme,
       ratingBarTheme: t < 0.5 ? a.ratingBarTheme : b.ratingBarTheme,
       accordionTheme: t < 0.5 ? a.accordionTheme : b.accordionTheme,
       imageTheme: t < 0.5 ? a.imageTheme : b.imageTheme,
-      navigationBarTheme:
-          t < 0.5 ? a.navigationBarTheme : b.navigationBarTheme,
+      navigationBarTheme: t < 0.5 ? a.navigationBarTheme : b.navigationBarTheme,
       pageViewTheme: t < 0.5 ? a.pageViewTheme : b.pageViewTheme,
       pickerTheme: t < 0.5 ? a.pickerTheme : b.pickerTheme,
     );

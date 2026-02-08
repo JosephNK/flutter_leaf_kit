@@ -73,9 +73,7 @@ class LFBottomSheetConfigure {
 class LFPickerCalendarConfigure {
   final Color? activeColor;
 
-  LFPickerCalendarConfigure({
-    this.activeColor = Colors.blueAccent,
-  });
+  LFPickerCalendarConfigure({this.activeColor = Colors.blueAccent});
 }
 
 @Deprecated('Use LeafThemeData instead')

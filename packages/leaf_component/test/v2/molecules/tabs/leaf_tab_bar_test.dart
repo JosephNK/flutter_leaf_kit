@@ -58,19 +58,14 @@ void main() {
 
     testWidgets('explicit colors override theme', (tester) async {
       final theme = LeafThemeData.light().copyWith(
-        tabBarTheme: const LeafTabBarThemeData(
-          labelColor: Colors.red,
-        ),
+        tabBarTheme: const LeafTabBarThemeData(labelColor: Colors.red),
       );
       const tabs = [Tab(text: 'A'), Tab(text: 'B')];
 
       await tester.pumpWidget(
         _wrapWithTabController(
           tabs: tabs,
-          child: const LeafTabBar(
-            tabs: tabs,
-            labelColor: Colors.green,
-          ),
+          child: const LeafTabBar(tabs: tabs, labelColor: Colors.green),
           theme: theme,
         ),
       );
@@ -89,9 +84,7 @@ void main() {
         ),
       );
 
-      final semantics = tester.widgetList<Semantics>(
-        find.byType(Semantics),
-      );
+      final semantics = tester.widgetList<Semantics>(find.byType(Semantics));
       final hasTabBarLabel = semantics.any(
         (s) => s.properties.label == 'Tab bar',
       );
@@ -105,10 +98,7 @@ void main() {
       await tester.pumpWidget(
         _wrapWithTabController(
           tabs: tabs,
-          child: LeafTabBar(
-            tabs: tabs,
-            onTap: (index) => tappedIndex = index,
-          ),
+          child: LeafTabBar(tabs: tabs, onTap: (index) => tappedIndex = index),
         ),
       );
 
@@ -158,7 +148,12 @@ void main() {
             length: 2,
             child: Column(
               children: [
-                const TabBar(tabs: [Tab(text: 'A'), Tab(text: 'B')]),
+                const TabBar(
+                  tabs: [
+                    Tab(text: 'A'),
+                    Tab(text: 'B'),
+                  ],
+                ),
                 Expanded(
                   child: LeafTabView(
                     children: [

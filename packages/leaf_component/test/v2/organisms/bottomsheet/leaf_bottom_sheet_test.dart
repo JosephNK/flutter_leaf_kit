@@ -19,10 +19,7 @@ void main() {
             builder: (context) {
               return ElevatedButton(
                 onPressed: () {
-                  LeafBottomSheet.show<String>(
-                    context,
-                    items: items,
-                  );
+                  LeafBottomSheet.show<String>(context, items: items);
                 },
                 child: const Text('Open'),
               );
@@ -104,8 +101,7 @@ void main() {
       expect(find.text('Option A'), findsOneWidget);
     });
 
-    testWidgets('calls onClose when bottom sheet is dismissed',
-        (tester) async {
+    testWidgets('calls onClose when bottom sheet is dismissed', (tester) async {
       bool closed = false;
 
       await tester.pumpWidget(

@@ -8,22 +8,14 @@ import '../../../helpers/theme_test_helper.dart';
 void main() {
   group('LeafTimePicker', () {
     testWidgets('renders with default label', (tester) async {
-      await tester.pumpWidget(
-        wrapWithTheme(
-          const LeafTimePicker(),
-        ),
-      );
+      await tester.pumpWidget(wrapWithTheme(const LeafTimePicker()));
 
       expect(find.text('Time'), findsOneWidget);
     });
 
     testWidgets('renders with custom label', (tester) async {
       await tester.pumpWidget(
-        wrapWithTheme(
-          const LeafTimePicker(
-            label: Text('End Time'),
-          ),
-        ),
+        wrapWithTheme(const LeafTimePicker(label: Text('End Time'))),
       );
 
       expect(find.text('End Time'), findsOneWidget);
@@ -38,9 +30,7 @@ void main() {
       await tester.pumpWidget(
         wrapWithTheme(
           SingleChildScrollView(
-            child: LeafTimePicker(
-              initialTime: DateTime(2025, 1, 1, 14, 30),
-            ),
+            child: LeafTimePicker(initialTime: DateTime(2025, 1, 1, 14, 30)),
           ),
         ),
       );
@@ -53,16 +43,10 @@ void main() {
 
     testWidgets('has semantics label', (tester) async {
       await tester.pumpWidget(
-        wrapWithTheme(
-          LeafTimePicker(
-            initialTime: DateTime(2025, 1, 1, 9, 0),
-          ),
-        ),
+        wrapWithTheme(LeafTimePicker(initialTime: DateTime(2025, 1, 1, 9, 0))),
       );
 
-      final semantics = tester.widgetList<Semantics>(
-        find.byType(Semantics),
-      );
+      final semantics = tester.widgetList<Semantics>(find.byType(Semantics));
       final hasLabel = semantics.any(
         (s) => s.properties.label?.contains('Time picker') ?? false,
       );
@@ -78,10 +62,7 @@ void main() {
       );
 
       await tester.pumpWidget(
-        wrapWithTheme(
-          const LeafTimePicker(),
-          theme: theme,
-        ),
+        wrapWithTheme(const LeafTimePicker(), theme: theme),
       );
 
       expect(find.text('Time'), findsOneWidget);

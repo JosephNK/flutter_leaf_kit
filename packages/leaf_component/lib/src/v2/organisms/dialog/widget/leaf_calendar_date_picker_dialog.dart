@@ -92,16 +92,16 @@ class _CalendarDatePickerContentState
     final resolvedBorderRadius =
         dialogTheme?.borderRadius ?? BorderRadius.circular(20.0);
 
-    final firstDate =
-        widget.firstDate ?? DateTime(_selectedDate.year - 10);
-    final lastDate =
-        widget.lastDate ?? DateTime(_selectedDate.year + 10);
+    final firstDate = widget.firstDate ?? DateTime(_selectedDate.year - 10);
+    final lastDate = widget.lastDate ?? DateTime(_selectedDate.year + 10);
 
     return Semantics(
       label: 'Calendar date picker dialog',
       child: Dialog(
-        insetPadding:
-            const EdgeInsets.symmetric(horizontal: 40.0, vertical: 80.0),
+        insetPadding: const EdgeInsets.symmetric(
+          horizontal: 40.0,
+          vertical: 80.0,
+        ),
         shape: RoundedRectangleBorder(borderRadius: resolvedBorderRadius),
         elevation: 4.0,
         backgroundColor: colors.surface,
@@ -113,9 +113,9 @@ class _CalendarDatePickerContentState
               Flexible(
                 child: Theme(
                   data: Theme.of(context).copyWith(
-                    colorScheme: Theme.of(context).colorScheme.copyWith(
-                          primary: resolvedActiveColor,
-                        ),
+                    colorScheme: Theme.of(
+                      context,
+                    ).colorScheme.copyWith(primary: resolvedActiveColor),
                   ),
                   child: CalendarDatePicker(
                     initialDate: _selectedDate,

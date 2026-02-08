@@ -82,8 +82,10 @@ class _CalendarTimePickerContentState
     return Semantics(
       label: 'Time picker dialog',
       child: Dialog(
-        insetPadding:
-            const EdgeInsets.symmetric(horizontal: 40.0, vertical: 80.0),
+        insetPadding: const EdgeInsets.symmetric(
+          horizontal: 40.0,
+          vertical: 80.0,
+        ),
         shape: RoundedRectangleBorder(borderRadius: resolvedBorderRadius),
         elevation: 4.0,
         backgroundColor: colors.surface,

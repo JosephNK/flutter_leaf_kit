@@ -71,16 +71,18 @@ class LeafPageCircleIndicator extends StatelessWidget {
         if (dotSize < 1.0) dotSize = 0.0;
       }
       if (dotSize > 0.0) {
-        dots.add(AnimatedContainer(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(dotSize),
-            color: i == activeIndex ? activeColor : inactiveColor,
+        dots.add(
+          AnimatedContainer(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(dotSize),
+              color: i == activeIndex ? activeColor : inactiveColor,
+            ),
+            duration: const Duration(milliseconds: 150),
+            margin: const EdgeInsets.symmetric(horizontal: 4.0),
+            width: dotSize,
+            height: dotSize,
           ),
-          duration: const Duration(milliseconds: 150),
-          margin: const EdgeInsets.symmetric(horizontal: 4.0),
-          width: dotSize,
-          height: dotSize,
-        ));
+        );
       }
     }
     return dots;

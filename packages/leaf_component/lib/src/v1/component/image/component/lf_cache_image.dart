@@ -42,11 +42,7 @@ class LFCacheImage extends StatelessWidget {
   Widget build(BuildContext context) {
     // Logging.d('LeafCacheImage: $url');
     final header = this.header;
-    return _buildWrapNetworkImage(
-      context,
-      uri: uri,
-      httpHeaders: header,
-    );
+    return _buildWrapNetworkImage(context, uri: uri, httpHeaders: header);
   }
 
   // Wrap Network Image
@@ -77,9 +73,7 @@ class LFCacheImage extends StatelessWidget {
 
     if (isEmpty(url)) {
       if (isClipper) {
-        return getClipperWrapperWidget(
-          child: _buildPlaceholderImage(context),
-        );
+        return getClipperWrapperWidget(child: _buildPlaceholderImage(context));
       }
       return _buildPlaceholderImage(context);
     }
@@ -111,9 +105,7 @@ class LFCacheImage extends StatelessWidget {
     );
 
     if (isClipper) {
-      return getClipperWrapperWidget(
-        child: networkWidget,
-      );
+      return getClipperWrapperWidget(child: networkWidget);
     }
     return networkWidget;
   }
@@ -179,9 +171,7 @@ class _LFWebpCacheNetworkImageState extends State<LFWebpCacheNetworkImage> {
     return Container(
       width: widget.width,
       height: widget.height,
-      decoration: BoxDecoration(
-        image: image,
-      ),
+      decoration: BoxDecoration(image: image),
     );
   }
 }
@@ -238,8 +228,12 @@ class LFBorderPainter extends CustomPainter {
     //   ..lineTo(0, 0);
     // path.close();
     final path = Path()
-      ..addRRect(RRect.fromRectAndRadius(
-          Rect.fromLTWH(0, 0, width, height), Radius.circular(width)))
+      ..addRRect(
+        RRect.fromRectAndRadius(
+          Rect.fromLTWH(0, 0, width, height),
+          Radius.circular(width),
+        ),
+      )
       ..close();
     canvas.drawPath(path, paint);
   }

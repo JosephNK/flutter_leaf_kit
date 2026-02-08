@@ -79,11 +79,11 @@ class _CalendarTimePickerContentState
     final okText = widget.okText;
 
     return Dialog(
-      insetPadding:
-          const EdgeInsets.symmetric(horizontal: 40.0, vertical: 80.0),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(20.0),
+      insetPadding: const EdgeInsets.symmetric(
+        horizontal: 40.0,
+        vertical: 80.0,
       ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
       elevation: 4.0,
       backgroundColor: Colors.white,
       child: Padding(
@@ -120,7 +120,7 @@ class _CalendarTimePickerContentState
                   ),
                 ),
               ],
-            )
+            ),
           ],
         ),
       ),

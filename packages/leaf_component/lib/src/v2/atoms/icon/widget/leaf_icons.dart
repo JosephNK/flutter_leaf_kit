@@ -10,13 +10,7 @@ class LeafIcons extends StatelessWidget {
   final double? width;
   final double? height;
 
-  const LeafIcons(
-    this.asset, {
-    super.key,
-    this.color,
-    this.width,
-    this.height,
-  });
+  const LeafIcons(this.asset, {super.key, this.color, this.width, this.height});
 
   @override
   Widget build(BuildContext context) {
@@ -33,8 +27,9 @@ class LeafIcons extends StatelessWidget {
     if (asset is AssetBytesLoader) {
       return SvgPicture(
         asset,
-        colorFilter:
-            color == null ? null : ColorFilter.mode(color!, BlendMode.srcIn),
+        colorFilter: color == null
+            ? null
+            : ColorFilter.mode(color!, BlendMode.srcIn),
         width: width,
         height: height,
       );
@@ -43,8 +38,9 @@ class LeafIcons extends StatelessWidget {
     if (asset is SvgPicture) {
       return SvgPicture(
         asset.bytesLoader,
-        colorFilter:
-            color == null ? null : ColorFilter.mode(color!, BlendMode.srcIn),
+        colorFilter: color == null
+            ? null
+            : ColorFilter.mode(color!, BlendMode.srcIn),
         width: width,
         height: height,
       );

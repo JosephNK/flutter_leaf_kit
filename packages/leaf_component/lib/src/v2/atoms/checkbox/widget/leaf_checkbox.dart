@@ -55,9 +55,10 @@ class LeafCheckBox extends StatelessWidget {
         inactiveColor ?? cbTheme?.inactiveColor ?? colors.inactive;
     final resolvedSpacing = runSpacing ?? cbTheme?.runSpacing ?? 4.0;
 
-    final resolvedActiveIcon = activeIcon ??
-        Icon(Icons.check_box, color: resolvedActiveColor);
-    final resolvedInactiveIcon = inactiveIcon ??
+    final resolvedActiveIcon =
+        activeIcon ?? Icon(Icons.check_box, color: resolvedActiveColor);
+    final resolvedInactiveIcon =
+        inactiveIcon ??
         Icon(Icons.check_box_outline_blank, color: resolvedInactiveColor);
 
     final children = [

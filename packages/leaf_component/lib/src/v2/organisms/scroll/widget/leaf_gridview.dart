@@ -62,8 +62,7 @@ class _LeafGridViewState<T> extends State<LeafGridView<T>>
     with LeafScrollControlMixin {
   StreamSubscription<LeafScrollControllerEvent>? _streamSubscription;
 
-  static const _defaultGridDelegate =
-      SliverGridDelegateWithFixedCrossAxisCount(
+  static const _defaultGridDelegate = SliverGridDelegateWithFixedCrossAxisCount(
     crossAxisCount: 3,
     mainAxisSpacing: 1.5,
     crossAxisSpacing: 1.5,
@@ -130,11 +129,9 @@ class _LeafGridViewState<T> extends State<LeafGridView<T>>
   // -- Private --
 
   void _listenToController() {
-    _streamSubscription =
-        widget.controller?.stream.listen((event) async {
+    _streamSubscription = widget.controller?.stream.listen((event) async {
       final mContext = context;
-      final duration =
-          event.duration ?? const Duration(milliseconds: 300);
+      final duration = event.duration ?? const Duration(milliseconds: 300);
       switch (event.type) {
         case LeafScrollControllerEventType.scrollToPosition:
           setClampingPhysics();
@@ -195,7 +192,9 @@ class _LeafGridViewState<T> extends State<LeafGridView<T>>
       key: widget.storageKey,
       gridDelegate: delegate,
       itemCount: widget.items.length,
-      controller: widget.scrollable ? PrimaryScrollController.of(context) : null,
+      controller: widget.scrollable
+          ? PrimaryScrollController.of(context)
+          : null,
       physics: widget.scrollable
           ? AlwaysScrollableScrollPhysics(
               parent: widget.physics ?? const ClampingScrollPhysics(),
@@ -232,7 +231,9 @@ class _LeafGridViewState<T> extends State<LeafGridView<T>>
 
     return CustomScrollView(
       key: widget.storageKey,
-      controller: widget.scrollable ? PrimaryScrollController.of(context) : null,
+      controller: widget.scrollable
+          ? PrimaryScrollController.of(context)
+          : null,
       physics: widget.scrollable
           ? AlwaysScrollableScrollPhysics(
               parent: widget.physics ?? const BouncingScrollPhysics(),
@@ -251,18 +252,14 @@ class _LeafGridViewState<T> extends State<LeafGridView<T>>
           )
         else
           const SliverToBoxAdapter(),
-        if (widget.header != null)
-          SliverToBoxAdapter(child: widget.header),
+        if (widget.header != null) SliverToBoxAdapter(child: widget.header),
         SliverPadding(
           padding: EdgeInsets.zero,
           sliver: SliverGrid(
             gridDelegate: delegate,
-            delegate: SliverChildBuilderDelegate(
-              (context, index) {
-                return widget.builder(context, widget.items[index], index);
-              },
-              childCount: widget.items.length,
-            ),
+            delegate: SliverChildBuilderDelegate((context, index) {
+              return widget.builder(context, widget.items[index], index);
+            }, childCount: widget.items.length),
           ),
         ),
       ],

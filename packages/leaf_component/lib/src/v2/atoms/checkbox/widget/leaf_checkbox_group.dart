@@ -4,10 +4,8 @@ import '../../../../common/model/model.dart';
 import 'leaf_checkbox.dart';
 
 /// Callback for checkbox group selection changes.
-typedef LeafCheckBoxGroupOnChanged = void Function(
-  List<LeafDataItem> items,
-  LeafDataItem changedItem,
-);
+typedef LeafCheckBoxGroupOnChanged =
+    void Function(List<LeafDataItem> items, LeafDataItem changedItem);
 
 /// A group of themed checkboxes (multi-select).
 ///

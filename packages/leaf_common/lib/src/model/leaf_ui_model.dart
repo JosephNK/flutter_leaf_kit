@@ -9,14 +9,10 @@ abstract class UIModelInterface {
 abstract class UIModel extends Equatable implements UIModelInterface {
   final Object? payload;
 
-  const UIModel({
-    required this.payload,
-  });
+  const UIModel({required this.payload});
 
   @override
-  List<Object?> get props => [
-        payload,
-      ];
+  List<Object?> get props => [payload];
 }
 
 /// UIModelV2
@@ -31,9 +27,7 @@ abstract class UIModelV2<P> extends Equatable implements UIModelV2Interface {
   const UIModelV2({P? payload}) : _payload = payload;
 
   @override
-  List<Object?> get props => [
-        _payload,
-      ];
+  List<Object?> get props => [_payload];
 
   P? get payload {
     // throw Exception(

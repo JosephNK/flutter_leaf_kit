@@ -68,14 +68,8 @@ class LFAlignedGridViewMaterial<T> extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         (header != null) ? header! : Container(),
-        Flexible(
-          child: gridViewWidget,
-        ),
-        if (!hasReachedMax) ...[
-          LFAlignedGridViewIndicator(
-            loading: loading,
-          ),
-        ]
+        Flexible(child: gridViewWidget),
+        if (!hasReachedMax) ...[LFAlignedGridViewIndicator(loading: loading)],
       ],
     );
 

@@ -35,7 +35,8 @@ class _LeafFadeAnimatedState extends State<LeafFadeAnimated>
   void initState() {
     super.initState();
 
-    _innerController = widget.controller ??
+    _innerController =
+        widget.controller ??
         LeafFadeAnimationController(
           autoAnimation: false,
           duration: widget.duration ?? const Duration(milliseconds: 250),
@@ -47,13 +48,15 @@ class _LeafFadeAnimatedState extends State<LeafFadeAnimated>
     _animationController = ac;
 
     if (!isDisappear) {
-      _animation = Tween<double>(begin: 0.0, end: 1.0).animate(
-        CurvedAnimation(parent: ac!, curve: Curves.easeIn),
-      );
+      _animation = Tween<double>(
+        begin: 0.0,
+        end: 1.0,
+      ).animate(CurvedAnimation(parent: ac!, curve: Curves.easeIn));
     } else {
-      _animation = Tween<double>(begin: 1.0, end: 0.0).animate(
-        CurvedAnimation(parent: ac!, curve: Curves.easeOut),
-      );
+      _animation = Tween<double>(
+        begin: 1.0,
+        end: 0.0,
+      ).animate(CurvedAnimation(parent: ac!, curve: Curves.easeOut));
     }
     _animation.addStatusListener(_onAnimationStatus);
 

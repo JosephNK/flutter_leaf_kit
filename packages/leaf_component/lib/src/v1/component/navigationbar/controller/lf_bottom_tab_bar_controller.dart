@@ -20,9 +20,7 @@ class LFBottomTabBarSelectedEvent extends LFBottomTabBarEvent {
 class LFBottomTabBarItemsEvent extends LFBottomTabBarEvent {
   final List<LFBottomTabItem> tabItems;
 
-  LFBottomTabBarItemsEvent({
-    required this.tabItems,
-  });
+  LFBottomTabBarItemsEvent({required this.tabItems});
 }
 
 @Deprecated('V1 component deprecated. Use V2 components instead.')
@@ -76,11 +74,7 @@ mixin LFBottomTabBarMixIn {
       tabItems,
       selectedIndex: selectedIndex,
     );
-    addEvent(
-      LFBottomTabBarItemsEvent(
-        tabItems: tabItems,
-      ),
-    );
+    addEvent(LFBottomTabBarItemsEvent(tabItems: tabItems));
   }
 
   void updateTabBadge({required int tabIndex, required int badgeCount}) {

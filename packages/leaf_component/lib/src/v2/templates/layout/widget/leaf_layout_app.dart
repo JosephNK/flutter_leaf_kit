@@ -70,10 +70,7 @@ class _LeafLayoutAppState extends State<LeafLayoutApp> {
               } else {
                 widget.onBuilder.call();
               }
-              return Container(
-                color: resolvedBg,
-                child: widget.child,
-              );
+              return Container(color: resolvedBg, child: widget.child);
             }
             return const Center(child: LeafIndicator());
           },

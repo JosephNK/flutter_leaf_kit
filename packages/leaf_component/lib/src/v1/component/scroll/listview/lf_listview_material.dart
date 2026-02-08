@@ -63,9 +63,7 @@ class LFListViewMaterial<T> extends StatelessWidget {
         final isLast = (totalCount - 1 == index);
         if (isLast) {
           if (!hasReachedMax) {
-            return LFListViewIndicator(
-              loading: loading,
-            );
+            return LFListViewIndicator(loading: loading);
           }
           return Container();
         }

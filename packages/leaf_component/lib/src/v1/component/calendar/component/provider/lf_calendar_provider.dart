@@ -1,19 +1,14 @@
 part of '../lf_calendar_view.dart';
 
 @Deprecated('Use LeafCalendarView instead')
-typedef LFCalendarProviderOnCellTapped = void Function(
-  List<DateTime> dates,
-);
+typedef LFCalendarProviderOnCellTapped = void Function(List<DateTime> dates);
 
 @Deprecated('Use LeafCalendarView instead')
 class LFCalendarProvider extends ChangeNotifier {
   final DateTime dateTime;
   final LFCalendarProviderOnCellTapped onCellTapped;
 
-  LFCalendarProvider({
-    required this.dateTime,
-    required this.onCellTapped,
-  }) {
+  LFCalendarProvider({required this.dateTime, required this.onCellTapped}) {
     _initialize(dateTime);
   }
 

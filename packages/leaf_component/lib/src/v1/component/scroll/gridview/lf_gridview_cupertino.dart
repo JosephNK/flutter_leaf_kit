@@ -47,28 +47,24 @@ class LFGridViewCupertino<T> extends StatelessWidget {
       },
     );
 
-    final headerWidget = SliverToBoxAdapter(
-      child: header,
-    );
+    final headerWidget = SliverToBoxAdapter(child: header);
 
     final gridViewWidget = SliverPadding(
       padding: const EdgeInsets.all(0.0),
       sliver: SliverGrid(
-        gridDelegate: gridDelegate ??
+        gridDelegate:
+            gridDelegate ??
             const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 3,
               mainAxisSpacing: 1.5,
               crossAxisSpacing: 1.5,
             ),
-        delegate: SliverChildBuilderDelegate(
-          (context, index) {
-            final itemIndex = index;
-            final item = items[itemIndex];
-            final itemWidget = builder(context, item, itemIndex);
-            return itemWidget;
-          },
-          childCount: totalCount,
-        ),
+        delegate: SliverChildBuilderDelegate((context, index) {
+          final itemIndex = index;
+          final item = items[itemIndex];
+          final itemWidget = builder(context, item, itemIndex);
+          return itemWidget;
+        }, childCount: totalCount),
       ),
     );
 

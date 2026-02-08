@@ -7,16 +7,12 @@ import '../response/leaf_dio_response.dart';
 
 abstract class DioJsonConverter {
   FutureOr<LeafDioResponse<ResultType>>
-      convertJsonResponse<ResultType, ResultErrorType>(
-    Response response,
-  );
+  convertJsonResponse<ResultType, ResultErrorType>(Response response);
 }
 
 abstract class DioExceptionConverter {
   FutureOr<LeafDioResponse<ResultType>>
-      convertDioException<ResultType, ResultErrorType>(
-    DioException dioException,
-  );
+  convertDioException<ResultType, ResultErrorType>(DioException dioException);
 }
 
 dynamic getPrintBodyFromResponse(

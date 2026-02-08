@@ -69,15 +69,18 @@ class LFAppBar extends StatelessWidget implements PreferredSizeWidget {
     final centerTitle = this.centerTitle ?? Platform.isIOS ? true : false;
     final toolbarHeight = this.toolbarHeight ?? kLFToolbarHeight;
     final leadingWidth = this.leadingWidth ?? toolbarHeight;
-    final backgroundColor = this.backgroundColor ??
+    final backgroundColor =
+        this.backgroundColor ??
         LFComponentConfigure.shared.appBar?.backgroundColor ??
         Colors.white;
     final backButtonColor = this.backButtonColor ?? Colors.black;
-    final bottomBorderColor = this.bottomBorderColor ??
+    final bottomBorderColor =
+        this.bottomBorderColor ??
         LFComponentConfigure.shared.appBar?.bottomBorderColor;
     final elevation =
         this.elevation ?? LFComponentConfigure.shared.appBar?.elevation;
-    final actionsRightMargin = this.actionsRightMargin ??
+    final actionsRightMargin =
+        this.actionsRightMargin ??
         LFComponentConfigure.shared.appBar?.actionsRightMargin;
 
     final ModalRoute<dynamic>? parentRoute = ModalRoute.of(context);
@@ -91,17 +94,17 @@ class LFAppBar extends StatelessWidget implements PreferredSizeWidget {
         leading: (leading != null)
             ? leading
             : canPop
-                ? LFAppBarBack(
-                    color: backButtonColor,
-                    onPressed: () {
-                      if (onBackPressed == null) {
-                        Navigator.maybePop(context);
-                      } else {
-                        onBackPressed?.call();
-                      }
-                    },
-                  )
-                : null,
+            ? LFAppBarBack(
+                color: backButtonColor,
+                onPressed: () {
+                  if (onBackPressed == null) {
+                    Navigator.maybePop(context);
+                  } else {
+                    onBackPressed?.call();
+                  }
+                },
+              )
+            : null,
         leadingWidth: leadingWidth,
         actions: [
           ...actions ?? [],
@@ -130,18 +133,16 @@ class LFAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => Size.fromHeight(toolbarHeight ??
-      kLFToolbarHeight + (bottom?.preferredSize.height ?? 0.0));
+  Size get preferredSize => Size.fromHeight(
+    toolbarHeight ?? kLFToolbarHeight + (bottom?.preferredSize.height ?? 0.0),
+  );
 
   static PreferredSizeWidget bottomBorder(Color? color) {
     return PreferredSize(
       preferredSize: const Size.fromHeight(1.0),
       child: Container(
         color: color,
-        child: const SizedBox(
-          width: double.infinity,
-          height: 1.0,
-        ),
+        child: const SizedBox(width: double.infinity, height: 1.0),
       ),
     );
   }

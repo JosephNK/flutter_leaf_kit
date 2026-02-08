@@ -63,12 +63,14 @@ class LFPageCircleIndicator extends StatelessWidget {
         }
       }
       if (size != 0.0) {
-        dots.add(LFPageCircleDot(
-          active: i == activeIndex,
-          activeColor: activeColor,
-          inactiveColor: inactiveColor,
-          size: size,
-        ));
+        dots.add(
+          LFPageCircleDot(
+            active: i == activeIndex,
+            activeColor: activeColor,
+            inactiveColor: inactiveColor,
+            size: size,
+          ),
+        );
       }
     }
     return dots;

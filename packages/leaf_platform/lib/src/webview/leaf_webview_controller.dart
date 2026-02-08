@@ -1,9 +1,9 @@
 part of 'leaf_webview.dart';
 
-typedef LeafWebViewOnJavaScriptMessageReceived = Function(
-    JavaScriptMessage javaScriptMessage);
-typedef LeafWebViewOnRegisterJavaScriptChannel = Function(
-    WebViewController webViewController);
+typedef LeafWebViewOnJavaScriptMessageReceived =
+    Function(JavaScriptMessage javaScriptMessage);
+typedef LeafWebViewOnRegisterJavaScriptChannel =
+    Function(WebViewController webViewController);
 
 class LeafWebViewController {
   LeafWebViewController() {
@@ -62,7 +62,8 @@ class LeafWebViewController {
   StreamController<Map<String, JavaScriptMessage>>? _messageStreamController;
   List<String> javaScriptChannelNames = [];
   Map<String, LeafWebViewOnJavaScriptMessageReceived> onMessageReceived = {};
-  List<LeafWebViewOnRegisterJavaScriptChannel> onRegisterJavaScriptChannels = [];
+  List<LeafWebViewOnRegisterJavaScriptChannel> onRegisterJavaScriptChannels =
+      [];
 
   /// Load the webview with the given [uri].
   Future<void> loadRequest(
@@ -80,10 +81,7 @@ class LeafWebViewController {
   }
 
   /// Load the webview with the given [html] string.
-  Future<void> loadHtmlString(
-    String html, {
-    String? baseUrl,
-  }) async {
+  Future<void> loadHtmlString(String html, {String? baseUrl}) async {
     return webViewController.loadHtmlString(html, baseUrl: baseUrl);
   }
 

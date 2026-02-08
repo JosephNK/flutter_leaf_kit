@@ -3,32 +3,28 @@ import 'package:flutter/material.dart';
 
 import 'leaf_error_value.dart';
 
-typedef LeafResultValueOnError = Future<void> Function(
-    BuildContext context, String? errorMessage, Object? exception);
-typedef LeafResultValueOnErrorMessage = Future<void> Function(
-    BuildContext context, String errorMessage);
-typedef LeafResultValueOnException = Future<void> Function(
-    BuildContext context, Object? exception);
-typedef LeafResultValueOnErrorValue = Future<void> Function(
-    BuildContext context, LeafErrorValue errorValue);
+typedef LeafResultValueOnError =
+    Future<void> Function(
+      BuildContext context,
+      String? errorMessage,
+      Object? exception,
+    );
+typedef LeafResultValueOnErrorMessage =
+    Future<void> Function(BuildContext context, String errorMessage);
+typedef LeafResultValueOnException =
+    Future<void> Function(BuildContext context, Object? exception);
+typedef LeafResultValueOnErrorValue =
+    Future<void> Function(BuildContext context, LeafErrorValue errorValue);
 
 class LeafResultValue<T> extends Equatable {
   final LeafErrorValue? errorValue;
   final T? data;
   final Object? option;
 
-  const LeafResultValue({
-    this.errorValue,
-    this.data,
-    this.option,
-  });
+  const LeafResultValue({this.errorValue, this.data, this.option});
 
   @override
-  List<Object?> get props => [
-        errorValue,
-        data,
-        option,
-      ];
+  List<Object?> get props => [errorValue, data, option];
 
   bool get empty {
     return errorValue == null && data == null && option == null;
@@ -92,15 +88,8 @@ class LeafResultValue<T> extends Equatable {
     );
   }
 
-  static LeafResultValue<T> fromSuccess<T>(
-    T? data, {
-    Object? option,
-  }) {
-    return LeafResultValue<T>(
-      errorValue: null,
-      data: data,
-      option: option,
-    );
+  static LeafResultValue<T> fromSuccess<T>(T? data, {Object? option}) {
+    return LeafResultValue<T>(errorValue: null, data: data, option: option);
   }
 
   static LeafResultValue<T> fromError<T>(
@@ -129,15 +118,21 @@ class LeafResultValue<T> extends Equatable {
   }) async {
     if (context != null && context.mounted) {
       if (sync) {
-        await LeafErrorValue.waitForErrorValues(context,
-            errorValues: errorValues, onWait: (context, errorValue) async {
-          await onErrorValue?.call(context, errorValue);
-        });
+        await LeafErrorValue.waitForErrorValues(
+          context,
+          errorValues: errorValues,
+          onWait: (context, errorValue) async {
+            await onErrorValue?.call(context, errorValue);
+          },
+        );
       } else {
-        LeafErrorValue.waitForErrorValues(context, errorValues: errorValues,
-            onWait: (context, errorValue) async {
-          await onErrorValue?.call(context, errorValue);
-        });
+        LeafErrorValue.waitForErrorValues(
+          context,
+          errorValues: errorValues,
+          onWait: (context, errorValue) async {
+            await onErrorValue?.call(context, errorValue);
+          },
+        );
       }
     }
   }

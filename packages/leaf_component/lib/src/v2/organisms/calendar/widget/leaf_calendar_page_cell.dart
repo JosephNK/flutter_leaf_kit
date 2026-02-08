@@ -4,11 +4,8 @@ import '../../../../common/theme/theme.dart';
 import '../date/extension_calendar.dart';
 
 /// Builder for custom content below the day number inside a cell.
-typedef LeafCalendarCellBuilder = Widget Function(
-  BuildContext context,
-  DateTime dateTime,
-  Size size,
-);
+typedef LeafCalendarCellBuilder =
+    Widget Function(BuildContext context, DateTime dateTime, Size size);
 
 /// A single day cell inside the calendar month grid.
 ///
@@ -57,12 +54,11 @@ class LeafCalendarPageCell extends StatelessWidget {
         selectedColor ?? calendarTheme?.selectedColor ?? colors.secondary;
     final resolvedHolidayColor =
         holidayColor ?? calendarTheme?.holidayColor ?? colors.error;
-    final resolvedDayTextStyle =
-        dayTextStyle ?? calendarTheme?.dayTextStyle;
+    final resolvedDayTextStyle = dayTextStyle ?? calendarTheme?.dayTextStyle;
 
     final isToday = dateTime.isToday;
-    final isSelected = onSelected != null &&
-        selectedDates.any((d) => dateTime.isSameDay(d));
+    final isSelected =
+        onSelected != null && selectedDates.any((d) => dateTime.isSameDay(d));
     final day = dateTime.day.toString();
 
     final dayBgColor = isToday && showToday
@@ -72,8 +68,8 @@ class LeafCalendarPageCell extends StatelessWidget {
     final dayTextColor = weekday == 7
         ? resolvedHolidayColor
         : isToday && showToday
-            ? colors.onPrimary
-            : colors.onSurface;
+        ? colors.onPrimary
+        : colors.onSurface;
 
     return Semantics(
       label: 'Day $day',
@@ -107,8 +103,10 @@ class LeafCalendarPageCell extends StatelessWidget {
                         child: Center(
                           child: Text(
                             day,
-                            style: resolvedDayTextStyle?.copyWith(
-                                    color: dayTextColor) ??
+                            style:
+                                resolvedDayTextStyle?.copyWith(
+                                  color: dayTextColor,
+                                ) ??
                                 TextStyle(
                                   fontWeight: FontWeight.normal,
                                   fontSize: 16.0,

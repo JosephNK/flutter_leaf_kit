@@ -35,7 +35,8 @@ class _LFBouncingAnimatedState extends State<LFBouncingAnimated>
   void initState() {
     super.initState();
 
-    _innerController = widget.controller ??
+    _innerController =
+        widget.controller ??
         LFBouncingAnimationController(
           autoAnimation: false,
           duration: widget.duration,
@@ -85,10 +86,7 @@ class _LFBouncingAnimatedState extends State<LFBouncingAnimated>
 
   @override
   Widget build(BuildContext context) {
-    return ScaleTransition(
-      scale: _animation,
-      child: widget.child,
-    );
+    return ScaleTransition(scale: _animation, child: widget.child);
   }
 
   void _controllerListener() {

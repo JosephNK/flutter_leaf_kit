@@ -4,10 +4,7 @@ part of '../lf_calendar_view.dart';
 class LFCalendarWeekDayView extends StatelessWidget {
   final Color holidayColor;
 
-  const LFCalendarWeekDayView({
-    super.key,
-    required this.holidayColor,
-  });
+  const LFCalendarWeekDayView({super.key, required this.holidayColor});
 
   @override
   Widget build(BuildContext context) {

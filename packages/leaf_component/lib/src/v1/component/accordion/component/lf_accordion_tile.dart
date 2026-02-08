@@ -54,10 +54,7 @@ class _LFAccordionTileState extends State<LFAccordionTile> {
             });
           },
         ),
-        LFAccordionContent(
-          expand: _expand,
-          child: child,
-        ),
+        LFAccordionContent(expand: _expand, child: child),
       ],
     );
   }

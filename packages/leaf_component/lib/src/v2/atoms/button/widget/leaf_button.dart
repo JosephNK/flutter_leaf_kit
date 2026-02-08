@@ -59,13 +59,13 @@ class LeafButton extends StatelessWidget {
     final colors = theme.colors;
     final buttonTheme = theme.buttonTheme;
 
-    final resolvedFg = foregroundColor ??
+    final resolvedFg =
+        foregroundColor ??
         textStyle?.color ??
         buttonTheme?.foregroundColor ??
         colors.onPrimary;
-    final resolvedBg = backgroundColor ??
-        buttonTheme?.backgroundColor ??
-        colors.primary;
+    final resolvedBg =
+        backgroundColor ?? buttonTheme?.backgroundColor ?? colors.primary;
     final resolvedLeadingSpacing =
         leadingSpacing ?? buttonTheme?.leadingSpacing ?? 8.0;
     final resolvedPadding = padding ?? buttonTheme?.padding;
@@ -84,7 +84,8 @@ class LeafButton extends StatelessWidget {
 
     final textWidget = LeafText(
       text,
-      style: textStyle?.copyWith(color: resolvedFg) ??
+      style:
+          textStyle?.copyWith(color: resolvedFg) ??
           TextStyle(color: resolvedFg),
       textAlign: textAlign,
     );

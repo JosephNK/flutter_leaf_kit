@@ -32,10 +32,7 @@ abstract class ScreenBuild {
 abstract class StatefulExtWidget extends StatefulWidget {
   final LFBottomTabIndex? index;
 
-  const StatefulExtWidget({
-    super.key,
-    this.index,
-  });
+  const StatefulExtWidget({super.key, this.index});
 }
 
 @Deprecated('Use LeafScreenStatefulWidget instead')
@@ -116,11 +113,7 @@ abstract class ScreenState<T extends StatefulExtWidget> extends State<T>
     return buildScaffold(context, null);
   }
 
-  Widget buildScaffold(
-    BuildContext context,
-    Object? state, {
-    Key? key,
-  }) {
+  Widget buildScaffold(BuildContext context, Object? state, {Key? key}) {
     const defaultBackgroundColor = Colors.transparent;
 
     final backgroundColor = this.backgroundColor;
@@ -163,11 +156,7 @@ abstract class ScreenState<T extends StatefulExtWidget> extends State<T>
     );
   }
 
-  Widget buildWithoutScaffold(
-    BuildContext context,
-    Object? state, {
-    Key? key,
-  }) {
+  Widget buildWithoutScaffold(BuildContext context, Object? state, {Key? key}) {
     const defaultBackgroundColor = Colors.transparent;
 
     final body = _buildSafeAreaBody(defaultBackgroundColor, state);
@@ -231,7 +220,10 @@ abstract class ScreenState<T extends StatefulExtWidget> extends State<T>
 
   @override
   void willPopScopeCallback(
-      BuildContext context, bool didPop, dynamic result) {}
+    BuildContext context,
+    bool didPop,
+    dynamic result,
+  ) {}
 }
 
 @Deprecated('V1 component deprecated. Use V2 components instead.')
@@ -268,16 +260,15 @@ class SafeAreaInsets {
   });
 
   static SafeAreaInsets fromLTRB(bool left, bool top, bool right, bool bottom) {
-    return SafeAreaInsets(
-      left: left,
-      top: top,
-      right: right,
-      bottom: bottom,
-    );
+    return SafeAreaInsets(left: left, top: top, right: right, bottom: bottom);
   }
 
-  static SafeAreaInsets only(
-      {bool? left, bool? top, bool? right, bool? bottom}) {
+  static SafeAreaInsets only({
+    bool? left,
+    bool? top,
+    bool? right,
+    bool? bottom,
+  }) {
     return SafeAreaInsets(
       left: left ?? false,
       top: top ?? false,

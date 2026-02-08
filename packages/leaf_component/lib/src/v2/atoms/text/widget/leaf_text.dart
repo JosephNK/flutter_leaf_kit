@@ -44,18 +44,14 @@ class LeafText extends StatelessWidget {
     final resolvedScaleFactor = _resolveScaleFactor();
     final textScaler = TextScaler.linear(resolvedScaleFactor);
 
-    final isUnderline =
-        resolvedStyle.decoration == TextDecoration.underline;
+    final isUnderline = resolvedStyle.decoration == TextDecoration.underline;
 
     return Semantics(
       label: semanticsLabel ?? text,
       child: isUnderline
           ? RichText(
               text: TextSpan(
-                children: buildUnderlineSpans(
-                  text: text,
-                  style: resolvedStyle,
-                ),
+                children: buildUnderlineSpans(text: text, style: resolvedStyle),
               ),
               textAlign: textAlign ?? TextAlign.left,
               maxLines: maxLines,
@@ -77,10 +73,7 @@ class LeafText extends StatelessWidget {
 
   TextStyle _resolveStyle(LeafThemeData theme) {
     final base = style ?? theme.typography.bodyMedium;
-    return base.copyWith(
-      color: color,
-      height: height,
-    );
+    return base.copyWith(color: color, height: height);
   }
 
   double _resolveScaleFactor() {

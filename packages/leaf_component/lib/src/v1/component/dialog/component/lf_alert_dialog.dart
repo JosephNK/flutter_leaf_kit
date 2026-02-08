@@ -101,7 +101,7 @@ class LFAlertDialog {
 
     final errorTitleStr =
         LFComponentConfigure.shared.alert?.errorMessageTitle ??
-            'Oops! Error :(';
+        'Oops! Error :(';
 
     String? errorMessageStr = errorMessage;
 
@@ -140,7 +140,7 @@ class LFAlertDialog {
 
     final errorTitleStr =
         LFComponentConfigure.shared.alert?.errorMessageTitle ??
-            'Oops! Exception :(';
+        'Oops! Exception :(';
 
     String errorMessageStr = exception.toString();
 
@@ -201,10 +201,7 @@ class _LFAlertDialog {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const SizedBox(height: 24.0),
-                    LFDialogTitle(
-                      text: title,
-                      textStyle: titleStyle,
-                    ),
+                    LFDialogTitle(text: title, textStyle: titleStyle),
                   ],
                 ),
               ),
@@ -220,24 +217,21 @@ class _LFAlertDialog {
             ],
           );
         } else {
-          titleWidget = LFDialogTitle(
-            text: title,
-            textStyle: titleStyle,
-          );
+          titleWidget = LFDialogTitle(text: title, textStyle: titleStyle);
         }
 
-        messageWidget = LFDialogMessage(
-          text: message,
-          textStyle: messageStyle,
-        );
+        messageWidget = LFDialogMessage(text: message, textStyle: messageStyle);
 
         final borderRadius = LFComponentConfigure.shared.alert?.borderRadius;
 
         return AlertDialog(
           title: isEmpty(title) ? null : titleWidget,
           content: messageWidget,
-          actionsPadding:
-              const EdgeInsets.only(left: 16.0, right: 16.0, bottom: 16.0),
+          actionsPadding: const EdgeInsets.only(
+            left: 16.0,
+            right: 16.0,
+            bottom: 16.0,
+          ),
           shape: (borderRadius != null)
               ? RoundedRectangleBorder(borderRadius: borderRadius)
               : null,
@@ -257,7 +251,7 @@ class _LFAlertDialog {
                     ),
                   ),
                 ],
-              )
+              ),
             ] else ...[
               LFDialogOKButton(
                 autoPop: autoPop,
@@ -298,15 +292,9 @@ class _LFAlertDialog {
   }) async {
     late Widget titleWidget, messageWidget;
 
-    titleWidget = LFDialogTitle(
-      text: title,
-      textStyle: titleStyle,
-    );
+    titleWidget = LFDialogTitle(text: title, textStyle: titleStyle);
 
-    messageWidget = LFDialogMessage(
-      text: message,
-      textStyle: messageStyle,
-    );
+    messageWidget = LFDialogMessage(text: message, textStyle: messageStyle);
 
     final borderRadius = LFComponentConfigure.shared.alert?.borderRadius;
 
@@ -317,8 +305,11 @@ class _LFAlertDialog {
         return AlertDialog(
           title: isEmpty(title) ? null : titleWidget,
           content: messageWidget,
-          actionsPadding:
-              const EdgeInsets.only(left: 16.0, right: 16.0, bottom: 16.0),
+          actionsPadding: const EdgeInsets.only(
+            left: 16.0,
+            right: 16.0,
+            bottom: 16.0,
+          ),
           shape: (borderRadius != null)
               ? RoundedRectangleBorder(borderRadius: borderRadius)
               : null,

@@ -76,8 +76,9 @@ class _LeafFlipAnimatedState extends State<LeafFlipAnimated> {
         final isUnder = ValueKey(_showFrontSide) != child!.key;
         var tilt = ((animation.value - 0.5).abs() - 0.5) * 0.003;
         tilt *= isUnder ? -1.0 : 1.0;
-        final value =
-            isUnder ? min(rotateAnim.value, pi / 2) : rotateAnim.value;
+        final value = isUnder
+            ? min(rotateAnim.value, pi / 2)
+            : rotateAnim.value;
         return Transform(
           transform: Matrix4.rotationY(value)..setEntry(3, 0, tilt),
           alignment: Alignment.center,

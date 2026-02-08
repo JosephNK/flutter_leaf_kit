@@ -18,10 +18,10 @@ class LFTimelinePainter extends CustomPainter {
     this.itemGap = 3.0,
     this.style = PaintingStyle.stroke,
   }) : linePaint = Paint()
-          ..color = lineColor
-          ..strokeCap = strokeCap
-          ..strokeWidth = strokeWidth
-          ..style = style;
+         ..color = lineColor
+         ..strokeCap = strokeCap
+         ..strokeWidth = strokeWidth
+         ..style = style;
 
   @override
   void paint(Canvas canvas, Size size) {

@@ -42,8 +42,8 @@ class LeafSwitch extends StatelessWidget {
     final resolvedThumb = thumbColor ?? swTheme?.thumbColor;
 
     final platform = Theme.of(context).platform;
-    final isApple = platform == TargetPlatform.iOS ||
-        platform == TargetPlatform.macOS;
+    final isApple =
+        platform == TargetPlatform.iOS || platform == TargetPlatform.macOS;
 
     return Semantics(
       toggled: value,
@@ -62,19 +62,18 @@ class LeafSwitch extends StatelessWidget {
               thumbColor: WidgetStateProperty.resolveWith<Color?>(
                 (states) => resolvedThumb,
               ),
-              trackColor: WidgetStateProperty.resolveWith<Color?>(
-                (states) {
-                  if (states.contains(WidgetState.disabled)) {
-                    return resolvedInactiveTrack.withValues(alpha: 0.5);
-                  }
-                  if (states.contains(WidgetState.selected)) {
-                    return resolvedActiveTrack;
-                  }
-                  return resolvedInactiveTrack;
-                },
+              trackColor: WidgetStateProperty.resolveWith<Color?>((states) {
+                if (states.contains(WidgetState.disabled)) {
+                  return resolvedInactiveTrack.withValues(alpha: 0.5);
+                }
+                if (states.contains(WidgetState.selected)) {
+                  return resolvedActiveTrack;
+                }
+                return resolvedInactiveTrack;
+              }),
+              trackOutlineWidth: WidgetStateProperty.resolveWith<double?>(
+                (_) => 0.0,
               ),
-              trackOutlineWidth:
-                  WidgetStateProperty.resolveWith<double?>((_) => 0.0),
               onChanged: onChanged,
             ),
     );

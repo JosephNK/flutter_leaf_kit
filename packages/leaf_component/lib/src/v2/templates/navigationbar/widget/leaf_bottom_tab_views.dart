@@ -4,9 +4,8 @@ import '../controller/leaf_bottom_tab_bar_controller.dart';
 import '../model/leaf_bottom_tab_item.dart';
 
 /// Builder that creates child views from the current tab items.
-typedef LeafBottomTabViewsBuilder = List<Widget> Function(
-  List<LeafBottomTabItem> tabItems,
-);
+typedef LeafBottomTabViewsBuilder =
+    List<Widget> Function(List<LeafBottomTabItem> tabItems);
 
 /// Displays the content view for the currently selected tab.
 ///

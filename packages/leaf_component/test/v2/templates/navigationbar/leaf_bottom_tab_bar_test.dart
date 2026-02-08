@@ -31,9 +31,7 @@ void main() {
 
     testWidgets('renders all tab labels', (tester) async {
       await tester.pumpWidget(
-        wrapWithTheme(
-          LeafBottomTabBar(controller: controller),
-        ),
+        wrapWithTheme(LeafBottomTabBar(controller: controller)),
       );
 
       expect(find.text('Tab 0'), findsOneWidget);
@@ -43,15 +41,10 @@ void main() {
 
     testWidgets('has semantics label', (tester) async {
       await tester.pumpWidget(
-        wrapWithTheme(
-          LeafBottomTabBar(controller: controller),
-        ),
+        wrapWithTheme(LeafBottomTabBar(controller: controller)),
       );
 
-      expect(
-        find.bySemanticsLabel('Bottom navigation bar'),
-        findsWidgets,
-      );
+      expect(find.bySemanticsLabel('Bottom navigation bar'), findsWidgets);
     });
 
     testWidgets('onTap fires with correct index', (tester) async {
@@ -79,9 +72,7 @@ void main() {
 
     testWidgets('hidden when visible is false', (tester) async {
       await tester.pumpWidget(
-        wrapWithTheme(
-          LeafBottomTabBar(controller: controller, visible: false),
-        ),
+        wrapWithTheme(LeafBottomTabBar(controller: controller, visible: false)),
       );
 
       // The BottomAppBar should not be visible

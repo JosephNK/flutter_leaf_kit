@@ -35,7 +35,8 @@ class _LeafExpandAnimatedState extends State<LeafExpandAnimated>
   void initState() {
     super.initState();
 
-    _innerController = widget.controller ??
+    _innerController =
+        widget.controller ??
         LeafExpandAnimationController(
           autoAnimation: false,
           duration: widget.duration ?? const Duration(milliseconds: 250),
@@ -76,8 +77,7 @@ class _LeafExpandAnimatedState extends State<LeafExpandAnimated>
 
   @override
   Widget build(BuildContext context) {
-    final expand =
-        _innerController.status == LeafAnimationStatus.forward;
+    final expand = _innerController.status == LeafAnimationStatus.forward;
 
     return SizeTransition(
       axis: Axis.vertical,

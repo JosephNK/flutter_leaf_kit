@@ -100,10 +100,7 @@ class _LFDatePickerState extends State<LFDatePicker> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             widget.label ?? const LFText('Date'),
-                            LFText(
-                              formattedDate,
-                              style: widget.timeTextStyle,
-                            ),
+                            LFText(formattedDate, style: widget.timeTextStyle),
                           ],
                         ),
                       ),
@@ -152,7 +149,7 @@ class _LFDatePickerState extends State<LFDatePicker> {
                   ),
                 ),
               ],
-            )
+            ),
           ],
         ),
       ),

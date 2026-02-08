@@ -3,9 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'leaf_scroll_info_data.dart';
 
 /// Callback fired when scroll position changes.
-typedef LeafScrollViewDidScroll = void Function(
-  LeafScrollInfoData scrollData,
-);
+typedef LeafScrollViewDidScroll = void Function(LeafScrollInfoData scrollData);
 
 /// Callback for pull-to-refresh.
 typedef LeafScrollViewRefresh = Future<void> Function();
@@ -14,10 +12,8 @@ typedef LeafScrollViewRefresh = Future<void> Function();
 typedef LeafScrollViewLoadMore = Future<void> Function();
 
 /// Callback to programmatically scroll to top.
-typedef LeafScrollViewScrollToTop = void Function(
-  BuildContext context, {
-  bool animated,
-});
+typedef LeafScrollViewScrollToTop =
+    void Function(BuildContext context, {bool animated});
 
 /// Callback to programmatically scroll to a specific index.
 typedef LeafScrollViewScrollToIndex = void Function(int index);

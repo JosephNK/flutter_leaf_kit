@@ -99,8 +99,9 @@ class LeafFileManager {
   }) async {
     try {
       await file.writeAsBytes(
-          buffer.asUint8List(byteData.offsetInBytes, byteData.lengthInBytes),
-          flush: flush);
+        buffer.asUint8List(byteData.offsetInBytes, byteData.lengthInBytes),
+        flush: flush,
+      );
       return file;
     } catch (e) {
       debugPrint('writeByteBufferFile Error: $e');
@@ -174,15 +175,18 @@ class LeafFileManager {
   }
 
   static Future<String> getApplicationDocumentsCreateDirectoryPath(
-      String folderName) async {
+    String folderName,
+  ) async {
     final Directory appDocDir = await getApplicationDocumentsDirectoryDir();
-    final Directory appDocDirFolder =
-        Directory('${appDocDir.path}/$folderName/');
+    final Directory appDocDirFolder = Directory(
+      '${appDocDir.path}/$folderName/',
+    );
     if (await appDocDirFolder.exists()) {
       return appDocDirFolder.path;
     }
-    final Directory appDocDirNewFolder =
-        await appDocDirFolder.create(recursive: true);
+    final Directory appDocDirNewFolder = await appDocDirFolder.create(
+      recursive: true,
+    );
     return appDocDirNewFolder.path;
   }
 }

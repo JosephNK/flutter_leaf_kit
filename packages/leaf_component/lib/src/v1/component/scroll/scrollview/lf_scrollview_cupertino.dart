@@ -56,9 +56,7 @@ class LFScrollViewCupertino<T> extends StatelessWidget {
               ),
         SliverPadding(
           padding: padding ?? const EdgeInsets.all(0),
-          sliver: SliverToBoxAdapter(
-            child: child,
-          ),
+          sliver: SliverToBoxAdapter(child: child),
         ),
       ],
     );

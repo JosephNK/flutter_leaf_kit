@@ -43,10 +43,7 @@ class LeafNavigationBasic {
     }
     return await Navigator.push(
       context,
-      MaterialPageRoute(
-        settings: routeSettings,
-        builder: (context) => child,
-      ),
+      MaterialPageRoute(settings: routeSettings, builder: (context) => child),
     );
   }
 
@@ -78,17 +75,19 @@ class LeafNavigationBasic {
     required Widget widget,
   }) {
     // nested navigation
-    Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(
-      builder: (BuildContext context) {
-        return Navigator(
-          key: navigatorKey,
-          onGenerateRoute: (route) => MaterialPageRoute(
-            settings: route,
-            builder: (context) => widget,
-          ),
-        );
-      },
-      fullscreenDialog: true,
-    ));
+    Navigator.of(context, rootNavigator: true).push(
+      MaterialPageRoute(
+        builder: (BuildContext context) {
+          return Navigator(
+            key: navigatorKey,
+            onGenerateRoute: (route) => MaterialPageRoute(
+              settings: route,
+              builder: (context) => widget,
+            ),
+          );
+        },
+        fullscreenDialog: true,
+      ),
+    );
   }
 }

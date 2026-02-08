@@ -31,7 +31,8 @@ class _LFFadeAnimatedState extends State<LFFadeAnimated>
   void initState() {
     super.initState();
 
-    _innerController = widget.controller ??
+    _innerController =
+        widget.controller ??
         LFFadeAnimationController(
           autoAnimation: false,
           duration: widget.duration ?? const Duration(milliseconds: 250),
@@ -47,10 +48,12 @@ class _LFFadeAnimatedState extends State<LFFadeAnimated>
 
     if (!isDisappear) {
       _animation = Tween<double>(begin: 0.0, end: 1.0).animate(
-          CurvedAnimation(parent: animationController!, curve: Curves.easeIn));
+        CurvedAnimation(parent: animationController!, curve: Curves.easeIn),
+      );
     } else {
       _animation = Tween<double>(begin: 1.0, end: 0.0).animate(
-          CurvedAnimation(parent: animationController!, curve: Curves.easeOut));
+        CurvedAnimation(parent: animationController!, curve: Curves.easeOut),
+      );
     }
     _animation.addStatusListener(animationCallback);
 
@@ -86,10 +89,7 @@ class _LFFadeAnimatedState extends State<LFFadeAnimated>
 
   @override
   Widget build(BuildContext context) {
-    return FadeTransition(
-      opacity: _animation,
-      child: widget.child,
-    );
+    return FadeTransition(opacity: _animation, child: widget.child);
   }
 
   void _controllerListener() {

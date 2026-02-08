@@ -27,11 +27,14 @@ class LFEasyRichText extends StatelessWidget implements LFBuildText {
   Widget build(BuildContext context) {
     return EasyRichText(
       text,
-      patternList: patternList
-              ?.map((pattern) => EasyRichTextPattern(
-                    targetString: pattern.targetString,
-                    style: pattern.style,
-                  ))
+      patternList:
+          patternList
+              ?.map(
+                (pattern) => EasyRichTextPattern(
+                  targetString: pattern.targetString,
+                  style: pattern.style,
+                ),
+              )
               .toList() ??
           [],
       defaultStyle: style,
@@ -66,9 +69,5 @@ class LFEasyRichTextPattern {
   ///Style of target text
   final TextStyle? style;
 
-  LFEasyRichTextPattern({
-    Key? key,
-    required this.targetString,
-    this.style,
-  });
+  LFEasyRichTextPattern({Key? key, required this.targetString, this.style});
 }

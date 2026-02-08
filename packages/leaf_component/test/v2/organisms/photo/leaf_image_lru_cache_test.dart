@@ -61,10 +61,8 @@ void main() {
     test('length reflects number of cached entries', () {
       expect(LeafImageLruCache.length, 0);
 
-      LeafImageLruCache.setData(
-          _makeAsset('a'), 64, Uint8List.fromList([1]));
-      LeafImageLruCache.setData(
-          _makeAsset('b'), 64, Uint8List.fromList([2]));
+      LeafImageLruCache.setData(_makeAsset('a'), 64, Uint8List.fromList([1]));
+      LeafImageLruCache.setData(_makeAsset('b'), 64, Uint8List.fromList([2]));
 
       expect(LeafImageLruCache.length, 2);
     });

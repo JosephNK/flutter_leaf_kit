@@ -19,8 +19,9 @@ void main() {
     test('daysInMonthGrid contains all days of the month', () {
       final date = DateTime(2024, 2); // Feb 2024 (leap year, 29 days)
       final grid = date.daysInMonthGrid();
-      final febDays =
-          grid.where((d) => d.month == 2 && d.year == 2024).toList();
+      final febDays = grid
+          .where((d) => d.month == 2 && d.year == 2024)
+          .toList();
       expect(febDays.length, 29);
     });
 

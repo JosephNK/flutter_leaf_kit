@@ -38,7 +38,8 @@ class LeafCalendarMonthView extends StatelessWidget {
     final arrowBgColor = colors.onSurface.withValues(alpha: 0.08);
     final arrowIconColor = colors.onSurface;
 
-    final resolvedTitleStyle = titleTextStyle ??
+    final resolvedTitleStyle =
+        titleTextStyle ??
         TextStyle(
           fontWeight: FontWeight.w600,
           fontSize: 22.0,
@@ -106,13 +107,8 @@ class _ArrowButton extends StatelessWidget {
       child: Container(
         width: 25.0,
         height: 25.0,
-        decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          color: bgColor,
-        ),
-        child: Center(
-          child: Icon(icon, size: 14.0, color: iconColor),
-        ),
+        decoration: BoxDecoration(shape: BoxShape.circle, color: bgColor),
+        child: Center(child: Icon(icon, size: 14.0, color: iconColor)),
       ),
     );
   }

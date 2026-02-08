@@ -22,8 +22,7 @@ class LeafToastThemeData {
     return LeafToastThemeData(
       backgroundColor: backgroundColor ?? this.backgroundColor,
       textStyle: textStyle ?? this.textStyle,
-      descriptionTextStyle:
-          descriptionTextStyle ?? this.descriptionTextStyle,
+      descriptionTextStyle: descriptionTextStyle ?? this.descriptionTextStyle,
       borderRadius: borderRadius ?? this.borderRadius,
     );
   }

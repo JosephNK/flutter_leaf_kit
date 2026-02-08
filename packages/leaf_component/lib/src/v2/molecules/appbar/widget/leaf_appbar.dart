@@ -75,7 +75,8 @@ class LeafAppBar extends StatelessWidget implements PreferredSizeWidget {
     final resolvedIconTheme = IconThemeData(
       color: abTheme?.foregroundColor ?? colors.onSurface,
     );
-    final resolvedTitleTextStyle = abTheme?.titleStyle ??
+    final resolvedTitleTextStyle =
+        abTheme?.titleStyle ??
         theme.typography.titleLarge.copyWith(color: colors.onSurface);
 
     final platform = Theme.of(context).platform;
@@ -85,9 +86,8 @@ class LeafAppBar extends StatelessWidget implements PreferredSizeWidget {
     final resolvedToolbarHeight =
         toolbarHeight ?? abTheme?.toolbarHeight ?? kLeafToolbarHeight;
     final resolvedLeadingWidth = leadingWidth ?? resolvedToolbarHeight;
-    final resolvedBg = backgroundColor ??
-        abTheme?.backgroundColor ??
-        colors.surface;
+    final resolvedBg =
+        backgroundColor ?? abTheme?.backgroundColor ?? colors.surface;
     final resolvedBackButtonColor =
         backButtonColor ?? abTheme?.backButtonColor ?? colors.onSurface;
     final resolvedBottomBorderColor =
@@ -104,7 +104,8 @@ class LeafAppBar extends StatelessWidget implements PreferredSizeWidget {
       child: AppBar(
         title: title,
         titleSpacing: !canPop ? titleSpacing : 0.0,
-        leading: leading ??
+        leading:
+            leading ??
             (canPop
                 ? LeafAppBarBack(
                     color: resolvedBackButtonColor,
@@ -146,9 +147,8 @@ class LeafAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Size get preferredSize => Size.fromHeight(
-        toolbarHeight ??
-            kLeafToolbarHeight + (bottom?.preferredSize.height ?? 0.0),
-      );
+    toolbarHeight ?? kLeafToolbarHeight + (bottom?.preferredSize.height ?? 0.0),
+  );
 
   static PreferredSizeWidget _bottomBorder(Color? color) {
     return PreferredSize(

@@ -1,14 +1,9 @@
 part of '../photo.dart';
 
 @Deprecated('Use LeafPhotoListView instead')
-typedef LFPhotosOnSelected = void Function(
-  List<AssetEntity> selectedEntities,
-);
+typedef LFPhotosOnSelected = void Function(List<AssetEntity> selectedEntities);
 @Deprecated('Use LeafPhotoListView instead')
-typedef LFPhotosOnLimitError = void Function(
-  Exception error,
-  int limit,
-);
+typedef LFPhotosOnLimitError = void Function(Exception error, int limit);
 
 ///
 /// LFPhotoListView
@@ -66,12 +61,11 @@ class _LFPhotoListViewState extends State<LFPhotoListView> {
 
     ImageLruCache.clearCache();
 
-    _checkedIcon = widget.checkedIcon ??
-        const Icon(
-          Icons.check_box,
-          color: Colors.blueAccent,
-        );
-    _uncheckedIcon = widget.uncheckedIcon ??
+    _checkedIcon =
+        widget.checkedIcon ??
+        const Icon(Icons.check_box, color: Colors.blueAccent);
+    _uncheckedIcon =
+        widget.uncheckedIcon ??
         Icon(
           Icons.check_box_outline_blank,
           color: Colors.grey.withValues(alpha: 0.8),
@@ -131,9 +125,7 @@ class _LFPhotoListViewState extends State<LFPhotoListView> {
                 onTap: () => _onItemTap(entity, index),
                 child: Stack(
                   children: <Widget>[
-                    LFPhotoTile(
-                      entity: entity,
-                    ),
+                    LFPhotoTile(entity: entity),
                     LFPhotoMask(
                       showMask: checked,
                       borderColor: widget.selectedBorderColor,
@@ -216,8 +208,10 @@ class _LFPhotoListViewState extends State<LFPhotoListView> {
         _selectedEntities.remove(data);
       }
       final int limit = widget.selectedLimit;
-      widget.onLimitError
-          ?.call(Exception('Selection $limit limit is restricted.'), limit);
+      widget.onLimitError?.call(
+        Exception('Selection $limit limit is restricted.'),
+        limit,
+      );
       return;
     }
     setState(() {});
@@ -233,11 +227,7 @@ class LFPhotoTile extends StatelessWidget {
   final AssetEntity entity;
   final int size;
 
-  const LFPhotoTile({
-    super.key,
-    required this.entity,
-    this.size = 64,
-  });
+  const LFPhotoTile({super.key, required this.entity, this.size = 64});
 
   @override
   Widget build(BuildContext context) {
@@ -247,7 +237,8 @@ class LFPhotoTile extends StatelessWidget {
     }
     return FutureBuilder<Uint8List?>(
       future: entity.thumbnailDataWithOption(
-          const ThumbnailOption(size: ThumbnailSize.square(150), quality: 100)),
+        const ThumbnailOption(size: ThumbnailSize.square(150), quality: 100),
+      ),
       builder: (BuildContext context, AsyncSnapshot<Uint8List?> snapshot) {
         final futureData = snapshot.data;
         if (snapshot.connectionState == ConnectionState.done &&
@@ -278,13 +269,10 @@ class LFPhotoTile extends StatelessWidget {
             visible: entity.type == AssetType.video,
             child: LFText(
               videoDuration.toString().split('.').first.padLeft(8, '0'),
-              style: const TextStyle(
-                fontSize: 12.0,
-                color: Colors.white,
-              ),
+              style: const TextStyle(fontSize: 12.0, color: Colors.white),
             ),
           ),
-        )
+        ),
       ],
     );
   }
@@ -298,11 +286,7 @@ class LFPhotoMask extends StatelessWidget {
   final bool showMask;
   final Color? borderColor;
 
-  const LFPhotoMask({
-    super.key,
-    required this.showMask,
-    this.borderColor,
-  });
+  const LFPhotoMask({super.key, required this.showMask, this.borderColor});
 
   @override
   Widget build(BuildContext context) {
@@ -312,7 +296,9 @@ class LFPhotoMask extends StatelessWidget {
         decoration: showMask
             ? BoxDecoration(
                 border: Border.all(
-                    color: borderColor ?? Colors.blueAccent, width: 3),
+                  color: borderColor ?? Colors.blueAccent,
+                  width: 3,
+                ),
               )
             : BoxDecoration(
                 border: Border.all(color: Colors.transparent, width: 0),

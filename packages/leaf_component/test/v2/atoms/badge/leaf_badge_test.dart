@@ -7,26 +7,20 @@ import '../../../helpers/theme_test_helper.dart';
 void main() {
   group('LeafBadge', () {
     testWidgets('renders text badge', (tester) async {
-      await tester.pumpWidget(
-        wrapWithTheme(const LeafBadge(text: '3')),
-      );
+      await tester.pumpWidget(wrapWithTheme(const LeafBadge(text: '3')));
 
       expect(find.text('3'), findsOneWidget);
     });
 
     testWidgets('renders icon badge', (tester) async {
-      await tester.pumpWidget(
-        wrapWithTheme(const LeafBadge(icon: Icons.star)),
-      );
+      await tester.pumpWidget(wrapWithTheme(const LeafBadge(icon: Icons.star)));
 
       expect(find.byIcon(Icons.star), findsOneWidget);
     });
 
     testWidgets('uses theme colors as fallback', (tester) async {
       final theme = LeafThemeData.light().copyWith(
-        badgeTheme: const LeafBadgeThemeData(
-          backgroundColor: Colors.orange,
-        ),
+        badgeTheme: const LeafBadgeThemeData(backgroundColor: Colors.orange),
       );
 
       await tester.pumpWidget(
@@ -39,10 +33,7 @@ void main() {
     testWidgets('explicit backgroundColor overrides theme', (tester) async {
       await tester.pumpWidget(
         wrapWithTheme(
-          const LeafBadge(
-            text: '5',
-            backgroundColor: Colors.green,
-          ),
+          const LeafBadge(text: '5', backgroundColor: Colors.green),
         ),
       );
 
@@ -50,16 +41,10 @@ void main() {
     });
 
     testWidgets('has semantics label', (tester) async {
-      await tester.pumpWidget(
-        wrapWithTheme(const LeafBadge(text: '9')),
-      );
+      await tester.pumpWidget(wrapWithTheme(const LeafBadge(text: '9')));
 
-      final semantics = tester.widgetList<Semantics>(
-        find.byType(Semantics),
-      );
-      final hasBadgeLabel = semantics.any(
-        (s) => s.properties.label == '9',
-      );
+      final semantics = tester.widgetList<Semantics>(find.byType(Semantics));
+      final hasBadgeLabel = semantics.any((s) => s.properties.label == '9');
       expect(hasBadgeLabel, isTrue);
     });
   });

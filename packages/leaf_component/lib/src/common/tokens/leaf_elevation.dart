@@ -94,12 +94,9 @@ class LeafElevation {
       shadowNone: shadowNone != null
           ? List.unmodifiable(shadowNone)
           : this.shadowNone,
-      shadowSm:
-          shadowSm != null ? List.unmodifiable(shadowSm) : this.shadowSm,
-      shadowMd:
-          shadowMd != null ? List.unmodifiable(shadowMd) : this.shadowMd,
-      shadowLg:
-          shadowLg != null ? List.unmodifiable(shadowLg) : this.shadowLg,
+      shadowSm: shadowSm != null ? List.unmodifiable(shadowSm) : this.shadowSm,
+      shadowMd: shadowMd != null ? List.unmodifiable(shadowMd) : this.shadowMd,
+      shadowLg: shadowLg != null ? List.unmodifiable(shadowLg) : this.shadowLg,
     );
   }
 
@@ -136,15 +133,15 @@ class LeafElevation {
 
   @override
   int get hashCode => Object.hash(
-        none,
-        xs,
-        sm,
-        md,
-        lg,
-        xl,
-        Object.hashAll(shadowNone),
-        Object.hashAll(shadowSm),
-        Object.hashAll(shadowMd),
-        Object.hashAll(shadowLg),
-      );
+    none,
+    xs,
+    sm,
+    md,
+    lg,
+    xl,
+    Object.hashAll(shadowNone),
+    Object.hashAll(shadowSm),
+    Object.hashAll(shadowMd),
+    Object.hashAll(shadowLg),
+  );
 }

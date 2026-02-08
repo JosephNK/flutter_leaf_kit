@@ -35,8 +35,7 @@ mixin LeafScrollControllerMixin {
       _streamController.stream.asBroadcastStream();
 
   void initController() {
-    _streamController =
-        StreamController<LeafScrollControllerEvent>.broadcast();
+    _streamController = StreamController<LeafScrollControllerEvent>.broadcast();
     isLoading = false;
   }
 

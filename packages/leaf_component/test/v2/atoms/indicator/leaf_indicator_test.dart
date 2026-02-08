@@ -7,24 +7,16 @@ import '../../../helpers/theme_test_helper.dart';
 void main() {
   group('LeafIndicator', () {
     testWidgets('renders loading indicator', (tester) async {
-      await tester.pumpWidget(
-        wrapWithTheme(const LeafIndicator()),
-      );
+      await tester.pumpWidget(wrapWithTheme(const LeafIndicator()));
 
       expect(find.byType(CircularProgressIndicator), findsOneWidget);
     });
 
     testWidgets('has loading semantics', (tester) async {
-      await tester.pumpWidget(
-        wrapWithTheme(const LeafIndicator()),
-      );
+      await tester.pumpWidget(wrapWithTheme(const LeafIndicator()));
 
-      final semantics = tester.widgetList<Semantics>(
-        find.byType(Semantics),
-      );
-      final hasLoading = semantics.any(
-        (s) => s.properties.label == 'Loading',
-      );
+      final semantics = tester.widgetList<Semantics>(find.byType(Semantics));
+      final hasLoading = semantics.any((s) => s.properties.label == 'Loading');
       expect(hasLoading, isTrue);
     });
 
@@ -46,9 +38,7 @@ void main() {
   group('LeafPageCircleIndicator', () {
     testWidgets('renders correct number of dots', (tester) async {
       await tester.pumpWidget(
-        wrapWithTheme(
-          const LeafPageCircleIndicator(total: 5, current: 0),
-        ),
+        wrapWithTheme(const LeafPageCircleIndicator(total: 5, current: 0)),
       );
 
       final containers = tester.widgetList<AnimatedContainer>(
@@ -59,14 +49,10 @@ void main() {
 
     testWidgets('has page semantics', (tester) async {
       await tester.pumpWidget(
-        wrapWithTheme(
-          const LeafPageCircleIndicator(total: 3, current: 1),
-        ),
+        wrapWithTheme(const LeafPageCircleIndicator(total: 3, current: 1)),
       );
 
-      final semantics = tester.widgetList<Semantics>(
-        find.byType(Semantics),
-      );
+      final semantics = tester.widgetList<Semantics>(find.byType(Semantics));
       final hasPageLabel = semantics.any(
         (s) => s.properties.label == 'Page 2 of 3',
       );
@@ -91,9 +77,7 @@ void main() {
   group('LeafPageRectIndicator', () {
     testWidgets('renders correct number of dots', (tester) async {
       await tester.pumpWidget(
-        wrapWithTheme(
-          const LeafPageRectIndicator(total: 4, current: 2),
-        ),
+        wrapWithTheme(const LeafPageRectIndicator(total: 4, current: 2)),
       );
 
       final containers = tester.widgetList<AnimatedContainer>(
@@ -104,14 +88,10 @@ void main() {
 
     testWidgets('has page semantics', (tester) async {
       await tester.pumpWidget(
-        wrapWithTheme(
-          const LeafPageRectIndicator(total: 5, current: 3),
-        ),
+        wrapWithTheme(const LeafPageRectIndicator(total: 5, current: 3)),
       );
 
-      final semantics = tester.widgetList<Semantics>(
-        find.byType(Semantics),
-      );
+      final semantics = tester.widgetList<Semantics>(find.byType(Semantics));
       final hasPageLabel = semantics.any(
         (s) => s.properties.label == 'Page 4 of 5',
       );

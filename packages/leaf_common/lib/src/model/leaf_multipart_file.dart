@@ -22,11 +22,7 @@ class LeafMultipartFile extends UIModelV2<String> {
   });
 
   @override
-  List<Object?> get props => [
-        super.props,
-        uri,
-        xFile,
-      ];
+  List<Object?> get props => [super.props, uri, xFile];
 
   Uri? getHttpUri() {
     return _isHttp() ? uri : null;
@@ -80,9 +76,7 @@ class LeafMultipartFile extends UIModelV2<String> {
     return null;
   }
 
-  bool checkAllowExt([
-    List<String> allowExt = kAllowFiles,
-  ]) {
+  bool checkAllowExt([List<String> allowExt = kAllowFiles]) {
     final ext = getExtension();
     if (!allowExt.contains(ext)) {
       return false;
@@ -90,9 +84,7 @@ class LeafMultipartFile extends UIModelV2<String> {
     return true;
   }
 
-  LeafMultipartFile? pipeCheckAllowExt([
-    List<String> allowExt = kAllowFiles,
-  ]) {
+  LeafMultipartFile? pipeCheckAllowExt([List<String> allowExt = kAllowFiles]) {
     if (!checkAllowExt(allowExt)) {
       return null;
     }

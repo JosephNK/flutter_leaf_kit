@@ -42,7 +42,8 @@ class LeafBadge extends StatelessWidget {
         backgroundColor ?? badgeTheme?.backgroundColor ?? colors.error;
     final resolvedIconColor =
         iconColor ?? badgeTheme?.iconColor ?? colors.onError;
-    final resolvedPadding = padding ??
+    final resolvedPadding =
+        padding ??
         badgeTheme?.padding ??
         const EdgeInsets.symmetric(horizontal: 3.0);
     final resolvedElevation = elevation ?? badgeTheme?.elevation ?? 2.0;
@@ -58,8 +59,7 @@ class LeafBadge extends StatelessWidget {
         child: Material(
           shape: RoundedRectangleBorder(
             side: BorderSide.none,
-            borderRadius:
-                BorderRadius.all(Radius.circular(resolvedSize / 2.0)),
+            borderRadius: BorderRadius.all(Radius.circular(resolvedSize / 2.0)),
           ),
           elevation: resolvedElevation,
           color: resolvedBg,
@@ -70,8 +70,7 @@ class LeafBadge extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisSize: MainAxisSize.min,
               children: [
-                if (text != null)
-                  Text(text!, style: resolvedTextStyle),
+                if (text != null) Text(text!, style: resolvedTextStyle),
                 if (icon != null)
                   Icon(
                     icon,

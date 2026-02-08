@@ -8,9 +8,7 @@ void main() {
   group('LeafCheckBox', () {
     testWidgets('renders unchecked state', (tester) async {
       await tester.pumpWidget(
-        wrapWithTheme(
-          const LeafCheckBox(text: 'Option A', value: false),
-        ),
+        wrapWithTheme(const LeafCheckBox(text: 'Option A', value: false)),
       );
 
       expect(find.text('Option A'), findsOneWidget);
@@ -19,9 +17,7 @@ void main() {
 
     testWidgets('renders checked state', (tester) async {
       await tester.pumpWidget(
-        wrapWithTheme(
-          const LeafCheckBox(text: 'Option A', value: true),
-        ),
+        wrapWithTheme(const LeafCheckBox(text: 'Option A', value: true)),
       );
 
       expect(find.byIcon(Icons.check_box), findsOneWidget);
@@ -67,17 +63,11 @@ void main() {
 
     testWidgets('has checked semantics', (tester) async {
       await tester.pumpWidget(
-        wrapWithTheme(
-          const LeafCheckBox(text: 'Check me', value: true),
-        ),
+        wrapWithTheme(const LeafCheckBox(text: 'Check me', value: true)),
       );
 
-      final semantics = tester.widgetList<Semantics>(
-        find.byType(Semantics),
-      );
-      final hasChecked = semantics.any(
-        (s) => s.properties.checked == true,
-      );
+      final semantics = tester.widgetList<Semantics>(find.byType(Semantics));
+      final hasChecked = semantics.any((s) => s.properties.checked == true);
       expect(hasChecked, isTrue);
     });
   });
@@ -90,9 +80,7 @@ void main() {
     ];
 
     testWidgets('renders all items', (tester) async {
-      await tester.pumpWidget(
-        wrapWithTheme(LeafCheckBoxGroup(items: items)),
-      );
+      await tester.pumpWidget(wrapWithTheme(LeafCheckBoxGroup(items: items)));
 
       expect(find.text('A'), findsOneWidget);
       expect(find.text('B'), findsOneWidget);
@@ -101,12 +89,7 @@ void main() {
 
     testWidgets('shows pre-selected values', (tester) async {
       await tester.pumpWidget(
-        wrapWithTheme(
-          LeafCheckBoxGroup(
-            items: items,
-            values: [items[0]],
-          ),
-        ),
+        wrapWithTheme(LeafCheckBoxGroup(items: items, values: [items[0]])),
       );
 
       expect(find.byIcon(Icons.check_box), findsOneWidget);

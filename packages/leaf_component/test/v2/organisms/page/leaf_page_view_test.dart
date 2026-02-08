@@ -13,18 +13,14 @@ void main() {
 
   group('LeafPageView', () {
     testWidgets('renders first page', (tester) async {
-      await tester.pumpWidget(
-        wrapWithTheme(LeafPageView(children: pages)),
-      );
+      await tester.pumpWidget(wrapWithTheme(LeafPageView(children: pages)));
       await tester.pumpAndSettle();
 
       expect(find.text('Page 1'), findsOneWidget);
     });
 
     testWidgets('shows indicator by default', (tester) async {
-      await tester.pumpWidget(
-        wrapWithTheme(LeafPageView(children: pages)),
-      );
+      await tester.pumpWidget(wrapWithTheme(LeafPageView(children: pages)));
       await tester.pumpAndSettle();
 
       expect(find.byType(LeafPageRectIndicator), findsOneWidget);
@@ -32,9 +28,7 @@ void main() {
 
     testWidgets('hides indicator when showIndicator is false', (tester) async {
       await tester.pumpWidget(
-        wrapWithTheme(
-          LeafPageView(showIndicator: false, children: pages),
-        ),
+        wrapWithTheme(LeafPageView(showIndicator: false, children: pages)),
       );
       await tester.pumpAndSettle();
 
@@ -55,10 +49,7 @@ void main() {
       await tester.pumpAndSettle();
 
       // Swipe left to go to page 2
-      await tester.drag(
-        find.byType(LeafPageView),
-        const Offset(-400.0, 0.0),
-      );
+      await tester.drag(find.byType(LeafPageView), const Offset(-400.0, 0.0));
       await tester.pumpAndSettle();
 
       expect(pageValue, isNotNull);
@@ -93,9 +84,7 @@ void main() {
       );
       await tester.pumpAndSettle();
 
-      final container = tester.widget<Container>(
-        find.byType(Container).first,
-      );
+      final container = tester.widget<Container>(find.byType(Container).first);
       expect(container.padding, const EdgeInsets.all(8.0));
       expect(container.margin, const EdgeInsets.all(4.0));
     });
@@ -109,10 +98,7 @@ void main() {
       );
 
       await tester.pumpWidget(
-        wrapWithTheme(
-          LeafPageView(children: pages),
-          theme: theme,
-        ),
+        wrapWithTheme(LeafPageView(children: pages), theme: theme),
       );
       await tester.pumpAndSettle();
 
@@ -128,10 +114,7 @@ void main() {
 
       await tester.pumpWidget(
         wrapWithTheme(
-          LeafPageView(
-            indicatorActiveColor: Colors.orange,
-            children: pages,
-          ),
+          LeafPageView(indicatorActiveColor: Colors.orange, children: pages),
           theme: theme,
         ),
       );
@@ -146,9 +129,7 @@ void main() {
 
     testWidgets('starts at initialPage', (tester) async {
       await tester.pumpWidget(
-        wrapWithTheme(
-          LeafPageView(initialPage: 1, children: pages),
-        ),
+        wrapWithTheme(LeafPageView(initialPage: 1, children: pages)),
       );
       await tester.pumpAndSettle();
 

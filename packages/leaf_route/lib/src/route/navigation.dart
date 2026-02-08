@@ -3,14 +3,10 @@ part of '../../leaf_route.dart';
 class LeafNavigationParam extends Equatable {
   final dynamic data;
 
-  const LeafNavigationParam({
-    this.data,
-  });
+  const LeafNavigationParam({this.data});
 
   @override
-  List<Object?> get props => [
-        data,
-      ];
+  List<Object?> get props => [data];
 
   T? getData<T>() => data as T?;
 }
@@ -23,7 +19,7 @@ enum LeafNavigatorPushType {
   basicCupertinoFullScreen,
   materialModal,
   materialModalNoAnimation,
-  cupertinoModal
+  cupertinoModal,
 }
 
 class LeafNavigation {
@@ -100,14 +96,13 @@ class LeafNavigation {
             },
             transitionsBuilder:
                 (context, animation, secondaryAnimation, child) {
-              final tween =
-                  Tween(begin: const Offset(0, 1), end: const Offset(0, 0));
-              final position = tween.animate(animation);
-              return SlideTransition(
-                position: position,
-                child: child,
-              );
-            },
+                  final tween = Tween(
+                    begin: const Offset(0, 1),
+                    end: const Offset(0, 0),
+                  );
+                  final position = tween.animate(animation);
+                  return SlideTransition(position: position, child: child);
+                },
             transitionDuration: const Duration(milliseconds: 300),
           ),
         );

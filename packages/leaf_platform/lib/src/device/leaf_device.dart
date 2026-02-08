@@ -20,9 +20,8 @@ class LeafDeviceManager {
   double get textScaleFactor => _textScaleFactor;
 
   double get statusBarHeight => MediaQueryData.fromView(
-          WidgetsBinding.instance.platformDispatcher.views.single)
-      .padding
-      .top;
+    WidgetsBinding.instance.platformDispatcher.views.single,
+  ).padding.top;
 
   Size _deviceSize = Size.zero;
   Size get deviceSize => _deviceSize;
@@ -44,10 +43,7 @@ class LeafDeviceManager {
   String _deviceIdentifier = '';
   String get deviceIdentifier => _deviceIdentifier;
 
-  Future<void> setupAsync(
-    BuildContext context, {
-    String? androidId,
-  }) async {
+  Future<void> setupAsync(BuildContext context, {String? androidId}) async {
     await setupMedia(context);
     await setupDevice(androidId: androidId);
   }
@@ -61,9 +57,7 @@ class LeafDeviceManager {
     _deviceSize = mediaQuery.size;
   }
 
-  Future<void> setupDevice({
-    String? androidId,
-  }) async {
+  Future<void> setupDevice({String? androidId}) async {
     /// Device Info
     DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
     if (Platform.isAndroid) {

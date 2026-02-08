@@ -31,11 +31,6 @@ class LeafScrollInfoData {
           isAppearTop == other.isAppearTop;
 
   @override
-  int get hashCode => Object.hash(
-        position,
-        maxScrollExtent,
-        direction,
-        isEdgeTop,
-        isAppearTop,
-      );
+  int get hashCode =>
+      Object.hash(position, maxScrollExtent, direction, isEdgeTop, isAppearTop);
 }

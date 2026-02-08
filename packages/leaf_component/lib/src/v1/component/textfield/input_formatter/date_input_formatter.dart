@@ -9,7 +9,9 @@ part of '../textfield.dart';
 class DateFormatter extends TextInputFormatter {
   @override
   TextEditingValue formatEditUpdate(
-      TextEditingValue oldValue, TextEditingValue newValue) {
+    TextEditingValue oldValue,
+    TextEditingValue newValue,
+  ) {
     var text = newValue.text;
 
     // 숫자만 허용

@@ -1,17 +1,12 @@
 part of '../navigationbar.dart';
 
 @Deprecated('Use LeafBottomTabBar instead')
-typedef LFBottomTabBarOnPressed = void Function(
-  int selectedIndex,
-  bool isActive,
-);
+typedef LFBottomTabBarOnPressed =
+    void Function(int selectedIndex, bool isActive);
 
 @Deprecated('Use LeafBottomTabBar instead')
-typedef LFBottomTabBarOnSelected = Future<bool> Function(
-  int selectedIndex,
-  int? previousIndex,
-  bool isActive,
-);
+typedef LFBottomTabBarOnSelected =
+    Future<bool> Function(int selectedIndex, int? previousIndex, bool isActive);
 
 @Deprecated('Use LeafBottomTabBar instead')
 class LFBottomTabBar extends StatefulWidget {
@@ -70,46 +65,50 @@ class _LFBottomTabBarState extends State<LFBottomTabBar> {
     _streamSubscription = widget.controller.streamController?.stream
         .asBroadcastStream()
         .listen((event) async {
-      if (event is LFBottomTabBarSelectedEvent) {
-        final selectedIndex = event.selectedIndex;
-        final previousIndex = event.previousIndex;
+          if (event is LFBottomTabBarSelectedEvent) {
+            final selectedIndex = event.selectedIndex;
+            final previousIndex = event.previousIndex;
 
-        final isActive = (selectedIndex == previousIndex);
+            final isActive = (selectedIndex == previousIndex);
 
-        final result = await widget.onSelected
-                ?.call(selectedIndex, previousIndex, isActive) ??
-            true;
+            final result =
+                await widget.onSelected?.call(
+                  selectedIndex,
+                  previousIndex,
+                  isActive,
+                ) ??
+                true;
 
-        if (result) {
-          widget.scaffoldController.tabBarViewsController.updateSelected(
-            selectedIndex: selectedIndex,
-            previousIndex: previousIndex,
-          );
+            if (result) {
+              widget.scaffoldController.tabBarViewsController.updateSelected(
+                selectedIndex: selectedIndex,
+                previousIndex: previousIndex,
+              );
 
-          setState(() {
-            _selectedIndex = selectedIndex;
-          });
-        }
-      }
+              setState(() {
+                _selectedIndex = selectedIndex;
+              });
+            }
+          }
 
-      if (event is LFBottomTabBarItemsEvent) {
-        final tabItems = event.tabItems;
+          if (event is LFBottomTabBarItemsEvent) {
+            final tabItems = event.tabItems;
 
-        setState(() {
-          _tabItems = tabItems;
+            setState(() {
+              _tabItems = tabItems;
+            });
+          }
+
+          if (event is LFBottomTabBarBadgeEvent) {
+            final tabItems = event.tabItems;
+            // final tabIndex = event.tabIndex;
+            // final badgeCount = event.badgeCount;
+
+            setState(() {
+              _tabItems = tabItems;
+            });
+          }
         });
-      }
-
-      if (event is LFBottomTabBarBadgeEvent) {
-        final tabItems = event.tabItems;
-        // final tabIndex = event.tabIndex;
-        // final badgeCount = event.badgeCount;
-
-        setState(() {
-          _tabItems = tabItems;
-        });
-      }
-    });
   }
 
   @override
@@ -135,9 +134,7 @@ class _LFBottomTabBarState extends State<LFBottomTabBar> {
     return Visibility(
       visible: show,
       child: Container(
-        decoration: BoxDecoration(
-          boxShadow: boxShadow,
-        ),
+        decoration: BoxDecoration(boxShadow: boxShadow),
         child: ClipRRect(
           borderRadius: borderRadius ?? BorderRadius.zero,
           child: BottomAppBar(
@@ -199,18 +196,14 @@ class _LFBottomTabBarState extends State<LFBottomTabBar> {
               ),
             ),
           );
-        })
+        }),
       ],
     );
   }
 }
 
 @Deprecated('V1 component deprecated. Use V2 components instead.')
-enum LSBottomTextIconAnimationType {
-  none,
-  expand,
-  bounce,
-}
+enum LSBottomTextIconAnimationType { none, expand, bounce }
 
 @Deprecated('V1 component deprecated. Use V2 components instead.')
 class LSBottomTextIcon extends StatefulWidget {
@@ -290,17 +283,15 @@ class _LSBottomTextIconState extends State<LSBottomTextIcon> {
           children: [
             Column(
               mainAxisSize: MainAxisSize.min,
-              children: [
-                bottomIconWidget,
-                bottomTextWrapWidget,
-              ],
+              children: [bottomIconWidget, bottomTextWrapWidget],
             ),
             Positioned.fill(
               child: Visibility(
                 visible: widget.badgeCount != 0,
                 child: Align(
                   alignment: defaultBadgeAlignment,
-                  child: widget.badgeWidget ??
+                  child:
+                      widget.badgeWidget ??
                       LFBadge(
                         text: widget.badgeCount.toString(),
                         textStyle: const TextStyle(
@@ -312,7 +303,7 @@ class _LSBottomTextIconState extends State<LSBottomTextIcon> {
               ),
             ),
           ],
-        )
+        ),
       ],
     );
 
@@ -396,13 +387,13 @@ class LFBottomText extends StatelessWidget {
         text ?? '',
         style: isActive
             ? (activeTextStyle ??
-                DefaultTextStyle.of(context).style.copyWith(
-                      color: Colors.blueAccent,
-                    ))
+                  DefaultTextStyle.of(
+                    context,
+                  ).style.copyWith(color: Colors.blueAccent))
             : (defaultTextStyle ??
-                DefaultTextStyle.of(context).style.copyWith(
-                      color: Colors.grey[600],
-                    )),
+                  DefaultTextStyle.of(
+                    context,
+                  ).style.copyWith(color: Colors.grey[600])),
       ),
     );
   }

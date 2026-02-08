@@ -33,9 +33,7 @@ class LFBottomSheet {
                 final textStyle = TextStyle(
                   fontWeight: active ? FontWeight.w500 : FontWeight.normal,
                   fontSize: 18.0,
-                ).copyWith(
-                  color: active ? activeColor : inactiveColor,
-                );
+                ).copyWith(color: active ? activeColor : inactiveColor);
 
                 return CupertinoActionSheetAction(
                   onPressed: () async {
@@ -78,15 +76,10 @@ class LFBottomSheet {
               final textStyle = TextStyle(
                 fontWeight: active ? FontWeight.w500 : FontWeight.normal,
                 fontSize: 18.0,
-              ).copyWith(
-                color: active ? activeColor : inactiveColor,
-              );
+              ).copyWith(color: active ? activeColor : inactiveColor);
 
               return ListTile(
-                title: LFText(
-                  item.title,
-                  style: textStyle,
-                ),
+                title: LFText(item.title, style: textStyle),
                 enabled: item.enabled,
                 onTap: () async {
                   Navigator.maybePop(context);

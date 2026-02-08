@@ -30,18 +30,15 @@ class LFAppBarAction extends StatelessWidget {
     final child = isNotEmpty(text)
         ? LFText(text ?? '', style: textStyle)
         : (icon != null)
-            ? icon
-            : Container();
+        ? icon
+        : Container();
 
     return Container(
       alignment: Alignment.center,
       margin: margin,
       child: LFInkWell(
         onTap: onPressed,
-        child: Padding(
-          padding: padding,
-          child: child,
-        ),
+        child: Padding(padding: padding, child: child),
       ),
     );
   }

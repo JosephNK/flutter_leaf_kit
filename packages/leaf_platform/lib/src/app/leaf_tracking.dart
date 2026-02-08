@@ -6,8 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_leaf_common/leaf_common.dart';
 
 class LeafTracking {
-  static Future<TrackingStatus> requestAppTracking(
-      BuildContext context) async {
+  static Future<TrackingStatus> requestAppTracking(BuildContext context) async {
     try {
       if (Platform.isIOS) {
         try {

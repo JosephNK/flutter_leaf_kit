@@ -43,20 +43,22 @@ class _LFLayoutAppState extends State<LFLayoutApp> {
 
     final child = LayoutBuilder(
       builder: (_, constraints) {
-        return OrientationBuilder(builder: (_, orientation) {
-          if (constraints.maxWidth != 0) {
-            if (onSetupDevice != null) {
-              onSetupDevice.call(onBuilder);
-            } else {
-              onBuilder.call();
+        return OrientationBuilder(
+          builder: (_, orientation) {
+            if (constraints.maxWidth != 0) {
+              if (onSetupDevice != null) {
+                onSetupDevice.call(onBuilder);
+              } else {
+                onBuilder.call();
+              }
+              return Container(
+                color: widget.backgroundColor,
+                child: widget.child,
+              );
             }
-            return Container(
-              color: widget.backgroundColor,
-              child: widget.child,
-            );
-          }
-          return const Center(child: LFIndicator());
-        });
+            return const Center(child: LFIndicator());
+          },
+        );
       },
     );
 

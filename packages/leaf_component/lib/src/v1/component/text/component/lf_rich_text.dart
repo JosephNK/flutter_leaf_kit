@@ -48,10 +48,5 @@ class LFRichText extends StatelessWidget implements LFBuildText {
 
 @Deprecated('V1 component deprecated. Use V2 components instead.')
 class LFTextSpan extends TextSpan {
-  const LFTextSpan({
-    super.text,
-    super.children,
-    super.style,
-    super.recognizer,
-  });
+  const LFTextSpan({super.text, super.children, super.style, super.recognizer});
 }

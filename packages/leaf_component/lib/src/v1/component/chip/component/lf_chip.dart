@@ -51,8 +51,9 @@ class _LFChipState extends State<LFChip> {
     final backgroundColor = !selected
         ? defaultColor.withValues(alpha: 0.4)
         : selectedColor.withValues(alpha: 0.5);
-    final textColor =
-        !selected ? defaultColor : selectedColor.withValues(alpha: 1.0);
+    final textColor = !selected
+        ? defaultColor
+        : selectedColor.withValues(alpha: 1.0);
 
     return LFInkWell(
       onTap: () {
@@ -61,15 +62,10 @@ class _LFChipState extends State<LFChip> {
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8.0),
         decoration: BoxDecoration(
-          borderRadius: const BorderRadius.all(
-            Radius.circular(50.0),
-          ),
+          borderRadius: const BorderRadius.all(Radius.circular(50.0)),
           color: backgroundColor,
         ),
-        child: LFText(
-          widget.text,
-          color: textColor,
-        ),
+        child: LFText(widget.text, color: textColor),
       ),
     );
   }

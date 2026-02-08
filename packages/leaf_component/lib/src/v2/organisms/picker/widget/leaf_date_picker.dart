@@ -66,11 +66,13 @@ class _LeafDatePickerState extends State<LeafDatePicker> {
     final resolvedActiveColor =
         widget.activeColor ?? componentTheme?.activeColor ?? colors.primary;
     final resolvedBg =
-        widget.backgroundColor ?? componentTheme?.backgroundColor ?? colors.surface;
+        widget.backgroundColor ??
+        componentTheme?.backgroundColor ??
+        colors.surface;
     final resolvedBorderRadius =
         widget.borderRadius ?? BorderRadius.circular(12.0);
-    final resolvedDateStyle = widget.dateTextStyle ??
-        componentTheme?.headerTextStyle;
+    final resolvedDateStyle =
+        widget.dateTextStyle ?? componentTheme?.headerTextStyle;
 
     final borderColor = _isExpanded ? resolvedActiveColor : Colors.transparent;
 

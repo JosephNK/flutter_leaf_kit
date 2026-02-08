@@ -40,13 +40,11 @@ class LeafPopScopeAppClose extends StatefulWidget {
 class _LeafPopScopeAppCloseState extends State<LeafPopScopeAppClose> {
   DateTime? _lastBackPress;
 
-  bool get _isAndroid =>
-      Theme.of(context).platform == TargetPlatform.android;
+  bool get _isAndroid => Theme.of(context).platform == TargetPlatform.android;
 
   bool get _isWithinExitWindow {
     final last = _lastBackPress;
-    return last != null &&
-        widget.duration > DateTime.now().difference(last);
+    return last != null && widget.duration > DateTime.now().difference(last);
   }
 
   @override

@@ -109,7 +109,8 @@ class _LeafBottomTabBarScaffoldState extends State<LeafBottomTabBarScaffold> {
   Future<void> _handleTap(int index, bool isAlreadyActive) async {
     if (widget.deactivateIndexes.contains(index)) return;
 
-    final shouldSelect = await widget.onSelect?.call(
+    final shouldSelect =
+        await widget.onSelect?.call(
           index,
           widget.controller.previousIndex,
           isAlreadyActive,

@@ -30,8 +30,10 @@ class _LFRangeSliderState extends State<LFRangeSlider> {
   void initState() {
     super.initState();
 
-    _labels = RangeLabels(widget.values.start.toInt().toString(),
-        widget.values.end.toInt().toString());
+    _labels = RangeLabels(
+      widget.values.start.toInt().toString(),
+      widget.values.end.toInt().toString(),
+    );
   }
 
   @override
@@ -45,8 +47,10 @@ class _LFRangeSliderState extends State<LFRangeSlider> {
       onChanged: (newValue) {
         if (widget.labels == null) {
           setState(() {
-            _labels = RangeLabels(newValue.start.toInt().toString(),
-                newValue.end.toInt().toString());
+            _labels = RangeLabels(
+              newValue.start.toInt().toString(),
+              newValue.end.toInt().toString(),
+            );
           });
         }
         widget.onChanged?.call(newValue);

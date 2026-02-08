@@ -4,15 +4,9 @@ class LeafIndicatorThemeData {
   final EdgeInsets? padding;
   final double? strokeWidth;
 
-  const LeafIndicatorThemeData({
-    this.padding,
-    this.strokeWidth,
-  });
+  const LeafIndicatorThemeData({this.padding, this.strokeWidth});
 
-  LeafIndicatorThemeData copyWith({
-    EdgeInsets? padding,
-    double? strokeWidth,
-  }) {
+  LeafIndicatorThemeData copyWith({EdgeInsets? padding, double? strokeWidth}) {
     return LeafIndicatorThemeData(
       padding: padding ?? this.padding,
       strokeWidth: strokeWidth ?? this.strokeWidth,

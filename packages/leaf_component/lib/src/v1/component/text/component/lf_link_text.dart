@@ -16,18 +16,13 @@ final RegExp kLinkEmailRegExp = RegExp(
   r'([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})',
 );
 
-const TextStyle kLinkTextHighlightStyle = TextStyle(
-  color: Colors.blue,
-);
+const TextStyle kLinkTextHighlightStyle = TextStyle(color: Colors.blue);
 
 @Deprecated('V1 component deprecated. Use V2 components instead.')
 enum LFLinkTextType { url, phoneNumber, email, matches }
 
 @Deprecated('V1 component deprecated. Use V2 components instead.')
-typedef LFLinkTextOnTap = void Function(
-  LFLinkTextType type,
-  String? id,
-);
+typedef LFLinkTextOnTap = void Function(LFLinkTextType type, String? id);
 
 @Deprecated('V1 component deprecated. Use V2 components instead.')
 class LFLinkText extends StatefulWidget {
@@ -223,28 +218,32 @@ extension _LFLinkTextStateMatchAddSpan on _LFLinkTextState {
         onMatch: (Match match) {
           final name = match.group(0);
           if (type == LFLinkTextType.matches) {
-            onMatch?.call(LFTextSpan(
-              children: LFUnderlineSpans().textWidgetSpan(
-                name ?? '',
-                style: style,
-                onTap: () {
-                  onTap?.call(type, name);
-                },
+            onMatch?.call(
+              LFTextSpan(
+                children: LFUnderlineSpans().textWidgetSpan(
+                  name ?? '',
+                  style: style,
+                  onTap: () {
+                    onTap?.call(type, name);
+                  },
+                ),
+                recognizer: TapGestureRecognizer()
+                  ..onTap = () {
+                    onTap?.call(type, name);
+                  },
               ),
-              recognizer: TapGestureRecognizer()
-                ..onTap = () {
-                  onTap?.call(type, name);
-                },
-            ));
+            );
           } else {
-            onMatch?.call(LFTextSpan(
-              text: name,
-              style: style,
-              recognizer: TapGestureRecognizer()
-                ..onTap = () {
-                  onTap?.call(type, name);
-                },
-            ));
+            onMatch?.call(
+              LFTextSpan(
+                text: name,
+                style: style,
+                recognizer: TapGestureRecognizer()
+                  ..onTap = () {
+                    onTap?.call(type, name);
+                  },
+              ),
+            );
           }
           return '';
         },

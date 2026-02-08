@@ -39,9 +39,7 @@ class LFAppBarTitle extends StatelessWidget {
     final image = this.image;
 
     if (image != null) {
-      return Container(
-        child: image,
-      );
+      return Container(child: image);
     }
 
     return null;

@@ -59,9 +59,9 @@ class LFCalendarMonthView extends StatelessWidget {
             GestureDetector(
               onTap: () async {
                 if (onPickerSelectTap == null) return;
-                final date =
-                    LeafDate.parseFromString(dateTime.toCalYearMonthDayString())
-                        .dateTime;
+                final date = LeafDate.parseFromString(
+                  dateTime.toCalYearMonthDayString(),
+                ).dateTime;
                 final _ = await LFCalendarMonthDatePicker.show(
                   context,
                   date: date,
@@ -108,7 +108,7 @@ class LFCalendarMonthView extends StatelessWidget {
                   ),
                 ),
               ),
-            )
+            ),
           ],
         ),
         const SizedBox(height: 10.0),

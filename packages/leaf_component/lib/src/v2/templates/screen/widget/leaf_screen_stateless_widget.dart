@@ -8,10 +8,7 @@ import 'package:flutter/material.dart';
 class LeafScreenStatelessWidget extends StatelessWidget {
   final Widget child;
 
-  const LeafScreenStatelessWidget({
-    super.key,
-    required this.child,
-  });
+  const LeafScreenStatelessWidget({super.key, required this.child});
 
   @override
   Widget build(BuildContext context) => child;

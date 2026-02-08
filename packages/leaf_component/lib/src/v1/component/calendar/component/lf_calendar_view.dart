@@ -19,29 +19,23 @@ part 'widget/lf_calendar_weekday_view.dart';
 enum LFCalendarFormat { month }
 
 @Deprecated('Use LeafCalendarView instead')
-typedef LFCalendarViewOnMonthOnTap = void Function(
-  DateTime month,
-);
+typedef LFCalendarViewOnMonthOnTap = void Function(DateTime month);
 
 @Deprecated('Use LeafCalendarView instead')
-typedef LFCalendarViewOnMonthChanged = void Function(
-  DateTime startDateInMonth,
-  DateTime endDateInMonth,
-  DateTime monthDate,
-  DateTime? selectedDate,
-);
+typedef LFCalendarViewOnMonthChanged =
+    void Function(
+      DateTime startDateInMonth,
+      DateTime endDateInMonth,
+      DateTime monthDate,
+      DateTime? selectedDate,
+    );
 
 @Deprecated('Use LeafCalendarView instead')
-typedef LFCalendarViewOnDateSelected = void Function(
-  DateTime? selectedDate,
-);
+typedef LFCalendarViewOnDateSelected = void Function(DateTime? selectedDate);
 
 @Deprecated('Use LeafCalendarView instead')
-typedef LFCalendarCellBuilder = Widget Function(
-  BuildContext context,
-  DateTime dateTime,
-  Size size,
-);
+typedef LFCalendarCellBuilder =
+    Widget Function(BuildContext context, DateTime dateTime, Size size);
 
 @Deprecated('Use LeafCalendarView instead')
 class LFCalendarView extends StatefulWidget {
@@ -112,9 +106,15 @@ class _LFCalendarViewState extends State<LFCalendarView> {
     _maxDate = maxDate;
 
     final initialPage = _calculateFocusedPage(
-        LFCalendarFormat.month, minDate, _defaultDateTime);
+      LFCalendarFormat.month,
+      minDate,
+      _defaultDateTime,
+    );
     final todayPage = _calculateFocusedPage(
-        LFCalendarFormat.month, minDate, LeafDate.now().dateTime);
+      LFCalendarFormat.month,
+      minDate,
+      LeafDate.now().dateTime,
+    );
 
     _initialPage = initialPage;
     _todayPage = todayPage;
@@ -128,26 +128,30 @@ class _LFCalendarViewState extends State<LFCalendarView> {
     _streamSubscription = widget.controller?.streamController?.stream
         .asBroadcastStream()
         .listen((event) {
-      final context = _providerContext;
-      if (context != null) {
-        if (event is LFCalendarControllerTodayEvent) {
-          if (context.mounted) {
-            onActionAtToday(context);
+          final context = _providerContext;
+          if (context != null) {
+            if (event is LFCalendarControllerTodayEvent) {
+              if (context.mounted) {
+                onActionAtToday(context);
+              }
+            }
+            if (event is LFCalendarControllerSelectedEvent) {
+              if (context.mounted) {
+                onActionAtSelected(
+                  context,
+                  event.dateTime,
+                  null,
+                  useSendEvent: event.useSendEvent,
+                );
+              }
+            }
+            if (event is LFCalendarControllerMonthSelectedEvent) {
+              if (context.mounted) {
+                onActionAtMonthSelected(context, event.dateTime);
+              }
+            }
           }
-        }
-        if (event is LFCalendarControllerSelectedEvent) {
-          if (context.mounted) {
-            onActionAtSelected(context, event.dateTime, null,
-                useSendEvent: event.useSendEvent);
-          }
-        }
-        if (event is LFCalendarControllerMonthSelectedEvent) {
-          if (context.mounted) {
-            onActionAtMonthSelected(context, event.dateTime);
-          }
-        }
-      }
-    });
+        });
   }
 
   @override
@@ -252,15 +256,13 @@ class _LFCalendarViewState extends State<LFCalendarView> {
                   );
                 },
               ),
-              LFCalendarWeekDayView(
-                holidayColor: holidayColor,
-              ),
+              LFCalendarWeekDayView(holidayColor: holidayColor),
               SizedBox(
                 height: _pageHeight,
                 child: Consumer<LFCalendarProvider>(
                   builder: (context, provider, child) {
-                    final selectedDateTimes =
-                        provider.selectedDateTimes.toList();
+                    final selectedDateTimes = provider.selectedDateTimes
+                        .toList();
 
                     return PageView.builder(
                       physics: (onMonthChanged == null)
@@ -268,11 +270,16 @@ class _LFCalendarViewState extends State<LFCalendarView> {
                           : physics,
                       controller: _pageController,
                       itemCount: _getPageCount(
-                          LFCalendarFormat.month, _minDate, _maxDate),
+                        LFCalendarFormat.month,
+                        _minDate,
+                        _maxDate,
+                      ),
                       pageSnapping: true,
                       itemBuilder: (context, index) {
-                        final pageDateTime =
-                            _getBaseDay(LFCalendarFormat.month, index);
+                        final pageDateTime = _getBaseDay(
+                          LFCalendarFormat.month,
+                          index,
+                        );
 
                         return buildPageView(
                           context,
@@ -281,11 +288,16 @@ class _LFCalendarViewState extends State<LFCalendarView> {
                         );
                       },
                       onPageChanged: (index) {
-                        final pageDateTime =
-                            _getBaseDay(LFCalendarFormat.month, index);
+                        final pageDateTime = _getBaseDay(
+                          LFCalendarFormat.month,
+                          index,
+                        );
 
                         onPageChangedAtDateTime(
-                            context, pageDateTime, onMonthChanged);
+                          context,
+                          pageDateTime,
+                          onMonthChanged,
+                        );
                       },
                     );
                   },
@@ -299,7 +311,10 @@ class _LFCalendarViewState extends State<LFCalendarView> {
   }
 
   int _calculateFocusedPage(
-      LFCalendarFormat format, DateTime startDay, DateTime focusedDay) {
+    LFCalendarFormat format,
+    DateTime startDay,
+    DateTime focusedDay,
+  ) {
     switch (format) {
       case LFCalendarFormat.month:
         return _getMonthCount(startDay, focusedDay);
@@ -352,42 +367,47 @@ class _LFCalendarViewState extends State<LFCalendarView> {
     List<DateTime>? selectedDateTimes, {
     bool useSendEvent = false,
   }) {
-    final page =
-        _calculateFocusedPage(LFCalendarFormat.month, _minDate, dateTime);
+    final page = _calculateFocusedPage(
+      LFCalendarFormat.month,
+      _minDate,
+      dateTime,
+    );
 
     if (page != (_pageController.page?.toInt() ?? 0)) {
       animateToPage(page, animate: false);
     }
 
-    final selectedDate =
-        _makeSelectingDateTime(monthDateTime: dateTime, dayDateTime: null);
+    final selectedDate = _makeSelectingDateTime(
+      monthDateTime: dateTime,
+      dayDateTime: null,
+    );
 
     // [selectedDate] 날짜로 선택 효과
     // useSendEvent 값에 의한 onDateSelected 함수 호출 여부 (default: 호출 안함)
-    context
-        .read<LFCalendarProvider>()
-        .select(selectedDate, useSendEvent: useSendEvent);
+    context.read<LFCalendarProvider>().select(
+      selectedDate,
+      useSendEvent: useSendEvent,
+    );
   }
 
-  void onActionAtMonthSelected(
-    BuildContext context,
-    DateTime dateTime,
-  ) async {
-    final page =
-        _calculateFocusedPage(LFCalendarFormat.month, _minDate, dateTime);
+  void onActionAtMonthSelected(BuildContext context, DateTime dateTime) async {
+    final page = _calculateFocusedPage(
+      LFCalendarFormat.month,
+      _minDate,
+      dateTime,
+    );
 
     animateToPage(page, animate: false); // 이후 onPageChangedAtDateTime 함수 호출
   }
 
-  void onActionAtToday(
-    BuildContext context,
-  ) async {
+  void onActionAtToday(BuildContext context) async {
     todayPage(animate: false); // 이후 onPageChangedAtDateTime 함수 호출
 
     // 페이지 전환 후 [오늘] 날짜로 선택 효과 & onDateSelected 함수 호출
-    context
-        .read<LFCalendarProvider>()
-        .select(LeafDate.now().dateTime, useSendEvent: true);
+    context.read<LFCalendarProvider>().select(
+      LeafDate.now().dateTime,
+      useSendEvent: true,
+    );
   }
 
   void onActionAtPrevious(
@@ -412,19 +432,23 @@ class _LFCalendarViewState extends State<LFCalendarView> {
     LFCalendarViewOnMonthChanged? onMonthChanged,
   ) async {
     final selectedDateTimes = List<DateTime>.from(
-        context.read<LFCalendarProvider>().selectedDateTimes);
+      context.read<LFCalendarProvider>().selectedDateTimes,
+    );
     context.read<LFCalendarProvider>().setDateTime(pageDateTime);
     context.read<LFCalendarProvider>().removeAll();
 
     if (selectedDateTimes.isEmpty) return;
 
     final selectedDate = _makeSelectingDateTime(
-        monthDateTime: pageDateTime, dayDateTime: selectedDateTimes.first);
+      monthDateTime: pageDateTime,
+      dayDateTime: selectedDateTimes.first,
+    );
 
     // 페이지 전환 후 [selectedDate] 날짜로 선택 효과 & onDateSelected 함수 호출 하지 않음
-    context
-        .read<LFCalendarProvider>()
-        .select(selectedDate, useSendEvent: false);
+    context.read<LFCalendarProvider>().select(
+      selectedDate,
+      useSendEvent: false,
+    );
 
     onMonthChanged?.call(
       pageDateTime.firstDayOfWeek(),
@@ -440,8 +464,11 @@ class _LFCalendarViewState extends State<LFCalendarView> {
 
   void animateToPage(int page, {bool animate = true}) {
     if (animate) {
-      _pageController.animateToPage(page,
-          duration: _pageDuration, curve: Curves.easeIn);
+      _pageController.animateToPage(
+        page,
+        duration: _pageDuration,
+        curve: Curves.easeIn,
+      );
     } else {
       _pageController.jumpToPage(page);
     }
@@ -466,8 +493,10 @@ class _LFCalendarViewState extends State<LFCalendarView> {
   /// PageController Helper
   ///
 
-  DateTime _makeSelectingDateTime(
-      {required DateTime monthDateTime, required DateTime? dayDateTime}) {
+  DateTime _makeSelectingDateTime({
+    required DateTime monthDateTime,
+    required DateTime? dayDateTime,
+  }) {
     final year = monthDateTime.year.toString();
     final month = monthDateTime.month.toString().padLeft(2, '0');
     final day = (dayDateTime == null)

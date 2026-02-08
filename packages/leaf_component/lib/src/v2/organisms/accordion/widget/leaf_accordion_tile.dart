@@ -103,10 +103,12 @@ class _LeafAccordionTileState extends State<LeafAccordionTile>
     final colors = theme.colors;
     final accordionTheme = theme.accordionTheme;
 
-    final resolvedHeaderBg = widget.headerBackgroundColor ??
+    final resolvedHeaderBg =
+        widget.headerBackgroundColor ??
         accordionTheme?.headerBackgroundColor ??
         colors.surface;
-    final resolvedContentBg = widget.contentBackgroundColor ??
+    final resolvedContentBg =
+        widget.contentBackgroundColor ??
         accordionTheme?.contentBackgroundColor ??
         colors.background;
     final resolvedDividerColor =
@@ -185,10 +187,7 @@ class _LeafAccordionTileState extends State<LeafAccordionTile>
                   child: child,
                 );
               },
-              child: Icon(
-                Icons.keyboard_arrow_down_outlined,
-                color: iconColor,
-              ),
+              child: Icon(Icons.keyboard_arrow_down_outlined, color: iconColor),
             ),
           ],
         ),

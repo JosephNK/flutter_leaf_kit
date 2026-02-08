@@ -38,10 +38,7 @@ class LeafAppBarAction extends StatelessWidget {
         margin: margin,
         child: LeafInkWell(
           onTap: onPressed,
-          child: Padding(
-            padding: padding,
-            child: child,
-          ),
+          child: Padding(padding: padding, child: child),
         ),
       ),
     );

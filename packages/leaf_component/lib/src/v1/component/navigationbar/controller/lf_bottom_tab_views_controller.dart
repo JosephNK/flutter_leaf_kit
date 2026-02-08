@@ -20,9 +20,7 @@ class LFBottomTabBarViewsSelectedEvent extends LFBottomTabBarViewsEvent {
 class LFBottomTabBarViewsItemsEvent extends LFBottomTabBarViewsEvent {
   final List<LFBottomTabItem> tabItems;
 
-  LFBottomTabBarViewsItemsEvent({
-    required this.tabItems,
-  });
+  LFBottomTabBarViewsItemsEvent({required this.tabItems});
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -63,11 +61,7 @@ mixin LFBottomTabBarViewsMixIn {
       tabItems,
       selectedIndex: selectedIndex,
     );
-    addEvent(
-      LFBottomTabBarViewsItemsEvent(
-        tabItems: tabItems,
-      ),
-    );
+    addEvent(LFBottomTabBarViewsItemsEvent(tabItems: tabItems));
   }
 }
 

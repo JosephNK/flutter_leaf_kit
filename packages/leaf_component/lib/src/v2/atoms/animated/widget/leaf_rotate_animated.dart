@@ -35,7 +35,8 @@ class _LeafRotateAnimatedState extends State<LeafRotateAnimated>
   void initState() {
     super.initState();
 
-    _innerController = widget.controller ??
+    _innerController =
+        widget.controller ??
         LeafRotateAnimationController(
           autoAnimation: false,
           duration: widget.duration ?? const Duration(milliseconds: 250),
@@ -80,10 +81,7 @@ class _LeafRotateAnimatedState extends State<LeafRotateAnimated>
     return AnimatedBuilder(
       animation: _animationController!,
       builder: (context, child) {
-        return Transform.rotate(
-          angle: _animation.value,
-          child: widget.child,
-        );
+        return Transform.rotate(angle: _animation.value, child: widget.child);
       },
     );
   }

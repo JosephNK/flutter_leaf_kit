@@ -9,13 +9,7 @@ class LFIcons extends StatelessWidget {
   final double? width; // Icon size or Svg width
   final double? height; // Svg height
 
-  const LFIcons(
-    this.asset, {
-    super.key,
-    this.color,
-    this.width,
-    this.height,
-  });
+  const LFIcons(this.asset, {super.key, this.color, this.width, this.height});
 
   @override
   Widget build(BuildContext context) {
@@ -32,10 +26,7 @@ class LFIcons extends StatelessWidget {
     );
   }
 
-  static Widget buildUpdateColor(
-    LFIcons icon, {
-    required Color? color,
-  }) {
+  static Widget buildUpdateColor(LFIcons icon, {required Color? color}) {
     final asset = icon.asset;
     final width = icon.width;
     final height = icon.height;
@@ -80,8 +71,9 @@ class _PrivateIcons extends StatelessWidget {
     if (asset is AssetBytesLoader) {
       return SvgPicture(
         asset,
-        colorFilter:
-            color == null ? null : ColorFilter.mode(color, BlendMode.srcIn),
+        colorFilter: color == null
+            ? null
+            : ColorFilter.mode(color, BlendMode.srcIn),
         width: width,
         height: height,
       );
@@ -90,16 +82,14 @@ class _PrivateIcons extends StatelessWidget {
     if (asset is SvgPicture) {
       return SvgPicture(
         asset.bytesLoader,
-        colorFilter:
-            color == null ? null : ColorFilter.mode(color, BlendMode.srcIn),
+        colorFilter: color == null
+            ? null
+            : ColorFilter.mode(color, BlendMode.srcIn),
         width: width,
         height: height,
       );
     }
 
-    return SizedBox(
-      width: width,
-      height: height,
-    );
+    return SizedBox(width: width, height: height);
   }
 }

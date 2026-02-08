@@ -66,8 +66,7 @@ class LeafToast {
     final componentTheme = theme.toastTheme;
 
     final resolvedStyle = style ?? LeafToastNotificationStyle.flat;
-    final resolvedBorderRadius =
-        borderRadius ?? componentTheme?.borderRadius;
+    final resolvedBorderRadius = borderRadius ?? componentTheme?.borderRadius;
 
     Color? resolvedBg = backgroundColor ?? componentTheme?.backgroundColor;
     TextStyle? resolvedTextStyle = textStyle ?? componentTheme?.textStyle;

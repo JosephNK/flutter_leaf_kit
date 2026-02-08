@@ -77,8 +77,9 @@ class _LFFlipAnimatedState extends State<LFFlipAnimated> {
         final isUnder = (ValueKey(_showFrontSide) != widget!.key);
         var tilt = ((animation.value - 0.5).abs() - 0.5) * 0.003;
         tilt *= isUnder ? -1.0 : 1.0;
-        final value =
-            isUnder ? min(rotateAnim.value, pi / 2) : rotateAnim.value;
+        final value = isUnder
+            ? min(rotateAnim.value, pi / 2)
+            : rotateAnim.value;
         return Transform(
           transform: _flipXAxis
               ? (Matrix4.rotationY(value)..setEntry(3, 0, tilt))
@@ -91,16 +92,10 @@ class _LFFlipAnimatedState extends State<LFFlipAnimated> {
   }
 
   Widget _buildFront() {
-    return Container(
-      key: const ValueKey(true),
-      child: widget.front,
-    );
+    return Container(key: const ValueKey(true), child: widget.front);
   }
 
   Widget _buildRear() {
-    return Container(
-      key: const ValueKey(false),
-      child: widget.rear,
-    );
+    return Container(key: const ValueKey(false), child: widget.rear);
   }
 }

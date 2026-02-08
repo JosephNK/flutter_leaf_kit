@@ -22,7 +22,15 @@ extension LeafDateDateTime on DateTime {
     if (newDay > lastDayOfMonth) {
       newDay = lastDayOfMonth;
     }
-    return DateTime(newYear, normalizedMonth, newDay, hour, minute, second,
-        millisecond, microsecond);
+    return DateTime(
+      newYear,
+      normalizedMonth,
+      newDay,
+      hour,
+      minute,
+      second,
+      millisecond,
+      microsecond,
+    );
   }
 }

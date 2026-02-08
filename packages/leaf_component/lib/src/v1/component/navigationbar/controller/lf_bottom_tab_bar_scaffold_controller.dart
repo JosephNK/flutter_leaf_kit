@@ -59,11 +59,12 @@ class LFBottomTabBarScaffoldController {
       final item = e.value;
       final didSelected = (selectedIndex == index);
       return item.copyWith(
-          bottomTabIndex: item.bottomTabIndex.copyWith(
-        activeTabIndex: () => selectedIndex,
-        didSelected: () =>
-            (index == item.bottomTabIndex.tabIndex) ? didSelected : false,
-      ));
+        bottomTabIndex: item.bottomTabIndex.copyWith(
+          activeTabIndex: () => selectedIndex,
+          didSelected: () =>
+              (index == item.bottomTabIndex.tabIndex) ? didSelected : false,
+        ),
+      );
     }).toList();
   }
 
@@ -74,9 +75,7 @@ class LFBottomTabBarScaffoldController {
   }) {
     final newItems = tabItems.map((item) {
       if (item.bottomTabIndex.tabIndex == selectedIndex) {
-        return item.copyWith(
-          badgeCount: badgeCount,
-        );
+        return item.copyWith(badgeCount: badgeCount);
       }
       return item;
     }).toList();

@@ -72,10 +72,7 @@ void main() {
     testWidgets('no Banner when buildName is empty', (tester) async {
       await tester.pumpWidget(
         _wrapWithThemeNoBanner(
-          LeafLayoutApp(
-            onBuilder: () {},
-            child: const Text('No Banner'),
-          ),
+          LeafLayoutApp(onBuilder: () {}, child: const Text('No Banner')),
         ),
       );
 
@@ -101,16 +98,14 @@ void main() {
       expect(hasBlueColor, isTrue);
     });
 
-    testWidgets('uses LeafTheme background when no explicit colour',
-        (tester) async {
+    testWidgets('uses LeafTheme background when no explicit colour', (
+      tester,
+    ) async {
       final theme = LeafThemeData.light();
 
       await tester.pumpWidget(
         _wrapWithThemeNoBanner(
-          LeafLayoutApp(
-            onBuilder: () {},
-            child: const Text('Themed BG'),
-          ),
+          LeafLayoutApp(onBuilder: () {}, child: const Text('Themed BG')),
           theme: theme,
         ),
       );

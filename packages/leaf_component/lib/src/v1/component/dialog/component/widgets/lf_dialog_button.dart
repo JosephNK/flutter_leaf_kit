@@ -4,8 +4,10 @@ import '../../../../configure/configure.dart';
 import '../../../text/text.dart';
 
 const kDefaultDialogButtonTextStyle = TextStyle(fontSize: 16);
-const kDefaultDialogButtonPadding =
-    EdgeInsets.symmetric(vertical: 10.0, horizontal: 12.0);
+const kDefaultDialogButtonPadding = EdgeInsets.symmetric(
+  vertical: 10.0,
+  horizontal: 12.0,
+);
 
 @Deprecated('Use LeafAlertDialog instead')
 class LFDialogOKButton extends StatelessWidget {
@@ -110,7 +112,8 @@ class LFDialogCancelButton extends StatelessWidget {
 
     final textStyle =
         this.textStyle ?? cancelTextStyleValue ?? kDefaultDialogButtonTextStyle;
-    final backgroundColor = this.backgroundColor ??
+    final backgroundColor =
+        this.backgroundColor ??
         cancelTextBackgroundColorValue ??
         Colors.grey.withValues(alpha: 0.5);
     final borderColor = this.borderColor ?? cancelTextBorderColor;

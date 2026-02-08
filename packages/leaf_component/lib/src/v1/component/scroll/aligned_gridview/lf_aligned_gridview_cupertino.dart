@@ -47,9 +47,7 @@ class LFAlignedGridViewCupertino<T> extends StatelessWidget {
       },
     );
 
-    final headerWidget = SliverToBoxAdapter(
-      child: header,
-    );
+    final headerWidget = SliverToBoxAdapter(child: header);
 
     final gridViewWidget = SliverAlignedGrid.count(
       crossAxisCount: gridDelegate.crossAxisCount,
@@ -85,11 +83,9 @@ class LFAlignedGridViewCupertino<T> extends StatelessWidget {
           gridViewWidget,
           if (!hasReachedMax) ...[
             SliverToBoxAdapter(
-              child: LFAlignedGridViewIndicator(
-                loading: loading,
-              ),
+              child: LFAlignedGridViewIndicator(loading: loading),
             ),
-          ]
+          ],
         ],
       ),
     );

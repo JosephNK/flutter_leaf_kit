@@ -41,7 +41,8 @@ class LFGridViewMaterial<T> extends StatelessWidget {
 
     final gridViewWidget = GridView.builder(
       key: storageKey,
-      gridDelegate: gridDelegate ??
+      gridDelegate:
+          gridDelegate ??
           const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 3,
             mainAxisSpacing: 1.5,
@@ -70,9 +71,7 @@ class LFGridViewMaterial<T> extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           (header != null) ? header! : Container(),
-          Flexible(
-            child: gridViewWidget,
-          ),
+          Flexible(child: gridViewWidget),
         ],
       );
     }
@@ -85,9 +84,7 @@ class LFGridViewMaterial<T> extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           (header != null) ? header! : Container(),
-          Flexible(
-            child: gridViewWidget,
-          ),
+          Flexible(child: gridViewWidget),
         ],
       ),
     );

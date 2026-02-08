@@ -91,27 +91,29 @@ void main() {
       expect(find.byType(CustomScrollView), findsOneWidget);
     });
 
-    testWidgets('shows loading indicator when hasReachedMax is false on Android',
-        (tester) async {
-      await tester.pumpWidget(
-        MaterialApp(
-          theme: ThemeData(platform: TargetPlatform.android),
-          home: LeafTheme(
-            data: LeafThemeData.light(),
-            child: Scaffold(
-              body: LeafAlignedGridView<String>(
-                items: const ['A'],
-                gridDelegate: gridDelegate,
-                hasReachedMax: false,
-                builder: (_, item, _) => Text(item),
+    testWidgets(
+      'shows loading indicator when hasReachedMax is false on Android',
+      (tester) async {
+        await tester.pumpWidget(
+          MaterialApp(
+            theme: ThemeData(platform: TargetPlatform.android),
+            home: LeafTheme(
+              data: LeafThemeData.light(),
+              child: Scaffold(
+                body: LeafAlignedGridView<String>(
+                  items: const ['A'],
+                  gridDelegate: gridDelegate,
+                  hasReachedMax: false,
+                  builder: (_, item, _) => Text(item),
+                ),
               ),
             ),
           ),
-        ),
-      );
+        );
 
-      expect(find.byType(Visibility), findsWidgets);
-    });
+        expect(find.byType(Visibility), findsWidgets);
+      },
+    );
 
     testWidgets('works with controller', (tester) async {
       final controller = LeafScrollController();
@@ -131,8 +133,7 @@ void main() {
       controller.dispose();
     });
 
-    testWidgets('disallowGlow wraps with ScrollConfiguration',
-        (tester) async {
+    testWidgets('disallowGlow wraps with ScrollConfiguration', (tester) async {
       await tester.pumpWidget(
         MaterialApp(
           theme: ThemeData(platform: TargetPlatform.android),

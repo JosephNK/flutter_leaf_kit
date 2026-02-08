@@ -25,7 +25,8 @@ class LeafDialogTitle extends StatelessWidget {
     final theme = LeafTheme.of(context);
     final dialogTheme = theme.dialogTheme;
 
-    final resolvedStyle = textStyle ??
+    final resolvedStyle =
+        textStyle ??
         dialogTheme?.titleStyle ??
         const TextStyle(fontSize: 18, fontWeight: FontWeight.w600);
 

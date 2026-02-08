@@ -8,11 +8,7 @@ void main() {
   group('LeafLockGestureDetector', () {
     testWidgets('renders child', (tester) async {
       await tester.pumpWidget(
-        wrapWithTheme(
-          const LeafLockGestureDetector(
-            child: Text('Child'),
-          ),
-        ),
+        wrapWithTheme(const LeafLockGestureDetector(child: Text('Child'))),
       );
 
       expect(find.text('Child'), findsOneWidget);

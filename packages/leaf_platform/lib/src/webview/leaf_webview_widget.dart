@@ -1,29 +1,25 @@
 part of 'leaf_webview.dart';
 
-enum LeafWebViewEventType {
-  mailto,
-  tel,
-  geo,
-}
+enum LeafWebViewEventType { mailto, tel, geo }
 
 typedef LeafWebViewOnBeforeLoaded = Function();
 typedef LeafWebViewOnLoaded = Function();
 typedef LeafWebViewOnLoaderBuilder = Widget Function();
-typedef LeafWebViewOnCreateWebViewController = Function(
-    WebViewController webViewController);
+typedef LeafWebViewOnCreateWebViewController =
+    Function(WebViewController webViewController);
 typedef LeafWebViewOnPageStarted = Function();
 typedef LeafWebViewOnPageFinished = Function();
 typedef LeafWebViewOnHeightFinished = Function(double height);
-typedef LeafWebViewOnNavigationDecision = bool Function(
-    LeafWebViewEventType? type, String url);
+typedef LeafWebViewOnNavigationDecision =
+    bool Function(LeafWebViewEventType? type, String url);
 typedef LeafWebViewOnUrlChange = Function(String? url);
 typedef LeafWebViewOnHttpError = Function(HttpResponseError error);
-typedef LeafWebViewOnJavaScriptAlertDialogIOS = Future<bool?> Function(
-    JavaScriptAlertDialogRequest request);
-typedef LeafWebViewOnJavaScriptConfirmDialogIOS = Future<bool?> Function(
-    JavaScriptConfirmDialogRequest request);
-typedef LeafWebViewOnJavaScriptTextInputDialogIOS = Future<String?> Function(
-    JavaScriptTextInputDialogRequest request);
+typedef LeafWebViewOnJavaScriptAlertDialogIOS =
+    Future<bool?> Function(JavaScriptAlertDialogRequest request);
+typedef LeafWebViewOnJavaScriptConfirmDialogIOS =
+    Future<bool?> Function(JavaScriptConfirmDialogRequest request);
+typedef LeafWebViewOnJavaScriptTextInputDialogIOS =
+    Future<String?> Function(JavaScriptTextInputDialogRequest request);
 
 class LeafWebView extends StatefulWidget {
   final LeafWebViewController controller;
@@ -52,7 +48,8 @@ class LeafWebView extends StatefulWidget {
   final LeafWebViewOnHttpError? onHttpError;
   final LeafWebViewOnJavaScriptAlertDialogIOS? onJavaScriptAlertDialogIOS;
   final LeafWebViewOnJavaScriptConfirmDialogIOS? onJavaScriptConfirmDialogIOS;
-  final LeafWebViewOnJavaScriptTextInputDialogIOS? onJavaScriptTextInputDialogIOS;
+  final LeafWebViewOnJavaScriptTextInputDialogIOS?
+  onJavaScriptTextInputDialogIOS;
 
   const LeafWebView({
     super.key,
@@ -140,24 +137,28 @@ class _LeafWebViewState extends State<LeafWebView> {
       WebKitWebViewController iOSWebViewController =
           (webViewController.platform as WebKitWebViewController);
       iOSWebViewController.setAllowsBackForwardNavigationGestures(
-          allowsBackForwardNavigationGestures);
+        allowsBackForwardNavigationGestures,
+      );
       iOSWebViewController.setInspectable(isInspectable);
       if (onJavaScriptAlertDialogIOS != null) {
-        iOSWebViewController.setOnJavaScriptAlertDialog(
-            (JavaScriptAlertDialogRequest request) async {
+        iOSWebViewController.setOnJavaScriptAlertDialog((
+          JavaScriptAlertDialogRequest request,
+        ) async {
           await onJavaScriptAlertDialogIOS.call(request);
         });
       }
       if (onJavaScriptConfirmDialogIOS != null) {
-        iOSWebViewController.setOnJavaScriptConfirmDialog(
-            (JavaScriptConfirmDialogRequest request) async {
+        iOSWebViewController.setOnJavaScriptConfirmDialog((
+          JavaScriptConfirmDialogRequest request,
+        ) async {
           final result = await onJavaScriptConfirmDialogIOS.call(request);
           return result ?? false;
         });
       }
       if (onJavaScriptTextInputDialogIOS != null) {
-        iOSWebViewController.setOnJavaScriptTextInputDialog(
-            (JavaScriptTextInputDialogRequest request) async {
+        iOSWebViewController.setOnJavaScriptTextInputDialog((
+          JavaScriptTextInputDialogRequest request,
+        ) async {
           final result = await onJavaScriptTextInputDialogIOS.call(request);
           return result ?? '';
         });
@@ -174,21 +175,21 @@ class _LeafWebViewState extends State<LeafWebView> {
       androidWebViewController.setCustomWidgetCallbacks(
         onShowCustomWidget:
             (Widget child, OnHideCustomWidgetCallback callback) {
-          if (allowAllowOrientation) {
-            SystemChrome.setPreferredOrientations([
-              DeviceOrientation.portraitUp,
-              DeviceOrientation.portraitDown,
-              DeviceOrientation.landscapeRight,
-              DeviceOrientation.landscapeLeft,
-            ]);
-          }
-          Navigator.of(context).push(
-            MaterialPageRoute<void>(
-              builder: (BuildContext context) => child,
-              fullscreenDialog: true,
-            ),
-          );
-        },
+              if (allowAllowOrientation) {
+                SystemChrome.setPreferredOrientations([
+                  DeviceOrientation.portraitUp,
+                  DeviceOrientation.portraitDown,
+                  DeviceOrientation.landscapeRight,
+                  DeviceOrientation.landscapeLeft,
+                ]);
+              }
+              Navigator.of(context).push(
+                MaterialPageRoute<void>(
+                  builder: (BuildContext context) => child,
+                  fullscreenDialog: true,
+                ),
+              );
+            },
         onHideCustomWidget: () {
           if (allowAllowOrientation) {
             SystemChrome.setPreferredOrientations([
@@ -255,8 +256,9 @@ class _LeafWebViewState extends State<LeafWebView> {
       controller.webViewController.addJavaScriptChannel(
         javaScriptChannelName,
         onMessageReceived: (message) {
-          controller
-              .addJavaScriptMessageStream({javaScriptChannelName: message});
+          controller.addJavaScriptMessageStream({
+            javaScriptChannelName: message,
+          });
         },
       );
     }
@@ -305,9 +307,7 @@ class _LeafWebViewState extends State<LeafWebView> {
 
     late WebViewWidget webViewWidget;
     if (WebViewPlatform.instance is WebKitWebViewPlatform) {
-      webViewWidget = WebViewWidget(
-        controller: controller.webViewController,
-      );
+      webViewWidget = WebViewWidget(controller: controller.webViewController);
     } else {
       webViewWidget = WebViewWidget.fromPlatformCreationParams(
         params: AndroidWebViewWidgetCreationParams(
@@ -383,12 +383,14 @@ class _LeafWebViewState extends State<LeafWebView> {
   Future<void> updateWebViewHeightAfterOnPageFinished() async {
     final controller = widget.controller;
     final webViewController = controller.webViewController;
-    final readyState = await webViewController
-        .runJavaScriptReturningResult('document.readyState');
+    final readyState = await webViewController.runJavaScriptReturningResult(
+      'document.readyState',
+    );
     Logging.d('[LeafWebView] readyState: $readyState');
     if (readyState == 'complete' || readyState == '"complete"') {
-      final height = await webViewController
-          .runJavaScriptReturningResult('document.body.scrollHeight');
+      final height = await webViewController.runJavaScriptReturningResult(
+        'document.body.scrollHeight',
+      );
       final heightStr = height.toString();
       final documentHeight = double.parse(heightStr);
       Logging.d('[LeafWebView] DocumentHeight: $documentHeight');

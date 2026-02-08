@@ -4,10 +4,7 @@ part of '../scroll.dart';
 class LFAlignedGridViewIndicator extends StatelessWidget {
   final bool loading;
 
-  const LFAlignedGridViewIndicator({
-    super.key,
-    required this.loading,
-  });
+  const LFAlignedGridViewIndicator({super.key, required this.loading});
 
   @override
   Widget build(BuildContext context) {
@@ -15,9 +12,7 @@ class LFAlignedGridViewIndicator extends StatelessWidget {
       visible: loading,
       child: Container(
         padding: const EdgeInsets.all(12),
-        child: const Center(
-          child: LFIndicator(size: LFIndicatorSize.medium),
-        ),
+        child: const Center(child: LFIndicator(size: LFIndicatorSize.medium)),
       ),
     );
   }

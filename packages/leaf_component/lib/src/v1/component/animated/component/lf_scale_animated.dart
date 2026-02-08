@@ -31,7 +31,8 @@ class _LFScaleAnimatedState extends State<LFScaleAnimated>
   void initState() {
     super.initState();
 
-    _innerController = widget.controller ??
+    _innerController =
+        widget.controller ??
         LFScaleAnimationController(
           autoAnimation: false,
           duration: widget.duration ?? const Duration(milliseconds: 250),
@@ -44,8 +45,12 @@ class _LFScaleAnimatedState extends State<LFScaleAnimated>
     );
     _animationController = animationController;
 
-    _animation = Tween(begin: 0.0, end: 1.0).animate(CurvedAnimation(
-        parent: animationController!, curve: Curves.easeInOutBack));
+    _animation = Tween(begin: 0.0, end: 1.0).animate(
+      CurvedAnimation(
+        parent: animationController!,
+        curve: Curves.easeInOutBack,
+      ),
+    );
 
     _animation.addStatusListener(animationCallback);
 
@@ -81,10 +86,7 @@ class _LFScaleAnimatedState extends State<LFScaleAnimated>
 
   @override
   Widget build(BuildContext context) {
-    return ScaleTransition(
-      scale: _animation,
-      child: widget.child,
-    );
+    return ScaleTransition(scale: _animation, child: widget.child);
   }
 
   void _controllerListener() {

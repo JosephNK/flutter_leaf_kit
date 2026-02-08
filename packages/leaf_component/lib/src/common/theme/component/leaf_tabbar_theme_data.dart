@@ -33,11 +33,9 @@ class LeafTabBarThemeData {
   }) {
     return LeafTabBarThemeData(
       labelColor: labelColor ?? this.labelColor,
-      unselectedLabelColor:
-          unselectedLabelColor ?? this.unselectedLabelColor,
+      unselectedLabelColor: unselectedLabelColor ?? this.unselectedLabelColor,
       labelStyle: labelStyle ?? this.labelStyle,
-      unselectedLabelStyle:
-          unselectedLabelStyle ?? this.unselectedLabelStyle,
+      unselectedLabelStyle: unselectedLabelStyle ?? this.unselectedLabelStyle,
       indicatorColor: indicatorColor ?? this.indicatorColor,
       dividerColor: dividerColor ?? this.dividerColor,
       indicatorPadding: indicatorPadding ?? this.indicatorPadding,

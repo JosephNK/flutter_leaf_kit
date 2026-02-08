@@ -40,7 +40,7 @@ class LFPageRectIndicator extends StatelessWidget {
                 activeColor: activeColor,
                 inactiveColor: inactiveColor,
               ),
-            ]
+            ],
         ],
       ),
     );

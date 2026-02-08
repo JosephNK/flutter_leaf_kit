@@ -6,7 +6,8 @@ import 'package:flutter_leaf_common/leaf_common.dart';
 import 'package:permission_handler/permission_handler.dart' as ph;
 
 class LeafPermissionManager {
-  static final LeafPermissionManager _instance = LeafPermissionManager._internal();
+  static final LeafPermissionManager _instance =
+      LeafPermissionManager._internal();
   static LeafPermissionManager get shared => _instance;
   LeafPermissionManager._internal();
 
@@ -36,9 +37,7 @@ class LeafPermissionManager {
     required ph.Permission permission,
     required ValueChanged<ph.PermissionStatus> onNotPermission,
   }) async {
-    final isGranted = await isGrantedPermission(
-      permission: permission,
-    );
+    final isGranted = await isGrantedPermission(permission: permission);
     if (!isGranted) {
       return await requestPermissionStatus(
         permission: permission,
@@ -70,9 +69,7 @@ class LeafPermissionManager {
 
   // 상태만 체크 하는 함수 이기에
   // didChangeAppLifecycleState 함수 호출 하지 않음.
-  Future<bool> isGrantedPermission({
-    required ph.Permission permission,
-  }) async {
+  Future<bool> isGrantedPermission({required ph.Permission permission}) async {
     final updatePermission = await _permissionForceChange(permission);
     var isGranted = await updatePermission.isGranted;
     if (!isGranted) {

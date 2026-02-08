@@ -1,11 +1,8 @@
 part of '../accordion.dart';
 
 @Deprecated('Use LeafAccordion instead')
-typedef LFAccordionItemBuilder<T> = Widget Function(
-  BuildContext context,
-  int index,
-  T item,
-);
+typedef LFAccordionItemBuilder<T> =
+    Widget Function(BuildContext context, int index, T item);
 
 @Deprecated('Use LeafAccordion instead')
 class LFAccordion<T> extends StatelessWidget {
@@ -48,7 +45,7 @@ class LFAccordion<T> extends StatelessWidget {
               borderColor: borderColor,
               child: widget,
             );
-          })
+          }),
         ],
       ),
     );

@@ -1,10 +1,7 @@
 part of '../checkbox.dart';
 
 @Deprecated('Use LeafCheckBoxAlign instead')
-enum LFCheckBoxAlign {
-  left,
-  right,
-}
+enum LFCheckBoxAlign { left, right }
 
 @Deprecated('Use LeafCheckBox instead')
 class LFCheckBox extends StatelessWidget {
@@ -37,16 +34,12 @@ class LFCheckBox extends StatelessWidget {
   Widget build(BuildContext context) {
     final leading = this.leading;
     final mainAxisAlignment = this.mainAxisAlignment;
-    final activeIcon = this.activeIcon ??
-        const Icon(
-          Icons.check_box,
-          color: Colors.blueAccent,
-        );
-    final inactiveIcon = this.inactiveIcon ??
-        const Icon(
-          Icons.check_box_outline_blank,
-          color: Colors.grey,
-        );
+    final activeIcon =
+        this.activeIcon ??
+        const Icon(Icons.check_box, color: Colors.blueAccent);
+    final inactiveIcon =
+        this.inactiveIcon ??
+        const Icon(Icons.check_box_outline_blank, color: Colors.grey);
 
     final children = [
       value ? activeIcon : inactiveIcon,
@@ -61,10 +54,7 @@ class LFCheckBox extends StatelessWidget {
               leading ?? Container(),
               Align(
                 alignment: Alignment.topCenter,
-                child: LFText(
-                  text ?? '',
-                  style: textStyle,
-                ),
+                child: LFText(text ?? '', style: textStyle),
               ),
             ],
           ),
@@ -82,7 +72,7 @@ class LFCheckBox extends StatelessWidget {
           if (align == LFCheckBoxAlign.left)
             ...children
           else
-            ...children.reversed
+            ...children.reversed,
         ],
       ),
     );

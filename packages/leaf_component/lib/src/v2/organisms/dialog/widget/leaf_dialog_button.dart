@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import '../../../../common/theme/theme.dart';
 
 const _kDefaultButtonTextStyle = TextStyle(fontSize: 16);
-const _kDefaultButtonPadding =
-    EdgeInsets.symmetric(vertical: 10.0, horizontal: 12.0);
+const _kDefaultButtonPadding = EdgeInsets.symmetric(
+  vertical: 10.0,
+  horizontal: 12.0,
+);
 
 /// A themed OK button for dialogs.
 ///
@@ -38,15 +40,12 @@ class LeafDialogOKButton extends StatelessWidget {
     final colors = theme.colors;
     final dialogTheme = theme.dialogTheme;
 
-    final resolvedText =
-        text ?? dialogTheme?.okText ?? 'OK';
+    final resolvedText = text ?? dialogTheme?.okText ?? 'OK';
     final resolvedTextStyle =
         textStyle ?? dialogTheme?.okTextStyle ?? _kDefaultButtonTextStyle;
-    final resolvedBgColor = backgroundColor ??
-        dialogTheme?.okTextBackgroundColor ??
-        colors.primary;
-    final resolvedBorderColor =
-        borderColor ?? dialogTheme?.okTextBorderColor;
+    final resolvedBgColor =
+        backgroundColor ?? dialogTheme?.okTextBackgroundColor ?? colors.primary;
+    final resolvedBorderColor = borderColor ?? dialogTheme?.okTextBorderColor;
     final resolvedPadding =
         padding ?? dialogTheme?.okTextPadding ?? _kDefaultButtonPadding;
     final resolvedBorderRadius =
@@ -117,11 +116,11 @@ class LeafDialogCancelButton extends StatelessWidget {
     final theme = LeafTheme.of(context);
     final dialogTheme = theme.dialogTheme;
 
-    final resolvedText =
-        text ?? dialogTheme?.cancelText ?? 'Cancel';
+    final resolvedText = text ?? dialogTheme?.cancelText ?? 'Cancel';
     final resolvedTextStyle =
         textStyle ?? dialogTheme?.cancelTextStyle ?? _kDefaultButtonTextStyle;
-    final resolvedBgColor = backgroundColor ??
+    final resolvedBgColor =
+        backgroundColor ??
         dialogTheme?.cancelTextBackgroundColor ??
         Colors.grey.withValues(alpha: 0.5);
     final resolvedBorderColor =

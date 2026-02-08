@@ -35,7 +35,8 @@ class _LeafScaleAnimatedState extends State<LeafScaleAnimated>
   void initState() {
     super.initState();
 
-    _innerController = widget.controller ??
+    _innerController =
+        widget.controller ??
         LeafScaleAnimationController(
           autoAnimation: false,
           duration: widget.duration ?? const Duration(milliseconds: 250),
@@ -45,9 +46,10 @@ class _LeafScaleAnimatedState extends State<LeafScaleAnimated>
     );
     _animationController = ac;
 
-    _animation = Tween(begin: 0.0, end: 1.0).animate(
-      CurvedAnimation(parent: ac!, curve: Curves.easeInOutBack),
-    );
+    _animation = Tween(
+      begin: 0.0,
+      end: 1.0,
+    ).animate(CurvedAnimation(parent: ac!, curve: Curves.easeInOutBack));
     _animation.addStatusListener(_onAnimationStatus);
 
     WidgetsBinding.instance.addPostFrameCallback((_) async {

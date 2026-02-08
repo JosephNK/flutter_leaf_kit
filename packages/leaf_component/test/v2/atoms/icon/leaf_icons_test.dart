@@ -8,9 +8,7 @@ void main() {
   group('LeafIcons', () {
     testWidgets('renders IconData', (tester) async {
       await tester.pumpWidget(
-        wrapWithTheme(
-          const LeafIcons(Icons.home, width: 24),
-        ),
+        wrapWithTheme(const LeafIcons(Icons.home, width: 24)),
       );
 
       expect(find.byIcon(Icons.home), findsOneWidget);
@@ -18,9 +16,7 @@ void main() {
 
     testWidgets('renders Icon widget', (tester) async {
       await tester.pumpWidget(
-        wrapWithTheme(
-          const LeafIcons(Icon(Icons.star), width: 24),
-        ),
+        wrapWithTheme(const LeafIcons(Icon(Icons.star), width: 24)),
       );
 
       expect(find.byIcon(Icons.star), findsOneWidget);
@@ -39,9 +35,7 @@ void main() {
 
     testWidgets('returns SizedBox for unknown asset type', (tester) async {
       await tester.pumpWidget(
-        wrapWithTheme(
-          const LeafIcons('unknown', width: 30, height: 30),
-        ),
+        wrapWithTheme(const LeafIcons('unknown', width: 30, height: 30)),
       );
 
       expect(find.byType(SizedBox), findsWidgets);
@@ -51,9 +45,7 @@ void main() {
       const original = LeafIcons(Icons.star, color: Colors.blue, width: 24);
 
       await tester.pumpWidget(
-        wrapWithTheme(
-          LeafIcons.updateColor(original, color: Colors.green),
-        ),
+        wrapWithTheme(LeafIcons.updateColor(original, color: Colors.green)),
       );
 
       final icon = tester.widget<Icon>(find.byIcon(Icons.star));

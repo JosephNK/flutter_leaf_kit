@@ -22,8 +22,9 @@ class LFBottomTabIndex {
   }) {
     return LFBottomTabIndex(
       tabIndex: tabIndex != null ? tabIndex() : this.tabIndex,
-      activeTabIndex:
-          activeTabIndex != null ? activeTabIndex() : this.activeTabIndex,
+      activeTabIndex: activeTabIndex != null
+          ? activeTabIndex()
+          : this.activeTabIndex,
       didSelected: didSelected != null ? didSelected() : this.didSelected,
       forceActive: forceActive != null ? forceActive() : this.forceActive,
     );

@@ -24,19 +24,21 @@ void main() {
       expect(events.first, isA<LeafCalendarTodayEvent>());
     });
 
-    test('selectDate emits LeafCalendarSelectEvent with correct date',
-        () async {
-      final events = <LeafCalendarEvent>[];
-      controller.stream.listen(events.add);
+    test(
+      'selectDate emits LeafCalendarSelectEvent with correct date',
+      () async {
+        final events = <LeafCalendarEvent>[];
+        controller.stream.listen(events.add);
 
-      final target = DateTime(2024, 6, 15);
-      controller.selectDate(target);
-      await Future<void>.delayed(Duration.zero);
+        final target = DateTime(2024, 6, 15);
+        controller.selectDate(target);
+        await Future<void>.delayed(Duration.zero);
 
-      expect(events, hasLength(1));
-      final event = events.first as LeafCalendarSelectEvent;
-      expect(event.dateTime, target);
-    });
+        expect(events, hasLength(1));
+        final event = events.first as LeafCalendarSelectEvent;
+        expect(event.dateTime, target);
+      },
+    );
 
     test('goToMonth emits LeafCalendarMonthEvent with correct date', () async {
       final events = <LeafCalendarEvent>[];

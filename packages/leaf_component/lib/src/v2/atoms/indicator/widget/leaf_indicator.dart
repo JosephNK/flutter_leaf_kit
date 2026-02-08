@@ -56,14 +56,12 @@ class LeafIndicator extends StatelessWidget {
     final theme = LeafTheme.of(context);
     final indTheme = theme.indicatorTheme;
 
-    final resolvedPadding =
-        padding ?? indTheme?.padding ?? EdgeInsets.zero;
-    final resolvedStrokeWidth =
-        strokeWidth ?? indTheme?.strokeWidth ?? 2.0;
+    final resolvedPadding = padding ?? indTheme?.padding ?? EdgeInsets.zero;
+    final resolvedStrokeWidth = strokeWidth ?? indTheme?.strokeWidth ?? 2.0;
 
     final platform = Theme.of(context).platform;
-    final isApple = platform == TargetPlatform.iOS ||
-        platform == TargetPlatform.macOS;
+    final isApple =
+        platform == TargetPlatform.iOS || platform == TargetPlatform.macOS;
 
     return Semantics(
       label: 'Loading',

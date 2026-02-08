@@ -28,7 +28,10 @@ class NavigationHelper {
   }
 
   static bool getRemoveUntilIndex(
-      Route<dynamic> route, int findIndex, int count) {
+    Route<dynamic> route,
+    int findIndex,
+    int count,
+  ) {
     // final history =
     //     NavigationHistoryObserver().history.toList().reversed.toList();
     // if (findIndex == 0) {

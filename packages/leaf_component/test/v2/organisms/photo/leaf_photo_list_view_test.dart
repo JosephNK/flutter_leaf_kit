@@ -8,9 +8,7 @@ void main() {
   group('LeafPhotoListView', () {
     testWidgets('renders with null assetPath without error', (tester) async {
       await tester.pumpWidget(
-        wrapWithTheme(
-          const LeafPhotoListView(assetPath: null),
-        ),
+        wrapWithTheme(const LeafPhotoListView(assetPath: null)),
       );
       await tester.pump();
 
@@ -20,9 +18,7 @@ void main() {
 
     testWidgets('has semantics label', (tester) async {
       await tester.pumpWidget(
-        wrapWithTheme(
-          const LeafPhotoListView(assetPath: null),
-        ),
+        wrapWithTheme(const LeafPhotoListView(assetPath: null)),
       );
 
       expect(find.bySemanticsLabel('Photo grid'), findsWidgets);

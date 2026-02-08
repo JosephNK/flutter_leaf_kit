@@ -176,13 +176,11 @@ class LeafDate {
     LeafDate otherFrom,
     LeafDate otherTo, {
     Unit unit = Unit.microsecond,
-  }) =>
-      _jiffy.isBetween(otherFrom.jiffy, otherTo.jiffy, unit: unit);
+  }) => _jiffy.isBetween(otherFrom.jiffy, otherTo.jiffy, unit: unit);
 
   num diff(
     LeafDate other, {
     Unit unit = Unit.microsecond,
     bool asFloat = false,
-  }) =>
-      _jiffy.diff(other.jiffy, unit: unit, asFloat: asFloat);
+  }) => _jiffy.diff(other.jiffy, unit: unit, asFloat: asFloat);
 }

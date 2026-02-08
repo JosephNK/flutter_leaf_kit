@@ -17,8 +17,8 @@ class LeafErrorValueException implements Exception {
 
 ///////////////////////////////////////////////////////////////////////////////
 
-typedef LeafErrorValueOnWait = Future<void> Function(
-    BuildContext context, LeafErrorValue errorValue);
+typedef LeafErrorValueOnWait =
+    Future<void> Function(BuildContext context, LeafErrorValue errorValue);
 
 class LeafErrorValue extends Equatable {
   final int statusCode;
@@ -34,12 +34,7 @@ class LeafErrorValue extends Equatable {
   });
 
   @override
-  List<Object?> get props => [
-        statusCode,
-        errorCode,
-        errorMessage,
-        exception,
-      ];
+  List<Object?> get props => [statusCode, errorCode, errorMessage, exception];
 
   String get displayErrorMessage {
     final errorMessage = this.errorMessage;
@@ -85,15 +80,13 @@ class LeafErrorValue extends Equatable {
     );
   }
 
-  factory LeafErrorValue.fromException({
-    dynamic exception,
-    String? errorCode,
-  }) {
+  factory LeafErrorValue.fromException({dynamic exception, String? errorCode}) {
     if (exception is LeafErrorValue) {
       return exception;
     }
-    final errorMessage =
-        (exception != null) ? exception.toString() : 'Unknown Exception';
+    final errorMessage = (exception != null)
+        ? exception.toString()
+        : 'Unknown Exception';
     return LeafErrorValue(
       statusCode: kDefaultStatusCode,
       errorCode: errorCode,
@@ -116,7 +109,9 @@ class LeafErrorValue extends Equatable {
 
   /// Utils
 
-  static LeafErrorValue? getFirstErrorValues(List<LeafErrorValue?> errorValues) {
+  static LeafErrorValue? getFirstErrorValues(
+    List<LeafErrorValue?> errorValues,
+  ) {
     final errorValue1s = errorValues.nonNulls.toList();
     return errorValue1s.firstOrNull;
   }

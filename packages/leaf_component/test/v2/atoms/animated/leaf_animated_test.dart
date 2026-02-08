@@ -64,9 +64,7 @@ void main() {
   group('LeafExpandAnimated', () {
     testWidgets('renders child widget', (tester) async {
       await tester.pumpWidget(
-        wrapWithTheme(
-          const LeafExpandAnimated(child: Text('Expand')),
-        ),
+        wrapWithTheme(const LeafExpandAnimated(child: Text('Expand'))),
       );
 
       expect(find.text('Expand'), findsOneWidget);
@@ -74,9 +72,7 @@ void main() {
 
     testWidgets('contains SizeTransition', (tester) async {
       await tester.pumpWidget(
-        wrapWithTheme(
-          const LeafExpandAnimated(child: Text('Expand')),
-        ),
+        wrapWithTheme(const LeafExpandAnimated(child: Text('Expand'))),
       );
 
       expect(
@@ -92,9 +88,7 @@ void main() {
   group('LeafFadeAnimated', () {
     testWidgets('renders child widget', (tester) async {
       await tester.pumpWidget(
-        wrapWithTheme(
-          const LeafFadeAnimated(child: Text('Fade')),
-        ),
+        wrapWithTheme(const LeafFadeAnimated(child: Text('Fade'))),
       );
 
       expect(find.text('Fade'), findsOneWidget);
@@ -102,9 +96,7 @@ void main() {
 
     testWidgets('contains FadeTransition', (tester) async {
       await tester.pumpWidget(
-        wrapWithTheme(
-          const LeafFadeAnimated(child: Text('Fade')),
-        ),
+        wrapWithTheme(const LeafFadeAnimated(child: Text('Fade'))),
       );
 
       expect(
@@ -121,10 +113,7 @@ void main() {
     testWidgets('shows front side by default', (tester) async {
       await tester.pumpWidget(
         wrapWithTheme(
-          const LeafFlipAnimated(
-            front: Text('Front'),
-            rear: Text('Rear'),
-          ),
+          const LeafFlipAnimated(front: Text('Front'), rear: Text('Rear')),
         ),
       );
 
@@ -154,9 +143,7 @@ void main() {
   group('LeafRotateAnimated', () {
     testWidgets('renders child widget', (tester) async {
       await tester.pumpWidget(
-        wrapWithTheme(
-          const LeafRotateAnimated(child: Text('Rotate')),
-        ),
+        wrapWithTheme(const LeafRotateAnimated(child: Text('Rotate'))),
       );
 
       expect(find.text('Rotate'), findsOneWidget);
@@ -166,9 +153,7 @@ void main() {
   group('LeafScaleAnimated', () {
     testWidgets('renders child widget', (tester) async {
       await tester.pumpWidget(
-        wrapWithTheme(
-          const LeafScaleAnimated(child: Text('Scale')),
-        ),
+        wrapWithTheme(const LeafScaleAnimated(child: Text('Scale'))),
       );
 
       expect(find.text('Scale'), findsOneWidget);
@@ -176,9 +161,7 @@ void main() {
 
     testWidgets('contains ScaleTransition', (tester) async {
       await tester.pumpWidget(
-        wrapWithTheme(
-          const LeafScaleAnimated(child: Text('Scale')),
-        ),
+        wrapWithTheme(const LeafScaleAnimated(child: Text('Scale'))),
       );
 
       expect(

@@ -52,9 +52,11 @@ class LeafRadio extends StatelessWidget {
     final resolvedInactiveColor =
         inactiveColor ?? radioTheme?.inactiveColor ?? colors.inactive;
 
-    final resolvedActiveIcon = activeIcon ??
+    final resolvedActiveIcon =
+        activeIcon ??
         Icon(Icons.radio_button_checked, color: resolvedActiveColor);
-    final resolvedInactiveIcon = inactiveIcon ??
+    final resolvedInactiveIcon =
+        inactiveIcon ??
         Icon(Icons.radio_button_off, color: resolvedInactiveColor);
 
     final children = [

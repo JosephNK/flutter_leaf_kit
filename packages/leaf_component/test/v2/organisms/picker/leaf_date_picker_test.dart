@@ -8,11 +8,7 @@ void main() {
   group('LeafDatePicker', () {
     testWidgets('renders with default label and date', (tester) async {
       await tester.pumpWidget(
-        wrapWithTheme(
-          const LeafDatePicker(
-            initialDate: null,
-          ),
-        ),
+        wrapWithTheme(const LeafDatePicker(initialDate: null)),
       );
 
       expect(find.text('Date'), findsOneWidget);
@@ -20,11 +16,7 @@ void main() {
 
     testWidgets('renders with custom label', (tester) async {
       await tester.pumpWidget(
-        wrapWithTheme(
-          const LeafDatePicker(
-            label: Text('Start Date'),
-          ),
-        ),
+        wrapWithTheme(const LeafDatePicker(label: Text('Start Date'))),
       );
 
       expect(find.text('Start Date'), findsOneWidget);
@@ -32,11 +24,7 @@ void main() {
 
     testWidgets('displays formatted initial date', (tester) async {
       await tester.pumpWidget(
-        wrapWithTheme(
-          LeafDatePicker(
-            initialDate: DateTime(2025, 3, 15),
-          ),
-        ),
+        wrapWithTheme(LeafDatePicker(initialDate: DateTime(2025, 3, 15))),
       );
 
       expect(find.text('03.15 2025'), findsOneWidget);
@@ -44,11 +32,7 @@ void main() {
 
     testWidgets('expands calendar on tap', (tester) async {
       await tester.pumpWidget(
-        wrapWithTheme(
-          LeafDatePicker(
-            initialDate: DateTime(2025, 1, 10),
-          ),
-        ),
+        wrapWithTheme(LeafDatePicker(initialDate: DateTime(2025, 1, 10))),
       );
 
       // Tap to expand
@@ -61,16 +45,10 @@ void main() {
 
     testWidgets('has semantics label', (tester) async {
       await tester.pumpWidget(
-        wrapWithTheme(
-          LeafDatePicker(
-            initialDate: DateTime(2025, 6, 1),
-          ),
-        ),
+        wrapWithTheme(LeafDatePicker(initialDate: DateTime(2025, 6, 1))),
       );
 
-      final semantics = tester.widgetList<Semantics>(
-        find.byType(Semantics),
-      );
+      final semantics = tester.widgetList<Semantics>(find.byType(Semantics));
       final hasLabel = semantics.any(
         (s) => s.properties.label?.contains('Date picker') ?? false,
       );
@@ -87,9 +65,7 @@ void main() {
 
       await tester.pumpWidget(
         wrapWithTheme(
-          LeafDatePicker(
-            initialDate: DateTime(2025, 1, 1),
-          ),
+          LeafDatePicker(initialDate: DateTime(2025, 1, 1)),
           theme: theme,
         ),
       );

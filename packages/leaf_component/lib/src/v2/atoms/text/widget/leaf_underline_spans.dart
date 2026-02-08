@@ -12,13 +12,9 @@ List<InlineSpan> buildUnderlineSpans({
   final fontSize = style.fontSize ?? 14.0;
   final lineHeight = style.height ?? 1.13;
   final height = fontSize * lineHeight;
-  final marginBottom =
-      lineHeight > 1.13 ? (lineHeight - 1.13) * fontSize : 0.0;
+  final marginBottom = lineHeight > 1.13 ? (lineHeight - 1.13) * fontSize : 0.0;
 
-  final charStyle = style.copyWith(
-    height: 1,
-    decoration: TextDecoration.none,
-  );
+  final charStyle = style.copyWith(height: 1, decoration: TextDecoration.none);
 
   return [
     for (int i = 0; i < text.length; i++)

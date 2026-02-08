@@ -1,10 +1,7 @@
 part of '../radio.dart';
 
 @Deprecated('Use LeafRadioAlign instead')
-enum LFRadioAlign {
-  left,
-  right,
-}
+enum LFRadioAlign { left, right }
 
 @Deprecated('Use LeafRadio instead')
 class LFRadio extends StatelessWidget {
@@ -35,16 +32,12 @@ class LFRadio extends StatelessWidget {
   Widget build(BuildContext context) {
     final leading = this.leading;
     final mainAxisAlignment = this.mainAxisAlignment;
-    final activeIcon = this.activeIcon ??
-        const Icon(
-          Icons.radio_button_checked,
-          color: Colors.blueAccent,
-        );
-    final inactiveIcon = this.inactiveIcon ??
-        const Icon(
-          Icons.radio_button_off,
-          color: Colors.grey,
-        );
+    final activeIcon =
+        this.activeIcon ??
+        const Icon(Icons.radio_button_checked, color: Colors.blueAccent);
+    final inactiveIcon =
+        this.inactiveIcon ??
+        const Icon(Icons.radio_button_off, color: Colors.grey);
 
     final children = [
       value ? activeIcon : inactiveIcon,
@@ -55,10 +48,7 @@ class LFRadio extends StatelessWidget {
           child: Row(
             children: [
               leading ?? Container(),
-              LFText(
-                text ?? '',
-                style: textStyle,
-              ),
+              LFText(text ?? '', style: textStyle),
             ],
           ),
         ),
@@ -72,7 +62,7 @@ class LFRadio extends StatelessWidget {
       child: Row(
         mainAxisAlignment: mainAxisAlignment,
         children: [
-          if (align == LFRadioAlign.left) ...children else ...children.reversed
+          if (align == LFRadioAlign.left) ...children else ...children.reversed,
         ],
       ),
     );

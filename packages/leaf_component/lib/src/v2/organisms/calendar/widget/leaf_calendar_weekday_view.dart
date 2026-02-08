@@ -38,9 +38,13 @@ class LeafCalendarWeekdayView extends StatelessWidget {
     final labels = weekdays ?? _kDefaultWeekdays;
     final resolvedHolidayColor =
         holidayColor ?? calendarTheme?.holidayColor ?? colors.error;
-    final baseStyle = weekdayTextStyle ??
+    final baseStyle =
+        weekdayTextStyle ??
         calendarTheme?.dayTextStyle ??
-        TextStyle(fontSize: 13.0, color: colors.onSurface.withValues(alpha: 0.6));
+        TextStyle(
+          fontSize: 13.0,
+          color: colors.onSurface.withValues(alpha: 0.6),
+        );
 
     return Semantics(
       label: 'Weekday headers',

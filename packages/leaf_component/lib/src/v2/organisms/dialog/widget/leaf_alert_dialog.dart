@@ -52,10 +52,7 @@ class LeafAlertDialog {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const SizedBox(height: 24.0),
-                      LeafDialogTitle(
-                        text: title,
-                        textStyle: titleStyle,
-                      ),
+                      LeafDialogTitle(text: title, textStyle: titleStyle),
                     ],
                   ),
                 ),
@@ -71,10 +68,7 @@ class LeafAlertDialog {
               ],
             );
           } else {
-            titleWidget = LeafDialogTitle(
-              text: title,
-              textStyle: titleStyle,
-            );
+            titleWidget = LeafDialogTitle(text: title, textStyle: titleStyle);
           }
         }
 
@@ -108,9 +102,7 @@ class LeafAlertDialog {
                 : null,
             actions: [
               if (expandableButton)
-                Row(
-                  children: [Expanded(child: okButton)],
-                )
+                Row(children: [Expanded(child: okButton)])
               else
                 okButton,
             ],
@@ -152,10 +144,7 @@ class LeafAlertDialog {
       builder: (BuildContext ctx) {
         Widget? titleWidget;
         if (title != null && title.isNotEmpty) {
-          titleWidget = LeafDialogTitle(
-            text: title,
-            textStyle: titleStyle,
-          );
+          titleWidget = LeafDialogTitle(text: title, textStyle: titleStyle);
         }
 
         final messageWidget = LeafDialogMessage(

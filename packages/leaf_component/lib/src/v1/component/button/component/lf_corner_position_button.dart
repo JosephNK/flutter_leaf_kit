@@ -5,10 +5,7 @@ class LFCornerPosition {
   final double show;
   final double hide;
 
-  LFCornerPosition({
-    this.show = 0.0,
-    this.hide = 0.0,
-  });
+  LFCornerPosition({this.show = 0.0, this.hide = 0.0});
 }
 
 @Deprecated('V1 component deprecated. Use V2 components instead.')
@@ -72,7 +69,8 @@ class LFCornerPositionButton extends StatelessWidget {
 
   Widget _buildButton(BuildContext context) {
     return Container(
-      decoration: decoration ??
+      decoration:
+          decoration ??
           BoxDecoration(
             borderRadius: const BorderRadius.all(Radius.circular(2)),
             border: Border.all(color: const Color(0xffdee0e8), width: 1),
@@ -82,7 +80,7 @@ class LFCornerPositionButton extends StatelessWidget {
                 offset: Offset(0, 2),
                 blurRadius: 4,
                 spreadRadius: 0,
-              )
+              ),
             ],
             color: const Color(0xfffbfbfc),
           ),
@@ -90,7 +88,8 @@ class LFCornerPositionButton extends StatelessWidget {
         showLoading: false,
         onTap: onTap,
         child: Center(
-          child: child ??
+          child:
+              child ??
               Icon(
                 Icons.arrow_upward_sharp,
                 color: Colors.black.withValues(alpha: 0.6),

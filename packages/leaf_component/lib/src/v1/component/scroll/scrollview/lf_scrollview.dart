@@ -49,47 +49,47 @@ class _LFScrollViewState extends State<LFScrollView> with LFScrollControlMixin {
     _streamSubscription = widget.controller?.streamController?.stream
         .asBroadcastStream()
         .listen((event) async {
-      final type = event.type;
-      final animated = event.animated;
-      final position = event.position;
-      final duration = event.duration ?? const Duration(milliseconds: 300);
-      final mContext = context;
-      switch (type) {
-        case LFScrollControllerEventType.scrollToPosition:
-          setClampingPhysics();
-          if (mContext.mounted) {
-            await scrollToPosition(
-              mContext,
-              animated: animated,
-              value: position,
-              animationDuration: duration,
-            );
+          final type = event.type;
+          final animated = event.animated;
+          final position = event.position;
+          final duration = event.duration ?? const Duration(milliseconds: 300);
+          final mContext = context;
+          switch (type) {
+            case LFScrollControllerEventType.scrollToPosition:
+              setClampingPhysics();
+              if (mContext.mounted) {
+                await scrollToPosition(
+                  mContext,
+                  animated: animated,
+                  value: position,
+                  animationDuration: duration,
+                );
+              }
+              resetPhysics();
+              break;
+            case LFScrollControllerEventType.scrollToTop:
+              if (mContext.mounted) {
+                await scrollToTop(
+                  mContext,
+                  animated: animated,
+                  animationDuration: duration,
+                );
+              }
+              break;
+            case LFScrollControllerEventType.scrollToBottom:
+              if (mContext.mounted) {
+                await scrollToBottom(
+                  mContext,
+                  animated: animated,
+                  animationDuration: duration,
+                );
+              }
+              break;
+            case LFScrollControllerEventType.loading:
+              setLoading(animated);
+              break;
           }
-          resetPhysics();
-          break;
-        case LFScrollControllerEventType.scrollToTop:
-          if (mContext.mounted) {
-            await scrollToTop(
-              mContext,
-              animated: animated,
-              animationDuration: duration,
-            );
-          }
-          break;
-        case LFScrollControllerEventType.scrollToBottom:
-          if (mContext.mounted) {
-            await scrollToBottom(
-              mContext,
-              animated: animated,
-              animationDuration: duration,
-            );
-          }
-          break;
-        case LFScrollControllerEventType.loading:
-          setLoading(animated);
-          break;
-      }
-    });
+        });
   }
 
   @override

@@ -18,9 +18,7 @@ void main() {
 
     testWidgets('renders empty text field', (tester) async {
       await tester.pumpWidget(
-        wrapWithTheme(
-          LeafTextField(controller: controller),
-        ),
+        wrapWithTheme(LeafTextField(controller: controller)),
       );
 
       expect(find.byType(TextField), findsOneWidget);
@@ -29,10 +27,7 @@ void main() {
     testWidgets('displays placeholder text', (tester) async {
       await tester.pumpWidget(
         wrapWithTheme(
-          LeafTextField(
-            controller: controller,
-            placeHolder: 'Enter text',
-          ),
+          LeafTextField(controller: controller, placeHolder: 'Enter text'),
         ),
       );
 
@@ -77,9 +72,7 @@ void main() {
 
     testWidgets('programmatic setText via controller', (tester) async {
       await tester.pumpWidget(
-        wrapWithTheme(
-          LeafTextField(controller: controller),
-        ),
+        wrapWithTheme(LeafTextField(controller: controller)),
       );
 
       controller.text = 'Programmatic';

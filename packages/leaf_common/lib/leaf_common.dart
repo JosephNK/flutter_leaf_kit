@@ -17,5 +17,4 @@ export 'src/exception/index.dart';
 export 'src/extension/index.dart';
 export 'src/logger/index.dart';
 export 'src/model/index.dart';
-export 'src/types/index.dart';
 export 'src/utils/index.dart';

@@ -6,17 +6,16 @@ import '../controller/leaf_bottom_tab_bar_controller.dart';
 import '../model/leaf_bottom_tab_item.dart';
 
 /// Callback fired when a tab item is tapped.
-typedef LeafBottomTabBarOnTap = void Function(
-  int selectedIndex,
-  bool isAlreadyActive,
-);
+typedef LeafBottomTabBarOnTap =
+    void Function(int selectedIndex, bool isAlreadyActive);
 
 /// Callback that determines whether a tab selection should be accepted.
-typedef LeafBottomTabBarOnSelect = Future<bool> Function(
-  int selectedIndex,
-  int? previousIndex,
-  bool isAlreadyActive,
-);
+typedef LeafBottomTabBarOnSelect =
+    Future<bool> Function(
+      int selectedIndex,
+      int? previousIndex,
+      bool isAlreadyActive,
+    );
 
 /// A themed bottom navigation tab bar.
 ///
@@ -180,15 +179,15 @@ class _TabItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final badgeAlignment =
-        item.badgeAlignment ?? const Alignment(1.0, -1.4);
+    final badgeAlignment = item.badgeAlignment ?? const Alignment(1.0, -1.4);
 
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
       onTap: onTap,
       child: Container(
-        constraints:
-            const BoxConstraints(minHeight: kBottomNavigationBarHeight),
+        constraints: const BoxConstraints(
+          minHeight: kBottomNavigationBarHeight,
+        ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -218,7 +217,9 @@ class _TabItem extends StatelessWidget {
   }
 
   Widget _buildIcon() {
-    final icon = isActive ? (item.activeIcon ?? item.defaultIcon) : item.defaultIcon;
+    final icon = isActive
+        ? (item.activeIcon ?? item.defaultIcon)
+        : item.defaultIcon;
     if (icon == null) return const SizedBox.shrink();
 
     if (icon is Icon) {
@@ -234,15 +235,15 @@ class _TabItem extends StatelessWidget {
 
     final style = isActive
         ? (item.activeLabelStyle ??
-            labelStyle?.copyWith(color: selectedColor) ??
-            DefaultTextStyle.of(context)
-                .style
-                .copyWith(color: selectedColor, fontSize: 12.0))
+              labelStyle?.copyWith(color: selectedColor) ??
+              DefaultTextStyle.of(
+                context,
+              ).style.copyWith(color: selectedColor, fontSize: 12.0))
         : (item.defaultLabelStyle ??
-            labelStyle?.copyWith(color: unselectedColor) ??
-            DefaultTextStyle.of(context)
-                .style
-                .copyWith(color: unselectedColor, fontSize: 12.0));
+              labelStyle?.copyWith(color: unselectedColor) ??
+              DefaultTextStyle.of(
+                context,
+              ).style.copyWith(color: unselectedColor, fontSize: 12.0));
 
     return Text(label, style: style);
   }

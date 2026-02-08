@@ -6,11 +6,7 @@ class LFBottomSheetItem<T> {
   String title;
   bool enabled;
 
-  LFBottomSheetItem({
-    this.key,
-    required this.title,
-    this.enabled = true,
-  }) {
+  LFBottomSheetItem({this.key, required this.title, this.enabled = true}) {
     // key = key ?? UniqueKey();
   }
 }

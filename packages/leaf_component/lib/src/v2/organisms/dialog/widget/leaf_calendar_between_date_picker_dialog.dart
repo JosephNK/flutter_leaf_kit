@@ -29,12 +29,10 @@ class LeafCalendarBetweenDatePickerDialog {
     Color? okTextBackgroundColor,
     Color? okTextBorderColor,
     EdgeInsets? okTextPadding,
-    String validStartMessage =
-        'Please set the start date before the end date',
-    String validEndMessage =
-        'Please set the end date after the start date',
+    String validStartMessage = 'Please set the start date before the end date',
+    String validEndMessage = 'Please set the end date after the start date',
     void Function(LeafCalendarBetweenPickerSelect select, DateTime dateTime)?
-        onOK,
+    onOK,
   }) async {
     return showDialog(
       context: context,
@@ -81,7 +79,10 @@ class _BetweenDatePickerContent extends StatefulWidget {
   final String validStartMessage;
   final String validEndMessage;
   final void Function(
-      LeafCalendarBetweenPickerSelect select, DateTime dateTime)? onOK;
+    LeafCalendarBetweenPickerSelect select,
+    DateTime dateTime,
+  )?
+  onOK;
 
   const _BetweenDatePickerContent({
     required this.pickerSelect,
@@ -98,10 +99,8 @@ class _BetweenDatePickerContent extends StatefulWidget {
     this.okTextBackgroundColor,
     this.okTextBorderColor,
     this.okTextPadding,
-    this.validStartMessage =
-        'Please set the start date before the end date',
-    this.validEndMessage =
-        'Please set the end date after the start date',
+    this.validStartMessage = 'Please set the start date before the end date',
+    this.validEndMessage = 'Please set the end date after the start date',
     this.onOK,
   });
 
@@ -110,8 +109,7 @@ class _BetweenDatePickerContent extends StatefulWidget {
       _BetweenDatePickerContentState();
 }
 
-class _BetweenDatePickerContentState
-    extends State<_BetweenDatePickerContent> {
+class _BetweenDatePickerContentState extends State<_BetweenDatePickerContent> {
   late DateTime _startDate;
   late DateTime _endDate;
   late DateTime _initialDate;
@@ -138,15 +136,12 @@ class _BetweenDatePickerContentState
     final dialogTheme = theme.dialogTheme;
 
     final resolvedActiveColor = widget.activeColor ?? colors.primary;
-    final resolvedInactiveColor =
-        widget.inactiveColor ?? colors.inactive;
+    final resolvedInactiveColor = widget.inactiveColor ?? colors.inactive;
     final resolvedBorderRadius =
         dialogTheme?.borderRadius ?? BorderRadius.circular(20.0);
 
-    final firstDate =
-        widget.firstDate ?? DateTime(_initialDate.year - 10);
-    final lastDate =
-        widget.lastDate ?? DateTime(_initialDate.year + 10);
+    final firstDate = widget.firstDate ?? DateTime(_initialDate.year - 10);
+    final lastDate = widget.lastDate ?? DateTime(_initialDate.year + 10);
 
     final showHeader =
         widget.pickerSelect != LeafCalendarBetweenPickerSelect.none;
@@ -154,8 +149,10 @@ class _BetweenDatePickerContentState
     return Semantics(
       label: 'Between date picker dialog',
       child: Dialog(
-        insetPadding:
-            const EdgeInsets.symmetric(horizontal: 40.0, vertical: 80.0),
+        insetPadding: const EdgeInsets.symmetric(
+          horizontal: 40.0,
+          vertical: 80.0,
+        ),
         shape: RoundedRectangleBorder(borderRadius: resolvedBorderRadius),
         elevation: 4.0,
         backgroundColor: colors.surface,
@@ -224,9 +221,9 @@ class _BetweenDatePickerContentState
               Flexible(
                 child: Theme(
                   data: Theme.of(context).copyWith(
-                    colorScheme: Theme.of(context).colorScheme.copyWith(
-                          primary: resolvedActiveColor,
-                        ),
+                    colorScheme: Theme.of(
+                      context,
+                    ).colorScheme.copyWith(primary: resolvedActiveColor),
                   ),
                   child: CalendarDatePicker(
                     initialDate: _initialDate,
@@ -290,17 +287,17 @@ class _BetweenDatePickerContentState
       case LeafCalendarBetweenPickerSelect.none:
       case LeafCalendarBetweenPickerSelect.start:
         if (_startDate.isAfter(_endDate)) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(widget.validStartMessage)),
-          );
+          ScaffoldMessenger.of(
+            context,
+          ).showSnackBar(SnackBar(content: Text(widget.validStartMessage)));
           return;
         }
         resultDate = _startDate;
       case LeafCalendarBetweenPickerSelect.end:
         if (_endDate.isBefore(_startDate)) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(widget.validEndMessage)),
-          );
+          ScaffoldMessenger.of(
+            context,
+          ).showSnackBar(SnackBar(content: Text(widget.validEndMessage)));
           return;
         }
         resultDate = _endDate;

@@ -8,11 +8,7 @@ void main() {
   group('LeafInkWell', () {
     testWidgets('renders child', (tester) async {
       await tester.pumpWidget(
-        wrapWithTheme(
-          const LeafInkWell(
-            child: Text('Tap me'),
-          ),
-        ),
+        wrapWithTheme(const LeafInkWell(child: Text('Tap me'))),
       );
 
       expect(find.text('Tap me'), findsOneWidget);
@@ -23,10 +19,7 @@ void main() {
 
       await tester.pumpWidget(
         wrapWithTheme(
-          LeafInkWell(
-            onTap: () => tapped = true,
-            child: const Text('Tap me'),
-          ),
+          LeafInkWell(onTap: () => tapped = true, child: const Text('Tap me')),
         ),
       );
 
@@ -69,10 +62,12 @@ void main() {
       );
 
       final container = tester.widget<Container>(
-        find.ancestor(
-          of: find.byType(Material),
-          matching: find.byType(Container),
-        ).first,
+        find
+            .ancestor(
+              of: find.byType(Material),
+              matching: find.byType(Container),
+            )
+            .first,
       );
 
       expect(container.decoration, isA<BoxDecoration>());

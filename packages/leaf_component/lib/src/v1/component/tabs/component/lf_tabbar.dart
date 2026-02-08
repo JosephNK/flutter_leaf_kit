@@ -39,17 +39,14 @@ class LFTabBar extends StatelessWidget {
       unselectedLabelColor: unselectedLabelColor ?? Colors.black54,
       indicatorColor: indicatorColor ?? Colors.blueAccent,
       dividerColor: dividerColor,
-      labelStyle: labelStyle ??
-          const TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 16.0,
-          ),
-      unselectedLabelStyle: unselectedLabelStyle ??
-          const TextStyle(
-            fontWeight: FontWeight.normal,
-            fontSize: 16.0,
-          ),
-      indicatorPadding: indicatorPadding ??
+      labelStyle:
+          labelStyle ??
+          const TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0),
+      unselectedLabelStyle:
+          unselectedLabelStyle ??
+          const TextStyle(fontWeight: FontWeight.normal, fontSize: 16.0),
+      indicatorPadding:
+          indicatorPadding ??
           const EdgeInsets.symmetric(vertical: 0.0, horizontal: 16.0),
       labelPadding: labelPadding,
       isScrollable: isScrollable,

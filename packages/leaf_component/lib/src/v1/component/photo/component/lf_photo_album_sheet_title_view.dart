@@ -58,10 +58,8 @@ class _LFPhotoAlbumSheetTitleViewState extends State<LFPhotoAlbumSheetTitleView>
           context,
           items: _assetPathList
               .map(
-                (item) => LFBottomSheetItem<String>(
-                  key: item.id,
-                  title: item.name,
-                ),
+                (item) =>
+                    LFBottomSheetItem<String>(key: item.id, title: item.name),
               )
               .toList(),
           onTap: (item) {
@@ -86,10 +84,7 @@ class _LFPhotoAlbumSheetTitleViewState extends State<LFPhotoAlbumSheetTitleView>
         children: [
           LFText(
             _selectedAssetPath?.name ?? '',
-            style: widget.textStyle ??
-                const TextStyle(
-                  fontSize: 18.0,
-                ),
+            style: widget.textStyle ?? const TextStyle(fontSize: 18.0),
           ),
           const Icon(Icons.arrow_drop_down_sharp, size: 30.0),
         ],

@@ -143,11 +143,11 @@ class _ChipPickerContentState extends State<_ChipPickerContent> {
     final onOK = widget.onOK;
 
     return Dialog(
-      insetPadding:
-          const EdgeInsets.symmetric(horizontal: 40.0, vertical: 80.0),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(4.0),
+      insetPadding: const EdgeInsets.symmetric(
+        horizontal: 40.0,
+        vertical: 80.0,
       ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4.0)),
       elevation: 4.0,
       backgroundColor: Colors.white,
       child: Padding(
@@ -161,10 +161,7 @@ class _ChipPickerContentState extends State<_ChipPickerContent> {
               visible: isNotEmpty(title),
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: LFDialogTitle(
-                  text: title,
-                  textStyle: titleStyle,
-                ),
+                child: LFDialogTitle(text: title, textStyle: titleStyle),
               ),
             ),
             const Divider(),
@@ -214,7 +211,7 @@ class _ChipPickerContentState extends State<_ChipPickerContent> {
                   },
                 ),
               ],
-            )
+            ),
           ],
         ),
       ),

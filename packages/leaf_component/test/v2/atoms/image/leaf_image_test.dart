@@ -10,9 +10,7 @@ void main() {
   group('LeafAssetImage', () {
     testWidgets('shows error icon for null uri', (tester) async {
       await tester.pumpWidget(
-        wrapWithTheme(
-          const LeafAssetImage(width: 100, height: 100),
-        ),
+        wrapWithTheme(const LeafAssetImage(width: 100, height: 100)),
       );
 
       expect(find.byIcon(Icons.broken_image), findsOneWidget);
@@ -21,11 +19,7 @@ void main() {
     testWidgets('shows error icon for empty uri', (tester) async {
       await tester.pumpWidget(
         wrapWithTheme(
-          LeafAssetImage(
-            uri: Uri.parse(''),
-            width: 100,
-            height: 100,
-          ),
+          LeafAssetImage(uri: Uri.parse(''), width: 100, height: 100),
         ),
       );
 
@@ -50,9 +44,7 @@ void main() {
   group('LeafMemoryImage', () {
     testWidgets('shows error icon for null bytes', (tester) async {
       await tester.pumpWidget(
-        wrapWithTheme(
-          const LeafMemoryImage(width: 100, height: 100),
-        ),
+        wrapWithTheme(const LeafMemoryImage(width: 100, height: 100)),
       );
 
       expect(find.byIcon(Icons.broken_image), findsOneWidget);
@@ -61,11 +53,7 @@ void main() {
     testWidgets('shows error icon for empty bytes', (tester) async {
       await tester.pumpWidget(
         wrapWithTheme(
-          LeafMemoryImage(
-            bytes: Uint8List(0),
-            width: 100,
-            height: 100,
-          ),
+          LeafMemoryImage(bytes: Uint8List(0), width: 100, height: 100),
         ),
       );
 
@@ -90,9 +78,7 @@ void main() {
   group('LeafCacheNetworkImage', () {
     testWidgets('shows error icon for empty url', (tester) async {
       await tester.pumpWidget(
-        wrapWithTheme(
-          const LeafCacheNetworkImage(width: 100, height: 100),
-        ),
+        wrapWithTheme(const LeafCacheNetworkImage(width: 100, height: 100)),
       );
 
       expect(find.byIcon(Icons.broken_image), findsOneWidget);
@@ -132,11 +118,7 @@ void main() {
     testWidgets('applies border radius via ClipRRect', (tester) async {
       await tester.pumpWidget(
         wrapWithTheme(
-          const LeafCacheImage(
-            width: 100,
-            height: 100,
-            borderRadius: 8.0,
-          ),
+          const LeafCacheImage(width: 100, height: 100, borderRadius: 8.0),
         ),
       );
 
@@ -173,11 +155,7 @@ void main() {
 
   group('LeafCircleAvatarImage', () {
     testWidgets('renders with ClipOval', (tester) async {
-      await tester.pumpWidget(
-        wrapWithTheme(
-          const LeafCircleAvatarImage(),
-        ),
-      );
+      await tester.pumpWidget(wrapWithTheme(const LeafCircleAvatarImage()));
 
       expect(find.byType(ClipOval), findsOneWidget);
     });
@@ -197,15 +175,9 @@ void main() {
     });
 
     testWidgets('has avatar semantics', (tester) async {
-      await tester.pumpWidget(
-        wrapWithTheme(
-          const LeafCircleAvatarImage(),
-        ),
-      );
+      await tester.pumpWidget(wrapWithTheme(const LeafCircleAvatarImage()));
 
-      final semantics = tester.widgetList<Semantics>(
-        find.byType(Semantics),
-      );
+      final semantics = tester.widgetList<Semantics>(find.byType(Semantics));
       final hasAvatar = semantics.any(
         (s) => s.properties.label == 'Avatar image',
       );
@@ -213,11 +185,7 @@ void main() {
     });
 
     testWidgets('shows error for null sources', (tester) async {
-      await tester.pumpWidget(
-        wrapWithTheme(
-          const LeafCircleAvatarImage(),
-        ),
-      );
+      await tester.pumpWidget(wrapWithTheme(const LeafCircleAvatarImage()));
 
       expect(find.byIcon(Icons.broken_image), findsOneWidget);
     });

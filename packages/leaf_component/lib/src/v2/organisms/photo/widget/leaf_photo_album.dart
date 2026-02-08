@@ -114,8 +114,7 @@ class _LeafPhotoAlbumState extends State<LeafPhotoAlbum>
           children: [
             Text(
               albumName,
-              style: widget.titleTextStyle ??
-                  const TextStyle(fontSize: 18.0),
+              style: widget.titleTextStyle ?? const TextStyle(fontSize: 18.0),
             ),
             Icon(
               _isExpanded

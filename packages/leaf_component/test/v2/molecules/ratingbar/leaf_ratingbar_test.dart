@@ -8,12 +8,7 @@ void main() {
   group('LeafRatingBar', () {
     testWidgets('renders star icons', (tester) async {
       await tester.pumpWidget(
-        wrapWithTheme(
-          LeafRatingBar(
-            itemCount: 5,
-            onRatingUpdate: (_) {},
-          ),
-        ),
+        wrapWithTheme(LeafRatingBar(itemCount: 5, onRatingUpdate: (_) {})),
       );
 
       // Should find star icons (empty stars for 0 rating)
@@ -69,12 +64,8 @@ void main() {
         ),
       );
 
-      final semantics = tester.widgetList<Semantics>(
-        find.byType(Semantics),
-      );
-      final hasRating = semantics.any(
-        (s) => s.properties.label == 'Rating',
-      );
+      final semantics = tester.widgetList<Semantics>(find.byType(Semantics));
+      final hasRating = semantics.any((s) => s.properties.label == 'Rating');
       expect(hasRating, isTrue);
     });
 

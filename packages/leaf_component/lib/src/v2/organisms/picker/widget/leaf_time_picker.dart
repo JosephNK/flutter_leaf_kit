@@ -77,11 +77,13 @@ class _LeafTimePickerState extends State<LeafTimePicker> {
     final resolvedActiveColor =
         widget.activeColor ?? componentTheme?.activeColor ?? colors.primary;
     final resolvedBg =
-        widget.backgroundColor ?? componentTheme?.backgroundColor ?? colors.surface;
+        widget.backgroundColor ??
+        componentTheme?.backgroundColor ??
+        colors.surface;
     final resolvedBorderRadius =
         widget.borderRadius ?? BorderRadius.circular(12.0);
-    final resolvedTimeStyle = widget.timeTextStyle ??
-        componentTheme?.headerTextStyle;
+    final resolvedTimeStyle =
+        widget.timeTextStyle ?? componentTheme?.headerTextStyle;
 
     final borderColor = _isExpanded ? resolvedActiveColor : Colors.transparent;
 

@@ -19,11 +19,10 @@ class LeafBottomTabBarController extends ChangeNotifier {
   int _previousIndex;
   List<LeafBottomTabItem> _tabItems;
 
-  LeafBottomTabBarController({
-    int initialIndex = 0,
-  })  : _selectedIndex = initialIndex,
-        _previousIndex = initialIndex,
-        _tabItems = const [];
+  LeafBottomTabBarController({int initialIndex = 0})
+    : _selectedIndex = initialIndex,
+      _previousIndex = initialIndex,
+      _tabItems = const [];
 
   /// The currently selected tab index.
   int get selectedIndex => _selectedIndex;
@@ -44,10 +43,7 @@ class LeafBottomTabBarController extends ChangeNotifier {
   }
 
   /// Initialises or replaces all tab items and sets the active index.
-  void setItems(
-    List<LeafBottomTabItem> items, {
-    required int selectedIndex,
-  }) {
+  void setItems(List<LeafBottomTabItem> items, {required int selectedIndex}) {
     _selectedIndex = selectedIndex;
     _previousIndex = selectedIndex;
     _tabItems = _rebuildItems(items, selectedIndex: selectedIndex);

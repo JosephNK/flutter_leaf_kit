@@ -84,7 +84,8 @@ class _CalendarDatePickerContentState
 
   @override
   Widget build(BuildContext context) {
-    final activeColor = widget.activeColor ??
+    final activeColor =
+        widget.activeColor ??
         LFComponentConfigure.shared.pickerCalendar?.activeColor ??
         Colors.blueAccent;
     final okText = widget.okText;
@@ -94,11 +95,11 @@ class _CalendarDatePickerContentState
     final okTextPadding = widget.okTextPadding;
 
     return Dialog(
-      insetPadding:
-          const EdgeInsets.symmetric(horizontal: 40.0, vertical: 80.0),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(20.0),
+      insetPadding: const EdgeInsets.symmetric(
+        horizontal: 40.0,
+        vertical: 80.0,
       ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
       elevation: 4.0,
       backgroundColor: Colors.white,
       child: Padding(
@@ -117,8 +118,8 @@ class _CalendarDatePickerContentState
               onMonthOnTap: (month) {},
               onMonthChanged:
                   (startDateTime, endDateTime, monthDate, selectedDate) {
-                _updateSelectDate(selectedDate);
-              },
+                    _updateSelectDate(selectedDate);
+                  },
               onDateSelected: (selectedDate) {
                 _updateSelectDate(selectedDate);
               },
@@ -147,7 +148,7 @@ class _CalendarDatePickerContentState
                   ),
                 ],
               ),
-            )
+            ),
           ],
         ),
       ),

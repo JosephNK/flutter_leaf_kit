@@ -269,14 +269,16 @@ class _LFTextFieldState extends State<LFTextField> {
         disabledBackgroundColor ?? Colors.grey.withValues(alpha: 0.5);
 
     /// Colors
-    var inputBackgroundColor =
-        (disabled || readOnly) ? disabledBackground1Color : backgroundColor;
+    var inputBackgroundColor = (disabled || readOnly)
+        ? disabledBackground1Color
+        : backgroundColor;
     if (_hasFocus) {
       //
     }
     var inputPlaceHolderColor = placeHolderColor ?? Colors.grey;
-    var inputTextColor =
-        disabled ? disabledTextColor ?? Colors.grey : textColor ?? Colors.black;
+    var inputTextColor = disabled
+        ? disabledTextColor ?? Colors.grey
+        : textColor ?? Colors.black;
     var inputBorderColor = borderColor ?? Colors.grey.withValues(alpha: 0.2);
     var inputFocusBorderColor = focusBorderColor ?? inputBorderColor;
     var inputErrorBorderColor = errorBorderColor ?? Colors.red;
@@ -285,11 +287,9 @@ class _LFTextFieldState extends State<LFTextField> {
         : clearIconColor ?? Colors.black.withValues(alpha: 0.6);
 
     /// TextStyle
-    final textFieldTextStyle = textStyle ??
-        const TextStyle(
-          fontWeight: FontWeight.normal,
-          fontSize: 16.0,
-        );
+    final textFieldTextStyle =
+        textStyle ??
+        const TextStyle(fontWeight: FontWeight.normal, fontSize: 16.0);
 
     /// Widgets
     Widget clearButtonWithHandler() {
@@ -316,8 +316,8 @@ class _LFTextFieldState extends State<LFTextField> {
           suffixIcon ?? Container(),
           enableClearButton
               ? !_showClearButton
-                  ? Container()
-                  : clearButtonWithHandler()
+                    ? Container()
+                    : clearButtonWithHandler()
               : Container(),
         ],
       ),
@@ -381,69 +381,77 @@ class _LFTextFieldState extends State<LFTextField> {
         enabledBorder: onlyUnderline
             ? UnderlineInputBorder(
                 borderSide: BorderSide(
-                    color: (borderWidth == 0.0)
-                        ? Colors.transparent
-                        : inputBorderColor,
-                    width: borderWidth),
+                  color: (borderWidth == 0.0)
+                      ? Colors.transparent
+                      : inputBorderColor,
+                  width: borderWidth,
+                ),
                 borderRadius: BorderRadius.circular(borderRadius),
               )
             : OutlineInputBorder(
                 borderSide: BorderSide(
-                    color: (borderWidth == 0.0)
-                        ? Colors.transparent
-                        : inputBorderColor,
-                    width: borderWidth),
+                  color: (borderWidth == 0.0)
+                      ? Colors.transparent
+                      : inputBorderColor,
+                  width: borderWidth,
+                ),
                 borderRadius: BorderRadius.circular(borderRadius),
               ),
         focusedBorder: onlyUnderline
             ? UnderlineInputBorder(
                 borderSide: BorderSide(
-                    color: (borderWidth == 0.0)
-                        ? Colors.transparent
-                        : inputFocusBorderColor,
-                    width: borderWidth),
+                  color: (borderWidth == 0.0)
+                      ? Colors.transparent
+                      : inputFocusBorderColor,
+                  width: borderWidth,
+                ),
                 borderRadius: BorderRadius.circular(borderRadius),
               )
             : OutlineInputBorder(
                 borderSide: BorderSide(
-                    color: (borderWidth == 0.0)
-                        ? Colors.transparent
-                        : inputFocusBorderColor,
-                    width: borderWidth),
+                  color: (borderWidth == 0.0)
+                      ? Colors.transparent
+                      : inputFocusBorderColor,
+                  width: borderWidth,
+                ),
                 borderRadius: BorderRadius.circular(borderRadius),
               ),
         errorBorder: onlyUnderline
             ? UnderlineInputBorder(
                 borderSide: BorderSide(
-                    color: (borderWidth == 0.0)
-                        ? Colors.transparent
-                        : inputErrorBorderColor,
-                    width: borderWidth),
+                  color: (borderWidth == 0.0)
+                      ? Colors.transparent
+                      : inputErrorBorderColor,
+                  width: borderWidth,
+                ),
                 borderRadius: BorderRadius.circular(borderRadius),
               )
             : OutlineInputBorder(
                 borderSide: BorderSide(
-                    color: (borderWidth == 0.0)
-                        ? Colors.transparent
-                        : inputErrorBorderColor,
-                    width: borderWidth),
+                  color: (borderWidth == 0.0)
+                      ? Colors.transparent
+                      : inputErrorBorderColor,
+                  width: borderWidth,
+                ),
                 borderRadius: BorderRadius.circular(borderRadius),
               ),
         focusedErrorBorder: onlyUnderline
             ? UnderlineInputBorder(
                 borderSide: BorderSide(
-                    color: (borderWidth == 0.0)
-                        ? Colors.transparent
-                        : inputErrorBorderColor,
-                    width: borderWidth),
+                  color: (borderWidth == 0.0)
+                      ? Colors.transparent
+                      : inputErrorBorderColor,
+                  width: borderWidth,
+                ),
                 borderRadius: BorderRadius.circular(borderRadius),
               )
             : OutlineInputBorder(
                 borderSide: BorderSide(
-                    color: (borderWidth == 0.0)
-                        ? Colors.transparent
-                        : inputErrorBorderColor,
-                    width: borderWidth),
+                  color: (borderWidth == 0.0)
+                      ? Colors.transparent
+                      : inputErrorBorderColor,
+                  width: borderWidth,
+                ),
                 borderRadius: BorderRadius.circular(borderRadius),
               ),
       ),
@@ -567,7 +575,9 @@ class _LFTextFieldState extends State<LFTextField> {
 class LFNoSpaceFormatter extends TextInputFormatter {
   @override
   TextEditingValue formatEditUpdate(
-      TextEditingValue oldValue, TextEditingValue newValue) {
+    TextEditingValue oldValue,
+    TextEditingValue newValue,
+  ) {
     // Check if the new value contains any spaces
     if (newValue.text.contains(' ')) {
       // If it does, return the old value

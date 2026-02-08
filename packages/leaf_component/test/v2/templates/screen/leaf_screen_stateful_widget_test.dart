@@ -93,10 +93,7 @@ Widget _wrapWithPlatform(Widget child, TargetPlatform platform) {
   return MaterialApp(
     debugShowCheckedModeBanner: false,
     theme: ThemeData(platform: platform),
-    home: LeafTheme(
-      data: LeafThemeData.light(),
-      child: child,
-    ),
+    home: LeafTheme(data: LeafThemeData.light(), child: child),
   );
 }
 
@@ -122,8 +119,9 @@ void main() {
       expect(find.byType(Scaffold), findsWidgets);
     });
 
-    testWidgets('renders custom screen when buildScreen returns widget',
-        (tester) async {
+    testWidgets('renders custom screen when buildScreen returns widget', (
+      tester,
+    ) async {
       await tester.pumpWidget(
         wrapWithTheme(const _TestScreen(useCustomScreen: true)),
       );
@@ -173,14 +171,11 @@ void main() {
 
     testWidgets('applies custom background colour', (tester) async {
       await tester.pumpWidget(
-        wrapWithTheme(
-          const _TestScreen(overrideBg: Colors.red),
-        ),
+        wrapWithTheme(const _TestScreen(overrideBg: Colors.red)),
       );
 
       final scaffolds = tester.widgetList<Scaffold>(find.byType(Scaffold));
-      final hasRedBg =
-          scaffolds.any((s) => s.backgroundColor == Colors.red);
+      final hasRedBg = scaffolds.any((s) => s.backgroundColor == Colors.red);
       expect(hasRedBg, isTrue);
     });
 

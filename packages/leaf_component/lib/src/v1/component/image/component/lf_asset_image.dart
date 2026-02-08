@@ -115,9 +115,7 @@ class LFAssetFileImage extends StatelessWidget {
           color: baseColor ?? Colors.grey[300],
           width: width,
           height: height,
-          child: const Center(
-            child: Icon(Icons.error),
-          ),
+          child: const Center(child: Icon(Icons.error)),
         );
   }
 }

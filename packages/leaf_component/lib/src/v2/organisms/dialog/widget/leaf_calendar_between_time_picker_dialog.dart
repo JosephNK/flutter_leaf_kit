@@ -22,12 +22,10 @@ class LeafCalendarBetweenTimePickerDialog {
     String startText = 'Start',
     String endText = 'End',
     String? okText,
-    String validStartMessage =
-        'Please set the start time before the end time',
-    String validEndMessage =
-        'Please set the end time after the start time',
+    String validStartMessage = 'Please set the start time before the end time',
+    String validEndMessage = 'Please set the end time after the start time',
     void Function(LeafCalendarBetweenPickerSelect select, DateTime dateTime)?
-        onOK,
+    onOK,
   }) async {
     return showDialog(
       context: context,
@@ -62,7 +60,10 @@ class _BetweenTimePickerContent extends StatefulWidget {
   final String validStartMessage;
   final String validEndMessage;
   final void Function(
-      LeafCalendarBetweenPickerSelect select, DateTime dateTime)? onOK;
+    LeafCalendarBetweenPickerSelect select,
+    DateTime dateTime,
+  )?
+  onOK;
 
   const _BetweenTimePickerContent({
     required this.pickerSelect,
@@ -73,10 +74,8 @@ class _BetweenTimePickerContent extends StatefulWidget {
     this.startText = 'Start',
     this.endText = 'End',
     this.okText,
-    this.validStartMessage =
-        'Please set the start time before the end time',
-    this.validEndMessage =
-        'Please set the end time after the start time',
+    this.validStartMessage = 'Please set the start time before the end time',
+    this.validEndMessage = 'Please set the end time after the start time',
     this.onOK,
   });
 
@@ -85,8 +84,7 @@ class _BetweenTimePickerContent extends StatefulWidget {
       _BetweenTimePickerContentState();
 }
 
-class _BetweenTimePickerContentState
-    extends State<_BetweenTimePickerContent> {
+class _BetweenTimePickerContentState extends State<_BetweenTimePickerContent> {
   late DateTime _startTime;
   late DateTime _endTime;
   late DateTime _defaultTime;
@@ -113,8 +111,7 @@ class _BetweenTimePickerContentState
     final dialogTheme = theme.dialogTheme;
 
     final resolvedActiveColor = widget.activeColor ?? colors.primary;
-    final resolvedInactiveColor =
-        widget.inactiveColor ?? colors.inactive;
+    final resolvedInactiveColor = widget.inactiveColor ?? colors.inactive;
     final resolvedBorderRadius =
         dialogTheme?.borderRadius ?? BorderRadius.circular(20.0);
 
@@ -124,8 +121,10 @@ class _BetweenTimePickerContentState
     return Semantics(
       label: 'Between time picker dialog',
       child: Dialog(
-        insetPadding:
-            const EdgeInsets.symmetric(horizontal: 40.0, vertical: 80.0),
+        insetPadding: const EdgeInsets.symmetric(
+          horizontal: 40.0,
+          vertical: 80.0,
+        ),
         shape: RoundedRectangleBorder(borderRadius: resolvedBorderRadius),
         elevation: 4.0,
         backgroundColor: colors.surface,
@@ -248,20 +247,18 @@ class _BetweenTimePickerContentState
       case LeafCalendarBetweenPickerSelect.none:
       case LeafCalendarBetweenPickerSelect.start:
         resultTime = _startTime;
-        if (_isSameDay(_startTime, _endTime) &&
-            _startTime.isAfter(_endTime)) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(widget.validStartMessage)),
-          );
+        if (_isSameDay(_startTime, _endTime) && _startTime.isAfter(_endTime)) {
+          ScaffoldMessenger.of(
+            context,
+          ).showSnackBar(SnackBar(content: Text(widget.validStartMessage)));
           return;
         }
       case LeafCalendarBetweenPickerSelect.end:
         resultTime = _endTime;
-        if (_isSameDay(_startTime, _endTime) &&
-            _endTime.isBefore(_startTime)) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(widget.validEndMessage)),
-          );
+        if (_isSameDay(_startTime, _endTime) && _endTime.isBefore(_startTime)) {
+          ScaffoldMessenger.of(
+            context,
+          ).showSnackBar(SnackBar(content: Text(widget.validEndMessage)));
           return;
         }
     }

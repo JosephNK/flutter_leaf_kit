@@ -8,9 +8,7 @@ void main() {
   group('LeafSlider', () {
     testWidgets('renders slider widget', (tester) async {
       await tester.pumpWidget(
-        wrapWithTheme(
-          LeafSlider(value: 0.5, onChanged: (_) {}),
-        ),
+        wrapWithTheme(LeafSlider(value: 0.5, onChanged: (_) {})),
       );
 
       expect(find.byType(Slider), findsOneWidget);
@@ -21,11 +19,7 @@ void main() {
 
       await tester.pumpWidget(
         wrapWithTheme(
-          LeafSlider(
-            value: 0.5,
-            divisions: 10,
-            onChanged: (v) => changed = v,
-          ),
+          LeafSlider(value: 0.5, divisions: 10, onChanged: (v) => changed = v),
         ),
       );
 
@@ -40,16 +34,11 @@ void main() {
 
     testWidgets('resolves colors from theme', (tester) async {
       final theme = LeafThemeData.light().copyWith(
-        sliderTheme: const LeafSliderThemeData(
-          activeTrackColor: Colors.orange,
-        ),
+        sliderTheme: const LeafSliderThemeData(activeTrackColor: Colors.orange),
       );
 
       await tester.pumpWidget(
-        wrapWithTheme(
-          LeafSlider(value: 0.5, onChanged: (_) {}),
-          theme: theme,
-        ),
+        wrapWithTheme(LeafSlider(value: 0.5, onChanged: (_) {}), theme: theme),
       );
 
       expect(find.byType(Slider), findsOneWidget);
@@ -57,17 +46,11 @@ void main() {
 
     testWidgets('has slider semantics', (tester) async {
       await tester.pumpWidget(
-        wrapWithTheme(
-          LeafSlider(value: 0.5, onChanged: (_) {}),
-        ),
+        wrapWithTheme(LeafSlider(value: 0.5, onChanged: (_) {})),
       );
 
-      final semantics = tester.widgetList<Semantics>(
-        find.byType(Semantics),
-      );
-      final hasSlider = semantics.any(
-        (s) => s.properties.label == 'Slider',
-      );
+      final semantics = tester.widgetList<Semantics>(find.byType(Semantics));
+      final hasSlider = semantics.any((s) => s.properties.label == 'Slider');
       expect(hasSlider, isTrue);
     });
   });
@@ -96,9 +79,7 @@ void main() {
         ),
       );
 
-      final semantics = tester.widgetList<Semantics>(
-        find.byType(Semantics),
-      );
+      final semantics = tester.widgetList<Semantics>(find.byType(Semantics));
       final hasRange = semantics.any(
         (s) => s.properties.label == 'Range slider',
       );

@@ -80,20 +80,17 @@ _FakeScrollNotification _createFakeScrollNotification() {
 
 class _FakeScrollMetrics extends FixedScrollMetrics {
   _FakeScrollMetrics()
-      : super(
-          minScrollExtent: 0,
-          maxScrollExtent: 1000,
-          pixels: 50,
-          viewportDimension: 600,
-          axisDirection: AxisDirection.down,
-          devicePixelRatio: 1.0,
-        );
+    : super(
+        minScrollExtent: 0,
+        maxScrollExtent: 1000,
+        pixels: 50,
+        viewportDimension: 600,
+        axisDirection: AxisDirection.down,
+        devicePixelRatio: 1.0,
+      );
 }
 
 class _FakeScrollNotification extends ScrollNotification {
   _FakeScrollNotification()
-      : super(
-          metrics: _FakeScrollMetrics(),
-          context: null,
-        );
+    : super(metrics: _FakeScrollMetrics(), context: null);
 }

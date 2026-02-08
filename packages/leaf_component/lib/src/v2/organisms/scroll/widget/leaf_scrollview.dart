@@ -105,11 +105,9 @@ class _LeafScrollViewState extends State<LeafScrollView>
   // -- Private --
 
   void _listenToController() {
-    _streamSubscription =
-        widget.controller?.stream.listen((event) async {
+    _streamSubscription = widget.controller?.stream.listen((event) async {
       final mContext = context;
-      final duration =
-          event.duration ?? const Duration(milliseconds: 300);
+      final duration = event.duration ?? const Duration(milliseconds: 300);
       switch (event.type) {
         case LeafScrollControllerEventType.scrollToPosition:
           setClampingPhysics();

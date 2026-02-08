@@ -43,26 +43,28 @@ class LFCalendarPageCell extends StatelessWidget {
     final isSelected = (onSelected == null)
         ? false
         : selectedDateTimes
-            .where((selectedDateTime) =>
-                dateTime.isSameDateTime(selectedDateTime, onlyDate: true))
-            .toList()
-            .isNotEmpty;
+              .where(
+                (selectedDateTime) =>
+                    dateTime.isSameDateTime(selectedDateTime, onlyDate: true),
+              )
+              .toList()
+              .isNotEmpty;
     final isToday = dateTime.isToday();
     final day = dateTime.day.toString();
 
     final dayBackgroundColor = isToday
         ? showToday
-            ? todayColor
-            : Colors.transparent
+              ? todayColor
+              : Colors.transparent
         : Colors.transparent;
 
     final dayTextColor = weekday == 7
         ? holidayColor
         : isToday
-            ? showToday
-                ? Colors.white
-                : Colors.black
-            : Colors.black;
+        ? showToday
+              ? Colors.white
+              : Colors.black
+        : Colors.black;
 
     return Material(
       type: MaterialType.transparency,
@@ -90,8 +92,9 @@ class LFCalendarPageCell extends StatelessWidget {
                         borderRadius: BorderRadius.circular(26.0),
                         color: dayBackgroundColor,
                         border: Border.all(
-                          color:
-                              isSelected ? selectedColor : Colors.transparent,
+                          color: isSelected
+                              ? selectedColor
+                              : Colors.transparent,
                         ),
                       ),
                       child: Opacity(
@@ -102,10 +105,10 @@ class LFCalendarPageCell extends StatelessWidget {
                             day,
                             style:
                                 dayTextStyle?.copyWith(color: dayTextColor) ??
-                                    const TextStyle(
-                                      fontWeight: FontWeight.normal,
-                                      fontSize: 16.0,
-                                    ).copyWith(color: dayTextColor),
+                                const TextStyle(
+                                  fontWeight: FontWeight.normal,
+                                  fontSize: 16.0,
+                                ).copyWith(color: dayTextColor),
                             textAlign: TextAlign.center,
                           ),
                         ),

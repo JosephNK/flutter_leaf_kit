@@ -6,8 +6,9 @@ import '../../../helpers/theme_test_helper.dart';
 
 void main() {
   group('LeafPushNotification', () {
-    testWidgets('shows notification overlay with title and body',
-        (tester) async {
+    testWidgets('shows notification overlay with title and body', (
+      tester,
+    ) async {
       late BuildContext savedContext;
 
       await tester.pumpWidget(
@@ -148,9 +149,7 @@ void main() {
       await tester.pump();
       await tester.pump(const Duration(milliseconds: 500));
 
-      final semantics = tester.widgetList<Semantics>(
-        find.byType(Semantics),
-      );
+      final semantics = tester.widgetList<Semantics>(find.byType(Semantics));
       final hasLabel = semantics.any(
         (s) => s.properties.label == 'Notification: Alert',
       );

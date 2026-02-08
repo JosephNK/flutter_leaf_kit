@@ -23,7 +23,8 @@ class DateCalendarCell extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isSelected = selectedDateTime.day == dateTime.day &&
+    final isSelected =
+        selectedDateTime.day == dateTime.day &&
         selectedDateTime.month == dateTime.month &&
         selectedDateTime.year == dateTime.year;
     final day = dateTime.day.toString();
@@ -66,9 +67,7 @@ class DateCalendarCell extends StatelessWidget {
                       style: const TextStyle(
                         fontWeight: FontWeight.normal,
                         fontSize: 16.0,
-                      ).copyWith(
-                        color: dayTextColor,
-                      ),
+                      ).copyWith(color: dayTextColor),
                       textAlign: TextAlign.center,
                     ),
                   ),

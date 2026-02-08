@@ -31,7 +31,8 @@ class _LFExpandAnimatedState extends State<LFExpandAnimated>
   void initState() {
     super.initState();
 
-    _innerController = widget.controller ??
+    _innerController =
+        widget.controller ??
         LFExpandAnimationController(
           autoAnimation: false,
           duration: widget.duration ?? const Duration(milliseconds: 250),
@@ -44,8 +45,10 @@ class _LFExpandAnimatedState extends State<LFExpandAnimated>
     );
     _animationController = animationController;
 
-    _animation =
-        CurvedAnimation(parent: animationController!, curve: Curves.ease);
+    _animation = CurvedAnimation(
+      parent: animationController!,
+      curve: Curves.ease,
+    );
     _animation.addStatusListener(animationCallback);
 
     _innerController.addListener(_controllerListener);

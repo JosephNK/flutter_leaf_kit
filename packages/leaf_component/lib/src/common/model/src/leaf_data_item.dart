@@ -17,10 +17,7 @@ class LeafDataItem extends Equatable {
   });
 
   @override
-  List<Object?> get props => [
-        id,
-        text,
-      ];
+  List<Object?> get props => [id, text];
 
   @override
   bool operator ==(other) =>
@@ -35,14 +32,8 @@ class LeafDataColorItem extends Equatable {
   final Color? normal;
   final Color? selected;
 
-  const LeafDataColorItem({
-    this.normal,
-    this.selected,
-  });
+  const LeafDataColorItem({this.normal, this.selected});
 
   @override
-  List<Object?> get props => [
-        normal,
-        selected,
-      ];
+  List<Object?> get props => [normal, selected];
 }

@@ -13,7 +13,9 @@ class LeafLocationManager {
   StreamSubscription<Position>? streamPosition;
 
   Future<Position> getCurrentPosition(
-      bool useAccuracy, LocationAccuracy accuracy) async {
+    bool useAccuracy,
+    LocationAccuracy accuracy,
+  ) async {
     if (!useAccuracy) {
       final position = await getLastKnownPosition();
       if (position != null) {
@@ -21,9 +23,7 @@ class LeafLocationManager {
       }
     }
     final position = await Geolocator.getCurrentPosition(
-      locationSettings: LocationSettings(
-        accuracy: accuracy,
-      ),
+      locationSettings: LocationSettings(accuracy: accuracy),
     );
     return position;
   }
@@ -34,19 +34,20 @@ class LeafLocationManager {
   }
 
   void startLocationListen(
-      LocationAccuracy accuracy, ValueChanged<Position> callback) async {
+    LocationAccuracy accuracy,
+    ValueChanged<Position> callback,
+  ) async {
     stopLocationListen();
 
-    streamPosition = Geolocator.getPositionStream(
-      locationSettings: LocationSettings(
-        accuracy: accuracy,
-        distanceFilter: 10,
-      ),
-    ).listen(
-      (Position position) {
-        callback.call(position);
-      },
-    );
+    streamPosition =
+        Geolocator.getPositionStream(
+          locationSettings: LocationSettings(
+            accuracy: accuracy,
+            distanceFilter: 10,
+          ),
+        ).listen((Position position) {
+          callback.call(position);
+        });
   }
 
   void stopLocationListen() {
@@ -74,7 +75,8 @@ class LeafLocationManager {
   }
 
   bool _isDeniedStatus(LocationPermission permission) {
-    final isDenied = (permission == LocationPermission.denied ||
+    final isDenied =
+        (permission == LocationPermission.denied ||
         permission == LocationPermission.deniedForever);
     return isDenied;
   }

@@ -1,9 +1,8 @@
 part of '../navigationbar.dart';
 
 @Deprecated('Use LeafBottomTabViews instead')
-typedef LFBottomTabBarViewsChildren = List<Widget> Function(
-  List<LFBottomTabItem> tabItems,
-);
+typedef LFBottomTabBarViewsChildren =
+    List<Widget> Function(List<LFBottomTabItem> tabItems);
 
 @Deprecated('Use LeafBottomTabViews instead')
 class LFBottomTabBarViews extends StatefulWidget {
@@ -36,23 +35,23 @@ class _LFBottomTabBarViewsState extends State<LFBottomTabBarViews> {
     _streamSubscription = widget.controller.streamController?.stream
         .asBroadcastStream()
         .listen((event) {
-      if (event is LFBottomTabBarViewsSelectedEvent) {
-        final selectedIndex = event.selectedIndex;
-        // final previousIndex = event.previousIndex;
+          if (event is LFBottomTabBarViewsSelectedEvent) {
+            final selectedIndex = event.selectedIndex;
+            // final previousIndex = event.previousIndex;
 
-        setState(() {
-          _selectedIndex = selectedIndex;
+            setState(() {
+              _selectedIndex = selectedIndex;
+            });
+          }
+
+          if (event is LFBottomTabBarViewsItemsEvent) {
+            final tabItems = event.tabItems;
+
+            setState(() {
+              _tabItems = tabItems;
+            });
+          }
         });
-      }
-
-      if (event is LFBottomTabBarViewsItemsEvent) {
-        final tabItems = event.tabItems;
-
-        setState(() {
-          _tabItems = tabItems;
-        });
-      }
-    });
   }
 
   @override
@@ -69,9 +68,7 @@ class _LFBottomTabBarViewsState extends State<LFBottomTabBarViews> {
 
     return IndexedStack(
       index: _selectedIndex,
-      children: [
-        ...children.call(tabItems),
-      ],
+      children: [...children.call(tabItems)],
     );
   }
 }

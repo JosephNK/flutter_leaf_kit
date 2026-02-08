@@ -13,9 +13,6 @@ class LFTabView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TabBarView(
-      controller: controller,
-      children: children,
-    );
+    return TabBarView(controller: controller, children: children);
   }
 }

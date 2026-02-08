@@ -1,10 +1,7 @@
 part of '../radio.dart';
 
 @Deprecated('Use LeafRadioGroup instead')
-typedef LFRadioGroupsOnChanged = Function(
-  LeafDataItem item,
-  bool checked,
-);
+typedef LFRadioGroupsOnChanged = Function(LeafDataItem item, bool checked);
 
 @Deprecated('Use LeafRadioGroup instead')
 class LFRadioGroups extends StatefulWidget {

@@ -3,7 +3,6 @@ import 'package:flutter_leaf_component/src/v2/templates/navigationbar/index.dart
 import 'package:flutter_leaf_component/src/common/theme/theme.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-
 List<LeafBottomTabItem> _makeItems(int count) {
   return List.generate(
     count,

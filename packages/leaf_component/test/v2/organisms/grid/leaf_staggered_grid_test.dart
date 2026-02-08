@@ -9,9 +9,7 @@ void main() {
   group('LeafStaggeredGrid', () {
     testWidgets('renders with required crossAxisCount', (tester) async {
       await tester.pumpWidget(
-        wrapWithTheme(
-          const LeafStaggeredGrid(crossAxisCount: 2),
-        ),
+        wrapWithTheme(const LeafStaggeredGrid(crossAxisCount: 2)),
       );
 
       expect(find.byType(LeafStaggeredGrid), findsOneWidget);

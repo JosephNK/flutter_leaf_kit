@@ -14,10 +14,7 @@ void main() {
             builder: (context) {
               return ElevatedButton(
                 onPressed: () {
-                  LeafAlertDialog.show(
-                    context,
-                    message: 'Test message',
-                  );
+                  LeafAlertDialog.show(context, message: 'Test message');
                 },
                 child: const Text('Open'),
               );
@@ -88,8 +85,7 @@ void main() {
       expect(find.text('Cancel'), findsOneWidget);
     });
 
-    testWidgets('show() with close button displays close icon',
-        (tester) async {
+    testWidgets('show() with close button displays close icon', (tester) async {
       await tester.pumpWidget(
         wrapWithTheme(
           Builder(
@@ -116,8 +112,9 @@ void main() {
       expect(find.byIcon(Icons.close), findsOneWidget);
     });
 
-    testWidgets('show() with custom ok text uses provided text',
-        (tester) async {
+    testWidgets('show() with custom ok text uses provided text', (
+      tester,
+    ) async {
       await tester.pumpWidget(
         wrapWithTheme(
           Builder(
@@ -175,9 +172,7 @@ void main() {
   group('LeafDialogTitle', () {
     testWidgets('renders title text', (tester) async {
       await tester.pumpWidget(
-        wrapWithTheme(
-          const LeafDialogTitle(text: 'Dialog Title'),
-        ),
+        wrapWithTheme(const LeafDialogTitle(text: 'Dialog Title')),
       );
 
       expect(find.text('Dialog Title'), findsOneWidget);
@@ -187,9 +182,7 @@ void main() {
   group('LeafDialogMessage', () {
     testWidgets('renders message text', (tester) async {
       await tester.pumpWidget(
-        wrapWithTheme(
-          const LeafDialogMessage(text: 'Dialog Message'),
-        ),
+        wrapWithTheme(const LeafDialogMessage(text: 'Dialog Message')),
       );
 
       expect(find.text('Dialog Message'), findsOneWidget);
@@ -198,21 +191,13 @@ void main() {
 
   group('LeafDialogButton', () {
     testWidgets('OK button renders with default text', (tester) async {
-      await tester.pumpWidget(
-        wrapWithTheme(
-          const LeafDialogOKButton(),
-        ),
-      );
+      await tester.pumpWidget(wrapWithTheme(const LeafDialogOKButton()));
 
       expect(find.text('OK'), findsOneWidget);
     });
 
     testWidgets('Cancel button renders with default text', (tester) async {
-      await tester.pumpWidget(
-        wrapWithTheme(
-          const LeafDialogCancelButton(),
-        ),
-      );
+      await tester.pumpWidget(wrapWithTheme(const LeafDialogCancelButton()));
 
       expect(find.text('Cancel'), findsOneWidget);
     });

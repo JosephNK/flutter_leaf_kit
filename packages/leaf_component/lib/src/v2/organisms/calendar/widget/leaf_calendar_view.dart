@@ -10,15 +10,11 @@ import 'leaf_calendar_page_view.dart';
 import 'leaf_calendar_weekday_view.dart';
 
 /// Callback when the displayed month changes.
-typedef LeafCalendarViewOnMonthChanged = void Function(
-  DateTime monthDate,
-  DateTime? selectedDate,
-);
+typedef LeafCalendarViewOnMonthChanged =
+    void Function(DateTime monthDate, DateTime? selectedDate);
 
 /// Callback when a date is selected.
-typedef LeafCalendarViewOnDateSelected = void Function(
-  DateTime? selectedDate,
-);
+typedef LeafCalendarViewOnDateSelected = void Function(DateTime? selectedDate);
 
 /// A full month-based calendar view with navigation and date selection.
 ///
@@ -234,8 +230,7 @@ class _LeafCalendarViewState extends State<LeafCalendarView> {
     Widget buildPageGrid(DateTime pageDateTime) {
       return LeafCalendarPageView(
         pageDateTime: pageDateTime,
-        selectedDates:
-            _selectedDate != null ? [_selectedDate!] : const [],
+        selectedDates: _selectedDate != null ? [_selectedDate!] : const [],
         cellBuilder: widget.cellBuilder,
         dayTextStyle: resolvedDayTextStyle,
         todayColor: resolvedTodayColor,

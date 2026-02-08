@@ -95,10 +95,7 @@ class _LFTimePickerState extends State<LFTimePicker> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             widget.label ?? const LFText('Time'),
-                            LFText(
-                              formattedTime,
-                              style: widget.timeTextStyle,
-                            ),
+                            LFText(formattedTime, style: widget.timeTextStyle),
                           ],
                         ),
                       ),
@@ -147,7 +144,7 @@ class _LFTimePickerState extends State<LFTimePicker> {
                   ),
                 ),
               ],
-            )
+            ),
           ],
         ),
       ),

@@ -15,20 +15,10 @@ class LFImageValue extends Equatable {
   // only use cache_image
   final Map<String, String>? header;
 
-  const LFImageValue({
-    this.origin,
-    this.thumbnail,
-    this.bytes,
-    this.header,
-  });
+  const LFImageValue({this.origin, this.thumbnail, this.bytes, this.header});
 
   @override
-  List<Object?> get props => [
-        origin,
-        thumbnail,
-        bytes,
-        header,
-      ];
+  List<Object?> get props => [origin, thumbnail, bytes, header];
 
   @override
   String toString() {
@@ -45,13 +35,12 @@ class LFImageValue extends Equatable {
     Uri? Function()? thumbnail,
     Uint8List? Function()? bytes,
     Map<String, String>? Function()? header,
-  }) =>
-      LFImageValue(
-        origin: origin != null ? origin() : this.origin,
-        thumbnail: thumbnail != null ? thumbnail() : this.thumbnail,
-        bytes: bytes != null ? bytes() : this.bytes,
-        header: header != null ? header() : this.header,
-      );
+  }) => LFImageValue(
+    origin: origin != null ? origin() : this.origin,
+    thumbnail: thumbnail != null ? thumbnail() : this.thumbnail,
+    bytes: bytes != null ? bytes() : this.bytes,
+    header: header != null ? header() : this.header,
+  );
 
   /// Method
 

@@ -36,8 +36,9 @@ void main() {
       expect(find.text('X'), findsOneWidget);
     });
 
-    testWidgets('shows loading indicator when hasReachedMax is false',
-        (tester) async {
+    testWidgets('shows loading indicator when hasReachedMax is false', (
+      tester,
+    ) async {
       await tester.pumpWidget(
         wrapWithTheme(
           LeafListView<String>(
@@ -92,8 +93,7 @@ void main() {
       expect(find.byType(CustomScrollView), findsOneWidget);
     });
 
-    testWidgets('disallowGlow wraps with ScrollConfiguration',
-        (tester) async {
+    testWidgets('disallowGlow wraps with ScrollConfiguration', (tester) async {
       await tester.pumpWidget(
         MaterialApp(
           theme: ThemeData(platform: TargetPlatform.android),
@@ -113,8 +113,7 @@ void main() {
       expect(find.byType(ScrollConfiguration), findsWidgets);
     });
 
-    testWidgets('enableTapUnFocus wraps with GestureDetector',
-        (tester) async {
+    testWidgets('enableTapUnFocus wraps with GestureDetector', (tester) async {
       await tester.pumpWidget(
         wrapWithTheme(
           LeafListView<String>(

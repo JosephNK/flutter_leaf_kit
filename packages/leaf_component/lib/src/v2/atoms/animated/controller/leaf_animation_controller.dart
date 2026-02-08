@@ -23,8 +23,7 @@ class LeafAnimationController extends ChangeNotifier {
   LeafAnimationStatus status = LeafAnimationStatus.stop;
   TickerFuture _tickerFuture = TickerFuture.complete();
 
-  AnimationController? initAnimationController(
-      AnimationController controller) {
+  AnimationController? initAnimationController(AnimationController controller) {
     animationController = controller;
     return animationController;
   }

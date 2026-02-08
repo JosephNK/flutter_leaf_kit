@@ -1,10 +1,8 @@
 part of '../chip.dart';
 
 @Deprecated('Use LeafChips instead')
-typedef LFChipsOnChanged = Function(
-  List<LeafDataItem> items,
-  LeafDataItem changeItem,
-);
+typedef LFChipsOnChanged =
+    Function(List<LeafDataItem> items, LeafDataItem changeItem);
 
 @Deprecated('Use LeafChips instead')
 class LFChips extends StatefulWidget {

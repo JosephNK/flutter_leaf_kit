@@ -49,10 +49,12 @@ class LeafPushNotification {
     final colors = theme.colors;
     final componentTheme = theme.notificationTheme;
 
-    final resolvedAnimDuration = animationDuration ??
+    final resolvedAnimDuration =
+        animationDuration ??
         componentTheme?.animationDuration ??
         const Duration(milliseconds: 450);
-    final resolvedDecoration = boxDecoration ??
+    final resolvedDecoration =
+        boxDecoration ??
         componentTheme?.boxDecoration ??
         BoxDecoration(
           borderRadius: const BorderRadius.all(Radius.circular(20.0)),
@@ -65,22 +67,23 @@ class LeafPushNotification {
             ),
           ],
         );
-    final resolvedTitleStyle = titleTextStyle ??
+    final resolvedTitleStyle =
+        titleTextStyle ??
         componentTheme?.titleTextStyle ??
         TextStyle(
           color: colors.onSurface,
           fontSize: 16.0,
           fontWeight: FontWeight.bold,
         );
-    final resolvedBodyStyle = bodyTextStyle ??
+    final resolvedBodyStyle =
+        bodyTextStyle ??
         componentTheme?.bodyTextStyle ??
         TextStyle(
           color: colors.onSurface,
           fontSize: 14.0,
           fontWeight: FontWeight.normal,
         );
-    final resolvedIconColor =
-        componentTheme?.iconColor ?? colors.onSurface;
+    final resolvedIconColor = componentTheme?.iconColor ?? colors.onSurface;
     final resolvedIconSize = componentTheme?.iconSize ?? 40.0;
 
     _overlayEntry = OverlayEntry(
@@ -89,7 +92,8 @@ class LeafPushNotification {
           title: title,
           body: body,
           data: data,
-          icon: icon ??
+          icon:
+              icon ??
               Icon(
                 Icons.notifications,
                 color: resolvedIconColor,

@@ -33,39 +33,39 @@ class LFSwitch extends StatelessWidget {
     }
     return Switch(
       value: value,
-      thumbColor: WidgetStateProperty.resolveWith<Color?>(
-        (Set<WidgetState> states) {
-          if (states.contains(WidgetState.disabled)) {
-            return thumbColor?.withValues(alpha: 0.5);
-          }
-          if (states.contains(WidgetState.selected)) {
-            return thumbColor;
-          }
-          if (states.contains(WidgetState.hovered)) {
-            return thumbColor;
-          }
+      thumbColor: WidgetStateProperty.resolveWith<Color?>((
+        Set<WidgetState> states,
+      ) {
+        if (states.contains(WidgetState.disabled)) {
+          return thumbColor?.withValues(alpha: 0.5);
+        }
+        if (states.contains(WidgetState.selected)) {
           return thumbColor;
-        },
-      ),
-      trackColor: WidgetStateProperty.resolveWith<Color?>(
-        (Set<WidgetState> states) {
-          if (states.contains(WidgetState.disabled)) {
-            return inactiveTrackColor?.withValues(alpha: 0.5);
-          }
-          if (states.contains(WidgetState.selected)) {
-            return activeTrackColor;
-          }
-          if (states.contains(WidgetState.hovered)) {
-            return activeTrackColor;
-          }
-          return inactiveTrackColor;
-        },
-      ),
-      trackOutlineWidth: WidgetStateProperty.resolveWith<double?>(
-        (Set<WidgetState> states) {
-          return 0.0;
-        },
-      ),
+        }
+        if (states.contains(WidgetState.hovered)) {
+          return thumbColor;
+        }
+        return thumbColor;
+      }),
+      trackColor: WidgetStateProperty.resolveWith<Color?>((
+        Set<WidgetState> states,
+      ) {
+        if (states.contains(WidgetState.disabled)) {
+          return inactiveTrackColor?.withValues(alpha: 0.5);
+        }
+        if (states.contains(WidgetState.selected)) {
+          return activeTrackColor;
+        }
+        if (states.contains(WidgetState.hovered)) {
+          return activeTrackColor;
+        }
+        return inactiveTrackColor;
+      }),
+      trackOutlineWidth: WidgetStateProperty.resolveWith<double?>((
+        Set<WidgetState> states,
+      ) {
+        return 0.0;
+      }),
       onChanged: onChanged,
     );
   }

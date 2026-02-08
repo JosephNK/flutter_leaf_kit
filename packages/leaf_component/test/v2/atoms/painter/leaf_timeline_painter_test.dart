@@ -8,32 +8,18 @@ import '../../../helpers/theme_test_helper.dart';
 void main() {
   group('LeafTimelinePainter', () {
     testWidgets('renders CustomPaint with painter', (tester) async {
-      final painter = LeafTimelinePainter(
-        width: 20,
-        lineColor: Colors.blue,
-      );
+      final painter = LeafTimelinePainter(width: 20, lineColor: Colors.blue);
 
       await tester.pumpWidget(
-        wrapWithTheme(
-          CustomPaint(
-            painter: painter,
-            size: const Size(20, 100),
-          ),
-        ),
+        wrapWithTheme(CustomPaint(painter: painter, size: const Size(20, 100))),
       );
 
       expect(find.byType(CustomPaint), findsWidgets);
     });
 
     test('shouldRepaint returns true when lineColor changes', () {
-      final painter1 = LeafTimelinePainter(
-        width: 20,
-        lineColor: Colors.blue,
-      );
-      final painter2 = LeafTimelinePainter(
-        width: 20,
-        lineColor: Colors.red,
-      );
+      final painter1 = LeafTimelinePainter(width: 20, lineColor: Colors.blue);
+      final painter2 = LeafTimelinePainter(width: 20, lineColor: Colors.red);
 
       expect(painter1.shouldRepaint(painter2), isTrue);
     });

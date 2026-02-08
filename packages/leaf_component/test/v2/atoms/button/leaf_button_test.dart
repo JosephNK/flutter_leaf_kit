@@ -8,9 +8,7 @@ void main() {
   group('LeafButton', () {
     testWidgets('renders text', (tester) async {
       await tester.pumpWidget(
-        wrapWithTheme(
-          const LeafButton(text: 'Press Me'),
-        ),
+        wrapWithTheme(const LeafButton(text: 'Press Me')),
       );
 
       expect(find.text('Press Me'), findsOneWidget);
@@ -20,12 +18,7 @@ void main() {
       var pressed = false;
 
       await tester.pumpWidget(
-        wrapWithTheme(
-          LeafButton(
-            text: 'Press',
-            onTap: () => pressed = true,
-          ),
-        ),
+        wrapWithTheme(LeafButton(text: 'Press', onTap: () => pressed = true)),
       );
 
       await tester.tap(find.text('Press'));
@@ -43,10 +36,7 @@ void main() {
       );
 
       await tester.pumpWidget(
-        wrapWithTheme(
-          const LeafButton(text: 'Themed'),
-          theme: customTheme,
-        ),
+        wrapWithTheme(const LeafButton(text: 'Themed'), theme: customTheme),
       );
 
       expect(find.text('Themed'), findsOneWidget);
@@ -54,17 +44,12 @@ void main() {
 
     testWidgets('explicit colors override theme', (tester) async {
       final customTheme = LeafThemeData.light().copyWith(
-        buttonTheme: const LeafButtonThemeData(
-          backgroundColor: Colors.orange,
-        ),
+        buttonTheme: const LeafButtonThemeData(backgroundColor: Colors.orange),
       );
 
       await tester.pumpWidget(
         wrapWithTheme(
-          const LeafButton(
-            text: 'Override',
-            backgroundColor: Colors.purple,
-          ),
+          const LeafButton(text: 'Override', backgroundColor: Colors.purple),
           theme: customTheme,
         ),
       );
@@ -73,11 +58,7 @@ void main() {
     });
 
     testWidgets('has button semantics', (tester) async {
-      await tester.pumpWidget(
-        wrapWithTheme(
-          const LeafButton(text: 'Action'),
-        ),
-      );
+      await tester.pumpWidget(wrapWithTheme(const LeafButton(text: 'Action')));
 
       final semantics = tester.widget<Semantics>(
         find.byWidgetPredicate(
@@ -90,10 +71,7 @@ void main() {
     testWidgets('renders leading widget', (tester) async {
       await tester.pumpWidget(
         wrapWithTheme(
-          const LeafButton(
-            text: 'With Icon',
-            leading: Icon(Icons.add),
-          ),
+          const LeafButton(text: 'With Icon', leading: Icon(Icons.add)),
         ),
       );
 

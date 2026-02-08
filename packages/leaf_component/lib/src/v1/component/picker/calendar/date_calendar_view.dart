@@ -108,8 +108,9 @@ class _DateCalendarViewState extends State<DateCalendarView> {
     _dateTimes = [];
     final firstDayOfMonth = DateTime(now.year, now.month, 1);
     int daysToSubtract = firstDayOfMonth.weekday % 7;
-    final calendarStart =
-        firstDayOfMonth.subtract(Duration(days: daysToSubtract));
+    final calendarStart = firstDayOfMonth.subtract(
+      Duration(days: daysToSubtract),
+    );
     DateTime date = calendarStart;
     for (int week = 0; week < 6; week++) {
       // String weekRow = '';

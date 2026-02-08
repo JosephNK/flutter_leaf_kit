@@ -24,8 +24,12 @@ class MapMarkerBitmapIcon {
   }
 
   /// Creates a BitmapDescriptor from an IconData
-  Future<BitmapDescriptor> createBitmapDescriptorFromIconData(IconData iconData,
-      Color iconColor, Color circleColor, Color backgroundColor) async {
+  Future<BitmapDescriptor> createBitmapDescriptorFromIconData(
+    IconData iconData,
+    Color iconColor,
+    Color circleColor,
+    Color backgroundColor,
+  ) async {
     final pictureRecorder = PictureRecorder();
     final canvas = Canvas(pictureRecorder);
 
@@ -34,8 +38,10 @@ class MapMarkerBitmapIcon {
     _paintIcon(canvas, iconColor, iconData);
 
     final picture = pictureRecorder.endRecording();
-    final image =
-        await picture.toImage(_markerSize.round(), _markerSize.round());
+    final image = await picture.toImage(
+      _markerSize.round(),
+      _markerSize.round(),
+    );
     final bytes = await image.toByteData(format: ImageByteFormat.png);
 
     return BitmapDescriptor.bytes(bytes!.buffer.asUint8List());
@@ -47,7 +53,10 @@ class MapMarkerBitmapIcon {
       ..style = PaintingStyle.fill
       ..color = color;
     canvas.drawCircle(
-        Offset(_circleOffset, _circleOffset), _fillCircleWidth, paint);
+      Offset(_circleOffset, _circleOffset),
+      _fillCircleWidth,
+      paint,
+    );
   }
 
   /// Paints a circle around the icon
@@ -57,20 +66,24 @@ class MapMarkerBitmapIcon {
       ..color = color
       ..strokeWidth = _circleStrokeWidth;
     canvas.drawCircle(
-        Offset(_circleOffset, _circleOffset), _outlineCircleWidth, paint);
+      Offset(_circleOffset, _circleOffset),
+      _outlineCircleWidth,
+      paint,
+    );
   }
 
   /// Paints the icon
   void _paintIcon(Canvas canvas, Color color, IconData iconData) {
     final textPainter = TextPainter(textDirection: TextDirection.ltr);
     textPainter.text = TextSpan(
-        text: String.fromCharCode(iconData.codePoint),
-        style: TextStyle(
-          letterSpacing: 0.0,
-          fontSize: _iconSize,
-          fontFamily: iconData.fontFamily,
-          color: color,
-        ));
+      text: String.fromCharCode(iconData.codePoint),
+      style: TextStyle(
+        letterSpacing: 0.0,
+        fontSize: _iconSize,
+        fontFamily: iconData.fontFamily,
+        color: color,
+      ),
+    );
     textPainter.layout();
     textPainter.paint(canvas, Offset(_iconOffset, _iconOffset));
   }

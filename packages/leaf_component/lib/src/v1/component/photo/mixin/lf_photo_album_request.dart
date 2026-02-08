@@ -10,9 +10,7 @@ mixin LFPhotoAlbumRequest {
     if (result == PermissionState.authorized) {
       final paths = await PhotoManager.getAssetPathList(
         type: type,
-        filterOption: FilterOptionGroup(
-          containsPathModified: true,
-        ),
+        filterOption: FilterOptionGroup(containsPathModified: true),
       );
       return paths;
     } else {

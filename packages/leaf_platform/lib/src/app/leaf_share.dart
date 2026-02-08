@@ -51,10 +51,7 @@ class LeafShare {
   }) async {
     try {
       final result = await SharePlus.instance.share(
-        ShareParams(
-          uri: uri,
-          sharePositionOrigin: sharePositionOrigin,
-        ),
+        ShareParams(uri: uri, sharePositionOrigin: sharePositionOrigin),
       );
       return result.status;
     } catch (e) {

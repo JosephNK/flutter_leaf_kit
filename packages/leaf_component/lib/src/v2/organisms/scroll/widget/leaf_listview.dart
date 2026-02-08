@@ -126,11 +126,9 @@ class _LeafListViewState<T> extends State<LeafListView<T>>
   // -- Private --
 
   void _listenToController() {
-    _streamSubscription =
-        widget.controller?.stream.listen((event) async {
+    _streamSubscription = widget.controller?.stream.listen((event) async {
       final mContext = context;
-      final duration =
-          event.duration ?? const Duration(milliseconds: 300);
+      final duration = event.duration ?? const Duration(milliseconds: 300);
       switch (event.type) {
         case LeafScrollControllerEventType.scrollToPosition:
           setClampingPhysics();
@@ -262,27 +260,26 @@ class _LeafListViewState<T> extends State<LeafListView<T>>
         SliverPadding(
           padding: widget.padding ?? EdgeInsets.zero,
           sliver: SliverList(
-            delegate: SliverChildBuilderDelegate(
-              (context, index) {
-                if (widget.header != null && index == 0) {
-                  return widget.header!;
-                }
+            delegate: SliverChildBuilderDelegate((context, index) {
+              if (widget.header != null && index == 0) {
+                return widget.header!;
+              }
 
-                final isLast = (totalCount - 1 == index);
-                if (isLast) {
-                  if (!widget.hasReachedMax) {
-                    return _LeafScrollLoadingIndicator(loading: loading);
-                  }
-                  return const SizedBox.shrink();
+              final isLast = (totalCount - 1 == index);
+              if (isLast) {
+                if (!widget.hasReachedMax) {
+                  return _LeafScrollLoadingIndicator(loading: loading);
                 }
+                return const SizedBox.shrink();
+              }
 
-                final itemIndex =
-                    (widget.header == null) ? index : index - 1;
-                return widget.builder(
-                    context, widget.items[itemIndex], itemIndex);
-              },
-              childCount: totalCount,
-            ),
+              final itemIndex = (widget.header == null) ? index : index - 1;
+              return widget.builder(
+                context,
+                widget.items[itemIndex],
+                itemIndex,
+              );
+            }, childCount: totalCount),
           ),
         ),
       ],

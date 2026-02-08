@@ -40,34 +40,37 @@ class _LFExpandableTextState extends State<LFExpandableText> {
 
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(builder: (context, size) {
-      final span = TextSpan(text: widget.text, style: widget.style);
-      final tp = TextPainter(
+    return LayoutBuilder(
+      builder: (context, size) {
+        final span = TextSpan(text: widget.text, style: widget.style);
+        final tp = TextPainter(
           text: span,
           textDirection: TextDirection.ltr,
-          maxLines: widget.maxLines);
-      tp.layout(maxWidth: size.maxWidth);
-
-      if (tp.didExceedMaxLines) {
-        return Column(
-          children: [
-            LFText(
-              widget.text,
-              style: widget.style,
-              maxLines: _isExpanded ? widget.expandMaxLines : widget.maxLines,
-            ),
-            _isExpanded
-                ? (widget.collapseWidget ?? const SizedBox())
-                : (widget.expandWidget ?? const SizedBox()),
-          ],
-        );
-      } else {
-        return LFText(
-          widget.text,
-          style: widget.style,
           maxLines: widget.maxLines,
         );
-      }
-    });
+        tp.layout(maxWidth: size.maxWidth);
+
+        if (tp.didExceedMaxLines) {
+          return Column(
+            children: [
+              LFText(
+                widget.text,
+                style: widget.style,
+                maxLines: _isExpanded ? widget.expandMaxLines : widget.maxLines,
+              ),
+              _isExpanded
+                  ? (widget.collapseWidget ?? const SizedBox())
+                  : (widget.expandWidget ?? const SizedBox()),
+            ],
+          );
+        } else {
+          return LFText(
+            widget.text,
+            style: widget.style,
+            maxLines: widget.maxLines,
+          );
+        }
+      },
+    );
   }
 }

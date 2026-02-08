@@ -118,8 +118,9 @@ class _LeafPageViewState extends State<LeafPageView>
 
     final total = widget.children.length;
     final lastPage = total - 1;
-    final nextPage =
-        _currentPage.round() < lastPage ? _currentPage.round() + 1 : 0;
+    final nextPage = _currentPage.round() < lastPage
+        ? _currentPage.round() + 1
+        : 0;
 
     final fadeDuration = _resolveFadeDuration();
 
@@ -142,10 +143,12 @@ class _LeafPageViewState extends State<LeafPageView>
     final colors = theme.colors;
     final pageViewTheme = theme.pageViewTheme;
 
-    final resolvedActiveColor = widget.indicatorActiveColor ??
+    final resolvedActiveColor =
+        widget.indicatorActiveColor ??
         pageViewTheme?.indicatorActiveColor ??
         colors.primary;
-    final resolvedInactiveColor = widget.indicatorInactiveColor ??
+    final resolvedInactiveColor =
+        widget.indicatorInactiveColor ??
         pageViewTheme?.indicatorInactiveColor ??
         colors.inactive;
 
@@ -204,11 +207,6 @@ class _LeafPageViewState extends State<LeafPageView>
             inactiveColor: inactiveColor,
           );
 
-    return Positioned(
-      left: 0.0,
-      right: 0.0,
-      bottom: 5.0,
-      child: indicator,
-    );
+    return Positioned(left: 0.0, right: 0.0, bottom: 5.0, child: indicator);
   }
 }

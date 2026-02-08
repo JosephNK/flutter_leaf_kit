@@ -8,11 +8,7 @@ void main() {
   group('LeafScrollView', () {
     testWidgets('renders child widget', (tester) async {
       await tester.pumpWidget(
-        wrapWithTheme(
-          const LeafScrollView(
-            child: Text('Content'),
-          ),
-        ),
+        wrapWithTheme(const LeafScrollView(child: Text('Content'))),
       );
 
       expect(find.text('Content'), findsOneWidget);
@@ -24,9 +20,7 @@ void main() {
           theme: ThemeData(platform: TargetPlatform.android),
           home: LeafTheme(
             data: LeafThemeData.light(),
-            child: const Scaffold(
-              body: LeafScrollView(child: Text('Content')),
-            ),
+            child: const Scaffold(body: LeafScrollView(child: Text('Content'))),
           ),
         ),
       );
@@ -40,9 +34,7 @@ void main() {
           theme: ThemeData(platform: TargetPlatform.iOS),
           home: LeafTheme(
             data: LeafThemeData.light(),
-            child: const Scaffold(
-              body: LeafScrollView(child: Text('Content')),
-            ),
+            child: const Scaffold(body: LeafScrollView(child: Text('Content'))),
           ),
         ),
       );
@@ -50,8 +42,9 @@ void main() {
       expect(find.byType(CustomScrollView), findsOneWidget);
     });
 
-    testWidgets('uses RefreshIndicator on Android with onRefresh',
-        (tester) async {
+    testWidgets('uses RefreshIndicator on Android with onRefresh', (
+      tester,
+    ) async {
       await tester.pumpWidget(
         MaterialApp(
           theme: ThemeData(platform: TargetPlatform.android),
@@ -70,18 +63,14 @@ void main() {
       expect(find.byType(RefreshIndicator), findsOneWidget);
     });
 
-    testWidgets('disallowGlow wraps with ScrollConfiguration',
-        (tester) async {
+    testWidgets('disallowGlow wraps with ScrollConfiguration', (tester) async {
       await tester.pumpWidget(
         MaterialApp(
           theme: ThemeData(platform: TargetPlatform.android),
           home: LeafTheme(
             data: LeafThemeData.light(),
             child: const Scaffold(
-              body: LeafScrollView(
-                disallowGlow: true,
-                child: Text('Content'),
-              ),
+              body: LeafScrollView(disallowGlow: true, child: Text('Content')),
             ),
           ),
         ),
@@ -90,8 +79,9 @@ void main() {
       expect(find.byType(ScrollConfiguration), findsWidgets);
     });
 
-    testWidgets('dragKeyboardHide sets onDrag dismiss behavior',
-        (tester) async {
+    testWidgets('dragKeyboardHide sets onDrag dismiss behavior', (
+      tester,
+    ) async {
       await tester.pumpWidget(
         MaterialApp(
           theme: ThemeData(platform: TargetPlatform.android),
@@ -121,10 +111,7 @@ void main() {
 
       await tester.pumpWidget(
         wrapWithTheme(
-          LeafScrollView(
-            controller: controller,
-            child: const Text('Content'),
-          ),
+          LeafScrollView(controller: controller, child: const Text('Content')),
         ),
       );
 
@@ -132,14 +119,12 @@ void main() {
       controller.dispose();
     });
 
-    testWidgets('enableTapUnFocus wraps with opaque GestureDetector',
-        (tester) async {
+    testWidgets('enableTapUnFocus wraps with opaque GestureDetector', (
+      tester,
+    ) async {
       await tester.pumpWidget(
         wrapWithTheme(
-          const LeafScrollView(
-            enableTapUnFocus: true,
-            child: Text('Content'),
-          ),
+          const LeafScrollView(enableTapUnFocus: true, child: Text('Content')),
         ),
       );
 

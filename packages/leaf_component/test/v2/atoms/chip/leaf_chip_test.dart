@@ -7,9 +7,7 @@ import '../../../helpers/theme_test_helper.dart';
 void main() {
   group('LeafChip', () {
     testWidgets('renders text', (tester) async {
-      await tester.pumpWidget(
-        wrapWithTheme(const LeafChip(text: 'Tag')),
-      );
+      await tester.pumpWidget(wrapWithTheme(const LeafChip(text: 'Tag')));
 
       expect(find.text('Tag'), findsOneWidget);
     });
@@ -35,9 +33,7 @@ void main() {
 
     testWidgets('resolves colors from theme', (tester) async {
       final theme = LeafThemeData.light().copyWith(
-        chipTheme: const LeafChipThemeData(
-          selectedColor: Colors.amber,
-        ),
+        chipTheme: const LeafChipThemeData(selectedColor: Colors.amber),
       );
 
       await tester.pumpWidget(
@@ -55,12 +51,8 @@ void main() {
         wrapWithTheme(const LeafChip(text: 'Active', selected: true)),
       );
 
-      final semantics = tester.widgetList<Semantics>(
-        find.byType(Semantics),
-      );
-      final hasSelected = semantics.any(
-        (s) => s.properties.selected == true,
-      );
+      final semantics = tester.widgetList<Semantics>(find.byType(Semantics));
+      final hasSelected = semantics.any((s) => s.properties.selected == true);
       expect(hasSelected, isTrue);
     });
   });
@@ -73,9 +65,7 @@ void main() {
     ];
 
     testWidgets('renders all chips', (tester) async {
-      await tester.pumpWidget(
-        wrapWithTheme(LeafChips(items: items)),
-      );
+      await tester.pumpWidget(wrapWithTheme(LeafChips(items: items)));
 
       expect(find.text('Red'), findsOneWidget);
       expect(find.text('Blue'), findsOneWidget);

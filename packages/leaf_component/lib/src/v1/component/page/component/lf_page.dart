@@ -101,10 +101,7 @@ class _LFPageViewState extends State<LFPageView>
       margin: margin,
       child: Stack(
         // fit: StackFit.expand,
-        children: [
-          _buildPageView(context),
-          _buildPageIndicator(context),
-        ],
+        children: [_buildPageView(context), _buildPageIndicator(context)],
       ),
     );
   }
@@ -129,9 +126,7 @@ class _LFPageViewState extends State<LFPageView>
       child: pageViewWidget,
     );
 
-    return Positioned(
-      child: !autoPage ? pageViewWidget : animationWidget,
-    );
+    return Positioned(child: !autoPage ? pageViewWidget : animationWidget);
   }
 
   Widget _buildPageIndicator(BuildContext context) {

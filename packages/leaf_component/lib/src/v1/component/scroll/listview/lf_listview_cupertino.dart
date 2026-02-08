@@ -70,29 +70,24 @@ class LFListViewCupertino<T> extends StatelessWidget {
         SliverPadding(
           padding: padding ?? const EdgeInsets.all(0.0),
           sliver: SliverList(
-            delegate: SliverChildBuilderDelegate(
-              (context, index) {
-                if (header != null && index == 0) {
-                  return header!;
-                }
+            delegate: SliverChildBuilderDelegate((context, index) {
+              if (header != null && index == 0) {
+                return header!;
+              }
 
-                final isLast = (totalCount - 1 == index);
-                if (isLast) {
-                  if (!hasReachedMax) {
-                    return LFListViewIndicator(
-                      loading: loading,
-                    );
-                  }
-                  return Container();
+              final isLast = (totalCount - 1 == index);
+              if (isLast) {
+                if (!hasReachedMax) {
+                  return LFListViewIndicator(loading: loading);
                 }
+                return Container();
+              }
 
-                final itemIndex = (header == null) ? index : index - 1;
-                final item = items[itemIndex];
-                final itemWidget = builder(context, item, itemIndex);
-                return itemWidget;
-              },
-              childCount: totalCount,
-            ),
+              final itemIndex = (header == null) ? index : index - 1;
+              final item = items[itemIndex];
+              final itemWidget = builder(context, item, itemIndex);
+              return itemWidget;
+            }, childCount: totalCount),
           ),
         ),
       ],

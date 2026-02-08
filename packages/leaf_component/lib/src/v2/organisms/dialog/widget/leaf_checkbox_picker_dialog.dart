@@ -92,8 +92,7 @@ class _CheckboxPickerContent extends StatefulWidget {
   });
 
   @override
-  State<_CheckboxPickerContent> createState() =>
-      _CheckboxPickerContentState();
+  State<_CheckboxPickerContent> createState() => _CheckboxPickerContentState();
 }
 
 class _CheckboxPickerContentState extends State<_CheckboxPickerContent> {
@@ -126,8 +125,10 @@ class _CheckboxPickerContentState extends State<_CheckboxPickerContent> {
     return Semantics(
       label: 'Checkbox picker dialog',
       child: Dialog(
-        insetPadding:
-            const EdgeInsets.symmetric(horizontal: 40.0, vertical: 80.0),
+        insetPadding: const EdgeInsets.symmetric(
+          horizontal: 40.0,
+          vertical: 80.0,
+        ),
         shape: RoundedRectangleBorder(borderRadius: resolvedBorderRadius),
         elevation: 4.0,
         backgroundColor: colors.surface,

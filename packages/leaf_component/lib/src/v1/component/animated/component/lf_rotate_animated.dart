@@ -31,7 +31,8 @@ class _LFRotateAnimatedState extends State<LFRotateAnimated>
   void initState() {
     super.initState();
 
-    _innerController = widget.controller ??
+    _innerController =
+        widget.controller ??
         LFRotateAnimationController(
           autoAnimation: false,
           duration: widget.duration ?? const Duration(milliseconds: 250),
@@ -86,10 +87,7 @@ class _LFRotateAnimatedState extends State<LFRotateAnimated>
     return AnimatedBuilder(
       animation: animationController!,
       builder: (context, child) {
-        return Transform.rotate(
-          angle: _animation.value,
-          child: widget.child,
-        );
+        return Transform.rotate(angle: _animation.value, child: widget.child);
       },
     );
   }

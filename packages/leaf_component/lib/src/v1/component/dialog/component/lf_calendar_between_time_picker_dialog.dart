@@ -1,8 +1,8 @@
 part of '../dialog.dart';
 
 @Deprecated('Use LeafAlertDialog instead')
-typedef LFCalendarBetweenTimePickerOnOK = Function(
-    LFCalendarBetweenPickerSelect select, DateTime dateTime);
+typedef LFCalendarBetweenTimePickerOnOK =
+    Function(LFCalendarBetweenPickerSelect select, DateTime dateTime);
 
 @Deprecated('Use LeafAlertDialog instead')
 class LFCalendarBetweenTimePickerDialog {
@@ -107,11 +107,11 @@ class _CalendarBetweenTimePickerContentState
     final okText = widget.okText;
 
     return Dialog(
-      insetPadding:
-          const EdgeInsets.symmetric(horizontal: 40.0, vertical: 80.0),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(20.0),
+      insetPadding: const EdgeInsets.symmetric(
+        horizontal: 40.0,
+        vertical: 80.0,
       ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
       elevation: 4.0,
       backgroundColor: Colors.white,
       child: Padding(
@@ -149,7 +149,9 @@ class _CalendarBetweenTimePickerContentState
                         child: LFText(
                           _startTime.toCalMeridiemTimeString(context),
                           style: TextStyle(
-                              fontSize: 18.0, color: _getStartTimeColor()),
+                            fontSize: 18.0,
+                            color: _getStartTimeColor(),
+                          ),
                           textAlign: TextAlign.left,
                         ),
                       ),
@@ -162,7 +164,9 @@ class _CalendarBetweenTimePickerContentState
                         child: LFText(
                           _endTime.toCalMeridiemTimeString(context),
                           style: TextStyle(
-                              fontSize: 18.0, color: _getEndTimeColor()),
+                            fontSize: 18.0,
+                            color: _getEndTimeColor(),
+                          ),
                           textAlign: TextAlign.right,
                         ),
                       ),
@@ -199,7 +203,9 @@ class _CalendarBetweenTimePickerContentState
                         color: activeColor,
                       ),
                       padding: const EdgeInsets.symmetric(
-                          vertical: 15.0, horizontal: 20.0),
+                        vertical: 15.0,
+                        horizontal: 20.0,
+                      ),
                       child: LFText(
                         okText,
                         style: const TextStyle(
@@ -212,7 +218,7 @@ class _CalendarBetweenTimePickerContentState
                   ),
                 ),
               ],
-            )
+            ),
           ],
         ),
       ),
@@ -259,18 +265,20 @@ class _CalendarBetweenTimePickerContentState
         break;
     }
 
-    final fDay =
-        LeafDate.parseFromString(fromTime.toCalYearMonthDayString()).dateTime;
-    final tDay =
-        LeafDate.parseFromString(toTime.toCalYearMonthDayString()).dateTime;
+    final fDay = LeafDate.parseFromString(
+      fromTime.toCalYearMonthDayString(),
+    ).dateTime;
+    final tDay = LeafDate.parseFromString(
+      toTime.toCalYearMonthDayString(),
+    ).dateTime;
 
     if (fDay.isSameDateTime(tDay, onlyDate: true)) {
-      final f =
-          LeafDate.parseFromString(fromTime.toCalYearMonthDayHourMinuteString())
-              .dateTime;
-      final t =
-          LeafDate.parseFromString(toTime.toCalYearMonthDayHourMinuteString())
-              .dateTime;
+      final f = LeafDate.parseFromString(
+        fromTime.toCalYearMonthDayHourMinuteString(),
+      ).dateTime;
+      final t = LeafDate.parseFromString(
+        toTime.toCalYearMonthDayHourMinuteString(),
+      ).dateTime;
 
       String? validMessage;
 

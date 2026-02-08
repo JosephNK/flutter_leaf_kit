@@ -7,9 +7,7 @@ import '../../../helpers/theme_test_helper.dart';
 void main() {
   group('LeafText', () {
     testWidgets('renders text', (tester) async {
-      await tester.pumpWidget(
-        wrapWithTheme(const LeafText('Hello')),
-      );
+      await tester.pumpWidget(wrapWithTheme(const LeafText('Hello')));
 
       expect(find.text('Hello'), findsOneWidget);
     });
@@ -18,9 +16,7 @@ void main() {
       const style = TextStyle(fontSize: 24, color: Colors.red);
 
       await tester.pumpWidget(
-        wrapWithTheme(
-          const LeafText('Styled', style: style),
-        ),
+        wrapWithTheme(const LeafText('Styled', style: style)),
       );
 
       final text = tester.widget<Text>(find.byType(Text).last);
@@ -30,9 +26,7 @@ void main() {
 
     testWidgets('applies color override', (tester) async {
       await tester.pumpWidget(
-        wrapWithTheme(
-          const LeafText('Colored', color: Colors.green),
-        ),
+        wrapWithTheme(const LeafText('Colored', color: Colors.green)),
       );
 
       final text = tester.widget<Text>(find.byType(Text).last);
@@ -47,10 +41,7 @@ void main() {
       );
 
       await tester.pumpWidget(
-        wrapWithTheme(
-          const LeafText('Themed'),
-          theme: customTheme,
-        ),
+        wrapWithTheme(const LeafText('Themed'), theme: customTheme),
       );
 
       final text = tester.widget<Text>(find.byType(Text).last);
@@ -60,16 +51,11 @@ void main() {
     testWidgets('has semantics label', (tester) async {
       await tester.pumpWidget(
         wrapWithTheme(
-          const LeafText(
-            'Hidden text',
-            semanticsLabel: 'Custom label',
-          ),
+          const LeafText('Hidden text', semanticsLabel: 'Custom label'),
         ),
       );
 
-      final semantics = tester.widgetList<Semantics>(
-        find.byType(Semantics),
-      );
+      final semantics = tester.widgetList<Semantics>(find.byType(Semantics));
       final hasCustomLabel = semantics.any(
         (s) => s.properties.label == 'Custom label',
       );
@@ -77,13 +63,9 @@ void main() {
     });
 
     testWidgets('uses text as default semantics label', (tester) async {
-      await tester.pumpWidget(
-        wrapWithTheme(const LeafText('My text')),
-      );
+      await tester.pumpWidget(wrapWithTheme(const LeafText('My text')));
 
-      final semantics = tester.widgetList<Semantics>(
-        find.byType(Semantics),
-      );
+      final semantics = tester.widgetList<Semantics>(find.byType(Semantics));
       final hasTextLabel = semantics.any(
         (s) => s.properties.label == 'My text',
       );
@@ -99,9 +81,7 @@ void main() {
       );
 
       await tester.pumpWidget(
-        wrapWithTheme(
-          const LeafText('안녕하세요', style: style),
-        ),
+        wrapWithTheme(const LeafText('안녕하세요', style: style)),
       );
 
       // Each character gets its own Text widget inside WidgetSpan
@@ -111,9 +91,7 @@ void main() {
     });
 
     testWidgets('uses Text when no underline', (tester) async {
-      await tester.pumpWidget(
-        wrapWithTheme(const LeafText('Hello')),
-      );
+      await tester.pumpWidget(wrapWithTheme(const LeafText('Hello')));
 
       final textWidgets = find.byType(Text);
       expect(textWidgets, findsOneWidget);
@@ -127,9 +105,7 @@ void main() {
       );
 
       await tester.pumpWidget(
-        wrapWithTheme(
-          const LeafText('가나다', style: style),
-        ),
+        wrapWithTheme(const LeafText('가나다', style: style)),
       );
 
       final charTexts = tester.widgetList<Text>(find.byType(Text));
@@ -138,8 +114,9 @@ void main() {
       }
     });
 
-    testWidgets('preserves maxLines and textAlign in underline mode',
-        (tester) async {
+    testWidgets('preserves maxLines and textAlign in underline mode', (
+      tester,
+    ) async {
       const style = TextStyle(
         fontSize: 16,
         decoration: TextDecoration.underline,
@@ -177,9 +154,7 @@ void main() {
         ),
       );
 
-      final semantics = tester.widgetList<Semantics>(
-        find.byType(Semantics),
-      );
+      final semantics = tester.widgetList<Semantics>(find.byType(Semantics));
       final hasLabel = semantics.any(
         (s) => s.properties.label == 'Underline label',
       );
@@ -193,13 +168,7 @@ void main() {
       );
 
       await tester.pumpWidget(
-        wrapWithTheme(
-          const LeafText(
-            '크기',
-            style: style,
-            textScaleFactor: 1.5,
-          ),
-        ),
+        wrapWithTheme(const LeafText('크기', style: style, textScaleFactor: 1.5)),
       );
 
       final richText = tester.widget<RichText>(find.byType(RichText).first);

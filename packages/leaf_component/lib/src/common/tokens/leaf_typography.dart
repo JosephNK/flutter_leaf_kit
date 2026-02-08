@@ -175,8 +175,7 @@ class LeafTypography {
       displayMedium: TextStyle.lerp(a.displayMedium, b.displayMedium, t)!,
       displaySmall: TextStyle.lerp(a.displaySmall, b.displaySmall, t)!,
       headlineLarge: TextStyle.lerp(a.headlineLarge, b.headlineLarge, t)!,
-      headlineMedium:
-          TextStyle.lerp(a.headlineMedium, b.headlineMedium, t)!,
+      headlineMedium: TextStyle.lerp(a.headlineMedium, b.headlineMedium, t)!,
       headlineSmall: TextStyle.lerp(a.headlineSmall, b.headlineSmall, t)!,
       titleLarge: TextStyle.lerp(a.titleLarge, b.titleLarge, t)!,
       titleMedium: TextStyle.lerp(a.titleMedium, b.titleMedium, t)!,
@@ -213,20 +212,20 @@ class LeafTypography {
 
   @override
   int get hashCode => Object.hash(
-        displayLarge,
-        displayMedium,
-        displaySmall,
-        headlineLarge,
-        headlineMedium,
-        headlineSmall,
-        titleLarge,
-        titleMedium,
-        titleSmall,
-        bodyLarge,
-        bodyMedium,
-        bodySmall,
-        labelLarge,
-        labelMedium,
-        labelSmall,
-      );
+    displayLarge,
+    displayMedium,
+    displaySmall,
+    headlineLarge,
+    headlineMedium,
+    headlineSmall,
+    titleLarge,
+    titleMedium,
+    titleSmall,
+    bodyLarge,
+    bodyMedium,
+    bodySmall,
+    labelLarge,
+    labelMedium,
+    labelSmall,
+  );
 }

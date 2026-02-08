@@ -53,10 +53,7 @@ class LFAutoSizeText extends StatelessWidget implements LFBuildText {
   @override
   TextStyle? buildTextStyle(BuildContext context) {
     TextStyle style = this.style ?? DefaultTextStyle.of(context).style;
-    style = style.copyWith(
-      color: color,
-      height: height,
-    );
+    style = style.copyWith(color: color, height: height);
     return style;
   }
 }

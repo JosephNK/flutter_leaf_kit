@@ -5,11 +5,7 @@ import 'leaf_theme_data.dart';
 class LeafTheme extends InheritedWidget {
   final LeafThemeData data;
 
-  const LeafTheme({
-    super.key,
-    required this.data,
-    required super.child,
-  });
+  const LeafTheme({super.key, required this.data, required super.child});
 
   static LeafThemeData of(BuildContext context) {
     final theme = context.dependOnInheritedWidgetOfExactType<LeafTheme>();

@@ -58,8 +58,7 @@ class LeafTabBar extends StatelessWidget {
         dividerColor ?? tabBarTheme?.dividerColor ?? colors.divider;
     final resolvedIndicatorPadding =
         indicatorPadding ?? tabBarTheme?.indicatorPadding;
-    final resolvedLabelPadding =
-        labelPadding ?? tabBarTheme?.labelPadding;
+    final resolvedLabelPadding = labelPadding ?? tabBarTheme?.labelPadding;
 
     return Semantics(
       label: 'Tab bar',

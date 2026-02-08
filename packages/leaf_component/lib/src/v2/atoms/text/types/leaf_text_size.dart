@@ -1,9 +1,5 @@
 /// Text scale factor presets for Leaf text components.
-enum LeafTextSize {
-  small,
-  medium,
-  large,
-}
+enum LeafTextSize { small, medium, large }
 
 extension LeafTextSizeExt on LeafTextSize {
   double get textScaleFactor {

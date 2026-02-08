@@ -47,14 +47,8 @@ class LFIndicator extends StatelessWidget {
   /// Platform
   Widget _buildPlatform(BuildContext context) {
     return Platform.isIOS
-        ? LFCupertinoIndicator(
-            padding: padding,
-            size: size,
-          )
-        : LFMaterialIndicator(
-            padding: padding,
-            size: size,
-          );
+        ? LFCupertinoIndicator(padding: padding, size: size)
+        : LFMaterialIndicator(padding: padding, size: size);
   }
 }
 
@@ -78,9 +72,7 @@ class LFMaterialIndicator extends StatelessWidget {
       child: SizedBox(
         width: size,
         height: size,
-        child: const CircularProgressIndicator(
-          strokeWidth: 2.0,
-        ),
+        child: const CircularProgressIndicator(strokeWidth: 2.0),
       ),
     );
   }
@@ -103,9 +95,7 @@ class LFCupertinoIndicator extends StatelessWidget {
 
     return Container(
       padding: padding,
-      child: CupertinoActivityIndicator(
-        radius: size,
-      ),
+      child: CupertinoActivityIndicator(radius: size),
     );
   }
 }

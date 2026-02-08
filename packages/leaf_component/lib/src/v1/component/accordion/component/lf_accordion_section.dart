@@ -109,7 +109,7 @@ class _LFAccordionSectionState extends State<LFAccordionSection>
                       ),
                     ),
                   ),
-                )
+                ),
               ],
             ),
             AnimatedBuilder(

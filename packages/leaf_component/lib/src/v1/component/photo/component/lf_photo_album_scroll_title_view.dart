@@ -30,7 +30,8 @@ class LFPhotoAlbumScrollTitleView extends StatefulWidget {
 }
 
 class _LFPhotoAlbumScrollTitleViewState
-    extends State<LFPhotoAlbumScrollTitleView> with LFPhotoAlbumRequest {
+    extends State<LFPhotoAlbumScrollTitleView>
+    with LFPhotoAlbumRequest {
   AssetPathEntity? _selectedAssetPath;
 
   @override
@@ -83,10 +84,7 @@ class _LFPhotoAlbumScrollTitleViewState
         children: [
           LFText(
             albumName,
-            style: widget.textStyle ??
-                const TextStyle(
-                  fontSize: 18.0,
-                ),
+            style: widget.textStyle ?? const TextStyle(fontSize: 18.0),
           ),
           widget.visibleAlbumView
               ? const Icon(Icons.arrow_drop_up_sharp, size: 30.0)

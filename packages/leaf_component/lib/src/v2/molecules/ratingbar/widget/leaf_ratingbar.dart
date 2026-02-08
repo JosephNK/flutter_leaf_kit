@@ -49,7 +49,8 @@ class LeafRatingBar extends StatelessWidget {
     final resolvedUnrated =
         unratedColor ?? ratingTheme?.unratedColor ?? colors.inactive;
     final resolvedSize = itemSize ?? ratingTheme?.size ?? 40.0;
-    final resolvedPadding = itemPadding ??
+    final resolvedPadding =
+        itemPadding ??
         EdgeInsets.symmetric(horizontal: ratingTheme?.spacing ?? 0.0);
 
     return Semantics(
@@ -66,7 +67,8 @@ class LeafRatingBar extends StatelessWidget {
         tapOnlyMode: tapOnlyMode,
         updateOnDrag: updateOnDrag,
         ignoreGestures: ignoreGestures,
-        ratingWidget: ratingWidget ??
+        ratingWidget:
+            ratingWidget ??
             RatingWidget(
               full: Icon(Icons.star, color: resolvedRated),
               half: Icon(Icons.star_half, color: resolvedRated),

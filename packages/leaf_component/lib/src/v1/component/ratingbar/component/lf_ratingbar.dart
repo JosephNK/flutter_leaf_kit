@@ -44,7 +44,8 @@ class LFRatingBar extends StatelessWidget {
       tapOnlyMode: tapOnlyMode,
       updateOnDrag: updateOnDrag,
       ignoreGestures: ignoreGestures,
-      ratingWidget: ratingWidget ??
+      ratingWidget:
+          ratingWidget ??
           RatingWidget(
             full: const Icon(Icons.star, color: Colors.red),
             half: const Icon(Icons.star_half, color: Colors.red),

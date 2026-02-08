@@ -10,12 +10,11 @@ class LeafDioRequestInterceptor extends InterceptorsWrapper {
 
   @override
   void onRequest(
-      RequestOptions options, RequestInterceptorHandler handler) async {
+    RequestOptions options,
+    RequestInterceptorHandler handler,
+  ) async {
     Map<String, dynamic> headers = await onHeader?.call() ?? {};
-    options.headers = {
-      ...options.headers,
-      ...headers,
-    };
+    options.headers = {...options.headers, ...headers};
     options.queryParameters = options.queryParameters..removeNullEmptyValue();
     if (options.data != null) {
       if (options.data is FormData) {

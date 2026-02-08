@@ -10,7 +10,9 @@ part of '../textfield.dart';
 class CreditCardNumberFormatter extends TextInputFormatter {
   @override
   TextEditingValue formatEditUpdate(
-      TextEditingValue oldValue, TextEditingValue newValue) {
+    TextEditingValue oldValue,
+    TextEditingValue newValue,
+  ) {
     var text = newValue.text.replaceAll(' ', '');
 
     if (newValue.selection.baseOffset == 0) {

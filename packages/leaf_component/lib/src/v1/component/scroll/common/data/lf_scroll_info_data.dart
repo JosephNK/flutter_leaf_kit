@@ -20,11 +20,11 @@ class LFScrollInfoData extends Equatable {
 
   @override
   List<Object?> get props => [
-        scrollNotification,
-        position,
-        maxScrollExtent,
-        direction,
-        isEdgeTop,
-        isAppearTop,
-      ];
+    scrollNotification,
+    position,
+    maxScrollExtent,
+    direction,
+    isEdgeTop,
+    isAppearTop,
+  ];
 }
