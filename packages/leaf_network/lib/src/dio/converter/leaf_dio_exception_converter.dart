@@ -5,11 +5,11 @@ import 'package:built_value/standard_json_plugin.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_leaf_common/leaf_common.dart';
 
-import '../../http/exception/http_exception.dart';
+import '../../exception/leaf_http_exception.dart';
 import '../response/leaf_dio_response.dart';
-import 'leaf_dio_base_converter.dart';
+import 'leaf_dio_converter.dart';
 
-class LeafDioExceptionConverter implements DioExceptionConverter {
+class LeafDioExceptionConverter implements LeafDioExceptionConverterBase {
   final Serializers serializers;
   final int printMaxLength;
 
@@ -104,28 +104,32 @@ class LeafDioExceptionConverter implements DioExceptionConverter {
       headers: response.headers,
     );
 
-    HTTPException? exception;
+    LeafHttpException? exception;
     switch (statusCode) {
       case 400:
-        exception = BadRequestException(statusCode, errorMessage, body);
+        exception = LeafBadRequestException(statusCode, errorMessage, body);
         break;
       case 401:
-        exception = UnauthorisedException(statusCode, errorMessage, body);
+        exception = LeafUnauthorisedException(statusCode, errorMessage, body);
         break;
       case 404:
-        exception = NotFoundException(statusCode, errorMessage, body);
+        exception = LeafNotFoundException(statusCode, errorMessage, body);
         break;
       case 408:
-        exception = TimeoutRequestException(statusCode, errorMessage, body);
+        exception = LeafTimeoutRequestException(statusCode, errorMessage, body);
         break;
       case 500:
-        exception = InternalServerException(statusCode, errorMessage, body);
+        exception = LeafInternalServerException(statusCode, errorMessage, body);
         break;
       case 503:
-        exception = ServiceUnavailableException(statusCode, errorMessage, body);
+        exception = LeafServiceUnavailableException(
+          statusCode,
+          errorMessage,
+          body,
+        );
         break;
       default:
-        exception = UnknownException(statusCode, errorMessage, body);
+        exception = LeafUnknownException(statusCode, errorMessage, body);
         break;
     }
 
@@ -143,35 +147,47 @@ class LeafDioExceptionConverter implements DioExceptionConverter {
       requestOptions: RequestOptions(),
     );
 
-    HTTPException? exception;
+    LeafHttpException? exception;
     switch (dioExceptionType) {
       case DioExceptionType.connectionTimeout:
-        exception = ConnectionTimeoutException(
+        exception = LeafConnectionTimeoutException(
           -99990,
           dioExceptionMessage,
           null,
         );
         break;
       case DioExceptionType.sendTimeout:
-        exception = SendTimeoutException(-99991, dioExceptionMessage, null);
+        exception = LeafSendTimeoutException(-99991, dioExceptionMessage, null);
         break;
       case DioExceptionType.receiveTimeout:
-        exception = ReceiveTimeoutException(-99992, dioExceptionMessage, null);
+        exception = LeafReceiveTimeoutException(
+          -99992,
+          dioExceptionMessage,
+          null,
+        );
         break;
       case DioExceptionType.badCertificate:
-        exception = BadCertificateException(-99993, dioExceptionMessage, null);
+        exception = LeafBadCertificateException(
+          -99993,
+          dioExceptionMessage,
+          null,
+        );
         break;
       case DioExceptionType.badResponse:
-        exception = BadResponseException(-99994, dioExceptionMessage, null);
+        exception = LeafBadResponseException(-99994, dioExceptionMessage, null);
         break;
       case DioExceptionType.cancel:
-        exception = CancelException(-99995, dioExceptionMessage, null);
+        exception = LeafCancelException(-99995, dioExceptionMessage, null);
         break;
       case DioExceptionType.connectionError:
-        exception = ConnectionErrorException(-99996, dioExceptionMessage, null);
+        exception = LeafConnectionErrorException(
+          -99996,
+          dioExceptionMessage,
+          null,
+        );
         break;
       case DioExceptionType.unknown:
-        exception = UnknownException(-99999, dioExceptionMessage, null);
+        exception = LeafUnknownException(-99999, dioExceptionMessage, null);
         break;
     }
 

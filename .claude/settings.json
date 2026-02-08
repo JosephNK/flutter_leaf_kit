@@ -8,10 +8,24 @@
       "Skill(commit:*)",
       "Skill(update-version)",
       "Skill(update-version:*)",
+      "WebFetch(domain:docs.claude.com)",
       "WebFetch(domain:pub.dev)",
       "WebFetch(domain:github.com)",
       "WebFetch(domain:mantine.dev)"
     ]
   },
-  "teammateMode": "tmux"
+  "teammateMode": "tmux",
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "FILE=$(jq -r '.tool_input.file_path') && if [[ \"$FILE\" == *.dart ]]; then dart format \"$FILE\" && echo \"dart format completed: $FILE\"; fi"
+          }
+        ]
+      }
+    ]
+  }
 }

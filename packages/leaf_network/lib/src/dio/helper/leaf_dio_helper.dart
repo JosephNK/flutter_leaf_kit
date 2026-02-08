@@ -2,21 +2,21 @@ import 'package:dio/dio.dart';
 import 'package:flutter_leaf_common/leaf_common.dart';
 import 'package:http_parser/http_parser.dart';
 
-enum HttpDioMediaMimeType { image }
+enum LeafDioMediaMimeType { image }
 
-extension HttpDioMediaMimeTypeExt on HttpDioMediaMimeType {
+extension LeafDioMediaMimeTypeExt on LeafDioMediaMimeType {
   String get value {
     switch (this) {
-      case HttpDioMediaMimeType.image:
+      case LeafDioMediaMimeType.image:
         return 'image';
     }
   }
 }
 
-class HttpDioHelper {
+class LeafDioHelper {
   MultipartFile convertFromFile(
     LeafMultipartFile file, {
-    HttpDioMediaMimeType mediaMimeType = HttpDioMediaMimeType.image,
+    LeafDioMediaMimeType mediaMimeType = LeafDioMediaMimeType.image,
   }) {
     final path = file.getPath();
     final ext = file.getExtension();

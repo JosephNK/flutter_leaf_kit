@@ -2,11 +2,11 @@ import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 
-const Map<String, String> kContentTypeJsonHeader = {
+const Map<String, String> leafContentTypeJsonHeader = {
   HttpHeaders.contentTypeHeader: 'application/json',
 };
 
-const Map<String, String> kContentTypeMultipartHeader = {
+const Map<String, String> leafContentTypeMultipartHeader = {
   HttpHeaders.contentTypeHeader: 'multipart/form-data',
 };
 

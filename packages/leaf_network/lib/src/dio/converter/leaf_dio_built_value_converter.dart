@@ -5,15 +5,15 @@ import 'package:built_value/standard_json_plugin.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_leaf_common/leaf_common.dart';
 
-import '../../http/exception/http_exception.dart';
+import '../../exception/leaf_http_exception.dart';
 import '../response/leaf_dio_response.dart';
-import 'leaf_dio_base_converter.dart';
-import 'leaf_dio_built_value_json_key.dart';
+import 'leaf_dio_converter.dart';
+import 'leaf_dio_json_key.dart';
 
-class LeafDioBuiltValueConverter implements DioJsonConverter {
+class LeafDioBuiltValueConverter implements LeafDioJsonConverter {
   final Serializers serializers;
   final int printMaxLength;
-  final LeafDioBuiltValueJSONUndefinedKey? jsonUndefinedKey;
+  final LeafDioJsonUndefinedKey? jsonUndefinedKey;
 
   static Serializers? jsonSerializers;
 
@@ -167,9 +167,9 @@ class LeafDioBuiltValueConverter implements DioJsonConverter {
       errorMessage = '[DioBuiltValue ConvertError] $message';
     }
 
-    HTTPException? exception;
+    LeafHttpException? exception;
     if (isNotEmpty(errorMessage)) {
-      exception = UnknownException(statusCode, errorMessage, body);
+      exception = LeafUnknownException(statusCode, errorMessage, body);
     }
 
     final successResponse = LeafDioResponse<ResultType>(

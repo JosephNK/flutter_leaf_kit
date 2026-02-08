@@ -5,12 +5,12 @@ import 'package:dio/dio.dart';
 
 import '../response/leaf_dio_response.dart';
 
-abstract class DioJsonConverter {
+abstract class LeafDioJsonConverter {
   FutureOr<LeafDioResponse<ResultType>>
   convertJsonResponse<ResultType, ResultErrorType>(Response response);
 }
 
-abstract class DioExceptionConverter {
+abstract class LeafDioExceptionConverterBase {
   FutureOr<LeafDioResponse<ResultType>>
   convertDioException<ResultType, ResultErrorType>(DioException dioException);
 }

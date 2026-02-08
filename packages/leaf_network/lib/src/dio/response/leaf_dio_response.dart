@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 
-import '../../http/exception/http_exception.dart';
+import '../../exception/leaf_http_exception.dart';
 
 class LeafDioResponse<T> extends Response<T> {
   LeafDioResponse({
@@ -26,7 +26,7 @@ class LeafDioResponse<T> extends Response<T> {
         exception == null;
   }
 
-  HTTPException? get httpException {
+  LeafHttpException? get httpException {
     final exception = this.exception;
     return exception?.exception;
   }

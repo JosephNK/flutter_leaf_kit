@@ -4,44 +4,36 @@ import 'package:built_value/serializer.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_leaf_common/leaf_common.dart';
 
-import 'converter/leaf_dio_built_value_converter.dart';
-import 'converter/leaf_dio_built_value_json_key.dart';
-import 'converter/leaf_dio_exception_converter.dart';
-import 'interceptor/leaf_dio_curl_interceptor.dart';
-import 'interceptor/leaf_dio_request_interceptor.dart';
-import 'service/leaf_dio_base_service.dart';
-
-export 'package:dio/dio.dart';
-
-export 'converter/leaf_dio_built_value_json_key.dart';
-export 'interceptor/leaf_dio_request_interceptor.dart';
-export 'request/leaf_dio_request_header.dart';
-export 'response/leaf_dio_response.dart';
-export 'service/leaf_dio_base_service.dart';
+import '../converter/leaf_dio_built_value_converter.dart';
+import '../converter/leaf_dio_exception_converter.dart';
+import '../converter/leaf_dio_json_key.dart';
+import '../interceptor/leaf_dio_curl_interceptor.dart';
+import '../interceptor/leaf_dio_request_interceptor.dart';
+import '../service/leaf_dio_service.dart';
 
 Type _typeOf<T>() => T;
 
-typedef LeafHttpDioInterceptorBuilder = List<Interceptor>? Function(Dio dio);
+typedef LeafDioInterceptorBuilder = List<Interceptor>? Function(Dio dio);
 
-class LeafHttpDio {
+class LeafDioClient {
   late Dio dio;
   late LeafDioBuiltValueConverter converter;
   late LeafDioExceptionConverter errorConverter;
-  final Map<Type, DioService> _services = {};
+  final Map<Type, LeafDioServiceBase> _services = {};
   Future<String> Function()? _getTemporaryDirectoryPath;
 
-  Map<Type, DioService> get services => _services;
+  Map<Type, LeafDioServiceBase> get services => _services;
 
-  LeafHttpDio init({
+  LeafDioClient init({
     required Uri baseUrl,
     required Serializers responseSerializers,
-    required List<DioService> services,
-    LeafHttpDioInterceptorBuilder? interceptorBuilder,
-    LeafDioBuiltValueJSONUndefinedKey? jsonUndefinedKey,
+    required List<LeafDioServiceBase> services,
+    LeafDioInterceptorBuilder? interceptorBuilder,
+    LeafDioJsonUndefinedKey? jsonUndefinedKey,
     Duration connectTimeout = const Duration(seconds: 5),
     Duration receiveTimeout = const Duration(seconds: 60),
     int printMaxLength = 2024,
-    LeafHttpDioOnHeader? onHeader,
+    LeafDioOnHeader? onHeader,
     Future<String> Function()? getTemporaryDirectoryPath,
   }) {
     _getTemporaryDirectoryPath = getTemporaryDirectoryPath;
@@ -84,14 +76,14 @@ class LeafHttpDio {
     return this;
   }
 
-  ServiceType getService<ServiceType extends DioService>() {
+  ServiceType getService<ServiceType extends LeafDioServiceBase>() {
     final Type serviceType = _typeOf<ServiceType>();
-    if (serviceType == dynamic || serviceType == DioService) {
+    if (serviceType == dynamic || serviceType == LeafDioServiceBase) {
       throw Exception(
         'Service type should be provided, `dynamic` is not allowed.',
       );
     }
-    final DioService? service = _services[serviceType];
+    final LeafDioServiceBase? service = _services[serviceType];
     if (service == null) {
       throw Exception('Service of type \'$serviceType\' not found.');
     }
@@ -161,28 +153,28 @@ class LeafHttpDio {
 
 /// Not Recommend
 
-class LeafHttpSharedDio {
-  static final LeafHttpSharedDio _instance = LeafHttpSharedDio._internal();
-  static LeafHttpSharedDio get shared => _instance;
-  LeafHttpSharedDio._internal() {
-    Logging.d('LeafHttpSharedDio Init');
+class LeafDioSharedClient {
+  static final LeafDioSharedClient _instance = LeafDioSharedClient._internal();
+  static LeafDioSharedClient get shared => _instance;
+  LeafDioSharedClient._internal() {
+    Logging.d('LeafDioSharedClient Init');
   }
 
-  late LeafHttpDio lfHttpDio;
+  late LeafDioClient dioClient;
 
   void init({
     required Uri baseUrl,
     required Serializers responseSerializers,
-    required List<DioService> services,
-    LeafHttpDioInterceptorBuilder? interceptorBuilder,
-    LeafDioBuiltValueJSONUndefinedKey? jsonUndefinedKey,
+    required List<LeafDioServiceBase> services,
+    LeafDioInterceptorBuilder? interceptorBuilder,
+    LeafDioJsonUndefinedKey? jsonUndefinedKey,
     Duration connectTimeout = const Duration(seconds: 5),
     Duration receiveTimeout = const Duration(seconds: 60),
     int printMaxLength = 2024,
-    LeafHttpDioOnHeader? onHeader,
+    LeafDioOnHeader? onHeader,
     Future<String> Function()? getTemporaryDirectoryPath,
   }) {
-    lfHttpDio = LeafHttpDio().init(
+    dioClient = LeafDioClient().init(
       baseUrl: baseUrl,
       responseSerializers: responseSerializers,
       services: services,
@@ -196,14 +188,14 @@ class LeafHttpSharedDio {
     );
   }
 
-  ServiceType getService<ServiceType extends DioService>() {
+  ServiceType getService<ServiceType extends LeafDioServiceBase>() {
     final Type serviceType = _typeOf<ServiceType>();
-    if (serviceType == dynamic || serviceType == DioService) {
+    if (serviceType == dynamic || serviceType == LeafDioServiceBase) {
       throw Exception(
         'Service type should be provided, `dynamic` is not allowed.',
       );
     }
-    final DioService? service = lfHttpDio.services[serviceType];
+    final LeafDioServiceBase? service = dioClient.services[serviceType];
     if (service == null) {
       throw Exception('Service of type \'$serviceType\' not found.');
     }

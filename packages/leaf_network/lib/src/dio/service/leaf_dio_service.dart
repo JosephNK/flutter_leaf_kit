@@ -4,13 +4,13 @@ import '../converter/leaf_dio_built_value_converter.dart';
 import '../converter/leaf_dio_exception_converter.dart';
 import '../response/leaf_dio_response.dart';
 
-abstract class DioService {
+abstract class LeafDioServiceBase {
   late Dio dio;
   late LeafDioBuiltValueConverter converter;
   late LeafDioExceptionConverter errorConverter;
 }
 
-class LeafDioService extends DioService {
+class LeafDioService extends LeafDioServiceBase {
   /// Convenience method to make an HTTP GET request.
   Future<LeafDioResponse<R>> get<R, E>(
     String path, {

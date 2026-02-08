@@ -1,10 +1,10 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_leaf_common/leaf_common.dart';
 
-typedef LeafHttpDioOnHeader = Future<Map<String, dynamic>> Function();
+typedef LeafDioOnHeader = Future<Map<String, dynamic>> Function();
 
 class LeafDioRequestInterceptor extends InterceptorsWrapper {
-  final LeafHttpDioOnHeader? onHeader;
+  final LeafDioOnHeader? onHeader;
 
   LeafDioRequestInterceptor({this.onHeader});
 
