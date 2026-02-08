@@ -1,0 +1,36 @@
+# Flutter Leaf Platform Library - LLM Documentation
+
+This index lists Leaf Platform documentation pages formatted for LLMs.
+Each link points to a standalone Markdown file under the /llms path.
+
+## App
+
+- [App Utilities](https://github.com/JosephNK/flutter_leaf_kit/blob/main/llms/leaf_platform/app/app.md): Badge count, share, app tracking transparency, and URL launcher static utilities
+
+## App Info
+
+- [App Info](https://github.com/JosephNK/flutter_leaf_kit/blob/main/llms/leaf_platform/app-info/app-info.md): Singleton app information with build type, version display, and user agent
+
+## Device
+
+- [Device Manager](https://github.com/JosephNK/flutter_leaf_kit/blob/main/llms/leaf_platform/device/device.md): Singleton device info manager with screen metrics, OS details, and cache control
+
+## File
+
+- [File Manager](https://github.com/JosephNK/flutter_leaf_kit/blob/main/llms/leaf_platform/file/file.md): Static file CRUD and directory operations with path_provider
+
+## Location
+
+- [Location Manager](https://github.com/JosephNK/flutter_leaf_kit/blob/main/llms/leaf_platform/location/location.md): Singleton GPS location manager with position stream and permission handling
+
+## Map
+
+- [Map Utilities](https://github.com/JosephNK/flutter_leaf_kit/blob/main/llms/leaf_platform/map/map.md): Circle containment check and custom marker bitmap generation from IconData
+
+## Permission
+
+- [Permission Manager](https://github.com/JosephNK/flutter_leaf_kit/blob/main/llms/leaf_platform/permission/permission.md): Singleton permission request/check with Android SDK-level adaptation
+
+## WebView
+
+- [WebView](https://github.com/JosephNK/flutter_leaf_kit/blob/main/llms/leaf_platform/webview/webview.md): Full-featured WebView widget with controller, JavaScript channels, and navigation handling

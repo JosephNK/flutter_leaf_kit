@@ -36,7 +36,7 @@ HTTP communication layer built on Dio with interceptors, cookie management, and 
 
 Location information, Google Maps, WebView, URL launcher, sharing, app/device/file/permission management.
 
-- Documentation: _coming soon_
+- [Documentation Index](https://github.com/JosephNK/flutter_leaf_kit/blob/main/llms/leaf_platform/llms.txt)
 
 ### leaf_route — Page Navigation
 
