@@ -1,0 +1,8 @@
+# Flutter Leaf State Library - LLM Documentation
+
+This index lists Leaf State documentation pages formatted for LLMs.
+Each link points to a standalone Markdown file under the /llms path.
+
+## BLoC
+
+- [BLoC Utilities](https://github.com/JosephNK/flutter_leaf_kit/blob/main/llms/leaf_state/bloc/bloc.md): Base state, observer, screen consumer, and debounce transformer for BLoC state management

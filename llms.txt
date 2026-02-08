@@ -46,6 +46,6 @@ Page navigation helpers and modal presentation utilities.
 
 ### leaf_state — BLoC State Management
 
-BLoC state management utilities including observer, base state, and screen consumer.
+BLoC state management utilities including observer, base state, screen consumer, and debounce transformer.
 
-- Documentation: _coming soon_
+- [Documentation Index](https://github.com/JosephNK/flutter_leaf_kit/blob/main/llms/leaf_state/llms.txt)
