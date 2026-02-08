@@ -8,17 +8,29 @@ Repository: https://github.com/JosephNK/flutter_leaf_kit
 
 Each package has its own LLM documentation index under `/llms/<package>/llms.txt`.
 
+### leaf — Umbrella Package
+
+Re-exports all packages above for single-import convenience.
+
+- Documentation: _coming soon_
+
+### leaf_common — Common Utilities
+
+Shared utilities, extension functions, logging, date/time, data models, and type conversion used across all packages.
+
+- [Documentation Index](https://github.com/JosephNK/flutter_leaf_kit/blob/main/llms/leaf_common/llms.txt)
+
 ### leaf_component — UI Component Library
 
 Themed UI components built on Atomic Design (atoms, molecules, organisms, templates) with a design-token-based theme system.
 
 - [Documentation Index](https://github.com/JosephNK/flutter_leaf_kit/blob/main/llms/leaf_component/llms.txt)
 
-### leaf_common — Common Utilities
+### leaf_network — HTTP Networking
 
-Shared utilities, extension functions, logging, exception handling, date/time, data models, and type conversion used across all packages.
+HTTP communication layer built on Dio with interceptors, cookie management, and response handling.
 
-- [Documentation Index](https://github.com/JosephNK/flutter_leaf_kit/blob/main/llms/leaf_common/llms.txt)
+- [Documentation Index](https://github.com/JosephNK/flutter_leaf_kit/blob/main/llms/leaf_network/llms.txt)
 
 ### leaf_platform — Platform Services
 
@@ -32,20 +44,8 @@ Page navigation helpers and modal presentation utilities.
 
 - Documentation: _coming soon_
 
-### leaf_network — HTTP Networking
-
-HTTP communication layer built on Dio with interceptors, cookie management, and response handling.
-
-- Documentation: _coming soon_
-
 ### leaf_state — BLoC State Management
 
 BLoC state management utilities including observer, base state, and screen consumer.
-
-- Documentation: _coming soon_
-
-### leaf — Umbrella Package
-
-Re-exports all packages above for single-import convenience.
 
 - Documentation: _coming soon_

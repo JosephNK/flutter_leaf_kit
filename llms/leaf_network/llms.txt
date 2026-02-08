@@ -1,0 +1,26 @@
+# Flutter Leaf Network Library - LLM Documentation
+
+This index lists Leaf Network documentation pages formatted for LLMs.
+Each link points to a standalone Markdown file under the /llms path.
+
+## Exception
+
+- [HTTP Exception](https://github.com/JosephNK/flutter_leaf_kit/blob/main/llms/leaf_network/exception/exception.md): Base exception class with 16 HTTP/Dio subclasses and helper utilities
+
+## HTTP
+
+- [HTTP Overrides](https://github.com/JosephNK/flutter_leaf_kit/blob/main/llms/leaf_network/http/http-overrides.md): Global HttpClient configuration with connection limit
+
+## Cookie
+
+- [Cookie Store](https://github.com/JosephNK/flutter_leaf_kit/blob/main/llms/leaf_network/cookie/cookie-store.md): Singleton cookie persistence via SharedPreferences
+
+## Dio
+
+- [Client](https://github.com/JosephNK/flutter_leaf_kit/blob/main/llms/leaf_network/dio/client.md): Dio client initialization with converters, interceptors, and service registry
+- [Service](https://github.com/JosephNK/flutter_leaf_kit/blob/main/llms/leaf_network/dio/service.md): Abstract service base and typed GET/POST/PUT/DELETE methods
+- [Response](https://github.com/JosephNK/flutter_leaf_kit/blob/main/llms/leaf_network/dio/response.md): Typed response wrapper with success check and exception access
+- [Converter](https://github.com/JosephNK/flutter_leaf_kit/blob/main/llms/leaf_network/dio/converter.md): BuiltValue JSON converter and DioException converter with interfaces
+- [Interceptor](https://github.com/JosephNK/flutter_leaf_kit/blob/main/llms/leaf_network/dio/interceptor.md): cURL logging interceptor and request header/body interceptor
+- [Request Header](https://github.com/JosephNK/flutter_leaf_kit/blob/main/llms/leaf_network/dio/request-header.md): Header builder with device OS, version, and authorization support
+- [Helper](https://github.com/JosephNK/flutter_leaf_kit/blob/main/llms/leaf_network/dio/helper.md): Multipart file converter and media MIME type enum
