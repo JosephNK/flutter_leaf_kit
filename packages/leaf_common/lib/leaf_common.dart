@@ -12,9 +12,9 @@ export 'package:quiver/strings.dart';
 export 'package:string_validator/string_validator.dart';
 
 export 'src/cancelable/index.dart';
+export 'src/converter/index.dart';
 export 'src/datetime/index.dart';
 export 'src/exception/index.dart';
 export 'src/extension/index.dart';
 export 'src/logger/index.dart';
 export 'src/model/index.dart';
-export 'src/utils/index.dart';
