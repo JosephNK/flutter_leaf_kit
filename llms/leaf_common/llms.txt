@@ -1,0 +1,34 @@
+# Flutter Leaf Common Library - LLM Documentation
+
+This index lists Leaf Common documentation pages formatted for LLMs.
+Each link points to a standalone Markdown file under the /llms path.
+
+## Cancelable
+
+- [CancelableFuture](https://github.com/JosephNK/flutter_leaf_kit/blob/main/llms/leaf_common/cancelable/cancelable.md): Wrapper for cancelling a pending Future callback
+
+## DateTime
+
+- [Date & DateTime](https://github.com/JosephNK/flutter_leaf_kit/blob/main/llms/leaf_common/datetime/datetime.md): Date manipulation with Jiffy, lunar calendar support, and DateTime extensions
+
+## Exception
+
+- [Exception](https://github.com/JosephNK/flutter_leaf_kit/blob/main/llms/leaf_common/exception/exception.md): Simple message-based exception class
+
+## Extension
+
+- [Extensions](https://github.com/JosephNK/flutter_leaf_kit/blob/main/llms/leaf_common/extension/extensions.md): Utility extensions for Color, String, Number, List, Map, Uri, MediaQuery, FocusNode, GlobalKey, and AssetImage
+
+## Logger
+
+- [Logger](https://github.com/JosephNK/flutter_leaf_kit/blob/main/llms/leaf_common/logger/logger.md): Logging utilities with platform-aware console output
+
+## Model
+
+- [UIModel](https://github.com/JosephNK/flutter_leaf_kit/blob/main/llms/leaf_common/model/ui-model.md): Abstract base models with Equatable and payload support (V1 and V2)
+- [ResultValue](https://github.com/JosephNK/flutter_leaf_kit/blob/main/llms/leaf_common/model/result-value.md): Result/error value pattern for API responses with chained error display
+- [MultipartFile](https://github.com/JosephNK/flutter_leaf_kit/blob/main/llms/leaf_common/model/multipart-file.md): File model for multipart uploads supporting URI and XFile sources
+
+## Utils
+
+- [TypeConverter](https://github.com/JosephNK/flutter_leaf_kit/blob/main/llms/leaf_common/utils/type-converter.md): Safe dynamic-to-typed value converter

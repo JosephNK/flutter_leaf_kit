@@ -16,10 +16,16 @@ dependencies:
   # Leaf Kit Plugin (workspace에서 자동 해결)
   flutter_leaf_kit: any
 
+  dart_object_extension: ^0.4.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^6.0.0
+
+  build_runner: ^2.10.5
+  built_value_generator: ^8.12.3
+  dart_object_extension_gen: ^0.4.0
 
 flutter:
 

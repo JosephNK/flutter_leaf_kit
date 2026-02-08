@@ -16,13 +16,13 @@ Themed UI components built on Atomic Design (atoms, molecules, organisms, templa
 
 ### leaf_common — Common Utilities
 
-Shared utilities, extension functions, logging, and exception handling used across all packages.
+Shared utilities, extension functions, logging, exception handling, date/time, data models, and type conversion used across all packages.
 
-- Documentation: _coming soon_
+- [Documentation Index](https://github.com/JosephNK/flutter_leaf_kit/blob/main/llms/leaf_common/llms.txt)
 
-### leaf_datetime — Date & Time
+### leaf_platform — Platform Services
 
-Date/time management and localization (Korean, English).
+Location information, Google Maps, WebView, URL launcher, sharing, app/device/file/permission management.
 
 - Documentation: _coming soon_
 
@@ -34,37 +34,13 @@ Page navigation helpers and modal presentation utilities.
 
 ### leaf_network — HTTP Networking
 
-HTTP communication layer built on Dio with interceptors and response handling.
-
-- Documentation: _coming soon_
-
-### leaf_manager — App & Device Management
-
-App lifecycle, device info, file management, and permission handling.
+HTTP communication layer built on Dio with interceptors, cookie management, and response handling.
 
 - Documentation: _coming soon_
 
 ### leaf_state — BLoC State Management
 
-BLoC state management utilities.
-
-- Documentation: _coming soon_
-
-### leaf_location — Location Services
-
-Location information management built on Geolocator.
-
-- Documentation: _coming soon_
-
-### leaf_map — Google Maps
-
-Google Maps integration for Flutter.
-
-- Documentation: _coming soon_
-
-### leaf_webview — WebView
-
-WebView integration with controller and callback typedefs.
+BLoC state management utilities including observer, base state, and screen consumer.
 
 - Documentation: _coming soon_
 
