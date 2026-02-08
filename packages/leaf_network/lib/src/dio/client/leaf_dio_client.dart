@@ -1,8 +1,9 @@
 import 'dart:io';
+import 'dart:typed_data';
+import 'dart:ui' as ui;
 
 import 'package:built_value/serializer.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter_leaf_common/leaf_common.dart';
 
 import '../converter/leaf_dio_built_value_converter.dart';
 import '../converter/leaf_dio_exception_converter.dart';
@@ -87,7 +88,6 @@ class LeafDioClient {
     if (service == null) {
       throw Exception('Service of type \'$serviceType\' not found.');
     }
-
     return service as ServiceType;
   }
 
@@ -146,60 +146,35 @@ class LeafDioClient {
     }
   }
 
+  Future<Uint8List?> resizeDownloadImage(
+    Uri uri, {
+    required int targetWidth,
+    required int targetHeight,
+  }) async {
+    try {
+      final response = await dio.get<List<int>>(
+        uri.toString(),
+        options: Options(responseType: ResponseType.bytes),
+      );
+      final originalUnit8List = Uint8List.fromList(response.data!);
+      var codec = await ui.instantiateImageCodec(
+        originalUnit8List,
+        targetHeight: targetHeight,
+        targetWidth: targetWidth,
+      );
+      var frameInfo = await codec.getNextFrame();
+      ui.Image targetUiImage = frameInfo.image;
+      ByteData? targetByteData = await targetUiImage.toByteData(
+        format: ui.ImageByteFormat.png,
+      );
+      Uint8List? targetUint8List = targetByteData?.buffer.asUint8List();
+      return targetUint8List;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
   static CancelToken createCancelToken() {
     return CancelToken();
-  }
-}
-
-/// Not Recommend
-
-class LeafDioSharedClient {
-  static final LeafDioSharedClient _instance = LeafDioSharedClient._internal();
-  static LeafDioSharedClient get shared => _instance;
-  LeafDioSharedClient._internal() {
-    Logging.d('LeafDioSharedClient Init');
-  }
-
-  late LeafDioClient dioClient;
-
-  void init({
-    required Uri baseUrl,
-    required Serializers responseSerializers,
-    required List<LeafDioServiceBase> services,
-    LeafDioInterceptorBuilder? interceptorBuilder,
-    LeafDioJsonUndefinedKey? jsonUndefinedKey,
-    Duration connectTimeout = const Duration(seconds: 5),
-    Duration receiveTimeout = const Duration(seconds: 60),
-    int printMaxLength = 2024,
-    LeafDioOnHeader? onHeader,
-    Future<String> Function()? getTemporaryDirectoryPath,
-  }) {
-    dioClient = LeafDioClient().init(
-      baseUrl: baseUrl,
-      responseSerializers: responseSerializers,
-      services: services,
-      interceptorBuilder: interceptorBuilder,
-      jsonUndefinedKey: jsonUndefinedKey,
-      connectTimeout: connectTimeout,
-      receiveTimeout: receiveTimeout,
-      printMaxLength: printMaxLength,
-      onHeader: onHeader,
-      getTemporaryDirectoryPath: getTemporaryDirectoryPath,
-    );
-  }
-
-  ServiceType getService<ServiceType extends LeafDioServiceBase>() {
-    final Type serviceType = _typeOf<ServiceType>();
-    if (serviceType == dynamic || serviceType == LeafDioServiceBase) {
-      throw Exception(
-        'Service type should be provided, `dynamic` is not allowed.',
-      );
-    }
-    final LeafDioServiceBase? service = dioClient.services[serviceType];
-    if (service == null) {
-      throw Exception('Service of type \'$serviceType\' not found.');
-    }
-
-    return service as ServiceType;
   }
 }
