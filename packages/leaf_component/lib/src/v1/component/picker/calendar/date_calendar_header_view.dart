@@ -21,7 +21,8 @@ class DateCalendarHeaderView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final weekDays = LeafLocalizations.shared.localization.shortWeekdays;
+    final locale = Localizations.localeOf(context).toString();
+    final weekDays = DateFormat.EEEE(locale).dateSymbols.SHORTWEEKDAYS;
     final monthYear = LeafDate.parseFromDateTime(date).format('MMMM yyyy');
 
     return Visibility(
@@ -35,12 +36,7 @@ class DateCalendarHeaderView extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    LFText(
-                      monthYear,
-                      style: const TextStyle(
-                        fontSize: 16.0,
-                      ),
-                    ),
+                    LFText(monthYear, style: const TextStyle(fontSize: 16.0)),
                     // const Icon(LucideIcons.chevronRight, size: 18.0),
                   ],
                 ),
@@ -63,7 +59,7 @@ class DateCalendarHeaderView extends StatelessWidget {
                       child: const Icon(LucideIcons.chevronRight),
                     ),
                   ],
-                )
+                ),
               ],
             ),
           ),

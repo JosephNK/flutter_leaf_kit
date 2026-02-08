@@ -147,7 +147,7 @@ class _CalendarBetweenTimePickerContentState
                     children: [
                       Expanded(
                         child: LFText(
-                          _startTime.toCalMeridiemTimeString(),
+                          _startTime.toCalMeridiemTimeString(context),
                           style: TextStyle(
                               fontSize: 18.0, color: _getStartTimeColor()),
                           textAlign: TextAlign.left,
@@ -160,7 +160,7 @@ class _CalendarBetweenTimePickerContentState
                       ),
                       Expanded(
                         child: LFText(
-                          _endTime.toCalMeridiemTimeString(),
+                          _endTime.toCalMeridiemTimeString(context),
                           style: TextStyle(
                               fontSize: 18.0, color: _getEndTimeColor()),
                           textAlign: TextAlign.right,

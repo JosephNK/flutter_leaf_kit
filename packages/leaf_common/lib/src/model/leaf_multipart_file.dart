@@ -4,7 +4,10 @@ import 'dart:typed_data';
 import 'package:cross_file/cross_file.dart';
 import 'package:uuid/uuid.dart';
 
-import '../../leaf_common.dart';
+import '../extension/leaf_ext_string.dart';
+import '../extension/leaf_ext_uri.dart';
+import '../logger/leaf_logging.dart';
+import 'leaf_ui_model.dart';
 
 const kAllowFiles = ['.jpg', '.jpeg', '.png'];
 

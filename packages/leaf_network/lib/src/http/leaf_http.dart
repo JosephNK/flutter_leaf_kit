@@ -21,8 +21,9 @@ class LeafHttp {
       );
       var frameInfo = await codec.getNextFrame();
       ui.Image targetUiImage = frameInfo.image;
-      ByteData? targetByteData =
-          await targetUiImage.toByteData(format: ui.ImageByteFormat.png);
+      ByteData? targetByteData = await targetUiImage.toByteData(
+        format: ui.ImageByteFormat.png,
+      );
       Uint8List? targetUint8List = targetByteData?.buffer.asUint8List();
       return targetUint8List;
     } catch (e) {

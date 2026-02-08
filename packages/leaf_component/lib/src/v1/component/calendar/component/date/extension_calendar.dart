@@ -1,4 +1,4 @@
-import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_leaf_common/leaf_common.dart';
 
 /// Private Extension
@@ -20,10 +20,14 @@ extension DateCalendar on DateTime {
   List<DateTime> daysInMonth() {
     final date = this;
     final result = <DateTime>[];
-    final firstDayOfTheMonth =
-        LeafDate.parseFromList([date.year, date.month, 1]).dateTime;
-    final firstDay =
-        firstDayOfTheMonth.add(firstDayOfTheMonth.weekday.daysDuration);
+    final firstDayOfTheMonth = LeafDate.parseFromList([
+      date.year,
+      date.month,
+      1,
+    ]).dateTime;
+    final firstDay = firstDayOfTheMonth.add(
+      firstDayOfTheMonth.weekday.daysDuration,
+    );
     result.add(firstDay);
     for (var i = 0; i + 1 < 42; i++) {
       result.add(firstDay.add(Duration(days: i + 1)));
@@ -53,11 +57,11 @@ extension DateCalendar on DateTime {
     return daysInMonth().last;
   }
 
-// String toDateTimeIso8601() {
-//   DateTime localDateTime = toLocal();
-//   String formattedDateTime = localDateTime.toUtc().toIso8601String();
-//   return formattedDateTime;
-// }
+  // String toDateTimeIso8601() {
+  //   DateTime localDateTime = toLocal();
+  //   String formattedDateTime = localDateTime.toUtc().toIso8601String();
+  //   return formattedDateTime;
+  // }
 }
 
 @Deprecated('Use LeafCalendarView instead')
@@ -101,13 +105,16 @@ extension DateCalendar1 on DateTime {
   }
 
   String toCalSolarDateString() {
-    return LeafDate.parseFromDateTime(this).toSolarFromLunarFormat('yyyy-MM-dd');
+    return LeafDate.parseFromDateTime(
+      this,
+    ).toSolarFromLunarFormat('yyyy-MM-dd');
   }
 
-  String toCalMeridiemTimeString() {
+  String toCalMeridiemTimeString(BuildContext context) {
     DateFormat? formatter;
     try {
-      if (LeafLocalizations.shared.languageCode == 'ko') {
+      final languageCode = Localizations.localeOf(context).languageCode;
+      if (languageCode == 'ko') {
         formatter = DateFormat('aa hh:mm', 'ko');
       }
     } catch (e) {
@@ -117,20 +124,18 @@ extension DateCalendar1 on DateTime {
     return formatter.format(this);
   }
 
-  String toCalWeekDayDateString({
+  String toCalWeekDayDateString(
+    BuildContext context, {
     bool showTime = false,
     bool short = false,
     bool isLunar = false,
     bool visiblePrefix = false,
   }) {
-    DateFormat formatLocaleYearMonthDay() {
+    DateFormat formatLocaleYearMonthDay(BuildContext context) {
       try {
-        final languageCode = LeafLocalizations.shared.languageCode;
+        final languageCode = Localizations.localeOf(context).languageCode;
         if (languageCode == 'ko') {
-          final yearUnit = LeafLocalizations.shared.localization.year;
-          final monthUnit = LeafLocalizations.shared.localization.month;
-          final dayUnit = LeafLocalizations.shared.localization.day;
-          return DateFormat('yyyy$yearUnit MM$monthUnit dd$dayUnit', 'ko');
+          return DateFormat('yyyy년 MM월 dd일', 'ko');
         }
       } catch (e) {
         debugPrint('formatLocaleYearMonthDay error: $e');
@@ -138,9 +143,9 @@ extension DateCalendar1 on DateTime {
       return DateFormat('yyyy.MM.dd', 'en');
     }
 
-    DateFormat formatLocaleWeekDay() {
+    DateFormat formatLocaleWeekDay(BuildContext context) {
       try {
-        final locale = LeafLocalizations.shared.locale.toString();
+        final locale = Localizations.localeOf(context);
         return DateFormat.E(locale);
       } catch (e) {
         debugPrint('formatLocaleWeekDay error: $e');
@@ -155,23 +160,24 @@ extension DateCalendar1 on DateTime {
       return '$year.$month.$day';
     }
 
+    final languageCode = Localizations.localeOf(context).languageCode;
     String prefix = !isLunar
-        ? LeafLocalizations.shared.localization.shortSolar
-        : LeafLocalizations.shared.localization.shortLunar;
+        ? (languageCode == 'ko' ? '양' : 'Solar')
+        : (languageCode == 'ko' ? '음' : 'Lunar');
     DateTime? dateTime = !isLunar
         ? this
         : LeafDate.parseFromString(
             LeafDate.parseFromDateTime(this).toLunarFormat('yyyy-MM-dd'),
           ).dateTime;
-    String dateStr = formatLocaleYearMonthDay().format(dateTime);
-    String weekDayStr = formatLocaleWeekDay().format(dateTime);
+    String dateStr = formatLocaleYearMonthDay(context).format(dateTime);
+    String weekDayStr = formatLocaleWeekDay(context).format(dateTime);
     if (short) {
       dateStr = toNormalDateDisplay(dateTime); // ex., 2023.01.01
     }
 
     String result = '$dateStr ($weekDayStr)';
     if (showTime) {
-      String timeStr = toCalMeridiemTimeString();
+      String timeStr = toCalMeridiemTimeString(context);
       result = '$dateStr $timeStr ($weekDayStr)';
     }
     return visiblePrefix ? '$prefix $result' : result;

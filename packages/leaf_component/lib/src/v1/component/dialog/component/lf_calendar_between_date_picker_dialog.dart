@@ -196,7 +196,7 @@ class _CalendarBetweenDatePickerContentState
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             LFAutoSizeText(
-                              _startDate.toCalWeekDayDateString(
+                              _startDate.toCalWeekDayDateString(context,
                                   short: true,
                                   isLunar: isLunar,
                                   visiblePrefix: isLunar),
@@ -211,7 +211,7 @@ class _CalendarBetweenDatePickerContentState
                               child: Padding(
                                 padding: const EdgeInsets.only(top: 2.0),
                                 child: LFText(
-                                  _startDate.toCalWeekDayDateString(
+                                  _startDate.toCalWeekDayDateString(context,
                                       short: true,
                                       isLunar: false,
                                       visiblePrefix: isLunar),
@@ -235,7 +235,7 @@ class _CalendarBetweenDatePickerContentState
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
                             LFAutoSizeText(
-                              _endDate.toCalWeekDayDateString(
+                              _endDate.toCalWeekDayDateString(context,
                                   short: true,
                                   isLunar: isLunar,
                                   visiblePrefix: isLunar),
@@ -250,7 +250,7 @@ class _CalendarBetweenDatePickerContentState
                               child: Padding(
                                 padding: const EdgeInsets.only(top: 2.0),
                                 child: LFText(
-                                  _endDate.toCalWeekDayDateString(
+                                  _endDate.toCalWeekDayDateString(context,
                                       short: true,
                                       isLunar: isLunar,
                                       visiblePrefix: isLunar),
