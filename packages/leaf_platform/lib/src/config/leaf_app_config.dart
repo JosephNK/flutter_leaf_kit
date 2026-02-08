@@ -8,17 +8,17 @@ import 'leaf_build_type.dart';
 
 export 'leaf_build_type.dart';
 
-class LeafAppInfo {
-  final BuildType buildType;
+class LeafAppConfig {
+  final LeafBuildType buildType;
   final String packageName;
   final String packageVersion;
   final String packageBuildNumber;
   final String platform;
 
-  static LeafAppInfo? _instance;
-  static LeafAppInfo get instance => _instance!;
+  static LeafAppConfig? _instance;
+  static LeafAppConfig get instance => _instance!;
 
-  const LeafAppInfo._internal(
+  const LeafAppConfig._internal(
     this.buildType, {
     required this.packageName,
     required this.packageVersion,
@@ -26,10 +26,10 @@ class LeafAppInfo {
     required this.platform,
   });
 
-  bool get isProduction => (buildType == BuildType.production);
-  bool get isDevelopment => (buildType == BuildType.development);
-  bool get isStaging => (buildType == BuildType.staging);
-  bool get isTest => (buildType == BuildType.test);
+  bool get isProduction => (buildType == LeafBuildType.production);
+  bool get isDevelopment => (buildType == LeafBuildType.development);
+  bool get isStaging => (buildType == LeafBuildType.staging);
+  bool get isTest => (buildType == LeafBuildType.test);
 
   String getDisplayAppVersion({
     bool showBuildNumber = false,
@@ -50,7 +50,7 @@ class LeafAppInfo {
     return '$appName-$platform-$deployment-$packageVersion.$packageBuildNumber';
   }
 
-  factory LeafAppInfo({
+  factory LeafAppConfig({
     required String packageName,
     required String packageVersion,
     required String packageBuildNumber,
@@ -62,16 +62,16 @@ class LeafAppInfo {
       platform = Platform.isIOS ? 'ios' : 'aos';
     }
 
-    var buildType = BuildType.production;
+    var buildType = LeafBuildType.production;
     if (packageName.contains('dev')) {
-      buildType = BuildType.development;
+      buildType = LeafBuildType.development;
     } else if (packageName.contains('staging')) {
-      buildType = BuildType.staging;
+      buildType = LeafBuildType.staging;
     } else if (packageName.contains('test')) {
-      buildType = BuildType.test;
+      buildType = LeafBuildType.test;
     }
 
-    _instance ??= LeafAppInfo._internal(
+    _instance ??= LeafAppConfig._internal(
       buildType,
       packageName: packageName,
       packageVersion: packageVersion,
@@ -82,9 +82,9 @@ class LeafAppInfo {
     return _instance!;
   }
 
-  static Future<LeafAppInfo> fromInfo() async {
+  static Future<LeafAppConfig> fromInfo() async {
     if (kIsWeb) {
-      return LeafAppInfo(
+      return LeafAppConfig(
         packageName: 'web',
         packageVersion: '',
         packageBuildNumber: '',
@@ -94,7 +94,7 @@ class LeafAppInfo {
     final packageName = packageInfo.packageName;
     final packageVersion = packageInfo.version;
     final packageBuildNumber = packageInfo.buildNumber;
-    return LeafAppInfo(
+    return LeafAppConfig(
       packageName: packageName,
       packageVersion: packageVersion,
       packageBuildNumber: packageBuildNumber,

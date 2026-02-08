@@ -3,13 +3,13 @@
 This index lists Leaf Platform documentation pages formatted for LLMs.
 Each link points to a standalone Markdown file under the /llms path.
 
-## App
+## Config
 
-- [App Utilities](https://github.com/JosephNK/flutter_leaf_kit/blob/main/llms/leaf_platform/app/app.md): Badge count, share, app tracking transparency, and URL launcher static utilities
+- [App Config](https://github.com/JosephNK/flutter_leaf_kit/blob/main/llms/leaf_platform/config/config.md): Singleton app configuration with build type, version display, and user agent
 
-## App Info
+## System
 
-- [App Info](https://github.com/JosephNK/flutter_leaf_kit/blob/main/llms/leaf_platform/app-info/app-info.md): Singleton app information with build type, version display, and user agent
+- [System Utilities](https://github.com/JosephNK/flutter_leaf_kit/blob/main/llms/leaf_platform/system/system.md): Badge count, share, app tracking transparency, and URL launcher static utilities
 
 ## Device
 

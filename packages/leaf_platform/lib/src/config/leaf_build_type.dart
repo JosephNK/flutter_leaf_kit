@@ -1,33 +1,33 @@
-enum BuildType {
+enum LeafBuildType {
   production, // Live
   development, // Dev
   staging, // Sta
   test, // QA
 }
 
-extension BuildTypeExt on BuildType {
+extension LeafBuildTypeExt on LeafBuildType {
   String get longName {
     switch (this) {
-      case BuildType.production:
+      case LeafBuildType.production:
         return 'production';
-      case BuildType.development:
+      case LeafBuildType.development:
         return 'development';
-      case BuildType.staging:
+      case LeafBuildType.staging:
         return 'staging';
-      case BuildType.test:
+      case LeafBuildType.test:
         return 'test';
     }
   }
 
   String get shortName {
     switch (this) {
-      case BuildType.production:
+      case LeafBuildType.production:
         return 'prod';
-      case BuildType.development:
+      case LeafBuildType.development:
         return 'dev';
-      case BuildType.staging:
+      case LeafBuildType.staging:
         return 'stg';
-      case BuildType.test:
+      case LeafBuildType.test:
         return 'test';
     }
   }

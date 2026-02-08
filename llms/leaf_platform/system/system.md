@@ -1,6 +1,6 @@
-# App Utilities
+# System Utilities
 
-Four static utility classes for common app-level operations: badge count, sharing, app tracking transparency (iOS), and URL launching.
+Four static utility classes for common system-level operations: badge count, sharing, app tracking transparency (iOS), and URL launching.
 
 ## API Reference
 

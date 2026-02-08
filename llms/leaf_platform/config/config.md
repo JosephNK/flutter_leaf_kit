@@ -1,10 +1,10 @@
-# LeafAppInfo
+# LeafAppConfig
 
 Singleton that holds app package metadata (name, version, build number, platform) and derives the build type from the package name. Provides display version and user agent string generation.
 
 ## API Reference
 
-### LeafAppInfo
+### LeafAppConfig
 
 #### Factory Constructor
 
@@ -20,14 +20,14 @@ The factory determines `platform` (`ios`, `aos`, `web`) and `buildType` based on
 
 | Method | Return Type | Description |
 |--------|-------------|-------------|
-| `LeafAppInfo.fromInfo()` | `Future<LeafAppInfo>` | Creates instance from `PackageInfo.fromPlatform()` |
+| `LeafAppConfig.fromInfo()` | `Future<LeafAppConfig>` | Creates instance from `PackageInfo.fromPlatform()` |
 
 #### Properties
 
 | Property | Type | Description |
 |----------|------|-------------|
-| `instance` | `LeafAppInfo` | Singleton access (throws if not initialized) |
-| `buildType` | `BuildType` | Derived build type |
+| `instance` | `LeafAppConfig` | Singleton access (throws if not initialized) |
+| `buildType` | `LeafBuildType` | Derived build type |
 | `packageName` | `String` | App package name |
 | `packageVersion` | `String` | Version string |
 | `packageBuildNumber` | `String` | Build number |
@@ -44,7 +44,7 @@ The factory determines `platform` (`ios`, `aos`, `web`) and `buildType` based on
 | `getDisplayAppVersion({bool showBuildNumber, bool showDeployment})` | `String` | Formatted version string (e.g., `development 1.0.0(1)`) |
 | `userAgent(String appName)` | `String` | User agent string (e.g., `MyApp-ios-development-1.0.0.1`) |
 
-### BuildType (Enum)
+### LeafBuildType (Enum)
 
 | Value | Description |
 |-------|-------------|
@@ -53,7 +53,7 @@ The factory determines `platform` (`ios`, `aos`, `web`) and `buildType` based on
 | `staging` | Staging build |
 | `test` | QA/test build |
 
-### BuildTypeExt (Extension on BuildType)
+### LeafBuildTypeExt (Extension on LeafBuildType)
 
 | Property | Type | Description |
 |----------|------|-------------|
@@ -65,13 +65,13 @@ The factory determines `platform` (`ios`, `aos`, `web`) and `buildType` based on
 ### Initialize from Platform
 
 ```dart
-final appInfo = await LeafAppInfo.fromInfo();
+final appConfig = await LeafAppConfig.fromInfo();
 ```
 
 ### Initialize Manually
 
 ```dart
-final appInfo = LeafAppInfo(
+final appConfig = LeafAppConfig(
   packageName: 'com.example.app.dev',
   packageVersion: '1.2.0',
   packageBuildNumber: '42',
@@ -81,15 +81,15 @@ final appInfo = LeafAppInfo(
 ### Access Singleton
 
 ```dart
-final info = LeafAppInfo.instance;
-print(info.isProduction); // false
-print(info.buildType.shortName); // 'dev'
+final config = LeafAppConfig.instance;
+print(config.isProduction); // false
+print(config.buildType.shortName); // 'dev'
 ```
 
 ### Display Version
 
 ```dart
-final version = LeafAppInfo.instance.getDisplayAppVersion(
+final version = LeafAppConfig.instance.getDisplayAppVersion(
   showBuildNumber: true,
   showDeployment: true,
 ); // 'development 1.2.0(42)'
@@ -98,6 +98,6 @@ final version = LeafAppInfo.instance.getDisplayAppVersion(
 ### User Agent
 
 ```dart
-final ua = LeafAppInfo.instance.userAgent('MyApp');
+final ua = LeafAppConfig.instance.userAgent('MyApp');
 // 'MyApp-ios-development-1.2.0.42'
 ```
