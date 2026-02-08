@@ -66,7 +66,23 @@ def main():
         print(f"[Error] develop pull 실패: {e}")
         sys.exit(1)
 
-    # 4. main 브랜치로 전환
+    # 4. develop에 push할 커밋이 있으면 먼저 push
+    commits_ahead = int(repo.git.rev_list("--count", "origin/develop..develop"))
+    if commits_ahead > 0:
+        if args.dry_run:
+            print(f"[Dry-run] develop 브랜치에 push되지 않은 {commits_ahead}개의 커밋 발견 (push 생략)")
+        else:
+            try:
+                print(f"[..] develop 브랜치에 push되지 않은 {commits_ahead}개의 커밋 발견, push 중...")
+                repo.git.push("origin", "develop")
+                print("[OK] develop 브랜치 push 완료")
+            except GitCommandError as e:
+                print(f"[Error] develop push 실패: {e}")
+                sys.exit(1)
+    else:
+        print("[OK] develop 브랜치에 push할 커밋 없음")
+
+    # 5. main 브랜치로 전환
     try:
         print("[..] main 브랜치로 전환 중...")
         repo.git.checkout("main")
@@ -75,7 +91,7 @@ def main():
         print(f"[Error] main 브랜치 전환 실패: {e}")
         sys.exit(1)
 
-    # 5. main 최신화
+    # 6. main 최신화
     try:
         print("[..] main 브랜치 pull 중...")
         repo.git.pull("origin", "main")
@@ -85,7 +101,7 @@ def main():
         repo.git.checkout("develop")
         sys.exit(1)
 
-    # 6. develop → main 머지
+    # 7. develop → main 머지
     try:
         print("[..] develop → main 머지 중...")
         repo.git.merge("develop")
@@ -95,7 +111,7 @@ def main():
         print("[Info] 충돌을 해결한 후 수동으로 진행해주세요.")
         sys.exit(1)
 
-    # 7. main push
+    # 8. main push
     if args.dry_run:
         print("[Dry-run] push 생략 (--dry-run)")
     else:
@@ -108,7 +124,7 @@ def main():
             print("[Info] 현재 main 브랜치에 머지된 상태입니다. 수동으로 push 해주세요.")
             sys.exit(1)
 
-    # 8. develop 브랜치로 복귀
+    # 9. develop 브랜치로 복귀
     try:
         print("[..] develop 브랜치로 복귀 중...")
         repo.git.checkout("develop")
