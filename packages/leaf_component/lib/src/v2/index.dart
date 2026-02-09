@@ -1,6 +1,7 @@
 export 'atoms/animated/index.dart';
 export 'atoms/badge/index.dart';
 export 'atoms/button/index.dart';
+export 'atoms/card/index.dart';
 export 'atoms/checkbox/index.dart';
 export 'atoms/chip/index.dart';
 export 'atoms/icon/index.dart';
@@ -12,14 +13,11 @@ export 'atoms/size/index.dart';
 export 'atoms/skeleton/index.dart';
 export 'atoms/slider/index.dart';
 export 'atoms/switch/index.dart';
-// Atoms
 export 'atoms/text/index.dart';
 export 'molecules/appbar/index.dart';
 export 'molecules/ratingbar/index.dart';
 export 'molecules/tabs/index.dart';
-// Molecules
 export 'molecules/textfield/index.dart';
-// Organisms
 export 'organisms/accordion/index.dart';
 export 'organisms/bottomsheet/index.dart';
 export 'organisms/calendar/index.dart';
@@ -35,5 +33,4 @@ export 'shared/index.dart';
 export 'templates/layout/index.dart';
 export 'templates/navigationbar/index.dart';
 export 'templates/popscope/index.dart';
-// Templates
 export 'templates/screen/index.dart';

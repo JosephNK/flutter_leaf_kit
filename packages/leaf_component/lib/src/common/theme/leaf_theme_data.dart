@@ -9,6 +9,7 @@ import 'component/leaf_appbar_theme_data.dart';
 import 'component/leaf_badge_theme_data.dart';
 import 'component/leaf_bottomsheet_theme_data.dart';
 import 'component/leaf_button_theme_data.dart';
+import 'component/leaf_card_theme_data.dart';
 import 'component/leaf_calendar_theme_data.dart';
 import 'component/leaf_checkbox_theme_data.dart';
 import 'component/leaf_chip_theme_data.dart';
@@ -38,6 +39,7 @@ class LeafThemeData {
 
   // Component themes
   final LeafButtonThemeData? buttonTheme;
+  final LeafCardThemeData? cardTheme;
   final LeafAppBarThemeData? appBarTheme;
   final LeafTextFieldThemeData? textFieldTheme;
   final LeafDialogThemeData? dialogTheme;
@@ -69,6 +71,7 @@ class LeafThemeData {
     required this.radius,
     required this.duration,
     this.buttonTheme,
+    this.cardTheme,
     this.appBarTheme,
     this.textFieldTheme,
     this.dialogTheme,
@@ -123,6 +126,7 @@ class LeafThemeData {
     LeafRadius? radius,
     LeafDuration? duration,
     LeafButtonThemeData? buttonTheme,
+    LeafCardThemeData? cardTheme,
     LeafAppBarThemeData? appBarTheme,
     LeafTextFieldThemeData? textFieldTheme,
     LeafDialogThemeData? dialogTheme,
@@ -154,6 +158,7 @@ class LeafThemeData {
       radius: radius ?? this.radius,
       duration: duration ?? this.duration,
       buttonTheme: buttonTheme ?? this.buttonTheme,
+      cardTheme: cardTheme ?? this.cardTheme,
       appBarTheme: appBarTheme ?? this.appBarTheme,
       textFieldTheme: textFieldTheme ?? this.textFieldTheme,
       dialogTheme: dialogTheme ?? this.dialogTheme,
@@ -188,6 +193,7 @@ class LeafThemeData {
       radius: LeafRadius.lerp(a.radius, b.radius, t),
       duration: t < 0.5 ? a.duration : b.duration,
       buttonTheme: t < 0.5 ? a.buttonTheme : b.buttonTheme,
+      cardTheme: t < 0.5 ? a.cardTheme : b.cardTheme,
       appBarTheme: t < 0.5 ? a.appBarTheme : b.appBarTheme,
       textFieldTheme: t < 0.5 ? a.textFieldTheme : b.textFieldTheme,
       dialogTheme: t < 0.5 ? a.dialogTheme : b.dialogTheme,

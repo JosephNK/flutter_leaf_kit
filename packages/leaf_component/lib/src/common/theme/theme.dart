@@ -10,6 +10,7 @@ export 'component/leaf_appbar_theme_data.dart';
 export 'component/leaf_badge_theme_data.dart';
 export 'component/leaf_bottomsheet_theme_data.dart';
 export 'component/leaf_button_theme_data.dart';
+export 'component/leaf_card_theme_data.dart';
 export 'component/leaf_calendar_theme_data.dart';
 export 'component/leaf_checkbox_theme_data.dart';
 export 'component/leaf_chip_theme_data.dart';

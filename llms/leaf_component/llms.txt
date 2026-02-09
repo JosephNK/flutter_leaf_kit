@@ -27,6 +27,7 @@ Each link points to a standalone Markdown file under the /llms path.
 - [Text](https://github.com/JosephNK/flutter_leaf_kit/blob/main/llms/leaf_component/v2/atoms/text.md): Themed text widget with CJK underline workaround
 - [Icon](https://github.com/JosephNK/flutter_leaf_kit/blob/main/llms/leaf_component/v2/atoms/icon.md): Icon wrapper with theme integration
 - [Badge](https://github.com/JosephNK/flutter_leaf_kit/blob/main/llms/leaf_component/v2/atoms/badge.md): Notification badge indicator
+- [Card](https://github.com/JosephNK/flutter_leaf_kit/blob/main/llms/leaf_component/v2/atoms/card.md): Themed card with elevated/outlined/filled variants, header/footer slots, and tap support
 - [Button](https://github.com/JosephNK/flutter_leaf_kit/blob/main/llms/leaf_component/v2/atoms/button.md): Interactive button with loading states and lock gesture
 - [CheckBox](https://github.com/JosephNK/flutter_leaf_kit/blob/main/llms/leaf_component/v2/atoms/checkbox.md): Single checkbox and multi-selection checkbox group
 - [Radio](https://github.com/JosephNK/flutter_leaf_kit/blob/main/llms/leaf_component/v2/atoms/radio.md): Single radio button and radio button group
