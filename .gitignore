@@ -33,3 +33,4 @@ build/
 .iml
 .playwright-mcp/
 .claude/*.local.json
+.mcp.json
