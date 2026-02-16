@@ -5,10 +5,7 @@ import '../../common/models/component_category.dart';
 import 'component_registry.dart';
 
 class ComponentListScreen extends LeafScreenStatefulWidget {
-  const ComponentListScreen({
-    super.key,
-    required this.category,
-  });
+  const ComponentListScreen({super.key, required this.category});
 
   final ComponentCategory category;
 
@@ -19,9 +16,7 @@ class ComponentListScreen extends LeafScreenStatefulWidget {
 class _ComponentListScreenState extends LeafScreenState<ComponentListScreen> {
   @override
   PreferredSizeWidget? buildAppBar(BuildContext context, Object? state) {
-    return LeafAppBar(
-      title: LeafAppBarTitle(text: widget.category.label),
-    );
+    return LeafAppBar(title: LeafAppBarTitle(text: widget.category.label));
   }
 
   @override
@@ -39,14 +34,9 @@ class _ComponentListScreenState extends LeafScreenState<ComponentListScreen> {
         final item = items[index];
         return ListTile(
           title: Text(item.title, style: typography.bodyLarge),
-          trailing: Icon(
-            Icons.chevron_right,
-            color: colors.onSurfaceVariant,
-          ),
-          onTap: () => Navigator.push(
-            context,
-            MaterialPageRoute(builder: item.builder),
-          ),
+          trailing: Icon(Icons.chevron_right, color: colors.onSurfaceVariant),
+          onTap: () =>
+              Navigator.push(context, MaterialPageRoute(builder: item.builder)),
         );
       },
     );

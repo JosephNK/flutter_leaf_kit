@@ -34,10 +34,7 @@ class _ExampleAppState extends State<ExampleApp> {
           brightness: _isDark ? Brightness.dark : Brightness.light,
           colorSchemeSeed: themeData.colors.primary,
         ),
-        home: HomeScreen(
-          isDark: _isDark,
-          onToggleTheme: _toggleTheme,
-        ),
+        home: HomeScreen(isDark: _isDark, onToggleTheme: _toggleTheme),
       ),
     );
   }

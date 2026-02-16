@@ -36,7 +36,10 @@ class _ListViewScreenState extends LeafScreenState<ListViewScreen> {
               ),
             ),
             title: Text(item, style: typography.bodyLarge),
-            subtitle: Text('Description for $item', style: typography.bodySmall),
+            subtitle: Text(
+              'Description for $item',
+              style: typography.bodySmall,
+            ),
           ),
         );
       },

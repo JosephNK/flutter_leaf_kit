@@ -37,9 +37,7 @@ class _GridViewScreenState extends LeafScreenState<GridViewScreen> {
             color: colors.surfaceVariant,
             borderRadius: BorderRadius.circular(radius.md),
           ),
-          child: Center(
-            child: Text(item, style: typography.bodyMedium),
-          ),
+          child: Center(child: Text(item, style: typography.bodyMedium)),
         );
       },
     );

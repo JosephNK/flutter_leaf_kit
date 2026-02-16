@@ -53,7 +53,8 @@ class _SliderScreenState extends LeafScreenState<SliderScreen> {
           title: 'Range Slider',
           children: [
             ShowcaseTile(
-              label: 'Range (${_rangeValues.start.toInt()} - ${_rangeValues.end.toInt()})',
+              label:
+                  'Range (${_rangeValues.start.toInt()} - ${_rangeValues.end.toInt()})',
               child: LeafRangeSlider(
                 values: _rangeValues,
                 min: 0,

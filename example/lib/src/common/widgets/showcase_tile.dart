@@ -2,11 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_leaf_kit/flutter_leaf_kit.dart';
 
 class ShowcaseTile extends StatelessWidget {
-  const ShowcaseTile({
-    super.key,
-    required this.label,
-    required this.child,
-  });
+  const ShowcaseTile({super.key, required this.label, required this.child});
 
   final String label;
   final Widget child;

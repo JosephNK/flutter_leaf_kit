@@ -43,9 +43,7 @@ class _PopScopeScreenState extends LeafScreenState<PopScopeScreen> {
                 '  child: YourAppContent(),\n'
                 '  duration: Duration(seconds: 2),\n'
                 ')',
-                style: typography.bodySmall.copyWith(
-                  fontFamily: 'monospace',
-                ),
+                style: typography.bodySmall.copyWith(fontFamily: 'monospace'),
               ),
             ),
           ],

@@ -11,8 +11,7 @@ class ThemeShowcaseScreen extends LeafScreenStatefulWidget {
   State<ThemeShowcaseScreen> createState() => _ThemeShowcaseScreenState();
 }
 
-class _ThemeShowcaseScreenState
-    extends LeafScreenState<ThemeShowcaseScreen> {
+class _ThemeShowcaseScreenState extends LeafScreenState<ThemeShowcaseScreen> {
   @override
   PreferredSizeWidget? buildAppBar(BuildContext context, Object? state) {
     return const LeafAppBar(title: LeafAppBarTitle(text: 'Theme Showcase'));
@@ -143,8 +142,10 @@ class _ThemeShowcaseScreenState
             ),
           ),
           const SizedBox(width: 8),
-          Text('${value.toStringAsFixed(0)}pt',
-              style: const TextStyle(fontSize: 12)),
+          Text(
+            '${value.toStringAsFixed(0)}pt',
+            style: const TextStyle(fontSize: 12),
+          ),
         ],
       ),
     );

@@ -37,10 +37,7 @@ class _BadgeScreenState extends LeafScreenState<BadgeScreen> {
             ),
             ShowcaseTile(
               label: 'Custom color',
-              child: LeafBadge(
-                text: '5',
-                backgroundColor: colors.primary,
-              ),
+              child: LeafBadge(text: '5', backgroundColor: colors.primary),
             ),
           ],
         ),
@@ -66,11 +63,7 @@ class _BadgeScreenState extends LeafScreenState<BadgeScreen> {
                 clipBehavior: Clip.none,
                 children: [
                   const Icon(Icons.notifications, size: 32),
-                  Positioned(
-                    right: -6,
-                    top: -6,
-                    child: LeafBadge(text: '3'),
-                  ),
+                  Positioned(right: -6, top: -6, child: LeafBadge(text: '3')),
                 ],
               ),
             ),

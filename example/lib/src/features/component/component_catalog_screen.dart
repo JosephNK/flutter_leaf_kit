@@ -16,9 +16,7 @@ class _ComponentCatalogScreenState
     extends LeafScreenState<ComponentCatalogScreen> {
   @override
   PreferredSizeWidget? buildAppBar(BuildContext context, Object? state) {
-    return const LeafAppBar(
-      title: LeafAppBarTitle(text: 'Components'),
-    );
+    return const LeafAppBar(title: LeafAppBarTitle(text: 'Components'));
   }
 
   @override
@@ -48,10 +46,7 @@ class _ComponentCatalogScreenState
               '${items.length} components',
               style: typography.bodySmall,
             ),
-            trailing: Icon(
-              Icons.chevron_right,
-              color: colors.onSurfaceVariant,
-            ),
+            trailing: Icon(Icons.chevron_right, color: colors.onSurfaceVariant),
             onTap: () => Navigator.push(
               context,
               MaterialPageRoute(

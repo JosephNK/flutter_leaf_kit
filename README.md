@@ -24,7 +24,7 @@ Below is a partial guide to using the package.
       url: https://github.com/JosephNK/flutter_leaf_kit.git
       ref: main or 'v2.0.0' or 'b23ce51'
       path: ./packages/leaf_common
-  
+
   flutter_leaf_component:
     git:
       url: https://github.com/JosephNK/flutter_leaf_kit.git
@@ -39,6 +39,9 @@ Below is a partial guide to using the package.
 ```bash
 # Install dependencies (Melos)
 melos bootstrap
+
+# Poetry 의존성 설치 및 pre-commit git hooks를 설정
+melos run setup
 
 # Build all
 melos run build

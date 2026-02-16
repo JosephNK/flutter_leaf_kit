@@ -105,9 +105,9 @@ class _HomeScreenState extends LeafScreenState<HomeScreen> {
               enabled: entry.enabled,
               onTap: entry.enabled
                   ? () => Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: entry.builder),
-                      )
+                      context,
+                      MaterialPageRoute(builder: entry.builder),
+                    )
                   : null,
             ),
           ),
