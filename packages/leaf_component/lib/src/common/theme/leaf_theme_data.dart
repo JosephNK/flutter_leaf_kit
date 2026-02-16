@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 import '../tokens/leaf_colors.dart';
 import '../tokens/leaf_duration.dart';
 import '../tokens/leaf_elevation.dart';
@@ -9,8 +11,8 @@ import 'component/leaf_appbar_theme_data.dart';
 import 'component/leaf_badge_theme_data.dart';
 import 'component/leaf_bottomsheet_theme_data.dart';
 import 'component/leaf_button_theme_data.dart';
-import 'component/leaf_card_theme_data.dart';
 import 'component/leaf_calendar_theme_data.dart';
+import 'component/leaf_card_theme_data.dart';
 import 'component/leaf_checkbox_theme_data.dart';
 import 'component/leaf_chip_theme_data.dart';
 import 'component/leaf_dialog_theme_data.dart';
@@ -28,6 +30,7 @@ import 'component/leaf_switch_theme_data.dart';
 import 'component/leaf_tabbar_theme_data.dart';
 import 'component/leaf_textfield_theme_data.dart';
 import 'component/leaf_toast_theme_data.dart';
+import 'leaf_theme_extension.dart';
 
 class LeafThemeData {
   final LeafColors colors;
@@ -115,6 +118,39 @@ class LeafThemeData {
       elevation: LeafElevation.defaults(),
       radius: LeafRadius.defaults(),
       duration: LeafDuration.defaults(),
+    );
+  }
+
+  ThemeData toThemeData({Brightness brightness = Brightness.light}) {
+    final base = brightness == Brightness.light
+        ? ThemeData.light(useMaterial3: true)
+        : ThemeData.dark(useMaterial3: true);
+    final scheme = brightness == Brightness.light
+        ? ColorScheme.light(
+            primary: colors.primary,
+            onPrimary: colors.onPrimary,
+            secondary: colors.secondary,
+            onSecondary: colors.onSecondary,
+            surface: colors.surface,
+            onSurface: colors.onSurface,
+            error: colors.error,
+            onError: colors.onError,
+          )
+        : ColorScheme.dark(
+            primary: colors.primary,
+            onPrimary: colors.onPrimary,
+            secondary: colors.secondary,
+            onSecondary: colors.onSecondary,
+            surface: colors.surface,
+            onSurface: colors.onSurface,
+            error: colors.error,
+            onError: colors.onError,
+          );
+    return base.copyWith(
+      scaffoldBackgroundColor: colors.background,
+      colorScheme: scheme,
+      dividerColor: colors.divider,
+      extensions: [LeafThemeDataExtension(data: this)],
     );
   }
 
