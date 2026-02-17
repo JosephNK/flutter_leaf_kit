@@ -1,6 +1,6 @@
 # LeafDioServiceBase & LeafDioService
 
-Abstract base class for Dio services and a concrete implementation with typed GET/POST/PUT/DELETE methods that automatically convert responses and errors via BuiltValue converters.
+Abstract base class for Dio services and a concrete implementation with typed GET/POST/PUT/PATCH/DELETE methods that automatically convert responses and errors via BuiltValue converters.
 
 ## API Reference
 
@@ -25,6 +25,7 @@ All methods return `Future<LeafDioResponse<R>>` and accept two type parameters: 
 | `get<R, E>(path, {...})` | HTTP GET request |
 | `post<R, E>(path, {...})` | HTTP POST request |
 | `put<R, E>(path, {...})` | HTTP PUT request |
+| `patch<R, E>(path, {...})` | HTTP PATCH request |
 | `delete<R, E>(path, {...})` | HTTP DELETE request |
 
 #### Common Parameters (all methods)
@@ -36,17 +37,19 @@ All methods return `Future<LeafDioResponse<R>>` and accept two type parameters: 
 | `queryParameters` | `Map<String, dynamic>?` | No | `null` | Query parameters |
 | `options` | `Options?` | No | `null` | Dio options |
 | `cancelToken` | `CancelToken?` | No | `null` | Cancel token |
+| `errorParser` | `LeafDioErrorParser?` | No | `null` | Custom error parser for status-code-specific error deserialization |
 
 #### Additional Parameters
 
 | Parameter | Available in | Type | Description |
 |-----------|-------------|------|-------------|
-| `onReceiveProgress` | GET, POST, PUT | `ProgressCallback?` | Receive progress callback |
-| `onSendProgress` | POST, PUT | `ProgressCallback?` | Send progress callback |
+| `onReceiveProgress` | GET, POST, PUT, PATCH | `ProgressCallback?` | Receive progress callback |
+| `onSendProgress` | POST, PUT, PATCH | `ProgressCallback?` | Send progress callback |
 
 #### Error Handling
 
-- `DioException` is caught and converted via `errorConverter.convertDioException<R, E>()`
+- `DioException` is caught and converted via `errorConverter.convertDioException<R, E>(e, errorParser: errorParser)`
+- If `errorParser` is provided, it is called first to parse the error body; returns `null` to fall back to generic `E` deserialization
 - HTTP error status codes (400, 401, 404, etc.) are mapped to typed `LeafHttpException` subclasses
 - Other exceptions are rethrown
 
@@ -68,6 +71,10 @@ class UserService extends LeafDioService {
     return put<User, Null>('/users/$id', data: data);
   }
 
+  Future<LeafDioResponse<User>> patchUser(int id, Map<String, dynamic> data) {
+    return patch<User, Null>('/users/$id', data: data);
+  }
+
   Future<LeafDioResponse<void>> deleteUser(int id) {
     return delete<Null, Null>('/users/$id');
   }
@@ -86,4 +93,19 @@ if (response.isSuccessful) {
   final error = response.httpException;
   print('Error: ${error?.message}');
 }
+```
+
+### Custom Error Parsing
+
+```dart
+final response = await userService.post<User, Null>(
+  '/users',
+  data: userData,
+  errorParser: (statusCode, body) {
+    if (statusCode == 422 && body is Map) {
+      return ValidationError.fromJson(body);
+    }
+    return null; // fallback to generic E deserialization
+  },
+);
 ```

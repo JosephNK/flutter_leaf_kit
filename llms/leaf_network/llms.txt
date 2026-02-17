@@ -23,4 +23,4 @@ Each link points to a standalone Markdown file under the /llms path.
 - [Converter](https://github.com/JosephNK/flutter_leaf_kit/blob/main/llms/leaf_network/dio/converter.md): BuiltValue JSON converter and DioException converter with interfaces
 - [Interceptor](https://github.com/JosephNK/flutter_leaf_kit/blob/main/llms/leaf_network/dio/interceptor.md): cURL logging interceptor and request header/body interceptor
 - [Request Header](https://github.com/JosephNK/flutter_leaf_kit/blob/main/llms/leaf_network/dio/request-header.md): Header builder with device OS, version, and authorization support
-- [Helper](https://github.com/JosephNK/flutter_leaf_kit/blob/main/llms/leaf_network/dio/helper.md): Multipart file converter and media MIME type enum
+- [Multipart](https://github.com/JosephNK/flutter_leaf_kit/blob/main/llms/leaf_network/dio/multipart.md): File model for multipart uploads with URI, XFile, and bytes support

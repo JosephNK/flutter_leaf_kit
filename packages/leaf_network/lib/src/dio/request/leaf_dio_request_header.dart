@@ -27,8 +27,8 @@ class LeafDioRequestHeader {
     final os = defaultTargetPlatform.name.toUpperCase();
 
     Map<String, String> headers = {
-      'X-LF-DEVICE-OS': os,
-      'X-LF-APP-VERSION': appVersion,
+      'X-LEAF-DEVICE-OS': os,
+      'X-LEAF-APP-VERSION': appVersion,
     };
     if (authorization != null && authorization.isNotEmpty) {
       if (authorizationHeader != null) {
@@ -39,11 +39,11 @@ class LeafDioRequestHeader {
       }
     }
     if (deviceOSHeader != null) {
-      headers.remove('X-LF-DEVICE-OS');
+      headers.remove('X-LEAF-DEVICE-OS');
       headers.addAll(deviceOSHeader(os));
     }
     if (versionHeader != null) {
-      headers.remove('X-LF-APP-VERSION');
+      headers.remove('X-LEAF-APP-VERSION');
       headers.addAll(versionHeader(appVersion));
     }
     if (userAgent != null) {

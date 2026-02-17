@@ -25,6 +25,18 @@ class LeafDioClient {
 
   Map<Type, LeafDioServiceBase> get services => _services;
 
+  /// Dio HTTP 클라이언트를 초기화합니다.
+  ///
+  /// - [baseUrl] API 서버의 기본 URL
+  /// - [responseSerializers] built_value 응답 직렬화기
+  /// - [services] 등록할 [LeafDioServiceBase] 목록
+  /// - [interceptorBuilder] 추가 Dio 인터셉터를 구성하는 빌더
+  /// - [jsonUndefinedKey] JSON 파싱 시 정의되지 않은 키 처리 정책
+  /// - [connectTimeout] 연결 타임아웃 (기본값: 5초)
+  /// - [receiveTimeout] 응답 수신 타임아웃 (기본값: 60초)
+  /// - [printMaxLength] 로그 출력 시 최대 문자 수 (기본값: 2024)
+  /// - [onHeader] 요청 헤더를 동적으로 구성하는 콜백
+  /// - [getTemporaryDirectoryPath] 파일 다운로드 시 임시 저장 경로를 반환하는 콜백
   LeafDioClient init({
     required Uri baseUrl,
     required Serializers responseSerializers,

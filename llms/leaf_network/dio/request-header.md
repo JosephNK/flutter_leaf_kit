@@ -36,16 +36,16 @@ Static utility for building standard HTTP request headers with device OS, app ve
 | `appVersion` | `String` | Yes | - | App version string |
 | `authorization` | `String?` | No | `null` | Authorization token |
 | `userAgent` | `String?` | No | `null` | Custom user agent |
-| `deviceOSHeader` | `LeafDioDeviceOSHeader?` | No | `null` | Override default `X-LF-DEVICE-OS` header |
-| `versionHeader` | `LeafDioVersionHeader?` | No | `null` | Override default `X-LF-APP-VERSION` header |
+| `deviceOSHeader` | `LeafDioDeviceOSHeader?` | No | `null` | Override default `X-LEAF-DEVICE-OS` header |
+| `versionHeader` | `LeafDioVersionHeader?` | No | `null` | Override default `X-LEAF-APP-VERSION` header |
 | `authorizationHeader` | `LeafDioAuthorizationHeader?` | No | `null` | Override default `Authorization` header |
 
 #### Default Headers
 
 | Header | Value |
 |--------|-------|
-| `X-LF-DEVICE-OS` | Platform name in uppercase (e.g., `ANDROID`, `IOS`) |
-| `X-LF-APP-VERSION` | Provided `appVersion` value |
+| `X-LEAF-DEVICE-OS` | Platform name in uppercase (e.g., `ANDROID`, `IOS`) |
+| `X-LEAF-APP-VERSION` | Provided `appVersion` value |
 | `Authorization` | Provided `authorization` value (if non-empty) |
 | `User-Agent` | Provided `userAgent` value (if set) |
 
@@ -58,7 +58,7 @@ final headers = LeafDioRequestHeader.getHeaders(
   appVersion: '1.2.0',
   authorization: 'Bearer eyJ...',
 );
-// {'X-LF-DEVICE-OS': 'IOS', 'X-LF-APP-VERSION': '1.2.0', 'Authorization': 'Bearer eyJ...'}
+// {'X-LEAF-DEVICE-OS': 'IOS', 'X-LEAF-APP-VERSION': '1.2.0', 'Authorization': 'Bearer eyJ...'}
 ```
 
 ### Custom Header Keys

@@ -27,4 +27,3 @@ Each link points to a standalone Markdown file under the /llms path.
 
 - [UIModel](https://github.com/JosephNK/flutter_leaf_kit/blob/main/llms/leaf_common/model/ui-model.md): Abstract base models with Equatable and payload support (V1 and V2)
 - [ResultValue](https://github.com/JosephNK/flutter_leaf_kit/blob/main/llms/leaf_common/model/result-value.md): Result/error value pattern for API responses with chained error display
-- [MultipartFile](https://github.com/JosephNK/flutter_leaf_kit/blob/main/llms/leaf_common/model/multipart-file.md): File model for multipart uploads supporting URI and XFile sources

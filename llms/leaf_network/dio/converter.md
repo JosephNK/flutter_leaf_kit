@@ -4,6 +4,12 @@ BuiltValue-based JSON response converter and DioException error converter. These
 
 ## API Reference
 
+### Typedefs
+
+| Typedef | Signature | Description |
+|---------|-----------|-------------|
+| `LeafDioErrorParser` | `Object? Function(int statusCode, dynamic body)` | Custom error parser for status-code-specific deserialization; return `null` to fall back to generic `E` deserialization |
+
 ### Abstract Interfaces
 
 #### LeafDioJsonConverter
@@ -16,7 +22,7 @@ BuiltValue-based JSON response converter and DioException error converter. These
 
 | Method | Return Type | Description |
 |--------|-------------|-------------|
-| `convertDioException<ResultType, ResultErrorType>(DioException)` | `FutureOr<LeafDioResponse<ResultType>>` | Convert Dio exception to response |
+| `convertDioException<ResultType, ResultErrorType>(DioException, {LeafDioErrorParser? errorParser})` | `FutureOr<LeafDioResponse<ResultType>>` | Convert Dio exception to response |
 
 ### Helper Function
 
@@ -64,8 +70,8 @@ Converts `DioException` into typed `LeafDioResponse` with appropriate `LeafHttpE
 
 | Method | Return Type | Description |
 |--------|-------------|-------------|
-| `convertDioException<R, E>(DioException)` | `FutureOr<LeafDioResponse<R>>` | Route to `convertError` (with response) or `convertException` (without) |
-| `convertError<R, E>(Response)` | `FutureOr<LeafDioResponse<R>>` | Convert HTTP error response (400/401/404/408/500/503) |
+| `convertDioException<R, E>(DioException, {LeafDioErrorParser? errorParser})` | `FutureOr<LeafDioResponse<R>>` | Route to `convertError` (with response) or `convertException` (without) |
+| `convertError<R, E>(Response, {LeafDioErrorParser? errorParser})` | `FutureOr<LeafDioResponse<R>>` | Convert HTTP error response (400/401/404/408/500/503) |
 | `convertException<R, E>(DioException)` | `FutureOr<LeafDioResponse<R>>` | Convert Dio-level exception (timeout, cancel, connection error) |
 
 #### DioExceptionType Mapping
