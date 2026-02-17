@@ -32,17 +32,24 @@ class LeafDioExceptionConverter implements LeafDioExceptionConverterBase {
   }
 
   @override
-  FutureOr<LeafDioResponse<ResultType>>
-  convertDioException<ResultType, ResultErrorType>(DioException dioException) {
+  FutureOr<LeafDioResponse<ResultType>> convertDioException<
+    ResultType,
+    ResultErrorType
+  >(DioException dioException, {LeafDioErrorParser? errorParser}) {
     final dioResponse = dioException.response;
     if (dioResponse != null) {
-      return convertError<ResultType, ResultErrorType>(dioResponse);
+      return convertError<ResultType, ResultErrorType>(
+        dioResponse,
+        errorParser: errorParser,
+      );
     }
     return convertException<ResultType, ResultErrorType>(dioException);
   }
 
-  FutureOr<LeafDioResponse<ResultType>>
-  convertError<ResultType, ResultErrorType>(Response response) async {
+  FutureOr<LeafDioResponse<ResultType>> convertError<
+    ResultType,
+    ResultErrorType
+  >(Response response, {LeafDioErrorParser? errorParser}) async {
     final statusCode = response.statusCode ?? 0;
     final method = response.requestOptions.method;
     final url = response.requestOptions.uri.toString();
@@ -68,19 +75,32 @@ class LeafDioExceptionConverter implements LeafDioExceptionConverterBase {
     dynamic bodyObject, bodyErrorObject;
     dynamic parserException;
 
-    try {
-      bodyObject ??= _deserialize<ResultErrorType>(body);
-    } catch (e) {
-      parserException ??= e;
-      bodyErrorObject ??= body;
-    }
-
-    if (ResultErrorType.toString() == 'Null') {
+    // 1. errorParser가 있으면 우선 사용
+    if (errorParser != null) {
       try {
-        bodyObject = _deserialize<ResultType>(body);
+        bodyObject = errorParser(statusCode, body);
       } catch (e) {
         parserException = e;
         bodyErrorObject = body;
+      }
+    }
+
+    // 2. errorParser가 없거나 파싱 실패 시, 기존 E 역직렬화 fallback
+    if (bodyObject == null && errorParser == null) {
+      try {
+        bodyObject ??= _deserialize<ResultErrorType>(body);
+      } catch (e) {
+        parserException ??= e;
+        bodyErrorObject ??= body;
+      }
+
+      if (ResultErrorType.toString() == 'Null') {
+        try {
+          bodyObject = _deserialize<ResultType>(body);
+        } catch (e) {
+          parserException = e;
+          bodyErrorObject = body;
+        }
       }
     }
 

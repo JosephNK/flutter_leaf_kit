@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 
 import '../converter/leaf_dio_built_value_converter.dart';
+import '../converter/leaf_dio_converter.dart';
 import '../converter/leaf_dio_exception_converter.dart';
 import '../response/leaf_dio_response.dart';
 
@@ -19,6 +20,7 @@ class LeafDioService extends LeafDioServiceBase {
     Options? options,
     CancelToken? cancelToken,
     ProgressCallback? onReceiveProgress,
+    LeafDioErrorParser? errorParser,
   }) async {
     try {
       final response = await dio.get(
@@ -30,7 +32,10 @@ class LeafDioService extends LeafDioServiceBase {
       );
       return await converter.convertJsonResponse<R, E>(response);
     } on DioException catch (e) {
-      return await errorConverter.convertDioException<R, E>(e);
+      return await errorConverter.convertDioException<R, E>(
+        e,
+        errorParser: errorParser,
+      );
     } catch (e) {
       rethrow;
     }
@@ -45,6 +50,7 @@ class LeafDioService extends LeafDioServiceBase {
     CancelToken? cancelToken,
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
+    LeafDioErrorParser? errorParser,
   }) async {
     try {
       final response = await dio.post(
@@ -57,7 +63,10 @@ class LeafDioService extends LeafDioServiceBase {
       );
       return await converter.convertJsonResponse<R, E>(response);
     } on DioException catch (e) {
-      return await errorConverter.convertDioException<R, E>(e);
+      return await errorConverter.convertDioException<R, E>(
+        e,
+        errorParser: errorParser,
+      );
     } catch (e) {
       rethrow;
     }
@@ -72,6 +81,7 @@ class LeafDioService extends LeafDioServiceBase {
     CancelToken? cancelToken,
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
+    LeafDioErrorParser? errorParser,
   }) async {
     try {
       final response = await dio.put(
@@ -84,7 +94,10 @@ class LeafDioService extends LeafDioServiceBase {
       );
       return await converter.convertJsonResponse<R, E>(response);
     } on DioException catch (e) {
-      return await errorConverter.convertDioException<R, E>(e);
+      return await errorConverter.convertDioException<R, E>(
+        e,
+        errorParser: errorParser,
+      );
     } catch (e) {
       rethrow;
     }
@@ -97,6 +110,7 @@ class LeafDioService extends LeafDioServiceBase {
     Map<String, dynamic>? queryParameters,
     Options? options,
     CancelToken? cancelToken,
+    LeafDioErrorParser? errorParser,
   }) async {
     try {
       final response = await dio.delete(
@@ -108,7 +122,10 @@ class LeafDioService extends LeafDioServiceBase {
       );
       return await converter.convertJsonResponse<R, E>(response);
     } on DioException catch (e) {
-      return await errorConverter.convertDioException<R, E>(e);
+      return await errorConverter.convertDioException<R, E>(
+        e,
+        errorParser: errorParser,
+      );
     } catch (e) {
       rethrow;
     }
