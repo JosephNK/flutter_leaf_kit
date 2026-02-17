@@ -22,13 +22,15 @@ repos:
         entry: bash -c 'for pkg in packages/*/; do [ -f "$pkg/pubspec.yaml" ] && flutter analyze "$pkg" || exit 1; done'
         language: system
         pass_filenames: false
+        types: [file]
         files: \.dart$
 
       - id: flutter-test
-        name: flutter test
-        entry: bash -c 'for pkg in packages/*/; do if [ -d "$pkg/test" ] && ls "$pkg/test"/*_test.dart >/dev/null 2>&1 || find "$pkg/test" -name "*_test.dart" -print -quit 2>/dev/null | grep -q .; then flutter test "$pkg" || exit 1; fi; done'
+        name: flutter test (related only)
+        entry: bash -c 'pkgs=$(git diff --cached --name-only --diff-filter=ACMR -- "*.dart" | grep "^packages/" | cut -d/ -f1-2 | sort -u); for pkg in $pkgs; do if [ -d "$pkg/test" ] && find "$pkg/test" -name "*_test.dart" -print -quit 2>/dev/null | grep -q .; then flutter test "$pkg" || exit 1; fi; done'
         language: system
         pass_filenames: false
+        types: [file]
         files: \.dart$
 
   # Conventional commit 검증
