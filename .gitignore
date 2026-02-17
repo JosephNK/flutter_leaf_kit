@@ -34,3 +34,4 @@ build/
 .playwright-mcp/
 .claude/*.local.json
 .mcp.json
+plans/

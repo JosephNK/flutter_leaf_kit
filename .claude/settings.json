@@ -1,7 +1,9 @@
 {
+  "plansDirectory": "./plans",
   "env": {
     "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1"
   },
+  "teammateMode": "tmux",
   "permissions": {
     "allow": [
       "Skill(commit)",
@@ -14,7 +16,6 @@
       "WebFetch(domain:mantine.dev)"
     ]
   },
-  "teammateMode": "tmux",
   "hooks": {
     "PostToolUse": [
       {
