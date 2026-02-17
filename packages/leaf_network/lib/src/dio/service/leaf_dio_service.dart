@@ -103,6 +103,37 @@ class LeafDioService extends LeafDioServiceBase {
     }
   }
 
+  /// Convenience method to make an HTTP PATCH request.
+  Future<LeafDioResponse<R>> patch<R, E>(
+    String path, {
+    Object? data,
+    Map<String, dynamic>? queryParameters,
+    Options? options,
+    CancelToken? cancelToken,
+    ProgressCallback? onSendProgress,
+    ProgressCallback? onReceiveProgress,
+    LeafDioErrorParser? errorParser,
+  }) async {
+    try {
+      final response = await dio.patch(
+        path,
+        data: data,
+        queryParameters: queryParameters,
+        options: options,
+        cancelToken: cancelToken,
+        onReceiveProgress: onReceiveProgress,
+      );
+      return await converter.convertJsonResponse<R, E>(response);
+    } on DioException catch (e) {
+      return await errorConverter.convertDioException<R, E>(
+        e,
+        errorParser: errorParser,
+      );
+    } catch (e) {
+      rethrow;
+    }
+  }
+
   /// Convenience method to make an HTTP DELETE request.
   Future<LeafDioResponse<R>> delete<R, E>(
     String path, {
