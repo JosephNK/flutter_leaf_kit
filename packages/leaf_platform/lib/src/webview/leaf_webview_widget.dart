@@ -204,36 +204,36 @@ class _LeafWebViewState extends State<LeafWebView> {
 
     _navigationDelegate = NavigationDelegate(
       onProgress: (int progress) {
-        Logging.d('[LeafWebView] onProgress = ${progress.toString()}');
+        LeafLogging.d('[LeafWebView] onProgress = ${progress.toString()}');
       },
       onPageStarted: (String url) {
-        Logging.d('[LeafWebView] onPageStarted = $url');
+        LeafLogging.d('[LeafWebView] onPageStarted = $url');
         setState(() {
           _loading = true;
         });
         onPageStarted?.call();
       },
       onPageFinished: (String url) async {
-        Logging.d('[LeafWebView] onPageFinished = $url');
+        LeafLogging.d('[LeafWebView] onPageFinished = $url');
         await updateWebViewHeightAfterOnPageFinished();
         onPageFinished?.call();
       },
       onWebResourceError: (WebResourceError error) {
-        Logging.d('[LeafWebView] onWebResourceError = ${error.errorCode}');
+        LeafLogging.d('[LeafWebView] onWebResourceError = ${error.errorCode}');
       },
       onNavigationRequest: (NavigationRequest request) async {
-        Logging.d('[LeafWebView] navigationDelegate = ${request.url}');
+        LeafLogging.d('[LeafWebView] navigationDelegate = ${request.url}');
         return await navigationURLToLinkEvent(request.url);
       },
       onHttpAuthRequest: (HttpAuthRequest request) async {
-        Logging.d('[LeafWebView] onHttpAuthRequest = ${request.realm}');
+        LeafLogging.d('[LeafWebView] onHttpAuthRequest = ${request.realm}');
       },
       onUrlChange: (UrlChange change) {
-        Logging.d('[LeafWebView] onUrlChange = ${change.url}');
+        LeafLogging.d('[LeafWebView] onUrlChange = ${change.url}');
         widget.onUrlChange?.call(change.url);
       },
       onHttpError: (HttpResponseError error) {
-        Logging.d('[LeafWebView] onHttpError = ${error.response}');
+        LeafLogging.d('[LeafWebView] onHttpError = ${error.response}');
         widget.onHttpError?.call(error);
       },
     );
@@ -361,15 +361,17 @@ class _LeafWebViewState extends State<LeafWebView> {
   Future<NavigationDecision> navigationURLToLinkEvent(String url) async {
     final onNavigationDecision = widget.onNavigationDecision;
     if (url.contains('mailto:')) {
-      Logging.d('[LeafWebView] navigationDelegate :: Mailto clicked! = $url');
+      LeafLogging.d(
+        '[LeafWebView] navigationDelegate :: Mailto clicked! = $url',
+      );
       final _ = onNavigationDecision?.call(LeafWebViewEventType.mailto, url);
       return NavigationDecision.prevent;
     } else if (url.contains('tel:')) {
-      Logging.d('[LeafWebView] navigationDelegate :: Tel clicked! = $url');
+      LeafLogging.d('[LeafWebView] navigationDelegate :: Tel clicked! = $url');
       final _ = onNavigationDecision?.call(LeafWebViewEventType.tel, url);
       return NavigationDecision.prevent;
     } else if (url.contains('geo:')) {
-      Logging.d('[LeafWebView] navigationDelegate :: GEO clicked! = $url');
+      LeafLogging.d('[LeafWebView] navigationDelegate :: GEO clicked! = $url');
       final _ = onNavigationDecision?.call(LeafWebViewEventType.geo, url);
       return NavigationDecision.prevent;
     }
@@ -386,14 +388,14 @@ class _LeafWebViewState extends State<LeafWebView> {
     final readyState = await webViewController.runJavaScriptReturningResult(
       'document.readyState',
     );
-    Logging.d('[LeafWebView] readyState: $readyState');
+    LeafLogging.d('[LeafWebView] readyState: $readyState');
     if (readyState == 'complete' || readyState == '"complete"') {
       final height = await webViewController.runJavaScriptReturningResult(
         'document.body.scrollHeight',
       );
       final heightStr = height.toString();
       final documentHeight = double.parse(heightStr);
-      Logging.d('[LeafWebView] DocumentHeight: $documentHeight');
+      LeafLogging.d('[LeafWebView] DocumentHeight: $documentHeight');
       final fullScreen = widget.fullScreen;
       if (!fullScreen) {
         if (context.mounted) {

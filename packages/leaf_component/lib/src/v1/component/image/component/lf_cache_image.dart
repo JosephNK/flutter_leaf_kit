@@ -40,7 +40,7 @@ class LFCacheImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Logging.d('LeafCacheImage: $url');
+    // LeafLogging.d('LeafCacheImage: $url');
     final header = this.header;
     return _buildWrapNetworkImage(context, uri: uri, httpHeaders: header);
   }

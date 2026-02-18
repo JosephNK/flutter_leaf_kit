@@ -72,14 +72,14 @@ abstract class ScreenState<T extends StatefulExtWidget> extends State<T>
     super.initState();
 
     className = context.widget.toString();
-    Logging.d('$className is initState');
+    LeafLogging.d('$className is initState');
 
     _updateActivation();
   }
 
   @override
   void dispose() {
-    Logging.d('$className is dispose');
+    LeafLogging.d('$className is dispose');
 
     super.dispose();
   }
@@ -103,7 +103,7 @@ abstract class ScreenState<T extends StatefulExtWidget> extends State<T>
   @override
   Widget build(BuildContext context) {
     if (!_isActivation) {
-      Logging.i('$className is not Activation!');
+      LeafLogging.i('$className is not Activation!');
       return Container();
     }
     final screenWidget = buildScreen(context);

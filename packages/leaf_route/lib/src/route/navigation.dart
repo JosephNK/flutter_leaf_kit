@@ -62,7 +62,9 @@ class LeafNavigation {
     required Widget child, // Widget, MultiBlocProvider
     LeafNavigatorPushType pushType = LeafNavigatorPushType.basicMaterial,
   }) async {
-    Logging.i('[LeafNavigation PushNamed] PushType :: $routeName => $pushType');
+    LeafLogging.i(
+      '[LeafNavigation PushNamed] PushType :: $routeName => $pushType',
+    );
 
     RouteSettings routeSettings = RouteSettings(name: routeName);
 

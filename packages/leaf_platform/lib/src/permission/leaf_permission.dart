@@ -58,7 +58,7 @@ class LeafPermissionManager {
     try {
       status = await updatePermission.request();
     } catch (e) {
-      Logging.e('[RequestPermission] e => $e');
+      LeafLogging.e('[RequestPermission] e => $e');
     }
     if (status != ph.PermissionStatus.granted) {
       onNotPermission.call(status);

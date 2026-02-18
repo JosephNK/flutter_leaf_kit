@@ -16,11 +16,11 @@ class LeafTracking {
             await Future.delayed(const Duration(milliseconds: 200));
             final TrackingStatus status =
                 await AppTrackingTransparency.requestTrackingAuthorization();
-            Logging.d('AppTrackingTransparency Status: $status');
+            LeafLogging.d('AppTrackingTransparency Status: $status');
             return status;
           }
         } on PlatformException {
-          Logging.d('AppTrackingTransparency PlatformException was thrown');
+          LeafLogging.d('AppTrackingTransparency PlatformException was thrown');
           rethrow;
         }
       }
@@ -38,7 +38,7 @@ class LeafTracking {
               await AppTrackingTransparency.getAdvertisingIdentifier();
           return identifier;
         } on PlatformException {
-          Logging.d('AppTrackingTransparency PlatformException was thrown');
+          LeafLogging.d('AppTrackingTransparency PlatformException was thrown');
           rethrow;
         }
       }

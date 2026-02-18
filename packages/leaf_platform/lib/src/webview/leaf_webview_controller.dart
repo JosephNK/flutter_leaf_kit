@@ -37,12 +37,12 @@ class LeafWebViewController {
           webViewCookieManager.platform as AndroidWebViewCookieManager;
       await androidManager.clearCookies();
     }
-    Logging.d('All WebViewCookieManager have been cleared.');
+    LeafLogging.d('All WebViewCookieManager have been cleared.');
 
     // CookieManager clears cookies
     CookieManager cookieManager = CookieManager.instance();
     await cookieManager.deleteAllCookies();
-    Logging.d('All CookieManager have been cleared.');
+    LeafLogging.d('All CookieManager have been cleared.');
   }
 
   static Future<void> deleteAllData() async {
@@ -55,7 +55,7 @@ class LeafWebViewController {
         date: DateTime.fromMillisecondsSinceEpoch(0),
       );
     }
-    Logging.d('All Web Storage Data have been cleared.');
+    LeafLogging.d('All Web Storage Data have been cleared.');
   }
 
   late WebViewController webViewController;

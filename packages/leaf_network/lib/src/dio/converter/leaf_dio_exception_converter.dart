@@ -61,7 +61,7 @@ class LeafDioExceptionConverter implements LeafDioExceptionConverterBase {
       printMaxLength: printMaxLength,
     );
 
-    Logging.w(
+    LeafLogging.w(
       '[http_dio :: built_value_converter convertError]\n'
       '[*] statusCode: $statusCode\n'
       '[*] method: $method\n'

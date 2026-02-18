@@ -94,7 +94,7 @@ class LeafDioBuiltValueConverter implements LeafDioJsonConverter {
       }
       return _deserialize<T>(deserializeEntity);
     } catch (e) {
-      Logging.e(e);
+      LeafLogging.e(e);
       rethrow;
     }
   }
@@ -124,7 +124,7 @@ class LeafDioBuiltValueConverter implements LeafDioJsonConverter {
       printMaxLength: printMaxLength,
     );
 
-    Logging.i(
+    LeafLogging.i(
       '[http_dio :: built_value_converter convertSuccess]\n'
       '[*] statusCode: $statusCode\n'
       '[*] method: $method\n'
@@ -148,7 +148,7 @@ class LeafDioBuiltValueConverter implements LeafDioJsonConverter {
     String errorMessage = ((bodyErrorObject is String) ? bodyErrorObject : '')
         .trim();
     if (isNotEmpty(errorMessage)) {
-      Logging.i(
+      LeafLogging.i(
         '[http_dio :: built_value_converter errorMessage]\n'
         '[*] errorMessage: $errorMessage\n'
         '[*] ResultType: $ResultType\n'
@@ -157,7 +157,7 @@ class LeafDioBuiltValueConverter implements LeafDioJsonConverter {
       errorMessage = '[DioBuiltValue ConvertError] $errorMessage';
     }
     if (parserException != null) {
-      Logging.i(
+      LeafLogging.i(
         '[http_dio :: built_value_converter parserException]\n'
         '[*] parserException: $parserException\n'
         '[*] ResultType: $ResultType\n'

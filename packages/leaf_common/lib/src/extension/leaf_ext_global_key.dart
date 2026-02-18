@@ -17,7 +17,7 @@ extension GlobalKeyHelper on GlobalKey {
         });
       }
     } catch (e) {
-      Logging.e('ensureVisibleScroll Error: $e');
+      LeafLogging.e('ensureVisibleScroll Error: $e');
     }
   }
 }

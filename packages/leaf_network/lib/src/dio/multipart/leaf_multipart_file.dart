@@ -95,7 +95,7 @@ class LeafMultipartFile extends UIModelV2<String> {
       final file = File(xFile.path);
       return await file.readAsBytes();
     } catch (e) {
-      Logging.e('getFileBytes Error: $e');
+      LeafLogging.e('getFileBytes Error: $e');
       return null;
     }
   }

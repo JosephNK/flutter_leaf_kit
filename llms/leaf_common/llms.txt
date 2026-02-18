@@ -21,7 +21,7 @@ Each link points to a standalone Markdown file under the /llms path.
 
 ## Logger
 
-- [Logger](https://github.com/JosephNK/flutter_leaf_kit/blob/main/llms/leaf_common/logger/logger.md): Logging utilities with platform-aware console output
+- [Logger](https://github.com/JosephNK/flutter_leaf_kit/blob/main/llms/leaf_common/logger/logger.md): LeafLogging utilities with platform-aware console output
 
 ## Model
 

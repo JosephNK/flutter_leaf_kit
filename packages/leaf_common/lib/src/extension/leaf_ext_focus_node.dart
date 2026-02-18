@@ -25,7 +25,7 @@ extension FocusNodeHelper on FocusNode {
         curve: curve,
         alignmentPolicy: alignmentPolicy,
       ).catchError((e) {
-        Logging.e('Scrollable ensureVisible Error: e');
+        LeafLogging.e('Scrollable ensureVisible Error: $e');
       });
     }
   }

@@ -18,7 +18,7 @@ class LeafShare {
       );
       return result.status;
     } catch (e) {
-      Logging.e('Share.share Error: $e');
+      LeafLogging.e('Share.share Error: $e');
     }
     return ShareResultStatus.unavailable;
   }
@@ -40,7 +40,7 @@ class LeafShare {
       );
       return result.status;
     } catch (e) {
-      Logging.e('Share.shareXFiles Error: $e');
+      LeafLogging.e('Share.shareXFiles Error: $e');
     }
     return ShareResultStatus.unavailable;
   }
@@ -55,7 +55,7 @@ class LeafShare {
       );
       return result.status;
     } catch (e) {
-      Logging.e('Share.shareUri Error: $e');
+      LeafLogging.e('Share.shareUri Error: $e');
     }
     return ShareResultStatus.unavailable;
   }

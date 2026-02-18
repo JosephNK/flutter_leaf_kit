@@ -5,21 +5,21 @@ import 'package:logger/logger.dart';
 
 import 'leaf_console_output.dart';
 
-class Logging {
+class LeafLogging {
   static void d(dynamic message) {
-    LoggingManager.shared.logger?.d(message);
+    LeafLoggingManager.shared.logger?.d(message);
   }
 
   static void i(dynamic message) {
-    LoggingManager.shared.logger?.i(message);
+    LeafLoggingManager.shared.logger?.i(message);
   }
 
   static void w(dynamic message) {
-    LoggingManager.shared.logger?.w(message);
+    LeafLoggingManager.shared.logger?.w(message);
   }
 
   static void e(dynamic message) {
-    LoggingManager.shared.logger?.e(message);
+    LeafLoggingManager.shared.logger?.e(message);
   }
 
   static void printLong(dynamic message) {
@@ -35,10 +35,10 @@ class Logging {
   }
 }
 
-class LoggingManager {
-  static final LoggingManager _instance = LoggingManager._internal();
-  static LoggingManager get shared => _instance;
-  LoggingManager._internal() {
+class LeafLoggingManager {
+  static final LeafLoggingManager _instance = LeafLoggingManager._internal();
+  static LeafLoggingManager get shared => _instance;
+  LeafLoggingManager._internal() {
     logger = Logger(
       printer: PrettyPrinter(
         methodCount: 0, // number of method calls to be displayed
