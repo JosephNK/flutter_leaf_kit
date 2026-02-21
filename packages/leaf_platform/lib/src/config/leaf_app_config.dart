@@ -31,23 +31,26 @@ class LeafAppConfig {
   bool get isStaging => (buildType == LeafBuildType.staging);
   bool get isTest => (buildType == LeafBuildType.test);
 
-  String getDisplayAppVersion({
-    bool showBuildNumber = false,
-    bool showDeployment = true,
-  }) {
-    final deployment = showDeployment ? buildType.name : '';
-    final version = showBuildNumber
-        ? '$packageVersion($packageBuildNumber)'
-        : packageVersion;
-    if (isNotEmpty(deployment)) {
-      return '$deployment $version';
-    }
-    return version;
-  }
+  @Deprecated('Use ensureInitialized() instead')
+  static Future<LeafAppConfig> fromInfo() => ensureInitialized();
 
-  String userAgent(String appName) {
-    final deployment = buildType.name;
-    return '$appName-$platform-$deployment-$packageVersion.$packageBuildNumber';
+  static Future<LeafAppConfig> ensureInitialized() async {
+    if (kIsWeb) {
+      return LeafAppConfig(
+        packageName: 'web',
+        packageVersion: '',
+        packageBuildNumber: '',
+      );
+    }
+    final packageInfo = await PackageInfo.fromPlatform();
+    final packageName = packageInfo.packageName;
+    final packageVersion = packageInfo.version;
+    final packageBuildNumber = packageInfo.buildNumber;
+    return LeafAppConfig(
+      packageName: packageName,
+      packageVersion: packageVersion,
+      packageBuildNumber: packageBuildNumber,
+    );
   }
 
   factory LeafAppConfig({
@@ -82,22 +85,22 @@ class LeafAppConfig {
     return _instance!;
   }
 
-  static Future<LeafAppConfig> fromInfo() async {
-    if (kIsWeb) {
-      return LeafAppConfig(
-        packageName: 'web',
-        packageVersion: '',
-        packageBuildNumber: '',
-      );
+  String getDisplayAppVersion({
+    bool showBuildNumber = false,
+    bool showDeployment = true,
+  }) {
+    final deployment = showDeployment ? buildType.name : '';
+    final version = showBuildNumber
+        ? '$packageVersion($packageBuildNumber)'
+        : packageVersion;
+    if (isNotEmpty(deployment)) {
+      return '$deployment $version';
     }
-    final packageInfo = await PackageInfo.fromPlatform();
-    final packageName = packageInfo.packageName;
-    final packageVersion = packageInfo.version;
-    final packageBuildNumber = packageInfo.buildNumber;
-    return LeafAppConfig(
-      packageName: packageName,
-      packageVersion: packageVersion,
-      packageBuildNumber: packageBuildNumber,
-    );
+    return version;
+  }
+
+  String userAgent(String appName) {
+    final deployment = buildType.name;
+    return '$appName-$platform-$deployment-$packageVersion.$packageBuildNumber';
   }
 }

@@ -15,7 +15,7 @@ workspace:
   - packages/leaf_state
 
 dev_dependencies:
-  melos: 7.3.0
+  melos: 7.4.0
 
 melos:
   scripts:
