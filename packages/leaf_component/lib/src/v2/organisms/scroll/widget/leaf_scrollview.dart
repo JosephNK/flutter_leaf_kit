@@ -28,6 +28,8 @@ class LeafScrollView extends StatefulWidget {
   final bool scrollable;
   final bool enableTapUnFocus;
   final bool reverse;
+  final RefreshControlIndicatorBuilder? refreshIndicatorBuilder;
+  final LeafRefreshStyle refreshStyle;
 
   const LeafScrollView({
     super.key,
@@ -44,6 +46,8 @@ class LeafScrollView extends StatefulWidget {
     this.scrollable = true,
     this.enableTapUnFocus = false,
     this.reverse = false,
+    this.refreshIndicatorBuilder,
+    this.refreshStyle = LeafRefreshStyle.auto,
   });
 
   @override
@@ -146,8 +150,13 @@ class _LeafScrollViewState extends State<LeafScrollView>
     final platform = Theme.of(context).platform;
     final isApple =
         platform == TargetPlatform.iOS || platform == TargetPlatform.macOS;
+    final useCupertino = switch (widget.refreshStyle) {
+      LeafRefreshStyle.cupertino => true,
+      LeafRefreshStyle.material => false,
+      LeafRefreshStyle.auto => isApple,
+    };
 
-    if (isApple) {
+    if (useCupertino) {
       return _buildCupertinoScrollView(context);
     }
 
@@ -214,6 +223,9 @@ class _LeafScrollViewState extends State<LeafScrollView>
           CupertinoSliverRefreshControl(
             refreshTriggerPullDistance: 100.0,
             refreshIndicatorExtent: 30.0,
+            builder:
+                widget.refreshIndicatorBuilder ??
+                CupertinoSliverRefreshControl.buildRefreshIndicator,
             onRefresh: () async {
               await onPullToRefresh(context, widget.onRefresh);
             },

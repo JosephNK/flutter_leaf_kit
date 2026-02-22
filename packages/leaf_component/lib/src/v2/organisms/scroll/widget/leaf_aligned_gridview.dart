@@ -32,6 +32,8 @@ class LeafAlignedGridView<T> extends StatefulWidget {
   final bool scrollable;
   final bool enableTapUnFocus;
   final bool hasReachedMax;
+  final RefreshControlIndicatorBuilder? refreshIndicatorBuilder;
+  final LeafRefreshStyle refreshStyle;
 
   const LeafAlignedGridView({
     super.key,
@@ -52,6 +54,8 @@ class LeafAlignedGridView<T> extends StatefulWidget {
     this.scrollable = true,
     this.enableTapUnFocus = false,
     this.hasReachedMax = true,
+    this.refreshIndicatorBuilder,
+    this.refreshStyle = LeafRefreshStyle.auto,
   });
 
   @override
@@ -164,8 +168,13 @@ class _LeafAlignedGridViewState<T> extends State<LeafAlignedGridView<T>>
     final platform = Theme.of(context).platform;
     final isApple =
         platform == TargetPlatform.iOS || platform == TargetPlatform.macOS;
+    final useCupertino = switch (widget.refreshStyle) {
+      LeafRefreshStyle.cupertino => true,
+      LeafRefreshStyle.material => false,
+      LeafRefreshStyle.auto => isApple,
+    };
 
-    if (isApple) {
+    if (useCupertino) {
       return _buildCupertinoAlignedGridView(context);
     }
 
@@ -245,6 +254,9 @@ class _LeafAlignedGridViewState<T> extends State<LeafAlignedGridView<T>>
             CupertinoSliverRefreshControl(
               refreshTriggerPullDistance: 100.0,
               refreshIndicatorExtent: 30.0,
+              builder:
+                  widget.refreshIndicatorBuilder ??
+                  CupertinoSliverRefreshControl.buildRefreshIndicator,
               onRefresh: () async {
                 await onPullToRefresh(context, widget.onRefresh);
               },

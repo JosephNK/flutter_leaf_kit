@@ -34,6 +34,8 @@ class LeafListView<T> extends StatefulWidget {
   final bool reverse;
   final bool enableTapUnFocus;
   final bool hasReachedMax;
+  final RefreshControlIndicatorBuilder? refreshIndicatorBuilder;
+  final LeafRefreshStyle refreshStyle;
 
   const LeafListView({
     super.key,
@@ -54,6 +56,8 @@ class LeafListView<T> extends StatefulWidget {
     this.reverse = false,
     this.enableTapUnFocus = false,
     this.hasReachedMax = true,
+    this.refreshIndicatorBuilder,
+    this.refreshStyle = LeafRefreshStyle.auto,
   });
 
   @override
@@ -167,8 +171,13 @@ class _LeafListViewState<T> extends State<LeafListView<T>>
     final platform = Theme.of(context).platform;
     final isApple =
         platform == TargetPlatform.iOS || platform == TargetPlatform.macOS;
+    final useCupertino = switch (widget.refreshStyle) {
+      LeafRefreshStyle.cupertino => true,
+      LeafRefreshStyle.material => false,
+      LeafRefreshStyle.auto => isApple,
+    };
 
-    if (isApple) {
+    if (useCupertino) {
       return _buildCupertinoListView(context);
     }
 
@@ -251,6 +260,9 @@ class _LeafListViewState<T> extends State<LeafListView<T>>
           CupertinoSliverRefreshControl(
             refreshTriggerPullDistance: 100.0,
             refreshIndicatorExtent: 30.0,
+            builder:
+                widget.refreshIndicatorBuilder ??
+                CupertinoSliverRefreshControl.buildRefreshIndicator,
             onRefresh: () async {
               await onPullToRefresh(context, widget.onRefresh);
             },

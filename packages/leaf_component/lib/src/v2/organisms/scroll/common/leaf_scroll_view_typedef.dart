@@ -23,3 +23,15 @@ typedef LeafScrollViewLoading = void Function(bool value);
 
 /// Callback to update the reached-max flag.
 typedef LeafScrollViewReachedMax = void Function(bool value);
+
+/// Determines which refresh indicator style to use.
+enum LeafRefreshStyle {
+  /// Automatically selects based on platform (iOS/macOS → Cupertino, others → Material).
+  auto,
+
+  /// Always uses [CupertinoSliverRefreshControl].
+  cupertino,
+
+  /// Always uses [RefreshIndicator].
+  material,
+}

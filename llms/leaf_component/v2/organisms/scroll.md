@@ -54,6 +54,16 @@ Mixin providing shared scroll control logic for stateful widgets. Handles scroll
 | `LeafScrollViewLoadMore` | `Future<void> Function()` | Infinite-scroll load-more callback |
 | `LeafScrollViewDidScroll` | `void Function(LeafScrollInfoData)` | Scroll position callback |
 
+### LeafRefreshStyle
+
+Determines which refresh indicator style to use.
+
+| Value | Description |
+|-------|-------------|
+| `auto` | Automatically selects based on platform (iOS/macOS → Cupertino, others → Material) |
+| `cupertino` | Always uses `CupertinoSliverRefreshControl` |
+| `material` | Always uses `RefreshIndicator` |
+
 ---
 
 ### LeafListView\<T\>
@@ -81,6 +91,8 @@ A unified list view with pull-to-refresh and infinite-scroll load-more support.
 | `reverse` | `bool` | No | `false` | Reverse scroll direction |
 | `enableTapUnFocus` | `bool` | No | `false` | Unfocus on tap |
 | `hasReachedMax` | `bool` | No | `true` | Whether all data has been loaded |
+| `refreshIndicatorBuilder` | `RefreshControlIndicatorBuilder?` | No | `null` | Custom Cupertino refresh indicator builder |
+| `refreshStyle` | `LeafRefreshStyle` | No | `auto` | Refresh indicator style selection |
 
 ---
 
@@ -109,6 +121,8 @@ A unified grid view with pull-to-refresh and load-more support.
 | `reverse` | `bool` | No | `false` | Reverse scroll direction |
 | `enableTapUnFocus` | `bool` | No | `false` | Unfocus on tap |
 | `hasReachedMax` | `bool` | No | `true` | Whether all data has been loaded |
+| `refreshIndicatorBuilder` | `RefreshControlIndicatorBuilder?` | No | `null` | Custom Cupertino refresh indicator builder |
+| `refreshStyle` | `LeafRefreshStyle` | No | `auto` | Refresh indicator style selection |
 
 Default grid delegate: `SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3, mainAxisSpacing: 1.5, crossAxisSpacing: 1.5)`
 
@@ -139,6 +153,8 @@ A unified aligned grid view using `flutter_staggered_grid_view` with pull-to-ref
 | `scrollable` | `bool` | No | `true` | Whether scrolling is enabled |
 | `enableTapUnFocus` | `bool` | No | `false` | Unfocus on tap |
 | `hasReachedMax` | `bool` | No | `true` | Whether all data has been loaded |
+| `refreshIndicatorBuilder` | `RefreshControlIndicatorBuilder?` | No | `null` | Custom Cupertino refresh indicator builder |
+| `refreshStyle` | `LeafRefreshStyle` | No | `auto` | Refresh indicator style selection |
 
 ---
 
@@ -163,6 +179,8 @@ A unified scroll view wrapper for a single child with pull-to-refresh support.
 | `scrollable` | `bool` | No | `true` | Whether scrolling is enabled |
 | `enableTapUnFocus` | `bool` | No | `false` | Unfocus on tap |
 | `reverse` | `bool` | No | `false` | Reverse scroll direction |
+| `refreshIndicatorBuilder` | `RefreshControlIndicatorBuilder?` | No | `null` | Custom Cupertino refresh indicator builder |
+| `refreshStyle` | `LeafRefreshStyle` | No | `auto` | Refresh indicator style selection |
 
 ## Usage
 
@@ -307,6 +325,45 @@ class _MyState extends State<MyWidget> {
     );
   }
 }
+```
+
+### Custom Refresh Style and Indicator
+
+```dart
+// Force Cupertino-style refresh on all platforms
+LeafListView<String>(
+  items: items,
+  refreshStyle: LeafRefreshStyle.cupertino,
+  onRefresh: () async {
+    await refreshData();
+  },
+  builder: (context, item, index) {
+    return ListTile(title: Text(item));
+  },
+)
+
+// Custom refresh indicator builder (Cupertino only)
+LeafListView<String>(
+  items: items,
+  refreshStyle: LeafRefreshStyle.cupertino,
+  refreshIndicatorBuilder: (context, refreshState, pulledExtent, triggerDistance, extent) {
+    final progress = (pulledExtent / triggerDistance).clamp(0.0, 1.0);
+    return Center(
+      child: refreshState == RefreshIndicatorMode.refresh
+          ? const CupertinoActivityIndicator(radius: 14)
+          : Opacity(
+              opacity: progress,
+              child: const Icon(CupertinoIcons.arrow_down),
+            ),
+    );
+  },
+  onRefresh: () async {
+    await refreshData();
+  },
+  builder: (context, item, index) {
+    return ListTile(title: Text(item));
+  },
+)
 ```
 
 ### Suppress Overscroll Glow
