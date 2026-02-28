@@ -18,7 +18,7 @@ Base class that holds references injected by `LeafDioClient.init`.
 
 #### Methods
 
-All methods return `Future<LeafDioResponse<R>>` and accept two type parameters: `R` (response type) and `E` (error body type).
+All methods return `Future<LeafDioResponse<R, E>>` and accept two type parameters: `R` (response type) and `E` (error body type).
 
 | Method | Description |
 |--------|-------------|

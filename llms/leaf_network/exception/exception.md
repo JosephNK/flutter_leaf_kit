@@ -48,7 +48,7 @@ Wrapper that holds a `LeafHttpException` and provides formatted `toString()` out
 
 | Parameter | Type | Required | Description |
 |-----------|------|----------|-------------|
-| `exception` | `LeafHttpException` | Yes | The wrapped exception |
+| `httpException` | `LeafHttpException` | Yes | The wrapped exception |
 
 ### Helper Function
 

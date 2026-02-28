@@ -1,10 +1,18 @@
-# LeafDioResponse\<T\>
+# LeafDioResponse\<T, E\>
 
-Typed response wrapper extending Dio's `Response<T>` with success checking, error tracking, and exception access. Returned by all `LeafDioService` HTTP methods.
+Typed response wrapper extending Dio's `Response<T>` with error type parameter `E`, success checking, error tracking, and exception access. Returned by all `LeafDioService` HTTP methods.
 
 ## API Reference
 
-### LeafDioResponse\<T\> (extends Response\<T\>)
+### LeafErrorObject (extends Object)
+
+Wrapper that holds an error body object.
+
+| Parameter | Type | Required | Default | Description |
+|-----------|------|----------|---------|-------------|
+| `value` | `Object?` | No | `null` | The wrapped error value |
+
+### LeafDioResponse\<T, E\> (extends Response\<T\>)
 
 #### Constructor Parameters
 
@@ -19,14 +27,21 @@ Typed response wrapper extending Dio's `Response<T>` with success checking, erro
 | `extra` | `Map<String, dynamic>` | No | `{}` | Extra metadata |
 | `headers` | `Headers?` | No | `null` | Response headers |
 
-#### Properties
+#### Setters
+
+| Setter | Type | Description |
+|--------|------|-------------|
+| `error` | `LeafErrorObject?` | Set the error object (internal storage) |
+| `exception` | `LeafHttpExceptionObject?` | Set the exception object (internal storage) |
+
+#### Getters
 
 | Property | Type | Description |
 |----------|------|-------------|
-| `error` | `Object?` | Deserialized error body (mutable) |
-| `exception` | `LeafHttpExceptionObject?` | Wrapped exception object (mutable) |
 | `isSuccessful` | `bool` | `true` when status 200-399, no error, and no exception |
-| `httpException` | `LeafHttpException?` | Convenience getter for `exception?.exception` |
+| `error` | `E?` | Deserialized error body, cast to type `E` |
+| `isHttpUnauthorisedException` | `bool` | `true` when `httpException` is `LeafUnauthorisedException` |
+| `httpException` | `LeafHttpException?` | Convenience getter for `_exception?.httpException` |
 
 #### toString Output
 
@@ -37,7 +52,7 @@ Produces structured debug output including status code, data (JSON-encoded for m
 ### Check Response
 
 ```dart
-final response = await service.get<User, Null>('/users/1');
+final response = await service.get<User, ErrorBody>('/users/1');
 
 if (response.isSuccessful) {
   final user = response.data!;
@@ -48,13 +63,23 @@ if (response.isSuccessful) {
 }
 ```
 
-### Access Error Body
+### Access Typed Error Body
 
 ```dart
 final response = await service.post<User, ErrorBody>('/users', data: body);
 
 if (!response.isSuccessful) {
-  final errorBody = response.error as ErrorBody?;
+  final errorBody = response.error; // ErrorBody? (typed as E)
   print('Validation errors: ${errorBody?.errors}');
+}
+```
+
+### Check 401 Unauthorized
+
+```dart
+final response = await service.get<User, Null>('/profile');
+
+if (response.isHttpUnauthorisedException) {
+  // Redirect to login
 }
 ```

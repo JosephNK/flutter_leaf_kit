@@ -1,6 +1,6 @@
 # Dio Converters
 
-BuiltValue-based JSON response converter and DioException error converter. These convert raw Dio responses into typed `LeafDioResponse<T>` objects using BuiltValue serialization.
+BuiltValue-based JSON response converter and DioException error converter. These convert raw Dio responses into typed `LeafDioResponse<T, E>` objects using BuiltValue serialization.
 
 ## API Reference
 
@@ -16,13 +16,13 @@ BuiltValue-based JSON response converter and DioException error converter. These
 
 | Method | Return Type | Description |
 |--------|-------------|-------------|
-| `convertJsonResponse<ResultType, ResultErrorType>(Response)` | `FutureOr<LeafDioResponse<ResultType>>` | Convert successful JSON response |
+| `convertJsonResponse<ResultType, ResultErrorType>(Response)` | `FutureOr<LeafDioResponse<ResultType, ResultErrorType>>` | Convert successful JSON response |
 
 #### LeafDioExceptionConverterBase
 
 | Method | Return Type | Description |
 |--------|-------------|-------------|
-| `convertDioException<ResultType, ResultErrorType>(DioException, {LeafDioErrorParser? errorParser})` | `FutureOr<LeafDioResponse<ResultType>>` | Convert Dio exception to response |
+| `convertDioException<ResultType, ResultErrorType>(DioException, {LeafDioErrorParser? errorParser})` | `FutureOr<LeafDioResponse<ResultType, ResultErrorType>>` | Convert Dio exception to response |
 
 ### Helper Function
 
@@ -52,8 +52,8 @@ Deserializes JSON response bodies into BuiltValue types with support for undefin
 
 | Method | Return Type | Description |
 |--------|-------------|-------------|
-| `convertJsonResponse<R, E>(Response)` | `FutureOr<LeafDioResponse<R>>` | Deserialize response via BuiltValue |
-| `convertSuccess<R, E>(Response)` | `FutureOr<LeafDioResponse<R>>` | Internal success conversion with logging |
+| `convertJsonResponse<R, E>(Response)` | `FutureOr<LeafDioResponse<R, E>>` | Deserialize response via BuiltValue |
+| `convertSuccess<R, E>(Response)` | `FutureOr<LeafDioResponse<R, E>>` | Internal success conversion with logging |
 
 ### LeafDioExceptionConverter (implements LeafDioExceptionConverterBase)
 
@@ -70,9 +70,9 @@ Converts `DioException` into typed `LeafDioResponse` with appropriate `LeafHttpE
 
 | Method | Return Type | Description |
 |--------|-------------|-------------|
-| `convertDioException<R, E>(DioException, {LeafDioErrorParser? errorParser})` | `FutureOr<LeafDioResponse<R>>` | Route to `convertError` (with response) or `convertException` (without) |
-| `convertError<R, E>(Response, {LeafDioErrorParser? errorParser})` | `FutureOr<LeafDioResponse<R>>` | Convert HTTP error response (400/401/404/408/500/503) |
-| `convertException<R, E>(DioException)` | `FutureOr<LeafDioResponse<R>>` | Convert Dio-level exception (timeout, cancel, connection error) |
+| `convertDioException<R, E>(DioException, {LeafDioErrorParser? errorParser})` | `FutureOr<LeafDioResponse<R, E>>` | Route to `convertError` (with response) or `convertException` (without) |
+| `convertError<R, E>(Response, {LeafDioErrorParser? errorParser})` | `FutureOr<LeafDioResponse<R, E>>` | Convert HTTP error response (400/401/404/408/500/503) |
+| `convertException<R, E>(DioException)` | `FutureOr<LeafDioResponse<R, E>>` | Convert Dio-level exception (timeout, cancel, connection error) |
 
 #### DioExceptionType Mapping
 

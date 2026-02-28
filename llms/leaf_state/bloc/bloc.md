@@ -38,13 +38,14 @@ BLoC observer that delegates `onChange` and `onError` to optional callbacks.
 
 ### BlocScreenConsumer\<B, S\>
 
-StatelessWidget that wraps `BlocConsumer` to separate success and error listeners. When the state is a `BlocBaseState` with a non-null `exception`, the `errorListener` is invoked.
+StatelessWidget that wraps `BlocConsumer` to separate success and error listeners. Supports two error detection modes: (1) `BlocBaseState.exception` for backward compatibility, (2) custom `errorWhen` callback for flexible error conditions.
 
 | Parameter | Type | Required | Description |
 |-----------|------|----------|-------------|
 | `builder` | `BlocWidgetBuilder<S>` | Yes | Widget builder for the state |
-| `successListener` | `BlocScreenSuccessListener<S>` | Yes | Called on every state change |
-| `errorListener` | `BlocScreenErrorListener<S>?` | Yes | Called when `BlocBaseState.exception` is non-null |
+| `successListener` | `BlocScreenSuccessListener<S>` | Yes | Called on successful state changes |
+| `errorListener` | `BlocScreenErrorListener<S>?` | No | Called when error is detected |
+| `errorWhen` | `bool Function(S state)?` | No | Custom error condition callback |
 
 #### Type Aliases
 
@@ -105,7 +106,7 @@ class CounterState extends BlocBaseState {
 }
 ```
 
-### Screen Consumer
+### Screen Consumer (BlocBaseState 방식)
 
 ```dart
 BlocScreenConsumer<CounterBloc, CounterState>(
@@ -119,6 +120,26 @@ BlocScreenConsumer<CounterBloc, CounterState>(
     // Show error dialog or snackbar
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(content: Text('Error: $exception')),
+    );
+  },
+)
+```
+
+### Screen Consumer (errorWhen 방식)
+
+```dart
+BlocScreenConsumer<MyBloc, MyState>(
+  builder: (context, state) {
+    return Text('Data: ${state.data}');
+  },
+  successListener: (context, state) {
+    // Handle successful state changes
+  },
+  errorWhen: (state) => state.hasError,
+  errorListener: (context, state) {
+    // state itself is passed when errorWhen triggers
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text('Error occurred')),
     );
   },
 )
