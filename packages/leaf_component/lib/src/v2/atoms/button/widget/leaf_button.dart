@@ -38,7 +38,7 @@ class LeafButton extends StatelessWidget {
     this.textAlign = TextAlign.center,
     this.leading,
     this.leadingSpacing,
-    this.duration = const Duration(milliseconds: 250),
+    this.duration = const Duration(milliseconds: 500),
     this.forceLock = false,
     this.loading = false,
     this.showLoading = true,
