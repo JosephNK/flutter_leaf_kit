@@ -138,7 +138,7 @@ class _LeafLockGestureDetectorState extends State<LeafLockGestureDetector> {
     );
 
     void onGestureTap() {
-      if (_lock || _forceLock || _disabled) return;
+      if (_lock || _forceLock || _loading || _disabled) return;
       if (!_forceLock) _startLockTimer();
       onTap?.call();
     }
