@@ -100,12 +100,12 @@ class LeafDioBuiltValueConverter implements LeafDioJsonConverter {
   }
 
   @override
-  FutureOr<LeafDioResponse<ResultType>>
+  FutureOr<LeafDioResponse<ResultType, ResultErrorType>>
   convertJsonResponse<ResultType, ResultErrorType>(Response response) async {
     return convertSuccess<ResultType, ResultErrorType>(response);
   }
 
-  FutureOr<LeafDioResponse<ResultType>>
+  FutureOr<LeafDioResponse<ResultType, ResultErrorType>>
   convertSuccess<ResultType, ResultErrorType>(Response response) async {
     final statusCode = response.statusCode ?? 0;
     final requestOptions = response.requestOptions;
@@ -172,7 +172,7 @@ class LeafDioBuiltValueConverter implements LeafDioJsonConverter {
       exception = LeafUnknownException(statusCode, errorMessage, body);
     }
 
-    final successResponse = LeafDioResponse<ResultType>(
+    final successResponse = LeafDioResponse<ResultType, ResultErrorType>(
       data: (bodyObject is ResultType) ? bodyObject : null,
       requestOptions: requestOptions,
       statusCode: statusCode,

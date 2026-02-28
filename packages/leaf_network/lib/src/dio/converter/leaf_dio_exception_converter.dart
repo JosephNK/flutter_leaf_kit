@@ -32,7 +32,7 @@ class LeafDioExceptionConverter implements LeafDioExceptionConverterBase {
   }
 
   @override
-  FutureOr<LeafDioResponse<ResultType>> convertDioException<
+  FutureOr<LeafDioResponse<ResultType, ResultErrorType>> convertDioException<
     ResultType,
     ResultErrorType
   >(DioException dioException, {LeafDioErrorParser? errorParser}) {
@@ -46,7 +46,7 @@ class LeafDioExceptionConverter implements LeafDioExceptionConverterBase {
     return convertException<ResultType, ResultErrorType>(dioException);
   }
 
-  FutureOr<LeafDioResponse<ResultType>> convertError<
+  FutureOr<LeafDioResponse<ResultType, ResultErrorType>> convertError<
     ResultType,
     ResultErrorType
   >(Response response, {LeafDioErrorParser? errorParser}) async {
@@ -72,7 +72,7 @@ class LeafDioExceptionConverter implements LeafDioExceptionConverterBase {
     );
 
     final body = jsonData;
-    dynamic bodyObject, bodyErrorObject;
+    dynamic bodyObject, bodyJsonObject;
     dynamic parserException;
 
     // 1. errorParser가 있으면 우선 사용
@@ -81,7 +81,7 @@ class LeafDioExceptionConverter implements LeafDioExceptionConverterBase {
         bodyObject = errorParser(statusCode, body);
       } catch (e) {
         parserException = e;
-        bodyErrorObject = body;
+        bodyJsonObject = body;
       }
     }
 
@@ -91,7 +91,7 @@ class LeafDioExceptionConverter implements LeafDioExceptionConverterBase {
         bodyObject ??= _deserialize<ResultErrorType>(body);
       } catch (e) {
         parserException ??= e;
-        bodyErrorObject ??= body;
+        bodyJsonObject ??= body;
       }
 
       if (ResultErrorType.toString() == 'Null') {
@@ -99,21 +99,17 @@ class LeafDioExceptionConverter implements LeafDioExceptionConverterBase {
           bodyObject = _deserialize<ResultType>(body);
         } catch (e) {
           parserException = e;
-          bodyErrorObject = body;
+          bodyJsonObject = body;
         }
       }
     }
 
-    String errorMessage = (bodyErrorObject is String) ? bodyErrorObject : '';
-    if (isNotEmpty(errorMessage)) {
-      errorMessage = '[DioException ConvertError] $errorMessage';
-    }
-    if (parserException != null && isEmpty(errorMessage)) {
-      final message = parserException.toString();
-      errorMessage = '[DioException ConvertError] $message';
+    String errorJsonString = (bodyJsonObject is String) ? bodyJsonObject : '';
+    if (parserException != null && isEmpty(errorJsonString)) {
+      errorJsonString = parserException.toString();
     }
 
-    final errorResponse = LeafDioResponse<ResultType>(
+    final errorResponse = LeafDioResponse<ResultType, ResultErrorType>(
       data: null,
       requestOptions: response.requestOptions,
       statusCode: response.statusCode,
@@ -127,45 +123,58 @@ class LeafDioExceptionConverter implements LeafDioExceptionConverterBase {
     LeafHttpException? exception;
     switch (statusCode) {
       case 400:
-        exception = LeafBadRequestException(statusCode, errorMessage, body);
+        exception = LeafBadRequestException(statusCode, errorJsonString, body);
         break;
       case 401:
-        exception = LeafUnauthorisedException(statusCode, errorMessage, body);
+        exception = LeafUnauthorisedException(
+          statusCode,
+          errorJsonString,
+          body,
+        );
         break;
       case 404:
-        exception = LeafNotFoundException(statusCode, errorMessage, body);
+        exception = LeafNotFoundException(statusCode, errorJsonString, body);
         break;
       case 408:
-        exception = LeafTimeoutRequestException(statusCode, errorMessage, body);
+        exception = LeafTimeoutRequestException(
+          statusCode,
+          errorJsonString,
+          body,
+        );
         break;
       case 500:
-        exception = LeafInternalServerException(statusCode, errorMessage, body);
+        exception = LeafInternalServerException(
+          statusCode,
+          errorJsonString,
+          body,
+        );
         break;
       case 503:
         exception = LeafServiceUnavailableException(
           statusCode,
-          errorMessage,
+          errorJsonString,
           body,
         );
         break;
       default:
-        exception = LeafUnknownException(statusCode, errorMessage, body);
+        exception = LeafUnknownException(statusCode, errorJsonString, body);
         break;
     }
 
     return errorResponse
-      ..error = bodyObject
+      ..error = LeafErrorObject(value: bodyObject)
       ..exception = LeafHttpExceptionObject(exception);
   }
 
-  FutureOr<LeafDioResponse<ResultType>>
+  FutureOr<LeafDioResponse<ResultType, ResultErrorType>>
   convertException<ResultType, ResultErrorType>(DioException e) async {
     final dioExceptionType = e.type;
     final dioExceptionMessage = e.message ?? 'Unknown DioException';
 
-    LeafDioResponse<ResultType> resultResponse = LeafDioResponse<ResultType>(
-      requestOptions: RequestOptions(),
-    );
+    LeafDioResponse<ResultType, ResultErrorType> resultResponse =
+        LeafDioResponse<ResultType, ResultErrorType>(
+          requestOptions: RequestOptions(),
+        );
 
     LeafHttpException? exception;
     switch (dioExceptionType) {

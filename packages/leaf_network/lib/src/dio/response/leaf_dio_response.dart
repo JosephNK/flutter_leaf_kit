@@ -4,7 +4,18 @@ import 'package:dio/dio.dart';
 
 import '../../exception/leaf_http_exception.dart';
 
-class LeafDioResponse<T> extends Response<T> {
+class LeafErrorObject extends Object {
+  final Object? value;
+
+  LeafErrorObject({this.value});
+
+  @override
+  String toString() {
+    return value.toString();
+  }
+}
+
+class LeafDioResponse<T, E> extends Response<T> {
   LeafDioResponse({
     super.data,
     required super.requestOptions,
@@ -16,19 +27,40 @@ class LeafDioResponse<T> extends Response<T> {
     super.headers,
   });
 
-  Object? error;
-  LeafHttpExceptionObject? exception;
+  LeafErrorObject? _error;
+
+  set error(LeafErrorObject? object) => _error = object;
+
+  LeafHttpExceptionObject? _exception;
+
+  set exception(LeafHttpExceptionObject? object) => _exception = object;
 
   bool get isSuccessful {
     final statusCode = this.statusCode ?? 0;
     return (statusCode >= 200 && statusCode < 400) &&
-        error == null &&
-        exception == null;
+        _error == null &&
+        _exception == null;
+  }
+
+  E? get error {
+    final error = _error;
+    if (error != null) {
+      return error.value as E?;
+    }
+    return null;
+  }
+
+  bool get isHttpUnauthorisedException {
+    final httpException = this.httpException;
+    if (httpException is LeafUnauthorisedException) {
+      return true;
+    }
+    return false;
   }
 
   LeafHttpException? get httpException {
-    final exception = this.exception;
-    return exception?.exception;
+    final exception = _exception;
+    return exception?.httpException;
   }
 
   @override
@@ -42,11 +74,11 @@ class LeafDioResponse<T> extends Response<T> {
     buffer.writeln('  isSuccessful: $isSuccessful,');
 
     // 에러 정보 (있을 때만)
-    if (error != null) {
-      buffer.writeln('  error: $error,');
+    if (_error != null) {
+      buffer.writeln('  error: $_error,');
     }
-    if (exception != null) {
-      buffer.writeln('  exception: $exception,');
+    if (_exception != null) {
+      buffer.writeln('  exception: $_exception,');
     }
 
     // 데이터 정보

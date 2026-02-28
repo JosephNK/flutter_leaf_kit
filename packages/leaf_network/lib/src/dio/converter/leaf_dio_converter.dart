@@ -14,12 +14,12 @@ import '../response/leaf_dio_response.dart';
 typedef LeafDioErrorParser = Object? Function(int statusCode, dynamic body);
 
 abstract class LeafDioJsonConverter {
-  FutureOr<LeafDioResponse<ResultType>>
+  FutureOr<LeafDioResponse<ResultType, ResultErrorType>>
   convertJsonResponse<ResultType, ResultErrorType>(Response response);
 }
 
 abstract class LeafDioExceptionConverterBase {
-  FutureOr<LeafDioResponse<ResultType>> convertDioException<
+  FutureOr<LeafDioResponse<ResultType, ResultErrorType>> convertDioException<
     ResultType,
     ResultErrorType
   >(DioException dioException, {LeafDioErrorParser? errorParser});

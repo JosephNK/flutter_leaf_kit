@@ -13,7 +13,7 @@ abstract class LeafDioServiceBase {
 
 class LeafDioService extends LeafDioServiceBase {
   /// Convenience method to make an HTTP GET request.
-  Future<LeafDioResponse<R>> get<R, E>(
+  Future<LeafDioResponse<R, E>> get<R, E>(
     String path, {
     Object? data,
     Map<String, dynamic>? queryParameters,
@@ -42,7 +42,7 @@ class LeafDioService extends LeafDioServiceBase {
   }
 
   /// Convenience method to make an HTTP POST request.
-  Future<LeafDioResponse<R>> post<R, E>(
+  Future<LeafDioResponse<R, E>> post<R, E>(
     String path, {
     Object? data,
     Map<String, dynamic>? queryParameters,
@@ -73,7 +73,7 @@ class LeafDioService extends LeafDioServiceBase {
   }
 
   /// Convenience method to make an HTTP PUT request.
-  Future<LeafDioResponse<R>> put<R, E>(
+  Future<LeafDioResponse<R, E>> put<R, E>(
     String path, {
     Object? data,
     Map<String, dynamic>? queryParameters,
@@ -104,7 +104,7 @@ class LeafDioService extends LeafDioServiceBase {
   }
 
   /// Convenience method to make an HTTP PATCH request.
-  Future<LeafDioResponse<R>> patch<R, E>(
+  Future<LeafDioResponse<R, E>> patch<R, E>(
     String path, {
     Object? data,
     Map<String, dynamic>? queryParameters,
@@ -135,7 +135,7 @@ class LeafDioService extends LeafDioServiceBase {
   }
 
   /// Convenience method to make an HTTP DELETE request.
-  Future<LeafDioResponse<R>> delete<R, E>(
+  Future<LeafDioResponse<R, E>> delete<R, E>(
     String path, {
     Object? data,
     Map<String, dynamic>? queryParameters,

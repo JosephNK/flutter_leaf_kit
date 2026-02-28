@@ -21,7 +21,7 @@ class LeafHttpException implements Exception {
 
   @override
   String toString() {
-    return '\n[*] statusCode: $statusCode\n[*] message: $message\n[*] value: $value';
+    return 'LeafHttpException \n[*] statusCode: $statusCode\n[*] message: $message\n[*] value: $value';
   }
 }
 
@@ -106,14 +106,14 @@ class LeafUnknownException extends LeafHttpException {
 }
 
 class LeafHttpExceptionObject extends Object {
-  final LeafHttpException exception;
+  final LeafHttpException httpException;
 
-  LeafHttpExceptionObject(this.exception);
+  LeafHttpExceptionObject(this.httpException);
 
   @override
   String toString() {
     return '\n[*] runtimeType: ${runtimeType.toString()}'
-        '\n[*] exception: ${exception.runtimeType.toString()}'
-        '${exception.toString()}';
+        '\n[*] httpException: ${httpException.runtimeType.toString()}'
+        '${httpException.toString()}';
   }
 }
