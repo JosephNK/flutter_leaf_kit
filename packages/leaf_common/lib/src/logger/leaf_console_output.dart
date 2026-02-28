@@ -15,7 +15,10 @@ class PlatformConsoleOutput extends LogOutput {
     if (_kReleaseMode || !Platform.isIOS) {
       event.lines.forEach(debugPrint);
     } else {
-      event.lines.forEach(developer.log);
+      // 여러 줄을 개별 developer.log()로 호출하면
+      // 다른 로그(curl 등)가 사이에 끼어들어 순서가 꼬일 수 있으므로
+      // 하나의 호출로 합쳐서 출력
+      developer.log(event.lines.join('\n'));
     }
   }
 }

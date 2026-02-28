@@ -1,7 +1,7 @@
 import 'dart:convert';
-import 'dart:developer';
 
 import 'package:dio/dio.dart';
+import 'package:flutter_leaf_common/leaf_common.dart';
 
 class LeafDioCurlInterceptor extends InterceptorsWrapper {
   LeafDioCurlInterceptor();
@@ -22,9 +22,11 @@ class LeafDioCurlInterceptor extends InterceptorsWrapper {
   void _renderCurlRepresentation(RequestOptions requestOptions) {
     // add a breakpoint here so all errors can break
     try {
-      log(_cURLRepresentation(requestOptions));
+      LeafLogging.d(_cURLRepresentation(requestOptions));
     } catch (err) {
-      log('unable to create a CURL representation of the requestOptions');
+      LeafLogging.e(
+        'unable to create a CURL representation of the requestOptions',
+      );
     }
   }
 
