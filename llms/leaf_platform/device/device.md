@@ -12,9 +12,7 @@ Access via `LeafDeviceManager.shared`.
 
 | Method | Return Type | Description |
 |--------|-------------|-------------|
-| `setupAsync(BuildContext context, {String? androidId})` | `Future<void>` | Initializes both media and device info |
-| `setupMedia(BuildContext context)` | `Future<void>` | Collects screen metrics from `MediaQuery` |
-| `setupDevice({String? androidId})` | `Future<void>` | Collects device model, OS version, and identifier |
+| `ensureInitialized(BuildContext context, {String? androidId})` | `static Future<void>` | Initializes both media and device info |
 
 #### Properties
 
@@ -47,7 +45,7 @@ Access via `LeafDeviceManager.shared`.
 ### Initialize
 
 ```dart
-await LeafDeviceManager.shared.setupAsync(context);
+await LeafDeviceManager.ensureInitialized(context);
 ```
 
 ### Read Device Info

@@ -43,12 +43,15 @@ class LeafDeviceManager {
   String _deviceIdentifier = '';
   String get deviceIdentifier => _deviceIdentifier;
 
-  Future<void> setupAsync(BuildContext context, {String? androidId}) async {
-    await setupMedia(context);
-    await setupDevice(androidId: androidId);
+  static Future<void> ensureInitialized(
+    BuildContext context, {
+    String? androidId,
+  }) async {
+    await _instance._setupMedia(context);
+    await _instance._setupDevice(androidId: androidId);
   }
 
-  Future<void> setupMedia(BuildContext context) async {
+  Future<void> _setupMedia(BuildContext context) async {
     /// MediaQuery
     final mediaQuery = MediaQuery.of(context);
     _widowPadding = MediaQueryData.fromView(View.of(context)).padding;
@@ -57,7 +60,7 @@ class LeafDeviceManager {
     _deviceSize = mediaQuery.size;
   }
 
-  Future<void> setupDevice({String? androidId}) async {
+  Future<void> _setupDevice({String? androidId}) async {
     /// Device Info
     DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
     if (Platform.isAndroid) {
