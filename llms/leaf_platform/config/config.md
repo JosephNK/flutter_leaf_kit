@@ -20,7 +20,7 @@ The factory determines `platform` (`ios`, `aos`, `web`) and `buildType` based on
 
 | Method | Return Type | Description |
 |--------|-------------|-------------|
-| `LeafAppConfig.fromInfo()` | `Future<LeafAppConfig>` | Creates instance from `PackageInfo.fromPlatform()` |
+| `LeafAppConfig.ensureInitialized()` | `Future<LeafAppConfig>` | Creates instance from `PackageInfo.fromPlatform()` |
 
 #### Properties
 
@@ -42,7 +42,7 @@ The factory determines `platform` (`ios`, `aos`, `web`) and `buildType` based on
 | Method | Return Type | Description |
 |--------|-------------|-------------|
 | `getDisplayAppVersion({bool showBuildNumber, bool showDeployment})` | `String` | Formatted version string (e.g., `development 1.0.0(1)`) |
-| `userAgent(String appName)` | `String` | User agent string (e.g., `MyApp-ios-development-1.0.0.1`) |
+| `userAgent(String appName, {LeafBuildType? overrideBuildType})` | `String` | User agent string (e.g., `MyApp-ios-development-1.0.0.1`). `overrideBuildType`으로 빌드타입 오버라이드 가능 |
 
 ### LeafBuildType (Enum)
 
@@ -65,7 +65,7 @@ The factory determines `platform` (`ios`, `aos`, `web`) and `buildType` based on
 ### Initialize from Platform
 
 ```dart
-final appConfig = await LeafAppConfig.fromInfo();
+final appConfig = await LeafAppConfig.ensureInitialized();
 ```
 
 ### Initialize Manually
@@ -100,4 +100,8 @@ final version = LeafAppConfig.instance.getDisplayAppVersion(
 ```dart
 final ua = LeafAppConfig.instance.userAgent('MyApp');
 // 'MyApp-ios-development-1.2.0.42'
+
+// 빌드타입 오버라이드
+final ua2 = LeafAppConfig.instance.userAgent('MyApp', overrideBuildType: LeafBuildType.production);
+// 'MyApp-ios-production-1.2.0.42'
 ```

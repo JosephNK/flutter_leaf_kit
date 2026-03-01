@@ -31,9 +31,6 @@ class LeafAppConfig {
   bool get isStaging => (buildType == LeafBuildType.staging);
   bool get isTest => (buildType == LeafBuildType.test);
 
-  @Deprecated('Use ensureInitialized() instead')
-  static Future<LeafAppConfig> fromInfo() => ensureInitialized();
-
   static Future<LeafAppConfig> ensureInitialized() async {
     if (kIsWeb) {
       return LeafAppConfig(
@@ -99,8 +96,8 @@ class LeafAppConfig {
     return version;
   }
 
-  String userAgent(String appName) {
-    final deployment = buildType.name;
+  String userAgent(String appName, {LeafBuildType? overrideBuildType}) {
+    final deployment = overrideBuildType?.name ?? buildType.name;
     return '$appName-$platform-$deployment-$packageVersion.$packageBuildNumber';
   }
 }
