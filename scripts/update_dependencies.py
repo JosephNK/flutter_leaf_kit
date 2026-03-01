@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Flutter Leaf Kit - Dependencies Update Script
+Flutter Packages - Dependencies Update Script
 
 Usage:
     update-deps                        # 모든 패키지 (기본)
@@ -74,17 +74,33 @@ def compare_versions(current: str, latest: str) -> tuple[bool, bool]:
         return False, False
 
 
-def get_packages(project_root: Path, package_filter: Optional[str] = None) -> list[Path]:
-    """packages/ 디렉토리에서 pubspec.yaml 파일 목록 반환"""
-    packages_dir = project_root / "packages"
-    results = list(packages_dir.rglob("pubspec.yaml"))
+def get_packages(
+    project_root: Path, package_filter: Optional[str] = None
+) -> list[Path]:
+    """워크스페이스 pubspec.yaml의 workspace 항목을 기반으로 pubspec.yaml 파일 목록 반환"""
+    results: list[Path] = []
+
+    # 루트 pubspec.yaml에서 workspace 항목 읽기
+    root_pubspec = project_root / "pubspec.yaml"
+    if root_pubspec.exists():
+        yaml_loader = ruamel.yaml.YAML()
+        with open(root_pubspec, "r") as f:
+            root_data = yaml_loader.load(f)
+
+        workspace_entries = root_data.get("workspace", []) or []
+        for entry in workspace_entries:
+            entry_path = project_root / entry / "pubspec.yaml"
+            if entry_path.exists():
+                results.append(entry_path)
 
     if package_filter:
         # 패키지명으로 필터링
         filtered = []
         for result in results:
             path_str = str(result)
-            if f"/{package_filter}/" in path_str or path_str.endswith(f"/{package_filter}/pubspec.yaml"):
+            if f"/{package_filter}/" in path_str or path_str.endswith(
+                f"/{package_filter}/pubspec.yaml"
+            ):
                 filtered.append(result)
         return filtered
 
@@ -122,13 +138,15 @@ def analyze_dependencies(pubspec_path: Path, yaml) -> dict:
                 latest = get_latest_version(pkg_name)
                 if latest:
                     needs_update, is_major = compare_versions(version, latest)
-                    results[section].append({
-                        "name": pkg_name,
-                        "current": version,
-                        "latest": latest,
-                        "needs_update": needs_update,
-                        "is_major": is_major,
-                    })
+                    results[section].append(
+                        {
+                            "name": pkg_name,
+                            "current": version,
+                            "latest": latest,
+                            "needs_update": needs_update,
+                            "is_major": is_major,
+                        }
+                    )
 
     return results
 
@@ -167,7 +185,9 @@ def print_report(analysis_results: list[dict], include_major: bool = False) -> i
             else:
                 status = "🟢 Latest"
 
-            print(f"  {dep['name']:<25} {dep['current']:<12} {dep['latest']:<12} {status:<10}")
+            print(
+                f"  {dep['name']:<25} {dep['current']:<12} {dep['latest']:<12} {status:<10}"
+            )
 
         if package_updates > 0:
             print(f"\n  ⬆️  업데이트 가능: {package_updates}개")
@@ -182,7 +202,9 @@ def print_report(analysis_results: list[dict], include_major: bool = False) -> i
     return total_updates
 
 
-def update_pubspec(pubspec_path: Path, analysis: dict, yaml, include_major: bool = False):
+def update_pubspec(
+    pubspec_path: Path, analysis: dict, yaml, include_major: bool = False
+):
     """pubspec.yaml 파일의 dependencies 업데이트"""
     with open(pubspec_path, "r") as f:
         data = yaml.load(f)
@@ -222,27 +244,19 @@ def main():
     os.chdir(project_root)
 
     parser = argparse.ArgumentParser(
-        description="Flutter Leaf Kit - Dependencies Update Script"
+        description="Flutter Packages - Dependencies Update Script"
     )
     parser.add_argument(
-        "--all",
-        action="store_true",
-        help="모든 패키지 업데이트 (기본값)"
+        "--all", action="store_true", help="모든 패키지 업데이트 (기본값)"
     )
     parser.add_argument(
-        "--package",
-        type=str,
-        help="특정 패키지만 업데이트 (예: leaf_common)"
+        "--package", type=str, help="특정 패키지만 업데이트 (예: package_common)"
     )
     parser.add_argument(
-        "--report",
-        action="store_true",
-        help="리포트만 출력 (업데이트 안함)"
+        "--report", action="store_true", help="리포트만 출력 (업데이트 안함)"
     )
     parser.add_argument(
-        "--include-major",
-        action="store_true",
-        help="Major 버전 업데이트 포함"
+        "--include-major", action="store_true", help="Major 버전 업데이트 포함"
     )
 
     args = parser.parse_args()
@@ -256,7 +270,7 @@ def main():
         return
 
     print()
-    print("🔍 Flutter Leaf Kit - Dependencies Update")
+    print("🔍 Flutter Packages - Dependencies Update")
     print()
     print(f"📋 {len(pubspec_files)}개의 패키지를 분석합니다...")
 
@@ -291,12 +305,7 @@ def main():
 
     for analysis in analysis_results:
         print(f"\n📦 [{analysis['name']}]")
-        updated = update_pubspec(
-            analysis["path"],
-            analysis,
-            yaml,
-            args.include_major
-        )
+        updated = update_pubspec(analysis["path"], analysis, yaml, args.include_major)
         total_updated += updated
 
     print()
