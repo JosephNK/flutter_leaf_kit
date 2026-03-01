@@ -65,7 +65,7 @@ void main() {
       }
 
       // 400 에러
-      final result400 = await converter.convertDioException<String, Null>(
+      final result400 = await converter.convertDioException<String, Object>(
         dioException400,
         errorParser: errorParser,
       );
@@ -76,7 +76,7 @@ void main() {
       expect(result400.httpException, isA<LeafBadRequestException>());
 
       // 500 에러
-      final result500 = await converter.convertDioException<String, Null>(
+      final result500 = await converter.convertDioException<String, Object>(
         dioException500,
         errorParser: errorParser,
       );
