@@ -17,7 +17,7 @@ dependencies:
   flutter_cache_manager: ^3.4.1
   flutter_rating_bar: ^4.0.1
   flutter_staggered_grid_view: ^0.7.0
-  expandable_page_view: ^1.2.0
+  expandable_page_view: ^1.2.1
   shimmer: ^3.0.0
   photo_manager: ^3.8.3
   visibility_detector: ^0.4.0+2
@@ -28,7 +28,7 @@ dependencies:
   flutter_datetime_picker_plus: ^2.2.0
   vector_graphics: ^1.1.19
   flutter_svg: ^2.2.3
-  lucide_icons_flutter: ^3.1.9
+  lucide_icons_flutter: ^3.1.10
   device_info_plus: ^12.3.0
 
   flutter_leaf_common:
