@@ -42,7 +42,9 @@ class LeafDialogOKButton extends StatelessWidget {
 
     final resolvedText = text ?? dialogTheme?.okText ?? 'OK';
     final resolvedTextStyle =
-        textStyle ?? dialogTheme?.okTextStyle ?? _kDefaultButtonTextStyle;
+        textStyle ??
+        dialogTheme?.okTextStyle ??
+        _kDefaultButtonTextStyle.copyWith(color: colors.onPrimary);
     final resolvedBgColor =
         backgroundColor ?? dialogTheme?.okTextBackgroundColor ?? colors.primary;
     final resolvedBorderColor = borderColor ?? dialogTheme?.okTextBorderColor;
@@ -114,11 +116,14 @@ class LeafDialogCancelButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = LeafTheme.of(context);
+    final colors = theme.colors;
     final dialogTheme = theme.dialogTheme;
 
     final resolvedText = text ?? dialogTheme?.cancelText ?? 'Cancel';
     final resolvedTextStyle =
-        textStyle ?? dialogTheme?.cancelTextStyle ?? _kDefaultButtonTextStyle;
+        textStyle ??
+        dialogTheme?.cancelTextStyle ??
+        _kDefaultButtonTextStyle.copyWith(color: colors.onSurface);
     final resolvedBgColor =
         backgroundColor ??
         dialogTheme?.cancelTextBackgroundColor ??
