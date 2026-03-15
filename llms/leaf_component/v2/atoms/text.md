@@ -1,10 +1,10 @@
 # LeafText
 
-A themed text widget that resolves styles from the Leaf design token system, with a built-in CJK underline workaround that renders underlines as bottom borders per character to avoid Flutter issue #42833 where underlines cut through CJK/Hangul glyphs.
+A themed text widget that resolves styles from the Leaf design token system, with a built-in CJK underline workaround that renders underlines as bottom borders per character to avoid Flutter issue #42833 where underlines cut through CJK/Hangul glyphs. Supports both plain text and mixed-style rich text via `LeafText.rich`.
 
 ## API Reference
 
-### LeafText
+### LeafText (default constructor)
 
 #### Constructor Parameters
 | Parameter | Type | Required | Default | Description |
@@ -21,6 +21,31 @@ A themed text widget that resolves styles from the Leaf design token system, wit
 | `height` | `double?` | No | `null` | Line height multiplier applied via `copyWith` |
 | `semanticsLabel` | `String?` | No | `null` | Accessibility label; defaults to `text` |
 
+### LeafText.rich (named constructor)
+
+Creates a themed text widget with an `InlineSpan` tree for mixed-style text. Uses `Text.rich` internally to preserve `DefaultTextStyle` inheritance.
+
+#### Constructor Parameters
+| Parameter | Type | Required | Default | Description |
+|-----------|------|----------|---------|-------------|
+| `textSpan` | `InlineSpan` | Yes | - | The span tree to display (positional parameter) |
+| `key` | `Key?` | No | `null` | Widget key |
+| `style` | `TextStyle?` | No | `null` | Default style applied to the span tree; falls back to `theme.typography.bodyMedium` |
+| `textAlign` | `TextAlign?` | No | `TextAlign.left` | Text alignment |
+| `color` | `Color?` | No | `null` | Text color override applied via `copyWith` |
+| `maxLines` | `int?` | No | `null` | Maximum number of lines; enables overflow when set |
+| `overflow` | `TextOverflow?` | No | `TextOverflow.ellipsis` | Overflow behavior when `maxLines` is set |
+| `textScaleFactor` | `double` | No | `1.0` | Manual text scale factor |
+| `textSize` | `LeafTextSize?` | No | `null` | Preset scale factor; overrides `textScaleFactor` |
+| `height` | `double?` | No | `null` | Line height multiplier applied via `copyWith` |
+| `semanticsLabel` | `String?` | No | `null` | Accessibility label; defaults to extracted plain text from span tree |
+
+#### Properties
+| Property | Type | Description |
+|----------|------|-------------|
+| `text` | `String?` | Plain text (non-null for default constructor, null for `.rich`) |
+| `textSpan` | `InlineSpan?` | Span tree (non-null for `.rich`, null for default constructor) |
+
 ### LeafTextSize (Enum)
 
 | Value | Scale Factor |
@@ -35,7 +60,9 @@ A themed text widget that resolves styles from the Leaf design token system, wit
 3. `DefaultTextStyle` from the widget tree
 
 ### CJK Underline Workaround
-When the resolved style has `TextDecoration.underline`, LeafText automatically switches from `Text` to `RichText` with per-character `WidgetSpan`s. Each character is wrapped in a `DecoratedBox` with a bottom border, preventing the underline from cutting through CJK glyphs.
+When the resolved style has `TextDecoration.underline`, the default constructor automatically switches from `Text` to `RichText` with per-character `WidgetSpan`s. Each character is wrapped in a `DecoratedBox` with a bottom border, preventing the underline from cutting through CJK glyphs.
+
+Note: The CJK underline workaround applies only to the default constructor. `LeafText.rich` delegates to `Text.rich` directly.
 
 ## Usage
 
@@ -83,5 +110,35 @@ LeafText(
 LeafText(
   'Price: \$9.99',
   semanticsLabel: 'Price is nine dollars and ninety-nine cents',
+)
+```
+
+### Rich Text (Mixed Styles)
+```dart
+LeafText.rich(
+  TextSpan(
+    text: 'Hello ',
+    children: [
+      TextSpan(
+        text: 'Flutter',
+        style: TextStyle(fontWeight: FontWeight.bold, color: Colors.blue),
+      ),
+      TextSpan(text: '에 오신 걸 환영합니다!'),
+    ],
+  ),
+)
+```
+
+### Rich Text with Inline Widget
+```dart
+LeafText.rich(
+  TextSpan(
+    text: '별점 ',
+    children: [
+      WidgetSpan(child: Icon(Icons.star, size: 16)),
+      TextSpan(text: ' 4.5'),
+    ],
+  ),
+  style: TextStyle(fontSize: 16),
 )
 ```

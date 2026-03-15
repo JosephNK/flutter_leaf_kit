@@ -175,4 +175,141 @@ void main() {
       expect(richText.textScaler, const TextScaler.linear(1.5));
     });
   });
+
+  group('LeafText.rich', () {
+    testWidgets('renders TextSpan text', (tester) async {
+      await tester.pumpWidget(
+        wrapWithTheme(const LeafText.rich(TextSpan(text: 'Hello Rich'))),
+      );
+
+      expect(find.text('Hello Rich'), findsOneWidget);
+    });
+
+    testWidgets('renders mixed-style spans', (tester) async {
+      await tester.pumpWidget(
+        wrapWithTheme(
+          const LeafText.rich(
+            TextSpan(
+              text: 'Hello ',
+              children: [
+                TextSpan(
+                  text: 'World',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
+          ),
+        ),
+      );
+
+      expect(find.text('Hello World'), findsOneWidget);
+    });
+
+    testWidgets('applies theme style as default', (tester) async {
+      final customTheme = LeafThemeData.light().copyWith(
+        typography: LeafTypography.defaults().copyWith(
+          bodyMedium: const TextStyle(fontSize: 20),
+        ),
+      );
+
+      await tester.pumpWidget(
+        wrapWithTheme(
+          const LeafText.rich(TextSpan(text: 'Themed')),
+          theme: customTheme,
+        ),
+      );
+
+      final text = tester.widget<Text>(find.byType(Text).last);
+      expect(text.style?.fontSize, 20);
+    });
+
+    testWidgets('applies explicit style over theme', (tester) async {
+      const style = TextStyle(fontSize: 30, color: Colors.red);
+
+      await tester.pumpWidget(
+        wrapWithTheme(
+          const LeafText.rich(TextSpan(text: 'Styled'), style: style),
+        ),
+      );
+
+      final text = tester.widget<Text>(find.byType(Text).last);
+      expect(text.style?.fontSize, 30);
+      expect(text.style?.color, Colors.red);
+    });
+
+    testWidgets('applies color override', (tester) async {
+      await tester.pumpWidget(
+        wrapWithTheme(
+          const LeafText.rich(TextSpan(text: 'Colored'), color: Colors.purple),
+        ),
+      );
+
+      final text = tester.widget<Text>(find.byType(Text).last);
+      expect(text.style?.color, Colors.purple);
+    });
+
+    testWidgets('has custom semantics label', (tester) async {
+      await tester.pumpWidget(
+        wrapWithTheme(
+          const LeafText.rich(
+            TextSpan(text: 'Hidden'),
+            semanticsLabel: 'Rich label',
+          ),
+        ),
+      );
+
+      final semantics = tester.widgetList<Semantics>(find.byType(Semantics));
+      final hasLabel = semantics.any((s) => s.properties.label == 'Rich label');
+      expect(hasLabel, isTrue);
+    });
+
+    testWidgets('extracts plain text for default semantics', (tester) async {
+      await tester.pumpWidget(
+        wrapWithTheme(
+          const LeafText.rich(
+            TextSpan(
+              text: 'Hello ',
+              children: [TextSpan(text: 'World')],
+            ),
+          ),
+        ),
+      );
+
+      final semantics = tester.widgetList<Semantics>(find.byType(Semantics));
+      final hasLabel = semantics.any(
+        (s) => s.properties.label == 'Hello World',
+      );
+      expect(hasLabel, isTrue);
+    });
+
+    testWidgets('preserves maxLines and textAlign', (tester) async {
+      await tester.pumpWidget(
+        wrapWithTheme(
+          const LeafText.rich(
+            TextSpan(text: 'Aligned'),
+            maxLines: 3,
+            textAlign: TextAlign.center,
+          ),
+        ),
+      );
+
+      final text = tester.widget<Text>(find.byType(Text).last);
+      expect(text.maxLines, 3);
+      expect(text.textAlign, TextAlign.center);
+    });
+
+    testWidgets('text getter returns null', (tester) async {
+      const leafText = LeafText.rich(TextSpan(text: 'Rich'));
+      expect(leafText.text, isNull);
+      expect(leafText.textSpan, isNotNull);
+    });
+
+    testWidgets('default constructor textSpan getter returns null', (
+      tester,
+    ) async {
+      const leafText = LeafText('Plain');
+      expect(leafText.text, 'Plain');
+      expect(leafText.textSpan, isNull);
+    });
+  });
 }
