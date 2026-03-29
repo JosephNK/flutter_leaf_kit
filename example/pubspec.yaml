@@ -11,7 +11,7 @@ dependencies:
   flutter:
     sdk: flutter
 
-  cupertino_icons: ^1.0.8
+  cupertino_icons: ^1.0.9
 
   # Leaf Kit Plugin (workspace에서 자동 해결)
   flutter_leaf_kit: any
@@ -23,8 +23,8 @@ dev_dependencies:
     sdk: flutter
   flutter_lints: ^6.0.0
 
-  build_runner: ^2.11.1
-  built_value_generator: ^8.12.4
+  build_runner: ^2.13.1
+  built_value_generator: ^8.12.5
   dart_object_extension_gen: ^0.4.0
 
 flutter:

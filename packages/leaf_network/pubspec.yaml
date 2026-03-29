@@ -1,6 +1,6 @@
 name: flutter_leaf_network
 description: A new Flutter package project.
-version: "4.3.9-dev"
+version: "4.4.0-dev"
 publish_to: 'none'
 homepage: https://github.com/JosephNK/flutter_leaf_kit
 resolution: workspace
@@ -14,19 +14,19 @@ dependencies:
 
   http: ^1.6.0
   http_parser: ^4.1.2
-  dio: ^5.9.1
+  dio: ^5.9.2
   dio_intercept_to_curl: ^0.2.0
   cross_file: ^0.3.5+1
   uuid: ^4.5.3
 
-  built_value: ^8.12.4
+  built_value: ^8.12.5
   built_collection: ^5.1.1
-  shared_preferences: ^2.5.4
+  shared_preferences: ^2.5.5
 
   flutter_leaf_common:
     git:
       url: https://github.com/JosephNK/flutter_leaf_kit.git
-      ref: "v4.3.9-dev"
+      ref: "v4.4.0-dev"
       path: ./packages/leaf_common
 
 dev_dependencies:
@@ -35,7 +35,7 @@ dev_dependencies:
   flutter_lints: ^6.0.0
 
   # Build Gen Plugin
-  build_runner: ^2.11.1
-  built_value_generator: ^8.12.4
+  build_runner: ^2.13.1
+  built_value_generator: ^8.12.5
 
 flutter:
