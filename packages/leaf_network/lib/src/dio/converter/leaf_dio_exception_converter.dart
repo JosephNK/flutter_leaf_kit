@@ -1,8 +1,10 @@
 import 'dart:async';
+import 'dart:developer' as developer;
 
 import 'package:built_value/serializer.dart';
 import 'package:built_value/standard_json_plugin.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_leaf_common/leaf_common.dart';
 
 import '../../exception/leaf_http_exception.dart';
@@ -11,14 +13,10 @@ import 'leaf_dio_converter.dart';
 
 class LeafDioExceptionConverter implements LeafDioExceptionConverterBase {
   final Serializers serializers;
-  final int printMaxLength;
 
   static Serializers? jsonSerializers;
 
-  LeafDioExceptionConverter({
-    required this.serializers,
-    this.printMaxLength = 2024,
-  }) {
+  LeafDioExceptionConverter({required this.serializers}) {
     LeafDioExceptionConverter.jsonSerializers =
         (serializers.toBuilder()..addPlugin(StandardJsonPlugin())).build();
   }
@@ -55,21 +53,20 @@ class LeafDioExceptionConverter implements LeafDioExceptionConverterBase {
     final url = response.requestOptions.uri.toString();
     final jsonData = response.data;
 
-    dynamic printBody = getPrintBodyFromResponse(
-      jsonData,
-      response,
-      printMaxLength: printMaxLength,
-    );
+    dynamic printBody = getPrintBodyFromResponse(jsonData, response);
 
-    LeafLogging.w(
-      '[http_dio :: built_value_converter convertError]\n'
-      '[*] statusCode: $statusCode\n'
-      '[*] method: $method\n'
-      '[*] url: $url\n'
-      '[*] body: $printBody\n'
-      '[*] ResultType: $ResultType\n'
-      '[*] ResultErrorType: $ResultErrorType',
-    );
+    if (kDebugMode) {
+      developer.log(
+        '[http_dio :: built_value_converter convertError]\n'
+        '[*] statusCode: $statusCode\n'
+        '[*] method: $method\n'
+        '[*] url: $url\n'
+        '[*] body: $printBody\n'
+        '[*] ResultType: $ResultType\n'
+        '[*] ResultErrorType: $ResultErrorType',
+        name: 'LeafDioExceptionConverter',
+      );
+    }
 
     final body = jsonData;
     dynamic bodyObject, bodyJsonObject;

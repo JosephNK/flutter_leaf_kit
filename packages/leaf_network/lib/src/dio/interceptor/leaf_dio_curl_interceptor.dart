@@ -1,6 +1,8 @@
 import 'dart:convert';
+import 'dart:developer' as developer;
 
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_leaf_common/leaf_common.dart';
 
 class LeafDioCurlInterceptor extends InterceptorsWrapper {
@@ -20,9 +22,12 @@ class LeafDioCurlInterceptor extends InterceptorsWrapper {
   }
 
   void _renderCurlRepresentation(RequestOptions requestOptions) {
-    // add a breakpoint here so all errors can break
+    if (!kDebugMode) return;
     try {
-      LeafLogging.d(_cURLRepresentation(requestOptions));
+      developer.log(
+        _cURLRepresentation(requestOptions),
+        name: 'LeafDioCurlInterceptor',
+      );
     } catch (err) {
       LeafLogging.e(
         'unable to create a CURL representation of the requestOptions',
@@ -38,26 +43,25 @@ class LeafDioCurlInterceptor extends InterceptorsWrapper {
 
     options.headers.forEach((k, v) {
       if (k != 'Cookie') {
-        components.add('-H "$k: $v"');
+        final escaped = '$v'.replaceAll('"', '\\"');
+        components.add('-H "$k: $escaped"');
       }
     });
 
     if (options.data != null) {
-      // FormData can't be JSON-serialized, so keep only their fields attributes
       if (options.data is FormData) {
-        final FormData data = options.data;
-        final fields = data.fields;
-        final files = data.files;
+        final FormData formData = options.data;
 
-        options.data = Map.fromEntries(fields);
-
-        for (var file in files) {
-          components.add('-f "${file.key}=@${file.value.filename}"');
+        for (var field in formData.fields) {
+          components.add('-F "${field.key}=${field.value}"');
         }
+        for (var file in formData.files) {
+          components.add('-F "${file.key}=@${file.value.filename}"');
+        }
+      } else {
+        final data = json.encode(options.data).replaceAll('"', '\\"');
+        components.add('-d "$data"');
       }
-
-      final data = json.encode(options.data).replaceAll('"', '\\"');
-      components.add('-d "$data"');
     }
 
     components.add('"${options.uri.toString()}"');

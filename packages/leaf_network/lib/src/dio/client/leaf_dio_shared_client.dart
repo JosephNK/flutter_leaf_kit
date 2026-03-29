@@ -24,7 +24,6 @@ class LeafDioSharedClient {
   /// - [jsonUndefinedKey] JSON 파싱 시 정의되지 않은 키 처리 정책
   /// - [connectTimeout] 연결 타임아웃 (기본값: 5초)
   /// - [receiveTimeout] 응답 수신 타임아웃 (기본값: 60초)
-  /// - [printMaxLength] 로그 출력 시 최대 문자 수 (기본값: 2024)
   /// - [onHeader] 요청 헤더를 동적으로 구성하는 콜백
   /// - [getTemporaryDirectoryPath] 파일 다운로드 시 임시 저장 경로를 반환하는 콜백
   void init({
@@ -35,7 +34,6 @@ class LeafDioSharedClient {
     LeafDioJsonUndefinedKey? jsonUndefinedKey,
     Duration connectTimeout = const Duration(seconds: 5),
     Duration receiveTimeout = const Duration(seconds: 60),
-    int printMaxLength = 2024,
     LeafDioOnHeader? onHeader,
     Future<String> Function()? getTemporaryDirectoryPath,
   }) {
@@ -47,7 +45,6 @@ class LeafDioSharedClient {
       jsonUndefinedKey: jsonUndefinedKey,
       connectTimeout: connectTimeout,
       receiveTimeout: receiveTimeout,
-      printMaxLength: printMaxLength,
       onHeader: onHeader,
       getTemporaryDirectoryPath: getTemporaryDirectoryPath,
     );

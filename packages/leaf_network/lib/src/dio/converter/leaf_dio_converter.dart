@@ -25,20 +25,11 @@ abstract class LeafDioExceptionConverterBase {
   >(DioException dioException, {LeafDioErrorParser? errorParser});
 }
 
-dynamic getPrintBodyFromResponse(
-  dynamic jsonData,
-  Response response, {
-  int printMaxLength = 2024,
-}) {
+dynamic getPrintBodyFromResponse(dynamic jsonData, Response response) {
   dynamic printBody;
   try {
     final prettyBody = const JsonEncoder.withIndent('  ').convert(jsonData);
-    final maxLength = printMaxLength; // 최대 길이
     String body = prettyBody;
-    if (prettyBody.length > maxLength) {
-      final truncatedJsonString = prettyBody.substring(0, maxLength);
-      body = '$truncatedJsonString\n......\n...\n';
-    }
     printBody = body;
   } catch (_) {
     printBody = response.data;

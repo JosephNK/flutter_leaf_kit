@@ -45,7 +45,6 @@ class LeafDioClient {
     LeafDioJsonUndefinedKey? jsonUndefinedKey,
     Duration connectTimeout = const Duration(seconds: 5),
     Duration receiveTimeout = const Duration(seconds: 60),
-    int printMaxLength = 2024,
     LeafDioOnHeader? onHeader,
     Future<String> Function()? getTemporaryDirectoryPath,
   }) {
@@ -60,12 +59,10 @@ class LeafDioClient {
     // Converter
     converter = LeafDioBuiltValueConverter(
       serializers: responseSerializers,
-      printMaxLength: printMaxLength,
       jsonUndefinedKey: jsonUndefinedKey,
     );
     errorConverter = LeafDioExceptionConverter(
       serializers: responseSerializers,
-      printMaxLength: printMaxLength,
     );
 
     dio = Dio(options);

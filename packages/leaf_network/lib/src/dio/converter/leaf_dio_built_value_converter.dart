@@ -1,8 +1,10 @@
 import 'dart:async';
+import 'dart:developer' as developer;
 
 import 'package:built_value/serializer.dart';
 import 'package:built_value/standard_json_plugin.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_leaf_common/leaf_common.dart';
 
 import '../../exception/leaf_http_exception.dart';
@@ -12,14 +14,12 @@ import 'leaf_dio_json_key.dart';
 
 class LeafDioBuiltValueConverter implements LeafDioJsonConverter {
   final Serializers serializers;
-  final int printMaxLength;
   final LeafDioJsonUndefinedKey? jsonUndefinedKey;
 
   static Serializers? jsonSerializers;
 
   LeafDioBuiltValueConverter({
     required this.serializers,
-    this.printMaxLength = 2024,
     this.jsonUndefinedKey,
   }) {
     LeafDioBuiltValueConverter.jsonSerializers =
@@ -118,21 +118,20 @@ class LeafDioBuiltValueConverter implements LeafDioJsonConverter {
     final url = requestOptions.uri.toString();
     final jsonData = response.data;
 
-    dynamic printBody = getPrintBodyFromResponse(
-      jsonData,
-      response,
-      printMaxLength: printMaxLength,
-    );
+    dynamic printBody = getPrintBodyFromResponse(jsonData, response);
 
-    LeafLogging.i(
-      '[http_dio :: built_value_converter convertSuccess]\n'
-      '[*] statusCode: $statusCode\n'
-      '[*] method: $method\n'
-      '[*] url: $url\n'
-      '[*] body: $printBody\n'
-      '[*] ResultType: $ResultType\n'
-      '[*] ResultErrorType: $ResultErrorType',
-    );
+    if (kDebugMode) {
+      developer.log(
+        '[http_dio :: built_value_converter convertSuccess]\n'
+        '[*] statusCode: $statusCode\n'
+        '[*] method: $method\n'
+        '[*] url: $url\n'
+        '[*] body: $printBody\n'
+        '[*] ResultType: $ResultType\n'
+        '[*] ResultErrorType: $ResultErrorType',
+        name: 'LeafDioBuiltValueConverter',
+      );
+    }
 
     final body = jsonData;
     dynamic bodyObject, bodyErrorObject;
@@ -148,21 +147,27 @@ class LeafDioBuiltValueConverter implements LeafDioJsonConverter {
     String errorMessage = ((bodyErrorObject is String) ? bodyErrorObject : '')
         .trim();
     if (isNotEmpty(errorMessage)) {
-      LeafLogging.i(
-        '[http_dio :: built_value_converter errorMessage]\n'
-        '[*] errorMessage: $errorMessage\n'
-        '[*] ResultType: $ResultType\n'
-        '[*] ResultErrorType: $ResultErrorType',
-      );
+      if (kDebugMode) {
+        developer.log(
+          '[http_dio :: built_value_converter errorMessage]\n'
+          '[*] errorMessage: $errorMessage\n'
+          '[*] ResultType: $ResultType\n'
+          '[*] ResultErrorType: $ResultErrorType',
+          name: 'LeafDioBuiltValueConverter',
+        );
+      }
       errorMessage = '[DioBuiltValue ConvertError] $errorMessage';
     }
     if (parserException != null) {
-      LeafLogging.i(
-        '[http_dio :: built_value_converter parserException]\n'
-        '[*] parserException: $parserException\n'
-        '[*] ResultType: $ResultType\n'
-        '[*] ResultErrorType: $ResultErrorType',
-      );
+      if (kDebugMode) {
+        developer.log(
+          '[http_dio :: built_value_converter parserException]\n'
+          '[*] parserException: $parserException\n'
+          '[*] ResultType: $ResultType\n'
+          '[*] ResultErrorType: $ResultErrorType',
+          name: 'LeafDioBuiltValueConverter',
+        );
+      }
       final message = parserException.toString();
       errorMessage = '[DioBuiltValue ConvertError] $message';
     }
