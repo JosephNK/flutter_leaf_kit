@@ -71,7 +71,7 @@ class LeafCheckBox extends StatelessWidget {
           child: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              if (leading != null) leading!,
+              ?leading,
               Text(text!, style: textStyle),
             ],
           ),

@@ -58,15 +58,15 @@ class _ImageScreenState extends LeafScreenState<ImageScreen> {
                 children: [
                   LeafCircleAvatarImage(
                     url: 'https://picsum.photos/100',
-                    size: 20,
+                    radius: 20,
                   ),
                   LeafCircleAvatarImage(
                     url: 'https://picsum.photos/100',
-                    size: 30,
+                    radius: 30,
                   ),
                   LeafCircleAvatarImage(
                     url: 'https://picsum.photos/100',
-                    size: 40,
+                    radius: 40,
                   ),
                 ],
               ),

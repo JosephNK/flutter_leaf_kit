@@ -15,7 +15,7 @@ class LeafCircleAvatarImage extends StatelessWidget {
   final String? url;
   final Uint8List? bytes;
   final Uri? uri;
-  final double size;
+  final double radius;
   final Color? borderColor;
   final double borderWidth;
   final BoxFit fit;
@@ -32,7 +32,7 @@ class LeafCircleAvatarImage extends StatelessWidget {
     this.url,
     this.bytes,
     this.uri,
-    this.size = 40.0,
+    this.radius = 20.0,
     this.borderColor,
     this.borderWidth = 0.0,
     this.fit = BoxFit.cover,
@@ -49,7 +49,7 @@ class LeafCircleAvatarImage extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = LeafTheme.of(context);
     final colors = theme.colors;
-    final diameter = size * 2;
+    final diameter = radius * 2;
     final resolvedBorderColor = borderColor ?? colors.divider;
 
     Widget image;

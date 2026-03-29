@@ -47,7 +47,7 @@ class LeafAppBarTitle extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisSize: MainAxisSize.min,
       children: [
-        if (leading != null) leading!,
+        ?leading,
         Flexible(
           child: Text(
             textValue,

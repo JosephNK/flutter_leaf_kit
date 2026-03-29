@@ -164,7 +164,7 @@ void main() {
       await tester.pumpWidget(
         wrapWithTheme(
           const LeafCircleAvatarImage(
-            size: 30,
+            radius: 15,
             borderWidth: 2.0,
             borderColor: Colors.blue,
           ),

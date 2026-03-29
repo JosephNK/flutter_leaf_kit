@@ -116,7 +116,7 @@ A circular avatar image supporting URL, bytes, or asset sources. The image is cl
 | `url` | `String?` | No | `null` | Network image URL |
 | `bytes` | `Uint8List?` | No | `null` | In-memory image bytes |
 | `uri` | `Uri?` | No | `null` | Asset or file URI |
-| `size` | `double` | No | `40.0` | Radius of the avatar (diameter = `size * 2`) |
+| `radius` | `double` | No | `20.0` | Radius of the avatar (diameter = `radius * 2`) |
 | `borderColor` | `Color?` | No | `null` | Circle border color |
 | `borderWidth` | `double` | No | `0.0` | Circle border width; `0` means no border |
 | `fit` | `BoxFit` | No | `BoxFit.cover` | How the image fits the circle |
@@ -190,7 +190,7 @@ LeafMemoryImage(
 ```dart
 LeafCircleAvatarImage(
   url: 'https://example.com/avatar.jpg',
-  size: 30, // 60x60 diameter
+  radius: 30, // 60x60 diameter
   borderColor: Colors.white,
   borderWidth: 2.0,
 )
@@ -200,7 +200,7 @@ LeafCircleAvatarImage(
 ```dart
 LeafCircleAvatarImage(
   bytes: userPhotoBytes,
-  size: 40,
+  radius: 40,
 )
 ```
 
@@ -208,7 +208,7 @@ LeafCircleAvatarImage(
 ```dart
 LeafCircleAvatarImage(
   uri: Uri.parse('assets/images/default_avatar.png'),
-  size: 24,
+  radius: 24,
 )
 ```
 
