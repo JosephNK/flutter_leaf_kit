@@ -116,7 +116,7 @@ class LFAppManager {
           final TrackingStatus status =
               await AppTrackingTransparency.trackingAuthorizationStatus;
           if (status == TrackingStatus.notDetermined) {
-            await Future.delayed(const Duration(milliseconds: 200));
+            await Future.delayed(const Duration(milliseconds: 800));
             final TrackingStatus status =
                 await AppTrackingTransparency.requestTrackingAuthorization();
             Logging.d('AppTrackingTransparency Status: $status');
