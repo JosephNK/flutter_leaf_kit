@@ -13,14 +13,16 @@ class LeafTracking {
           final TrackingStatus status =
               await AppTrackingTransparency.trackingAuthorizationStatus;
           if (status == TrackingStatus.notDetermined) {
-            await Future.delayed(const Duration(milliseconds: 200));
-            final TrackingStatus status =
+            await Future.delayed(const Duration(milliseconds: 1000));
+            final TrackingStatus newStatus =
                 await AppTrackingTransparency.requestTrackingAuthorization();
-            LeafLogging.d('AppTrackingTransparency Status: $status');
-            return status;
+            LeafLogging.d('AppTrackingTransparency Status: $newStatus');
+            return newStatus;
           }
         } on PlatformException {
           LeafLogging.d('AppTrackingTransparency PlatformException was thrown');
+          rethrow;
+        } catch (e) {
           rethrow;
         }
       }
