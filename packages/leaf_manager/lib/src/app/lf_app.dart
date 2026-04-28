@@ -116,14 +116,16 @@ class LFAppManager {
           final TrackingStatus status =
               await AppTrackingTransparency.trackingAuthorizationStatus;
           if (status == TrackingStatus.notDetermined) {
-            await Future.delayed(const Duration(milliseconds: 800));
-            final TrackingStatus status =
+            await Future.delayed(const Duration(milliseconds: 1000));
+            final TrackingStatus newStatus =
                 await AppTrackingTransparency.requestTrackingAuthorization();
-            Logging.d('AppTrackingTransparency Status: $status');
-            return status;
+            Logging.d('AppTrackingTransparency Status: $newStatus');
+            return newStatus;
           }
         } on PlatformException {
           Logging.d('AppTrackingTransparency PlatformException was thrown');
+          rethrow;
+        } catch (e) {
           rethrow;
         }
       }
