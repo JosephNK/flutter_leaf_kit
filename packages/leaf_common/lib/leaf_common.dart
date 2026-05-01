@@ -5,7 +5,6 @@ export 'package:equatable/equatable.dart';
 export 'package:intl/intl.dart' hide TextDirection;
 export 'package:jiffy/jiffy.dart';
 export 'package:logger/logger.dart' show PrettyPrinter, DateTimeFormat;
-export 'package:provider/provider.dart';
 export 'package:quiver/core.dart';
 export 'package:quiver/iterables.dart';
 export 'package:quiver/strings.dart';

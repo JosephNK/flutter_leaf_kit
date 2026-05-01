@@ -7,7 +7,6 @@ import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_leaf_common/leaf_common.dart';
 
-import '../../exception/leaf_http_exception.dart';
 import '../response/leaf_dio_response.dart';
 import 'leaf_dio_converter.dart';
 

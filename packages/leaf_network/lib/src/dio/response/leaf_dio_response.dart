@@ -1,8 +1,7 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
-
-import '../../exception/leaf_http_exception.dart';
+import 'package:flutter_leaf_common/leaf_common.dart';
 
 class LeafErrorObject extends Object {
   final Object? value;
