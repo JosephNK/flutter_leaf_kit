@@ -15,6 +15,10 @@ Each link points to a standalone Markdown file under the /llms path.
 
 - [Date & DateTime](https://github.com/JosephNK/flutter_leaf_kit/blob/main/llms/leaf_common/datetime/datetime.md): Date manipulation with Jiffy, lunar calendar support, and DateTime extensions
 
+## Exception
+
+- [HTTP Exception](https://github.com/JosephNK/flutter_leaf_kit/blob/main/llms/leaf_common/exception/exception.md): Base exception class with 16 HTTP/Dio subclasses and helper utilities
+
 ## Extension
 
 - [Extensions](https://github.com/JosephNK/flutter_leaf_kit/blob/main/llms/leaf_common/extension/extensions.md): Utility extensions for Color, String, Number, List, Map, Uri, MediaQuery, FocusNode, GlobalKey, and AssetImage

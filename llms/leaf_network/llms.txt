@@ -3,10 +3,6 @@
 This index lists Leaf Network documentation pages formatted for LLMs.
 Each link points to a standalone Markdown file under the /llms path.
 
-## Exception
-
-- [HTTP Exception](https://github.com/JosephNK/flutter_leaf_kit/blob/main/llms/leaf_network/exception/exception.md): Base exception class with 16 HTTP/Dio subclasses and helper utilities
-
 ## HTTP
 
 - [HTTP Overrides](https://github.com/JosephNK/flutter_leaf_kit/blob/main/llms/leaf_network/http/http-overrides.md): Global HttpClient configuration with connection limit
