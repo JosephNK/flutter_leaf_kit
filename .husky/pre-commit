@@ -1,0 +1,22 @@
+#!/usr/bin/env sh
+
+# 1) Dart format on staged .dart files (lint-staged)
+yarn lint-staged || exit 1
+
+# 2) flutter analyze on each package (only if any .dart file is staged)
+STAGED_DART=$(git diff --cached --name-only --diff-filter=ACMR -- '*.dart')
+if [ -n "$STAGED_DART" ]; then
+  for pkg in packages/*/; do
+    if [ -f "${pkg}pubspec.yaml" ]; then
+      flutter analyze "$pkg" || exit 1
+    fi
+  done
+
+  # 3) flutter test on packages affected by staged changes
+  AFFECTED_PKGS=$(echo "$STAGED_DART" | grep '^packages/' | cut -d/ -f1-2 | sort -u)
+  for pkg in $AFFECTED_PKGS; do
+    if [ -d "$pkg/test" ] && find "$pkg/test" -name '*_test.dart' -print -quit 2>/dev/null | grep -q .; then
+      flutter test "$pkg" || exit 1
+    fi
+  done
+fi

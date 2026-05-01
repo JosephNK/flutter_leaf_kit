@@ -16,12 +16,12 @@ A personal Flutter utility library package for common modules
 | `leaf_state` | BLoC 상태 관리 |
 | `leaf` | 모든 패키지 통합 export |
 
-## Python 스크립트 가이드
+## Node 스크립트 가이드
 
-Python 스크립트는 Poetry로 관리하며, `scripts/` 폴더에 위치합니다.
+Node.js 스크립트는 yarn으로 관리하며, `scripts/` 폴더에 위치합니다 (ESM, Node ≥ 20).
 
 ```bash
-poetry install  # 의존성 설치
+yarn install  # 의존성 설치 + husky git hooks 설정
 ```
 
 주요 명령어는 [README.md](README.md#commands) 참고

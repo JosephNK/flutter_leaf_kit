@@ -1,9 +1,31 @@
 {
   "name": "flutter_leaf_kit",
   "version": "1.0.0",
-  "description": "This package is created to be used as a common module in the project.",
-  "main": "",
-  "scripts": {},
+  "description": "Flutter Leaf Kit - dev tooling (Node.js)",
+  "type": "module",
+  "private": true,
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "scripts": {
+    "update-version": "node scripts/update-version.js",
+    "update-deps": "node scripts/update-dependencies.js",
+    "pub-outdated": "node scripts/pub-outdated.js",
+    "merge-to-main": "node scripts/merge-to-main.js",
+    "prepare": "husky"
+  },
+  "dependencies": {
+    "yaml": "^2.6.1"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^19.6.1",
+    "@commitlint/config-conventional": "^19.6.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^15.2.11"
+  },
+  "lint-staged": {
+    "*.dart": "dart format --set-exit-if-changed"
+  },
   "author": "JosephNK",
-  "license": "MIT License"
+  "license": "MIT"
 }

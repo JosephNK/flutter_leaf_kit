@@ -40,29 +40,29 @@ Below is a partial guide to using the package.
 # Install dependencies (Melos)
 melos bootstrap
 
-# Poetry 의존성 설치 및 pre-commit git hooks를 설정
+# Node 의존성 설치 및 husky git hooks 설정
 melos run setup
 
 # Build all
 melos run build
 
 # Update version
-poetry run update-version           # Interactive
-poetry run update-version 2.5.0-dev     # Specify version
+yarn update-version                      # Interactive
+yarn update-version 2.5.0-dev            # Specify version
 
 # Check dependency updates (pub.dev API)
-poetry run update-deps --report              # Report only
-poetry run update-deps                       # Report and update
-poetry run update-deps --package leaf_core # Specific package
-poetry run update-deps --include-major       # Include major updates
+yarn update-deps --report                # Report only
+yarn update-deps                         # Report and update
+yarn update-deps --package leaf_core     # Specific package
+yarn update-deps --include-major         # Include major updates
 
 # Check dependency status (dart pub outdated)
-poetry run pub-outdated                      # All packages
-poetry run pub-outdated --package leaf_core # Specific package
+yarn pub-outdated                        # All packages
+yarn pub-outdated --package leaf_core    # Specific package
 
 # Merge develop → main and push
-poetry run merge-to-main             # Execute
-poetry run merge-to-main --dry-run   # Dry run (no push)
+yarn merge-to-main                       # Execute
+yarn merge-to-main --dry-run             # Dry run (no push)
 
 # Run example app
 cd example && flutter run

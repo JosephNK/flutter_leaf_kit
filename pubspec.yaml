@@ -20,8 +20,8 @@ dev_dependencies:
 melos:
   scripts:
     setup:
-        run: poetry install && poetry run pre-commit install && poetry run pre-commit install --hook-type commit-msg
-        description: Setup project (install dependencies & git hooks)
+        run: yarn install
+        description: Setup project (install Node deps & husky git hooks)
 
     analyze:flutter:
       run: melos exec -c 1 -- flutter analyze
