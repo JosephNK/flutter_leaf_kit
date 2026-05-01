@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_leaf_common/leaf_common.dart';
+import 'package:flutter_leaf_core/leaf_core.dart';
 import 'package:stream_transform/stream_transform.dart';
 
 export 'package:bloc_concurrency/bloc_concurrency.dart';

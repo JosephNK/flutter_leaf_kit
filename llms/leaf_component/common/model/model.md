@@ -31,8 +31,8 @@ Compares both `normal` and `selected` fields.
 
 ## Dependencies
 
-- Extends `Equatable` from `flutter_leaf_common` (`leaf_common` package)
-- Uses `hash2` from `flutter_leaf_common` for hash code generation
+- Extends `Equatable` from `flutter_leaf_core` (`leaf_core` package)
+- Uses `hash2` from `flutter_leaf_core` for hash code generation
 - Declared as `part of` the `model.dart` barrel file
 
 ## Usage

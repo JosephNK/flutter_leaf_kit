@@ -10,13 +10,13 @@ Re-exports all Leaf packages for single-import convenience. No unique code — a
 import 'package:flutter_leaf_kit/flutter_leaf_kit.dart';
 ```
 
-Includes: leaf_common, leaf_component, leaf_route, leaf_network, leaf_platform, leaf_state
+Includes: leaf_core, leaf_component, leaf_route, leaf_network, leaf_platform, leaf_state
 
 ### Per-package Import
 
 | Import | Package | Description |
 |--------|---------|-------------|
-| `flutter_leaf_kit/flutter_leaf_kit_common.dart` | leaf_common | Utilities, extensions, logging, date/time, data models |
+| `flutter_leaf_kit/flutter_leaf_kit_core.dart` | leaf_core | Utilities, extensions, logging, date/time, data models |
 | `flutter_leaf_kit/flutter_leaf_kit_component.dart` | leaf_component | UI components (Atomic Design) |
 | `flutter_leaf_kit/flutter_leaf_kit_route.dart` | leaf_route | Page navigation, modals |
 | `flutter_leaf_kit/flutter_leaf_kit_network.dart` | leaf_network | HTTP communication (Dio) |
@@ -27,12 +27,12 @@ Includes: leaf_common, leaf_component, leaf_route, leaf_network, leaf_platform, 
 
 | Import | Redirects to |
 |--------|-------------|
-| `flutter_leaf_kit/flutter_leaf_kit_datetime.dart` | leaf_common |
+| `flutter_leaf_kit/flutter_leaf_kit_datetime.dart` | leaf_core |
 | `flutter_leaf_kit/flutter_leaf_kit_manager.dart` | leaf_platform |
 
 ## Sub-package Documentation
 
-- [leaf_common](https://github.com/JosephNK/flutter_leaf_kit/blob/main/llms/leaf_common/llms.txt): Common utilities, extensions, date/time, data models
+- [leaf_core](https://github.com/JosephNK/flutter_leaf_kit/blob/main/llms/leaf_core/llms.txt): Common utilities, extensions, date/time, data models
 - [leaf_component](https://github.com/JosephNK/flutter_leaf_kit/blob/main/llms/leaf_component/llms.txt): UI component library (Atomic Design)
 - [leaf_network](https://github.com/JosephNK/flutter_leaf_kit/blob/main/llms/leaf_network/llms.txt): HTTP networking (Dio)
 - [leaf_platform](https://github.com/JosephNK/flutter_leaf_kit/blob/main/llms/leaf_platform/llms.txt): Platform services

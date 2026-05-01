@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:app_tracking_transparency/app_tracking_transparency.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_leaf_common/leaf_common.dart';
+import 'package:flutter_leaf_core/leaf_core.dart';
 
 class LeafTracking {
   static Future<TrackingStatus> requestAppTracking(BuildContext context) async {

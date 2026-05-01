@@ -19,11 +19,11 @@ Below is how to use the full package.
 
 Below is a partial guide to using the package.
 ```
-  flutter_leaf_common:
+  flutter_leaf_core:
     git:
       url: https://github.com/JosephNK/flutter_leaf_kit.git
       ref: main or 'v2.0.0' or 'b23ce51'
-      path: ./packages/leaf_common
+      path: ./packages/leaf_core
 
   flutter_leaf_component:
     git:
@@ -53,12 +53,12 @@ poetry run update-version 2.5.0-dev     # Specify version
 # Check dependency updates (pub.dev API)
 poetry run update-deps --report              # Report only
 poetry run update-deps                       # Report and update
-poetry run update-deps --package leaf_common # Specific package
+poetry run update-deps --package leaf_core # Specific package
 poetry run update-deps --include-major       # Include major updates
 
 # Check dependency status (dart pub outdated)
 poetry run pub-outdated                      # All packages
-poetry run pub-outdated --package leaf_common # Specific package
+poetry run pub-outdated --package leaf_core # Specific package
 
 # Merge develop → main and push
 poetry run merge-to-main             # Execute

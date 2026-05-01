@@ -1,7 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_leaf_common/leaf_common.dart';
+import 'package:flutter_leaf_core/leaf_core.dart';
 
 import '../button/button.dart';
 import '../text/text.dart';

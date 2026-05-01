@@ -7,7 +7,7 @@ import 'package:cached_network_image/cached_network_image.dart'
 //     as cached_network_interface;
 import 'package:flutter/material.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
-import 'package:flutter_leaf_common/leaf_common.dart';
+import 'package:flutter_leaf_core/leaf_core.dart';
 
 import '../skeleton/skeleton.dart';
 

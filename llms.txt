@@ -14,11 +14,11 @@ Re-exports all packages above for single-import convenience.
 
 - [Documentation Index](https://github.com/JosephNK/flutter_leaf_kit/blob/main/llms/leaf/llms.txt)
 
-### leaf_common — Common Utilities
+### leaf_core — Core Utilities
 
-Shared utilities, extension functions, logging, date/time, data models, and type conversion used across all packages.
+Core utilities, extension functions, logging, date/time, data models, exception handling, and type conversion used across all packages.
 
-- [Documentation Index](https://github.com/JosephNK/flutter_leaf_kit/blob/main/llms/leaf_common/llms.txt)
+- [Documentation Index](https://github.com/JosephNK/flutter_leaf_kit/blob/main/llms/leaf_core/llms.txt)
 
 ### leaf_component — UI Component Library
 

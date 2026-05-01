@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:flutter_leaf_common/leaf_common.dart';
+import 'package:flutter_leaf_core/leaf_core.dart';
 
 part 'behavior/lf_disallow_glow_behavior.dart';
 part 'data/lf_scroll_info_data.dart';

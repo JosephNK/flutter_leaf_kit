@@ -8,7 +8,7 @@ A personal Flutter utility library package for common modules
 
 | 패키지 | 설명 |
 |--------|------|
-| `leaf_common` | 공용 유틸, 확장 함수, 로깅, 예외 처리, 날짜/시간, 로컬라이제이션, 데이터 모델 |
+| `leaf_core` | 공용 유틸, 확장 함수, 로깅, 예외 처리, 날짜/시간, 로컬라이제이션, 데이터 모델 |
 | `leaf_component` | UI 컴포넌트 (AppBar, TabBar, Calendar, Radio, Toast 등) |
 | `leaf_platform` | 위치 정보, Google Maps, WebView, 앱/디바이스/파일/권한 관리 |
 | `leaf_route` | 페이지 네비게이션, 모달 |

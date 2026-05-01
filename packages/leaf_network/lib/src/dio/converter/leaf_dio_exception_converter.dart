@@ -5,7 +5,7 @@ import 'package:built_value/serializer.dart';
 import 'package:built_value/standard_json_plugin.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter_leaf_common/leaf_common.dart';
+import 'package:flutter_leaf_core/leaf_core.dart';
 
 import '../response/leaf_dio_response.dart';
 import 'leaf_dio_converter.dart';

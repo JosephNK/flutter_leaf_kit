@@ -3,7 +3,7 @@ import 'dart:typed_data';
 
 import 'package:cross_file/cross_file.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter_leaf_common/leaf_common.dart';
+import 'package:flutter_leaf_core/leaf_core.dart';
 import 'package:uuid/uuid.dart';
 
 const kDefaultLeafAllowFiles = ['.jpg', '.jpeg', '.png'];

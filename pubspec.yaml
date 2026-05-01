@@ -7,7 +7,7 @@ environment:
 workspace:
   - example
   - packages/leaf
-  - packages/leaf_common
+  - packages/leaf_core
   - packages/leaf_component
   - packages/leaf_route
   - packages/leaf_network

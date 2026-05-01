@@ -3,7 +3,7 @@ import 'dart:developer' as developer;
 
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter_leaf_common/leaf_common.dart';
+import 'package:flutter_leaf_core/leaf_core.dart';
 
 class LeafDioCurlInterceptor extends InterceptorsWrapper {
   LeafDioCurlInterceptor();

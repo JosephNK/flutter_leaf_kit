@@ -6,7 +6,7 @@ Flutter Leaf Kit - Pub Outdated Script
 
 Usage:
     pub-outdated                       # 모든 패키지
-    pub-outdated --package leaf_common # 특정 패키지만
+    pub-outdated --package leaf_core # 특정 패키지만
 """
 
 import os
@@ -66,7 +66,7 @@ def main():
     parser.add_argument(
         "--package",
         type=str,
-        help="특정 패키지만 확인 (예: leaf_common)"
+        help="특정 패키지만 확인 (예: leaf_core)"
     )
 
     args = parser.parse_args()

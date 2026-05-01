@@ -5,7 +5,7 @@ Flutter Packages - Dependencies Update Script
 Usage:
     update-deps                        # 모든 패키지 (기본)
     update-deps --all                  # 모든 패키지 (명시적)
-    update-deps --package leaf_common  # 단일 패키지
+    update-deps --package leaf_core  # 단일 패키지
     update-deps --report               # 리포트만 출력 (업데이트 안함)
     update-deps --include-major        # Major 업데이트 포함
 """
