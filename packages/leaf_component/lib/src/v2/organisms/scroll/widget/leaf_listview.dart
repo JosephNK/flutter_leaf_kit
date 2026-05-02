@@ -20,6 +20,7 @@ class LeafListView<T> extends StatefulWidget {
   final Key? storageKey;
   final Widget Function(BuildContext context, T item, int index) builder;
   final List<T> items;
+  final IndexedWidgetBuilder? separatorBuilder;
   final LeafScrollController? controller;
   final LeafScrollViewRefresh? onRefresh;
   final LeafScrollViewLoadMore? onLoadMore;
@@ -42,6 +43,7 @@ class LeafListView<T> extends StatefulWidget {
     this.storageKey,
     required this.builder,
     required this.items,
+    this.separatorBuilder,
     this.controller,
     this.onRefresh,
     this.onLoadMore,
@@ -201,32 +203,48 @@ class _LeafListViewState<T> extends State<LeafListView<T>>
           )
         : const NeverScrollableScrollPhysics();
 
-    final listView = ListView.builder(
-      key: widget.storageKey,
-      itemCount: totalCount,
-      controller: PrimaryScrollController.of(context),
-      physics: scrollPhysics,
-      keyboardDismissBehavior: widget.keyboardDismissBehavior,
-      padding: widget.padding,
-      shrinkWrap: widget.shrinkWrap,
-      reverse: widget.reverse,
-      itemBuilder: (context, index) {
-        if (widget.header != null && index == 0) {
-          return widget.header!;
-        }
+    Widget itemBuilder(BuildContext context, int index) {
+      if (widget.header != null && index == 0) {
+        return widget.header!;
+      }
 
-        final isLast = (totalCount - 1 == index);
-        if (isLast) {
-          if (!widget.hasReachedMax) {
-            return _LeafScrollLoadingIndicator(loading: loading);
-          }
-          return const SizedBox.shrink();
+      final isLast = (totalCount - 1 == index);
+      if (isLast) {
+        if (!widget.hasReachedMax) {
+          return _LeafScrollLoadingIndicator(loading: loading);
         }
+        return const SizedBox.shrink();
+      }
 
-        final itemIndex = (widget.header == null) ? index : index - 1;
-        return widget.builder(context, widget.items[itemIndex], itemIndex);
-      },
-    );
+      final itemIndex = (widget.header == null) ? index : index - 1;
+      return widget.builder(context, widget.items[itemIndex], itemIndex);
+    }
+
+    final Widget listView = widget.separatorBuilder != null
+        ? ListView.separated(
+            key: widget.storageKey,
+            itemCount: totalCount,
+            controller: PrimaryScrollController.of(context),
+            physics: scrollPhysics,
+            keyboardDismissBehavior: widget.keyboardDismissBehavior,
+            padding: widget.padding,
+            shrinkWrap: widget.shrinkWrap,
+            reverse: widget.reverse,
+            itemBuilder: itemBuilder,
+            separatorBuilder: (ctx, sepIndex) =>
+                _buildSeparator(ctx, sepIndex, totalCount),
+          )
+        : ListView.builder(
+            key: widget.storageKey,
+            itemCount: totalCount,
+            controller: PrimaryScrollController.of(context),
+            physics: scrollPhysics,
+            keyboardDismissBehavior: widget.keyboardDismissBehavior,
+            padding: widget.padding,
+            shrinkWrap: widget.shrinkWrap,
+            reverse: widget.reverse,
+            itemBuilder: itemBuilder,
+          );
 
     if (widget.onRefresh == null) return listView;
 
@@ -247,6 +265,37 @@ class _LeafListViewState<T> extends State<LeafListView<T>>
             parent: widget.physics ?? const BouncingScrollPhysics(),
           )
         : const NeverScrollableScrollPhysics();
+
+    Widget itemBuilder(BuildContext context, int index) {
+      if (widget.header != null && index == 0) {
+        return widget.header!;
+      }
+
+      final isLast = (totalCount - 1 == index);
+      if (isLast) {
+        if (!widget.hasReachedMax) {
+          return _LeafScrollLoadingIndicator(loading: loading);
+        }
+        return const SizedBox.shrink();
+      }
+
+      final itemIndex = (widget.header == null) ? index : index - 1;
+      return widget.builder(context, widget.items[itemIndex], itemIndex);
+    }
+
+    final Widget sliverList = widget.separatorBuilder != null
+        ? SliverList.separated(
+            itemBuilder: itemBuilder,
+            separatorBuilder: (ctx, sepIndex) =>
+                _buildSeparator(ctx, sepIndex, totalCount),
+            itemCount: totalCount,
+          )
+        : SliverList(
+            delegate: SliverChildBuilderDelegate(
+              itemBuilder,
+              childCount: totalCount,
+            ),
+          );
 
     return CustomScrollView(
       key: widget.storageKey,
@@ -271,31 +320,25 @@ class _LeafListViewState<T> extends State<LeafListView<T>>
           const SliverToBoxAdapter(),
         SliverPadding(
           padding: widget.padding ?? EdgeInsets.zero,
-          sliver: SliverList(
-            delegate: SliverChildBuilderDelegate((context, index) {
-              if (widget.header != null && index == 0) {
-                return widget.header!;
-              }
-
-              final isLast = (totalCount - 1 == index);
-              if (isLast) {
-                if (!widget.hasReachedMax) {
-                  return _LeafScrollLoadingIndicator(loading: loading);
-                }
-                return const SizedBox.shrink();
-              }
-
-              final itemIndex = (widget.header == null) ? index : index - 1;
-              return widget.builder(
-                context,
-                widget.items[itemIndex],
-                itemIndex,
-              );
-            }, childCount: totalCount),
-          ),
+          sliver: sliverList,
         ),
       ],
     );
+  }
+
+  /// Returns a separator widget for the rendered slot at [sepIndex].
+  ///
+  /// Skips separators adjacent to the [header] and the trailing
+  /// load-more / hasReachedMax slot, so separators appear only between
+  /// actual data items. The index passed to the user's
+  /// [LeafListView.separatorBuilder] is the data-item index — i.e. the
+  /// separator after `items[i]` receives `i`.
+  Widget _buildSeparator(BuildContext context, int sepIndex, int totalCount) {
+    final hasHeader = widget.header != null;
+    if (hasHeader && sepIndex == 0) return const SizedBox.shrink();
+    if (sepIndex == totalCount - 2) return const SizedBox.shrink();
+    final itemIndex = hasHeader ? sepIndex - 1 : sepIndex;
+    return widget.separatorBuilder!(context, itemIndex);
   }
 }
 

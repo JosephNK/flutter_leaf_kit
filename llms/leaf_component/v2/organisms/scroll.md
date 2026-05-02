@@ -76,6 +76,7 @@ A unified list view with pull-to-refresh and infinite-scroll load-more support.
 |-----------|------|----------|---------|-------------|
 | `builder` | `Widget Function(BuildContext, T, int)` | Yes | - | Item builder function |
 | `items` | `List<T>` | Yes | - | List data |
+| `separatorBuilder` | `IndexedWidgetBuilder?` | No | `null` | Separator builder inserted between data items only (skips header↔first item and last item↔load-more slot). Index `i` is the separator after `items[i]`. When non-null, uses `ListView.separated` (Material) / `SliverList.separated` (Cupertino). |
 | `storageKey` | `Key?` | No | `null` | Page storage key |
 | `controller` | `LeafScrollController?` | No | `null` | Programmatic scroll controller |
 | `onRefresh` | `LeafScrollViewRefresh?` | No | `null` | Pull-to-refresh callback |
@@ -192,6 +193,23 @@ LeafListView<String>(
   builder: (context, item, index) {
     return ListTile(title: Text(item));
   },
+)
+```
+
+### List View with Separators
+
+Provide `separatorBuilder` to insert a widget between data items. Separators
+are skipped around the header and the trailing load-more slot, so they appear
+only between actual items. The index passed to the builder is the data-item
+index — the separator after `items[i]` receives `i`.
+
+```dart
+LeafListView<String>(
+  items: items,
+  builder: (context, item, index) {
+    return ListTile(title: Text(item));
+  },
+  separatorBuilder: (context, index) => const Divider(height: 1),
 )
 ```
 
