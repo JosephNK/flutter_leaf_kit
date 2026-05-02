@@ -1,0 +1,27 @@
+# Flutter Leaf Kit
+
+A personal Flutter utility library package for common modules
+
+## 패키지 구조
+
+`packages/` 폴더 아래 7개의 독립 패키지로 구성:
+
+| 패키지 | 설명 |
+|--------|------|
+| `leaf_core` | 공용 유틸, 확장 함수, 로깅, 예외 처리, 날짜/시간, 로컬라이제이션, 데이터 모델 |
+| `leaf_component` | UI 컴포넌트 (AppBar, TabBar, Calendar, Radio, Toast 등) |
+| `leaf_platform` | 위치 정보, Google Maps, WebView, 앱/디바이스/파일/권한 관리 |
+| `leaf_route` | 페이지 네비게이션, 모달 |
+| `leaf_network` | HTTP 통신 (Dio 기반) |
+| `leaf_state` | BLoC 상태 관리 |
+| `leaf` | 모든 패키지 통합 export |
+
+## Node 스크립트 가이드
+
+Node.js 스크립트는 yarn으로 관리하며, `scripts/` 폴더에 위치합니다 (ESM, Node ≥ 20).
+
+```bash
+yarn install  # 의존성 설치 + husky git hooks 설정
+```
+
+주요 명령어는 [README.md](README.md#commands) 참고
