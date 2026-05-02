@@ -25,6 +25,7 @@ class LFPhotoAlbumSheetTitleView extends StatefulWidget {
 
 class _LFPhotoAlbumSheetTitleViewState extends State<LFPhotoAlbumSheetTitleView>
     with LFPhotoAlbumRequest {
+  // ignore: unused_field
   List<AssetPathEntity> _assetPathList = [];
   AssetPathEntity? _selectedAssetPath;
 
@@ -54,28 +55,28 @@ class _LFPhotoAlbumSheetTitleViewState extends State<LFPhotoAlbumSheetTitleView>
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
       onTap: () {
-        LFBottomSheet.show<String>(
-          context,
-          items: _assetPathList
-              .map(
-                (item) =>
-                    LFBottomSheetItem<String>(key: item.id, title: item.name),
-              )
-              .toList(),
-          onTap: (item) {
-            final key = item.key;
-            final findList = _assetPathList
-                .where((assetPath) => assetPath.id == key)
-                .toList();
-            final assetPath = findList.isNotEmpty ? findList.first : null;
-            if (assetPath != null) {
-              setState(() {
-                _selectedAssetPath = assetPath;
-              });
-              widget.onSelected?.call(assetPath);
-            }
-          },
-        );
+        // LFBottomSheet.show<String>(
+        //   context,
+        //   items: _assetPathList
+        //       .map(
+        //         (item) =>
+        //             LFBottomSheetItem<String>(key: item.id, title: item.name),
+        //       )
+        //       .toList(),
+        //   onTap: (item) {
+        //     final key = item.key;
+        //     final findList = _assetPathList
+        //         .where((assetPath) => assetPath.id == key)
+        //         .toList();
+        //     final assetPath = findList.isNotEmpty ? findList.first : null;
+        //     if (assetPath != null) {
+        //       setState(() {
+        //         _selectedAssetPath = assetPath;
+        //       });
+        //       widget.onSelected?.call(assetPath);
+        //     }
+        //   },
+        // );
       },
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,

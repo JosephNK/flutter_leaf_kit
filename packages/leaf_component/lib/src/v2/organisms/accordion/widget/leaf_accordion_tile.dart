@@ -3,7 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 
 import '../../../../common/theme/leaf_theme.dart';
-import '../../../shared/widget/leaf_inkwell.dart';
+import '../../../_shared/widget/leaf_inkwell.dart';
 
 class LeafAccordionTile extends StatefulWidget {
   final String title;

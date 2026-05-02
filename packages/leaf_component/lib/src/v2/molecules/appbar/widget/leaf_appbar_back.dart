@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../common/theme/theme.dart';
-import '../../../shared/widget/leaf_inkwell.dart';
+import '../../../_shared/widget/leaf_inkwell.dart';
 
 /// Back button for [LeafAppBar].
 ///

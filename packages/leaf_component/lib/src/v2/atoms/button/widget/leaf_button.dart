@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../common/theme/theme.dart';
-import '../../../shared/widget/leaf_lock_gesture_detector.dart';
+import '../../../_shared/widget/leaf_lock_gesture_detector.dart';
 import '../../text/widget/leaf_text.dart';
 
 /// A themed button widget that resolves colors from the LF design token system.

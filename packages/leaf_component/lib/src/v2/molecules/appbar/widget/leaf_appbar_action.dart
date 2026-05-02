@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../shared/widget/leaf_inkwell.dart';
+import '../../../_shared/widget/leaf_inkwell.dart';
 
 /// Action button widget for [LeafAppBar].
 ///

@@ -28,20 +28,21 @@ class LFPhotoAlbumScrollContentView extends StatefulWidget {
 class _LFPhotoAlbumScrollContentViewState
     extends State<LFPhotoAlbumScrollContentView>
     with LFPhotoAlbumRequest {
-  late LFExpandAnimationController _expandController;
+  // late LFExpandAnimationController _expandController;
 
   List<AssetPathEntity> _assetPathEntityList = [];
+  // ignore: unused_field
   AssetPathEntity? _selectedAssetPathEntity;
 
   @override
   void initState() {
     super.initState();
 
-    _expandController = LFExpandAnimationController(
-      autoAnimation: false,
-      repeatCount: -1,
-      duration: const Duration(milliseconds: 250),
-    );
+    // _expandController = LFExpandAnimationController(
+    //   autoAnimation: false,
+    //   repeatCount: -1,
+    //   duration: const Duration(milliseconds: 250),
+    // );
 
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       update();
@@ -56,11 +57,11 @@ class _LFPhotoAlbumScrollContentViewState
       }
     }
     if (oldWidget.visible != widget.visible) {
-      if (widget.visible) {
-        _expandController.forward();
-      } else {
-        _expandController.reverse();
-      }
+      // if (widget.visible) {
+      //   _expandController.forward();
+      // } else {
+      //   _expandController.reverse();
+      // }
     }
     super.didUpdateWidget(oldWidget);
   }
@@ -68,6 +69,7 @@ class _LFPhotoAlbumScrollContentViewState
   @override
   Widget build(BuildContext context) {
     final visible = widget.visible;
+    // ignore: unused_local_variable
     final recentName = widget.recentName;
 
     return Stack(
@@ -77,47 +79,47 @@ class _LFPhotoAlbumScrollContentViewState
           visible: visible,
           child: Container(color: Colors.black.withValues(alpha: 0.3)),
         ),
-        Positioned(
-          top: 0.0,
-          left: 0.0,
-          right: 0.0,
-          child: LFExpandAnimated(
-            controller: _expandController,
-            child: LayoutBuilder(
-              builder: (context, constraint) {
-                return Container(
-                  width: constraint.maxWidth,
-                  color: Colors.white,
-                  padding: const EdgeInsets.symmetric(vertical: 12.0),
-                  child: SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Row(
-                      children: [
-                        ..._assetPathEntityList.map((assetPathEntity) {
-                          final checked =
-                              assetPathEntity.id ==
-                              _selectedAssetPathEntity?.id;
-                          return LFPhotoAlbumScrollContentTile(
-                            assetPathEntity: assetPathEntity,
-                            selectedAssetPathEntity: _selectedAssetPathEntity,
-                            checked: checked,
-                            recentName: recentName,
-                            onSelected: (assetPathEntity) {
-                              setState(() {
-                                _selectedAssetPathEntity = assetPathEntity;
-                              });
-                              widget.onSelected?.call(assetPathEntity);
-                            },
-                          );
-                        }),
-                      ],
-                    ),
-                  ),
-                );
-              },
-            ),
-          ),
-        ),
+        // Positioned(
+        //   top: 0.0,
+        //   left: 0.0,
+        //   right: 0.0,
+        //   child: LFExpandAnimated(
+        //     controller: _expandController,
+        //     child: LayoutBuilder(
+        //       builder: (context, constraint) {
+        //         return Container(
+        //           width: constraint.maxWidth,
+        //           color: Colors.white,
+        //           padding: const EdgeInsets.symmetric(vertical: 12.0),
+        //           child: SingleChildScrollView(
+        //             scrollDirection: Axis.horizontal,
+        //             child: Row(
+        //               children: [
+        //                 ..._assetPathEntityList.map((assetPathEntity) {
+        //                   final checked =
+        //                       assetPathEntity.id ==
+        //                       _selectedAssetPathEntity?.id;
+        //                   return LFPhotoAlbumScrollContentTile(
+        //                     assetPathEntity: assetPathEntity,
+        //                     selectedAssetPathEntity: _selectedAssetPathEntity,
+        //                     checked: checked,
+        //                     recentName: recentName,
+        //                     onSelected: (assetPathEntity) {
+        //                       setState(() {
+        //                         _selectedAssetPathEntity = assetPathEntity;
+        //                       });
+        //                       widget.onSelected?.call(assetPathEntity);
+        //                     },
+        //                   );
+        //                 }),
+        //               ],
+        //             ),
+        //           ),
+        //         );
+        //       },
+        //     ),
+        //   ),
+        // ),
       ],
     );
   }

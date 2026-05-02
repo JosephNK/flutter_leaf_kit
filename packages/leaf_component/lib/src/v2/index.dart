@@ -1,3 +1,4 @@
+export '_shared/index.dart';
 export 'atoms/animated/index.dart';
 export 'atoms/badge/index.dart';
 export 'atoms/button/index.dart';
@@ -29,7 +30,6 @@ export 'organisms/photo/index.dart';
 export 'organisms/picker/index.dart';
 export 'organisms/scroll/index.dart';
 export 'organisms/toast/index.dart';
-export 'shared/index.dart';
 export 'templates/layout/index.dart';
 export 'templates/navigationbar/index.dart';
 export 'templates/popscope/index.dart';
