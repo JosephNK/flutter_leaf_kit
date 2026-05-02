@@ -2,7 +2,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_leaf_component/leaf_component.dart';
-import 'package:flutter_leaf_component/src/v2/templates/screen/model/safe_area_insets.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import '../../../helpers/theme_test_helper.dart';
