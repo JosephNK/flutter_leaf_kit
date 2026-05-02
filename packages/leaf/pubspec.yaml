@@ -1,6 +1,6 @@
 name: flutter_leaf_kit
 description: A new Flutter package project.
-version: "4.6.0-dev"
+version: "4.6.1-dev"
 publish_to: 'none'
 homepage: https://github.com/JosephNK/flutter_leaf_kit
 resolution: workspace
@@ -15,32 +15,32 @@ dependencies:
   flutter_leaf_core:
     git:
       url: https://github.com/JosephNK/flutter_leaf_kit.git
-      ref: "v4.6.0-dev"
+      ref: "v4.6.1-dev"
       path: ./packages/leaf_core
   flutter_leaf_component:
     git:
       url: https://github.com/JosephNK/flutter_leaf_kit.git
-      ref: "v4.6.0-dev"
+      ref: "v4.6.1-dev"
       path: ./packages/leaf_component
   flutter_leaf_platform:
     git:
       url: https://github.com/JosephNK/flutter_leaf_kit.git
-      ref: "v4.6.0-dev"
+      ref: "v4.6.1-dev"
       path: ./packages/leaf_platform
   flutter_leaf_route:
     git:
       url: https://github.com/JosephNK/flutter_leaf_kit.git
-      ref: "v4.6.0-dev"
+      ref: "v4.6.1-dev"
       path: ./packages/leaf_route
   flutter_leaf_network:
     git:
       url: https://github.com/JosephNK/flutter_leaf_kit.git
-      ref: "v4.6.0-dev"
+      ref: "v4.6.1-dev"
       path: ./packages/leaf_network
   flutter_leaf_state:
     git:
       url: https://github.com/JosephNK/flutter_leaf_kit.git
-      ref: "v4.6.0-dev"
+      ref: "v4.6.1-dev"
       path: ./packages/leaf_state
 
 dev_dependencies:
