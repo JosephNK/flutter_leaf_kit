@@ -94,6 +94,7 @@ A unified list view with pull-to-refresh and infinite-scroll load-more support.
 | `hasReachedMax` | `bool` | No | `true` | Whether all data has been loaded |
 | `refreshIndicatorBuilder` | `RefreshControlIndicatorBuilder?` | No | `null` | Custom Cupertino refresh indicator builder |
 | `refreshStyle` | `LeafRefreshStyle` | No | `auto` | Refresh indicator style selection |
+| `scrollDirection` | `Axis` | No | `Axis.vertical` | Scroll axis. **Asserts** at construction if set to `Axis.horizontal` together with `onRefresh`, since `RefreshIndicator`/`CupertinoSliverRefreshControl` are vertical-only. Load-more works on either axis. |
 
 ---
 
@@ -210,6 +211,27 @@ LeafListView<String>(
     return ListTile(title: Text(item));
   },
   separatorBuilder: (context, index) => const Divider(height: 1),
+)
+```
+
+### Horizontal List View
+
+Set `scrollDirection: Axis.horizontal` for a horizontal list. **Do not pass
+`onRefresh`** — pull-to-refresh is vertical-only and the constructor will
+assert. Wrap in a fixed-height container (or `SizedBox`) since horizontal
+lists need a bounded cross-axis extent.
+
+```dart
+SizedBox(
+  height: 120,
+  child: LeafListView<String>(
+    items: chips,
+    scrollDirection: Axis.horizontal,
+    builder: (context, item, index) => Padding(
+      padding: const EdgeInsets.all(8),
+      child: Chip(label: Text(item)),
+    ),
+  ),
 )
 ```
 

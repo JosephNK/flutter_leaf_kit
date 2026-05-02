@@ -37,6 +37,7 @@ class LeafListView<T> extends StatefulWidget {
   final bool hasReachedMax;
   final RefreshControlIndicatorBuilder? refreshIndicatorBuilder;
   final LeafRefreshStyle refreshStyle;
+  final Axis scrollDirection;
 
   const LeafListView({
     super.key,
@@ -60,7 +61,13 @@ class LeafListView<T> extends StatefulWidget {
     this.hasReachedMax = true,
     this.refreshIndicatorBuilder,
     this.refreshStyle = LeafRefreshStyle.auto,
-  });
+    this.scrollDirection = Axis.vertical,
+  }) : assert(
+         scrollDirection == Axis.vertical || onRefresh == null,
+         'LeafListView: pull-to-refresh (onRefresh) is only supported when '
+         'scrollDirection is Axis.vertical. Set onRefresh to null for '
+         'horizontal lists.',
+       );
 
   @override
   State<LeafListView<T>> createState() => _LeafListViewState<T>();
@@ -223,6 +230,7 @@ class _LeafListViewState<T> extends State<LeafListView<T>>
     final Widget listView = widget.separatorBuilder != null
         ? ListView.separated(
             key: widget.storageKey,
+            scrollDirection: widget.scrollDirection,
             itemCount: totalCount,
             controller: PrimaryScrollController.of(context),
             physics: scrollPhysics,
@@ -236,6 +244,7 @@ class _LeafListViewState<T> extends State<LeafListView<T>>
           )
         : ListView.builder(
             key: widget.storageKey,
+            scrollDirection: widget.scrollDirection,
             itemCount: totalCount,
             controller: PrimaryScrollController.of(context),
             physics: scrollPhysics,
@@ -299,6 +308,7 @@ class _LeafListViewState<T> extends State<LeafListView<T>>
 
     return CustomScrollView(
       key: widget.storageKey,
+      scrollDirection: widget.scrollDirection,
       controller: PrimaryScrollController.of(context),
       physics: scrollPhysics,
       keyboardDismissBehavior: widget.keyboardDismissBehavior,
