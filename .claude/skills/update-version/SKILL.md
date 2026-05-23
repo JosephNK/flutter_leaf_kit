@@ -16,5 +16,5 @@ allowed-tools: Bash
 ## 실행 규칙
 
 1. 인자가 없으면 버전을 입력하라고 안내하세요
-2. 인자가 있으면 바로 명령어를 실행하세요: `poetry run update-version $ARGUMENTS --auto-commit`
+2. 인자가 있으면 바로 명령어를 실행하세요: `yarn update-version $ARGUMENTS --auto-commit`
 3. 실행 결과를 사용자에게 보여주세요
