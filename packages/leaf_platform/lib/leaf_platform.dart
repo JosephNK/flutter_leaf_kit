@@ -6,6 +6,20 @@ export 'package:google_maps_flutter/google_maps_flutter.dart';
 export 'package:permission_handler/permission_handler.dart';
 export 'package:url_launcher/url_launcher.dart'
     show LaunchMode, WebViewConfiguration;
+export 'package:webview_flutter/webview_flutter.dart'
+    show
+        JavaScriptMessage,
+        JavaScriptMode,
+        WebViewController,
+        HttpResponseError,
+        WebResourceError,
+        NavigationDecision,
+        NavigationRequest,
+        UrlChange,
+        LoadRequestMethod,
+        JavaScriptAlertDialogRequest,
+        JavaScriptConfirmDialogRequest,
+        JavaScriptTextInputDialogRequest;
 
 export 'src/config/leaf_app_config.dart';
 export 'src/config/leaf_build_type.dart';
