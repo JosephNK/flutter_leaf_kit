@@ -81,6 +81,7 @@ Converts `DioException` into typed `LeafDioResponse` with appropriate `LeafHttpE
 | `connectionTimeout` | `LeafConnectionTimeoutException` | -99990 |
 | `sendTimeout` | `LeafSendTimeoutException` | -99991 |
 | `receiveTimeout` | `LeafReceiveTimeoutException` | -99992 |
+| `transformTimeout` | `LeafTransformTimeoutException` | -99997 |
 | `badCertificate` | `LeafBadCertificateException` | -99993 |
 | `badResponse` | `LeafBadResponseException` | -99994 |
 | `cancel` | `LeafCancelException` | -99995 |

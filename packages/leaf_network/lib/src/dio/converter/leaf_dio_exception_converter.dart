@@ -191,6 +191,13 @@ class LeafDioExceptionConverter implements LeafDioExceptionConverterBase {
           null,
         );
         break;
+      case DioExceptionType.transformTimeout:
+        exception = LeafTransformTimeoutException(
+          -99997,
+          dioExceptionMessage,
+          null,
+        );
+        break;
       case DioExceptionType.badCertificate:
         exception = LeafBadCertificateException(
           -99993,

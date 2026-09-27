@@ -174,4 +174,49 @@ void main() {
       }
     });
   });
+
+  group('LeafDioExceptionConverter DioExceptionType 매핑', () {
+    test('응답 없는 DioExceptionType별 예외 타입과 코드 매핑', () async {
+      final converter = _createConverter();
+
+      final cases = <DioExceptionType, (Type, int)>{
+        DioExceptionType.connectionTimeout: (
+          LeafConnectionTimeoutException,
+          -99990,
+        ),
+        DioExceptionType.sendTimeout: (LeafSendTimeoutException, -99991),
+        DioExceptionType.receiveTimeout: (LeafReceiveTimeoutException, -99992),
+        DioExceptionType.transformTimeout: (
+          LeafTransformTimeoutException,
+          -99997,
+        ),
+        DioExceptionType.badCertificate: (LeafBadCertificateException, -99993),
+        DioExceptionType.cancel: (LeafCancelException, -99995),
+        DioExceptionType.connectionError: (
+          LeafConnectionErrorException,
+          -99996,
+        ),
+        DioExceptionType.unknown: (LeafUnknownException, -99999),
+      };
+
+      for (final entry in cases.entries) {
+        final dioException = DioException(
+          requestOptions: RequestOptions(path: '/test'),
+          type: entry.key,
+          message: '${entry.key.name} message',
+        );
+        final result = await converter.convertDioException<String, Null>(
+          dioException,
+        );
+        final (expectedType, expectedCode) = entry.value;
+        expect(
+          result.httpException.runtimeType,
+          expectedType,
+          reason: '${entry.key} should map to $expectedType',
+        );
+        expect(result.httpException?.statusCode, expectedCode);
+        expect(result.httpException?.message, '${entry.key.name} message');
+      }
+    });
+  });
 }

@@ -80,6 +80,11 @@ class LeafReceiveTimeoutException extends LeafHttpException {
   LeafReceiveTimeoutException(super.statusCode, super.message, super.value);
 }
 
+/// TransformTimeout
+class LeafTransformTimeoutException extends LeafHttpException {
+  LeafTransformTimeoutException(super.statusCode, super.message, super.value);
+}
+
 /// BadCertificate
 class LeafBadCertificateException extends LeafHttpException {
   LeafBadCertificateException(super.statusCode, super.message, super.value);

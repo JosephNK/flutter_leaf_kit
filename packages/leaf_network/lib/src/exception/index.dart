@@ -14,6 +14,7 @@ export 'package:flutter_leaf_core/leaf_core.dart'
         LeafConnectionTimeoutException,
         LeafSendTimeoutException,
         LeafReceiveTimeoutException,
+        LeafTransformTimeoutException,
         LeafBadCertificateException,
         LeafBadResponseException,
         LeafCancelException,

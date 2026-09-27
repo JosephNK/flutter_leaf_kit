@@ -36,6 +36,7 @@ All subclasses share the same constructor signature as `LeafHttpException(status
 | `LeafConnectionTimeoutException` | Dio connection timeout |
 | `LeafSendTimeoutException` | Dio send timeout |
 | `LeafReceiveTimeoutException` | Dio receive timeout |
+| `LeafTransformTimeoutException` | Dio response transform timeout (dio ≥ 5.10) |
 | `LeafBadCertificateException` | Dio bad certificate |
 | `LeafBadResponseException` | Dio bad response |
 | `LeafCancelException` | Dio request cancelled |
